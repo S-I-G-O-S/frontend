@@ -1,0 +1,126 @@
+:root {
+    --azul: #395873;
+    --nav: #395873ea;
+    --laranja: #D96704;
+    --salmao: #F2AE72;
+    --salmaoClaro: #f7cba4;
+    --branco: #F2E8DF;
+    --marrom: #26110D;
+    --preto: #000;
+}
+#navClientes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.2rem;
+    height: 2.5rem;
+    padding: 0 1rem;
+
+    background-color: var(--marrom);
+    #bttNav {
+        width: 2rem;
+        cursor: pointer;
+        z-index: 99;
+    }
+    #sair {
+        cursor: pointer;
+        font-size: 0.95rem;
+        font-weight: 500;
+        text-decoration: none;
+        color: var(--salmao);
+    }
+}
+#sideNavClientes {
+    display: none;
+    flex-direction: column;
+    
+    box-sizing: border-box;
+    width: auto; 
+    height: 100%;
+    position: absolute;
+    z-index: 98;
+    
+    background-color: var(--nav);
+    padding: 3rem 2.5rem;
+    transition: 0.9s;
+
+    .links {
+        color: var(--branco);
+        text-decoration: none;
+        font-weight: 500;
+
+        margin: 0.4rem 0;
+    }
+    .links:hover {
+        color: var(--salmao);
+    }
+}
+#mainClientes {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+    width: 100%;
+    max-width: 900px;
+    padding: 0.5rem;
+    margin: 0 auto;
+
+    background-color: var(--branco);
+    section {
+        padding: 1rem;
+        border: 0.1rem solid var(--marrom);
+        border-radius: 10px;
+
+        background-color: var(--salmaoClaro);
+
+        h2 {
+            font-size: 1rem;
+            text-align: left;
+            margin: 0 0 0.9rem 0.5rem;
+            
+        }
+        #tabelaClientes {
+            width: 40rem;
+            #cabecalho {
+                display: grid;
+                grid-template-columns: 50% 30% 20%;
+
+                #cNome,
+                #cCNPJ {
+                    border: 0.1rem solid var(--marrom);
+                    text-align: center;
+
+                    padding: 0.1rem 0.5rem;
+                }
+                #adicionarCliente {
+                    text-align: center;
+                }
+            }
+            #listClientes {
+                .clientes {
+                    display: grid;
+                    grid-template-columns: 50% 30% 20%;
+
+                    font-size: 0.9rem;
+                    height: 1.3rem;                   
+
+                    border: 0.1rem solid var(--marrom);
+
+
+                    div {
+                        text-align: center;
+
+                        background-color: var(--branco);
+                    }
+                    .options {
+                        height: 100%;
+                        
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (width <= 800px) {
+    
+}
