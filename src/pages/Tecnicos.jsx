@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import navAbrir  from '../assets/navAbrir.png'
 import navFechar  from '../assets/navFechar.png'
 import '../styles/tecnicos.css'
-function Tecnicos() {{
+function Tecnicos() {
     async function changeNav() {
         const sideNav = document.getElementById("sideNavTecnicos")
         const button = document.getElementById("bttNav")
@@ -27,7 +27,7 @@ function Tecnicos() {{
         </nav>
         <div id="sideNavTecnicos" className="goTo">
             <Link className="links" to="/home">home</Link>
-            <Link className="links" to="/tecnicos">clientes</Link>
+            <Link className="links" to="/clientes">clientes</Link>
             <Link className="links" to="/ordens">ordens de serviços</Link>
         </div>
         <main id='mainTecnicos'>
@@ -45,6 +45,6 @@ function Tecnicos() {{
         </main>
         </>
     )
-}}
+}
 
 export default Tecnicos

@@ -5,7 +5,6 @@ import options from '../assets/options.png'
 import '../styles/clientes.css'
 
 function Clientes() {
-
     async function addCliente() {
         changeRegClienteContainer()
     }
@@ -26,12 +25,12 @@ function Clientes() {
     async function changeRegClienteContainer() {
         const sombra = document.getElementById("sombra")
         const contRegCliente = document.getElementById("containerNovoCliente")
-        if (sombra.style.display == 'none') {
+        if (sombra.style.display == 'flex') {
+            sombra.style.display = 'none'
+            contRegCliente.style.display = 'none'
+        } else {
             sombra.style.display = 'flex'
             contRegCliente.style.display = 'grid'
-        } else {
-            document.getElementById("sombra").style.display = 'none',
-            document.getElementById("containerNovoCliente").style.display = 'none'
         }
     }
     return (
