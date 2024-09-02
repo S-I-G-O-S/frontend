@@ -1,0 +1,89 @@
+:root {
+    --azul: #395873;
+    --nav: #395873ea;
+    --laranja: #D96704;
+    --salmao: #F2AE72;
+    --salmaoClaro: #f7cba4;
+    --branco: #F2E8DF;
+    --marrom: #26110D;
+    --preto: #000;
+}
+#navTecnicos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.2rem;
+    height: 2.5rem;
+    padding: 0 1rem;
+
+    background-color: var(--marrom);
+    #bttNav {
+        width: 2rem;
+        cursor: pointer;
+        z-index: 99;
+    }
+    #sair {
+        cursor: pointer;
+        font-size: 0.95rem;
+        font-weight: 500;
+        text-decoration: none;
+        color: var(--salmao);
+    }
+}
+#sideNavTecnicos {
+    display: none;
+    flex-direction: column;
+    
+    box-sizing: border-box;
+    width: auto; 
+    height: calc(100% - 2.5rem);
+    position: absolute;
+    z-index: 98;
+    
+    background-color: var(--nav);
+    padding: 0.3rem 2rem 0.1rem 2.5rem;
+    transition: 0.9s;
+
+    .links {
+        color: var(--branco);
+        text-decoration: none;
+        font-weight: 500;
+
+        margin: 0.4rem 0;
+    }
+    .links:hover {
+        color: var(--salmao);
+    }
+}
+#mainTecnicos {
+    display: grid;
+    box-sizing: border-box;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 2fr 1fr;
+    grid-template-areas: 
+    "sec2 sec1 sec3"
+    "sec2 sec1 sec4";
+    gap: 1rem;
+
+    height: 100%;
+    width: 100%;
+    padding: 1rem 2rem;
+    section {
+        border: 0.1rem solid var(--marrom);
+    }
+    #sec1 {
+        grid-area: sec1;
+    }
+    #sec2 {
+        grid-area: sec2;
+    }
+    #sec3 {
+        grid-area: sec3;
+    }
+    #sec4 {
+        grid-area: sec4;
+    }
+}
+@media screen and (width <= 550px) {
+    
+}

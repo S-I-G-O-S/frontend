@@ -15,12 +15,11 @@
     gap: 0.2rem;
     height: 2.5rem;
     padding: 0 1rem;
-
+    z-index: 96;
     background-color: var(--marrom);
     #bttNav {
         width: 2rem;
         cursor: pointer;
-        z-index: 99;
     }
     #sair {
         cursor: pointer;
@@ -36,12 +35,12 @@
     
     box-sizing: border-box;
     width: auto; 
-    height: 100%;
+    height: calc(100% - 2.5rem);
     position: absolute;
     z-index: 98;
     
     background-color: var(--nav);
-    padding: 3rem 2.5rem;
+    padding: 0.3rem 2rem 0.1rem 2.5rem;
     transition: 0.9s;
 
     .links {
@@ -59,17 +58,19 @@
     display: flex;
     justify-content: start;
     align-items: center;
+    flex-direction: column;
 
     width: 100%;
+    height: 100%;
     max-width: 900px;
-    padding: 0.5rem;
     margin: 0 auto;
 
     background-color: var(--branco);
-    section {
+    #containerListClientes {
         padding: 1rem;
         border: 0.1rem solid var(--marrom);
         border-radius: 10px;
+        margin-top: 1rem;
 
         background-color: var(--salmaoClaro);
 
@@ -80,7 +81,7 @@
             
         }
         #tabelaClientes {
-            width: 40rem;
+            width: 35rem;
             #cabecalho {
                 display: grid;
                 grid-template-columns: 50% 30% 20%;
@@ -94,6 +95,10 @@
                 }
                 #adicionarCliente {
                     text-align: center;
+
+                    button {
+                        
+                    }
                 }
             }
             #listClientes {
@@ -117,6 +122,122 @@
                         
                     }
                 }
+            }
+        }
+    }
+    #sombra {
+        display: flex;
+        position: fixed;
+        background-color: #000000c0;
+        width: 100%;
+        height: 100%;
+    }
+    #containerNovoCliente {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: auto auto auto auto;
+        grid-template-areas:
+        "title title title"
+        "geral geral geral"
+        "enderecos telefones emails"
+        "concForm concForm concForm";
+        column-gap: 0.5rem;
+        row-gap: 1rem;
+
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 90;
+
+        width: auto;
+        height: auto;
+        padding: 2rem;
+        border: 0.1rem solid var(--marrom);
+        border-radius: 10px;
+
+        background-color: var(--salmaoClaro);
+
+        h2 {
+            grid-area: title;
+            text-align: center;
+            font-size: 1.3rem;
+            margin: 0;
+            margin-bottom: 0.5rem;
+        }
+        #geral {
+            grid-area: geral;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-areas: 
+            "nome cnpj";
+            gap: 0.1rem;
+            #nome {
+                grid-area: nome;
+                
+                label {
+                    width: 30%;
+
+                }
+                input {
+                    width: 70%;
+                }
+            }
+            #cnpj {
+                grid-area: cnpj;
+                label {
+                    width: 30%;
+                    text-align: center;
+                }
+                input {
+                    width: 70%;
+                }
+            }
+        }
+        #contEnderecos {
+            grid-area: enderecos;
+        }
+        #contTelefones {
+            grid-area: telefones;
+        }
+        #contEmails {
+            grid-area: emails;
+        }
+        .contInfosNovoCliente {
+            display: grid;
+            width: 100%;
+            grid-template-columns: 6fr 1fr 1fr;
+            grid-template-rows: 1rem auto;
+            grid-template-areas: 
+            "title bttShow bttNovo"
+            "inps inps inps";
+            #title {
+                font-size: 1rem;
+                font-weight: 400;
+                margin: 0;
+                grid-area: title;
+            }
+            #bttShow {
+                grid-area: bttShow;
+            }
+            #bttNovo {
+                grid-area: bttNovo;
+            }
+            .inpsNovoCliente {
+                grid-area: inps;
+
+                
+            }
+        }
+        #concForm {
+            grid-area: concForm;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            button {
+                height: 2rem;
+                width: 8rem;
+                font-size: 1rem;
             }
         }
     }
