@@ -4,32 +4,50 @@ import navFechar  from '../assets/navFechar.png'
 import '../styles/tecnicos.css'
 function Tecnicos() {
     async function changeNav() {
-        const sideNav = document.getElementById("sideNavTecnicos")
+        const sideNav = document.getElementById("navTecnicos")
+        const nome1 = document.getElementById("goToHomeP")
+        const nome2 = document.getElementById("goToClientesP")
+        const nome3 = document.getElementById("goToOrdensP")
         const button = document.getElementById("bttNav")
 
         if (button.className == "navFechar") {
-            sideNav.style.display = "none"
+            //sideNav.style.display = "none"
             button.className = "navAbrir"
             button.src = navAbrir
+            nome1.style.display = "none"
+            nome2.style.display = "none"
+            nome3.style.display = "none"
         } else {
-            sideNav.style.display = "flex"
+            //sideNav.style.display = "flex"
             button.className = "navFechar"
             button.src = navFechar
+            nome1.style.display = "flex"
+            nome2.style.display = "flex"
+            nome3.style.display = "flex"
         }
     }
     return (
         <>
-        <nav id='navTecnicos'>
+        <header id='headerTecnicos'>
             <img id="bttNav" src={ navAbrir } alt="" onClick={changeNav} className="navAbrir"/>
             <Link id="sair" to="/">
                 sair
             </Link>
+        </header>
+        <nav id="navTecnicos" className="goTo">
+            <Link className="links" id='goToHome' to="/home">
+                <div id='img'>H</div>
+                <p className='nomeGoTo' id='goToHomeP'>home</p>
+            </Link>
+            <Link className="links" id='goToClientes' to="/clientes">
+                <div id='img'>C</div>
+                <p className='nomeGoTo' id='goToClientesP'>clientes</p>
+            </Link>
+            <Link className="links" id='goToOrdens' to="/ordens">
+                <div id='img'>O</div>
+                <p className='nomeGoTo' id='goToOrdensP'>ordens</p>
+            </Link>
         </nav>
-        <div id="sideNavTecnicos" className="goTo">
-            <Link className="links" to="/home">home</Link>
-            <Link className="links" to="/clientes">clientes</Link>
-            <Link className="links" to="/ordens">ordens de serviços</Link>
-        </div>
         <main id='mainTecnicos'>
             <section id='sec1'>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim asperiores facere aperiam, consequatur beatae commodi sed saepe minima dolorum rem officia alias repellendus vero perspiciatis officiis eum cum. Nostrum, labore.
