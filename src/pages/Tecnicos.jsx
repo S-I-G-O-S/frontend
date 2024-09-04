@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
 import navLeft  from '../assets/navLeft.png'
-import navFechar  from '../assets/navFechar.png'
+import navRight  from '../assets/navRight.png'
 import '../styles/tecnicos.css'
 function Tecnicos() {
     async function changeNav() {
-        const sideNav = document.getElementById("navTecnicos")
+        const nav = document.getElementById("navTecnicos")
         const nome1 = document.getElementById("goToHomeP")
         const nome2 = document.getElementById("goToClientesP")
         const nome3 = document.getElementById("goToOrdensP")
@@ -14,27 +14,22 @@ function Tecnicos() {
             //sideNav.style.display = "none"
             button.className = "navAbrir"
             button.src = navRight
-            nome1.style.display = "none"
-            nome2.style.display = "none"
-            nome3.style.display = "none"
+            nav.className = "navFechado"
         } else {
             //sideNav.style.display = "flex"
             button.className = "navFechar"
             button.src = navLeft
-            nome1.style.display = "flex"
-            nome2.style.display = "flex"
-            nome3.style.display = "flex"
+            nav.className = "navAberto"
         }
     }
     return (
         <>
         <header id='headerTecnicos'>
-            
             <Link id="sair" to="/">
                 sair
             </Link>
         </header>
-        <nav id="navTecnicos" className="goTo navAberto">
+        <nav id="navTecnicos" className="goTo navFechado">
             <img id="bttNav" src={ navRight } alt="" onClick={changeNav} className="navAbrir"/>
             <div id='containerLinks'>
                 <Link className="links" id='goToHome' to="/home">
