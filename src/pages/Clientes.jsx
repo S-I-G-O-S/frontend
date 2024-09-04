@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import navAbrir  from '../assets/navAbrir.png'
-import navFechar  from '../assets/navFechar.png'
+import navLeft  from '../assets/navLeft.png'
 import options from '../assets/options.png'
 import '../styles/clientes.css'
 
@@ -15,7 +15,7 @@ function Clientes() {
         if (button.className == "navFechar") {
             sideNav.style.display = "none"
             button.className = "navAbrir"
-            button.src = navAbrir
+            button.src = navLeft
         } else {
             sideNav.style.display = "flex"
             button.className = "navFechar"

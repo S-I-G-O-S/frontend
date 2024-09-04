@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import navAbrir  from '../assets/navAbrir.png'
+import navLeft  from '../assets/navLeft.png'
 import navFechar  from '../assets/navFechar.png'
 import '../styles/tecnicos.css'
 function Tecnicos() {
@@ -13,14 +13,14 @@ function Tecnicos() {
         if (button.className == "navFechar") {
             //sideNav.style.display = "none"
             button.className = "navAbrir"
-            button.src = navAbrir
+            button.src = navRight
             nome1.style.display = "none"
             nome2.style.display = "none"
             nome3.style.display = "none"
         } else {
             //sideNav.style.display = "flex"
             button.className = "navFechar"
-            button.src = navFechar
+            button.src = navLeft
             nome1.style.display = "flex"
             nome2.style.display = "flex"
             nome3.style.display = "flex"
@@ -29,24 +29,27 @@ function Tecnicos() {
     return (
         <>
         <header id='headerTecnicos'>
-            <img id="bttNav" src={ navAbrir } alt="" onClick={changeNav} className="navAbrir"/>
+            
             <Link id="sair" to="/">
                 sair
             </Link>
         </header>
-        <nav id="navTecnicos" className="goTo">
-            <Link className="links" id='goToHome' to="/home">
-                <div id='img'>H</div>
-                <p className='nomeGoTo' id='goToHomeP'>home</p>
-            </Link>
-            <Link className="links" id='goToClientes' to="/clientes">
-                <div id='img'>C</div>
-                <p className='nomeGoTo' id='goToClientesP'>clientes</p>
-            </Link>
-            <Link className="links" id='goToOrdens' to="/ordens">
-                <div id='img'>O</div>
-                <p className='nomeGoTo' id='goToOrdensP'>ordens</p>
-            </Link>
+        <nav id="navTecnicos" className="goTo navAberto">
+            <img id="bttNav" src={ navRight } alt="" onClick={changeNav} className="navAbrir"/>
+            <div id='containerLinks'>
+                <Link className="links" id='goToHome' to="/home">
+                    <div id='img'>H</div>
+                    <p className='nomeGoTo' id='goToHomeP'>home</p>
+                </Link>
+                <Link className="links" id='goToClientes' to="/clientes">
+                    <div id='img'>C</div>
+                    <p className='nomeGoTo' id='goToClientesP'>clientes</p>
+                </Link>
+                <Link className="links" id='goToOrdens' to="/ordens">
+                    <div id='img'>O</div>
+                    <p className='nomeGoTo' id='goToOrdensP'>ordens</p>
+                </Link>
+            </div>
         </nav>
         <main id='mainTecnicos'>
             <section id='sec1'>
