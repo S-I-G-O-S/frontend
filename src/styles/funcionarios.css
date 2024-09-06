@@ -7,8 +7,9 @@
     --branco: #F2E8DF;
     --marrom: #26110D;
     --preto: #000;
+    --leftBttNav: 5rem;
 }
-#pageHome {
+#pageFuncionarios {
     display: grid;
     grid-template-columns: max-content auto;
     grid-template-rows: 3rem auto;
@@ -22,7 +23,7 @@
     background-color: #F2E8DF;
     box-sizing: border-box;
 
-    #headerHome {
+    #headerFuncionarios {
         display: flex;
         grid-area: header;
         justify-content: right;
@@ -46,7 +47,7 @@
             color: var(--salmao);
         }
     }
-    #navHome {
+    #navFuncionarios {
         display: flex;
         grid-area: nav;
         flex-direction: column;
@@ -116,102 +117,31 @@
             }
         }
     }
-    #mainHome {
+    #mainFuncionarios {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: max-content;
-        grid-template-areas: 
-            "ordensAbertas ordensSendoAtendidas";
-        gap: 1rem;
-        align-items: start;
         grid-area: main;
-
-        width: 100%;
-        padding: 0.5rem;
-        margin: 0 auto;
         box-sizing: border-box;
-        background-color: var(--branco);
+        grid-template-columns: 1fr 2fr 1fr;
+        grid-template-rows: auto auto;
+        grid-template-areas: 
+        "sec2 sec1 sec3"
+        "sec2 sec1 sec4";
+        gap: 1rem;
+        padding: 1rem 2rem;
         section {
-            padding: 1rem;
             border: 0.1rem solid var(--marrom);
-            border-radius: 10px;
-
-            background-color: var(--salmaoClaro);
-
-            h2 {
-                font-size: 1rem;
-                text-align: left;
-                margin: 0 0 0.9rem 0.5rem;
-                
-            }
-            .ordens {
-                font-size: 0.9rem;
-                padding: 0.5rem;
-                border: 0.1rem solid var(--marrom);
-                border-radius: 5px;
-                margin-bottom: 0.5rem;
-                background-color: var(--branco);
-            }
         }
-        #secOrdensAbertas {
-            grid-area: ordensAbertas;
-            .ordensAbertas{
-                display: grid;
-                grid-template-columns: 1fr 7rem;
-                grid-template-rows: auto auto;
-                grid-template-areas: 
-                    "nomeCliente dataHora"
-                    "local local";
-                gap: 0.1rem;
-
-                .nomeCliente {
-                    grid-area: nomeCliente;
-                }
-                .dataHora {
-                    grid-area: dataHora;
-                }
-                .local {
-                    grid-area: local;
-                }
-            }
+        #sec1 {
+            grid-area: sec1;
         }
-        #secOrdensSendoAtendidas {
-            grid-area: ordensSendoAtendidas;
-            .ordensSendoAtendidas {
-                display: grid;
-                grid-template-columns: 1fr 7rem;
-                grid-template-rows: auto auto;
-                grid-template-areas: 
-                    "nomeCliente dataHora"
-                    "local local"
-                    "tecnico tecnico";
-                gap: 0.1rem;
-
-                .nomeCliente {
-                    grid-area: nomeCliente;
-                }
-                .dataHora {
-                    grid-area: dataHora;
-                }
-                .local {
-                    grid-area: local;
-                }
-                .tecnico {
-                    grid-area: tecnico;
-                }
-            }
+        #sec2 {
+            grid-area: sec2;
         }
-    }
-}
-@media screen and (width <= 800px) {
-    #pageHome{
-        #mainHome {
-            grid-template-columns: 1fr;
-            grid-template-rows: max-content max-content;
-            grid-template-areas: 
-                "ordensAbertas" 
-                "ordensSendoAtendidas";
-            gap: 1rem;
+        #sec3 {
+            grid-area: sec3;
+        }
+        #sec4 {
+            grid-area: sec4;
         }
     }
 }

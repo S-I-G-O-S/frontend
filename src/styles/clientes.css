@@ -8,236 +8,300 @@
     --marrom: #26110D;
     --preto: #000;
 }
-#navClientes {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.2rem;
-    height: 2.5rem;
-    padding: 0 1rem;
-    z-index: 96;
-    background-color: var(--marrom);
-    #bttNav {
-        width: 2rem;
-        cursor: pointer;
-    }
-    #sair {
-        cursor: pointer;
-        font-size: 0.95rem;
-        font-weight: 500;
-        text-decoration: none;
-        color: var(--salmao);
-    }
-}
-#sideNavClientes {
-    display: none;
-    flex-direction: column;
-    
-    box-sizing: border-box;
-    width: auto; 
-    height: calc(100% - 2.5rem);
-    position: absolute;
-    z-index: 98;
-    
-    background-color: var(--nav);
-    padding: 0.3rem 2rem 0.1rem 2.5rem;
-    transition: 0.9s;
-
-    .links {
-        color: var(--branco);
-        text-decoration: none;
-        font-weight: 500;
-
-        margin: 0.4rem 0;
-    }
-    .links:hover {
-        color: var(--salmao);
-    }
-}
-#mainClientes {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    flex-direction: column;
-
+#pageClientes {
+    display: grid;
+    grid-template-columns: max-content auto;
+    grid-template-rows: 3rem auto;
+    grid-template-areas: 
+    "nav header"
+    "nav main";
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
     width: 100%;
-    height: 100%;
-    max-width: 900px;
-    margin: 0 auto;
+    background-color: #F2E8DF;
+    box-sizing: border-box;
 
-    background-color: var(--branco);
-    #containerListClientes {
-        padding: 1rem;
-        border: 0.1rem solid var(--marrom);
-        border-radius: 10px;
-        margin-top: 1rem;
+    #headerClientes {
+        display: flex;
+        grid-area: header;
+        justify-content: right;
+        align-items: center;
+        gap: 0.2rem;
+        padding: 0 1rem;
 
-        background-color: var(--salmaoClaro);
+        z-index: 96;
 
-        h2 {
-            font-size: 1rem;
-            text-align: left;
-            margin: 0 0 0.9rem 0.5rem;
-            
+        background-color: var(--marrom);
+        #bttNav {
+            width: 2rem;
+            cursor: pointer;
+            z-index: 99;
         }
-        #tabelaClientes {
-            width: 35rem;
-            #cabecalho {
-                display: grid;
-                grid-template-columns: 50% 30% 20%;
-
-                #cNome,
-                #cCNPJ {
-                    border: 0.1rem solid var(--marrom);
-                    text-align: center;
-
-                    padding: 0.1rem 0.5rem;
+        #sair {
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-decoration: none;
+            color: var(--salmao);
+        }
+    }
+    #navClientes {
+        display: flex;
+        grid-area: nav;
+        flex-direction: column;
+        box-sizing: border-box;
+        height: 100%;
+        background-color: var(--azul);
+        transition: 0.25s;
+        z-index: 98;
+        #bttNav {
+            width: 3rem;
+            position: fixed;
+            transition: 0.25s;
+            cursor: pointer;
+        }
+        #containerLinks {
+            position: fixed;
+            top: 2.5rem;
+            margin: 0.5rem 1rem;
+            transition: 0.6s;
+            .links {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                width: auto;
+                text-decoration: none;
+                font-weight: 500;
+                
+                color: var(--branco);
+                margin: 0.9rem 0;
+                transition: 0.6s;
+                img {
+                    height: 1.5rem;
                 }
-                #adicionarCliente {
-                    text-align: center;
-
-                    button {
-                        
-                    }
+                .nomeGoTo {
+                    margin: 0;
+                    transition: 0.6s;
                 }
             }
-            #listClientes {
-                .clientes {
+            .links:hover {
+            }
+        }
+    }
+    .navAberto {
+        width: 11rem;
+        #bttNav {
+            margin-left: 9.5rem;
+        }
+        #containerLinks {
+            .links {
+                gap: 0;
+                .nomeGoTo {
+                    display: flex;
+                }
+            }
+        }
+    }
+    .navFechado {
+        width: 4rem;
+        #bttNav {
+            margin-left: 2.4rem;
+        }
+        #containerLinks {
+            .links {
+                .nomeGoTo {
+                    display: none;
+                }
+            }
+        }
+    }
+    #mainClientes {
+        grid-area: main;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        flex-direction: column;
+
+        width: 100%;
+        height: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+
+        background-color: var(--branco);
+        #containerListClientes {
+            padding: 1rem;
+            border: 0.1rem solid var(--marrom);
+            border-radius: 10px;
+            margin-top: 1rem;
+
+            background-color: var(--salmaoClaro);
+
+            h2 {
+                font-size: 1rem;
+                text-align: left;
+                margin: 0 0 0.9rem 0.5rem;
+                
+            }
+            #tabelaClientes {
+                width: 35rem;
+                #cabecalho {
                     display: grid;
                     grid-template-columns: 50% 30% 20%;
 
-                    font-size: 0.9rem;
-                    height: 1.3rem;                   
-
-                    border: 0.1rem solid var(--marrom);
-
-
-                    div {
+                    #cNome,
+                    #cCNPJ {
+                        border: 0.1rem solid var(--marrom);
                         text-align: center;
 
-                        background-color: var(--branco);
+                        padding: 0.1rem 0.5rem;
                     }
-                    .options {
-                        height: 100%;
-                        
+                    #adicionarCliente {
+                        text-align: center;
+
+                        button {
+                            
+                        }
+                    }
+                }
+                #listClientes {
+                    .clientes {
+                        display: grid;
+                        grid-template-columns: 50% 30% 20%;
+
+                        font-size: 0.9rem;
+                        height: 1.3rem;                   
+
+                        border: 0.1rem solid var(--marrom);
+
+
+                        div {
+                            text-align: center;
+
+                            background-color: var(--branco);
+                        }
+                        .options {
+                            height: 100%;
+                            
+                        }
                     }
                 }
             }
         }
-    }
-    #sombra {
-        display: none;
-        position: fixed;
-        background-color: #000000c0;
-        width: 100%;
-        height: 100%;
-    }
-    #containerNovoCliente {
-        display: none;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: auto auto auto auto;
-        grid-template-areas:
-        "title title title"
-        "geral geral geral"
-        "enderecos telefones emails"
-        "concForm concForm concForm";
-        column-gap: 0.5rem;
-        row-gap: 1rem;
-
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 90;
-
-        width: auto;
-        height: auto;
-        padding: 2rem;
-        border: 0.1rem solid var(--marrom);
-        border-radius: 10px;
-
-        background-color: var(--salmaoClaro);
-
-        h2 {
-            grid-area: title;
-            text-align: center;
-            font-size: 1.3rem;
-            margin: 0;
-            margin-bottom: 0.5rem;
-        }
-        #geral {
-            grid-area: geral;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-areas: 
-            "nome cnpj";
-            gap: 0.1rem;
-            #nome {
-                grid-area: nome;
-                
-                label {
-                    width: 30%;
-
-                }
-                input {
-                    width: 70%;
-                }
-            }
-            #cnpj {
-                grid-area: cnpj;
-                label {
-                    width: 30%;
-                    text-align: center;
-                }
-                input {
-                    width: 70%;
-                }
-            }
-        }
-        #contEnderecos {
-            grid-area: enderecos;
-        }
-        #contTelefones {
-            grid-area: telefones;
-        }
-        #contEmails {
-            grid-area: emails;
-        }
-        .contInfosNovoCliente {
-            display: grid;
+        #sombra {
+            display: none;
+            position: fixed;
+            background-color: #000000c0;
             width: 100%;
-            grid-template-columns: 6fr 1fr 1fr;
-            grid-template-rows: 1rem auto;
-            grid-template-areas: 
-            "title bttShow bttNovo"
-            "inps inps inps";
-            #title {
-                font-size: 1rem;
-                font-weight: 400;
-                margin: 0;
-                grid-area: title;
-            }
-            #bttShow {
-                grid-area: bttShow;
-            }
-            #bttNovo {
-                grid-area: bttNovo;
-            }
-            .inpsNovoCliente {
-                grid-area: inps;
-
-                
-            }
+            height: 100%;
         }
-        #concForm {
-            grid-area: concForm;
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            button {
-                height: 2rem;
-                width: 8rem;
-                font-size: 1rem;
+        #containerNovoCliente {
+            display: none;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: auto auto auto auto;
+            grid-template-areas:
+            "title title title"
+            "geral geral geral"
+            "enderecos telefones emails"
+            "concForm concForm concForm";
+            column-gap: 0.5rem;
+            row-gap: 1rem;
+
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 90;
+
+            width: auto;
+            height: auto;
+            padding: 2rem;
+            border: 0.1rem solid var(--marrom);
+            border-radius: 10px;
+
+            background-color: var(--salmaoClaro);
+
+            h2 {
+                grid-area: title;
+                text-align: center;
+                font-size: 1.3rem;
+                margin: 0;
+                margin-bottom: 0.5rem;
+            }
+            #geral {
+                grid-area: geral;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-areas: 
+                "nome cnpj";
+                gap: 0.1rem;
+                #nome {
+                    grid-area: nome;
+                    
+                    label {
+                        width: 30%;
+
+                    }
+                    input {
+                        width: 70%;
+                    }
+                }
+                #cnpj {
+                    grid-area: cnpj;
+                    label {
+                        width: 30%;
+                        text-align: center;
+                    }
+                    input {
+                        width: 70%;
+                    }
+                }
+            }
+            #contEnderecos {
+                grid-area: enderecos;
+            }
+            #contTelefones {
+                grid-area: telefones;
+            }
+            #contEmails {
+                grid-area: emails;
+            }
+            .contInfosNovoCliente {
+                display: grid;
+                width: 100%;
+                grid-template-columns: 6fr 1fr 1fr;
+                grid-template-rows: 1rem auto;
+                grid-template-areas: 
+                "title bttShow bttNovo"
+                "inps inps inps";
+                #title {
+                    font-size: 1rem;
+                    font-weight: 400;
+                    margin: 0;
+                    grid-area: title;
+                }
+                #bttShow {
+                    grid-area: bttShow;
+                }
+                #bttNovo {
+                    grid-area: bttNovo;
+                }
+                .inpsNovoCliente {
+                    grid-area: inps;
+
+                    
+                }
+            }
+            #concForm {
+                grid-area: concForm;
+                display: flex;
+                justify-content: center;
+                gap: 1rem;
+                button {
+                    height: 2rem;
+                    width: 8rem;
+                    font-size: 1rem;
+                }
             }
         }
     }

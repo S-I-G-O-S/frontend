@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
-import navAbrir  from '../assets/navAbrir.png'
 import navLeft  from '../assets/navLeft.png'
-import options from '../assets/options.png'
+import navRight  from '../assets/navRight.png'
+import funcsIcon from '../assets/funcsIcon.png'
+import homeIcon from '../assets/homeIcon.png'
+import ordensIcon from '../assets/ordensIcon.png'
 import '../styles/clientes.css'
 
 function Clientes() {
@@ -9,17 +11,19 @@ function Clientes() {
         changeRegClienteContainer()
     }
     async function changeNav() {
-        const sideNav = document.getElementById("sideNavClientes")
+        const nav = document.getElementById("navClientes")
         const button = document.getElementById("bttNav")
 
         if (button.className == "navFechar") {
-            sideNav.style.display = "none"
+            //sideNav.style.display = "none"
             button.className = "navAbrir"
-            button.src = navLeft
+            button.src = navRight
+            nav.className = "navFechado"
         } else {
-            sideNav.style.display = "flex"
+            //sideNav.style.display = "flex"
             button.className = "navFechar"
-            button.src = navFechar
+            button.src = navLeft
+            nav.className = "navAberto"
         }
     }
     async function changeRegClienteContainer() {
@@ -34,18 +38,29 @@ function Clientes() {
         }
     }
     return (
-        <>
-        <nav id='navClientes'>
-            <img id="bttNav" src={ navAbrir } alt="" onClick={changeNav} className="navAbrir"/>
+        <div id='pageClientes'>
+        <header id='headerClientes'>
             <Link id="sair" to="/">
                 sair
             </Link>
+        </header>
+        <nav id="navClientes" className="goTo navFechado">
+            <img id="bttNav" src={ navRight } alt="" onClick={changeNav} className="navAbrir"/>
+            <div id='containerLinks'>
+                <Link className="links" id='goToClientes' to="/clientes">
+                    <img src={homeIcon} alt="clientes" />
+                    <p className='nomeGoTo' id='goToClientesP'>home</p>
+                </Link>
+                <Link className="links" id='goToFuncs' to="/funcionarios">
+                    <img src={funcsIcon} alt="home" />
+                    <p className='nomeGoTo' id='goToHomeP'>funcionarios</p>
+                </Link>
+                <Link className="links" id='goToOrdens' to="/ordens">
+                    <img src={ordensIcon} alt="ordens" />
+                    <p className='nomeGoTo' id='goToOrdensP'>ordens</p>
+                </Link>
+            </div>
         </nav>
-        <div id="sideNavClientes" className="goTo">
-            <Link className="links" to="/home">home</Link>
-            <Link className="links" to="/tecnicos">tenicos</Link>
-            <Link className="links" to="/ordens">ordens de serviços</Link>
-        </div>
         <main id='mainClientes'>
             {/* Listagem */}
             <section id='containerListClientes'>
@@ -129,7 +144,7 @@ function Clientes() {
                 </div>
             </section>
         </main>
-        </>
+        </div>
     )
 }
 
