@@ -52,13 +52,9 @@ function Funcionarios() {
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim asperiores facere aperiam, consequatur beatae commodi sed saepe minima dolorum rem officia alias repellendus vero perspiciatis officiis eum cum. Nostrum, labore.
             </section>
             <section id='sec2'>
-                ipsum dolor sit amet consectetur, adipisicing elit. Tempora corporis veniam fuga. Modi, ea eaque consequuntur quisquam veniam voluptatum amet numquam adipisci natus error, nisi voluptatem unde tempore perferendis eveniet!</section>
+                ipsum dolor sit amet consectetur, adipisicing elit. Tempora corporis veniam fuga. Modi, ea eaque consequuntur quisquam veniam voluptatum amet numquam adipisci natus error, nisi voluptatem unde tempore perferendis eveniet!
+            </section>
             <section id='sec3'>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit fugit optio, numquam minima hic minus iusto neque? Est quae, repudiandae iure blanditiis quam esse incidunt quia ex, voluptatem reiciendis ipsa?
-                ipsum dolor sit, amet consectetur adipisicing elit. Suscipit fugit optio, numquam minima hic minus iusto neque? Est quae, repudiandae iure blanditiis quam esse incidunt quia ex, voluptatem reiciendis ipsa?
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit fugit optio, numquam minima hic minus iusto neque? Est quae, repudiandae iure blanditiis quam esse incidunt quia ex, voluptatem reiciendis ipsa?
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit fugit optio, numquam minima hic minus iusto neque? Est quae, repudiandae iure blanditiis quam esse incidunt quia ex, voluptatem reiciendis ipsa?
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit fugit optio, numquam minima hic minus iusto neque? Est quae, repudiandae iure blanditiis quam esse incidunt quia ex, voluptatem reiciendis ipsa?
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit fugit optio, numquam minima hic minus iusto neque? Est quae, repudiandae iure blanditiis quam esse incidunt quia ex, voluptatem reiciendis ipsa?
             </section>
             <section id='sec4'>

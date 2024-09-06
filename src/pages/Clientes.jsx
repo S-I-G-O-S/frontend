@@ -47,8 +47,8 @@ function Clientes() {
         <nav id="navClientes" className="goTo navFechado">
             <img id="bttNav" src={ navRight } alt="" onClick={changeNav} className="navAbrir"/>
             <div id='containerLinks'>
-                <Link className="links" id='goToClientes' to="/clientes">
-                    <img src={homeIcon} alt="clientes" />
+                <Link className="links" id='goToClientes' to="/home">
+                    <img src={homeIcon} alt="home" />
                     <p className='nomeGoTo' id='goToClientesP'>home</p>
                 </Link>
                 <Link className="links" id='goToFuncs' to="/funcionarios">

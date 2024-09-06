@@ -127,9 +127,10 @@
         grid-area: main;
 
         width: 100%;
-        padding: 0.5rem;
+        padding: 1rem;
         margin: 0 auto;
         box-sizing: border-box;
+
         background-color: var(--branco);
         section {
             padding: 1rem;
