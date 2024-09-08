@@ -1,0 +1,35 @@
+:root {
+    --azul: #395873;
+    --azulHover: #2a4358;
+    --nav: #395873ea;
+    --laranja: #D96704;
+    --salmao: #F2AE72;
+    --salmaoClaro: #f7cba4;
+    --branco: #F2E8DF;
+    --marrom: #26110D;
+    --preto: #000;
+}
+#header {
+    display: flex;
+    grid-area: header;
+    justify-content: right;
+    align-items: center;
+    gap: 0.2rem;
+    padding: 0 1rem;
+
+    z-index: 96;
+
+    background-color: var(--marrom);
+    #bttNav {
+        width: 2rem;
+        cursor: pointer;
+        z-index: 99;
+    }
+    #sair {
+        cursor: pointer;
+        font-size: 0.95rem;
+        font-weight: 500;
+        text-decoration: none;
+        color: var(--salmao);
+    }
+}

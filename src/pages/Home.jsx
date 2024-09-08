@@ -1,40 +1,17 @@
-import { Link } from 'react-router-dom'
-import navLeft  from '../assets/navLeft.png'
-import navRight  from '../assets/navRight.png'
-import funcsIcon from '../assets/funcsIcon.png'
-import clientesIcon from '../assets/clientesIcon.png'
-import ordensIcon from '../assets/ordensIcon.png'
+import Nav from '../components/public/Nav'
+import Header from '../components/public/Header'
 import '../styles/home.css'
 function Home() {
-    async function changeNav() {
-        const nav = document.getElementById("navHome")
-        const button = document.getElementById("bttNav")
-
-        if (button.className == "navFechar") {
-            //sideNav.style.display = "none"
-            button.className = "navAbrir"
-            button.src = navRight
-            nav.className = "navFechado"
-        } else {
-            //sideNav.style.display = "flex"
-            button.className = "navFechar"
-            button.src = navLeft
-            nav.className = "navAberto"
-        }
-    }
     return (
         <div id='pageHome'>
-        <header id='headerHome'>
-            <Link id="sair" to="/">
-                sair
-            </Link>
-        </header>
-        <nav id="navHome" className="goTo navFechado">
+        <Header></Header>
+        <Nav></Nav>
+        {/* <nav id="navHome" className="goTo navFechado">
             <img id="bttNav" src={ navRight } alt="" onClick={changeNav} className="navAbrir"/>
             <div id='containerLinks'>
                 <Link className="links" id='goToFuncs' to="/funcionarios">
-                    <img src={funcsIcon} alt="home" />
-                    <p className='nomeGoTo' id='goToHomeP'>funcionarios</p>
+                    <img src={funcsIcon} alt="funcionarios" />
+                    <p className='nomeGoTo' id='goToFuncionariosP'>funcionarios</p>
                 </Link>
                 <Link className="links" id='goToClientes' to="/clientes">
                     <img src={clientesIcon} alt="clientes" />
@@ -45,7 +22,7 @@ function Home() {
                     <p className='nomeGoTo' id='goToOrdensP'>ordens</p>
                 </Link>
             </div>
-        </nav>
+        </nav> */}
         <main id="mainHome">
             {/* SEÇÃO DE ORDENS DE SERVIÇOS ABERTOS */}
             <section id="secOrdensAbertas">

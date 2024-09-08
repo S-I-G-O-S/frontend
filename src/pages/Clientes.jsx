@@ -1,30 +1,10 @@
-import { Link } from 'react-router-dom'
-import navLeft  from '../assets/navLeft.png'
-import navRight  from '../assets/navRight.png'
-import funcsIcon from '../assets/funcsIcon.png'
-import homeIcon from '../assets/homeIcon.png'
-import ordensIcon from '../assets/ordensIcon.png'
+import Nav from '../components/public/Nav'
 import '../styles/clientes.css'
+import Header from '../components/public/Header'
 
 function Clientes() {
     async function addCliente() {
         changeRegClienteContainer()
-    }
-    async function changeNav() {
-        const nav = document.getElementById("navClientes")
-        const button = document.getElementById("bttNav")
-
-        if (button.className == "navFechar") {
-            //sideNav.style.display = "none"
-            button.className = "navAbrir"
-            button.src = navRight
-            nav.className = "navFechado"
-        } else {
-            //sideNav.style.display = "flex"
-            button.className = "navFechar"
-            button.src = navLeft
-            nav.className = "navAberto"
-        }
     }
     async function changeRegClienteContainer() {
         const sombra = document.getElementById("sombra")
@@ -39,28 +19,8 @@ function Clientes() {
     }
     return (
         <div id='pageClientes'>
-        <header id='headerClientes'>
-            <Link id="sair" to="/">
-                sair
-            </Link>
-        </header>
-        <nav id="navClientes" className="goTo navFechado">
-            <img id="bttNav" src={ navRight } alt="" onClick={changeNav} className="navAbrir"/>
-            <div id='containerLinks'>
-                <Link className="links" id='goToClientes' to="/home">
-                    <img src={homeIcon} alt="home" />
-                    <p className='nomeGoTo' id='goToClientesP'>home</p>
-                </Link>
-                <Link className="links" id='goToFuncs' to="/funcionarios">
-                    <img src={funcsIcon} alt="home" />
-                    <p className='nomeGoTo' id='goToHomeP'>funcionarios</p>
-                </Link>
-                <Link className="links" id='goToOrdens' to="/ordens">
-                    <img src={ordensIcon} alt="ordens" />
-                    <p className='nomeGoTo' id='goToOrdensP'>ordens</p>
-                </Link>
-            </div>
-        </nav>
+        <Header></Header>
+        <Nav></Nav>
         <main id='mainClientes'>
             {/* Listagem */}
             <section id='containerListClientes'>

@@ -1,0 +1,91 @@
+:root {
+    --azul: #395873;
+    --azulHover: #2a4358;
+    --nav: #395873ea;
+    --laranja: #D96704;
+    --salmao: #F2AE72;
+    --salmaoClaro: #f7cba4;
+    --branco: #F2E8DF;
+    --marrom: #26110D;
+    --preto: #000;
+}
+#nav {
+    display: flex;
+    grid-area: nav;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: 100%;
+    background-color: var(--azul);
+    transition: 0.25s;
+    z-index: 98;
+    #bttNav {
+        width: 3rem;
+        position: fixed;
+        transition: 0.25s;
+        cursor: pointer;
+    }
+    #containerLinks {
+        position: sticky;
+        top: 3rem;
+        box-sizing: border-box;
+        margin: 0.5rem 0;
+        transition: 0.6s;
+        .links {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            width: 100%;
+            height: 2.2rem;
+            text-decoration: none;
+            font-weight: 500;
+            box-sizing: border-box;
+            color: var(--branco);
+            padding: 0.3rem 1.2rem;
+            margin: 0;
+            img {
+                height: 1.5rem;
+                transition: 0.2s;
+            }
+            .nomeGoTo {
+                margin: 0;
+                transition: 0.2s;
+                font-size: 1rem;
+            }
+        }
+        .links:hover {
+            background-color: var(--azulHover);
+            background-image: ;
+            transition: 0.3s;
+        }
+    }
+}
+.navAberto {
+    width: 11rem;
+    #bttNav {
+        margin-left: 9.5rem;
+    }
+    #containerLinks {
+        a {
+            gap: 1rem;
+            .nomeGoTo {
+                display: flex;
+            }
+        }
+    }
+}
+.navFechado {
+    width: 4rem;
+    #bttNav {
+        margin-left: 2.4rem;
+    }
+    #containerLinks {
+        .links {
+            .nomeGoTo {
+                display: none;
+            }
+        }
+    }
+}
+a.active {
+    background-color: var(--laranja);
+}

@@ -1,36 +1,12 @@
-import { Link } from 'react-router-dom'
-import navLeft  from '../assets/navLeft.png'
-import navRight  from '../assets/navRight.png'
-import homeIcon from '../assets/homeIcon.png'
-import clientesIcon from '../assets/clientesIcon.png'
-import ordensIcon from '../assets/ordensIcon.png'
 import '../styles/funcionarios.css'
-
+import Nav from '../components/public/Nav'
+import Header from '../components/public/Header'
 function Funcionarios() {
-    async function changeNav() {
-        const nav = document.getElementById("navFuncionarios")
-        const button = document.getElementById("bttNav")
-
-        if (button.className == "navFechar") {
-            //sideNav.style.display = "none"
-            button.className = "navAbrir"
-            button.src = navRight
-            nav.className = "navFechado"
-        } else {
-            //sideNav.style.display = "flex"
-            button.className = "navFechar"
-            button.src = navLeft
-            nav.className = "navAberto"
-        }
-    }
     return (
         <div id='pageFuncionarios'>
-        <header id='headerFuncionarios'>
-            <Link id="sair" to="/">
-                sair
-            </Link>
-        </header>
-        <nav id="navFuncionarios" className="goTo navFechado">
+        <Header></Header>
+        <Nav></Nav>
+        {/* <nav id="navFuncionarios" className="goTo navFechado">
             <img id="bttNav" src={ navRight } alt="" onClick={changeNav} className="navAbrir"/>
             <div id='containerLinks'>
                 <Link className="links" id='goToHome' to="/home">
@@ -46,19 +22,44 @@ function Funcionarios() {
                     <p className='nomeGoTo' id='goToOrdensP'>ordens</p>
                 </Link>
             </div>
-        </nav>
+        </nav> */}
         <main id='mainFuncionarios'>
             <section id='sec1'>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim asperiores facere aperiam, consequatur beatae commodi sed saepe minima dolorum rem officia alias repellendus vero perspiciatis officiis eum cum. Nostrum, labore.
+                <div id='titleList'>
+                    <div className='selectTitle'></div>
+                    <div className='nomeTitle'>nome</div>
+                    <div className='cellTitle'>celular</div>
+                    <div className='cargoTitle'>cargo</div>
+                    <div className='statusTitle'>status</div>
+                </div>
+                <div id='listFuncs'>
+                    <div className='funcs'>
+                        <div className='containerSelectFunc'>
+                            <input type="checkbox" className='selectFunc' id="" />
+                        </div>
+                        <div className='nomeFunc'>Leonardo Almeida</div>
+                        <div className='cellFunc'>(13) 123456-7891</div>
+                        <div className='cargoFunc'>tecnico</div>
+                        <div className='statusFunc'>disponivel</div>
+                        <div className='containerSkillsFunc'>
+                            <div className='skillsFunc'>portão</div>
+                            <div className='skillsFunc'>camera</div>
+                            <div className='skillsFunc'>escada rolante</div>
+                            <div className='skillsFunc'>interfone</div>
+                        </div>
+                    </div>
+                </div>
             </section>
             <section id='sec2'>
-                ipsum dolor sit amet consectetur, adipisicing elit. Tempora corporis veniam fuga. Modi, ea eaque consequuntur quisquam veniam voluptatum amet numquam adipisci natus error, nisi voluptatem unde tempore perferendis eveniet!
+                FILTROS
+                <br />lugar onde o usuario vai poder filtrar quais funcionarios deseja ver, como por exemplo, só funcionarios disponiveis ou por especialidades.
             </section>
             <section id='sec3'>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit fugit optio, numquam minima hic minus iusto neque? Est quae, repudiandae iure blanditiis quam esse incidunt quia ex, voluptatem reiciendis ipsa?
+
             </section>
             <section id='sec4'>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit fugit optio, numquam minima hic minus iusto neque? Est quae, repudiandae iure blanditiis quam esse incidunt quia ex, voluptatem reiciendis ipsa?
+                ESPECIALIDADES
+                <br />Onde o usuario poderá editar, criar, excluir e saber mais sobre as especialidades registradas no sistema.
             </section>
         </main>
         </div>
