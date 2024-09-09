@@ -59,6 +59,7 @@
             }
         }
         #secOrdensAbertas {
+            display: none;
             grid-area: ordensAbertas;
             .ordensAbertas{
                 display: grid;
@@ -106,6 +107,7 @@
                 }
             }
         }
+        #sec
     }
 }
 @media screen and (width <= 800px) {

@@ -50,6 +50,12 @@ function Home() {
                     </div>
                 </div>
             </section>
+            <section id='secTecnicosDisponiveis'>
+                <h2>Tecnicos disponiveis</h2>
+                <div id='listTecsDisp'>
+                    
+                </div>
+            </section>
         </main>
         </div>
     )
