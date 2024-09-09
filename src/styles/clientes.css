@@ -49,14 +49,16 @@
                 
             }
             #tabelaClientes {
-                width: 35rem;
+                width: auto;
                 #cabecalho {
                     display: grid;
-                    grid-template-columns: 50% 30% 20%;
+                    grid-template-columns: 2fr 1fr 1fr 1fr;
 
                     #cNome,
+                    #cEndereco,
                     #cCNPJ {
                         border: 0.1rem solid var(--marrom);
+                        border-bottom: 0;
                         text-align: center;
 
                         padding: 0.1rem 0.5rem;
@@ -72,7 +74,7 @@
                 #listClientes {
                     .clientes {
                         display: grid;
-                        grid-template-columns: 50% 30% 20%;
+                        grid-template-columns: 2fr 1fr 1fr 1fr;
 
                         font-size: 0.9rem;
                         height: 1.3rem;                   

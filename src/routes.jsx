@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Funcionarios from "./pages/Funcionarios";
 import Ordens from "./pages/Ordens";
 import Clientes from "./pages/Clientes";
+import Cliente from "./pages/Cliente"
 
 function AppRoutes() {
     return (
@@ -14,6 +15,8 @@ function AppRoutes() {
                 <Route path="/funcionarios" element={ <Funcionarios/> }></Route>
                 <Route path="/ordens" element={ <Ordens/> }></Route>
                 <Route path="/clientes" element={ <Clientes/> }></Route>
+                <Route path="/cliente" element={ <Cliente/> }></Route>
+                
             </Routes>
         </BrowserRouter>
     )

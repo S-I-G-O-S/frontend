@@ -1,0 +1,48 @@
+:root {
+    --azul: #395873;
+    --nav: #395873ea;
+    --laranja: #D96704;
+    --salmao: #F2AE72;
+    --salmaoClaro: #f7cba4;
+    --branco: #F2E8DF;
+    --marrom: #26110D;
+    --preto: #000;
+}
+
+#pageCliente {
+    display: grid;
+    grid-template-columns: max-content auto;
+    grid-template-rows: 3rem auto;
+    grid-template-areas: 
+    "nav header"
+    "nav main";
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #F2E8DF;
+    box-sizing: border-box;
+
+    main {
+        display: grid;
+        grid-template-areas: 
+        "sec1 sec3"
+        "sec2 sec3";
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        padding: 1rem;
+        gap: 0.5rem;
+        section {
+            border: 0.1rem solid black;
+        }
+        #sec1 {
+            grid-area: sec1;
+        }
+        #sec2 {
+            grid-area: sec2;
+        }
+        #sec3 {
+            grid-area: sec3;
+        }
+    }
+}
