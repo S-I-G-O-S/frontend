@@ -6,25 +6,18 @@ function Funcionarios() {
         <div id='pageFuncionarios'>
         <Header></Header>
         <Nav></Nav>
-        {/* <nav id="navFuncionarios" className="goTo navFechado">
-            <img id="bttNav" src={ navRight } alt="" onClick={changeNav} className="navAbrir"/>
-            <div id='containerLinks'>
-                <Link className="links" id='goToHome' to="/home">
-                    <img src={homeIcon} alt="home" />
-                    <p className='nomeGoTo' id='goToHomeP'>home</p>
-                </Link>
-                <Link className="links" id='goToClientes' to="/clientes">
-                    <img src={clientesIcon} alt="clientes" />
-                    <p className='nomeGoTo' id='goToClientesP'>clientes</p>
-                </Link>
-                <Link className="links" id='goToOrdens' to="/ordens">
-                    <img src={ordensIcon} alt="ordens" />
-                    <p className='nomeGoTo' id='goToOrdensP'>ordens</p>
-                </Link>
-            </div>
-        </nav> */}
+
         <main id='mainFuncionarios'>
             <section id='sec1'>
+                <div id='containerSelectCriar'>
+                    <div id='select'>
+                        <input type="checkbox" name="" id="" />
+                        <p><span></span>todos</p>
+                    </div>
+                    <div id='contAddNovo'>
+                        <button>Novo Funcionario</button>
+                    </div>
+                </div>
                 <div id='titleList'>
                     <div className='selectTitle'></div>
                     <div className='nomeTitle'>nome</div>
