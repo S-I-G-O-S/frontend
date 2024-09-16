@@ -51,7 +51,7 @@
             #tabelaClientes {
                 width: auto;
                 #cabecalho {
-                    display: grid;
+                    display: none;
                     grid-template-columns: 2fr 1fr 1fr 1fr;
 
                     #cNome,
@@ -74,7 +74,7 @@
                 #listClientes {
                     .clientes {
                         display: grid;
-                        grid-template-columns: 2fr 1fr 1fr 1fr;
+                        grid-template-columns: 1fr 1fr 1fr 4rem;
 
                         font-size: 0.9rem;
                         height: 1.3rem;                   
@@ -83,13 +83,19 @@
 
 
                         div {
-                            text-align: center;
+                            text-align: left;
 
                             background-color: var(--branco);
                         }
+                        .nome,
+                        .cnpj {
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
                         .options {
                             height: 100%;
-                            
+                            cursor: pointer;
                         }
                     }
                 }

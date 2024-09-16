@@ -26,7 +26,7 @@
         grid-template-columns: 1fr 1fr;
         grid-template-rows: max-content;
         grid-template-areas: 
-            "ordensAbertas ordensSendoAtendidas";
+        "ordensSendoAtendidas tecDisponiveis";
         gap: 1rem;
         align-items: start;
         grid-area: main;
@@ -107,17 +107,19 @@
                 }
             }
         }
-        #sec
+        #secTecnicosDisponiveis {
+            grid-area: tecDisponiveis;
+        }
     }
 }
-@media screen and (width <= 800px) {
+@media screen and (width <= 750px) {
     #pageHome{
         #mainHome {
             grid-template-columns: 1fr;
             grid-template-rows: max-content max-content;
             grid-template-areas: 
-                "ordensAbertas" 
-                "ordensSendoAtendidas";
+                "ordensSendoAtendidas"
+                "tecDisponiveis" ;
             gap: 1rem;
         }
     }

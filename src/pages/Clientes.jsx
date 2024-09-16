@@ -25,18 +25,27 @@ function Clientes() {
             {/* Listagem */}
             <section id='containerListClientes'>
                 <div id='tabelaClientes'>
+                    <h2>Clientes</h2>
                     <div id='cabecalho'>
                         <div id='cNome'>nome</div>
                         <div id='cCNPJ'>CNPJ</div>
                         <div id='cEndereco'>endereço</div>
                         <div id='adicionarCliente'>
-                            <button onClick={changeRegClienteContainer}>novo cliente</button>
+                            <button onClick={changeRegClienteContainer}>novo</button>
                         </div>
                     </div>
                     <div id='listClientes'>
                         <div id='cliente1' className='clientes'>
                             <div className='nome'>Açougue JM</div>
                             <div className='cnpj'>00.000.000/0001-11</div>
+                            <div className='endereco'>R. Leopoldo, 32</div>
+                            <div className='options'>
+                                editar
+                            </div>
+                        </div>
+                        <div id='cliente2' className='clientes'>
+                            <div className='nome'>Nome longo de cliente para testar</div>
+                            <div className='cnpj'>00.000.000/0000-00</div>
                             <div className='endereco'>R. Leopoldo, 32</div>
                             <div className='options'>
                                 editar
