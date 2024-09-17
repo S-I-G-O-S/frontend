@@ -9,6 +9,20 @@
     --preto: #000;
     --leftBttNav: 5rem;
 }
+.checkbox {
+    all: unset;
+    height: 1rem;
+    width: 1rem;
+    cursor: pointer;
+    margin: 0;
+    border: 0.1rem solid var(--marrom);
+    border-radius: 50%;
+
+    background-color: var(--branco);
+}
+.checkbox:checked {
+    background-color: var(--laranja);
+}
 #pageFuncionarios {
     display: grid;
     grid-template-columns: max-content auto;
@@ -23,28 +37,69 @@
     background-color: #F2E8DF;
     box-sizing: border-box;
     
+    
+
     #mainFuncionarios {
         display: grid;
         grid-area: main;
         box-sizing: border-box;
-        grid-template-columns: 1fr 2fr 1fr;
-        grid-template-rows: auto auto;
+        grid-template-columns: 3fr 1fr;
+        grid-template-rows: auto;
         grid-template-areas: 
-        "sec2 sec1 sec3"
-        "sec2 sec1 sec4";
+        "sec1 sec2";
         gap: 1rem;
         padding: 1rem 2rem;
         section {
+            background-color: var(--salmaoClaro);
+            padding: 0.5rem 1rem;
             border: 0.1rem solid var(--marrom);
+            border-radius: 0.4rem;
+            h2 {
+                font-size: 1.1rem;
+                color: var(--marrom);
+                margin: 0;
+                margin-bottom: 1.5rem;
+            }
         }
-        #sec1 {
+        #secList {
             grid-area: sec1;
+            
+            #containerSelectCriar {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                height: 2rem;
+                margin-bottom: 0.5rem;
+                #select {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    p {
+                        font-size: 1rem;
+                        margin: auto 0;
+                    }
+                }
+            }
             #titleList {
                 display: grid;
                 grid-template-columns: 2rem 2fr 2fr 1fr 1fr;
                 
+                background-color: var(--marrom);
+                
+                div {
+                    height: auto;
+                    font-size: 0.95rem;
+                    font-weight: 400;
+                    color: var(--salmao);
+
+                    padding: 0.1rem 0.1rem;
+                }
             }
             #listFuncs {
+                background-color: var(--branco);
+                
+                padding: 0.5rem 0;
                 .funcs {
                     display: grid;
                     grid-template-columns: 2rem 2fr 2fr 1fr 1fr;
@@ -85,17 +140,22 @@
                 }
             }
         }
-        #sec2 {
+        #secEspecialidades {
             grid-area: sec2;
-        }
-        #sec3 {
-            grid-area: sec3;
-        }
-        #sec4 {
-            grid-area: sec4;
         }
     }
 }
-@media screen and (width <= 550px) {
-    
+@media screen and (width <= 800px) {
+    #pageFuncionarios >
+    #mainFuncionarios {
+        display: grid;
+        grid-area: main;
+        box-sizing: border-box;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        grid-template-areas: 
+        "sec1"
+        "sec2";
+        gap: 1rem;
+    }
 }

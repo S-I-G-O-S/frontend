@@ -6,12 +6,12 @@ function Funcionarios() {
         <div id='pageFuncionarios'>
         <Header></Header>
         <Nav></Nav>
-
         <main id='mainFuncionarios'>
-            <section id='sec1'>
+            <section id='secList'>
+                <h2>Funcionários</h2>
                 <div id='containerSelectCriar'>
                     <div id='select'>
-                        <input type="checkbox" name="" id="" />
+                        <input type="checkbox" name="" id="" className='checkbox'/>
                         <p><span></span>todos</p>
                     </div>
                     <div id='contAddNovo'>
@@ -28,7 +28,7 @@ function Funcionarios() {
                 <div id='listFuncs'>
                     <div className='funcs'>
                         <div className='containerSelectFunc'>
-                            <input type="checkbox" className='selectFunc' id="" />
+                            <input type="checkbox" className='selectFunc checkbox' id="" />
                         </div>
                         <div className='nomeFunc'>Leonardo Almeida</div>
                         <div className='cellFunc'>(13) 123456-7891</div>
@@ -43,7 +43,7 @@ function Funcionarios() {
                     </div>
                     <div className='funcs'>
                         <div className='containerSelectFunc'>
-                            <input type="checkbox" className='selectFunc' id="" />
+                            <input type="checkbox" className='selectFunc checkbox' id="" />
                         </div>
                         <div className='nomeFunc'>Leonardo Almeida</div>
                         <div className='cellFunc'>(13) 123456-7891</div>
@@ -58,7 +58,7 @@ function Funcionarios() {
                     </div>
                     <div className='funcs'>
                         <div className='containerSelectFunc'>
-                            <input type="checkbox" className='selectFunc' id="" />
+                            <input type="checkbox" className='selectFunc checkbox' id="" />
                         </div>
                         <div className='nomeFunc'>Leonardo Almeida</div>
                         <div className='cellFunc'>(13) 123456-7891</div>
@@ -73,14 +73,7 @@ function Funcionarios() {
                     </div>
                 </div>
             </section>
-            <section id='sec2'>
-                FILTROS
-                <br />lugar onde o usuario vai poder filtrar quais funcionarios deseja ver, como por exemplo, só funcionarios disponiveis ou por especialidades.
-            </section>
-            <section id='sec3'>
-
-            </section>
-            <section id='sec4'>
+            <section id='secEspecialidades'>
                 ESPECIALIDADES
                 <br />Onde o usuario poderá editar, criar, excluir e saber mais sobre as especialidades registradas no sistema.
             </section>

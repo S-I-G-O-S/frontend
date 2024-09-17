@@ -43,9 +43,10 @@
             background-color: var(--salmaoClaro);
 
             h2 {
-                font-size: 1rem;
-                text-align: left;
-                margin: 0 0 0.9rem 0.5rem;
+                font-size: 1.1rem;
+                color: var(--marrom);
+                margin: 0;
+                margin-bottom: 1.5rem;
                 
             }
             #tabelaClientes {
@@ -72,30 +73,45 @@
                     }
                 }
                 #listClientes {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.1rem;
                     .clientes {
                         display: grid;
-                        grid-template-columns: 1fr 1fr 1fr 4rem;
+                        grid-template-columns: 15rem auto 1fr 4rem;
 
                         font-size: 0.9rem;
-                        height: 1.3rem;                   
+                        height: auto;                   
 
                         border: 0.1rem solid var(--marrom);
-
+                        border-radius: 0.2rem;
+                        background-color: var(--branco);
 
                         div {
                             text-align: left;
-
-                            background-color: var(--branco);
+                            
                         }
                         .nome,
-                        .cnpj {
+                        .cnpj,
+                        .endereco {
                             white-space: nowrap;
                             overflow: hidden;
                             text-overflow: ellipsis;
+                            
+                            padding: 0 0.5rem;
+                            border-right: 0.1rem solid var(--marrom);
+
                         }
                         .options {
-                            height: 100%;
                             cursor: pointer;
+                            text-align: center;
+                            font-weight: 500;
+                            transition: 150ms;
+                        }
+                        .options:hover {
+                            
+                            color: var(--salmao);
+                            background-color: var(--marrom);
                         }
                     }
                 }

@@ -46,7 +46,7 @@ function Clientes() {
                         <div id='cliente2' className='clientes'>
                             <div className='nome'>Nome longo de cliente para testar</div>
                             <div className='cnpj'>00.000.000/0000-00</div>
-                            <div className='endereco'>R. Leopoldo, 32</div>
+                            <div className='endereco'>R. Rua Com Nome Longo, 325 - apto. 12</div>
                             <div className='options'>
                                 editar
                             </div>
