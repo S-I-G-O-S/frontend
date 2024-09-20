@@ -40,16 +40,15 @@
     
 
     #mainFuncionarios {
-        display: grid;
+        display: flex;
+        width: 100%;
         grid-area: main;
         box-sizing: border-box;
-        grid-template-columns: 3fr 1fr;
-        grid-template-rows: auto;
-        grid-template-areas: 
-        "sec1 sec2";
-        gap: 1rem;
         padding: 1rem 2rem;
-        section {
+
+        #secList {
+            grid-area: sec1;
+            width: 100%;
             background-color: var(--salmaoClaro);
             padding: 0.5rem 1rem;
             border: 0.1rem solid var(--marrom);
@@ -60,10 +59,6 @@
                 margin: 0;
                 margin-bottom: 1.5rem;
             }
-        }
-        #secList {
-            grid-area: sec1;
-            
             #containerSelectCriar {
                 display: flex;
                 flex-direction: row;
@@ -75,9 +70,27 @@
                     display: flex;
                     align-items: center;
                     gap: 0.5rem;
+                    margin-left: 0.5rem;
                     p {
                         font-size: 1rem;
                         margin: auto 0;
+                    }
+                }
+                #contEspecsNovoFunc {
+                    display: flex;
+                    gap: 1rem;
+                    .btt {
+                        cursor: pointer;
+                        font-size: 0.9rem;
+                        font-weight: 600;
+                        padding: 0.2rem 1rem;
+                        border: 0.1rem solid var(--marrom);
+                        border-radius: 0.3rem;
+                        color: var(--salmao);
+                        background-color: var(--marrom);
+                    }
+                    .btt:hover {
+                        opacity: 0.9;
                     }
                 }
             }
@@ -97,6 +110,9 @@
                 }
             }
             #listFuncs {
+                display: flex;
+                flex-direction: column;
+                row-gap: 0.5rem;
                 background-color: var(--branco);
                 
                 padding: 0.5rem 0;
@@ -132,6 +148,9 @@
                         justify-content: center;
                         gap: 0.5rem;
                         .skillsFunc {
+                            font-size: 0.8rem;
+                            color: var(--branco);
+                            background-color: var(--laranja);
                             border: 0.1rem solid black;
                             border-radius: 5px;
                             padding: 0.1rem 0.5rem;
@@ -140,22 +159,8 @@
                 }
             }
         }
-        #secEspecialidades {
-            grid-area: sec2;
-        }
     }
 }
 @media screen and (width <= 800px) {
-    #pageFuncionarios >
-    #mainFuncionarios {
-        display: grid;
-        grid-area: main;
-        box-sizing: border-box;
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto;
-        grid-template-areas: 
-        "sec1"
-        "sec2";
-        gap: 1rem;
-    }
+
 }

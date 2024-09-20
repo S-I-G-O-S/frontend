@@ -1,0 +1,31 @@
+:root {
+    --azul: #395873;
+    --nav: #395873ea;
+    --laranja: #D96704;
+    --salmao: #F2AE72;
+    --salmaoClaro: #f7cba4;
+    --branco: #F2E8DF;
+    --marrom: #26110D;
+    --preto: #000;
+    --leftBttNav: 5rem;
+}
+#pageOrdens {
+    display: grid;
+    grid-template-columns: max-content auto;
+    grid-template-rows: 3rem auto;
+    grid-template-areas: 
+    "nav header"
+    "nav main";
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #F2E8DF;
+    box-sizing: border-box;
+
+    #mainOrdens {
+        display: grid;
+        grid-area: main;
+        box-sizing: border-box;
+    }
+}

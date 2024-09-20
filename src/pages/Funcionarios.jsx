@@ -14,8 +14,9 @@ function Funcionarios() {
                         <input type="checkbox" name="" id="" className='checkbox'/>
                         <p><span></span>todos</p>
                     </div>
-                    <div id='contAddNovo'>
-                        <button>Novo Funcionario</button>
+                    <div id='contEspecsNovoFunc'>
+                        <button className='btt'>Especialidades</button>
+                        <button className='btt'>Novo Funcionário</button>
                     </div>
                 </div>
                 <div id='titleList'>
@@ -72,10 +73,6 @@ function Funcionarios() {
                         </div>
                     </div>
                 </div>
-            </section>
-            <section id='secEspecialidades'>
-                ESPECIALIDADES
-                <br />Onde o usuario poderá editar, criar, excluir e saber mais sobre as especialidades registradas no sistema.
             </section>
         </main>
         </div>
