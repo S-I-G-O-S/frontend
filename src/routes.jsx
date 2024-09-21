@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import Funcionarios from "./pages/Funcionarios";
 import Ordens from "./pages/Ordens";
 import Clientes from "./pages/Clientes";
-import Cliente from "./pages/Cliente"
+import Cliente from "./pages/Clientes/Cliente"
 
 function AppRoutes() {
     return (

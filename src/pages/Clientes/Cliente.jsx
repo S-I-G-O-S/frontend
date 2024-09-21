@@ -1,6 +1,6 @@
-import Nav from '../components/public/Nav'
-import '../styles/cliente.css'
-import Header from '../components/public/Header'
+import Nav from '../../components/public/Nav'
+import '../../styles/cliente.css'
+import Header from '../../components/public/Header'
 
 function Cliente() {
     return(
