@@ -2,6 +2,7 @@ import '../styles/funcionarios.css'
 import Nav from '../components/public/Nav'
 import Header from '../components/public/Header'
 function Funcionarios() {
+    // TODO função para selecionar todos os funcionarios
     return (
         <div id='pageFuncionarios'>
         <Header></Header>
@@ -11,8 +12,8 @@ function Funcionarios() {
                 <h2>Funcionários</h2>
                 <div id='containerSelectCriar'>
                     <div id='select'>
-                        <input type="checkbox" name="" id="" className='checkbox'/>
-                        <p><span></span>todos</p>
+                        <input type="checkbox" name="" id="checkSelectAll" className='checkbox'/>
+                        <p id="pSelectAll">todos</p>
                     </div>
                     <div id='contEspecsNovoFunc'>
                         <button className='btt'>Especialidades</button>

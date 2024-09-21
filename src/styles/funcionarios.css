@@ -4,6 +4,7 @@
     --laranja: #D96704;
     --salmao: #F2AE72;
     --salmaoClaro: #f7cba4;
+    --salmao3: #fcd8b9;
     --branco: #F2E8DF;
     --marrom: #26110D;
     --preto: #000;
@@ -78,19 +79,30 @@
                 }
                 #contEspecsNovoFunc {
                     display: flex;
+                    align-items: center;
+                    justify-content: center;
                     gap: 1rem;
                     .btt {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
                         cursor: pointer;
                         font-size: 0.9rem;
                         font-weight: 600;
-                        padding: 0.2rem 1rem;
+
+                        box-sizing: border-box;
+                        width: 10rem;
+                        height: 1.5rem;
                         border: 0.1rem solid var(--marrom);
                         border-radius: 0.3rem;
-                        color: var(--salmao);
+                        color: var(--salmao3);
                         background-color: var(--marrom);
+
+                        transition: 150ms;
                     }
                     .btt:hover {
-                        opacity: 0.9;
+                        width: 11rem;
+                        height: 1.6rem;
                     }
                 }
             }
