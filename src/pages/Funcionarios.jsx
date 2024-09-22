@@ -9,19 +9,14 @@ function Funcionarios() {
         <Nav></Nav>
         <main id='mainFuncionarios'>
             <section id='secList'>
-                <h2>Funcionários</h2>
-                <div id='containerSelectCriar'>
-                    <div id='select'>
-                        <input type="checkbox" name="" id="checkSelectAll" className='checkbox'/>
-                        <p id="pSelectAll">todos</p>
-                    </div>
+                <div id='containerH2Criar'>
+                    <h2>Funcionários</h2>
                     <div id='contEspecsNovoFunc'>
                         <button className='btt'>Especialidades</button>
                         <button className='btt'>Novo Funcionário</button>
                     </div>
                 </div>
                 <div id='titleList'>
-                    <div className='selectTitle'></div>
                     <div className='nomeTitle'>nome</div>
                     <div className='cellTitle'>celular</div>
                     <div className='cargoTitle'>cargo</div>
@@ -29,48 +24,27 @@ function Funcionarios() {
                 </div>
                 <div id='listFuncs'>
                     <div className='funcs'>
-                        <div className='containerSelectFunc'>
-                            <input type="checkbox" className='selectFunc checkbox' id="" />
-                        </div>
                         <div className='nomeFunc'>Leonardo Almeida</div>
                         <div className='cellFunc'>(13) 123456-7891</div>
                         <div className='cargoFunc'>tecnico</div>
                         <div className='statusFunc'>disponivel</div>
                         <div className='containerSkillsFunc'>
-                            <div className='skillsFunc'>portão</div>
-                            <div className='skillsFunc'>camera</div>
-                            <div className='skillsFunc'>escada rolante</div>
-                            <div className='skillsFunc'>interfone</div>
+                            <div className='skillsFunc skill1'>portão</div>
+                            <div className='skillsFunc skill2'>camera</div>
+                            <div className='skillsFunc skill3'>escada rolante</div>
+                            <div className='skillsFunc skill4'>interfone</div>
                         </div>
                     </div>
                     <div className='funcs'>
-                        <div className='containerSelectFunc'>
-                            <input type="checkbox" className='selectFunc checkbox' id="" />
-                        </div>
                         <div className='nomeFunc'>Leonardo Almeida</div>
                         <div className='cellFunc'>(13) 123456-7891</div>
                         <div className='cargoFunc'>tecnico</div>
                         <div className='statusFunc'>disponivel</div>
                         <div className='containerSkillsFunc'>
-                            <div className='skillsFunc'>portão</div>
-                            <div className='skillsFunc'>camera</div>
-                            <div className='skillsFunc'>escada rolante</div>
-                            <div className='skillsFunc'>interfone</div>
-                        </div>
-                    </div>
-                    <div className='funcs'>
-                        <div className='containerSelectFunc'>
-                            <input type="checkbox" className='selectFunc checkbox' id="" />
-                        </div>
-                        <div className='nomeFunc'>Leonardo Almeida</div>
-                        <div className='cellFunc'>(13) 123456-7891</div>
-                        <div className='cargoFunc'>tecnico</div>
-                        <div className='statusFunc'>disponivel</div>
-                        <div className='containerSkillsFunc'>
-                            <div className='skillsFunc'>portão</div>
-                            <div className='skillsFunc'>camera</div>
-                            <div className='skillsFunc'>escada rolante</div>
-                            <div className='skillsFunc'>interfone</div>
+                            <div className='skillsFunc skill1'>portão</div>
+                            <div className='skillsFunc skill2'>camera</div>
+                            <div className='skillsFunc skill3'>escada rolante</div>
+                            <div className='skillsFunc skill4'>interfone</div>
                         </div>
                     </div>
                 </div>

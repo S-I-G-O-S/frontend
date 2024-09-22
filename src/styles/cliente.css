@@ -2,8 +2,9 @@
     --azul: #395873;
     --nav: #395873ea;
     --laranja: #D96704;
-    --salmao: #F2AE72;
-    --salmaoClaro: #f7cba4;
+    --salmao1: #F2AE72;
+    --salmao2: #f7cba4;
+    --salmao3: #fcd8b9;
     --branco: #F2E8DF;
     --marrom: #26110D;
     --preto: #000;
@@ -24,24 +25,236 @@
     box-sizing: border-box;
 
     main {
+        box-sizing: border-box;
         display: grid;
         grid-template-areas: 
         "sec1 sec3"
         "sec2 sec3";
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
+        grid-template-rows: max-content 1fr;
         padding: 1rem;
         gap: 0.5rem;
         section {
-            border: 0.1rem solid black;
+            padding: 1rem;
+            border: 0.1rem solid var(--marrom);
+            border-radius: 10px;
+
+            background-color: var(--salmao2);
+            
+            h2 {
+                font-size: 1.1rem;
+                color: var(--marrom);
+                margin: 0;
+            }
         }
-        #sec1 {
+        #secInfos {
             grid-area: sec1;
+            h2 {
+                font-size: 1.1rem;
+                color: var(--marrom);
+                margin: 0;
+                margin-bottom: 1.5rem;
+            }
+            input {
+                padding: 0.1rem 0.3rem;
+                border: 0.1rem solid var(--marrom);
+                border-radius: 0.3rem;
+                background-color: var(--branco);
+            }
+            input:focus {
+                font-weight: 500;
+            }
+            #geral {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                justify-content: left;
+                padding: 0.5rem;
+                border: 0.1rem solid var(--salmao1);
+                border-radius: 0.3rem;
+                margin-bottom: 0.4rem;
+                box-sizing: border-box;
+                div {
+                    display: flex;
+                    gap: 0.3rem;
+                }
+                #nome {
+                    input {
+                        width: 15rem;
+                    }
+                }
+                #cnpj {
+                    input {
+                        width: 7rem;
+                    }
+                }
+            }
+            #endereco {
+                display: flex;
+                flex-wrap: wrap;
+                column-gap: 0.5rem;
+                row-gap: 0.3rem;
+
+                padding: 0.5rem;
+                border: 0.1rem solid var(--salmao1);
+                border-radius: 0.3rem;
+                margin-bottom: 1rem;
+                div {
+                    display: flex;
+                    gap: 0.3rem;
+                    label {
+                        font-size: 0.95rem;
+                    }
+                }
+                #cep {
+                    grid-area: cep;
+                    input {
+                        width: 6rem;
+                    }
+                }
+                #rua {
+                    grid-area: rua;
+                }
+                #num {
+                    grid-area: num;
+                    input {
+                        width: 3rem;
+                    }
+                }
+                #complemento {
+                    grid-area: com;
+                }
+                #bairro {
+                    grid-area: bairro;
+                }
+                #cidade {
+                    grid-area: cidade;
+                }
+            }
+            #fimAcao {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                button {
+                    all: unset;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 1rem;
+                    font-weight: 500;
+                    width: 9rem;
+                    color: var(--branco);
+                    padding: 0.2rem ;
+                    border: 0.1rem solid var(--branco);
+                    border-radius: 0.4rem;
+                }
+                button:hover {
+                    opacity: 0.9;
+                }
+                #bttCancelar {
+                    background-color: #af2816;
+                }
+                #bttSalvar {
+                    background-color: #03770e;
+                }
+            }
         }
-        #sec2 {
+        #secContatos {
             grid-area: sec2;
+            #containerH2Novo {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                
+                margin-bottom: 1.5rem;
+
+                #bttNovoCtt  {
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 1rem;
+                    font-weight: 500;
+                    height: 1.5rem;
+                    width: 6rem;
+                    border: none;
+                    border-radius: 0.2rem;
+                    color: var(--branco);
+                    background-color: var(--marrom);
+
+                }
+                #bttNovoCtt:hover {
+                    opacity: 0.9;
+                }
+            }
+            #listContatos {
+                .contato {
+                    display: flex;
+                    flex-direction: column;
+                    box-sizing: border-box;
+                    .contatoHeader {
+                        all: unset;
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                        justify-content: left;
+                        gap: 1rem   ;
+                        font-size: 0.95rem;
+                        font-weight: 500;
+
+                        height: 1.5rem;
+
+                        padding: 0.2rem 0.5rem;
+                        color: var(--salmao2);
+                        background-color: var(--marrom);
+                        img {
+                            width: 1.9rem;
+                        }
+                    }
+                    .contatoBody {
+                        grid-template-columns: 1fr 1fr;
+                        grid-template-areas: 
+                        "telefone email"
+                        "descricao descricao";
+                        text-align: center;
+                        background-color: var(--salmao3);
+                        padding: 0.3rem 0.3rem;
+                        border: 0.1rem solid var(--marrom);
+                        
+                        .contatoTelefone {
+                            grid-area: telefone;
+                        }
+                        .contatoEmail {
+                            grid-area: email;
+                        }
+                        .contatoDescricao {
+                            grid-area: descricao;
+                            font-size: 0.9rem;
+                        }
+                    }
+                }
+                .fechado {
+                    .contatoHeader {
+                        border-radius: 0.5rem;
+                    }
+                    .contatoBody {
+                        display: none;
+                    }
+                }
+                .aberto {
+                    .contatoHeader {
+                        border-radius: 0.5rem 0.5rem 0 0;
+                    }
+                    .contatoBody {
+                        display: grid;
+                        border-radius: 0 0 0.5rem 0.5rem;
+                    }
+                }
+            }
         }
-        #sec3 {
+        #secHistorico {
             grid-area: sec3;
         }
     }

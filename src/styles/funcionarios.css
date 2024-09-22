@@ -2,8 +2,8 @@
     --azul: #395873;
     --nav: #395873ea;
     --laranja: #D96704;
-    --salmao: #F2AE72;
-    --salmaoClaro: #f7cba4;
+    --salmao1: #F2AE72;
+    --salmao2: #f7cba4;
     --salmao3: #fcd8b9;
     --branco: #F2E8DF;
     --marrom: #26110D;
@@ -38,8 +38,6 @@
     background-color: #F2E8DF;
     box-sizing: border-box;
     
-    
-
     #mainFuncionarios {
         display: flex;
         width: 100%;
@@ -50,43 +48,36 @@
         #secList {
             grid-area: sec1;
             width: 100%;
-            background-color: var(--salmaoClaro);
-            padding: 0.5rem 1rem;
+            background-color: var(--salmao2);
+            padding: 1rem;
             border: 0.1rem solid var(--marrom);
             border-radius: 0.4rem;
             h2 {
                 font-size: 1.1rem;
                 color: var(--marrom);
                 margin: 0;
-                margin-bottom: 1.5rem;
+                
             }
-            #containerSelectCriar {
+            #containerH2Criar {
                 display: flex;
                 flex-direction: row;
                 align-items: center;
                 justify-content: space-between;
                 height: 2rem;
-                margin-bottom: 0.5rem;
-                #select {
-                    display: flex;
-                    align-items: center;
-                    gap: 0.5rem;
-                    margin-left: 0.5rem;
-                    p {
-                        font-size: 1rem;
-                        margin: auto 0;
-                    }
-                }
+                margin-bottom: 1.5rem;
                 #contEspecsNovoFunc {
                     display: flex;
                     align-items: center;
                     justify-content: center;
+                    height: 100%;
                     gap: 1rem;
+                    
                     .btt {
                         display: flex;
                         align-items: center;
                         justify-content: center;
                         cursor: pointer;
+                        text-align: center;
                         font-size: 0.9rem;
                         font-weight: 600;
 
@@ -108,39 +99,39 @@
             }
             #titleList {
                 display: grid;
-                grid-template-columns: 2rem 2fr 2fr 1fr 1fr;
-                
+                grid-template-columns: 2fr 2fr 1fr 1fr;
+                height: 1.6rem;
                 background-color: var(--marrom);
-                
                 div {
                     height: auto;
-                    font-size: 0.95rem;
-                    font-weight: 400;
-                    color: var(--salmao);
+                    font-size: 1rem;
+                    padding: 0.1rem 0.5rem;
+                    text-align: center;
+                    color: var(--salmao2);
 
-                    padding: 0.1rem 0.1rem;
+                    padding: 0.1rem 0.5rem;
                 }
             }
             #listFuncs {
                 display: flex;
                 flex-direction: column;
-                row-gap: 0.5rem;
                 background-color: var(--branco);
                 
-                padding: 0.5rem 0;
+                border: 0.1rem solid var(--marrom);
+                border-bottom: none;
                 .funcs {
                     display: grid;
-                    grid-template-columns: 2rem 2fr 2fr 1fr 1fr;
+                    grid-template-columns: 2fr 2fr 1fr 1fr;
                     grid-template-areas: 
-                    "checks nome cell cargo status"
-                    "skills skills skills skills skills";
+                    "nome cell cargo status"
+                    "skills skills skills skills";
 
-                    .containerSelectFunc {
-                        grid-area: checks;
-                        display: flex;
-                        align-items: center;    
-                        justify-content: center;
-                    }
+                    box-sizing: border-box;
+                    padding: 0.2rem 0;
+                    border-bottom: 0.1rem solid var(--marrom);
+
+                    text-align: center;
+                    font-size: 0.95rem;
                     .nomeFunc {
                         grid-area: nome;
                     }
@@ -159,13 +150,27 @@
                         display: flex;
                         justify-content: center;
                         gap: 0.5rem;
+                        padding: 0.1rem;
                         .skillsFunc {
                             font-size: 0.8rem;
+                            font-weight: 500;
                             color: var(--branco);
-                            background-color: var(--laranja);
+
                             border: 0.1rem solid black;
                             border-radius: 5px;
-                            padding: 0.1rem 0.5rem;
+                            padding: 0.15rem 0.5rem;
+                        }
+                        .skill1 {
+                            background-color: #e25353;
+                        }   
+                        .skill2 {
+                            background-color: #063504;
+                        }
+                        .skill3 {
+                            background-color: #610404;
+                        }
+                        .skill4 {
+                            background-color: #090785;
                         }
                     }
                 }

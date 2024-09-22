@@ -2,8 +2,9 @@
     --azul: #395873;
     --nav: #395873ea;
     --laranja: #D96704;
-    --salmao: #F2AE72;
-    --salmaoClaro: #f7cba4;
+    --salmao1: #F2AE72;
+    --salmao2: #f7cba4;
+    --salmao3: #fcd8b9;
     --branco: #F2E8DF;
     --marrom: #26110D;
     --preto: #000;
@@ -27,5 +28,73 @@
         display: grid;
         grid-area: main;
         box-sizing: border-box;
+        align-items: start;
+        width: 100%;
+        padding: 1rem;
+        margin: 0 auto;
+        box-sizing: border-box;
+
+        background-color: var(--branco);
+        section {
+            padding: 1rem;
+            border: 0.1rem solid var(--marrom);
+            border-radius: 10px;
+
+            background-color: var(--salmao2);
+
+            h2 {
+                font-size: 1.1rem;
+                color: var(--marrom);
+                margin: 0;
+                margin-bottom: 1.5rem;
+            }
+            #containerListOrdens {
+                #cabecalho {
+                    display: grid;
+                    grid-template-columns: 1fr 2fr 2fr 2fr 2fr 5rem;
+                    height: 1.5rem;
+                    background-color: var(--marrom);
+                    div {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        height: 100%;
+                        color: var(--salmao2);
+                    }
+                }
+                #listOrdens {
+                    border-left: 0.1rem solid var(--marrom); 
+                    border-right: 0.1rem solid var(--marrom); 
+                    .ordem {
+                        display: grid;
+                        grid-template-columns: 1fr 2fr 2fr 2fr 2fr 5rem;
+                        height: 1.8rem;
+                        background-color: var(--branco);
+                        div {
+                            font-size: 0.9rem;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            box-sizing: border-box;
+                            padding: 0.2rem 0.5rem;
+                            border-bottom: 0.1rem solid var(--marrom);
+                        }
+                        .ordemDetalhes {
+                            cursor: pointer;
+                            padding: 0;
+                            img {
+                                height: 1.5rem;
+                            }
+                        }
+                        .ordemDetalhes:hover {
+                            background-color: var(--salmao1);
+                        }
+                        .barraTabela {
+                            border-left: 0.1rem solid black;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

@@ -2,8 +2,9 @@
     --azul: #395873;
     --nav: #395873ea;
     --laranja: #D96704;
-    --salmao: #F2AE72;
-    --salmaoClaro: #f7cba4;
+    --salmao1: #F2AE72;
+    --salmao2: #f7cba4;
+    --salmao3: #fcd8b9;
     --branco: #F2E8DF;
     --marrom: #26110D;
     --preto: #000;
@@ -27,58 +28,83 @@
         justify-content: start;
         align-items: center;
         flex-direction: column;
+        box-sizing: border-box;
 
         width: 100%;
         height: 100%;
         max-width: 900px;
+        padding: 1rem;
         margin: 0 auto;
 
         background-color: var(--branco);
-        #containerListClientes {
+        #secListClientes {
             padding: 1rem;
             border: 0.1rem solid var(--marrom);
             border-radius: 10px;
-            margin-top: 1rem;
 
-            background-color: var(--salmaoClaro);
-
-            h2 {
-                font-size: 1.1rem;
-                color: var(--marrom);
-                margin: 0;
+            background-color: var(--salmao2);
+            #containerH2Novo {
+                display: flex;
+                justify-content: space-between;
                 margin-bottom: 1.5rem;
-                
+                h2 {
+                    font-size: 1.1rem;
+                    color: var(--marrom);
+                    margin: 0;                    
+                }
+                button {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    font-size: 0.9rem;
+                    font-weight: 600;
+
+                    box-sizing: border-box;
+                    width: 6rem;
+                    height: 1.5rem;
+                    border: 0.1rem solid var(--marrom);
+                    border-radius: 0.3rem;
+                    color: var(--salmao3);
+                    background-color: var(--marrom);
+
+                    transition: 150ms;
+                }
+                button:hover {
+                    width: 9rem;
+                }
             }
             #tabelaClientes {
                 width: auto;
                 #cabecalho {
-                    display: none;
-                    grid-template-columns: 2fr 1fr 1fr 1fr;
+                    display: grid;
+                    grid-template-columns: 1fr 9rem 1fr 4rem;
+                    height: 1.6rem; 
 
                     #cNome,
                     #cEndereco,
                     #cCNPJ {
-                        border: 0.1rem solid var(--marrom);
-                        border-bottom: 0;
                         text-align: center;
-
+                        font-size: 1rem;
                         padding: 0.1rem 0.5rem;
+                        
+
+                        color: var(--salmao2);
+                        background-color: var(--marrom);
                     }
                     #adicionarCliente {
-                        text-align: center;
-
-                        button {
-                            
-                        }
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        
                     }
                 }
                 #listClientes {
                     display: flex;
                     flex-direction: column;
-                    gap: 0.1rem;
                     .clientes {
                         display: grid;
-                        grid-template-columns: 15rem auto 1fr 4rem;
+                        grid-template-columns: 1fr 9rem 1fr 4rem;
 
                         font-size: 0.9rem;
                         height: auto;                   
@@ -87,7 +113,7 @@
                         border-radius: 0.2rem;
                         background-color: var(--branco);
 
-                        div {
+                        .nome {
                             text-align: left;
                             
                         }
@@ -110,7 +136,7 @@
                         }
                         .options:hover {
                             
-                            color: var(--salmao);
+                            color: var(--salmao1);
                             background-color: var(--marrom);
                         }
                     }
@@ -124,17 +150,8 @@
             width: 100%;
             height: 100%;
         }
-        #containerNovoCliente {
+        #janela {
             display: none;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: auto auto auto auto;
-            grid-template-areas:
-            "title title title"
-            "geral geral geral"
-            "enderecos telefones emails"
-            "concForm concForm concForm";
-            column-gap: 0.5rem;
-            row-gap: 1rem;
 
             position: fixed;
             top: 50%;
@@ -145,93 +162,8 @@
             width: auto;
             height: auto;
             padding: 2rem;
-            border: 0.1rem solid var(--marrom);
+            border: 0.1rem solid black;
             border-radius: 10px;
-
-            background-color: var(--salmaoClaro);
-
-            h2 {
-                grid-area: title;
-                text-align: center;
-                font-size: 1.3rem;
-                margin: 0;
-                margin-bottom: 0.5rem;
-            }
-            #geral {
-                grid-area: geral;
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                grid-template-areas: 
-                "nome cnpj";
-                gap: 0.1rem;
-                #nome {
-                    grid-area: nome;
-                    
-                    label {
-                        width: 30%;
-
-                    }
-                    input {
-                        width: 70%;
-                    }
-                }
-                #cnpj {
-                    grid-area: cnpj;
-                    label {
-                        width: 30%;
-                        text-align: center;
-                    }
-                    input {
-                        width: 70%;
-                    }
-                }
-            }
-            #contEnderecos {
-                grid-area: enderecos;
-            }
-            #contTelefones {
-                grid-area: telefones;
-            }
-            #contEmails {
-                grid-area: emails;
-            }
-            .contInfosNovoCliente {
-                display: grid;
-                width: 100%;
-                grid-template-columns: 6fr 1fr 1fr;
-                grid-template-rows: 1rem auto;
-                grid-template-areas: 
-                "title bttShow bttNovo"
-                "inps inps inps";
-                #title {
-                    font-size: 1rem;
-                    font-weight: 400;
-                    margin: 0;
-                    grid-area: title;
-                }
-                #bttShow {
-                    grid-area: bttShow;
-                }
-                #bttNovo {
-                    grid-area: bttNovo;
-                }
-                .inpsNovoCliente {
-                    grid-area: inps;
-
-                    
-                }
-            }
-            #concForm {
-                grid-area: concForm;
-                display: flex;
-                justify-content: center;
-                gap: 1rem;
-                button {
-                    height: 2rem;
-                    width: 8rem;
-                    font-size: 1rem;
-                }
-            }
         }
     }
 }
