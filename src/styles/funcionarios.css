@@ -48,6 +48,7 @@
         #secList {
             grid-area: sec1;
             width: 100%;
+            height: fit-content;
             background-color: var(--salmao2);
             padding: 1rem;
             border: 0.1rem solid var(--marrom);
