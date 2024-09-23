@@ -60,6 +60,9 @@
                         justify-content: center;
                         height: 100%;
                         color: var(--salmao2);
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
                     }
                 }
                 #listOrdens {
@@ -72,12 +75,19 @@
                         background-color: var(--branco);
                         div {
                             font-size: 0.9rem;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
                             display: flex;
                             align-items: center;
                             justify-content: center;
                             box-sizing: border-box;
                             padding: 0.2rem 0.5rem;
                             border-bottom: 0.1rem solid var(--marrom);
+                        }
+                        .ordemCliente {
+                            justify-content: left;
+                            
                         }
                         .ordemDetalhes {
                             cursor: pointer;

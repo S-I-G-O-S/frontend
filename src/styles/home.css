@@ -2,8 +2,9 @@
     --azul: #395873;
     --nav: #395873ea;
     --laranja: #D96704;
-    --salmao: #F2AE72;
-    --salmaoClaro: #f7cba4;
+    --salmao1: #F2AE72;
+    --salmao2: #f7cba4;
+    --salmao3: #fcd8b9;
     --branco: #F2E8DF;
     --marrom: #26110D;
     --preto: #000;
@@ -41,7 +42,7 @@
             border: 0.1rem solid var(--marrom);
             border-radius: 10px;
 
-            background-color: var(--salmaoClaro);
+            background-color: var(--salmao2);
 
             h2 {
                 font-size: 1rem;

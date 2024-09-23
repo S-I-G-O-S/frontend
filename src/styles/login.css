@@ -1,8 +1,10 @@
 :root {
-    --cinza: #395873;
-    --azul: #5297d3;
+    --azul1: #395873;
+    --azul2: #5297d3;
     --laranja: #D96704;
-    --salmao: #f2ae73;
+    --salmao1: #F2AE72;
+    --salmao2: #f7cba4;
+    --salmao3: #fcd8b9;
     --branco: #F2E8DF;
     --marrom: #26110D;
     --preto: #000000;
@@ -20,6 +22,18 @@
     
     background-color: var(--branco);
 
+    #imgBG1 {
+        position: fixed;
+        height: 512px;
+        left: 55%;
+        top: 50%;
+    }
+    #imgBG2 {
+        position: fixed;
+        height: 350px;
+        left: 5%;
+        top: 9%;
+    }
     h2 {
         font-size: 1.6rem;
         text-align: center;
@@ -32,17 +46,18 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        
+
+        z-index: 99;
         border-width: 0.1rem;
         border-style: solid;
         border-radius: 10px;
-        border-color: var(--salmao);
+        border-color: var(--salmao1);
 
         padding: 1rem;
         margin: 0.5rem 0;
         width: 20rem;
 
-        background-color: var(--salmao);
+        background-color: var(--salmao1);
 
         input {
             font-size: 0.9rem;

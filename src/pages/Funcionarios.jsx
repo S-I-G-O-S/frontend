@@ -2,7 +2,6 @@ import '../styles/funcionarios.css'
 import Nav from '../components/public/Nav'
 import Header from '../components/public/Header'
 function Funcionarios() {
-    // TODO função para selecionar todos os funcionarios
     return (
         <div id='pageFuncionarios'>
         <Header></Header>
