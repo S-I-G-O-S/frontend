@@ -24,10 +24,9 @@
     box-sizing: border-box;
     #mainClientes {
         grid-area: main;
-        display: flex;
-        justify-content: start;
-        align-items: center;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: max-content;
         box-sizing: border-box;
 
         width: 100%;

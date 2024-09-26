@@ -13,8 +13,8 @@ function Login() {
                 <Link id="entrar" to="/home">entrar</Link>
                 <a id="esqueciMinhaSenha" href="">esqueci minha senha</a>
             </section>
-            <img id='imgBG1' src={Negocio} alt="" />
-            <img id='imgBG2' src={Analise} alt="" />
+            {/* <img id='imgBG1' src={Negocio} alt="" />
+            <img id='imgBG2' src={Analise} alt="" /> */}
         </main>
     )
 } 

@@ -100,7 +100,7 @@
             }
             #titleList {
                 display: grid;
-                grid-template-columns: 2fr 2fr 1fr 1fr;
+                grid-template-columns: 2fr 1fr 2fr 1fr 1fr 5rem 5rem;
                 height: 1.6rem;
                 background-color: var(--marrom);
                 div {
@@ -121,37 +121,61 @@
                 border: 0.1rem solid var(--marrom);
                 border-bottom: none;
                 .funcs {
-                    display: grid;
-                    grid-template-columns: 2fr 2fr 1fr 1fr;
-                    grid-template-areas: 
-                    "nome cell cargo status"
-                    "skills skills skills skills";
-
-                    box-sizing: border-box;
-                    padding: 0.2rem 0;
                     border-bottom: 0.1rem solid var(--marrom);
+                    .cardFunc {
+                        display: grid;
+                        grid-template-columns: 2fr 1fr 2fr 1fr  1fr 5rem 5rem;
+                        grid-template-areas: 
+                        "nome cell ultAtv cargo status setaSkillsFunc options";
 
-                    text-align: center;
-                    font-size: 0.95rem;
-                    .nomeFunc {
-                        grid-area: nome;
-                    }
-                    .cellFunc {
-                        grid-area: cell;
-                    }
-                    .cargoFunc {
-                        grid-area: cargo;
-                    }
-                    .statusFunc {
-                        grid-area: status;
+                        box-sizing: border-box;
+                        padding: 0.2rem 0;
+                        
+
+                        text-align: center;
+                        font-size: 0.95rem;
+
+                        div {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+                        .nomeFunc {
+                            grid-area: nome;
+                        }
+                        .cellFunc {
+                            grid-area: cell;
+                        }
+                        .ultAtvFunc {
+                            grid-area: ultAtv;
+                        }
+                        .cargoFunc {
+                            grid-area: cargo;
+                        }
+                        .statusFunc {
+                            grid-area: status;
+                        }
+                        .setaSkillsFunc {
+                            grid-area: setaSkillsFunc;
+                            cursor: pointer;
+                            border-left: 0.1rem solid var(--marrom);
+                            img {
+                                height: 1.3rem;
+                            }
+                        }
+                        .editFunc {
+                            grid-area: options;
+                            cursor: pointer;
+                            border-left: 0.1rem solid var(--marrom);
+                            img {
+                                height: 1.2rem;
+                            }
+                        }
                     }
                     .containerSkillsFunc {
-                        grid-area: skills;
-
-                        display: flex;
                         justify-content: center;
                         gap: 0.5rem;
-                        padding: 0.1rem;
+                        padding: 0 0.1rem 0.3rem 0.1rem;
                         .skillsFunc {
                             font-size: 0.8rem;
                             font-weight: 500;
@@ -173,6 +197,12 @@
                         .skill4 {
                             background-color: #090785;
                         }
+                    }
+                    .skillsAberto {
+                        display: flex;
+                    }
+                    .skillsFechado {
+                        display: none;
                     }
                 }
             }

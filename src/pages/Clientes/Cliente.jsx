@@ -1,8 +1,8 @@
 import Nav from '../../components/public/Nav'
 import '../../styles/cliente.css'
 import Header from '../../components/public/Header'
-import Down from '../../assets/down.png' 
-import Up from '../../assets/up.png'
+import Down from '../../assets/light/down.png' 
+import Up from '../../assets/light/up.png'
 
 function Cliente() {
     const verContato = (idContato) => {
