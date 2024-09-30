@@ -1,6 +1,6 @@
-import Nav from '../../components/public/Nav'
+import Nav from '../public/Nav'
 import '../../styles/cliente.css'
-import Header from '../../components/public/Header'
+import Header from '../public/Header'
 import Down from '../../assets/light/down.png' 
 import Up from '../../assets/light/up.png'
 
@@ -64,6 +64,7 @@ function Cliente() {
                     <div id='fimAcao'>
                         <button id='bttCancelar'>Cancelar</button>
                         <button id='bttSalvar'>Salvar</button>
+                        <button id='bttExcluir'>Excluir</button>
                     </div>
                 </section>
                 <section id='secContatos'>

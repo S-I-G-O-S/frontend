@@ -50,19 +50,19 @@
             display: flex;
             flex-direction: column;
             gap: 0.3rem;
-            #contInfosFunc,
+            #contGeralFunc,
             #contEndFunc,
             #contControle {
                 border: 0.1rem solid var(--salmao1);
                 border-radius: 0.3rem;
                 padding: 0.5rem;
             }
-            #contInfosFunc {
+            #contGeralFunc {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
                 flex-wrap: wrap;
-                column-gap: 1rem;
+                row-gap: 0.5rem;    
                 row-gap: 0.5rem;
                 div {
                     display: flex;
@@ -75,7 +75,7 @@
                         border-radius: 0.3rem;
                         font-size: 0.9rem;
                         padding: 0.1rem 0.3rem;
-                        height: 1.3rem;
+                        height: 1.2rem;
                     }
                     input:focus {
                         border: 0.1rem solid var(--laranja);
@@ -88,13 +88,91 @@
                 align-items: center;
                 justify-content: space-between;
                 flex-wrap: wrap;
-                column-gap: 1rem;
+                column-gap: 0.5rem;
                 row-gap: 0.5rem;
                 div {
                     display: flex;
                     gap: 0.2rem;
+
+                    input {
+                        all: unset;
+                        background-color: var(--branco);
+                        border: 0.1rem solid var(--marrom);
+                        border-radius: 0.3rem;
+                        font-size: 0.9rem;
+                        padding: 0.1rem 0.3rem;
+                        height: 1.2rem;
+                    }
+                    input:focus {
+                        border: 0.1rem solid var(--laranja);
+                        font-weight: 500;
+                    }
+                }
+                #contCepFunc {
+                    input {
+                        width: 6rem;
+                    }
+                }
+                #contRuaFunc {
+                    input {
+                        width: 15rem;
+                    }
+                }
+                #contNumFunc {
+                    input {
+                        width: 3rem;
+                    }
+                }
+                #contCidadeFunc {
+                    input {
+                        width: 8rem;
+                    }
+                }
+
+            }
+            #contControle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                column-gap: 2rem;                
+                button {
+                    all: unset;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    font-size: 0.95rem;
+                    font-weight: 500;
+                    
+
+                    height: 1.5rem;
+                    width: 8rem;
+                    border: 0.1rem solid var(--marrom);
+                    border-radius: 0.3rem;
+                    color: var(--marrom);
+
+                    transition: 150ms;
+                }
+                
+                button:hover {
+                    width: 11rem;
+                }
+                button:focus {
+                    text-decoration: underline;
+                    border: 0.1rem solid var(--laranja);
+                }
+                #bttCancelar {
+                    background-color: #ecea57;
+                }
+                #bttSalvar {
+                    background-color: #40ec5d;
+                }
+                #bttExcluir {
+                    background-color: #fc8c8c;
+                    
                 }
             }
+
         }
         #secEspecialidades {
 

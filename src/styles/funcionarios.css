@@ -91,6 +91,10 @@
                         background-color: var(--marrom);
 
                         transition: 150ms;
+
+                        #goToEspecialidades {
+                            all: unset;
+                        }
                     }
                     .btt:hover {
                         width: 11rem;

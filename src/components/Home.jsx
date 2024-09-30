@@ -1,5 +1,5 @@
-import Nav from '../components/public/Nav'
-import Header from '../components/public/Header'
+import Nav from './public/Nav'
+import Header from './public/Header'
 import '../styles/home.css'
 function Home() {
     return (

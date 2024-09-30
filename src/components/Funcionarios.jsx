@@ -1,15 +1,18 @@
 import '../styles/funcionarios.css'
-import Nav from '../components/public/Nav'
-import Header from '../components/public/Header'
+import Nav from './public/Nav'
+import Header from './public/Header'
 import Options from '../assets/options.png'
 import Edit from '../assets/edit-text.png'
 import Down from '../assets/dark/down.png' 
 import Up from '../assets/dark/up.png'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Funcionarios() {
     const navigate = useNavigate();
 
+    const goToEspecialidades = () => {
+        navigate(`/especialidades`)
+    }
     const handleCreateClick = () => {
         navigate(`/funcionario`)
     }
@@ -36,7 +39,9 @@ function Funcionarios() {
                 <div id='containerH2Criar'>
                     <h2>Funcionários</h2>
                     <div id='contEspecsNovoFunc'>
-                        <button className='btt'>Especialidades</button>
+                        <button className='btt' onClick={() => goToEspecialidades()}>
+                                Especialidades
+                        </button>
                         <button className='btt'
                         onClick={() => handleCreateClick()}>Novo Funcionário</button>
                     </div>

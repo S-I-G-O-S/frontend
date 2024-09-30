@@ -1,11 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Login from "./pages/Login"
-import Home from "./pages/Home";
-import Funcionarios from "./pages/Funcionarios";
-import Funcionario from "./pages/Funcionarios/Funcionario";
-import Ordens from "./pages/Ordens";
-import Clientes from "./pages/Clientes";
-import Cliente from "./pages/Clientes/Cliente"
+import Login from "./components/Login"
+import Home from "./components/Home";
+import Funcionarios from "./components/Funcionarios";
+import Funcionario from "./components/Funcionarios/Funcionario";
+import Especialidades from "./components/Funcionarios/Especialidades";
+import Ordens from "./components/Ordens";
+import Clientes from "./components/Clientes";
+import Cliente from "./components/Clientes/Cliente"
 
 
 function AppRoutes() {
@@ -16,6 +17,7 @@ function AppRoutes() {
                 <Route path="/home" element={ <Home/> }></Route>
                 <Route path="/funcionarios" element={ <Funcionarios/> }></Route>
                 <Route path="/funcionario" element={ <Funcionario/> }></Route>
+                <Route path="/especialidades" element={ <Especialidades/> }></Route>
                 <Route path="/ordens" element={ <Ordens/> }></Route>
                 <Route path="/clientes" element={ <Clientes/> }></Route>
                 <Route path="/cliente" element={ <Cliente/> }></Route>

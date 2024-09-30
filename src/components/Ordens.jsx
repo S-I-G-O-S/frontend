@@ -1,5 +1,5 @@
-import Header from "../components/public/Header"
-import Nav from "../components/public/Nav"
+import Header from "./public/Header"
+import Nav from "./public/Nav"
 import '../styles/ordens.css'
 import View from "../assets/view.png"
 import Hide from "../assets/hide.png"

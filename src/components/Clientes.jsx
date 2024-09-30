@@ -1,6 +1,6 @@
-import Nav from '../components/public/Nav'
+import Nav from './public/Nav'
 import '../styles/clientes.css'
-import Header from '../components/public/Header'
+import Header from './public/Header'
 import { useNavigate } from 'react-router-dom';
 
 function Clientes() {

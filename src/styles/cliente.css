@@ -49,6 +49,9 @@
         }
         #secInfos {
             grid-area: sec1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
             h2 {
                 font-size: 1.1rem;
                 color: var(--marrom);
@@ -64,19 +67,36 @@
             input:focus {
                 font-weight: 500;
             }
+            #geral,
+            #endereco,
+            #fimAcao {
+                border: 0.1rem solid var(--salmao1);
+                border-radius: 0.3rem;
+                padding: 0.5rem;
+            }
             #geral {
                 display: flex;
                 flex-wrap: wrap;
                 gap: 0.5rem;
                 justify-content: left;
                 padding: 0.5rem;
-                border: 0.1rem solid var(--salmao1);
-                border-radius: 0.3rem;
-                margin-bottom: 0.4rem;
                 box-sizing: border-box;
                 div {
                     display: flex;
                     gap: 0.3rem;
+                    input {
+                        all: unset;
+                        background-color: var(--branco);
+                        border: 0.1rem solid var(--marrom);
+                        border-radius: 0.3rem;
+                        font-size: 0.9rem;
+                        padding: 0.1rem 0.3rem;
+                        height: 1.2rem;
+                    }
+                    input:focus {
+                        border: 0.1rem solid var(--laranja);
+                        font-weight: 500;
+                    }
                 }
                 #nome {
                     input {
@@ -96,14 +116,24 @@
                 row-gap: 0.3rem;
 
                 padding: 0.5rem;
-                border: 0.1rem solid var(--salmao1);
-                border-radius: 0.3rem;
-                margin-bottom: 1rem;
                 div {
                     display: flex;
                     gap: 0.3rem;
                     label {
                         font-size: 0.95rem;
+                    }
+                    input {
+                        all: unset;
+                        background-color: var(--branco);
+                        border: 0.1rem solid var(--marrom);
+                        border-radius: 0.3rem;
+                        font-size: 0.9rem;
+                        padding: 0.1rem 0.3rem;
+                        height: 1.2rem;
+                    }
+                    input:focus {
+                        border: 0.1rem solid var(--laranja);
+                        font-weight: 500;
                     }
                 }
                 #cep {
@@ -138,26 +168,39 @@
                 gap: 2rem;
                 button {
                     all: unset;
-                    cursor: pointer;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    font-size: 1rem;
+                    cursor: pointer;
+                    font-size: 0.95rem;
                     font-weight: 500;
-                    width: 9rem;
-                    color: var(--branco);
-                    padding: 0.2rem ;
-                    border: 0.1rem solid var(--branco);
-                    border-radius: 0.4rem;
+                    
+
+                    height: 1.5rem;
+                    width: 8rem;
+                    border: 0.1rem solid var(--marrom);
+                    border-radius: 0.3rem;
+                    color: var(--marrom);
+
+                    transition: 150ms;
                 }
+                
                 button:hover {
-                    opacity: 0.9;
+                    width: 11rem;
+                }
+                button:focus {
+                    text-decoration: underline;
+                    border: 0.1rem solid var(--laranja);
                 }
                 #bttCancelar {
-                    background-color: #af2816;
+                    background-color: #ecea57;
                 }
                 #bttSalvar {
-                    background-color: #03770e;
+                    background-color: #40ec5d;
+                }
+                #bttExcluir {
+                    background-color: #fc8c8c;
+                    
                 }
             }
         }
