@@ -118,6 +118,7 @@
                 }
             }
             #listFuncs {
+                // TODO rolagem lateral ao quebrar a tabela
                 display: flex;
                 flex-direction: column;
                 background-color: var(--branco);
@@ -178,7 +179,7 @@
                     }
                     .containerSkillsFunc {
                         justify-content: center;
-                        gap: 0.5rem;
+                        gap: 1rem;
                         padding: 0 0.1rem 0.3rem 0.1rem;
                         .skillsFunc {
                             font-size: 0.8rem;

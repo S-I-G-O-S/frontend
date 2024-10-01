@@ -28,9 +28,8 @@
         box-sizing: border-box;
         display: grid;
         grid-template-areas: 
-        "sec1 sec3"
-        "sec2 sec3";
-        grid-template-columns: 1fr 1fr;
+        "sec1";
+        grid-template-columns: 1fr;
         grid-template-rows: 1fr;
         padding: 1rem;
         gap: 0.5rem;
@@ -48,18 +47,75 @@
             }
         }
         #sec1 {
+            grid-area: sec1;
+
+            #contH2Novo {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                height: 1.5rem;
+                margin-bottom: 1.5rem;
+                #contNovo {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    height: 100%;
+                    gap: 1rem;
+                    display: flex;
+                    button {
+                        align-items: center;
+                        justify-content: center;
+                        cursor: pointer;
+                        text-align: center;
+                        font-size: 0.9rem;
+                        font-weight: 600;
+
+                        box-sizing: border-box;
+                        width: 10rem;
+                        height: 1.5rem;
+                        border: 0.1rem solid var(--marrom);
+                        border-radius: 0.3rem;
+                        color: var(--salmao3);
+                        background-color: var(--marrom);
+
+                        transition: 150ms;
+
+                        #goToEspecialidades {
+                            all: unset;
+                        }
+                    }
+                    button:hover {
+                        width: 11rem;
+                        height: 1.6rem;
+                    }
+                }
+            }
             #titulo {
                 display: flex;
+                flex-direction: column;
+                #tExibir {
+                    display: flex;
+                    p {
+                        margin: 0;
+                    }
+                }
+                #tOrdenar {
+                    display: flex;
+                    p {
+                        margin: 0;
+                    }
+                }
             }
             #contListEspecs {
                 display: flex;
-                flex-direction: column;
+                flex-wrap: wrap;
                 .especs {
                     .headEspec {
                         display: flex;
                         align-items: center;
                         justify-content: space-between;
-                        
+                        cursor: pointer;
+                        gap: 2rem;
                         font-size: 0.9rem;
                         font-weight: 500;
                         height: 1.7rem;
@@ -105,13 +161,50 @@
                         border-radius: 0.4rem 0.4rem 0 0;
                     }
                     .servsEspec {
+                        display: flex;
                         border-radius: 0 0 0.4rem 0.4rem;
                     }
                 }
                 .especFechado {
-                    
+                    .headEspec {
+                        border-radius: 0.4rem;
+                    }
+                    .servsEspec {
+                        display: none;
+                    }
                 }
             }
+        }#sec2 {
+            grid-area: sec2;
+            display: none;
+            #contInfosEspecEdit {
+
+            }
+            #contServicosEspecEdit {
+                #headServicos {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+                #listServicosEdit {
+                    display: flex;
+                    flex-direction: column;
+                    p {
+                        margin: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (width <= 950px) {
+    #pageEspecialidades{
+        main {
+            grid-template-areas: 
+            "sec1"
+            "sec2";
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr 1fr;
         }
     }
 }

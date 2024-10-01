@@ -8,7 +8,7 @@ function Cliente() {
     const verContato = (idContato) => {
         const contato = document.getElementById(`contato${idContato}`)
         const img = document.getElementById(`img${idContato}`)
-            if (contato.classList == 'contato fechado') {
+        if (contato.classList == 'contato fechado') {
             contato.classList = "contato aberto"
             img.src = Up
             console.log(`contato ${idContato} aberto`)
