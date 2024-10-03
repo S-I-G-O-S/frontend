@@ -31,7 +31,6 @@
         "sec1";
         grid-template-columns: 1fr;
         grid-template-rows: 1fr;
-        padding: 1rem;
         gap: 0.5rem;
         section {
             padding: 1rem;
@@ -48,7 +47,9 @@
         }
         #sec1 {
             grid-area: sec1;
-
+            width: 100%;
+            max-width: 900px;
+            margin: 1rem auto;
             #contH2Novo {
                 display: flex;
                 align-items: center;
@@ -109,6 +110,7 @@
             #contListEspecs {
                 display: flex;
                 flex-wrap: wrap;
+                column-gap: 0.5rem;
                 .especs {
                     .headEspec {
                         display: flex;
@@ -119,7 +121,7 @@
                         font-size: 0.9rem;
                         font-weight: 500;
                         height: 1.7rem;
-                        padding: 0.2rem 1rem;
+                        padding: 0.2rem 0.5rem;
                         color: var(--salmao1);
                         background-color: var(--marrom);
                         p {
@@ -174,24 +176,119 @@
                     }
                 }
             }
-        }#sec2 {
-            grid-area: sec2;
+        }
+        #shadowBG {
             display: none;
-            #contInfosEspecEdit {
-
-            }
-            #contServicosEspecEdit {
-                #headServicos {
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
+            position: fixed;
+            background-color: #000000da;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            #secConfigEspec {
+                grid-area: sec2;
+                display: flex;
+                flex-direction: column;
+                margin: 1rem auto;
+                width: 30rem;
+                row-gap: 0.2rem;
+                h2 {
+                    margin-bottom: 0.8rem;
                 }
-                #listServicosEdit {
-                    display: flex;
-                    flex-direction: column;
-                    p {
-                        margin: 0;
+                #contInfosEspecEdit {
+                    font-size: 0.92rem;
+                    border: 0.1rem solid;
+                    border-color: var(--salmao1);
+                    border-radius: 0.2rem;
+                    padding: 0.5rem;
+                    .campoConfigEspec {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.4rem;
+                        margin-bottom: 0.3rem;
+                        label {
+                            font-weight: 500;
+                        }
+                        input[type="color"] {
+                            width: 2rem;
+                            padding: 0;
+                            border-radius: 0.3rem;
+                            border: 0;
+                            
+                        }
                     }
+                    #contPreVisu {
+                        #headPreVisu {
+                            display: flex;
+                            justify-content: space-between;
+                            p {
+                                margin: 0;
+                            }
+                            button {
+
+                            }
+                        }
+                        #preVisu {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            
+                            width: 100%;
+                            height: 3rem;
+                            #especPreVisu {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                font-weight: 500;
+                                padding: 0.1rem 0.5rem;
+                                border: 0.15rem solid;
+                                border-radius: 0.4rem;
+                                border-color: #F2E8DF;
+                                color: #F2E8DF;
+                                background-color: #cf0f0f;
+                            }
+                        }
+                        .preVisuDark {
+                            background-color: var(--marrom);
+                        }
+                        .preVisuLight {
+                            background-color: var(--branco);
+                        }
+                    }
+                }
+                #contServicosEspecEdit {
+                    border: 0.1rem solid;
+                    border-color: var(--salmao1);
+                    border-radius: 0.2rem;
+                    padding: 0.5rem;
+                    #headServicos {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        margin-bottom: 0.5rem;
+                        p {
+                            margin: 0;
+                        }
+                    }
+                    #listServicosEdit {
+                        display: flex;
+                        flex-direction: column;
+                        background-color: var(--salmao1);
+                        padding: 0.2rem 0.9rem;
+                        max-height: 5rem;
+                        overflow-y: scroll;
+                        p {
+                            margin: 0;
+                        }
+                    }
+                }
+                #contFimAcao {
+                    display: flex;
+                    justify-content: center;
+                    gap: 1rem;
+                    border: 0.1rem solid;
+                    border-color: var(--salmao1);
+                    border-radius: 0.2rem;
+                    padding: 0.5rem;
                 }
             }
         }
