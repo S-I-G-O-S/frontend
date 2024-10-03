@@ -8,22 +8,41 @@ import clientesIcon from '../../assets/clientesIcon.png'
 import ordensIcon from '../../assets/ordensIcon.png'
 
 function Nav() {
-    async function changeNav() {
+    console.log('teste 1')
+    var sessionConfig = {
+        "abertoNav": true
+    }
+    var storedSessionConfig = JSON.parse(sessionStorage.getItem('sessionConfig'));
+    if (storedSessionConfig) {
+        sessionConfig = storedSessionConfig
+    }
+    console.log('teste 2')
+    async function abrirNav() {
         const nav = document.getElementById("nav")
         const button = document.getElementById("bttNav")
-
-        if (button.className == "navFechar") {
-            //sideNav.style.display = "none"
-            button.className = "navAbrir"
-            button.src = navRight
-            nav.className = "navFechado"
-        } else {
-            //sideNav.style.display = "flex"
-            button.className = "navFechar"
-            button.src = navLeft
-            nav.className = "navAberto"
-        }
+        button.className = "navFechar"
+        button.src = navLeft
+        nav.className = "navAberto"
+        sessionConfig.abertoNav = true
     }
+    async function fecharNav() {
+        const nav = document.getElementById("nav")
+        const button = document.getElementById("bttNav")
+        button.className = "navAbrir"
+        button.src = navRight
+        nav.className = "navFechado"
+        sessionConfig.abertoNav = false
+    }
+    async function changeNav() {
+        console.log('debbug: ' + sessionConfig.abertoNav)
+        if (sessionConfig.abertoNav) {
+            fecharNav()
+        } else {
+            abrirNav()
+        }
+        localStorage.setItem('sessionConfig', JSON.stringify(sessionConfig))
+    }
+    console.log('teste 3')
     return (
         <nav id='nav' className="goTo navFechado">
             <img id="bttNav" src={ navRight } alt="" onClick={changeNav} className="navAbrir"/>
