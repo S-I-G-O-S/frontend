@@ -31,7 +31,7 @@ function Especialidades() {
             "nome": "Especialidade 3",
             "contFuncs": 34,
             "cor": "#1a9a0a/#fff",
-            "servicos": ["serviço 1", "serviço 2", "serviço 3"]
+            "servicos": ["serviço 1", "serviço com nome longo", "serviço 3"]
         }
     ]
     let servicos = [
