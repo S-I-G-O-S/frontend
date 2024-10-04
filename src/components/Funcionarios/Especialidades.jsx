@@ -2,6 +2,7 @@ import '../../styles/especialidades.css'
 import Nav from '../public/Nav'
 import Header from '../public/Header'
 import UnitEspec from './Especialidades/unitEspecialidade'
+import { useState } from 'react'
 // import Options from '../../assets/options.png'
 // import Edit from '../../assets/edit-text.png'
 // import Down from '../../assets/dark/down.png' 
@@ -11,6 +12,9 @@ import UnitEspec from './Especialidades/unitEspecialidade'
 
 // TODO a pagina agora terá uma so sessão, e a tela de edição da especialidade terá forma de popup
 function Especialidades() {
+    const [especEdit, setEspecEdit] = useState([])
+    const [prevTema, setPrevTema] = useState({
+        temaPrevEspec: 'dark'})
     let especialidades = [
         {
             "id": 1,
@@ -34,19 +38,16 @@ function Especialidades() {
             "servicos": ["serviço 1", "serviço com nome longo", "serviço 3"]
         }
     ]
-    let servicos = [
-
-    ]
-    let servicosEspecialidades = [
-
-    ]
+    let servicos = []
+    let servicosEspecialidades = []
     //https://www.delftstack.com/pt/howto/react/for-loop-in-react/
     return(
         <div id='pageEspecialidades'>
         <Header></Header>
         <Nav></Nav>
+        <div id='shadowBG'>
+        </div>
         <main>
-            
             <section id='sec1'>
                 <div id='contH2Novo'>
                     <h2>Especialidades & Serviços</h2>
@@ -68,7 +69,7 @@ function Especialidades() {
                     }
                 </div>
             </section>
-            <div id='shadowBG'>
+            
             <section id='secConfigEspec'>
                 <h2>Editando especialidade</h2>
                 <div id='contInfosEspecEdit'>
@@ -114,13 +115,8 @@ function Especialidades() {
                 <button>deletar</button>
                 </div>
             </section>
-            <section id='secConfigServ'>
-
-            </section>
-            </div>
         </main>
         </div>
     )
 }
-
 export default Especialidades
