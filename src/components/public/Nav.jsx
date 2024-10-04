@@ -6,48 +6,43 @@ import homeIcon from '../../assets/homeIcon.png'
 import funcsIcon from '../../assets/funcsIcon.png'
 import clientesIcon from '../../assets/clientesIcon.png'
 import ordensIcon from '../../assets/ordensIcon.png'
+import { useEffect, useState } from 'react'
 
 function Nav() {
-    console.log('teste 1')
-    var sessionConfig = {
-        "abertoNav": true
+    const [sessionConfig, setSessionConfig] = useState({
+        abertoNav: true
+    })
+    const saveSessionConfig = (config) => {
+        sessionStorage.setItem('sessionConfig', JSON.stringify(config))
     }
-    var storedSessionConfig = JSON.parse(sessionStorage.getItem('sessionConfig'));
-    if (storedSessionConfig) {
-        sessionConfig = storedSessionConfig
+    useEffect(() => {
+        const storedSessionConfig = JSON.parse(sessionStorage.getItem('sessionConfig'))
+        if (storedSessionConfig) {
+            setSessionConfig(storedSessionConfig)
+        }
+    }, [])
+    const abrirNav = () => {
+        setSessionConfig({ abertoNav: true })
+        saveSessionConfig({ abertoNav: true })
     }
-    console.log('teste 2')
-    async function abrirNav() {
-        const nav = document.getElementById("nav")
-        const button = document.getElementById("bttNav")
-        button.className = "navFechar"
-        button.src = navLeft
-        nav.className = "navAberto"
-        sessionConfig.abertoNav = true
+    const fecharNav = () => {
+        setSessionConfig({ abertoNav: false })
+        saveSessionConfig({ abertoNav: false })
     }
-    async function fecharNav() {
-        const nav = document.getElementById("nav")
-        const button = document.getElementById("bttNav")
-        button.className = "navAbrir"
-        button.src = navRight
-        nav.className = "navFechado"
-        sessionConfig.abertoNav = false
-    }
-    async function changeNav() {
-        console.log('debbug: ' + sessionConfig.abertoNav)
+    const changeNav = () => {
         if (sessionConfig.abertoNav) {
             fecharNav()
         } else {
             abrirNav()
         }
-        localStorage.setItem('sessionConfig', JSON.stringify(sessionConfig))
     }
-    console.log('teste 3')
     return (
-        <nav id='nav' className="goTo navFechado">
-            <img id="bttNav" src={ navRight } alt="" onClick={changeNav} className="navAbrir"/>
+        <nav id='nav' className={sessionConfig.abertoNav ? "navAberto" : "navFechado"}>
+            <img id="bttNav" 
+                src={sessionConfig.abertoNav ? navLeft : navRight}
+                onClick={changeNav} className={sessionConfig.abertoNav ? "navFechar" : "navAbrir"}/>
             <div id='containerLinks'>
-                <NavLink 
+                <NavLink
                     className="links" 
                     id='goToHome' 
                     to="/home"

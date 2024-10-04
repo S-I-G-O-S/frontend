@@ -112,10 +112,11 @@
                 flex-wrap: wrap;
                 column-gap: 0.5rem;
                 .especs {
+                    box-shadow: 0px 2px 15px black;
                     .headEspec {
                         display: flex;
                         align-items: center;
-                        justify-content: space-between;
+                        justify-content: center;
                         cursor: pointer;
                         gap: 2rem;
                         font-size: 0.9rem;
@@ -146,6 +147,7 @@
                         border: 0.1rem solid var(--marrom);
                         background-color: var(--salmao3);
                         p {
+                            cursor: pointer;
                             display: flex;
                             align-items: center;
                             justify-content: left;
@@ -155,7 +157,9 @@
                             margin: 0;
                             color: var(--marrom);
                         }
-                        
+                        p:hover {
+                            font-weight: 500;
+                        }
                     }
                 }
                 .especAberto {
