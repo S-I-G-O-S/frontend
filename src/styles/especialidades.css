@@ -112,7 +112,6 @@
                 flex-wrap: wrap;
                 column-gap: 0.5rem;
                 .especs {
-                    box-shadow: 0px 2px 15px black;
                     .headEspec {
                         display: flex;
                         align-items: center;
@@ -158,6 +157,7 @@
                             color: var(--marrom);
                         }
                         p:hover {
+                            
                             font-weight: 500;
                         }
                     }
