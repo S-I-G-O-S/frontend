@@ -11,11 +11,11 @@ import { useState } from 'react'
 // import { useState } from 'react'
 
 // TODO a pagina agora terá uma so sessão, e a tela de edição da especialidade terá forma de popup
+//https://www.delftstack.com/pt/howto/react/for-loop-in-react/
+
 function Especialidades() {
-    const [especEdit, setEspecEdit] = useState([])
-    const [prevTema, setPrevTema] = useState({
-        temaPrevEspec: 'dark'})
-    let especialidades = [
+    // GETS DAS API'S
+    let reqstEspecialidades = [
         {
             "id": 1,
             "nome": "Especialidade 1",
@@ -36,62 +36,270 @@ function Especialidades() {
             "contFuncs": 34,
             "cor": "#1a9a0a/#fff",
             "servicos": ["serviço 1", "serviço com nome longo", "serviço 3"]
+        },
+        {
+            "id": 4,
+            "nome": "Especialidade 4",
+            "contFuncs": 34,
+            "cor": "#b80a0a/#fff",
+            "servicos": ["serviço 1", "serviço 2", "serviço 3"]
+        },
+        {
+            "id": 5,
+            "nome": "Especialidade 5",
+            "contFuncs": 34,
+            "cor": "#273dfa/#fff",
+            "servicos": ["serviço 1", "serviço 2", "serviço 3"]
+        },
+        {
+            "id": 6,
+            "nome": "Especialidade 6",
+            "contFuncs": 34,
+            "cor": "#1a9a0a/#fff",
+            "servicos": ["serviço 1", "serviço com nome longo", "serviço 3"]
+        },
+        {
+            "id": 7,
+            "nome": "Especialidade 7",
+            "contFuncs": 34,
+            "cor": "#b80a0a/#fff",
+            "servicos": ["serviço 1", "serviço 2", "serviço 3"]
+        },
+        {
+            "id": 8,
+            "nome": "Especialidade 8",
+            "contFuncs": 34,
+            "cor": "#273dfa/#fff",
+            "servicos": ["serviço 1", "serviço 2", "serviço 3"]
+        },
+        {
+            "id": 9,
+            "nome": "Especialidade 9    ",
+            "contFuncs": 34,
+            "cor": "#1a9a0a/#fff",
+            "servicos": ["serviço 1", "serviço com nome longo", "serviço 3"]
         }
     ]
-    let servicos = []
-    let servicosEspecialidades = []
-    //https://www.delftstack.com/pt/howto/react/for-loop-in-react/
+    let reqstServicos = [
+        {
+            "id": 1,
+            "nome": "Concerto de portão (marca famosa 1)",
+            "descricao": "Imagine uma descrição boa deste serviço aqui"
+        },
+        {
+            "id": 2,
+            "nome": "Concerto de portão (marca famosa 2)",
+            "descricao": "Imagine uma descrição boa deste serviço aqui"
+        },
+        {
+            "id": 3,
+            "nome": "Concerto de portão (marca famosa 3)",
+            "descricao": "Imagine uma descrição boa deste serviço aqui"
+        },
+        {
+            "id": 4,
+            "nome": "Concerto de portão (marca famosa 4)",
+            "descricao": "Imagine uma descrição boa deste serviço aqui"
+        },
+        {
+            "id": 5,
+            "nome": "Concerto de portão (marca famosa 1)",
+            "descricao": "Imagine uma descrição boa deste serviço aqui"
+        },
+        {
+            "id": 6,
+            "nome": "Concerto de portão (marca famosa 2)",
+            "descricao": "Imagine uma descrição boa deste serviço aqui"
+        },
+        {
+            "id": 7,
+            "nome": "Concerto de portão (marca famosa 3)",
+            "descricao": "Imagine uma descrição boa deste serviço aqui"
+        },
+        {
+            "id": 8,
+            "nome": "Concerto de portão (marca famosa 4)",
+            "descricao": "Imagine uma descrição boa deste serviço aqui"
+        },
+        {
+            "id": 9,
+            "nome": "Concerto de portão (marca famosa 1)",
+            "descricao": "Imagine uma descrição boa deste serviço aqui"
+        },
+        {
+            "id": 10,
+            "nome": "Concerto de portão (marca famosa 2)",
+            "descricao": "Imagine uma descrição boa deste serviço aqui"
+        }
+    ]
+
+    const [especEdit, setEspecEdit] = useState([])
+    const [prevEspec, setPrevEspec] = useState({
+        prevTema: "preVisuLight",
+        cor1: "#fff",
+        cor2: "#000",
+        nome: "Exemplo",
+        })
+    const [layoutEspecServicos, setLayoutEspecServicos] = useState("layoutEspecs")
+    const [ordemEspecServicos, setOrdemEspecServicos] = useState("asc")
+    const [especialidades, setEspecialidades] = useState(reqstEspecialidades)
+    const [servicos, setServicos] = useState(reqstServicos)
+    const mudarLayoutEspecServicos = () => {
+        if(layoutEspecServicos == "layoutEspecs") {
+            setLayoutEspecServicos("layoutServicos")
+        } else {
+            setLayoutEspecServicos("layoutEspecs")
+        }
+    }
+    const mudarOrdemEspecServicos = () => {
+        if(ordemEspecServicos == "asc") {
+            setOrdemEspecServicos("desc")
+            setEspecialidades(
+                [...especialidades].sort((a, b) => b.nome.localeCompare(a.nome))
+            )
+            setServicos(
+                [...servicos].sort((a, b) => b.nome.localeCompare(a.nome))
+            )
+        } else {
+            setOrdemEspecServicos("asc")
+            setEspecialidades(
+                [...especialidades].sort((a, b) => a.nome.localeCompare(b.nome)) 
+            )
+            setServicos(
+                [...servicos].sort((a, b) => a.nome.localeCompare(b.nome))
+            )   
+        }
+    }
+    const mudarTemaPrevEspecConfig = () => {
+        if (prevEspec.prevTema === "preVisuLight") {
+            setPrevEspec(prevState => ({
+                ...prevState,
+                prevTema: "preVisuDark"
+            }))
+        } else {
+            setPrevEspec(prevState => ({
+                ...prevState, 
+                prevTema: "preVisuLight"
+            }))
+        }
+    }
+    const mudarNomePrevEspec = (nomePrev) => {
+        setPrevEspec(prevState => ({
+                ...prevState,
+                nome: nomePrev
+            }))
+    }
+    const mudarCor1PrevEspec = (cor1Prev) => {
+        setPrevEspec(prevState => ({
+                ...prevState,
+                cor1: cor1Prev
+            }))
+    }
+    const mudarCor2PrevEspec = (cor2Prev) => {
+        setPrevEspec(prevState => ({
+                ...prevState,
+                cor2: cor2Prev
+            }))
+    }
     return(
         <div id='pageEspecialidades'>
-        <Header></Header>
+        <Header titulo={"Especialidades & Serviços"}></Header>
         <Nav></Nav>
         <div id='shadowBG'>
         </div>
         <main>
             <section id='sec1'>
-                <div id='contH2Novo'>
+                {/* <div id='contH2Novo'>
                     <h2>Especialidades & Serviços</h2>
                     <div id='contNovo'>
                     <button>Nova Especialidade</button>
                     <button>Novo Serviço</button>
                     </div>
-                </div>
+                </div> */}
                 {/* 
-                    nome
-                    cont funcs
-                    list servs
+                    Nome ASC/DESC
+                    Mudar layout
+                    
                  */}
-                <div id='contListEspecs'>
-                    {
+                <div id='contFiltrosEspecServ'>
+                    <div id='orderFiltrosEspecServ'>
+                        <p>Ordernar por:</p>
+                        <button id='nomeOrderFiltrosEspec' onClick={mudarOrdemEspecServicos}>
+                            Nome {ordemEspecServicos.toUpperCase()}
+                        </button>
+                    </div>
+                    <div id='groupFiltrosEspecServ'>
+                        <p>Agrupar por:</p>
+                        <button id='bttGroupFiltrosEspec'
+                        onClick={mudarLayoutEspecServicos}>
+                            {
+                                layoutEspecServicos == "layoutEspecs" ?
+                                "Especialidades" : "Serviços" 
+                            }
+                        </button>
+                    </div>
+                </div>
+                <div id='contListEspecServ' className={layoutEspecServicos}>
+                    {   layoutEspecServicos == "layoutEspecs" ?
                         especialidades.map(espec => 
                             <UnitEspec key={espec.id} espec={espec}></UnitEspec>
+                        ) :
+                        servicos.map(serv => 
+                            <div className='servicos' key={serv.id}>
+                                <h4>{serv.nome}</h4>
+                                
+                                <div>
+                                    {serv.descricao}
+                                </div>
+                            </div>
                         )
                     }
                 </div>
             </section>
-            
             <section id='secConfigEspec'>
                 <h2>Editando especialidade</h2>
                 <div id='contInfosEspecEdit'>
-                    <div id='campoNomeConfigEspec' className='campoConfigEspec'>
+
+                    <div id='campoNomeConfigEspec'>
                         <label>Nome:</label>
-                        <input type="text" />
+                        <input 
+                            type="text" id='nomeConfigEspec' 
+                            value={prevEspec.nome}
+                            onChange={(e) => mudarNomePrevEspec(e.target.value)}
+                        />
                     </div>
-                    <div id='campoCor2ConfigEspec' className='campoConfigEspec'>
-                        <label>Cor de fundo:</label>
-                        <input type="color" name="" id="inpCorFundo" />
-                    </div>
-                    <div id='campoCor1ConfigEspec' className='campoConfigEspec'>
-                        <label>Cor da letra:</label>
-                        <input type="color" name="" id="inpCorLetra" />
+                    <div id='contCamposCoresEspecEdit'>
+                        <div id='campoCor1ConfigEspec' className='campoConfigEspec'>
+                            <label>Cor de fundo:</label>
+                            <input 
+                                type="color" name="" id="inpCorFundo" 
+                                value={prevEspec.cor1}
+                                onChange={(e) => mudarCor1PrevEspec(e.target.value)}
+                            />
+                        </div>
+                        <div id='campoCor2ConfigEspec' className='campoConfigEspec'>
+                            <label>Cor da letra:</label>
+                            <input 
+                                type="color" name="" id="inpCorLetra"
+                                value={prevEspec.cor2}
+                                onChange={(e) => mudarCor2PrevEspec(e.target.value)}
+                            />
+                        </div>
                     </div>
                     <div id='contPreVisu'>
                         <div id='headPreVisu'>
-                            <p>pré visualização:</p>
-                            <button>Mudar tema</button>
+                            <p>Pré-visualização:</p>
+                            <button onClick={mudarTemaPrevEspecConfig}>Mudar tema</button>
                         </div>
-                        <div id='preVisu' className='preVisuLight'>
-                            <div id='especPreVisu'>Especialidade</div>
+                        <div id='preVisu' className={prevEspec.prevTema}>
+                            <div id='especPreVisu'
+                            style={{
+                                borderColor: prevEspec.cor2,
+                                backgroundColor: prevEspec.cor1,
+                                color: prevEspec.cor2
+                            }}>
+                                {prevEspec.nome}
+                            </div>
                         </div>
                     </div>
                 </div>

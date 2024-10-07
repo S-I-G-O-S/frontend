@@ -89,94 +89,71 @@
                     }
                 }
             }
-            #titulo {
+            #contFiltrosEspecServ {
                 display: flex;
-                flex-direction: column;
-                #tExibir {
+                justify-content: space-between;
+                padding: 0.3rem 0.5rem;
+                border-radius: 0.3rem 0.3rem 0 0;
+                color: var(--salmao1);
+                background-color: var(--marrom);
+                #orderFiltrosEspecServ {
                     display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.3rem;
                     p {
+                        font-size: 0.91rem;
+                        font-weight: 500;
                         margin: 0;
                     }
                 }
-                #tOrdenar {
+                #groupFiltrosEspecServ {
                     display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.3rem;
                     p {
+                        font-size: 0.91rem;
+                        font-weight: 500;
                         margin: 0;
                     }
                 }
             }
-            #contListEspecs {
+            #contListEspecServ {
                 grid-area: sec2;
                 display: flex;
-                flex-wrap: wrap;
-                column-gap: 0.5rem;
-                .especs {
-                    .headEspec {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        cursor: pointer;
-                        gap: 2rem;
-                        font-size: 0.9rem;
-                        font-weight: 500;
-                        height: 1.7rem;
-                        padding: 0.2rem 0.5rem;
-                        color: var(--salmao1);
-                        background-color: var(--marrom);
-                        p {
-                            margin: 0;
-                        }
-                        .nomeEspec {
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            padding: 0.1rem 0.5rem;
-                            border: 0.15rem solid;
-                            border-radius: 0.3rem;
-                            
-                        }
-                    }
-                    .servsEspec {
-                        display: flex;
-                        flex-direction: column;
-                        gap: 0.3rem;
+                column-gap: 0.3rem;
+                row-gap: 0.3rem;
+                padding: 0.3rem 0.5rem;
+                border: 0.1rem solid var(--marrom);
+                border-radius: 0 0 0.3rem 0.3rem;
 
-                        padding: 0.5rem 1rem;
-                        border: 0.1rem solid var(--marrom);
-                        background-color: var(--salmao3);
-                        p {
-                            cursor: pointer;
-                            display: flex;
-                            align-items: center;
-                            justify-content: left;
-                            
-                            font-size: 0.95rem;
-                            height: 1rem;
-                            margin: 0;
-                            color: var(--marrom);
-                        }
-                        p:hover {
-                            
-                            font-weight: 500;
-                        }
+                background-color: var(--salmao1);
+            }
+            .layoutEspecs {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .layoutServicos {
+                flex-direction: column ;
+                overflow-y: scroll;
+
+                .servicos {
+                    cursor: pointer;
+                    padding: 0.3rem;
+                    border: 0.1rem solid var(--marrom);
+                    border-radius: 0.3rem;
+                    background-color: var(--salmao2);
+                    h4 {
+                        font-size: 0.9rem;
+                        margin: 0;
+                    }
+                    div {
+                        font-size: 0.85rem;
                     }
                 }
-                .especAberto {
-                    .headEspec {
-                        border-radius: 0.4rem 0.4rem 0 0;
-                    }
-                    .servsEspec {
-                        display: flex;
-                        border-radius: 0 0 0.4rem 0.4rem;
-                    }
-                }
-                .especFechado {
-                    .headEspec {
-                        border-radius: 0.4rem;
-                    }
-                    .servsEspec {
-                        display: none;
-                    }
+                .servicos:hover {
+                    background-color: var(--salmao3);
                 }
             }
         }
@@ -188,27 +165,49 @@
                 margin-bottom: 0.8rem;
             }
             #contInfosEspecEdit {
+                display: flex;
+                flex-direction: column;
+                gap: 0.4rem;
                 font-size: 0.92rem;
                 border: 0.1rem solid;
                 border-color: var(--salmao1);
                 border-radius: 0.2rem;
                 padding: 0.5rem;
-                .campoConfigEspec {
+
+                #campoNomeConfigEspec {
                     display: flex;
                     align-items: center;
+                    justify-content: center;
                     gap: 0.4rem;
-                    margin-bottom: 0.3rem;
                     label {
+                        font-size: 0.95rem;
                         font-weight: 500;
                     }
-                    input[type="color"] {
-                        width: 2rem;
-                        padding: 0;
-                        border-radius: 0.3rem;
-                        border: 0;
-                        
+                    input {
+                        width: calc();
                     }
                 }
+                #contCamposCoresEspecEdit {
+                    display: flex;
+                    justify-content: space-evenly;
+
+                    div {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.4rem;
+                        label {
+                            font-weight: 500;
+                        }
+                        input[type="color"] {
+                            width: 2rem;
+                            padding: 0;
+                            border-radius: 0.3rem;
+                            border: 0;
+                            
+                        }
+                    }
+                }
+
                 #contPreVisu {
                     #headPreVisu {
                         display: flex;
@@ -217,7 +216,7 @@
                             margin: 0;
                         }
                         button {
-
+                            
                         }
                     }
                     #preVisu {
@@ -227,6 +226,8 @@
                         
                         width: 100%;
                         height: 3rem;
+                        border: 0.1rem solid var(--marrom);
+                        border-radius: 0.3rem;
                         #especPreVisu {
                             display: flex;
                             align-items: center;
@@ -238,13 +239,15 @@
                             border-color: #F2E8DF;
                             color: #F2E8DF;
                             background-color: #cf0f0f;
+                            max-width: 9rem;
+                            overflow: hidden;
                         }
                     }
                     .preVisuDark {
                         background-color: var(--marrom);
                     }
                     .preVisuLight {
-                        background-color: var(--branco);
+                        background-color: var(--salmao3);
                     }
                 }
             }
@@ -285,6 +288,7 @@
             }
         }
     }
+    
     #shadowBG {
         display: none;
         position: fixed;

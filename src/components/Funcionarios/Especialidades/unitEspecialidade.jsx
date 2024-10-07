@@ -1,8 +1,7 @@
-import '../../../styles/especialidades.css'
-// import Nav from '../../public/Nav'
-// import Header from '../../public/Header'
-// import Down from '../../../assets/dark/down.png' 
-// import Up from '../../../assets/dark/up.png'
+import '../../../styles/unitEspecialidade.css'
+import Down from '../../../assets/dark/down.png' 
+import Up from '../../../assets/dark/up.png'
+import Edit from '../../../assets/edit-text.png'
 // import { Link, useNavigate } from 'react-router-dom';
 // import { esbuildVersion } from 'vite'
 import PropTypes from 'prop-types'
@@ -23,34 +22,18 @@ function UnitEspec({ espec }) {
         //const img = document.getElementById(`img${idContato}`)
         if (divEspec.classList == 'especs especFechado') {
             divEspec.classList = "especs especAberto"
-            //img.src = Up
-            console.log("aberto")
         } else {
             divEspec.classList = "especs especFechado"
-            //img.src = Down
-            console.log("fechado")
         }
     }
     return(
-        <div id={`espec${espec.id}`} className='especs especFechado'>
-            <div id={`headEspec${espec.id}`} className='headEspec' onClick={() => {
-                verEspec(espec.id)}}>
-                <p className='nomeEspec'
-                style={{
-                    borderColor: cor2,
-                    backgroundColor: cor1,
-                    color: cor2
-                    }}>
-                    {espec.nome}
-                </p>
-            </div>
-            <div id={`servsEspec${espec.id}`} className='servsEspec'>
-                {
-                    espec.servicos.map(servico => 
-                        <p key={servico}>{servico}</p>
-                    )
-                }
-            </div>
+        <div id={`espec${espec.id}`} className='especs' 
+        style={{
+            borderColor: cor2,
+            backgroundColor: cor1,
+            color: cor2
+            }}>
+            {espec.nome}
         </div>
     )
 }
