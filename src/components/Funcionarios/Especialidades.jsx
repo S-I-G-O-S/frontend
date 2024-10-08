@@ -2,7 +2,7 @@ import '../../styles/especialidades.css'
 import Nav from '../public/Nav'
 import Header from '../public/Header'
 import UnitEspec from './Especialidades/unitEspecialidade'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 // import Options from '../../assets/options.png'
 // import Edit from '../../assets/edit-text.png'
 // import Down from '../../assets/dark/down.png' 
@@ -10,9 +10,7 @@ import { useState } from 'react'
 // import { useNavigate } from 'react-router-dom'
 // import { useState } from 'react'
 
-// TODO a pagina agora terá uma so sessão
 // TODO a pagina lateral direita será para a edição de especialidades e serviços
-// TODO 
 
 //https://www.delftstack.com/pt/howto/react/for-loop-in-react/
 
@@ -22,65 +20,9 @@ function Especialidades() {
         {
             "id": 1,
             "nome": "Especialidade 1",
-            "contFuncs": 34,
+            "descricao": "descrição 1",
             "cor": "#b80a0a/#fff",
-            "servicos": ["serviço 1", "serviço 2", "serviço 3"]
-        },
-        {
-            "id": 2,
-            "nome": "Especialidade 2",
-            "contFuncs": 34,
-            "cor": "#273dfa/#fff",
-            "servicos": ["serviço 1", "serviço 2", "serviço 3"]
-        },
-        {
-            "id": 3,
-            "nome": "Especialidade 3",
-            "contFuncs": 34,
-            "cor": "#1a9a0a/#fff",
-            "servicos": ["serviço 1", "serviço com nome longo", "serviço 3"]
-        },
-        {
-            "id": 4,
-            "nome": "Especialidade 4",
-            "contFuncs": 34,
-            "cor": "#b80a0a/#fff",
-            "servicos": ["serviço 1", "serviço 2", "serviço 3"]
-        },
-        {
-            "id": 5,
-            "nome": "Especialidade 5",
-            "contFuncs": 34,
-            "cor": "#273dfa/#fff",
-            "servicos": ["serviço 1", "serviço 2", "serviço 3"]
-        },
-        {
-            "id": 6,
-            "nome": "Especialidade 6",
-            "contFuncs": 34,
-            "cor": "#1a9a0a/#fff",
-            "servicos": ["serviço 1", "serviço com nome longo", "serviço 3"]
-        },
-        {
-            "id": 7,
-            "nome": "Especialidade 7",
-            "contFuncs": 34,
-            "cor": "#b80a0a/#fff",
-            "servicos": ["serviço 1", "serviço 2", "serviço 3"]
-        },
-        {
-            "id": 8,
-            "nome": "Especialidade 8",
-            "contFuncs": 34,
-            "cor": "#273dfa/#fff",
-            "servicos": ["serviço 1", "serviço 2", "serviço 3"]
-        },
-        {
-            "id": 9,
-            "nome": "Especialidade 9    ",
-            "contFuncs": 34,
-            "cor": "#1a9a0a/#fff",
-            "servicos": ["serviço 1", "serviço com nome longo", "serviço 3"]
+            "servicos": [1, 2, 3, 6]
         }
     ]
     let reqstServicos = [
@@ -135,8 +77,6 @@ function Especialidades() {
             "descricao": "Imagine uma descrição boa deste serviço aqui"
         }
     ]
-
-    const [especEdit, setEspecEdit] = useState([])
     const [prevEspec, setPrevEspec] = useState({
         prevTema: "preVisuLight",
         cor1: "#fff",
@@ -147,6 +87,18 @@ function Especialidades() {
     const [ordemEspecServicos, setOrdemEspecServicos] = useState("asc")
     const [especialidades, setEspecialidades] = useState(reqstEspecialidades)
     const [servicos, setServicos] = useState(reqstServicos)
+    const [especAberta, setEspecAberta] = useState(
+        { 
+            id: 0, 
+            nome: '', 
+            descricao: '', 
+            cor: '',
+            servicos: []
+        }
+    )
+    const [message, setMessage] = useState('')
+    const [error, setError] = useState('')
+
     const mudarLayoutEspecServicos = () => {
         if(layoutEspecServicos == "layoutEspecs") {
             setLayoutEspecServicos("layoutServicos")
@@ -204,6 +156,75 @@ function Especialidades() {
                 cor2: cor2Prev
             }))
     }
+    const abrirEspec = (idEspec) => {
+        const especSelecionada = especialidades.find(espec => espec.id === idEspec)
+        console.log(especSelecionada)
+        if (!especSelecionada) {
+            setError('Erro ao abrir especialidade.')
+            return;
+        }
+        const [auxCor1, auxCor2] = especSelecionada.cor.split('/');
+        if (!auxCor1 || !auxCor2) {
+            setError('Erro ao abrir especialidade. Cor inv lida.')
+            return;
+        }
+        setEspecAberta(especSelecionada)
+        setPrevEspec({
+            prevTema: "preVisuLight",
+            cor1: auxCor1,
+            cor2: auxCor2,
+            nome: especSelecionada.nome,
+        })
+    }
+    const fecharEspec = () => {
+        
+    }
+    const postNovoEspec = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch('/api/especialidade', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(especAberta),
+            })
+
+            if (response.ok) {
+                setMessage('Especialidade criada com sucesso!')
+            } else {
+                const errorData = await response.json()
+                setMessage(`Erro: ${errorData.message}`)
+            }
+        } catch (error) {
+            setMessage(`Erro de conexão: ${error.message}`)
+        }
+    }
+    const getEspecialidades = async () => {
+        try {
+            const response = await fetch('/api/especialidade', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+
+            if (response.ok) {
+                const data = await response.json()
+                setEspecialidades(data)
+            } else {
+                const errorData = await response.json()
+                setError(`Erro: ${errorData.message}`)
+            }
+        } catch (error) {
+            setError(`Erro de conexão: ${error.message}`)
+        }
+    }
+
+    useEffect(() => {
+        // getEspecialidades()
+    }, [])
+
     return(
         <div id='pageEspecialidades'>
         <Header titulo={"Especialidades & Serviços"}></Header>
@@ -245,7 +266,7 @@ function Especialidades() {
                 <div id='contListEspecServ' className={layoutEspecServicos}>
                     {   layoutEspecServicos == "layoutEspecs" ?
                         especialidades.map(espec => 
-                            <UnitEspec key={espec.id} espec={espec}></UnitEspec>
+                            <UnitEspec key={espec.id} espec={espec} onClick={() => abrirEspec(espec.id)}></UnitEspec>
                         ) :
                         servicos.map(serv => 
                             <div className='servicos' key={serv.id}>
@@ -312,12 +333,13 @@ function Especialidades() {
                         <button>Adicionar</button>
                     </div>
                     <div id='listServicosEdit'>
-                        <p>Serviço 1</p>
-                        <p>Serviço 2</p>
-                        <p>Serviço 3</p>
-                        <p>Serviço 4</p>
-                        <p>Serviço 5</p>
-                        <p>Serviço 6</p>
+                        {
+                            especAberta.servicos.map(servico => 
+                                <p key={servico.id}>
+                                    {servico.nome}
+                                </p>
+                            )
+                        }
                     </div>
                 </div>
                 <div id='contFimAcao'>
