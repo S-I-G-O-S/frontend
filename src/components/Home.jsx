@@ -1,6 +1,9 @@
 import Nav from './public/Nav'
 import Header from './public/Header'
 import '../styles/home.css'
+
+// TODO Colocar mais conteudo como atalhos
+
 function Home() {
     return (
         <div id='pageHome'>

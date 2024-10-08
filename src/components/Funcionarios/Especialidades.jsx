@@ -10,7 +10,10 @@ import { useState } from 'react'
 // import { useNavigate } from 'react-router-dom'
 // import { useState } from 'react'
 
-// TODO a pagina agora terá uma so sessão, e a tela de edição da especialidade terá forma de popup
+// TODO a pagina agora terá uma so sessão
+// TODO a pagina lateral direita será para a edição de especialidades e serviços
+// TODO 
+
 //https://www.delftstack.com/pt/howto/react/for-loop-in-react/
 
 function Especialidades() {

@@ -3,9 +3,11 @@ import Nav from '../public/Nav'
 import Header from '../public/Header'
 import Down from '../../assets/light/down.png' 
 import Up from '../../assets/light/up.png'
-import { useLocation  } from 'react-router-dom'
+import { useFetcher, useLocation  } from 'react-router-dom'
 // import { cepAPI } from '../../services/cepAPI'
+// import { useQuery } from ‘react-query’;
 
+// TODO Os funcionarios tem CPF
 function Funcionario() {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);

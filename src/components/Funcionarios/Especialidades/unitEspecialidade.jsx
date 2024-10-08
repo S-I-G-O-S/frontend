@@ -17,17 +17,9 @@ UnitEspec.propTypes = {
 
 function UnitEspec({ espec }) {
     let [cor1, cor2] = espec.cor.split('/');
-    const verEspec = (idEspec) => {
-        const divEspec = document.getElementById(`espec${idEspec}`)
-        //const img = document.getElementById(`img${idContato}`)
-        if (divEspec.classList == 'especs especFechado') {
-            divEspec.classList = "especs especAberto"
-        } else {
-            divEspec.classList = "especs especFechado"
-        }
-    }
     return(
-        <div id={`espec${espec.id}`} className='especs' 
+        <div id={`espec${espec.id}`} className='especs' title="
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti sequi exercitationem ea dolorum quos at possimus, autem facere ipsa consequatur deleniti sit minus beatae dicta eos quis aliquam maxime ipsam?"
         style={{
             borderColor: cor2,
             backgroundColor: cor1,

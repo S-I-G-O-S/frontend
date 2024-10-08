@@ -3,6 +3,8 @@ import '../styles/clientes.css'
 import Header from './public/Header'
 import { useNavigate } from 'react-router-dom';
 
+// TODO preenchimento endereço apartir do CEP
+// TODO preenchimento campos para editar clientes
 function Clientes() {
     const navigate = useNavigate();
 

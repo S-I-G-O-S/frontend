@@ -6,8 +6,25 @@ import Edit from '../assets/edit-text.png'
 import Down from '../assets/dark/down.png' 
 import Up from '../assets/dark/up.png'
 import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react'
+
+// TODO Mudar a coluna "Status" para "disponivel"
+// TODO O carregamento das especialidades será diferente do "funcionarios"
+// TODO A relação de "funcionario" X "especialidade" será assincrona e separada
+// TODO tratamento para evitar espaços no começo e no final dos nomes
+
+//https://community.revelo.com.br/react-query-um-guia-pratico/
+
+
 
 function Funcionarios() {
+    const nomeCompleto = "Leonardo Martinez Nunes Barbosa Silva Almeida";
+    const nomes = nomeCompleto.split(" "); // separa a string em um array
+    const primeiroNome = nomes[0]; // primeiro elemento do array
+    const ultimoNome = nomes[nomes.length - 1]; // último elemento do array
+    const resultado = `${primeiroNome} ${ultimoNome}`
+
+    const [nome, setNome] = useState(resultado)
     const navigate = useNavigate();
 
     const goToEspecialidades = () => {
@@ -85,7 +102,7 @@ function Funcionarios() {
                     <div className='funcs'>
                         <div className='cardFunc' >
                             <div className='nomeFunc'>
-                                Leonardo Almeida
+                                {nome}
                             </div>
                             <div className='cellFunc'>
                                 (13) 123456-7891
