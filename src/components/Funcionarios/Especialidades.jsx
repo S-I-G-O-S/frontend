@@ -21,8 +21,47 @@ function Especialidades() {
             "id": 1,
             "nome": "Especialidade 1",
             "descricao": "descrição 1",
-            "cor": "#b80a0a/#fff",
-            "servicos": [1, 2, 3, 6]
+            "cor": "#b80a0a/#ffffff",
+            "servicos": [
+                {
+                    "id": 1,
+                    "nome": "Concerto de portão (marca famosa 1)",
+                    "descricao": "Imagine uma descrição boa deste serviço aqui"
+                },
+                {
+                    "id": 2,
+                    "nome": "Concerto de portão (marca famosa 2)",
+                    "descricao": "Imagine uma descrição boa deste serviço aqui"
+                },
+                {
+                    "id": 3,
+                    "nome": "Concerto de portão (marca famosa 3)",
+                    "descricao": "Imagine uma descrição boa deste serviço aqui"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "nome": "Especialidade 2",
+            "descricao": "descrição 2",
+            "cor": "#170099/#ffffff",
+            "servicos": [
+                {
+                    "id": 1,
+                    "nome": "Concerto de portão (marca famosa 1)",
+                    "descricao": "Imagine uma descrição boa deste serviço aqui"
+                },
+                {
+                    "id": 2,
+                    "nome": "Concerto de portão (marca famosa 2)",
+                    "descricao": "Imagine uma descrição boa deste serviço aqui"
+                },
+                {
+                    "id": 3,
+                    "nome": "Concerto de portão (marca famosa 3)",
+                    "descricao": "Imagine uma descrição boa deste serviço aqui"
+                }
+            ]
         }
     ]
     let reqstServicos = [
@@ -77,28 +116,16 @@ function Especialidades() {
             "descricao": "Imagine uma descrição boa deste serviço aqui"
         }
     ]
-    const [prevEspec, setPrevEspec] = useState({
-        prevTema: "preVisuLight",
-        cor1: "#fff",
-        cor2: "#000",
-        nome: "Exemplo",
-        })
+    const [prevEspec, setPrevEspec] = useState(null)
     const [layoutEspecServicos, setLayoutEspecServicos] = useState("layoutEspecs")
     const [ordemEspecServicos, setOrdemEspecServicos] = useState("asc")
     const [especialidades, setEspecialidades] = useState(reqstEspecialidades)
     const [servicos, setServicos] = useState(reqstServicos)
-    const [especAberta, setEspecAberta] = useState(
-        { 
-            id: 0, 
-            nome: '', 
-            descricao: '', 
-            cor: '',
-            servicos: []
-        }
-    )
+    const [especAberta, setEspecAberta] = useState(null)
     const [message, setMessage] = useState('')
     const [error, setError] = useState('')
 
+    //  LISTAGEM
     const mudarLayoutEspecServicos = () => {
         if(layoutEspecServicos == "layoutEspecs") {
             setLayoutEspecServicos("layoutServicos")
@@ -125,6 +152,12 @@ function Especialidades() {
             )   
         }
     }
+    const handleNovaEspec = () => {
+        
+        abrirEspec("nova")
+    }
+
+    //  EDITAÇÃO ESPECIALIDADE
     const mudarTemaPrevEspecConfig = () => {
         if (prevEspec.prevTema === "preVisuLight") {
             setPrevEspec(prevState => ({
@@ -139,45 +172,114 @@ function Especialidades() {
         }
     }
     const mudarNomePrevEspec = (nomePrev) => {
-        setPrevEspec(prevState => ({
-                ...prevState,
-                nome: nomePrev
-            }))
+        setEspecAberta(especState => ({
+            ...especState,
+            nome: nomePrev
+        }))
     }
     const mudarCor1PrevEspec = (cor1Prev) => {
         setPrevEspec(prevState => ({
-                ...prevState,
-                cor1: cor1Prev
-            }))
+            ...prevState,
+            cor1: cor1Prev
+        }))
+        setEspecAberta(especAberta => ({
+            ...especAberta,
+            cor: `${prevEspec.cor1}/${prevEspec.cor2}`,
+        }))
     }
     const mudarCor2PrevEspec = (cor2Prev) => {
         setPrevEspec(prevState => ({
-                ...prevState,
-                cor2: cor2Prev
-            }))
+            ...prevState,
+            cor2: cor2Prev
+        }))
+        setEspecAberta(especAberta => ({
+            ...especAberta,
+            cor: `${prevEspec.cor1}/${prevEspec.cor2}`,
+        }))
+    }
+    const handleSalvar = () => {
+        setEspecAberta(especAberta => ({
+            ...especAberta,
+            nome: prevEspec.nome,
+            cor: `${prevEspec.cor1}/${prevEspec.cor2}`,
+        }))
+        
+
+        window.alert(message)
+    }
+    const handleCancel = () => {
+        fecharEspec()
     }
     const abrirEspec = (idEspec) => {
-        const especSelecionada = especialidades.find(espec => espec.id === idEspec)
-        console.log(especSelecionada)
-        if (!especSelecionada) {
-            setError('Erro ao abrir especialidade.')
-            return;
+        console.log("especialidade do id " + idEspec +" foi aberta")
+
+        // if(especAberta != especSelecionada && especAberta) {
+        //     if(!window.confirm("Deseja excluir todas alterações da especialidade " + especAberta.nome + "?")) {
+        //         return
+        //     }
+        // }
+        if (idEspec == "nova") {
+        //  Nova Especialidade
+            setEspecAberta({
+                id: 0,
+                nome: 'Nova especialidade', 
+                descricao: '', 
+                cor: '',
+                servicos: []
+            })
+            setPrevEspec({
+                prevTema: "preVisuLight",
+                cor1: "#ffffff",
+                cor2: "#000"
+            })
+        } else {
+        //  Especialidade existente
+            let especSelecionada = especialidades.find(espec => espec.id === idEspec)
+            if (!especSelecionada) {
+                setError('Erro ao abrir especialidade.')
+                return;
+            }
+            const [auxCor1, auxCor2] = especSelecionada.cor.split('/');
+            if (!auxCor1 || !auxCor2) {
+                setError('Erro ao abrir especialidade. Cor invalida.')
+                return
+            }
+            setEspecAberta(especSelecionada)
+            setPrevEspec({
+                prevTema: "preVisuLight",
+                cor1: auxCor1,
+                cor2: auxCor2
+            })
         }
-        const [auxCor1, auxCor2] = especSelecionada.cor.split('/');
-        if (!auxCor1 || !auxCor2) {
-            setError('Erro ao abrir especialidade. Cor inv lida.')
-            return;
-        }
-        setEspecAberta(especSelecionada)
-        setPrevEspec({
-            prevTema: "preVisuLight",
-            cor1: auxCor1,
-            cor2: auxCor2,
-            nome: especSelecionada.nome,
-        })
     }
     const fecharEspec = () => {
-        
+        setEspecAberta(null)
+        setPrevEspec(null)
+    }
+    const putEditarEspec = async () => {
+        try {
+            const response = await fetch(`/api/especialidade/${especAberta.id}`, {
+            method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(especAberta), 
+            })
+
+            if (response.ok) {
+                setEspecialidades((prev) =>
+                        prev.map((esp) =>
+                        esp.id === especAberta.id ? especAberta : esp
+                    )
+                )
+                fecharEspec()
+            } else {
+                const errorData = await response.json()
+                setError(`Erro ao salvar: ${errorData.message}`)
+            }
+        } catch (error) {
+            setError(`Erro de conexão: ${error.message}`)
+        }
     }
     const postNovoEspec = async (e) => {
         e.preventDefault();
@@ -199,6 +301,7 @@ function Especialidades() {
         } catch (error) {
             setMessage(`Erro de conexão: ${error.message}`)
         }
+        
     }
     const getEspecialidades = async () => {
         try {
@@ -220,6 +323,25 @@ function Especialidades() {
             setError(`Erro de conexão: ${error.message}`)
         }
     }
+    const deleteEspec = async () => {
+        try {
+            const response = await fetch(`/api/especialidade/${especAberta.id}`, {
+            method: 'DELETE',
+            })
+
+            if (response.ok) {
+                setEspecialidades((prev) =>
+                    prev.filter((esp) => esp.id !== especAberta.id)
+                )
+                fecharEspec()
+            } else {
+                const errorData = await response.json();
+                setError(`Erro ao deletar: ${errorData.message}`)
+            }
+        } catch (error) {
+            setError(`Erro de conexão: ${error.message}`)
+        }
+    }
 
     useEffect(() => {
         // getEspecialidades()
@@ -231,20 +353,20 @@ function Especialidades() {
         <Nav></Nav>
         <div id='shadowBG'>
         </div>
-        <main>
+        <main className={
+                !especAberta ? "secConfigEspecFechada" : "secConfigEspecAberta"
+            }
+        >
             <section id='sec1'>
-                {/* <div id='contH2Novo'>
-                    <h2>Especialidades & Serviços</h2>
-                    <div id='contNovo'>
-                    <button>Nova Especialidade</button>
+                <div id='contNovo'>
+                    <button onClick={handleNovaEspec}>
+                        Nova Especialidade</button>
                     <button>Novo Serviço</button>
-                    </div>
-                </div> */}
+                </div>
                 {/* 
                     Nome ASC/DESC
                     Mudar layout
-                    
-                 */}
+                */}
                 <div id='contFiltrosEspecServ'>
                     <div id='orderFiltrosEspecServ'>
                         <p>Ordernar por:</p>
@@ -280,74 +402,76 @@ function Especialidades() {
                     }
                 </div>
             </section>
-            <section id='secConfigEspec'>
-                <h2>Editando especialidade</h2>
-                <div id='contInfosEspecEdit'>
+            { especAberta  &&
+                <section id='secConfigEspec'>
+                    <h2>Editando especialidade</h2>
+                    <div id='contInfosEspecEdit'>
 
-                    <div id='campoNomeConfigEspec'>
-                        <label>Nome:</label>
-                        <input 
-                            type="text" id='nomeConfigEspec' 
-                            value={prevEspec.nome}
-                            onChange={(e) => mudarNomePrevEspec(e.target.value)}
-                        />
-                    </div>
-                    <div id='contCamposCoresEspecEdit'>
-                        <div id='campoCor1ConfigEspec' className='campoConfigEspec'>
-                            <label>Cor de fundo:</label>
+                        <div id='campoNomeConfigEspec'>
+                            <label>Nome:</label>
                             <input 
-                                type="color" name="" id="inpCorFundo" 
-                                value={prevEspec.cor1}
-                                onChange={(e) => mudarCor1PrevEspec(e.target.value)}
+                                type="text" id='nomeConfigEspec' 
+                                value={especAberta.nome}
+                                onChange={(e) => mudarNomePrevEspec(e.target.value)}
                             />
                         </div>
-                        <div id='campoCor2ConfigEspec' className='campoConfigEspec'>
-                            <label>Cor da letra:</label>
-                            <input 
-                                type="color" name="" id="inpCorLetra"
-                                value={prevEspec.cor2}
-                                onChange={(e) => mudarCor2PrevEspec(e.target.value)}
-                            />
+                        <div id='contCamposCoresEspecEdit'>
+                            <div id='campoCor1ConfigEspec' className='campoConfigEspec'>
+                                <label>Cor de fundo:</label>
+                                <input 
+                                    type="color" name="" id="inpCorFundo" 
+                                    value={prevEspec.cor1}
+                                    onChange={(e) => mudarCor1PrevEspec(e.target.value)}
+                                />
+                            </div>
+                            <div id='campoCor2ConfigEspec' className='campoConfigEspec'>
+                                <label>Cor da letra:</label>
+                                <input 
+                                    type="color" name="" id="inpCorLetra"
+                                    value={prevEspec.cor2}
+                                    onChange={(e) => mudarCor2PrevEspec(e.target.value)}
+                                />
+                            </div>
                         </div>
-                    </div>
-                    <div id='contPreVisu'>
-                        <div id='headPreVisu'>
-                            <p>Pré-visualização:</p>
-                            <button onClick={mudarTemaPrevEspecConfig}>Mudar tema</button>
-                        </div>
-                        <div id='preVisu' className={prevEspec.prevTema}>
-                            <div id='especPreVisu'
-                            style={{
-                                borderColor: prevEspec.cor2,
-                                backgroundColor: prevEspec.cor1,
-                                color: prevEspec.cor2
-                            }}>
-                                {prevEspec.nome}
+                        <div id='contPreVisu'>
+                            <div id='headPreVisu'>
+                                <p>Pré-visualização:</p>
+                                <button onClick={mudarTemaPrevEspecConfig}>Mudar tema</button>
+                            </div>
+                            <div id='preVisu' className={prevEspec.prevTema}>
+                                <div id='especPreVisu'
+                                style={{
+                                    borderColor: prevEspec.cor2,
+                                    backgroundColor: prevEspec.cor1,
+                                    color: prevEspec.cor2
+                                }}>
+                                    {especAberta.nome}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div id='contServicosEspecEdit'>
-                    <div id='headServicos'>
-                        <p>Serviços relacionados</p>
-                        <button>Adicionar</button>
+                    <div id='contServicosEspecEdit'>
+                        <div id='headServicos'>
+                            <p>Serviços relacionados</p>
+                            <button>Adicionar</button>
+                        </div>
+                        <div id='listServicosEdit'>
+                            {
+                                especAberta.servicos.map(servico => 
+                                    <p key={servico.id}>
+                                        {servico.nome}
+                                    </p>
+                                )
+                            }
+                        </div>
                     </div>
-                    <div id='listServicosEdit'>
-                        {
-                            especAberta.servicos.map(servico => 
-                                <p key={servico.id}>
-                                    {servico.nome}
-                                </p>
-                            )
-                        }
+                    <div id='contFimAcao'>
+                    <button onClick={handleCancel}>cancelar</button>
+                    <button>salvar</button>
+                    <button>deletar</button>
                     </div>
-                </div>
-                <div id='contFimAcao'>
-                <button>cancelar</button>
-                <button>salvar</button>
-                <button>deletar</button>
-                </div>
-            </section>
+                </section>
+            }
         </main>
         </div>
     )
