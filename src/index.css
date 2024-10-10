@@ -1,3 +1,14 @@
+:root {
+    --azul: #395873;
+    --nav: #395873ea;
+    --laranja: #D96704;
+    --salmao1: #F2AE72;
+    --salmao2: #f7cba4;
+    --salmao3: #fcd8b9;
+    --branco: #F2E8DF;
+    --marrom: #26110D;
+    --preto: #000;
+}
 body {
   margin: 0px;
   padding: 0px;
@@ -18,4 +29,38 @@ body {
     box-sizing: border-box;
   }
 }
-
+/* Customizando a largura da barra de rolagem */
+/* ::-webkit-scrollbar {
+    width: 0.9rem;
+    height: 0.9rem;
+    box-sizing: border-box;
+} */
+/* Estilizando a trilha da barra */
+/* ::-webkit-scrollbar-track {
+    background-color: var(--salmao3);
+    border-radius: 0 0 0.4rem 0;
+    border-left: 0.1rem solid var(--marrom);
+    box-sizing: border-box;
+} */
+/* Estilizando o "thumb", a parte que o usuário move */
+/* ::-webkit-scrollbar-thumb {
+    background-color: var(--marrom);
+    border-radius: 0.9rem;
+    border: 0rem solid var(--salmao2);
+    cursor: pointer;
+    box-sizing: border-box;
+} */
+/* ::-webkit-scrollbar-button {
+	background-color: #D96704;
+	width: 0.5rem;
+	height: 0.5rem;
+} */
+/* Estilizando o "thumb" ao passar o mouse */
+/* ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--marrom);
+    box-sizing: border-box;
+} */
+/* Estilizando o canto da barra de rolagem */
+/* ::-webkit-scrollbar-corner {
+    background-color: var(--laranja);
+} */

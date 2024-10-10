@@ -197,6 +197,46 @@ function Especialidades() {
             cor: `${prevEspec.cor1}/${prevEspec.cor2}`,
         }))
     }
+    const mudarInputServPrevEspec = (inpServ) => {
+        setPrevEspec(especState => ({
+            ...especState,
+            inpServ: inpServ
+        }))
+    }
+    const addServToEspec = () => {
+        // Encontrar o serviço baseado no que foi digitado
+        const servicoSelecionado = servicos.find(servico => servico.nome.toLowerCase() === prevEspec.inpServ.toLowerCase())
+        
+        if (!servicoSelecionado) {
+            setError("Serviço não encontrado!")
+            return
+        }
+
+        // Verificar se o serviço já foi adicionado à especialidade
+        const servicoJaAdicionado = prevEspec.servicos.some(servEspec => servEspec.id === servicoSelecionado.id)
+
+        if (servicoJaAdicionado) {
+            setError("Este serviço já foi adicionado a esta especialidade!");
+            return
+        }
+
+        // Adicionar o serviço ao array de serviços da especialidade
+        setPrevEspec(especState => ({
+            ...especState,
+            servicos: [...especState.servicos, servicoSelecionado],  // Adiciona o serviço
+            inpServ: ''  // Limpa o campo de input após a adição
+        }))
+
+        // Limpar qualquer mensagem de erro existente
+        setError('')
+    }
+
+    const deleteServEspec = (idServ) => {
+        setEspecAberta(especState => ({
+            ...especState,
+            servicos: especState.servicos.filter(servico => servico.id !== idServ)
+        }))
+    }
     const handleSalvar = () => {
         setEspecAberta(especAberta => ({
             ...especAberta,
@@ -212,12 +252,18 @@ function Especialidades() {
     }
     const abrirEspec = (idEspec) => {
         console.log("especialidade do id " + idEspec +" foi aberta")
-
-        // if(especAberta != especSelecionada && especAberta) {
-        //     if(!window.confirm("Deseja excluir todas alterações da especialidade " + especAberta.nome + "?")) {
-        //         return
-        //     }
-        // }
+        
+        if (especAberta) {
+            if(especAberta.id == idEspec) {
+                return
+            }
+            if(especAberta.id != idEspec && especAberta) {
+                if(!window.confirm("Deseja excluir todas alterações da especialidade " + especAberta.nome + "?")) {
+                    
+                    return
+                }
+            }
+        }
         if (idEspec == "nova") {
         //  Nova Especialidade
             setEspecAberta({
@@ -230,7 +276,8 @@ function Especialidades() {
             setPrevEspec({
                 prevTema: "preVisuLight",
                 cor1: "#ffffff",
-                cor2: "#000"
+                cor2: "#000",
+                inpServ: ""
             })
         } else {
         //  Especialidade existente
@@ -248,7 +295,8 @@ function Especialidades() {
             setPrevEspec({
                 prevTema: "preVisuLight",
                 cor1: auxCor1,
-                cor2: auxCor2
+                cor2: auxCor2,
+                inpServ: ""
             })
         }
     }
@@ -351,8 +399,6 @@ function Especialidades() {
         <div id='pageEspecialidades'>
         <Header titulo={"Especialidades & Serviços"}></Header>
         <Nav></Nav>
-        <div id='shadowBG'>
-        </div>
         <main className={
                 !especAberta ? "secConfigEspecFechada" : "secConfigEspecAberta"
             }
@@ -373,6 +419,7 @@ function Especialidades() {
                         <button id='nomeOrderFiltrosEspec' onClick={mudarOrdemEspecServicos}>
                             Nome {ordemEspecServicos.toUpperCase()}
                         </button>
+                        <button>Criação ASC</button>
                     </div>
                     <div id='groupFiltrosEspecServ'>
                         <p>Agrupar por:</p>
@@ -392,8 +439,7 @@ function Especialidades() {
                         ) :
                         servicos.map(serv => 
                             <div className='servicos' key={serv.id}>
-                                <h4>{serv.nome}</h4>
-                                
+                                <h4>{serv.nome}</h4>    
                                 <div>
                                     {serv.descricao}
                                 </div>
@@ -451,16 +497,35 @@ function Especialidades() {
                         </div>
                     </div>
                     <div id='contServicosEspecEdit'>
-                        <div id='headServicos'>
-                            <p>Serviços relacionados</p>
-                            <button>Adicionar</button>
+                        <h3>Serviços relacionados</h3>
+                        <div id='secAddServicoEspecEdit'>
+                            <input type="text" list='dtListServicos' id='inputAddServicoEspecEdit' value={prevEspec.inpServ} onChange={(e) => mudarInputServPrevEspec(e.target.value)}/>
+                            <datalist id='dtListServicos'>
+                                {
+                                    servicos
+                                        .filter(servico => 
+                                            !especAberta.servicos.some(servEspec => servEspec.id === servico.id)
+                                        )
+                                        .map(servico => (
+                                            <option key={servico.id} value={servico.nome}>
+                                                {servico.nome}
+                                            </option>
+                                        ))
+                                }
+                            </datalist>
+                            <button onClick={addServToEspec}>Adicionar</button>
                         </div>
-                        <div id='listServicosEdit'>
+                        <div id='listServicosEditEspecEdit'>
                             {
                                 especAberta.servicos.map(servico => 
-                                    <p key={servico.id}>
+                                    <div key={servico.id}>
+                                        <p>
                                         {servico.nome}
-                                    </p>
+                                        </p>
+                                        <button onClick={() => {deleteServEspec(servico.id)}}>
+                                            X
+                                        </button>
+                                    </div>
                                 )
                             }
                         </div>
@@ -473,6 +538,9 @@ function Especialidades() {
                 </section>
             }
         </main>
+        <div id='shadowBG'>
+            
+        </div>
         </div>
     )
 }
