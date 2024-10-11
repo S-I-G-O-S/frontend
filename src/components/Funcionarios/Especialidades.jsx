@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react'
 
 // TODO a pagina lateral direita será para a edição de especialidades e serviços
 
-//https://www.delftstack.com/pt/howto/react/for-loop-in-react/
+// https://www.delftstack.com/pt/howto/react/for-loop-in-react/
 
 function Especialidades() {
     // GETS DAS API'S
@@ -204,7 +204,6 @@ function Especialidades() {
         }))
     }
     const addServToEspec = () => {
-        // Encontrar o serviço baseado no que foi digitado
         const servicoSelecionado = servicos.find(servico => servico.nome.toLowerCase() === prevEspec.inpServ.toLowerCase())
         
         if (!servicoSelecionado) {
@@ -212,25 +211,19 @@ function Especialidades() {
             return
         }
 
-        // Verificar se o serviço já foi adicionado à especialidade
         const servicoJaAdicionado = prevEspec.servicos.some(servEspec => servEspec.id === servicoSelecionado.id)
 
         if (servicoJaAdicionado) {
             setError("Este serviço já foi adicionado a esta especialidade!");
             return
         }
-
-        // Adicionar o serviço ao array de serviços da especialidade
         setPrevEspec(especState => ({
             ...especState,
-            servicos: [...especState.servicos, servicoSelecionado],  // Adiciona o serviço
-            inpServ: ''  // Limpa o campo de input após a adição
+            servicos: [...especState.servicos, servicoSelecionado],
+            inpServ: ''
         }))
-
-        // Limpar qualquer mensagem de erro existente
         setError('')
     }
-
     const deleteServEspec = (idServ) => {
         setEspecAberta(especState => ({
             ...especState,
@@ -243,9 +236,20 @@ function Especialidades() {
             nome: prevEspec.nome,
             cor: `${prevEspec.cor1}/${prevEspec.cor2}`,
         }))
-        
-
+        if(especAberta.id == "nova") {
+            postNovoEspec()
+        } else {
+            putEditarEspec()
+        }
         window.alert(message)
+        fecharEspec()
+    }
+    const handleDeletar = () => {
+        if(!window.confirm("Deseja APAGAR a especialidade " + especAberta.nome + "?")) {
+            return
+        }
+        deleteEspec()
+        fecharEspec()
     }
     const handleCancel = () => {
         fecharEspec()
@@ -267,7 +271,7 @@ function Especialidades() {
         if (idEspec == "nova") {
         //  Nova Especialidade
             setEspecAberta({
-                id: 0,
+                id: "nova",
                 nome: 'Nova especialidade', 
                 descricao: '', 
                 cor: '',
@@ -337,7 +341,11 @@ function Especialidades() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(especAberta),
+                body: JSON.stringify({
+                    nome: especAberta.nome,
+                    descricao: especAberta.descricao,
+                    cor: especAberta.cor,
+                }),
             })
 
             if (response.ok) {
@@ -392,7 +400,7 @@ function Especialidades() {
     }
 
     useEffect(() => {
-        // getEspecialidades()
+        getEspecialidades()
     }, [])
 
     return(
@@ -461,22 +469,35 @@ function Especialidades() {
                                 onChange={(e) => mudarNomePrevEspec(e.target.value)}
                             />
                         </div>
+                        <div id='campoDescricaoConfigEspec'>
+                            <label>Descrição:</label>
+                            <input type="text" />
+                        </div>
                         <div id='contCamposCoresEspecEdit'>
                             <div id='campoCor1ConfigEspec' className='campoConfigEspec'>
                                 <label>Cor de fundo:</label>
-                                <input 
-                                    type="color" name="" id="inpCorFundo" 
-                                    value={prevEspec.cor1}
-                                    onChange={(e) => mudarCor1PrevEspec(e.target.value)}
-                                />
+
+                                <div className='inputsCamposCoresConfigEspec'>
+                                    <input type="text" value={prevEspec.cor1}
+                                        onChange={(e) => mudarCor1PrevEspec(e.target.value)}/>
+                                    <input 
+                                        type="color" name="" id="inpCorFundo" 
+                                        value={prevEspec.cor1}
+                                        onChange={(e) => mudarCor1PrevEspec(e.target.value)}
+                                    />
+                                </div>
                             </div>
                             <div id='campoCor2ConfigEspec' className='campoConfigEspec'>
                                 <label>Cor da letra:</label>
+                                <div className='inputsCamposCoresConfigEspec'>
+                                <input type="text" value={prevEspec.cor2}
+                                    onChange={(e) => mudarCor2PrevEspec(e.target.value)}/>
                                 <input 
                                     type="color" name="" id="inpCorLetra"
                                     value={prevEspec.cor2}
                                     onChange={(e) => mudarCor2PrevEspec(e.target.value)}
                                 />
+                                </div>
                             </div>
                         </div>
                         <div id='contPreVisu'>
@@ -518,7 +539,7 @@ function Especialidades() {
                         <div id='listServicosEditEspecEdit'>
                             {
                                 especAberta.servicos.map(servico => 
-                                    <div key={servico.id}>
+                                    <div key={servico.id} className='itemListServicoEditEspecEdit'>
                                         <p>
                                         {servico.nome}
                                         </p>
@@ -532,8 +553,8 @@ function Especialidades() {
                     </div>
                     <div id='contFimAcao'>
                     <button onClick={handleCancel}>cancelar</button>
-                    <button>salvar</button>
-                    <button>deletar</button>
+                    <button onClick={handleSalvar}>salvar</button>
+                    <button onClick={handleCancel}>deletar</button>
                     </div>
                 </section>
             }
