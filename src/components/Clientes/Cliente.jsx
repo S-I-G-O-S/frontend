@@ -20,7 +20,7 @@ function Cliente() {
     }
     return(
         <div id="pageCliente">
-            <Header></Header>
+            <Header titulo={"Editando cliente "}></Header>
             <Nav></Nav>
             <main id='mainCliente'>
                 <section id='secInfos'>

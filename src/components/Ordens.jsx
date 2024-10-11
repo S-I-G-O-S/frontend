@@ -19,7 +19,7 @@ function Ordens() {
     // TODO Criar janela para configurar serviços
     return (
         <div id="pageOrdens">
-        <Header></Header>
+        <Header titulo={"Ordens"}></Header>
         <Nav></Nav>
         <main id="mainOrdens">
             <section>

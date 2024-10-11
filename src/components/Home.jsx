@@ -7,7 +7,7 @@ import '../styles/home.css'
 function Home() {
     return (
         <div id='pageHome'>
-        <Header></Header>
+        <Header titulo={"Home"}></Header>
         <Nav></Nav>
         <main id="mainHome">
             {/* SEÇÃO DE ORDENS DE SERVIÇOS ABERTOS */}

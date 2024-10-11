@@ -18,6 +18,7 @@ UnitEspec.propTypes = {
 }
 
 function UnitEspec({ espec, onClick }) {
+    
     let [cor1, cor2] = espec.cor.split('/');
     return(
         <div id={`espec${espec.id}`} className='especs' 

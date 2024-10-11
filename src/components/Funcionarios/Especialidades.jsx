@@ -554,7 +554,7 @@ function Especialidades() {
                     <div id='contFimAcao'>
                     <button onClick={handleCancel}>cancelar</button>
                     <button onClick={handleSalvar}>salvar</button>
-                    <button onClick={handleCancel}>deletar</button>
+                    <button onClick={handleDeletar}>deletar</button>
                     </div>
                 </section>
             }

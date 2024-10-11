@@ -3,20 +3,30 @@ import Nav from '../public/Nav'
 import Header from '../public/Header'
 import Down from '../../assets/light/down.png' 
 import Up from '../../assets/light/up.png'
-import { useFetcher, useLocation  } from 'react-router-dom'
+import { useFetcher, useLocation, useNavigate  } from 'react-router-dom'
 // import { cepAPI } from '../../services/cepAPI'
 // import { useQuery } from ‘react-query’;
 
 // TODO Os funcionarios tem CPF
 function Funcionario() {
+    const nomeCompleto = "Leonardo Martinez Nunes Barbosa Silva Almeida";
+    const nomes = nomeCompleto.split(" "); // separa a string em um array
+    const primeiroNome = nomes[0]; // primeiro elemento do array
+    const ultimoNome = nomes[nomes.length - 1]; // último elemento do array
+    const resultado = `${primeiroNome} ${ultimoNome}`
+    
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     let idFuncionario = searchParams.get('id');
     console.log(idFuncionario)
 
+    const navigate = useNavigate()
+    const goToFuncionarios = () => {
+        navigate(`/funcionarios`)
+    }
     return(
         <div id="pageFuncionario">
-            <Header></Header>
+            <Header titulo={"Editando funcionário " + idFuncionario}></Header>
             <Nav></Nav>
             <main>
                 <section id='secInfos'>
@@ -63,7 +73,7 @@ function Funcionario() {
                         </div>
                     </div>
                     <div id='contControle'>
-                        <button id='bttCancelar'>Cancelar</button>
+                        <button id='bttCancelar' onClick={goToFuncionarios}>Cancelar</button>
                         <button id='bttSalvar'>Salvar</button>
                         <button id='bttExcluir'>Excluir</button>
                     </div>
