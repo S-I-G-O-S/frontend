@@ -1,19 +1,31 @@
+import config from '../../services/devConfig.js'
+// Dados simulados
+import simuGetEspecialidades from '../../dadosSimulados/especialidades.js'
+import simuGetFuncionarios from '../../dadosSimulados/funcionarios.js'
+
+// Funções de requisições
+import {getFuncionarios} from '../../services/funcionariosAPI.js'
+import {getEspecialidades} from '../../services/especialidadesAPI.js'
+
 import '../../styles/funcionario.css'
 import Nav from '../public/Nav'
 import Header from '../public/Header'
 import Down from '../../assets/light/down.png' 
 import Up from '../../assets/light/up.png'
 import { useFetcher, useLocation, useNavigate  } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 // import { cepAPI } from '../../services/cepAPI'
-// import { useQuery } from ‘react-query’;
+// import { useQuery } from ‘react-query’
 
 // TODO Os funcionarios tem CPF
 function Funcionario() {
-    const nomeCompleto = "Leonardo Martinez Nunes Barbosa Silva Almeida";
-    const nomes = nomeCompleto.split(" "); // separa a string em um array
-    const primeiroNome = nomes[0]; // primeiro elemento do array
-    const ultimoNome = nomes[nomes.length - 1]; // último elemento do array
-    const resultado = `${primeiroNome} ${ultimoNome}`
+    // const nomeCompleto = "Leonardo Martinez Nunes Barbosa Silva Almeida";
+    // const nomes = nomeCompleto.split(" "); // separa a string em um array
+    // const primeiroNome = nomes[0]; // primeiro elemento do array
+    // const ultimoNome = nomes[nomes.length - 1]; // último elemento do array
+    // const resultado = `${primeiroNome} ${ultimoNome}`
+    
+    const [error, setError] = useState()
     
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search)
@@ -24,29 +36,40 @@ function Funcionario() {
     const goToFuncionarios = () => {
         navigate(`/funcionarios`)
     }
-    const getEspecialidades = async () => {
-        try {
-            const response = await fetch(`http://localhost:8080/api/funcionarios${idFuncionario}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
+    useEffect(() => {
+        const fetchData = async () => {
+            if (config.simularDados) {
+                setReqstEspecialidades(simuGetEspecialidades)
+                setReqstFuncionarios(simuGetFuncionarios)
 
-            if (response.ok) {
-                const data = await response.json()
-                setReqstEspecialidades(data)
+                setFuncionarios(simuGetFuncionarios.content)
+                setEspecialidades(simuGetEspecialidades.content)
             } else {
-                const errorData = await response.json()
-                setError(`Erro: ${errorData.message}`)
+                try {
+                    const funcionariosData = await getFuncionarios()
+                    const especialidadesData = await getEspecialidades()
+
+                    setReqstFuncionarios(funcionariosData)
+                    setReqstEspecialidades(especialidadesData)
+
+                    setFuncionarios(funcionariosData.content)
+                    setEspecialidades(especialidadesData.content)
+                } catch (error) {
+                    setError(error.message)
+                }
             }
-        } catch (error) {
-            setError(`Erro de conexão: ${error.message}`)
         }
-    }
+
+        fetchData()
+    }, [])
     return(
         <div id="pageFuncionario">
-            <Header titulo={"Editando funcionário " + idFuncionario}></Header>
+            <Header titulo={
+                idFuncionario !== null 
+                ? `Editando funcionário ${idFuncionario}`  
+                : 'Novo funcionário'
+            }>
+            </Header>
             <Nav></Nav>
             <main>
                 <section id='secInfos'>

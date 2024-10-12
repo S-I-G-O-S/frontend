@@ -1,127 +1,130 @@
+import config from '../../services/devConfig'
+// Dados simulados
+import simuGetEspecialidades from '../../dadosSimulados/especialidades'
+
+// Funções de requisições
+import {getEspecialidades, deleteEspec, postEspecialidade, putEspecialidade} from '../../services/especialidadesAPI'
+
 import '../../styles/especialidades.css'
+
 import Nav from '../public/Nav'
 import Header from '../public/Header'
 import UnitEspec from './Especialidades/unitEspecialidade'
 import { useEffect, useState } from 'react'
-// import Options from '../../assets/options.png'
-// import Edit from '../../assets/edit-text.png'
-// import Down from '../../assets/dark/down.png' 
-// import Up from '../../assets/dark/up.png'
-// import { useNavigate } from 'react-router-dom'
-// import { useState } from 'react'
-
-// TODO a pagina lateral direita será para a edição de especialidades e serviços
 
 // https://www.delftstack.com/pt/howto/react/for-loop-in-react/
 
 function Especialidades() {
-    // GETS DAS API'S
-    let reqstEspecialidades = [
-        {
-            "id": 1,
-            "nome": "Especialidade 1",
-            "descricao": "descrição 1",
-            "cor": "#b80a0a/#ffffff",
-            "servicos": [
-                {
-                    "id": 1,
-                    "nome": "Concerto de portão (marca famosa 1)",
-                    "descricao": "Imagine uma descrição boa deste serviço aqui"
-                },
-                {
-                    "id": 2,
-                    "nome": "Concerto de portão (marca famosa 2)",
-                    "descricao": "Imagine uma descrição boa deste serviço aqui"
-                },
-                {
-                    "id": 3,
-                    "nome": "Concerto de portão (marca famosa 3)",
-                    "descricao": "Imagine uma descrição boa deste serviço aqui"
-                }
-            ]
-        },
-        {
-            "id": 2,
-            "nome": "Especialidade 2",
-            "descricao": "descrição 2",
-            "cor": "#170099/#ffffff",
-            "servicos": [
-                {
-                    "id": 1,
-                    "nome": "Concerto de portão (marca famosa 1)",
-                    "descricao": "Imagine uma descrição boa deste serviço aqui"
-                },
-                {
-                    "id": 2,
-                    "nome": "Concerto de portão (marca famosa 2)",
-                    "descricao": "Imagine uma descrição boa deste serviço aqui"
-                },
-                {
-                    "id": 3,
-                    "nome": "Concerto de portão (marca famosa 3)",
-                    "descricao": "Imagine uma descrição boa deste serviço aqui"
-                }
-            ]
-        }
-    ]
-    let reqstServicos = [
-        {
-            "id": 1,
-            "nome": "Concerto de portão (marca famosa 1)",
-            "descricao": "Imagine uma descrição boa deste serviço aqui"
-        },
-        {
-            "id": 2,
-            "nome": "Concerto de portão (marca famosa 2)",
-            "descricao": "Imagine uma descrição boa deste serviço aqui"
-        },
-        {
-            "id": 3,
-            "nome": "Concerto de portão (marca famosa 3)",
-            "descricao": "Imagine uma descrição boa deste serviço aqui"
-        },
-        {
-            "id": 4,
-            "nome": "Concerto de portão (marca famosa 4)",
-            "descricao": "Imagine uma descrição boa deste serviço aqui"
-        },
-        {
-            "id": 5,
-            "nome": "Concerto de portão (marca famosa 1)",
-            "descricao": "Imagine uma descrição boa deste serviço aqui"
-        },
-        {
-            "id": 6,
-            "nome": "Concerto de portão (marca famosa 2)",
-            "descricao": "Imagine uma descrição boa deste serviço aqui"
-        },
-        {
-            "id": 7,
-            "nome": "Concerto de portão (marca famosa 3)",
-            "descricao": "Imagine uma descrição boa deste serviço aqui"
-        },
-        {
-            "id": 8,
-            "nome": "Concerto de portão (marca famosa 4)",
-            "descricao": "Imagine uma descrição boa deste serviço aqui"
-        },
-        {
-            "id": 9,
-            "nome": "Concerto de portão (marca famosa 1)",
-            "descricao": "Imagine uma descrição boa deste serviço aqui"
-        },
-        {
-            "id": 10,
-            "nome": "Concerto de portão (marca famosa 2)",
-            "descricao": "Imagine uma descrição boa deste serviço aqui"
-        }
-    ]
+    // let reqstEspecialidades = [
+    //     {
+    //         "id": 1,
+    //         "nome": "Especialidade 1",
+    //         "descricao": "descrição 1",
+    //         "cor": "#b80a0a/#ffffff",
+    //         "servicos": [
+    //             {
+    //                 "id": 1,
+    //                 "nome": "Concerto de portão (marca famosa 1)",
+    //                 "descricao": "Imagine uma descrição boa deste serviço aqui"
+    //             },
+    //             {
+    //                 "id": 2,
+    //                 "nome": "Concerto de portão (marca famosa 2)",
+    //                 "descricao": "Imagine uma descrição boa deste serviço aqui"
+    //             },
+    //             {
+    //                 "id": 3,
+    //                 "nome": "Concerto de portão (marca famosa 3)",
+    //                 "descricao": "Imagine uma descrição boa deste serviço aqui"
+    //             }
+    //         ]
+    //     },
+    //     {
+    //         "id": 2,
+    //         "nome": "Especialidade 2",
+    //         "descricao": "descrição 2",
+    //         "cor": "#170099/#ffffff",
+    //         "servicos": [
+    //             {
+    //                 "id": 1,
+    //                 "nome": "Concerto de portão (marca famosa 1)",
+    //                 "descricao": "Imagine uma descrição boa deste serviço aqui"
+    //             },
+    //             {
+    //                 "id": 2,
+    //                 "nome": "Concerto de portão (marca famosa 2)",
+    //                 "descricao": "Imagine uma descrição boa deste serviço aqui"
+    //             },
+    //             {
+    //                 "id": 3,
+    //                 "nome": "Concerto de portão (marca famosa 3)",
+    //                 "descricao": "Imagine uma descrição boa deste serviço aqui"
+    //             }
+    //         ]
+    //     }
+    // ]
+    // let reqstServicos = [
+    //     {
+    //         "id": 1,
+    //         "nome": "Concerto de portão (marca famosa 1)",
+    //         "descricao": "Imagine uma descrição boa deste serviço aqui"
+    //     },
+    //     {
+    //         "id": 2,
+    //         "nome": "Concerto de portão (marca famosa 2)",
+    //         "descricao": "Imagine uma descrição boa deste serviço aqui"
+    //     },
+    //     {
+    //         "id": 3,
+    //         "nome": "Concerto de portão (marca famosa 3)",
+    //         "descricao": "Imagine uma descrição boa deste serviço aqui"
+    //     },
+    //     {
+    //         "id": 4,
+    //         "nome": "Concerto de portão (marca famosa 4)",
+    //         "descricao": "Imagine uma descrição boa deste serviço aqui"
+    //     },
+    //     {
+    //         "id": 5,
+    //         "nome": "Concerto de portão (marca famosa 1)",
+    //         "descricao": "Imagine uma descrição boa deste serviço aqui"
+    //     },
+    //     {
+    //         "id": 6,
+    //         "nome": "Concerto de portão (marca famosa 2)",
+    //         "descricao": "Imagine uma descrição boa deste serviço aqui"
+    //     },
+    //     {
+    //         "id": 7,
+    //         "nome": "Concerto de portão (marca famosa 3)",
+    //         "descricao": "Imagine uma descrição boa deste serviço aqui"
+    //     },
+    //     {
+    //         "id": 8,
+    //         "nome": "Concerto de portão (marca famosa 4)",
+    //         "descricao": "Imagine uma descrição boa deste serviço aqui"
+    //     },
+    //     {
+    //         "id": 9,
+    //         "nome": "Concerto de portão (marca famosa 1)",
+    //         "descricao": "Imagine uma descrição boa deste serviço aqui"
+    //     },
+    //     {
+    //         "id": 10,
+    //         "nome": "Concerto de portão (marca famosa 2)",
+    //         "descricao": "Imagine uma descrição boa deste serviço aqui"
+    //     }
+    // ]
+    const [reqstEspecialidades, setReqstEspecialidades] = useState([])
+    const [reqstServicos, setReqstServicos] = useState([])
+    const [especialidades, setEspecialidades] = useState(reqstEspecialidades)
+    const [servicos, setServicos] = useState(reqstServicos)
+    
     const [prevEspec, setPrevEspec] = useState(null)
     const [layoutEspecServicos, setLayoutEspecServicos] = useState("layoutEspecs")
     const [ordemEspecServicos, setOrdemEspecServicos] = useState("asc")
-    const [especialidades, setEspecialidades] = useState(reqstEspecialidades)
-    const [servicos, setServicos] = useState(reqstServicos)
     const [especAberta, setEspecAberta] = useState(null)
+
     const [message, setMessage] = useState('')
     const [error, setError] = useState('')
 
@@ -153,7 +156,6 @@ function Especialidades() {
         }
     }
     const handleNovaEspec = () => {
-        
         abrirEspec("nova")
     }
 
@@ -175,6 +177,12 @@ function Especialidades() {
         setEspecAberta(especState => ({
             ...especState,
             nome: nomePrev
+        }))
+    }
+    const mudarDescricaoPrevEspec = (nomePrev) => {
+        setEspecAberta(especState => ({
+            ...especState,
+            descricao: nomePrev
         }))
     }
     const mudarCor1PrevEspec = (cor1Prev) => {
@@ -230,25 +238,44 @@ function Especialidades() {
             servicos: especState.servicos.filter(servico => servico.id !== idServ)
         }))
     }
-    const handleSalvar = () => {
-        setEspecAberta(especAberta => ({
+    const handleSalvar = async () => {
+        const especAberta = {
             ...especAberta,
             nome: prevEspec.nome,
             cor: `${prevEspec.cor1}/${prevEspec.cor2}`,
-        }))
-        if(especAberta.id == "nova") {
-            postNovoEspec()
-        } else {
-            putEditarEspec()
         }
-        window.alert(message)
-        fecharEspec()
+
+        let result
+        if (especAberta.id === "nova") {
+            result = postEspecialidade(especAberta)
+        } else {
+            result = putEspecialidade(especAberta)
+        }
+
+        if (result.success) {
+            window.alert('Alterações salvas com sucesso!')
+            fecharEspec()
+        } else {
+            window.alert(result.error)
+        }
     }
     const handleDeletar = () => {
         if(!window.confirm("Deseja APAGAR a especialidade " + especAberta.nome + "?")) {
             return
         }
-        deleteEspec()
+        if(config.simularDados) {
+            setReqstEspecialidades((prev) => ({
+                ...prev,
+                content: prev.content.filter((esp) => esp.id !== especAberta.id),
+            }))
+        } else {
+            const result = deleteEspec(especAberta.id);
+            if (result.success) {
+                setEspecialidades((prev) => prev.filter((esp) => esp.id !== especAberta.id));
+            } else {
+                console.error(result.error);
+            }
+        }
         fecharEspec()
     }
     const handleCancel = () => {
@@ -308,99 +335,27 @@ function Especialidades() {
         setEspecAberta(null)
         setPrevEspec(null)
     }
-    const putEditarEspec = async () => {
-        try {
-            const response = await fetch(`http://localhost:8080/api/especialidade/${especAberta.id}`, {
-            method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(especAberta), 
-            })
-
-            if (response.ok) {
-                setEspecialidades((prev) =>
-                        prev.map((esp) =>
-                        esp.id === especAberta.id ? especAberta : esp
-                    )
-                )
-                fecharEspec()
-            } else {
-                const errorData = await response.json()
-                setError(`Erro ao salvar: ${errorData.message}`)
-            }
-        } catch (error) {
-            setError(`Erro de conexão: ${error.message}`)
-        }
-    }
-    const postNovoEspec = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await fetch('http://localhost:8080/api/especialidade', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    nome: especAberta.nome,
-                    descricao: especAberta.descricao,
-                    cor: especAberta.cor,
-                }),
-            })
-
-            if (response.ok) {
-                setMessage('Especialidade criada com sucesso!')
-            } else {
-                const errorData = await response.json()
-                setMessage(`Erro: ${errorData.message}`)
-            }
-        } catch (error) {
-            setMessage(`Erro de conexão: ${error.message}`)
-        }
-        
-    }
-    const getEspecialidades = async () => {
-        try {
-            const response = await fetch('http://localhost:8080/api/especialidade', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-
-            if (response.ok) {
-                const data = await response.json()
-                setEspecialidades(data)
-            } else {
-                const errorData = await response.json()
-                setError(`Erro: ${errorData.message}`)
-            }
-        } catch (error) {
-            setError(`Erro de conexão: ${error.message}`)
-        }
-    }
-    const deleteEspec = async () => {
-        try {
-            const response = await fetch(`http://localhost:8080/api/especialidade/${especAberta.id}`, {
-                method: 'DELETE',
-            })
-
-            if (response.ok) {
-                setEspecialidades((prev) =>
-                    prev.filter((esp) => esp.id !== especAberta.id)
-                )
-                fecharEspec()
-            } else {
-                const errorData = await response.json();
-                setError(`Erro ao deletar: ${errorData.message}`)
-            }
-        } catch (error) {
-            setError(`Erro de conexão: ${error.message}`)
-        }
-    }
 
     useEffect(() => {
-        getEspecialidades()
+        const fetchData = async () => {
+            if (config.simularDados) {
+                setReqstEspecialidades(simuGetEspecialidades)
+
+                setEspecialidades(simuGetEspecialidades.content)
+            } else {
+                try {
+                    const especialidadesData = await getEspecialidades()
+
+                    setReqstEspecialidades(especialidadesData)
+
+                    setEspecialidades(especialidadesData.content)
+                } catch (error) {
+                    setError(error.message)
+                }
+            }
+        }
+
+        fetchData()
     }, [])
 
     return(
@@ -471,7 +426,9 @@ function Especialidades() {
                         </div>
                         <div id='campoDescricaoConfigEspec'>
                             <label>Descrição:</label>
-                            <input type="text" />
+                            <input type="text" id='descricaoConfigEspec' 
+                                value={especAberta.descricao}
+                                onChange={(e) => mudarDescricaoPrevEspec(e.target.value)}/>
                         </div>
                         <div id='contCamposCoresEspecEdit'>
                             <div id='campoCor1ConfigEspec' className='campoConfigEspec'>
@@ -554,7 +511,10 @@ function Especialidades() {
                     <div id='contFimAcao'>
                     <button onClick={handleCancel}>cancelar</button>
                     <button onClick={handleSalvar}>salvar</button>
-                    <button onClick={handleDeletar}>deletar</button>
+                    {
+                        especAberta.id == "nova" ? '' :
+                        <button onClick={handleDeletar}>deletar</button>
+                    }
                     </div>
                 </section>
             }

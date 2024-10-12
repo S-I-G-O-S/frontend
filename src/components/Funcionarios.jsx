@@ -1,78 +1,32 @@
+import config from '../services/devConfig.js'
+// Dados simulados
+import simuGetEspecialidades from '../dadosSimulados/especialidades.js'
+import simuGetFuncionarios from '../dadosSimulados/funcionarios.js'
+
+// Funções de requisições
+import {getFuncionarios} from '../services/funcionariosAPI.js'
+import {getEspecialidades} from '../services/especialidadesAPI.js'
+
+// Estilização
 import '../styles/funcionarios.css'
-import Nav from './public/Nav'
-import Header from './public/Header'
-import Options from '../assets/options.png'
 import Edit from '../assets/edit-text.png'
 import Down from '../assets/dark/down.png' 
 import Up from '../assets/dark/up.png'
-import { Link, useNavigate } from 'react-router-dom';
+
+import Nav from './public/Nav'
+import Header from './public/Header'
+import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 
 // TODO O carregamento das especialidades será diferente do "funcionarios"
 // TODO tratamento para evitar espaços no começo e no final dos nomes
 
 //https://community.revelo.com.br/react-query-um-guia-pratico/
-
-/* ****************************************************************** 
-/* ****************************************************************** */
 function Funcionarios() {
-    const [nome, setNome] = useState()
-    const [reqstFuncionarios, setReqstFuncionarios] = useState([])
-    const [reqstEspecialidades, setReqstEspecialidades] = useState([])
-    // const [funcionarios, setFuncionarios] = useState(reqstFuncionarios.content)
-    const [funcionarios, setFuncionarios] = useState([
-        {
-            id: "1",
-            nome: "João Almeida da Silva",
-            primeiroNome: "João",
-            ultimoNome: "Silva",
-            cpf: "99999999999",
-            email: "bR9kS@example.com",
-            celular: "(13) 99999-9999",
-            cargo: "tecnico",
-            isDisponivel: true,
-            isAtivo: true,
-            ultimaAtividade: "2022-01-01",
-            endereco: [
-                {
-                    cep: "99999-999",
-                    logradouro: "Rua dos Bobos",
-                    numero: "0",
-                    bairro: "Centro",
-                    cidade: "São Paulo",
-                    uf: "SP",
-                    complemento: "apto. 123",
-                }
-            ],
-            especialidades: [1],
-        },
-    ])
-    //const [especialidades, setEspecialidades] = useState(reqstEspecialidades.content)
-    const [especialidades, setEspecialidades] = useState([
-        {
-            "id": 1,
-            "nome": "Especialidade 1",
-            "descricao": "descrição 1",
-            "cor": "#b80a0a/#ffffff",
-            "servicos": [
-                {
-                    "id": 1,
-                    "nome": "Concerto de portão (marca famosa 1)",
-                    "descricao": "Imagine uma descrição boa deste serviço aqui"
-                },
-                {
-                    "id": 2,
-                    "nome": "Concerto de portão (marca famosa 2)",
-                    "descricao": "Imagine uma descrição boa deste serviço aqui"
-                },
-                {
-                    "id": 3,
-                    "nome": "Concerto de portão (marca famosa 3)",
-                    "descricao": "Imagine uma descrição boa deste serviço aqui"
-                }
-            ]
-        },
-    ])
+    const [reqstFuncionarios, setReqstFuncionarios] = useState()
+    const [reqstEspecialidades, setReqstEspecialidades] = useState()
+    const [funcionarios, setFuncionarios] = useState([])
+    const [especialidades, setEspecialidades] = useState([])
     const [error, setError] = useState()
 
     const navigate = useNavigate()
@@ -112,50 +66,33 @@ function Funcionarios() {
             img.src = Down
         }
     }
-    const getFuncionarios = async () => {
-        try {
-            const response = await fetch('http://localhost:8080/api/funcionarios', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-
-            if (response.ok) {
-                const data = await response.json()
-                setReqstFuncionarios(data)
-            } else {
-                const errorData = await response.json()
-                setError(`Erro: ${errorData.message}`)
-            }
-        } catch (error) {
-            setError(`Erro de conexão: ${error.message}`)
-        }
-    }
-    const getEspecialidades = async () => {
-        try {
-            const response = await fetch('http://localhost:8080/api/especialidades', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-
-            if (response.ok) {
-                const data = await response.json()
-                setReqstEspecialidades(data)
-            } else {
-                const errorData = await response.json()
-                setError(`Erro: ${errorData.message}`)
-            }
-        } catch (error) {
-            setError(`Erro de conexão: ${error.message}`)
-        }
-    }
     useEffect(() => {
-        // getFuncionarios()
-        // getEspecialidades()
+        const fetchData = async () => {
+            if (config.simularDados) {
+                setReqstEspecialidades(simuGetEspecialidades)
+                setReqstFuncionarios(simuGetFuncionarios)
+
+                setFuncionarios(simuGetFuncionarios.content)
+                setEspecialidades(simuGetEspecialidades.content)
+            } else {
+                try {
+                    const funcionariosData = await getFuncionarios()
+                    const especialidadesData = await getEspecialidades()
+
+                    setReqstFuncionarios(funcionariosData)
+                    setReqstEspecialidades(especialidadesData)
+
+                    setFuncionarios(funcionariosData.content)
+                    setEspecialidades(especialidadesData.content)
+                } catch (error) {
+                    setError(error.message)
+                }
+            }
+        }
+
+        fetchData()
     }, [])
+
     return (
         <div id='pageFuncionarios'>
         <Header titulo={"Funcionários"}></Header>
