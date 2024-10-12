@@ -16,13 +16,33 @@ function Funcionario() {
     const resultado = `${primeiroNome} ${ultimoNome}`
     
     const location = useLocation();
-    const searchParams = new URLSearchParams(location.search);
-    let idFuncionario = searchParams.get('id');
+    const searchParams = new URLSearchParams(location.search)
+    let idFuncionario = searchParams?.get('id') ?? null
     console.log(idFuncionario)
 
     const navigate = useNavigate()
     const goToFuncionarios = () => {
         navigate(`/funcionarios`)
+    }
+    const getEspecialidades = async () => {
+        try {
+            const response = await fetch(`http://localhost:8080/api/funcionarios${idFuncionario}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+
+            if (response.ok) {
+                const data = await response.json()
+                setReqstEspecialidades(data)
+            } else {
+                const errorData = await response.json()
+                setError(`Erro: ${errorData.message}`)
+            }
+        } catch (error) {
+            setError(`Erro de conexão: ${error.message}`)
+        }
     }
     return(
         <div id="pageFuncionario">

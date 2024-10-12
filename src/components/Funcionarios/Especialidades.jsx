@@ -310,7 +310,7 @@ function Especialidades() {
     }
     const putEditarEspec = async () => {
         try {
-            const response = await fetch(`/api/especialidade/${especAberta.id}`, {
+            const response = await fetch(`http://localhost:8080/api/especialidade/${especAberta.id}`, {
             method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -336,7 +336,7 @@ function Especialidades() {
     const postNovoEspec = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('/api/especialidade', {
+            const response = await fetch('http://localhost:8080/api/especialidade', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -361,7 +361,7 @@ function Especialidades() {
     }
     const getEspecialidades = async () => {
         try {
-            const response = await fetch('/api/especialidade', {
+            const response = await fetch('http://localhost:8080/api/especialidade', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -381,8 +381,8 @@ function Especialidades() {
     }
     const deleteEspec = async () => {
         try {
-            const response = await fetch(`/api/especialidade/${especAberta.id}`, {
-            method: 'DELETE',
+            const response = await fetch(`http://localhost:8080/api/especialidade/${especAberta.id}`, {
+                method: 'DELETE',
             })
 
             if (response.ok) {
