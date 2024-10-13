@@ -1,29 +1,75 @@
+import config from '../services/devConfig.js'
+// Dados simulados
+import simuGetOrdens from '../dadosSimulados/ordens.js'
+// Funções de requisições
+import {getFuncionarios} from '../services/funcionariosAPI.js'
+
 import Header from "./public/Header"
 import Nav from "./public/Nav"
 import '../styles/ordens.css'
 import View from "../assets/view.png"
 import Hide from "../assets/hide.png"
+import { useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react"
 
+// TODO Paginação devido a alta qtd de ordens
+// TODO Criação e Edição de Ordens por ordem de redirecionamento
 function Ordens() {
+    const [reqstOrdens, setReqstOrdens] = useState()
+    const [ordens, setOrdens] = useState()
+    const [ordemAberta, setOrdemAberta] = useState(null)
+    const navigate = useNavigate()
+
     function changeViewDetalhes(idOrdem) {
         const btt = document.getElementById('viewOrdem' + idOrdem)
-        if (btt.className == "view") {
+
+        if (!ordemAberta) {
             btt.src = Hide
             btt.className = 'hide'
+            if(config.simularDados) {
+                setOrdemAberta(ordens.find(ordem => ordem.id === idOrdem))
+            } else {
+                // await getOrdemPorID(ordemAberta.id)
+            }
         } else {
             btt.src = View
             btt.className = 'view'
+            setOrdemAberta(null)
         }
     }
-    // TODO Criar janela para ver mais detalhes de uma ordem
-    // TODO Criar janela para configurar serviços
+    useEffect(() => {
+        const fetchData = async () => {
+            if (config.simularDados) {
+                setReqstOrdens(simuGetOrdens)
+
+                setOrdens(simuGetOrdens?.content)
+            } else {
+                try {
+                    const especialidadesData = await getEspecialidades()
+
+                    setReqstEspecialidades(especialidadesData)
+
+                    setEspecialidades(especialidadesData.content)
+                } catch (error) {
+                    setError(error.message)
+                }
+            }
+        }
+
+        fetchData()
+    }, [])
+
     return (
         <div id="pageOrdens">
-        <Header titulo={"Ordens"}></Header>
+        <Header titulo={"Histórico de Ordens"}></Header>
         <Nav></Nav>
         <main id="mainOrdens">
             <section>
-                <h2>Histórico de ordens de serviço</h2>
+                <div>
+                    <button>
+                        Nova Ordem
+                    </button>
+                </div>
                 <div id="containerListOrdens">
                     <div id="cabecalho">
                         <div>id</div>
@@ -34,30 +80,59 @@ function Ordens() {
                         <div>detalhes</div>
                     </div>
                     <div id="listOrdens">
-                        <div className="ordem">
-                            <div className="ordemId">000001</div>
-                            <div className="ordemDtAbertura">9:00 - 21/09/2024</div>
-                            <div className="ordemCliente">A.R. Vidraçarias</div>
-                            <div className="ordemSituacao">Aguardando pagamento</div>
-                            <div className="ordemUltAtt">11:00 - 22/09/2024</div>
-                            <div onClick={() => changeViewDetalhes(1)} className="ordemDetalhes barraTabela">
-                                <img id="viewOrdem1" className="view" src={View} alt="" />
+                    {
+                        ordens?.map(ordem => (
+                            <div
+                                id={`ordem${ordem.id}`}
+                                className="ordem"
+                                key={ordem.id}>
+                                <div className="ordemId">
+                                    {ordem.id}
+                                </div>
+                                <div className="ordemDtAbertura">
+                                    {ordem.dt_Abertura}
+                                </div>
+                                <div className="ordemCliente">
+                                    {ordem.cliente.nome}
+                                </div>
+                                <div className="ordemSituacao">
+                                    {ordem.situacao}
+                                </div>
+                                <div className="ordemUltAtt">
+                                {
+                                    ordem.dt_Atendimento ? ordem.dt_Atendimento : ordem.dt_Abertura
+                                }
+                                </div>
+                                <div
+                                    onClick={() => changeViewDetalhes(ordem.id)}
+                                    className="ordemDetalhes barraTabela">
+                                    <img
+                                        id={`viewOrdem${ordem.id}`}
+                                        className="view"
+                                        src={View} alt="" />
+                                </div>
                             </div>
-                        </div>
-                        <div className="ordem">
-                            <div className="ordemId">000002</div>
-                            <div className="ordemDtAbertura">15:00 - 21/09/2024</div>
-                            <div className="ordemCliente">Teste de cliente com nome grande</div>
-                            <div className="ordemSituacao">Em atendimento</div>
-                            <div className="ordemUltAtt">15:01 - 21/09/2024</div>
-                            <div onClick={() => changeViewDetalhes(2)} className="ordemDetalhes barraTabela">
-                                <img id="viewOrdem2" className="view" src={View} alt=""/>
-                            </div>
-                        </div>
+                        ))
+                    }
                     </div>
                 </div>
             </section>
         </main>
+        {
+            ordemAberta &&
+            <div className='shadowBG'>
+            <section>
+                <h2>Ordem Nº{ordemAberta.id}</h2>
+                <p>{ordemAberta.cliente.nome}</p>
+                <p>{ordemAberta.cliente.endereco}</p>
+                <p>{ordemAberta.funcionario.nome}</p>
+                <p></p>
+                <div id='acoesOrdemAberta'>
+                    <button onClick={() => changeViewDetalhes(ordemAberta.id)}>cancelar</button>
+                </div>
+            </section>
+            </div>
+        }
         </div>
     )
 }

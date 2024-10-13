@@ -17,7 +17,6 @@ import { useEffect, useState } from 'react'
 // import { cepAPI } from '../../services/cepAPI'
 // import { useQuery } from ‘react-query’
 
-// TODO Os funcionarios tem CPF
 function Funcionario() {
     // const nomeCompleto = "Leonardo Martinez Nunes Barbosa Silva Almeida";
     // const nomes = nomeCompleto.split(" "); // separa a string em um array
@@ -26,7 +25,10 @@ function Funcionario() {
     // const resultado = `${primeiroNome} ${ultimoNome}`
     
     const [error, setError] = useState()
-    
+    const [funcionario, setFuncionario] = useState()
+    const [especialidades, setEspecialidades] = useState()
+    const [reqstEspecialidades, setReqstEspecialidades] = useState()
+
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search)
     let idFuncionario = searchParams?.get('id') ?? null
@@ -40,9 +42,10 @@ function Funcionario() {
         const fetchData = async () => {
             if (config.simularDados) {
                 setReqstEspecialidades(simuGetEspecialidades)
-                setReqstFuncionarios(simuGetFuncionarios)
 
-                setFuncionarios(simuGetFuncionarios.content)
+                setFuncionario(
+                    simuGetFuncionarios.content.find(funcionario => funcionario.id === idFuncionario)
+                )
                 setEspecialidades(simuGetEspecialidades.content)
             } else {
                 try {

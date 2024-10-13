@@ -23,7 +23,32 @@ const simuGetFuncionarios = {
                     complemento: "apto. 123",
                 }
             ],
-            especialidades: [1],
+            especialidades: [1, 2 , 3],
+        },
+        {
+            id: "2",
+            nome: 'Leonardo Martinez Almeida',
+            primeiroNome: "Leonardo",
+            ultimoNome: "Almeida",
+            cpf: "99999999999",
+            email: "bR9kS@example.com",
+            celular: "(13) 99999-9999",
+            cargo: "tecnico",
+            isDisponivel: true,
+            isAtivo: true,
+            ultimaAtividade: "2022-01-01",
+            endereco: [
+                {
+                    cep: "99999-999",
+                    logradouro: "Rua dos Bobos",
+                    numero: "0",
+                    bairro: "Centro",
+                    cidade: "São Paulo",
+                    uf: "SP",
+                    complemento: "apto. 123",
+                }
+            ],
+            especialidades: [2 , 3],
         },
     ]
 }
