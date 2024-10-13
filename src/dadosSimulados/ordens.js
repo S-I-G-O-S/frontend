@@ -1,4 +1,4 @@
-const simuGetOrdens = {
+const simuOrdens = {
     content: [
         {
             id: 1,
@@ -23,4 +23,4 @@ const simuGetOrdens = {
         },
     ]
 }
-export default simuGetOrdens
+export default simuOrdens

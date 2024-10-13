@@ -21,7 +21,7 @@ export const getFuncionarios = async () => {
 }
 export const getFuncionariosPorID = async (id) => {
     try {
-        const response = await fetch(`${config.url}/api/funcionarios${id}`, {
+        const response = await fetch(`/api/funcionarios${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

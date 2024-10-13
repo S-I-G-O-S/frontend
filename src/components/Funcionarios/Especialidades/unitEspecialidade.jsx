@@ -12,7 +12,7 @@ UnitEspec.propTypes = {
         nome: PropTypes.string.isRequired,
         descricao: PropTypes.string.isRequired,
         cor: PropTypes.string.isRequired,
-        servicos: PropTypes.arrayOf(PropTypes.object).isRequired
+        // servicos: PropTypes.arrayOf(PropTypes.object).isRequired
     }).isRequired,
     onClick: PropTypes.func
 }

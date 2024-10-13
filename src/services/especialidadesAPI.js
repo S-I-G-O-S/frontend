@@ -2,7 +2,7 @@ import config from '../services/devConfig'
 
 export const getEspecialidades = async () => {
     try {
-        const response = await fetch(`${config.url}/api/especialidades`, {
+        const response = await fetch(`/api/especialidades`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -21,7 +21,7 @@ export const getEspecialidades = async () => {
 }
 export const deleteEspec = async (id) => {
     try {
-        const response = await fetch(`${config.url}/api/especialidade/${id}`, {
+        const response = await fetch(`api/especialidade/${id}`, {
             method: 'DELETE',
         });
 
@@ -37,7 +37,7 @@ export const deleteEspec = async (id) => {
 };
 export const postEspecialidade = async (espec) => {
     try {
-        const response = await fetch(`${config.url}/api/especialidade`, {
+        const response = await fetch(`/api/especialidade`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ export const postEspecialidade = async (espec) => {
 };
 export const putEspecialidade = async (espec) => {
     try {
-        const response = await fetch(`${config.url}/api/especialidade/${espec.id}`, {
+        const response = await fetch(`/api/especialidade/${espec.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

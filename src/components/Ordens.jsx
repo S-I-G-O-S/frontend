@@ -18,6 +18,7 @@ function Ordens() {
     const [reqstOrdens, setReqstOrdens] = useState()
     const [ordens, setOrdens] = useState()
     const [ordemAberta, setOrdemAberta] = useState(null)
+    const [error, setError] = useState()
     const navigate = useNavigate()
 
     function changeViewDetalhes(idOrdem) {
@@ -44,15 +45,15 @@ function Ordens() {
 
                 setOrdens(simuGetOrdens?.content)
             } else {
-                try {
-                    const especialidadesData = await getEspecialidades()
+                // try {
+                //     const especialidadesData = await getEspecialidades()
 
-                    setReqstEspecialidades(especialidadesData)
+                //     setReqstEspecialidades(especialidadesData)
 
-                    setEspecialidades(especialidadesData.content)
-                } catch (error) {
-                    setError(error.message)
-                }
+                //     setEspecialidades(especialidadesData.content)
+                // } catch (error) {
+                //     setError(error.message)
+                // }
             }
         }
 

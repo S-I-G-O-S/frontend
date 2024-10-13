@@ -397,7 +397,9 @@ function Especialidades() {
                 </div>
                 <div id='contListEspecServ' className={layoutEspecServicos}>
                     {   layoutEspecServicos == "layoutEspecs" ?
-                        especialidades.map(espec => 
+                        especialidades
+                        .filter(espec => espec.ativo == true)
+                        .map(espec => 
                             <UnitEspec key={espec.id} espec={espec} onClick={() => abrirEspec(espec.id)}></UnitEspec>
                         ) :
                         servicos.map(serv => 
