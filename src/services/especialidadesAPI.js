@@ -2,7 +2,7 @@ import config from '../services/devConfig'
 
 export const getEspecialidades = async () => {
     try {
-        const response = await fetch(`/api/especialidades`, {
+        const response = await fetch(`${config.url}/api/especialidades`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
