@@ -3,7 +3,8 @@ import config from '../../services/devConfig'
 import simuGetEspecialidades from '../../dadosSimulados/especialidades'
 
 // Funções de requisições
-import {getEspecialidades, deleteEspec, postEspecialidade, putEspecialidade} from '../../services/especialidadesAPI'
+import { getEspecialidades, postEspecialidade, deleteEspec, putEspecialidade } from '../../services/especialidadesAPI'
+import { getServicos, postServicos, putServicos, deleteServicos } from '../../services/servicosAPi'
 
 import '../../styles/especialidades.css'
 
@@ -15,106 +16,6 @@ import { useEffect, useState } from 'react'
 // https://www.delftstack.com/pt/howto/react/for-loop-in-react/
 
 function Especialidades() {
-    // let reqstEspecialidades = [
-    //     {
-    //         "id": 1,
-    //         "nome": "Especialidade 1",
-    //         "descricao": "descrição 1",
-    //         "cor": "#b80a0a/#ffffff",
-    //         "servicos": [
-    //             {
-    //                 "id": 1,
-    //                 "nome": "Concerto de portão (marca famosa 1)",
-    //                 "descricao": "Imagine uma descrição boa deste serviço aqui"
-    //             },
-    //             {
-    //                 "id": 2,
-    //                 "nome": "Concerto de portão (marca famosa 2)",
-    //                 "descricao": "Imagine uma descrição boa deste serviço aqui"
-    //             },
-    //             {
-    //                 "id": 3,
-    //                 "nome": "Concerto de portão (marca famosa 3)",
-    //                 "descricao": "Imagine uma descrição boa deste serviço aqui"
-    //             }
-    //         ]
-    //     },
-    //     {
-    //         "id": 2,
-    //         "nome": "Especialidade 2",
-    //         "descricao": "descrição 2",
-    //         "cor": "#170099/#ffffff",
-    //         "servicos": [
-    //             {
-    //                 "id": 1,
-    //                 "nome": "Concerto de portão (marca famosa 1)",
-    //                 "descricao": "Imagine uma descrição boa deste serviço aqui"
-    //             },
-    //             {
-    //                 "id": 2,
-    //                 "nome": "Concerto de portão (marca famosa 2)",
-    //                 "descricao": "Imagine uma descrição boa deste serviço aqui"
-    //             },
-    //             {
-    //                 "id": 3,
-    //                 "nome": "Concerto de portão (marca famosa 3)",
-    //                 "descricao": "Imagine uma descrição boa deste serviço aqui"
-    //             }
-    //         ]
-    //     }
-    // ]
-    // let reqstServicos = [
-    //     {
-    //         "id": 1,
-    //         "nome": "Concerto de portão (marca famosa 1)",
-    //         "descricao": "Imagine uma descrição boa deste serviço aqui"
-    //     },
-    //     {
-    //         "id": 2,
-    //         "nome": "Concerto de portão (marca famosa 2)",
-    //         "descricao": "Imagine uma descrição boa deste serviço aqui"
-    //     },
-    //     {
-    //         "id": 3,
-    //         "nome": "Concerto de portão (marca famosa 3)",
-    //         "descricao": "Imagine uma descrição boa deste serviço aqui"
-    //     },
-    //     {
-    //         "id": 4,
-    //         "nome": "Concerto de portão (marca famosa 4)",
-    //         "descricao": "Imagine uma descrição boa deste serviço aqui"
-    //     },
-    //     {
-    //         "id": 5,
-    //         "nome": "Concerto de portão (marca famosa 1)",
-    //         "descricao": "Imagine uma descrição boa deste serviço aqui"
-    //     },
-    //     {
-    //         "id": 6,
-    //         "nome": "Concerto de portão (marca famosa 2)",
-    //         "descricao": "Imagine uma descrição boa deste serviço aqui"
-    //     },
-    //     {
-    //         "id": 7,
-    //         "nome": "Concerto de portão (marca famosa 3)",
-    //         "descricao": "Imagine uma descrição boa deste serviço aqui"
-    //     },
-    //     {
-    //         "id": 8,
-    //         "nome": "Concerto de portão (marca famosa 4)",
-    //         "descricao": "Imagine uma descrição boa deste serviço aqui"
-    //     },
-    //     {
-    //         "id": 9,
-    //         "nome": "Concerto de portão (marca famosa 1)",
-    //         "descricao": "Imagine uma descrição boa deste serviço aqui"
-    //     },
-    //     {
-    //         "id": 10,
-    //         "nome": "Concerto de portão (marca famosa 2)",
-    //         "descricao": "Imagine uma descrição boa deste serviço aqui"
-    //     }
-    // ]
     const [reqstEspecialidades, setReqstEspecialidades] = useState([])
     const [reqstServicos, setReqstServicos] = useState([])
     const [especialidades, setEspecialidades] = useState(reqstEspecialidades)
@@ -271,7 +172,7 @@ function Especialidades() {
         } else {
             const result = deleteEspec(especAberta.id);
             if (result.success) {
-                setEspecialidades((prev) => prev.filter((esp) => esp.id !== especAberta.id));
+                setEspecialidades((prev) => prev.filter((esp) => esp.id !== especAberta.id))
             } else {
                 console.error(result.error);
             }
@@ -335,27 +236,33 @@ function Especialidades() {
         setEspecAberta(null)
         setPrevEspec(null)
     }
-
-    useEffect(() => {
-        const fetchData = async () => {
-            if (config.simularDados) {
-                setReqstEspecialidades(simuGetEspecialidades)
-
-                setEspecialidades(simuGetEspecialidades.content)
-            } else {
-                try {
-                    const especialidadesData = await getEspecialidades()
-
-                    setReqstEspecialidades(especialidadesData)
-
-                    setEspecialidades(especialidadesData.content)
-                } catch (error) {
-                    setError(error.message)
-                }
-            }
+    const fetchEspecialidades = async () => {
+        try {
+            const data = await getEspecialidades()
+            setEspecialidades(data)
+            setReqstEspecialidades(data.content)
+        } catch (error) {
+            console.error(error.message)
         }
+    }
+    const fetchServicos = async () => {
+        try {
+            const data = await getServicos()
+            setReqstServicos(data)
+            setServicos(data.content)
+        } catch (error) {
+            console.error(error.message)
+        }
+    }
+    useEffect(() => {
+        if (config.simularDados) {
+            setReqstEspecialidades(simuGetEspecialidades)
 
-        fetchData()
+            setEspecialidades(simuGetEspecialidades.content)
+        } else {
+            fetchEspecialidades()
+            fetchServicos()
+        }
     }, [])
 
     return(

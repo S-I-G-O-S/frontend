@@ -1,9 +1,9 @@
 import axios from 'axios'
 import config from '../services/devConfig'
 
-export const getFuncionario = async () => {
+export const getServicos = async () => {
     try {
-        const response = await axios.get(`/api/especialidades`, {
+        const response = await axios.get(`/api/servicos`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -13,21 +13,10 @@ export const getFuncionario = async () => {
         throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
     }
 }
-export const getFuncionarioPorID = async (id) => {
+
+export const deleteServicos = async (id) => {
     try {
-        const response = await axios.get(`/api/especialidades/${id}`, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-        return response.data
-    } catch (error) {
-        throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
-    }
-}
-export const deleteFuncionario = async (id) => {
-    try {
-        await axios.delete(`api/funcionarios/${id}`)
+        await axios.delete(`api/servicos/${id}`)
         return { success: true }
     } catch (error) {
         return {
@@ -37,12 +26,12 @@ export const deleteFuncionario = async (id) => {
     }
 }
 
-export const postFuncionario = async (funcionario) => {
+export const postServicos = async (servico) => {
     try {
-        const response = await axios.post(`/api/funcionarios`, {
-            nome: espec.nome,
-            descricao: espec.descricao,
-            cor: espec.cor,
+        const response = await axios.post(`/api/servicos`, {
+            // TODO Adaptar para add novo servico
+            nome: servico.nome,
+            descricao: servico.descricao,
         })
         return { success: true, data: response.data }
     } catch (error) {
@@ -53,9 +42,9 @@ export const postFuncionario = async (funcionario) => {
     }
 }
 
-export const putFuncionario = async (espec) => {
+export const putServicos = async (servico) => {
     try {
-        const response = await axios.put(`/api/funcionarios/${espec.id}`, espec)
+        const response = await axios.put(`/api/servicos/${servico.id}`, servico)
         return { success: true, data: response.data }
     } catch (error) {
         return {

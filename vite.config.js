@@ -9,7 +9,7 @@ export default defineConfig({
       '/api': {
         target: 'https://total-wil-mette-sigos-6a0bb541.koyeb.app',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
+        //rewrite: (path) => path.replace(/^\/api/, ''),
       },
     },
   },
