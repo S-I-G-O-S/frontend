@@ -108,7 +108,6 @@
                 }
             }
             #contListEspecServ {
-                grid-area: sec2;
                 display: flex;
                 column-gap: 0.3rem;
                 row-gap: 0.3rem;
@@ -117,10 +116,16 @@
                 border-radius: 0 0 0.3rem 0.3rem;
 
                 background-color: var(--salmao1);
+                .espec {
+                    font-weight: 500;
+                }
             }
             .layoutEspecs {
                 flex-wrap: wrap;
                 justify-content: center;
+                .espec {
+                    font-weight: 600;
+                }
             }
             .layoutServicos {
                 flex-direction: column;

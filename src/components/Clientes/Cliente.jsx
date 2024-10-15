@@ -4,6 +4,8 @@ import Header from '../public/Header'
 import Down from '../../assets/light/down.png' 
 import Up from '../../assets/light/up.png'
 
+
+// TODO POST Cliente e Contatos tudo junto. PUT Cliente enviar PUT Contatos separados
 function Cliente() {
     const verContato = (idContato) => {
         const contato = document.getElementById(`contato${idContato}`)

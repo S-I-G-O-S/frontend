@@ -3,7 +3,7 @@ import config from '../services/devConfig'
 
 export const getServicos = async () => {
     try {
-        const response = await axios.get(`/api/servicos`, {
+        const response = await axios.get(`${config.url}/api/servicos`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -16,7 +16,7 @@ export const getServicos = async () => {
 
 export const deleteServicos = async (id) => {
     try {
-        await axios.delete(`api/servicos/${id}`)
+        await axios.delete(`${config.url}/api/servicos/${id}`)
         return { success: true }
     } catch (error) {
         return {
@@ -28,7 +28,7 @@ export const deleteServicos = async (id) => {
 
 export const postServicos = async (servico) => {
     try {
-        const response = await axios.post(`/api/servicos`, {
+        const response = await axios.post(`${config.url}/api/servicos`, {
             // TODO Adaptar para add novo servico
             nome: servico.nome,
             descricao: servico.descricao,
@@ -44,7 +44,7 @@ export const postServicos = async (servico) => {
 
 export const putServicos = async (servico) => {
     try {
-        const response = await axios.put(`/api/servicos/${servico.id}`, servico)
+        const response = await axios.put(`${config.url}/api/servicos/${servico.id}`, servico)
         return { success: true, data: response.data }
     } catch (error) {
         return {

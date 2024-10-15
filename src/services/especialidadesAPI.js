@@ -3,7 +3,7 @@ import config from '../services/devConfig'
 
 export const getEspecialidades = async () => {
     try {
-        const response = await axios.get(`/api/especialidades`, {
+        const response = await axios.get(`${config.url}/api/especialidades`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -13,10 +13,9 @@ export const getEspecialidades = async () => {
         throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
     }
 }
-
 export const deleteEspec = async (id) => {
     try {
-        await axios.delete(`api/especialidade/${id}`)
+        await axios.delete(`${config.url}/api/especialidade/${id}`)
         return { success: true }
     } catch (error) {
         return {
@@ -28,7 +27,7 @@ export const deleteEspec = async (id) => {
 
 export const postEspecialidade = async (espec) => {
     try {
-        const response = await axios.post(`/api/especialidade`, {
+        const response = await axios.post(`${config.url}/api/especialidade`, {
             nome: espec.nome,
             descricao: espec.descricao,
             cor: espec.cor,
@@ -44,7 +43,7 @@ export const postEspecialidade = async (espec) => {
 
 export const putEspecialidade = async (espec) => {
     try {
-        const response = await axios.put(`/api/especialidade/${espec.id}`, espec)
+        const response = await axios.put(`${config.url}/api/especialidade/${espec.id}`, espec)
         return { success: true, data: response.data }
     } catch (error) {
         return {

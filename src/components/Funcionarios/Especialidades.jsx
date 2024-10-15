@@ -184,7 +184,6 @@ function Especialidades() {
     }
     const abrirEspec = (idEspec) => {
         console.log("especialidade do id " + idEspec +" foi aberta")
-        
         if (especAberta) {
             if(especAberta.id == idEspec) {
                 return
@@ -214,6 +213,7 @@ function Especialidades() {
         } else {
         //  Especialidade existente
             let especSelecionada = especialidades.find(espec => espec.id === idEspec)
+            console.warn(especSelecionada)
             if (!especSelecionada) {
                 setError('Erro ao abrir especialidade.')
                 return;
@@ -239,8 +239,9 @@ function Especialidades() {
     const fetchEspecialidades = async () => {
         try {
             const data = await getEspecialidades()
-            setEspecialidades(data)
-            setReqstEspecialidades(data.content)
+            setReqstEspecialidades(data)
+            setEspecialidades(data.content)
+            console.warn(data)
         } catch (error) {
             console.error(error.message)
         }
@@ -264,7 +265,6 @@ function Especialidades() {
             fetchServicos()
         }
     }, [])
-
     return(
         <div id='pageEspecialidades'>
         <Header titulo={"Especialidades & Serviços"}></Header>
@@ -303,9 +303,10 @@ function Especialidades() {
                     </div>
                 </div>
                 <div id='contListEspecServ' className={layoutEspecServicos}>
-                    {   layoutEspecServicos == "layoutEspecs" ?
+                    {   
+                        layoutEspecServicos == "layoutEspecs" ?
                         especialidades
-                        .filter(espec => espec.ativo == true)
+                        // .filter(espec => espec.ativo == true)
                         .map(espec => 
                             <UnitEspec key={espec.id} espec={espec} onClick={() => abrirEspec(espec.id)}></UnitEspec>
                         ) :
@@ -390,9 +391,6 @@ function Especialidades() {
                             <datalist id='dtListServicos'>
                                 {
                                     servicos
-                                        .filter(servico => 
-                                            !especAberta.servicos.some(servEspec => servEspec.id === servico.id)
-                                        )
                                         .map(servico => (
                                             <option key={servico.id} value={servico.nome}>
                                                 {servico.nome}

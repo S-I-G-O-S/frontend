@@ -1,9 +1,9 @@
 import axios from 'axios'
 import config from '../services/devConfig'
 
-export const getFuncionario = async () => {
+export const getFuncionarios = async () => {
     try {
-        const response = await axios.get(`/api/especialidades`, {
+        const response = await axios.get(`${config.url}/api/funcionarios`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -15,7 +15,7 @@ export const getFuncionario = async () => {
 }
 export const getFuncionarioPorID = async (id) => {
     try {
-        const response = await axios.get(`/api/especialidades/${id}`, {
+        const response = await axios.get(`${config.url}/api/funcionarios/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -27,7 +27,7 @@ export const getFuncionarioPorID = async (id) => {
 }
 export const deleteFuncionario = async (id) => {
     try {
-        await axios.delete(`api/funcionarios/${id}`)
+        await axios.delete(`${config.url}/api/funcionarios/${id}`)
         return { success: true }
     } catch (error) {
         return {
@@ -38,11 +38,35 @@ export const deleteFuncionario = async (id) => {
 }
 
 export const postFuncionario = async (funcionario) => {
+    /*
+    {
+        "nome": "string",
+        "primeiro": "string",
+        "ultimo": "string",
+        "cpf": "string",
+        "email": "string",
+        "celular": "string",
+        "senha": "string",
+        "cargo": "string",
+        "endereco": {
+            "cep": "string",
+            "logradouro": "string",
+            "numero": "string",
+            "bairro": "string",
+            "cidade": "string",
+            "uf": "string",
+            "complemento": "string"
+        },
+        "especialidades": [
+            0
+        ]
+    }
+    */
     try {
-        const response = await axios.post(`/api/funcionarios`, {
-            nome: espec.nome,
-            descricao: espec.descricao,
-            cor: espec.cor,
+        const response = await axios.post(`${config.url}/api/funcionarios`, {
+            nome: funcionario.nome,
+            descricao: funcionario.descricao,
+            cor: funcionario.cor,
         })
         return { success: true, data: response.data }
     } catch (error) {
@@ -55,7 +79,7 @@ export const postFuncionario = async (funcionario) => {
 
 export const putFuncionario = async (espec) => {
     try {
-        const response = await axios.put(`/api/funcionarios/${espec.id}`, espec)
+        const response = await axios.put(`${config.url}/api/funcionarios/${espec.id}`, espec)
         return { success: true, data: response.data }
     } catch (error) {
         return {

@@ -25,9 +25,9 @@ import { useEffect, useState } from 'react'
 function Funcionarios() {
     const [reqstFuncionarios, setReqstFuncionarios] = useState()
     const [reqstEspecialidades, setReqstEspecialidades] = useState()
-    const [funcionarios, setFuncionarios] = useState([])
-    const [especialidades, setEspecialidades] = useState([])
-    const [error, setError] = useState()
+    const [funcionarios, setFuncionarios] = useState()
+    const [especialidades, setEspecialidades] = useState()
+    const [erro, setErro] = useState()
 
     const navigate = useNavigate()
     const goToEspecialidades = () => {
@@ -66,31 +66,41 @@ function Funcionarios() {
             img.src = Down
         }
     }
-    useEffect(() => {
-        const fetchData = async () => {
-            if (config.simularDados) {
-                setReqstEspecialidades(simuGetEspecialidades)
-                setReqstFuncionarios(simuGetFuncionarios)
-
-                setFuncionarios(simuGetFuncionarios.content)
-                setEspecialidades(simuGetEspecialidades.content)
-            } else {
-                try {
-                    const funcionariosData = await getFuncionarios()
-                    const especialidadesData = await getEspecialidades()
-
-                    setReqstFuncionarios(funcionariosData)
-                    setReqstEspecialidades(especialidadesData)
-
-                    setFuncionarios(funcionariosData.content)
-                    setEspecialidades(especialidadesData.content)
-                } catch (error) {
-                    setError(error.message)
-                }
-            }
+    const fetchEspecialidades = async () => {
+        try {
+            const data = await getEspecialidades()
+            setReqstEspecialidades(data)
+            setEspecialidades(data.content)
+            console.log(data.content)
+        } catch (error) {
+            setErro(error.message)
         }
+    }
+    const fetchFuncionarios = async () => {
+        try {
+            const data = await getFuncionarios()
+            setReqstFuncionarios(data)
+            setFuncionarios(data.content)
+            console.log(data.content)
+        } catch (error) {
+            setErro(error.message)
+        }
+    }
+    useEffect(() => {
+        console.log(erro)   
+    }, [erro])
 
-        fetchData()
+    useEffect(() => {
+        if (config.simularDados) {
+            setReqstEspecialidades(simuGetEspecialidades)
+            setReqstFuncionarios(simuGetFuncionarios)
+
+            setFuncionarios(simuGetFuncionarios.content)
+            setEspecialidades(simuGetEspecialidades.content)
+        } else {
+            fetchFuncionarios()
+            fetchEspecialidades()
+        }
     }, [])
 
     return (
@@ -118,9 +128,8 @@ function Funcionarios() {
                 </div>
                 <div id='listFuncs'>
                     {
-                        funcionarios
-                            .filter(funcionario => funcionario.isAtivo == true)
-                            .map(funcionario => (
+                        erro &&
+                        funcionarios.map(funcionario => (
                                 <div id={`funcionario${funcionario.id}`} className='funcs skillsFechado' key={funcionario.id}>
                                     <div className='cardFunc' >
                                         <div className='nomeFunc'>
