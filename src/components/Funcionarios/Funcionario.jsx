@@ -33,6 +33,13 @@ function Funcionario() {
     const [reqstEspecialidades, setReqstEspecialidades] = useState()
     const [erro, setErro] = useState()
 
+    const changeInput = (value, field) => {
+        setFuncionario(prevState => ({
+            ...prevState,
+            [field]: value,
+        }))
+    }
+
     const novoFuncionario = () => {
         setFuncionario(
             {
@@ -129,43 +136,88 @@ function Funcionario() {
                     <div id='contGeralFunc'>
                         <div id='contNomeFunc'>
                             <label>Nome:</label>
-                            <input type="text" id="" value={funcionario.nome}/>
+                            <input
+                            type="text"
+                            value={funcionario.nome || ""}
+                            onChange={(e) => changeInput(e.target.value, "nome")}
+                            />
                         </div>
                         <div id='contEmailFunc'>
                             <label>Email:</label>
-                            <input type="text" id="" value={funcionario.email}/>
+                            <input
+                            type="text"
+                            value={funcionario.email || ""}
+                            onChange={(e) => changeInput(e.target.value, "email")}
+                            />
                         </div>
                         <div id='contCellFunc'>
                             <label>Celular:</label>
-                            <input type="text" id="" value={funcionario.celular}/>
+                            <input
+                            type="text"
+                            value={funcionario.celular || ""}
+                            onChange={(e) => changeInput(e.target.value, "celular")}
+                            />
+                        </div>
+                        <div id='contCargoFunc'>
+                            <label>Cargo:</label>
+                            <input
+                            type="text"
+                            value={funcionario.cargo || ""}
+                            onChange={(e) => changeInput(e.target.value, "cargo")}
+                            />
                         </div>
                     </div>
                     <div id='contEndFunc'>
                         <div id='contCepFunc'>
                             <label>CEP:</label>
-                            <input type="text" value={funcionario.cep}/>
+                            <input
+                            type="text"
+                            value={funcionario.endereco.cep || ""}
+                            onChange={(e) => changeInput(e.target.value, "cep")}
+                            />
                         </div>
                         <div id='contRuaFunc'>
                             <label>Rua/logradouro:</label>
-                            <input type="text" value={funcionario.endereco.logradouro}/>
+                            <input
+                            type="text"
+                            value={funcionario.endereco?.logradouro || ""}
+                            onChange={(e) => changeInput(e.target.value, "logradouro")}
+                            />
                         </div>
                         <div id='contNumFunc'>
                             <label>Nº:</label>
-                            <input type="text" value={funcionario.endereco.numero}/>
+                            <input
+                            type="text"
+                            value={funcionario.endereco?.numero || ""}
+                            onChange={(e) => changeInput(e.target.value, "numero")}
+                            />
                         </div>
                         <div id='contCompFunc'>
                             <label>Complemento:</label>
-                            <input type="text" value={funcionario.endereco.complemento}/>
+                            <input
+                            type="text"
+                            value={funcionario.endereco?.complemento || ""}
+                            onChange={(e) => changeInput(e.target.value, "complemento")}
+                            />
                         </div>
                         <div id='contBairroFunc'>
                             <label>Bairro:</label>
-                            <input type="text" value={funcionario.endereco.bairro}/>
+                            <input
+                            type="text"
+                            value={funcionario.endereco?.bairro || ""}
+                            onChange={(e) => changeInput(e.target.value, "bairro")}
+                            />
                         </div>
                         <div id='contCidadeFunc'>
                             <label>Cidade:</label>
-                            <input type="text" value={funcionario.endereco.cidade}/>
+                            <input
+                            type="text"
+                            value={funcionario.endereco?.cidade || ""}
+                            onChange={(e) => changeInput(e.target.value, "cidade")}
+                            />
                         </div>
                     </div>
+
                     <div id='contControle'>
                         <button id='bttCancelar' onClick={goToFuncionarios}>Cancelar</button>
                         <button id='bttSalvar'>Salvar</button>

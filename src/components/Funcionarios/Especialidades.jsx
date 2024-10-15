@@ -300,7 +300,6 @@ function Especialidades() {
                     {   
                         layoutEspecServicos == "layoutEspecs" ?
                         especialidades
-                        // .filter(espec => espec.ativo == true)
                         .map(espec => 
                             <UnitEspec key={espec.id} espec={espec} onClick={() => abrirEspec(espec.id)}></UnitEspec>
                         ) :

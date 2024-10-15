@@ -121,8 +121,11 @@
                 }
             }
             .layoutEspecs {
-                flex-wrap: wrap;
+                display: grid;
+                
                 justify-content: center;
+                flex-wrap: wrap;
+
                 .espec {
                     font-weight: 600;
                 }
