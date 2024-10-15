@@ -106,12 +106,6 @@ function Especialidades() {
             cor: `${prevEspec.cor1}/${prevEspec.cor2}`,
         }))
     }
-    const mudarInputServPrevEspec = (inpServ) => {
-        setPrevEspec(especState => ({
-            ...especState,
-            inpServ: inpServ
-        }))
-    }
     const addServToEspec = () => {
         const servicoSelecionado = servicos.find(servico => servico.nome.toLowerCase() === prevEspec.inpServ.toLowerCase())
         
@@ -140,17 +134,17 @@ function Especialidades() {
         }))
     }
     const handleSalvar = async () => {
-        const especAberta = {
-            ...especAberta,
-            nome: prevEspec.nome,
-            cor: `${prevEspec.cor1}/${prevEspec.cor2}`,
-        }
-
         let result
         if (especAberta.id === "nova") {
-            result = postEspecialidade(especAberta)
+            result = await postEspecialidade(especAberta)
         } else {
-            result = putEspecialidade(especAberta)
+            let especSelecionada = especialidades.find(espec => espec.id === especAberta.id)
+            if(especSelecionada == especAberta) {
+                result.sucess = "nada mudou"
+                console.log("DEBBUG ESPECIALIDADE NÃO MUDOU PARA ATUALIZAR.")
+            } else {
+                result = await putEspecialidade(especAberta)
+            }
         }
 
         if (result.success) {
@@ -160,22 +154,16 @@ function Especialidades() {
             window.alert(result.error)
         }
     }
-    const handleDeletar = () => {
+    const handleDeletar = async () => {
         if(!window.confirm("Deseja APAGAR a especialidade " + especAberta.nome + "?")) {
             return
         }
-        if(config.simularDados) {
-            setReqstEspecialidades((prev) => ({
-                ...prev,
-                content: prev.content.filter((esp) => esp.id !== especAberta.id),
-            }))
+        
+        const result = await deleteEspec(especAberta.id);
+        if (result.success) {
+            setEspecialidades((prev) => prev.filter((esp) => esp.id !== especAberta.id))
         } else {
-            const result = deleteEspec(especAberta.id);
-            if (result.success) {
-                setEspecialidades((prev) => prev.filter((esp) => esp.id !== especAberta.id))
-            } else {
-                console.error(result.error);
-            }
+            console.error(result.error)
         }
         fecharEspec()
     }
@@ -183,7 +171,6 @@ function Especialidades() {
         fecharEspec()
     }
     const abrirEspec = (idEspec) => {
-        console.log("especialidade do id " + idEspec +" foi aberta")
         if (especAberta) {
             if(especAberta.id == idEspec) {
                 return
@@ -202,13 +189,11 @@ function Especialidades() {
                 nome: 'Nova especialidade', 
                 descricao: '', 
                 cor: '',
-                servicos: []
             })
             setPrevEspec({
                 prevTema: "preVisuLight",
                 cor1: "#ffffff",
                 cor2: "#000",
-                inpServ: ""
             })
         } else {
         //  Especialidade existente
@@ -218,8 +203,10 @@ function Especialidades() {
                 setError('Erro ao abrir especialidade.')
                 return;
             }
-            const [auxCor1, auxCor2] = especSelecionada.cor.split('/');
-            if (!auxCor1 || !auxCor2) {
+            const [auxCor1, auxCor2] = especSelecionada.cor.includes('/') 
+                ? especSelecionada.cor.split('/') 
+                : [especSelecionada.cor, '#000']
+            if (!auxCor1) {
                 setError('Erro ao abrir especialidade. Cor invalida.')
                 return
             }
@@ -228,14 +215,18 @@ function Especialidades() {
                 prevTema: "preVisuLight",
                 cor1: auxCor1,
                 cor2: auxCor2,
-                inpServ: ""
             })
         }
+        console.log("especialidade do id " + idEspec +" foi aberta")
     }
     const fecharEspec = () => {
-        setEspecAberta(null)
-        setPrevEspec(null)
+        setEspecAberta()
+        setPrevEspec()
     }
+    const handleAttLista = () => {
+        fetchEspecialidades()
+        fetchServicos()
+    } 
     const fetchEspecialidades = async () => {
         try {
             const data = await getEspecialidades()
@@ -256,14 +247,17 @@ function Especialidades() {
         }
     }
     useEffect(() => {
-        if (config.simularDados) {
-            setReqstEspecialidades(simuGetEspecialidades)
+        const fetchData = async () => {
+            if (config.simularDados) {
+                setReqstEspecialidades(simuGetEspecialidades)
 
-            setEspecialidades(simuGetEspecialidades.content)
-        } else {
-            fetchEspecialidades()
-            fetchServicos()
+                setEspecialidades(simuGetEspecialidades.content)
+            } else {
+                fetchEspecialidades()
+                fetchServicos()
+            }
         }
+        fetchData()
     }, [])
     return(
         <div id='pageEspecialidades'>
@@ -289,7 +283,7 @@ function Especialidades() {
                         <button id='nomeOrderFiltrosEspec' onClick={mudarOrdemEspecServicos}>
                             Nome {ordemEspecServicos.toUpperCase()}
                         </button>
-                        <button>Criação ASC</button>
+                        <button onClick={() => {handleAttLista}}>atualizar</button>
                     </div>
                     <div id='groupFiltrosEspecServ'>
                         <p>Agrupar por:</p>
@@ -384,12 +378,13 @@ function Especialidades() {
                             </div>
                         </div>
                     </div>
-                    <div id='contServicosEspecEdit'>
+                    {/* <div id='contServicosEspecEdit'>
                         <h3>Serviços relacionados</h3>
                         <div id='secAddServicoEspecEdit'>
                             <input type="text" list='dtListServicos' id='inputAddServicoEspecEdit' value={prevEspec.inpServ} onChange={(e) => mudarInputServPrevEspec(e.target.value)}/>
                             <datalist id='dtListServicos'>
                                 {
+                                    !servicos ? "carregando" : 
                                     servicos
                                         .map(servico => (
                                             <option key={servico.id} value={servico.nome}>
@@ -414,7 +409,7 @@ function Especialidades() {
                                 )
                             }
                         </div>
-                    </div>
+                    </div> */}
                     <div id='contFimAcao'>
                     <button onClick={handleCancel}>cancelar</button>
                     <button onClick={handleSalvar}>salvar</button>

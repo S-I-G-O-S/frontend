@@ -128,7 +128,7 @@
                     border-bottom: 0.1rem solid var(--marrom);
                     .cardFunc {
                         display: grid;
-                        grid-template-columns: minmax(10rem, 2fr) 1fr 2fr 1fr  1fr 5rem 5rem;
+                        grid-template-columns: minmax(10rem, 1.5fr) 1fr 1fr 2fr  1fr minmax(1.5rem, 3rem) minmax(1.2rem, 3rem);
                         grid-template-areas: 
                         "nome cell ultAtv cargo status setaSkillsFunc options";
 
@@ -147,7 +147,6 @@
                         .nomeFunc {
                             grid-area: nome;
                             display: flex;
-                            align-items: self-start;
                             height: 1.5rem;
                             max-height: 2rem;
                             overflow: hidden;
@@ -163,9 +162,15 @@
                         }
                         .ultAtvFunc {
                             grid-area: ultAtv;
+                            overflow-y: hidden;
+                            max-height: 1.5rem;
+                            text-overflow: clip;
                         }
                         .cargoFunc {
                             grid-area: cargo;
+                            overflow-wrap: break-word;
+                            overflow-y: hidden;
+                            max-height: 2rem;
                         }
                         .statusFunc {
                             grid-area: status;
@@ -175,7 +180,7 @@
                             cursor: pointer;
                             border-left: 0.1rem solid var(--marrom);
                             img {
-                                height: 1.3rem;
+                                height: 1.5rem;
                             }
                         }
                         .editFunc {
@@ -224,6 +229,9 @@
         }
     }
 }
-@media screen and (width <= 800px) {
-    
+@media screen and (width <= 1000px) {
+    #pageFuncionarios >
+    #mainFuncionarios {
+        padding: 1rem 0.5rem;
+    }
 }

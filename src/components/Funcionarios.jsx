@@ -39,7 +39,18 @@ function Funcionarios() {
     const handleEditClick = (idFuncionario) => {
         navigate(`/funcionario?id=${idFuncionario}`);
     }
-    
+    const converterDtHr = (dataHora) => {
+        const data = new Date(dataHora)
+        // Formata para o estilo desejado
+        const dataLegivel = data.toLocaleDateString('pt-BR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+        })
+        return dataLegivel
+    }
     const converterEspecs = (idEspec) => {
         let especialidade = especialidades.find(espec => espec.id == idEspec)
         const [cor1, cor2] = especialidade.cor.split('/')
@@ -69,7 +80,7 @@ function Funcionarios() {
     const fetchEspecialidades = async () => {
         try {
             const data = await getEspecialidades()
-            setReqstEspecialidades(data)
+            //setReqstEspecialidades(data)
             setEspecialidades(data.content)
             console.log(data.content)
         } catch (error) {
@@ -79,7 +90,7 @@ function Funcionarios() {
     const fetchFuncionarios = async () => {
         try {
             const data = await getFuncionarios()
-            setReqstFuncionarios(data)
+            ///setReqstFuncionarios(data)
             setFuncionarios(data.content)
             console.log(data.content)
         } catch (error) {
@@ -91,16 +102,19 @@ function Funcionarios() {
     }, [erro])
 
     useEffect(() => {
-        if (config.simularDados) {
-            setReqstEspecialidades(simuGetEspecialidades)
-            setReqstFuncionarios(simuGetFuncionarios)
+        const fetchData = async () => {
+            if (config.simularDados) {
+                setReqstEspecialidades(simuGetEspecialidades)
+                setReqstFuncionarios(simuGetFuncionarios)
 
-            setFuncionarios(simuGetFuncionarios.content)
-            setEspecialidades(simuGetEspecialidades.content)
-        } else {
-            fetchFuncionarios()
-            fetchEspecialidades()
+                setFuncionarios(simuGetFuncionarios.content)
+                setEspecialidades(simuGetEspecialidades.content)
+            } else {
+                fetchFuncionarios()
+                fetchEspecialidades()
+            }
         }
+        fetchData()
     }, [])
 
     return (
@@ -128,48 +142,48 @@ function Funcionarios() {
                 </div>
                 <div id='listFuncs'>
                     {
-                        erro &&
+                        !funcionarios ? "carregando..." :
                         funcionarios.map(funcionario => (
-                                <div id={`funcionario${funcionario.id}`} className='funcs skillsFechado' key={funcionario.id}>
-                                    <div className='cardFunc' >
-                                        <div className='nomeFunc'>
-                                            {funcionario.primeiroNome + ' ' + funcionario.ultimoNome}
-                                        </div>
-                                        <div className='cellFunc'>
-                                            {funcionario.celular}
-                                        </div>
-                                        <div className='ultAtvFunc'>
-                                            {funcionario.ultimaAtividade}
-                                        </div>
-                                        <div className='cargoFunc'>
-                                            {funcionario.cargo}
-                                        </div>
-                                        <div className='statusFunc'>
-                                            {
-                                                funcionario.isDisponivel
-                                                    ? 'disponível'
-                                                    : 'indisponível'
-                                            }
-                                        </div>
-                                        <div className='setaSkillsFunc'
-                                        onClick={() => verEspecialidades(funcionario.id)}>
-                                            <img id={`imgSetaSkillsFunc${funcionario.id}`} src={Down} alt="ver especialidades"/>
-                                        </div>
-                                        <div className='editFunc' onClick={() => handleEditClick(funcionario.id)}>
-                                            <img src={Edit} alt="editar"/>
-                                        </div>
+                            <div id={`funcionario${funcionario.id}`} className='funcs skillsFechado' key={funcionario.id}>
+                                <div className='cardFunc' >
+                                    <div className='nomeFunc'>
+                                        {funcionario.primeiro + ' ' + funcionario.ultimo}
                                     </div>
-                                    <div id={`contSkillsFunc${funcionario.id}`} className='containerSkillsFunc skillsFechado'>
+                                    <div className='cellFunc'>
+                                        {funcionario.celular}
+                                    </div>
+                                    <div className='ultAtvFunc'>
+                                        {converterDtHr(funcionario.ultimaAtividade)}
+                                    </div>
+                                    <div className='cargoFunc'>
+                                        {funcionario.cargo}
+                                    </div>
+                                    <div className='statusFunc'>
                                         {
-                                            funcionario.especialidades.map(especID => (
-                                                converterEspecs(especID)
-                                            ))
+                                            funcionario.isDisponivel
+                                                ? 'disponível'
+                                                : 'indisponível'
                                         }
                                     </div>
+                                    <div className='setaSkillsFunc'
+                                    onClick={() => verEspecialidades(funcionario.id)}>
+                                        <img id={`imgSetaSkillsFunc${funcionario.id}`} src={Down} alt="ver especialidades"/>
+                                    </div>
+                                    <div className='editFunc' onClick={() => handleEditClick(funcionario.id)}>
+                                        <img src={Edit} alt="editar"/>
+                                    </div>
                                 </div>
-                            ))
+                                <div id={`contSkillsFunc${funcionario.id}`} className='containerSkillsFunc skillsFechado'>
+                                    {
+                                        !especialidades ? 'carregando...' :
+                                        funcionario.especialidades.map(especID => (
+                                            converterEspecs(especID)
+                                        ))
+                                    }
+                                </div>
+                            </div>
+                        ))
                     }
-                    
                 </div>
             </section>
         </main>

@@ -4,7 +4,7 @@ import simuGetEspecialidades from '../../dadosSimulados/especialidades.js'
 import simuGetFuncionarios from '../../dadosSimulados/funcionarios.js'
 
 // Funções de requisições
-import {getFuncionarios} from '../../services/funcionariosAPI.js'
+import {getFuncionarioPorID, deleteFuncionario, postFuncionario, putFuncionario} from '../../services/funcionariosAPI.js'
 import {getEspecialidades} from '../../services/especialidadesAPI.js'
 
 import '../../styles/funcionario.css'
@@ -23,99 +23,147 @@ function Funcionario() {
     // const primeiroNome = nomes[0]; // primeiro elemento do array
     // const ultimoNome = nomes[nomes.length - 1]; // último elemento do array
     // const resultado = `${primeiroNome} ${ultimoNome}`
-    
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search)
+    let idFuncionario = searchParams?.get('id') ?? null
+    const navigate = useNavigate()
     const [error, setError] = useState()
     const [funcionario, setFuncionario] = useState()
     const [especialidades, setEspecialidades] = useState()
     const [reqstEspecialidades, setReqstEspecialidades] = useState()
+    const [erro, setErro] = useState()
 
-    const location = useLocation();
-    const searchParams = new URLSearchParams(location.search)
-    let idFuncionario = searchParams?.get('id') ?? null
-    console.log(idFuncionario)
-
-    const navigate = useNavigate()
+    const novoFuncionario = () => {
+        setFuncionario(
+            {
+                "nome": "",
+                "email": "",
+                "celular": "",
+                "senha": "",
+                "cargo": "",
+                "endereco": {
+                    "cep": "",
+                    "logradouro": "",
+                    "numero": "",
+                    "bairro": "",
+                    "cidade": "",
+                    "uf": "",
+                    "complemento": ""
+                },
+                "especialidades": []
+            }
+        )
+    }
     const goToFuncionarios = () => {
         navigate(`/funcionarios`)
     }
+    const converterEspecs = (idEspec) => {
+        let especialidade = especialidades.find(espec => espec.id == idEspec)
+        const [cor1, cor2] = especialidade.cor.split('/')
+        return (
+            <div className='espec' key={especialidade.id}
+                style={{
+                        borderColor: cor2,
+                        backgroundColor: cor1,
+                        color: cor2
+                }}
+            >
+                {especialidade.nome}
+            </div>
+        )
+    }
+    const fetchEspecialidades = async () => {
+        try {
+            const data = await getEspecialidades()
+            //setReqstEspecialidades(data)
+            setEspecialidades(data.content)
+            console.log(data.content)
+        } catch (error) {
+            setErro(error.message)
+        }
+    }
+    const fetchFuncionario = async () => {
+        try {
+            const data = await getFuncionarioPorID(idFuncionario)
+            setFuncionario(data)
+            console.log(data)
+        } catch (error) {
+            setErro(error.message)
+        }
+    }
+    useEffect(() => {
+        console.log(erro)   
+    }, [erro])
     useEffect(() => {
         const fetchData = async () => {
-            if (config.simularDados) {
-                setReqstEspecialidades(simuGetEspecialidades)
-
-                setFuncionario(
-                    simuGetFuncionarios.content.find(funcionario => funcionario.id === idFuncionario)
-                )
-                setEspecialidades(simuGetEspecialidades.content)
-            } else {
-                try {
-                    const funcionariosData = await getFuncionarios()
-                    const especialidadesData = await getEspecialidades()
-
-                    setReqstFuncionarios(funcionariosData)
-                    setReqstEspecialidades(especialidadesData)
-
-                    setFuncionarios(funcionariosData.content)
-                    setEspecialidades(especialidadesData.content)
-                } catch (error) {
-                    setError(error.message)
-                }
+            try {
+                idFuncionario !== null
+                ? fetchFuncionario()
+                : novoFuncionario()
+                
+                fetchEspecialidades()
+            } catch (error) {
+                setError(error.message)
             }
         }
-
         fetchData()
     }, [])
     return(
         <div id="pageFuncionario">
             <Header titulo={
-                idFuncionario !== null 
-                ? `Editando funcionário ${idFuncionario}`  
+                idFuncionario !== null
+                ? `Editando funcionário ${idFuncionario}`
                 : 'Novo funcionário'
             }>
             </Header>
             <Nav></Nav>
             <main>
+                {
+                !funcionario ? 
+                <section id='secInfos'>
+                    <h2>carregando...</h2>
+                </section> :
                 <section id='secInfos'>
                     <h2>Funcionário</h2>
                     {/* Infos do funcionarios */}
                     <div id='contGeralFunc'>
                         <div id='contNomeFunc'>
                             <label>Nome:</label>
-                            <input type="text" id="" />
+                            <input type="text" id="" value={funcionario.nome}/>
                         </div>
                         <div id='contEmailFunc'>
                             <label>Email:</label>
-                            <input type="text" id="" />
+                            <input type="text" id="" value={funcionario.email}/>
                         </div>
                         <div id='contCellFunc'>
                             <label>Celular:</label>
-                            <input type="text" id="" />
+                            <input type="text" id="" value={funcionario.celular}/>
                         </div>
                     </div>
                     <div id='contEndFunc'>
                         <div id='contCepFunc'>
                             <label>CEP:</label>
-                            <input type="text" />
+                            <input type="text" value={funcionario.cep}/>
                         </div>
                         <div id='contRuaFunc'>
                             <label>Rua/logradouro:</label>
-                            <input type="text" />
+                            <input type="text" value={funcionario.endereco.logradouro}/>
                         </div>
                         <div id='contNumFunc'>
                             <label>Nº:</label>
-                            <input type="text" />
+                            <input type="text" value={funcionario.endereco.numero}/>
                         </div>
                         <div id='contCompFunc'>
                             <label>Complemento:</label>
-                            <input type="text" />
+                            <input type="text" value={funcionario.endereco.complemento}/>
                         </div>
                         <div id='contBairroFunc'>
                             <label>Bairro:</label>
-                            <input type="text" />
+                            <input type="text" value={funcionario.endereco.bairro}/>
                         </div>
                         <div id='contCidadeFunc'>
                             <label>Cidade:</label>
-                            <input type="text" />
+                            <input type="text" value={funcionario.endereco.cidade}/>
                         </div>
                     </div>
                     <div id='contControle'>
@@ -124,6 +172,7 @@ function Funcionario() {
                         <button id='bttExcluir'>Excluir</button>
                     </div>
                 </section>
+                }
                 <section id='secEspecialidades'>
                     <h2>Especialidades</h2>
                     <div>
@@ -131,6 +180,16 @@ function Funcionario() {
                     </div>
                     <div>
                         {/* listagem  */}
+                        {
+                            !funcionario ? 'carregando' : 
+
+                            !funcionario.especialidades ? 
+                            'carregando' :
+                            funcionario.especialidades.map(especID => (
+                                //converterEspecs(especID)
+                                "teste"
+                            ))
+                        }
                     </div>
                 </section>
             </main>

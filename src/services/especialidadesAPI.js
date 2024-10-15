@@ -15,7 +15,7 @@ export const getEspecialidades = async () => {
 }
 export const deleteEspec = async (id) => {
     try {
-        await axios.delete(`${config.url}/api/especialidade/${id}`)
+        await axios.delete(`${config.url}/api/especialidades/${id}`)
         return { success: true }
     } catch (error) {
         return {
@@ -24,10 +24,9 @@ export const deleteEspec = async (id) => {
         }
     }
 }
-
 export const postEspecialidade = async (espec) => {
     try {
-        const response = await axios.post(`${config.url}/api/especialidade`, {
+        const response = await axios.post(`${config.url}/api/especialidades`, {
             nome: espec.nome,
             descricao: espec.descricao,
             cor: espec.cor,
@@ -40,10 +39,14 @@ export const postEspecialidade = async (espec) => {
         }
     }
 }
-
 export const putEspecialidade = async (espec) => {
     try {
-        const response = await axios.put(`${config.url}/api/especialidade/${espec.id}`, espec)
+        const response = await axios.put(`${config.url}/api/especialidades`, {
+            id: espec.id,
+            nome: espec.nome,
+            descricao: espec.descricao,
+            cor: espec.cor
+        })
         return { success: true, data: response.data }
     } catch (error) {
         return {
