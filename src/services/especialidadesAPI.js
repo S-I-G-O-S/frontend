@@ -15,7 +15,8 @@ export const getEspecialidades = async () => {
 }
 export const deleteEspec = async (id) => {
     try {
-        await axios.delete(`${config.url}/api/especialidades/${id}`)
+        const response = await axios.delete(`${config.url}/api/especialidades/${id}`)
+        console.log(response)
         return { success: true }
     } catch (error) {
         return {

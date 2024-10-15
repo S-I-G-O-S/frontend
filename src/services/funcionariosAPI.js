@@ -27,7 +27,8 @@ export const getFuncionarioPorID = async (id) => {
 }
 export const deleteFuncionario = async (id) => {
     try {
-        await axios.delete(`${config.url}/api/funcionarios/${id}`)
+        const response = await axios.delete(`${config.url}/api/funcionarios/${id}`)
+        console.log(response)
         return { success: true }
     } catch (error) {
         return {
@@ -68,6 +69,7 @@ export const postFuncionario = async (funcionario) => {
             descricao: funcionario.descricao,
             cor: funcionario.cor,
         })
+        
         return { success: true, data: response.data }
     } catch (error) {
         return {
