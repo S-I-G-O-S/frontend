@@ -164,7 +164,36 @@
 
         }
         #secEspecialidades {
-
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            div {
+                padding: 0.3rem;
+                border: 0.1rem solid var(--salmao1);
+                border-radius: 0.25rem;
+            }
+            #contAddEspecFunc {
+                display: grid;
+                grid-template-columns: 3fr 1fr;
+                gap: 0.3rem;
+                
+            }
+            #contListEspecFunc {
+                display: flex;
+                flex-direction: column;
+                row-gap: 0.2rem;
+                .especFunc {
+                    display: flex;
+                    justify-content: space-between;
+                    border: 0.1rem solid;
+                    padding: 0.1rem 0.5rem;
+                    p {
+                        margin: 0;
+                        font-weight: 500;
+                        font-size: 0.9rem;
+                    }
+                }
+            }
         }
     }
 }

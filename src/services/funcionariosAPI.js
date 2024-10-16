@@ -38,36 +38,26 @@ export const deleteFuncionario = async (id) => {
     }
 }
 
-export const postFuncionario = async (funcionario) => {
-    /*
-    {
-        "nome": "string",
-        "primeiro": "string",
-        "ultimo": "string",
-        "cpf": "string",
-        "email": "string",
-        "celular": "string",
-        "senha": "string",
-        "cargo": "string",
-        "endereco": {
-            "cep": "string",
-            "logradouro": "string",
-            "numero": "string",
-            "bairro": "string",
-            "cidade": "string",
-            "uf": "string",
-            "complemento": "string"
-        },
-        "especialidades": [
-            0
-        ]
-    }
-    */
+export const postFuncionario = async (f, especialidades) => {
     try {
         const response = await axios.post(`${config.url}/api/funcionarios`, {
-            nome: funcionario.nome,
-            descricao: funcionario.descricao,
-            cor: funcionario.cor,
+            nome: f.nome,
+            primeiro: f.primeiro,
+            ultimo: f.ultimo,
+            cpf: f.cpf,
+            email: f.email,
+            celular: f.celular,
+            cargo: f.cargo,
+            endereco: {
+                cep: f.endereco.cep,
+                logradouro: f.endereco.logradouro,
+                numero: f.endereco.numero,
+                bairro: f.endereco.bairro,
+                cidade: f.endereco.cidade,
+                uf: f.endereco.uf,
+                complemento: f.endereco.complemento
+            },
+            especialidades: especialidades
         })
         
         return { success: true, data: response.data }
@@ -79,9 +69,29 @@ export const postFuncionario = async (funcionario) => {
     }
 }
 
-export const putFuncionario = async (espec) => {
+export const putFuncionario = async (f, especialidades) => {
     try {
-        const response = await axios.put(`${config.url}/api/funcionarios/${espec.id}`, espec)
+        const response = await axios.put(`${config.url}/api/funcionarios`, {
+            id: f.id,
+            nome: f.nome,
+            primeiro: f.primeiro,
+            ultimo: f.ultimo,
+            cpf: f.cpf,
+            email: f.email,
+            celular: f.celular,
+            cargo: f.cargo,
+            endereco: {
+                id: f.endereco.id,
+                cep: f.endereco.cep,
+                logradouro: f.endereco.logradouro,
+                numero: f.endereco.numero,
+                bairro: f.endereco.bairro,
+                cidade: f.endereco.cidade,
+                uf: f.endereco.uf,
+                complemento: f.endereco.complemento
+            },
+            especialidades: especialidades
+        })
         return { success: true, data: response.data }
     } catch (error) {
         return {
