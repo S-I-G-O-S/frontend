@@ -1,13 +1,13 @@
 // Funções de requisições
 import {getFuncionarioPorID, deleteFuncionario, postFuncionario, putFuncionario} from '../../services/funcionariosAPI.js'
 import {getEspecialidades} from '../../services/especialidadesAPI.js'
+import { cepAPI } from '../../services/cepAPI.js'
 
 import '../../styles/funcionario.css'
 import Nav from '../public/Nav'
 import Header from '../public/Header'
 import { useLocation, useNavigate  } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-// import { cepAPI } from '../../services/cepAPI'
 // import { useQuery } from ‘react-query’
 
 function Funcionario() {
@@ -24,12 +24,13 @@ function Funcionario() {
     const [especialidades, setEspecialidades] = useState()
     const [reqstEspecialidades, setReqstEspecialidades] = useState()
     const [pesqAddEspec, setPesqAddEspec] = useState('')
+    const [cepMensagem, setCepMensagem] = useState('')
     const [erro, setErro] = useState()
+    const [viewSenha, setViewSenha] = useState(false)
     
     const addEspecToFunc = () => {
         console.info("ADICIONANDO ESPECIALIDADE")
         let especToAdd = especialidades.find(espec => espec.nome.toLowerCase() === pesqAddEspec.toLowerCase())
-        console.warn(especToAdd)
         if (!especToAdd) {
             setErro("Serviço não encontrado!")
             setPesqAddEspec("Especialidade não encontrada")
@@ -58,10 +59,64 @@ function Funcionario() {
     const changePesqAddEspec = (value) => {
         setPesqAddEspec(value)
     }
-    const changeInput = (value, field) => {
+    const handleCEP = (value) => {
+        const cep = value.replace(/\D/g, '');
+        if (cep.length <= 8) {
+            setFuncionario(prevState => ({
+                ...prevState,
+                endereco: {
+                    ...prevState.endereco,
+                    cep: cep,
+                }
+            }))
+        }
+    };
+    const fetchCEP = async () => {
+        const cep = funcionario.endereco.cep.replace(/\D/g, '')
+        if (cep.length === 8) {
+            try {
+                const response = await cepAPI(cep)
+                console.warn(response)
+                const { street, neighborhood, city, state } = response.data
+                setFuncionario(prevState => ({
+                    ...prevState,
+                    endereco: {
+                        ...prevState.endereco,
+                        logradouro: street,
+                        bairro: neighborhood,
+                        cidade: city,
+                        uf: state
+                    }
+                }))
+            } catch (error) {
+                setErro("Erro ao buscar CEP:", error)
+                setCepMensagem("CEP não encontrado ou inválido.")
+                setTimeout(() => {
+                    setCepMensagem('')
+                }, 5000)
+                // alert("CEP não encontrado ou inválido.");
+            }
+        } else {
+            setErro("São necessários 8 digitos.")
+            setCepMensagem("São necessários 8 digitos.")
+                setTimeout(() => {
+                    setCepMensagem('')
+                }, 5000)
+        }
+    }
+    const handleChangeDados = (value, field) => {
         setFuncionario(prevState => ({
             ...prevState,
             [field]: value,
+        }))
+    }
+    const handleChangeEndereco = (value, field) => {
+        setFuncionario(prevState => ({
+            ...prevState,
+            endereco: {
+                ...prevState.endereco,
+                [field]: value,
+            }
         }))
     }
     const novoFuncionario = () => {
@@ -97,12 +152,13 @@ function Funcionario() {
         if (result.success) {
             setFuncionario((prev) => prev.filter((func) => func.id !== funcionario.id))
         } else {
-            console.error(result.error)
+            setErro(result.error)
         }
         navigate(`/funcionarios`)
     }
     const handleSalvar = async () => {
         let arrayEspecs = []
+        console.warn(funcionario)
         funcionario.especialidades.map(espec => (
             arrayEspecs.push(espec.id)
         ))
@@ -110,7 +166,13 @@ function Funcionario() {
         if ('id' in funcionario) {
             result = await putFuncionario(funcionario, arrayEspecs)
         } else {
-            result = await postFuncionario(funcionario, arrayEspecs)
+            console.warn("Debbug "+ viewSenha)
+            if(viewSenha) {
+                result = await postFuncionario(funcionario, arrayEspecs)
+            } else {
+                setViewSenha(true)
+                return
+            }
         }
 
         if (result.success) {
@@ -120,7 +182,6 @@ function Funcionario() {
         }
     }
     const converterEspecs = (espec) => {
-        console.log("Debbug: " + espec.cor)
         const [cor1, cor2] = espec?.cor?.includes('/') 
                 ? espec.cor.split('/') 
                 : [espec.cor, '#000']
@@ -143,7 +204,6 @@ function Funcionario() {
             const data = await getEspecialidades()
             //setReqstEspecialidades(data)
             setEspecialidades(data.content)
-            console.log(data.content)
         } catch (error) {
             setErro(error.message)
         }
@@ -152,7 +212,6 @@ function Funcionario() {
         try {
             const data = await getFuncionarioPorID(idFuncionario)
             setFuncionario(data)
-            console.log(data)
         } catch (error) {
             setErro(error.message)
         }
@@ -201,7 +260,7 @@ function Funcionario() {
                             <input
                             type="text"
                             value={funcionario.nome || ""}
-                            onChange={(e) => changeInput(e.target.value, "nome")}
+                            onChange={(e) => handleChangeDados(e.target.value, "nome")}
                             />
                         </div>
                         <div id='contEmailFunc'>
@@ -209,7 +268,7 @@ function Funcionario() {
                             <input
                             type="text"
                             value={funcionario.email || ""}
-                            onChange={(e) => changeInput(e.target.value, "email")}
+                            onChange={(e) => handleChangeDados(e.target.value, "email")}
                             />
                         </div>
                         <div id='contCellFunc'>
@@ -217,16 +276,18 @@ function Funcionario() {
                             <input
                             type="text"
                             value={funcionario.celular || ""}
-                            onChange={(e) => changeInput(e.target.value, "celular")}
+                            onChange={(e) => handleChangeDados(e.target.value, "celular")}
                             />
                         </div>
                         <div id='contCargoFunc'>
                             <label>Cargo:</label>
-                            <input
-                            type="text"
-                            value={funcionario.cargo || ""}
-                            onChange={(e) => changeInput(e.target.value, "cargo")}
-                            />
+                            <select name="" id="" 
+                                value={funcionario.cargo || ""}
+                                onChange={(e) => handleChangeDados(e.target.value, "cargo")}>
+                                <option value="tecnico">Técnico</option>
+                                <option value="base">Base</option>
+                                <option value="adm">ADM</option>
+                            </select>
                         </div>
                     </div>
                     <div id='contEndFunc'>
@@ -235,15 +296,17 @@ function Funcionario() {
                             <input
                             type="text"
                             value={funcionario.endereco.cep || ""}
-                            onChange={(e) => changeInput(e.target.value, "cep")}
+                            onChange={(e) => handleCEP(e.target.value)}
                             />
+                            <button onClick={fetchCEP}>Pesquisar CEP</button>
+                            <p>{cepMensagem}</p>
                         </div>
                         <div id='contRuaFunc'>
                             <label>Rua/logradouro:</label>
                             <input
                             type="text"
                             value={funcionario.endereco?.logradouro || ""}
-                            onChange={(e) => changeInput(e.target.value, "logradouro")}
+                            onChange={(e) => handleChangeEndereco(e.target.value, "logradouro")}
                             />
                         </div>
                         <div id='contNumFunc'>
@@ -251,7 +314,7 @@ function Funcionario() {
                             <input
                             type="text"
                             value={funcionario.endereco?.numero || ""}
-                            onChange={(e) => changeInput(e.target.value, "numero")}
+                            onChange={(e) => handleChangeEndereco(e.target.value, "numero")}
                             />
                         </div>
                         <div id='contCompFunc'>
@@ -259,7 +322,7 @@ function Funcionario() {
                             <input
                             type="text"
                             value={funcionario.endereco?.complemento || ""}
-                            onChange={(e) => changeInput(e.target.value, "complemento")}
+                            onChange={(e) => handleChangeEndereco(e.target.value, "complemento")}
                             />
                         </div>
                         <div id='contBairroFunc'>
@@ -267,7 +330,7 @@ function Funcionario() {
                             <input
                             type="text"
                             value={funcionario.endereco?.bairro || ""}
-                            onChange={(e) => changeInput(e.target.value, "bairro")}
+                            onChange={(e) => handleChangeEndereco(e.target.value, "bairro")}
                             />
                         </div>
                         <div id='contCidadeFunc'>
@@ -275,7 +338,15 @@ function Funcionario() {
                             <input
                             type="text"
                             value={funcionario.endereco?.cidade || ""}
-                            onChange={(e) => changeInput(e.target.value, "cidade")}
+                            onChange={(e) => handleChangeEndereco(e.target.value, "cidade")}
+                            />
+                        </div>
+                        <div id='contUFFunc'>
+                            <label>UF:</label>
+                            <input
+                            type="text"
+                            value={funcionario.endereco?.uf || ""}
+                            onChange={(e) => handleChangeEndereco(e.target.value, "uf")}
                             />
                         </div>
                     </div>
@@ -328,6 +399,26 @@ function Funcionario() {
                     </div>
                 </section>
             </main>
+            {
+                viewSenha ?
+                <div id='shadowBG'>
+                    <section id='secTempSenha'>
+                        <h2>Definindo senha temporária</h2>
+                        <p>Esta será a senha fornecida ao funcionário para seu primeiro acesso. </p>
+                        <div>
+                            <input type="text" name="" id="" 
+                            value={funcionario.senha || ""}
+                            onChange={(e) => handleChangeDados(e.target.value, "senha")}/>
+                            {/* TODO Adicionar função de senha automatica */}
+                            <button>Gerar senha automatica</button>
+                        </div>
+                        <div>
+                            <button onClick={setViewSenha(false)}>voltar</button>
+                            <button onClick={handleSalvar}>salvar</button>
+                        </div>
+                    </section>
+                </div> : ''
+            }
         </div>
     )
 }
