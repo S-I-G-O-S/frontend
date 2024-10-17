@@ -13,8 +13,20 @@ export const getServicos = async () => {
         throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
     }
 }
+export const getServicoPorID = async (id) => {
+    try {
+        const response = await axios.get(`${config.url}/api/servicos/${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        return response.data
+    } catch (error) {
+        throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
+    }
+}
 
-export const deleteServicos = async (id) => {
+export const deleteServico = async (id) => {
     try {
         await axios.delete(`${config.url}/api/servicos/${id}`)
         return { success: true }
@@ -26,12 +38,12 @@ export const deleteServicos = async (id) => {
     }
 }
 
-export const postServicos = async (servico) => {
+export const postServico = async (servico, especs) => {
     try {
         const response = await axios.post(`${config.url}/api/servicos`, {
-            // TODO Adaptar para add novo servico
             nome: servico.nome,
             descricao: servico.descricao,
+            especialidades: especs
         })
         return { success: true, data: response.data }
     } catch (error) {
@@ -41,10 +53,19 @@ export const postServicos = async (servico) => {
         }
     }
 }
-
-export const putServicos = async (servico) => {
+export const putServico = async (servico, especs) => {
     try {
-        const response = await axios.put(`${config.url}/api/servicos/${servico.id}`, servico)
+        console.warn("Enviadando " + 
+            servico.id + " " +
+            servico.nome + " " +
+            servico.descricao + " " +
+            especs)
+        const response = await axios.put(`${config.url}/api/servicos/${servico.id}`, {
+            id: servico.id,
+            nome: servico.nome,
+            descricao: servico.descricao,
+            especialidades: especs
+        })
         return { success: true, data: response.data }
     } catch (error) {
         return {

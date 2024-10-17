@@ -127,7 +127,7 @@ function Funcionarios() {
                     <h2>Funcionários</h2>
                     <div id='contEspecsNovoFunc'>
                         <button className='btt' onClick={() => goToEspecialidades()}>
-                                Especialidades
+                                Especialidades e Serviços
                         </button>
                         <button className='btt'
                         onClick={() => handleCreateClick()}>Novo Funcionário</button>

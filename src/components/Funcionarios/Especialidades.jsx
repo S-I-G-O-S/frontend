@@ -4,7 +4,7 @@ import simuGetEspecialidades from '../../dadosSimulados/especialidades'
 
 // Funções de requisições
 import { getEspecialidades, postEspecialidade, deleteEspec, putEspecialidade } from '../../services/especialidadesAPI'
-import { getServicos, postServicos, putServicos, deleteServicos } from '../../services/servicosAPi'
+import { getServicos, getServicoPorID, postServico, putServico, deleteServico } from '../../services/servicosAPi'
 
 import '../../styles/especialidades.css'
 
@@ -12,22 +12,27 @@ import Nav from '../public/Nav'
 import Header from '../public/Header'
 import UnitEspec from './Especialidades/unitEspecialidade'
 import { useEffect, useState } from 'react'
+import { Await } from 'react-router-dom'
 
 // https://www.delftstack.com/pt/howto/react/for-loop-in-react/
 
 function Especialidades() {
-    const [reqstEspecialidades, setReqstEspecialidades] = useState([])
-    const [reqstServicos, setReqstServicos] = useState([])
-    const [especialidades, setEspecialidades] = useState(reqstEspecialidades)
-    const [servicos, setServicos] = useState(reqstServicos)
-    
-    const [prevEspec, setPrevEspec] = useState(null)
+    // Geal
+    const [tipoJanela, setTipoJanela] = useState(null)
     const [layoutEspecServicos, setLayoutEspecServicos] = useState("layoutEspecs")
     const [ordemEspecServicos, setOrdemEspecServicos] = useState("asc")
+    const [erro, setErro] = useState('')
+    
+    // Especialidades
+    const [reqstEspecialidades, setReqstEspecialidades] = useState([])
+    const [especialidades, setEspecialidades] = useState(reqstEspecialidades)
+    const [prevEspec, setPrevEspec] = useState(null)
     const [especAberta, setEspecAberta] = useState(null)
 
-    const [message, setMessage] = useState('')
-    const [error, setError] = useState('')
+    // Serviços
+    const [reqstServicos, setReqstServicos] = useState([])
+    const [servicos, setServicos] = useState(reqstServicos)
+    const [servicoAberto, setServicoAberto] = useState(null)
 
     //  LISTAGEM
     const mudarLayoutEspecServicos = () => {
@@ -56,11 +61,8 @@ function Especialidades() {
             )   
         }
     }
-    const handleNovaEspec = () => {
-        abrirEspec("nova")
-    }
 
-    //  EDITAÇÃO ESPECIALIDADE
+    //  EDIÇÃO ESPECIALIDADE
     const mudarTemaPrevEspecConfig = () => {
         if (prevEspec.prevTema === "preVisuLight") {
             setPrevEspec(prevState => ({
@@ -86,100 +88,94 @@ function Especialidades() {
             descricao: nomePrev
         }))
     }
-    const mudarCor1PrevEspec = (cor1Prev) => {
+    const mudarCorPrevEspec = (corPrev, corTipo) => {
         setPrevEspec(prevState => ({
             ...prevState,
-            cor1: cor1Prev
+            [corTipo]: corPrev
         }))
         setEspecAberta(especAberta => ({
             ...especAberta,
             cor: `${prevEspec.cor1}/${prevEspec.cor2}`,
         }))
     }
-    const mudarCor2PrevEspec = (cor2Prev) => {
-        setPrevEspec(prevState => ({
-            ...prevState,
-            cor2: cor2Prev
-        }))
-        setEspecAberta(especAberta => ({
-            ...especAberta,
-            cor: `${prevEspec.cor1}/${prevEspec.cor2}`,
+    // EDIÇÃO SERVIÇO
+    const mudarInfoServico = (valor, campo) => {
+        setServicoAberto(serv => ({
+            ...serv,
+            [campo]: valor,
         }))
     }
-    const addServToEspec = () => {
-        const servicoSelecionado = servicos.find(servico => servico.nome.toLowerCase() === prevEspec.inpServ.toLowerCase())
-        
-        if (!servicoSelecionado) {
-            setError("Serviço não encontrado!")
-            return
-        }
-
-        const servicoJaAdicionado = prevEspec.servicos.some(servEspec => servEspec.id === servicoSelecionado.id)
-
-        if (servicoJaAdicionado) {
-            setError("Este serviço já foi adicionado a esta especialidade!");
-            return
-        }
-        setPrevEspec(especState => ({
-            ...especState,
-            servicos: [...especState.servicos, servicoSelecionado],
-            inpServ: ''
-        }))
-        setError('')
-    }
-    const deleteServEspec = (idServ) => {
-        setEspecAberta(especState => ({
-            ...especState,
-            servicos: especState.servicos.filter(servico => servico.id !== idServ)
-        }))
-    }
+    // Geral
     const handleSalvar = async () => {
         let result
-        if (especAberta.id === "nova") {
-            result = await postEspecialidade(especAberta)
-        } else {
-            let especSelecionada = especialidades.find(espec => espec.id === especAberta.id)
-            if(especSelecionada == especAberta) {
-                result.sucess = "nada mudou"
-                console.log("DEBBUG ESPECIALIDADE NÃO MUDOU PARA ATUALIZAR.")
+
+        if (tipoJanela == 'espec') {
+            if (especAberta.id === "nova") {
+                result = await postEspecialidade(especAberta)
             } else {
                 result = await putEspecialidade(especAberta)
             }
+            if (result.success) {
+                window.alert('Alterações salvas com sucesso!')
+                fecharEspec()
+            } else {
+                window.alert("Não foi possivel salvar esta especialidade.")
+                setErro(result.error)
+            }
+            return
         }
-
-        if (result.success) {
-            window.alert('Alterações salvas com sucesso!')
-            fecharEspec()
-        } else {
-            window.alert(result.error)
+        if (tipoJanela == 'servico') {
+            let arrayEspecs = []
+            servicoAberto.especialidades.map(espec => (
+                arrayEspecs.push(espec.id)
+            ))
+            if (servicoAberto.id === "novo") {
+                result = await postServico(servicoAberto, arrayEspecs)
+            } else {
+                result = await putServico(servicoAberto, arrayEspecs)
+            }
+            if (result.success) {
+                window.alert('Alterações salvas com sucesso!')
+                fecharEspec()
+            } else {
+                window.alert("Não foi possivel salvar este serviço.")
+                setErro(result.error)
+            }
+            return 
         }
     }
     const handleDeletar = async () => {
-        if(!window.confirm("Deseja APAGAR a especialidade " + especAberta.nome + "?")) {
-            return
+        if (tipoJanela == 'espec') {
+            if(!window.confirm("Deseja APAGAR a especialidade " + especAberta.nome + "?")) {
+                return
+            }
+            
+            const result = await deleteEspec(especAberta.id);
+            if (result.success) {
+                setEspecialidades((prev) => prev.filter((esp) => esp.id !== especAberta.id))
+            } else {
+                setErro(result.error)
+            }
+            fecharEspec()
         }
-        
-        const result = await deleteEspec(especAberta.id);
-        if (result.success) {
-            setEspecialidades((prev) => prev.filter((esp) => esp.id !== especAberta.id))
-        } else {
-            console.error(result.error)
-        }
-        fecharEspec()
     }
     const handleCancel = () => {
         fecharEspec()
     }
     const abrirEspec = (idEspec) => {
-        if (especAberta) {
-            if(especAberta.id == idEspec) {
+        if (tipoJanela == 'espec') {
+            // TODO Excluir caso ocorra erro de uso ao abrir a mesma especialidade
+            if(especAberta?.id == idEspec) {
                 return
             }
-            if(especAberta.id != idEspec && especAberta) {
-                if(!window.confirm("Deseja excluir todas alterações da especialidade " + especAberta.nome + "?")) {
-                    
-                    return
-                }
+            if(!window.confirm("Deseja excluir todas alterações da especialidade " + especAberta.nome + "?")) {
+                
+                return
+            }
+        }
+        if (tipoJanela == 'servico') {
+            if(!window.confirm("Deseja excluir todas alterações do serviço " + servicoAberto.nome + "?")) {
+                return
             }
         }
         if (idEspec == "nova") {
@@ -200,14 +196,14 @@ function Especialidades() {
             let especSelecionada = especialidades.find(espec => espec.id === idEspec)
             console.warn(especSelecionada)
             if (!especSelecionada) {
-                setError('Erro ao abrir especialidade.')
+                console.error('Erro ao abrir especialidade.')
                 return;
             }
             const [auxCor1, auxCor2] = especSelecionada.cor.includes('/') 
                 ? especSelecionada.cor.split('/') 
                 : [especSelecionada.cor, '#000']
             if (!auxCor1) {
-                setError('Erro ao abrir especialidade. Cor invalida.')
+                console.error('Erro ao abrir especialidade. Cor invalida.')
                 return
             }
             setEspecAberta(especSelecionada)
@@ -218,10 +214,59 @@ function Especialidades() {
             })
         }
         console.log("especialidade do id " + idEspec +" foi aberta")
+        fecharServ()
+        setTipoJanela('espec')
+    }
+    const abrirServico = async (idServ) => {
+        if (tipoJanela == 'servico') {   // Se alguma janela lateral estiver aberta
+            // TODO Excluir caso ocorra erro de uso ao abrir o mesmo serviço
+            if(servicoAberto?.id == idServ) {   // Se a nova janela for igual 
+                return
+            }
+            if(!window.confirm("Deseja excluir todas alterações do serviço " + servicoAberto.nome + "?")) {
+                return
+            }
+        }
+        if(tipoJanela == 'espec') {
+            if(!window.confirm("Deseja excluir todas alterações da especialidade " + especAberta.nome + "?")) {
+                
+                return
+            }
+        }
+        if (idServ == "novo") {
+        //  Novo serviço
+            setServicoAberto({
+                id: "novo",
+                nome: 'Novo serviço', 
+                descricao: '',
+                especialidades: []
+            })
+        } else {
+        //  Serviço existente
+            try {
+                const data = await getServicoPorID(idServ)
+                setServicoAberto(data)
+                console.warn(servicoAberto)
+                // if (!servicoAberto) {
+                //     console.error('Erro ao abrir serviço.')
+                //     return;
+                // }
+            } catch (error) {
+                console.error(error.message)
+            }
+        }
+        console.log("Serviço do id " + idServ +" foi aberto")
+        fecharEspec()
+        setTipoJanela("servico")
     }
     const fecharEspec = () => {
         setEspecAberta()
         setPrevEspec()
+        setTipoJanela(null)
+    }
+    const fecharServ = () => {
+        setServicoAberto(null)
+        setTipoJanela(null)
     }
     const handleAttLista = () => {
         fetchEspecialidades()
@@ -232,9 +277,8 @@ function Especialidades() {
             const data = await getEspecialidades()
             setReqstEspecialidades(data)
             setEspecialidades(data.content)
-            console.warn(data)
         } catch (error) {
-            console.error(error.message)
+            setErro(error.message)
         }
     }
     const fetchServicos = async () => {
@@ -243,9 +287,17 @@ function Especialidades() {
             setReqstServicos(data)
             setServicos(data.content)
         } catch (error) {
-            console.error(error.message)
+            setErro(error.message)
         }
     }
+    const fetchServico = async (idServ) => {
+        
+    }
+    useEffect(() => {
+        if (erro) {
+            console.error(erro)
+        }
+    }, [erro])
     useEffect(() => {
         const fetchData = async () => {
             if (config.simularDados) {
@@ -264,14 +316,14 @@ function Especialidades() {
         <Header titulo={"Especialidades & Serviços"}></Header>
         <Nav></Nav>
         <main className={
-                !especAberta ? "secConfigEspecFechada" : "secConfigEspecAberta"
+                !tipoJanela ? "secConfigFechada" : "secConfigAberta"
             }
         >
             <section id='sec1'>
                 <div id='contNovo'>
-                    <button onClick={handleNovaEspec}>
+                    <button onClick={() => {abrirEspec("nova")}}>
                         Nova Especialidade</button>
-                    <button>Novo Serviço</button>
+                    <button onClick={() => {abrirServico("novo")}}>Novo Serviço</button>
                 </div>
                 {/* 
                     Nome ASC/DESC
@@ -304,120 +356,127 @@ function Especialidades() {
                             <UnitEspec key={espec.id} espec={espec} onClick={() => abrirEspec(espec.id)}></UnitEspec>
                         ) :
                         servicos.map(serv => 
-                            <div className='servicos' key={serv.id}>
-                                <h4>{serv.nome}</h4>    
-                                <div>
+                            <div className='servicos' key={serv.id} onClick={() => {abrirServico(serv.id)}}>
+                                <h4>
+                                    {serv.nome}
+                                </h4>
+                                <p>
                                     {serv.descricao}
-                                </div>
+                                </p>
                             </div>
                         )
                     }
                 </div>
             </section>
-            { especAberta  &&
-                <section id='secConfigEspec'>
-                    <h2>Editando especialidade</h2>
-                    <div id='contInfosEspecEdit'>
+            { !tipoJanela  ?
+                    ''
+                : (
+                    tipoJanela == 'espec' ?
+                    <section id='secConfigEspec'>
+                        <h2>Editando especialidade</h2>
+                        <div id='contInfosEspecEdit'>
 
-                        <div id='campoNomeConfigEspec'>
-                            <label>Nome:</label>
-                            <input 
-                                type="text" id='nomeConfigEspec' 
-                                value={especAberta.nome}
-                                onChange={(e) => mudarNomePrevEspec(e.target.value)}
-                            />
-                        </div>
-                        <div id='campoDescricaoConfigEspec'>
-                            <label>Descrição:</label>
-                            <input type="text" id='descricaoConfigEspec' 
-                                value={especAberta.descricao}
-                                onChange={(e) => mudarDescricaoPrevEspec(e.target.value)}/>
-                        </div>
-                        <div id='contCamposCoresEspecEdit'>
-                            <div id='campoCor1ConfigEspec' className='campoConfigEspec'>
-                                <label>Cor de fundo:</label>
-
-                                <div className='inputsCamposCoresConfigEspec'>
-                                    <input type="text" value={prevEspec.cor1}
-                                        onChange={(e) => mudarCor1PrevEspec(e.target.value)}/>
-                                    <input 
-                                        type="color" name="" id="inpCorFundo" 
-                                        value={prevEspec.cor1}
-                                        onChange={(e) => mudarCor1PrevEspec(e.target.value)}
-                                    />
-                                </div>
-                            </div>
-                            <div id='campoCor2ConfigEspec' className='campoConfigEspec'>
-                                <label>Cor da letra:</label>
-                                <div className='inputsCamposCoresConfigEspec'>
-                                <input type="text" value={prevEspec.cor2}
-                                    onChange={(e) => mudarCor2PrevEspec(e.target.value)}/>
+                            <div id='campoNomeConfigEspec'>
+                                <label>Nome:</label>
                                 <input 
-                                    type="color" name="" id="inpCorLetra"
-                                    value={prevEspec.cor2}
-                                    onChange={(e) => mudarCor2PrevEspec(e.target.value)}
+                                    type="text" id='nomeConfigEspec' 
+                                    value={especAberta.nome}
+                                    onChange={(e) => mudarNomePrevEspec(e.target.value)}
                                 />
-                                </div>
                             </div>
-                        </div>
-                        <div id='contPreVisu'>
-                            <div id='headPreVisu'>
-                                <p>Pré-visualização:</p>
-                                <button onClick={mudarTemaPrevEspecConfig}>Mudar tema</button>
+                            <div id='campoDescricaoConfigEspec'>
+                                <label>Descrição:</label>
+                                <input type="text" id='descricaoConfigEspec' 
+                                    value={especAberta.descricao}
+                                    onChange={(e) => mudarDescricaoPrevEspec(e.target.value)}/>
                             </div>
-                            <div id='preVisu' className={prevEspec.prevTema}>
-                                <div id='especPreVisu'
-                                style={{
-                                    borderColor: prevEspec.cor2,
-                                    backgroundColor: prevEspec.cor1,
-                                    color: prevEspec.cor2
-                                }}>
-                                    {especAberta.nome}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {/* <div id='contServicosEspecEdit'>
-                        <h3>Serviços relacionados</h3>
-                        <div id='secAddServicoEspecEdit'>
-                            <input type="text" list='dtListServicos' id='inputAddServicoEspecEdit' value={prevEspec.inpServ} onChange={(e) => mudarInputServPrevEspec(e.target.value)}/>
-                            <datalist id='dtListServicos'>
-                                {
-                                    !servicos ? "carregando" : 
-                                    servicos
-                                        .map(servico => (
-                                            <option key={servico.id} value={servico.nome}>
-                                                {servico.nome}
-                                            </option>
-                                        ))
-                                }
-                            </datalist>
-                            <button onClick={addServToEspec}>Adicionar</button>
-                        </div>
-                        <div id='listServicosEditEspecEdit'>
-                            {
-                                especAberta.servicos.map(servico => 
-                                    <div key={servico.id} className='itemListServicoEditEspecEdit'>
-                                        <p>
-                                        {servico.nome}
-                                        </p>
-                                        <button onClick={() => {deleteServEspec(servico.id)}}>
-                                            X
-                                        </button>
+                            <div id='contCamposCoresEspecEdit'>
+                                <div id='campoCor1ConfigEspec' className='campoConfigEspec'>
+                                    <label>Cor de fundo:</label>
+
+                                    <div className='inputsCamposCoresConfigEspec'>
+                                        <input type="text" value={prevEspec.cor1}
+                                            onChange={(e) => mudarCorPrevEspec(e.target.value, 'cor1')}/>
+                                        <input 
+                                            type="color" name="" id="inpCorFundo" 
+                                            value={prevEspec.cor1}
+                                            onChange={(e) => mudarCorPrevEspec(e.target.value, 'cor1')}
+                                        />
                                     </div>
-                                )
-                            }
+                                </div>
+                                <div id='campoCor2ConfigEspec' className='campoConfigEspec'>
+                                    <label>Cor da letra:</label>
+                                    <div className='inputsCamposCoresConfigEspec'>
+                                    <input type="text" value={prevEspec.cor2}
+                                        onChange={(e) => mudarCorPrevEspec(e.target.value, 'cor2')}/>
+                                    <input 
+                                        type="color" name="" id="inpCorLetra"
+                                        value={prevEspec.cor2}
+                                        onChange={(e) => mudarCorPrevEspec(e.target.value, 'cor2')}
+                                    />
+                                    </div>
+                                </div>
+                            </div>
+                            <div id='contPreVisu'>
+                                <div id='headPreVisu'>
+                                    <p>Pré-visualização:</p>
+                                    <button onClick={mudarTemaPrevEspecConfig}>Mudar tema</button>
+                                </div>
+                                <div id='preVisu' className={prevEspec.prevTema}>
+                                    <div id='especPreVisu'
+                                    style={{
+                                        borderColor: prevEspec.cor2,
+                                        backgroundColor: prevEspec.cor1,
+                                        color: prevEspec.cor2
+                                    }}>
+                                        {especAberta.nome}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div> */}
-                    <div id='contFimAcao'>
-                    <button onClick={handleCancel}>cancelar</button>
-                    <button onClick={handleSalvar}>salvar</button>
-                    {
-                        especAberta.id == "nova" ? '' :
-                        <button onClick={handleDeletar}>deletar</button>
-                    }
-                    </div>
-                </section>
+                        <div id='contFimAcao'>
+                        <button onClick={handleCancel}>cancelar</button>
+                        <button onClick={handleSalvar}>salvar</button>
+                        {
+                            especAberta.id == "nova" ? '' :
+                            <button onClick={handleDeletar}>deletar</button>
+                        }
+                        </div>
+                    </section> :
+                    (
+                        !servicoAberto ? 'Carregando...' : 
+                        <section id='secConfigServico'>
+                            <h2>Editando Serviço</h2>
+                            <div>
+                                <label>Nome:</label>
+                                <input 
+                                    type="text" id='nomeConfigEspec' 
+                                    value={servicoAberto.nome}
+                                    onChange={(e) => mudarInfoServico(e.target.value, 'nome')}
+                                />
+                            </div>
+                            <div id='contDadosConfigServ'>
+                                <label>Descrição:</label>
+                                <input 
+                                    type="text" id='nomeConfigEspec' 
+                                    value={servicoAberto.descricao}
+                                    onChange={(e) => mudarInfoServico(e.target.value, 'descricao')}
+                                />
+                            </div>
+                            <div id='contEspecsConfigServ'>
+                                <p>lugar para relacioanar especialidades</p>
+                            </div>
+                            <div id='contAcaoConfigServ'>
+                                <button onClick={handleCancel}>cancelar</button>
+                                <button onClick={handleSalvar}>salvar</button>
+                                {
+                                    servicoAberto.id == "novo" ? '' :
+                                    <button onClick={handleDeletar}>deletar</button>
+                                }
+                            </div>
+                        </section>
+                    )
+                )
             }
         </main>
         <div id='shadowBG'>

@@ -80,9 +80,7 @@
                     grid-template-columns: 1fr 9rem 1fr 4rem;
                     height: 1.6rem; 
 
-                    #cNome,
-                    #cEndereco,
-                    #cCNPJ {
+                    div {
                         text-align: center;
                         font-size: 1rem;
                         padding: 0.1rem 0.5rem;

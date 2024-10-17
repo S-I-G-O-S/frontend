@@ -3,7 +3,6 @@ import '../styles/clientes.css'
 import Header from './public/Header'
 import { useNavigate } from 'react-router-dom';
 
-// TODO preenchimento endereço apartir do CEP
 // TODO preenchimento campos para editar clientes
 function Clientes() {
     const navigate = useNavigate();
@@ -30,6 +29,7 @@ function Clientes() {
                         <div id='cNome'>nome</div>
                         <div id='cCNPJ'>CNPJ</div>
                         <div id='cEndereco'>endereço</div>
+                        <div></div>
                     </div>
                     <div id='listClientes'>
                         <div id='cliente1' className='clientes'>

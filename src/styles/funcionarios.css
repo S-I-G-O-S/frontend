@@ -82,8 +82,9 @@
                         font-weight: 600;
 
                         box-sizing: border-box;
-                        width: 10rem;
+                        width: auto;
                         height: 1.5rem;
+                        padding: 0.1rem 0.5rem;
                         border: 0.1rem solid var(--marrom);
                         border-radius: 0.3rem;
                         color: var(--salmao3);
@@ -96,8 +97,7 @@
                         }
                     }
                     .btt:hover {
-                        width: 11rem;
-                        height: 1.6rem;
+                        padding: 0.1rem 1.5rem;
                     }
                 }
             }
@@ -117,9 +117,10 @@
                 }
             }
             #listFuncs {
-                // TODO rolagem lateral ao quebrar a tabela
+                /* TODO rolagem lateral ao quebrar a tabela */
                 display: flex;
                 flex-direction: column;
+                
                 background-color: var(--branco);
 
                 overflow-y: scroll;
