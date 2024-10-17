@@ -8,7 +8,7 @@ export const getEspecialidades = async () => {
                 'Content-Type': 'application/json',
             },
         })
-        return response.data
+        return response
     } catch (error) {
         throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
     }

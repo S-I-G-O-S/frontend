@@ -66,7 +66,7 @@ export const putServico = async (servico, especs) => {
             descricao: servico.descricao,
             especialidades: especs
         })
-        return { success: true, data: response.data }
+        return { success: true, data: response }
     } catch (error) {
         return {
             success: false,

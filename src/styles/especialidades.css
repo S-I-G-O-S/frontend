@@ -331,8 +331,40 @@
             }
         }
         #secConfigServico {
-            display: flex;
             grid-area: sec2;
+            display: flex;
+            flex-direction: column;
+            #contDadosConfigServ{
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                gap: 0.5rem;
+                border: 0.1rem solid;
+                border-color: var(--salmao1);
+                border-radius: 0.2rem;
+                padding: 0.5rem;
+                
+                div {
+                    display: grid;
+                    grid-template-columns: min-content auto;
+                    gap: 0.3rem;
+                }
+                #descricaoDadosConfigServ {
+                    textarea {
+                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                        width: auto;
+                    }
+                }
+            }
+            #contAcaoConfigServ {
+                display: flex;
+                justify-content: center;
+                gap: 1rem;
+                border: 0.1rem solid;
+                border-color: var(--salmao1);
+                border-radius: 0.2rem;
+                padding: 0.5rem;
+            }
         }
     }
     .secConfigFechada {

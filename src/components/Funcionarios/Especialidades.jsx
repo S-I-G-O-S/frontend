@@ -1,7 +1,3 @@
-import config from '../../services/devConfig'
-// Dados simulados
-import simuGetEspecialidades from '../../dadosSimulados/especialidades'
-
 // Funções de requisições
 import { getEspecialidades, postEspecialidade, deleteEspec, putEspecialidade } from '../../services/especialidadesAPI'
 import { getServicos, getServicoPorID, postServico, putServico, deleteServico } from '../../services/servicosAPi'
@@ -93,6 +89,7 @@ function Especialidades() {
             ...prevState,
             [corTipo]: corPrev
         }))
+        
         setEspecAberta(especAberta => ({
             ...especAberta,
             cor: `${prevEspec.cor1}/${prevEspec.cor2}`,
@@ -108,20 +105,23 @@ function Especialidades() {
     // Geral
     const handleSalvar = async () => {
         let result
-
+        console.log()
         if (tipoJanela == 'espec') {
             if (especAberta.id === "nova") {
                 result = await postEspecialidade(especAberta)
             } else {
+            //  TODO As cores não estão sendo atualizadas
                 result = await putEspecialidade(especAberta)
             }
             if (result.success) {
                 window.alert('Alterações salvas com sucesso!')
                 fecharEspec()
+                handleAttLista()
             } else {
                 window.alert("Não foi possivel salvar esta especialidade.")
                 setErro(result.error)
             }
+            console.warn(especAberta)
             return
         }
         if (tipoJanela == 'servico') {
@@ -132,15 +132,18 @@ function Especialidades() {
             if (servicoAberto.id === "novo") {
                 result = await postServico(servicoAberto, arrayEspecs)
             } else {
+            //  TODO Retornando ERRO 405
                 result = await putServico(servicoAberto, arrayEspecs)
             }
             if (result.success) {
                 window.alert('Alterações salvas com sucesso!')
                 fecharEspec()
+                handleAttLista()
             } else {
                 window.alert("Não foi possivel salvar este serviço.")
-                setErro(result.error)
+                console.log(result.error)
             }
+            console.warn(servicoAberto)
             return 
         }
     }
@@ -300,14 +303,8 @@ function Especialidades() {
     }, [erro])
     useEffect(() => {
         const fetchData = async () => {
-            if (config.simularDados) {
-                setReqstEspecialidades(simuGetEspecialidades)
-
-                setEspecialidades(simuGetEspecialidades.content)
-            } else {
-                fetchEspecialidades()
-                fetchServicos()
-            }
+            fetchEspecialidades()
+            fetchServicos()
         }
         fetchData()
     }, [])
@@ -447,24 +444,26 @@ function Especialidades() {
                         !servicoAberto ? 'Carregando...' : 
                         <section id='secConfigServico'>
                             <h2>Editando Serviço</h2>
-                            <div>
-                                <label>Nome:</label>
-                                <input 
-                                    type="text" id='nomeConfigEspec' 
-                                    value={servicoAberto.nome}
-                                    onChange={(e) => mudarInfoServico(e.target.value, 'nome')}
-                                />
-                            </div>
                             <div id='contDadosConfigServ'>
-                                <label>Descrição:</label>
-                                <input 
-                                    type="text" id='nomeConfigEspec' 
-                                    value={servicoAberto.descricao}
-                                    onChange={(e) => mudarInfoServico(e.target.value, 'descricao')}
-                                />
+                                <div id='nomeDadosConfigServ'>
+                                    <label>Nome:</label>
+                                    <input 
+                                        type="text" id='nomeConfigEspec' 
+                                        value={servicoAberto.nome}
+                                        onChange={(e) => mudarInfoServico(e.target.value, 'nome')}
+                                    />
+                                </div>
+                                <div id='descricaoDadosConfigServ'>
+                                    <label>Descrição:</label>
+                                    <textarea 
+                                        type="text" id='nomeConfigEspec' 
+                                        value={servicoAberto.descricao}
+                                        onChange={(e) => mudarInfoServico(e.target.value, 'descricao')}
+                                    />
+                                </div>
                             </div>
                             <div id='contEspecsConfigServ'>
-                                <p>lugar para relacioanar especialidades</p>
+                                <p>lugar para relacionar especialidades</p>
                             </div>
                             <div id='contAcaoConfigServ'>
                                 <button onClick={handleCancel}>cancelar</button>

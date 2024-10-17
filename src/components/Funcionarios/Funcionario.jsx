@@ -201,11 +201,12 @@ function Funcionario() {
     }
     const fetchEspecialidades = async () => {
         try {
-            const data = await getEspecialidades()
-            //setReqstEspecialidades(data)
-            setEspecialidades(data.content)
+            const response = await getEspecialidades()
+            setReqstEspecialidades(response)
+            setEspecialidades(response.data.content)
+            console.warn(reqstEspecialidades)
         } catch (error) {
-            setErro(error.message)
+            console.error(error.message)
         }
     }
     const fetchFuncionario = async () => {
@@ -228,7 +229,7 @@ function Funcionario() {
                 
                 fetchEspecialidades()
             } catch (error) {
-                setError(error.message)
+                console.error(error.message)
             }
         }
         fetchData()
@@ -239,7 +240,7 @@ function Funcionario() {
                 idFuncionario !== null
                 ? ( !funcionario ? 
                     `Editando funcionário` :
-                    `Editando funcionário ${funcionario.nome}`
+                    `Editando funcionário "${funcionario.nome}"`
                 )
                 : 'Novo funcionário'
             }>
