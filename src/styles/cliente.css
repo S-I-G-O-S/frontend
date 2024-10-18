@@ -139,8 +139,13 @@
                 }
                 #cep {
                     grid-area: cep;
+                    width: 100%;
                     input {
                         width: 6rem;
+                    }
+                    p {
+                        margin: 0;
+                        color: #a50000;
                     }
                 }
                 #rua {
@@ -239,6 +244,10 @@
                 }
             }
             #listContatos {
+                display: flex;
+                flex-direction: column;
+                gap: 0.2rem;
+
                 .contato {
                     display: flex;
                     flex-direction: column;
@@ -250,16 +259,15 @@
                         align-items: center;
                         justify-content: left;
                         gap: 1rem   ;
-                        font-size: 0.95rem;
+                        font-size: 0.9rem;
                         font-weight: 500;
 
-                        height: 1.5rem;
 
                         padding: 0.2rem 0.5rem;
                         color: var(--salmao2);
                         background-color: var(--marrom);
                         img {
-                            width: 1.9rem;
+                            width: 1.7rem;
                         }
                     }
                     .contatoBody {
@@ -271,16 +279,12 @@
                         background-color: var(--salmao3);
                         padding: 0.3rem 0.3rem;
                         border: 0.1rem solid var(--marrom);
-                        
+                        font-size: 0.9rem;
                         .contatoTelefone {
                             grid-area: telefone;
                         }
                         .contatoEmail {
                             grid-area: email;
-                        }
-                        .contatoDescricao {
-                            grid-area: descricao;
-                            font-size: 0.9rem;
                         }
                     }
                 }
@@ -305,6 +309,28 @@
         }
         #secHistorico {
             grid-area: sec3;
+        }
+    }
+    #shadowBG {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        background-color: #000000da;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        #secNovoCliente {
+            padding: 1rem;
+            border: 0.1rem solid var(--marrom);
+            border-radius: 10px;
+            background-color: var(--salmao2);
+            h2 {
+                font-size: 1.1rem;
+                color: var(--marrom);
+                margin: 0;
+                margin-bottom: 1.5rem;
+            }
         }
     }
 }

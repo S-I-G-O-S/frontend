@@ -60,17 +60,18 @@
                     font-weight: 600;
 
                     box-sizing: border-box;
-                    width: 6rem;
+                    width: auto;
                     height: 1.5rem;
+                    padding: 0.1rem 2rem;
                     border: 0.1rem solid var(--marrom);
                     border-radius: 0.3rem;
-                    color: var(--salmao3);
+                    color: var(--salmao2);
                     background-color: var(--marrom);
 
                     transition: 150ms;
                 }
                 button:hover {
-                    width: 9rem;
+                    padding: 0.1rem 3rem;
                 }
             }
             #tabelaClientes {
@@ -99,15 +100,15 @@
                 #listClientes {
                     display: flex;
                     flex-direction: column;
+                    border: 0.1rem solid var(--marrom);
+                    border-top: 0;
                     .clientes {
                         display: grid;
-                        grid-template-columns: 1fr 9rem 1fr 4rem;
+                        grid-template-columns: 1fr minmax(6rem, 1fr) 1fr 4rem;
 
-                        font-size: 0.9rem;
-                        height: auto;                   
-
-                        border: 0.1rem solid var(--marrom);
-                        border-radius: 0.2rem;
+                        font-size: 0.95rem;
+                        height: auto;    
+                        border-top: 0.1rem solid var(--marrom);
                         background-color: var(--branco);
 
                         .nome {
@@ -120,23 +121,32 @@
                             white-space: nowrap;
                             overflow: hidden;
                             text-overflow: ellipsis;
+                            text-align: center;
                             
-                            padding: 0 0.5rem;
+                            padding: 0.15rem 0.5rem;
                             border-right: 0.1rem solid var(--marrom);
 
                         }
                         .options {
+                            all: unset;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
                             cursor: pointer;
                             text-align: center;
                             font-weight: 500;
                             transition: 150ms;
+                            img {
+                                height: 1.3rem;
+                            }
                         }
-                        .options:hover {
-                            
-                            color: var(--salmao1);
-                            background-color: var(--marrom);
-                        }
+                        /* .options:hover {
+                            background-color: var(--salmao1);
+                        } */
                     }
+                    .clientes:hover {
+                            background-color: var(--salmao1);
+                        }
                 }
             }
         }

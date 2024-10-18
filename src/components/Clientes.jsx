@@ -4,10 +4,10 @@ import {getClientes} from '../services/clientesAPI.js'
 import Nav from './public/Nav'
 import '../styles/clientes.css'
 import Header from './public/Header'
+import Edit from '../assets/edit-text.png'
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-// TODO preenchimento campos para editar clientes
 function Clientes() {
     const navigate = useNavigate();
     const [reqstClientes, setReqstClientes] = useState()
@@ -48,7 +48,7 @@ function Clientes() {
                 <div id='tabelaClientes'>
                     <div id='containerH2Novo'>
                         <h2>Clientes</h2>
-                        <button onClick={() => handleCreateClick(null)}>Novo</button>
+                        <button onClick={() => handleCreateClick(null)}>Novo cliente</button>
                     </div>
                     <div id='cabecalho'>
                         <div id='cNome'>nome</div>
@@ -67,7 +67,7 @@ function Clientes() {
                                 </div>
                                 <div className='endereco'>endereço talvez</div>
                                 <div className='options' onClick={() => handleEditClick(cliente.id)}>
-                                    editar
+                                    <img src={Edit} alt="" />
                                 </div>
                             </div>
                         ))

@@ -84,10 +84,10 @@
                         box-sizing: border-box;
                         width: auto;
                         height: 1.5rem;
-                        padding: 0.1rem 0.5rem;
+                        padding: 0.1rem 1rem;
                         border: 0.1rem solid var(--marrom);
                         border-radius: 0.3rem;
-                        color: var(--salmao3);
+                        color: var(--salmao2);
                         background-color: var(--marrom);
 
                         transition: 150ms;
@@ -97,23 +97,21 @@
                         }
                     }
                     .btt:hover {
-                        padding: 0.1rem 1.5rem;
+                        padding: 0.1rem 2rem;
                     }
                 }
             }
             #titleList {
                 display: grid;
-                grid-template-columns: 2fr 1fr 2fr 1fr 1fr 5rem 5rem;
-                height: 1.6rem;
+                grid-template-columns: 3fr 3fr 3fr 2fr 3fr 1fr 1fr;
                 background-color: var(--marrom);
+                padding: 0.2rem 0;
+                padding-right: 1.1rem;
                 div {
                     height: auto;
                     font-size: 1rem;
-                    padding: 0.1rem 0.5rem;
                     text-align: center;
                     color: var(--salmao2);
-
-                    padding: 0.1rem 0.5rem;
                 }
             }
             #listFuncs {
@@ -133,12 +131,12 @@
                     border-top: 0.1rem solid var(--marrom);
                     .cardFunc {
                         display: grid;
-                        grid-template-columns: minmax(10rem, 1.5fr) 1fr 1fr 2fr  1fr minmax(1.5rem, 3rem) minmax(1.2rem, 3rem);
+                        grid-template-columns: 3fr 3fr 3fr 2fr 3fr 1fr 1fr;
                         grid-template-areas: 
                         "nome cell ultAtv cargo status setaSkillsFunc options";
 
                         box-sizing: border-box;
-                        padding: 0.2rem 0;
+                        padding: 0.1rem 0;
                         
 
                         text-align: center;
@@ -154,8 +152,9 @@
                             display: flex;
                             height: 1.5rem;
                             max-height: 2rem;
+                            white-space: nowrap;
                             overflow: hidden;
-                            overflow-x: hidden;
+                            text-overflow: ellipsis;
                         }
                         .cellFunc {
                             grid-area: cell;
@@ -163,18 +162,23 @@
                             height: 1.5rem;
                             align-items: self-start;
                             max-height: 2.5rem;
+                            white-space: nowrap;
                             overflow: hidden;
+                            text-overflow: ellipsis;
                         }
                         .ultAtvFunc {
                             grid-area: ultAtv;
                             overflow-y: hidden;
                             max-height: 1.5rem;
-                            text-overflow: clip;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
                         }
                         .cargoFunc {
                             grid-area: cargo;
-                            overflow-wrap: break-word;
-                            overflow-y: hidden;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
                             max-height: 2rem;
                         }
                         .statusFunc {

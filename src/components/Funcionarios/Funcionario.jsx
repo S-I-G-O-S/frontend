@@ -21,6 +21,7 @@ function Funcionario() {
     let idFuncionario = searchParams?.get('id') ?? null
     const navigate = useNavigate()
     const [funcionario, setFuncionario] = useState()
+    const [reqstFuncionarios, setReqstFuncionarios] = useState()
     const [especialidades, setEspecialidades] = useState()
     const [reqstEspecialidades, setReqstEspecialidades] = useState()
     const [pesqAddEspec, setPesqAddEspec] = useState('')
@@ -32,7 +33,7 @@ function Funcionario() {
         console.info("ADICIONANDO ESPECIALIDADE")
         let especToAdd = especialidades.find(espec => espec.nome.toLowerCase() === pesqAddEspec.toLowerCase())
         if (!especToAdd) {
-            setErro("Serviço não encontrado!")
+            console.error("Serviço não encontrado!")
             setPesqAddEspec("Especialidade não encontrada")
             setTimeout(() => {
                 setPesqAddEspec('')
@@ -41,7 +42,7 @@ function Funcionario() {
         }
 
         if (funcionario.especialidades.some(espec => espec.id === pesqAddEspec.id)) {
-            setErro("Esta especialidade já foi adicionado a este funcionario!");
+            console.error("Esta especialidade já foi adicionado a este funcionario!");
             return
         }
         setFuncionario(especState => ({
@@ -70,7 +71,7 @@ function Funcionario() {
                 }
             }))
         }
-    };
+    }
     const fetchCEP = async () => {
         const cep = funcionario.endereco.cep.replace(/\D/g, '')
         if (cep.length === 8) {
@@ -105,6 +106,7 @@ function Funcionario() {
         }
     }
     const handleChangeDados = (value, field) => {
+        if(field == 'cargo') { console.warn('mudando cargo para: '+ value) }
         setFuncionario(prevState => ({
             ...prevState,
             [field]: value,
@@ -152,7 +154,7 @@ function Funcionario() {
         if (result.success) {
             setFuncionario((prev) => prev.filter((func) => func.id !== funcionario.id))
         } else {
-            setErro(result.error)
+            console.error(result.error)
         }
         navigate(`/funcionarios`)
     }
@@ -168,6 +170,7 @@ function Funcionario() {
         } else {
             console.warn("Debbug "+ viewSenha)
             if(viewSenha) {
+                //  TODO Endereço não está atualizando
                 result = await postFuncionario(funcionario, arrayEspecs)
             } else {
                 setViewSenha(true)
@@ -177,6 +180,8 @@ function Funcionario() {
 
         if (result.success) {
             window.alert('Alterações salvas com sucesso!')
+            // window.location.reload()
+            goToFuncionarios()
         } else {
             window.alert(result.error)
         }
@@ -204,22 +209,21 @@ function Funcionario() {
             const response = await getEspecialidades()
             setReqstEspecialidades(response)
             setEspecialidades(response.data.content)
-            console.warn(reqstEspecialidades)
+            console.warn(response)
         } catch (error) {
             console.error(error.message)
         }
     }
     const fetchFuncionario = async () => {
         try {
-            const data = await getFuncionarioPorID(idFuncionario)
-            setFuncionario(data)
+            const response = await getFuncionarioPorID(idFuncionario)
+            setFuncionario(response.data)
+            setReqstFuncionarios(response)
+            console.warn(response)
         } catch (error) {
-            setErro(error.message)
+            console.error(error.message)
         }
     }
-    useEffect(() => {
-        console.log(erro)   
-    }, [erro])
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -247,7 +251,7 @@ function Funcionario() {
             </Header>
             <Nav></Nav>
             <main>
-                {
+            {
                 !funcionario ? 
                 <section id='secInfos'>
                     <h2>carregando...</h2>
@@ -285,7 +289,7 @@ function Funcionario() {
                             <select name="" id="" 
                                 value={funcionario.cargo || ""}
                                 onChange={(e) => handleChangeDados(e.target.value, "cargo")}>
-                                <option value="tecnico">Técnico</option>
+                                <option value="técnico">Técnico</option>
                                 <option value="base">Base</option>
                                 <option value="adm">ADM</option>
                             </select>
@@ -358,7 +362,7 @@ function Funcionario() {
                         <button id='bttExcluir' onClick={handleDelete}>Excluir</button>
                     </div>
                 </section>
-                }
+            }
                 <section id='secEspecialidades'>
                     <h2>Especialidades</h2>
                     <div id='contAddEspecFunc'>

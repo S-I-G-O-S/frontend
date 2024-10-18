@@ -277,11 +277,11 @@ function Especialidades() {
     } 
     const fetchEspecialidades = async () => {
         try {
-            const data = await getEspecialidades()
-            setReqstEspecialidades(data)
-            setEspecialidades(data.content)
+            const response = await getEspecialidades()
+            setReqstEspecialidades(response)
+            setEspecialidades(response.data.content)
         } catch (error) {
-            setErro(error.message)
+            console.error(error.message)
         }
     }
     const fetchServicos = async () => {
@@ -348,11 +348,14 @@ function Especialidades() {
                 <div id='contListEspecServ' className={layoutEspecServicos}>
                     {   
                         layoutEspecServicos == "layoutEspecs" ?
-                        especialidades
-                        .map(espec => 
+                        (
+                            !especialidades ? 'carregando...' :
+                            especialidades.map(espec => 
                             <UnitEspec key={espec.id} espec={espec} onClick={() => abrirEspec(espec.id)}></UnitEspec>
-                        ) :
-                        servicos.map(serv => 
+                        )) :
+                        (
+                            !servicos ? 'carregando...' :
+                            servicos.map(serv => 
                             <div className='servicos' key={serv.id} onClick={() => {abrirServico(serv.id)}}>
                                 <h4>
                                     {serv.nome}
@@ -361,7 +364,7 @@ function Especialidades() {
                                     {serv.descricao}
                                 </p>
                             </div>
-                        )
+                        ))
                     }
                 </div>
             </section>

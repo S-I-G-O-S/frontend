@@ -79,12 +79,13 @@ function Funcionarios() {
     }
     const fetchEspecialidades = async () => {
         try {
-            const data = await getEspecialidades()
-            //setReqstEspecialidades(data)
-            setEspecialidades(data.content)
-            console.log(data.content)
+            const response = await getEspecialidades()
+            setReqstEspecialidades(response)
+            setEspecialidades(response.data.content)
+            console.warn(response.data.content)
+            console.warn(response)
         } catch (error) {
-            setErro(error.message)
+            console.error(error.message)
         }
     }
     const fetchFuncionarios = async () => {
@@ -97,10 +98,6 @@ function Funcionarios() {
             setErro(error.message)
         }
     }
-    useEffect(() => {
-        console.log(erro)   
-    }, [erro])
-
     useEffect(() => {
         const fetchData = async () => {
             if (config.simularDados) {
@@ -143,6 +140,7 @@ function Funcionarios() {
                 <div id='listFuncs'>
                     {
                         !funcionarios ? "carregando..." :
+                        
                         funcionarios.map(funcionario => (
                             <div id={`funcionario${funcionario.id}`} className='funcs skillsFechado' key={funcionario.id}>
                                 <div className='cardFunc' >
