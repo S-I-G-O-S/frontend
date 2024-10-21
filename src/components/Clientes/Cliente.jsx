@@ -9,6 +9,7 @@ import Up from '../../assets/light/up.png'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { cepAPI } from '../../services/cepAPI.js'
+import Loading from '../public/Loading.jsx'
 
 // TODO POST Cliente e Contatos tudo junto. PUT Cliente enviar PUT Contatos separados
 function Cliente() {
@@ -21,6 +22,7 @@ function Cliente() {
     const [msgCEP, setMsgCEP] = useState()
     const [viewNovoContato, setViewNovoContato] = useState(false)
     const [contato, setContato] = useState(null)
+    const [historico, setHistorico] = useState(null)
 
     
     const formatarCNPJ = (cnpj) => {
@@ -104,18 +106,37 @@ function Cliente() {
     const handleEditContato = () => {
 
     }
-    const changeNovoCliente = () => {
+    const handleAddContato = () => {
+        
+        setCliente(especState => ({
+            ...especState,
+            contatos: [...especState.contatos, contato]
+        }))
+    }
+    const changeNovoCliente = () => {   // Alterna o estado da janela de criação de novo contato do cliente
         if(viewNovoContato) {
+            // Se tiver aberto, será fechado
             setViewNovoContato(false)
         } else {
-            setContato({
-                nome: "",
-                //  TODO Em caso de novo contato, como vai colocar o id dele aqui?
-                cliente: (!idCliente ? null : cliente.id), 
-                descricao: "",
-                telefone: "",
-                email: ""
-            })
+            // Se tiver fechado, será carregado um novo objeto p/ o contato
+            if(idCliente) { // Veficar se é um cliente ja existente
+                // Se sim, adicionará a linha referente ao ID do cliente
+                setContato({
+                    nome: "",
+                    //  TODO Em caso de novo contato, como vai colocar o id dele aqui?
+                    cliente: cliente?.id, 
+                    descricao: "",
+                    telefone: "",
+                    email: ""
+                })
+            } else {
+                setContato({
+                    nome: "",
+                    descricao: "",
+                    telefone: "",
+                    email: ""
+                })
+            }
             setViewNovoContato(true)
         }
     }
@@ -145,11 +166,14 @@ function Cliente() {
         // formatarCNPJ(cliente?.cnpj)
     }
     const handleDelete = async () =>  {
+        window.alert("Em breve...")
+        return
         if(!window.confirm("Deseja APAGAR o cliente " + cliente.nome + "?")) {
             return
         }
-        //  TODO Retornando erro 504
+        //  TODO Retornando erro 405
         const result = await deleteCliente(cliente.id);
+        console.warn(result.response)
         if (result.success) {
             window.alert("Cliente excluído com sucesso")
         } else {
@@ -159,6 +183,39 @@ function Cliente() {
     }
     const handleVoltar = () => {
         navigate(`/clientes`)
+    }
+    const handleSalvar = async () => {
+        if (cliente.contatos.length < 1) {
+            window.alert("Cliente não enviado por falta de contato.")
+            return
+        }
+        if (cliente.nome == '' || cliente.cnpj.length < 14) {
+            window.alert("O nome e o CNPJ do cliente são obrigatórios!")
+            return
+        }
+        if (idCliente != null) {
+            let response
+            if (window.confirm("Deseja sobreescrever o cliente "+ cliente.nome +"?" )) {
+                try {
+                    response = await putCliente(cliente)
+                    console.warn(response)
+                    window.alert("Cliente atualizado com sucesso!")
+                } catch (err) {
+                    console.error(err.message)
+                    return
+                }
+            } else {
+                try {
+                    response = await postCliente(cliente)
+                    console.warn(response)
+                    window.alert("Cliente criado com sucesso!")
+                } catch (err) {
+                    console.error(err.message)
+                    return
+                }
+            }
+            handleVoltar()
+        }
     }
     const fetchCliente = async (id) => {
         try {
@@ -193,13 +250,13 @@ function Cliente() {
             }></Header>
             <Nav></Nav>
             <main id='mainCliente'>
-                {
-                !cliente ? 
-                <section id='secInfos'>
-                    <h2>Carregando...</h2>
-                </section> :
+                
                 <section id='secInfos'>
                     <h2>Informações do cliente</h2>
+                    {
+                    !cliente ? 
+                    <Loading></Loading> :
+                    <>
                     <div id='geral'>
                         <div id='nome'>
                             <label>Nome:</label>
@@ -261,13 +318,14 @@ function Cliente() {
                             />
                         </div>
                     </div>
+                    </>
+                    }   
                     <div id='fimAcao'>
                         <button id='bttCancelar' onClick={handleVoltar}>Cancelar</button>
-                        <button id='bttSalvar'>Salvar</button>
+                        <button id='bttSalvar' onClick={handleSalvar}>Salvar</button>
                         <button id='bttExcluir' onClick={handleDelete}>Excluir</button>
                     </div>
                 </section>
-                }
                 <section id='secContatos'>
                     <div id='containerH2Novo'>
                         <h2>Contatos</h2>
@@ -283,6 +341,7 @@ function Cliente() {
                                 <img id={`img${contato.id}`} src={Down} alt="abrir"/>
                                 <div className='nome'>{contato.nome}</div>
                                 <div className='contatoDescricao'>{contato.descricao}</div>
+                                
                             </button>
                             <div className='contatoBody'>
                                 <div className='contatoTelefone'>
@@ -300,6 +359,11 @@ function Cliente() {
                 </section>
                 <section id='secHistorico'>
                     <h2>Histórico de ordens</h2>
+                    {
+                        !historico ? 
+                        <Loading></Loading> :
+                        'em breve...' 
+                    }
                 </section>
             </main>
             {
@@ -334,6 +398,7 @@ function Cliente() {
                         </div>
                         <div>
                             <button onClick={changeNovoCliente}>cancelar</button>
+                            <button onClick={handleAddContato}>Adicionar contato</button>
                         </div>
                     </section>
                 </div>

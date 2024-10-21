@@ -1,0 +1,14 @@
+#contCarregando {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem;
+    img {
+        height: 2.5rem;
+    }
+    p {
+        margin: 0;
+        font-size: 0.9rem;
+    }
+}

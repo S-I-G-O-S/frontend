@@ -2,6 +2,7 @@
 import {getClientes} from '../services/clientesAPI.js'
 
 import Nav from './public/Nav'
+import Loading from './public/Loading.jsx'
 import '../styles/clientes.css'
 import Header from './public/Header'
 import Edit from '../assets/edit-text.png'
@@ -40,7 +41,7 @@ function Clientes() {
     }, [])
     return (
         <div id='pageClientes'>
-        <Header></Header>
+        <Header titulo={"Clientes"}></Header>
         <Nav></Nav>
         <main id='mainClientes'>
             {/* Listagem */}
@@ -58,7 +59,8 @@ function Clientes() {
                     </div>
                     <div id='listClientes'>
                     {
-                        !clientes ? "carregando..." :
+                        !clientes ? 
+                        <Loading></Loading> :
                         clientes.map(cliente => (
                             <div key={cliente.id} className='clientes'>
                                 <div className='nome'>{cliente.nome}</div>

@@ -58,7 +58,6 @@
         }
         .links:hover {
             background-color: var(--azulHover);
-            background-image: ;
             transition: 0.3s;
         }
     }

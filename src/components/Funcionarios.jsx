@@ -17,6 +17,7 @@ import Nav from './public/Nav'
 import Header from './public/Header'
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react'
+import Loading from './public/Loading.jsx'
 
 // TODO O carregamento das especialidades será diferente do "funcionarios"
 // TODO tratamento para evitar espaços no começo e no final dos nomes
@@ -139,8 +140,8 @@ function Funcionarios() {
                 </div>
                 <div id='listFuncs'>
                     {
-                        !funcionarios ? "carregando..." :
-                        
+                        !funcionarios ? 
+                        <Loading></Loading> :
                         funcionarios.map(funcionario => (
                             <div id={`funcionario${funcionario.id}`} className='funcs skillsFechado' key={funcionario.id}>
                                 <div className='cardFunc' >

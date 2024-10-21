@@ -9,6 +9,7 @@ import Header from '../public/Header'
 import UnitEspec from './Especialidades/unitEspecialidade'
 import { useEffect, useState } from 'react'
 import { Await } from 'react-router-dom'
+import Loading from '../public/Loading'
 
 // https://www.delftstack.com/pt/howto/react/for-loop-in-react/
 
@@ -349,12 +350,13 @@ function Especialidades() {
                     {   
                         layoutEspecServicos == "layoutEspecs" ?
                         (
-                            !especialidades ? 'carregando...' :
+                            !especialidades ? 
+                            <Loading></Loading> :
                             especialidades.map(espec => 
                             <UnitEspec key={espec.id} espec={espec} onClick={() => abrirEspec(espec.id)}></UnitEspec>
                         )) :
                         (
-                            !servicos ? 'carregando...' :
+                            !servicos ? <Loading></Loading> :
                             servicos.map(serv => 
                             <div className='servicos' key={serv.id} onClick={() => {abrirServico(serv.id)}}>
                                 <h4>
@@ -444,7 +446,8 @@ function Especialidades() {
                         </div>
                     </section> :
                     (
-                        !servicoAberto ? 'Carregando...' : 
+                        !servicoAberto ? 
+                        <Loading></Loading> : 
                         <section id='secConfigServico'>
                             <h2>Editando Serviço</h2>
                             <div id='contDadosConfigServ'>

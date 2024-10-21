@@ -35,7 +35,7 @@ export const deleteCliente = async (id) => {
     try {
         const response = await axios.delete(`${config.url}/api/clientes/${id}`)
         console.log(response)
-        return { success: true }
+        return { success: true, response: response}
     } catch (error) {
         return {
             success: false,
@@ -44,29 +44,11 @@ export const deleteCliente = async (id) => {
     }
 }
 
-export const postCliente = async (f, especialidades) => {
+export const postCliente = async (contato) => {
     try {
-        const response = await axios.post(`${config.url}/api/clientes`, {
-            nome: f.nome,
-            primeiro: f.primeiro,
-            ultimo: f.ultimo,
-            cpf: f.cpf,
-            email: f.email,
-            celular: f.celular,
-            cargo: f.cargo,
-            endereco: {
-                cep: f.endereco.cep,
-                logradouro: f.endereco.logradouro,
-                numero: f.endereco.numero,
-                bairro: f.endereco.bairro,
-                cidade: f.endereco.cidade,
-                uf: f.endereco.uf,
-                complemento: f.endereco.complemento
-            },
-            especialidades: especialidades
-        })
+        const response = await axios.post(`${config.url}/api/clientes`, contato)
         
-        return { success: true, data: response.data }
+        return { success: true, data: response }
     } catch (error) {
         return {
             success: false,
@@ -75,30 +57,10 @@ export const postCliente = async (f, especialidades) => {
     }
 }
 
-export const putCliente = async (f, especialidades) => {
+export const putCliente = async (cliente) => {
     try {
-        const response = await axios.put(`${config.url}/api/clientes`, {
-            id: f.id,
-            nome: f.nome,
-            primeiro: f.primeiro,
-            ultimo: f.ultimo,
-            cpf: f.cpf,
-            email: f.email,
-            celular: f.celular,
-            cargo: f.cargo,
-            endereco: {
-                id: f.endereco.id,
-                cep: f.endereco.cep,
-                logradouro: f.endereco.logradouro,
-                numero: f.endereco.numero,
-                bairro: f.endereco.bairro,
-                cidade: f.endereco.cidade,
-                uf: f.endereco.uf,
-                complemento: f.endereco.complemento
-            },
-            especialidades: especialidades
-        })
-        return { success: true, data: response.data }
+        const response = await axios.put(`${config.url}/api/clientes`, cliente)
+        return { success: true, response: response }
     } catch (error) {
         return {
             success: false,
