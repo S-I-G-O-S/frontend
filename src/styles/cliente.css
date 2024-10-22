@@ -375,3 +375,48 @@
         }
     }
 }
+@media screen and (width <= 950px) {
+    #pageCliente {
+        main {
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            gap: 0.5rem;
+        }
+    }
+}
+@media screen and (width <= 600px) {
+    #pageCliente >
+    main >
+    #secInfos >
+    #fimAcao {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        button {
+            all: unset;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            
+
+            height: 1.5rem;
+            width: 80%;
+            border: 0.1rem solid var(--marrom);
+            border-radius: 0.3rem;
+            color: var(--marrom);
+
+            transition: 150ms;
+        }
+        
+        button:hover {
+            width: 90%;
+        }
+    }
+}
