@@ -120,7 +120,7 @@ function Especialidades() {
                 handleAttLista()
             } else {
                 window.alert("Não foi possivel salvar esta especialidade.")
-                setErro(result.error)
+                console.error(result.error)
             }
             console.warn(especAberta)
             return
@@ -142,7 +142,7 @@ function Especialidades() {
                 handleAttLista()
             } else {
                 window.alert("Não foi possivel salvar este serviço.")
-                console.log(result.error)
+                console.error(result.error)
             }
             console.warn(servicoAberto)
             return 

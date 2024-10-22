@@ -1,5 +1,5 @@
 
-import {getClientePorID, postCliente, putCliente, deleteCliente} from '../../services/clientesAPI.js'
+import {getClientePorID, postCliente, putCliente, deleteCliente, putContato, postContato, deleteContato, getContatosPorID} from '../../services/clientesAPI.js'
 
 import Nav from '../public/Nav'
 import '../../styles/cliente.css'
@@ -20,9 +20,10 @@ function Cliente() {
     const [reqstCliente, setReqstCliente] = useState()
     const [cliente, setCliente] = useState()
     const [msgCEP, setMsgCEP] = useState()
-    const [viewNovoContato, setViewNovoContato] = useState(false)
+    const [viewContContato, setViewContContato] = useState(false)
     const [contato, setContato] = useState(null)
     const [historico, setHistorico] = useState(null)
+    const [countContatos, setCountContatos] = useState(0)
 
     
     const formatarCNPJ = (cnpj) => {
@@ -75,6 +76,7 @@ function Cliente() {
                 }, 5000)
         }
     }
+    // CONTATOS
     const verContato = (idContato) => {
         const contato = document.getElementById(`contato${idContato}`)
         const img = document.getElementById(`img${idContato}`)
@@ -88,6 +90,94 @@ function Cliente() {
             console.log(`contato ${idContato} fechado`)
         }
     }
+    const handleEditContato = (valor, field) => {
+        setContato(prevState => ({
+            ...prevState,
+            [field]: valor,
+        }))
+    }
+    const handleDeletarContato = async (idContato) => {
+        if (cliente.contatos.length <= 1) {
+            window.alert("O cliente DEVE conter ao menos 1 contato.")
+            return
+        }
+        if (window.confirm("Deseja APAGAR este contato de "+ cliente.nome +"?")){
+            let result
+            try {
+                // TODO Erro 400 Referential integrity constraint violation: "CONSTRAINT_64C: PUBLIC.CLIENTES FOREIGN KEY(CONTATO_ID) REFERENCES PUBLIC.CONTATOS(ID) (CAST(25 AS BIGINT))"
+                result = await deleteContato(idContato)
+                console.warn(result.response)
+            } catch (err) {
+                console.error(err)
+            }
+            if (result.success) {
+                setCliente(prevCliente => ({
+                    ...prevCliente,
+                    contatos: prevCliente.contatos.filter(c => c.id !== idContato)
+                }))
+            } else {
+                console.error(result.error)
+            }
+        }
+    }
+    const handleAddContato = async () => {
+        if (contato.nome == '') {
+            return
+        }
+        let result
+        console.log('salvando contato:')
+        console.log(contato)
+        try {
+            if ('id' in contato) {
+                result = await putContato(contato)
+            } else {
+                result = await postContato(contato)
+            }
+            console.warn(result.response)
+        } catch (err) {
+            console.error(err)
+        }
+        if (result.success) {
+            console.warn(result.response.data)
+            // if ('id' in contato) {
+            //     fetchContatos()
+            // } else {
+            // }
+            const novoContato = result.response.data
+            setCliente(prevCliente => ({
+                ...prevCliente,
+                contatos: prevCliente.contatos.some(c => c.id === novoContato.id)
+                    ? prevCliente.contatos.map(c => c.id === novoContato.id ? novoContato : c)  // Atualiza o contato se ele já existir
+                    : [...prevCliente.contatos, novoContato]  // Adiciona um novo contato se ele não existir
+            }))
+            handleViewContContato(null)
+        } else {
+            window.alert("Erro ao salvar este contato")
+        }
+    }
+    const handleViewContContato = (idContato) => {   // Alterna o estado da janela de edição do cliente
+        if(viewContContato) {
+            // Se tiver aberto, será fechado
+            setContato(null)
+            setViewContContato(false)
+        } else {
+            // Se tiver fechado, será carregado um novo objeto p/ o contato
+            if (idContato == 'novo') {
+                setContato({
+                    nome: "",
+                    cliente: cliente.id,
+                    descricao: "",
+                    telefone: "",
+                    email: ""
+                })
+            } else {
+                let contatoSelecionado = cliente.contatos.find(contato => contato.id === idContato)
+                setContato(contatoSelecionado)
+            }
+            setViewContContato(true)
+        }
+    }
+    // INFOS
     const handleEditDado = (valor, field) => {
         setCliente(prevState => ({
             ...prevState,
@@ -103,55 +193,18 @@ function Cliente() {
             }
         }))
     }
-    const handleEditContato = () => {
-
-    }
-    const handleAddContato = () => {
-        
-        setCliente(especState => ({
-            ...especState,
-            contatos: [...especState.contatos, contato]
-        }))
-    }
-    const changeNovoCliente = () => {   // Alterna o estado da janela de criação de novo contato do cliente
-        if(viewNovoContato) {
-            // Se tiver aberto, será fechado
-            setViewNovoContato(false)
-        } else {
-            // Se tiver fechado, será carregado um novo objeto p/ o contato
-            if(idCliente) { // Veficar se é um cliente ja existente
-                // Se sim, adicionará a linha referente ao ID do cliente
-                setContato({
-                    nome: "",
-                    //  TODO Em caso de novo contato, como vai colocar o id dele aqui?
-                    cliente: cliente?.id, 
-                    descricao: "",
-                    telefone: "",
-                    email: ""
-                })
-            } else {
-                setContato({
-                    nome: "",
-                    descricao: "",
-                    telefone: "",
-                    email: ""
-                })
-            }
-            setViewNovoContato(true)
-        }
-    }
     const novoCliente = () => {
         setCliente({
             nome: "novo cliente",
             cnpj: "",
             contatos: [
-                // {
-                // nome: "",
-                // cliente: 0,
-                // descricao: "",
-                // telefone: "",
-                // email: ""
-                // }
+                {
+                    nome: "",
+                    cliente: 0,
+                    descricao: "",
+                    telefone: "",
+                    email: ""
+                }
             ],
             endereco: {
                 cep: "",
@@ -166,8 +219,6 @@ function Cliente() {
         // formatarCNPJ(cliente?.cnpj)
     }
     const handleDelete = async () =>  {
-        window.alert("Em breve...")
-        return
         if(!window.confirm("Deseja APAGAR o cliente " + cliente.nome + "?")) {
             return
         }
@@ -179,7 +230,7 @@ function Cliente() {
         } else {
             console.error(result.error)
         }
-        // navigate(`/clientes`)
+        handleVoltar()
     }
     const handleVoltar = () => {
         navigate(`/clientes`)
@@ -216,6 +267,22 @@ function Cliente() {
             }
             handleVoltar()
         }
+    }
+
+    const fetchContatos = async () => {
+        let response
+        try {
+            response = await getContatosPorID(cliente.id)
+            setReqstCliente(response)
+            console.warn(response)
+        } catch (error) {
+            console.error(error.message)
+            return
+        }
+        setContato(prevState => ({
+            ...prevState,
+            contatos: response.data,
+        }))
     }
     const fetchCliente = async (id) => {
         try {
@@ -329,30 +396,47 @@ function Cliente() {
                 <section id='secContatos'>
                     <div id='containerH2Novo'>
                         <h2>Contatos</h2>
-                        <button id='bttNovoCtt' onClick={changeNovoCliente}>novo</button>
+                        <button id='bttNovoCtt' onClick={() => { handleViewContContato('novo')}}>novo</button>
                     </div>
                     <div id='listContatos'>
                     {
                         !cliente ? '' :
                         cliente.contatos.map(contato => (
-                        <div id={`contato${contato.id}`} className='contato fechado' key={contato.id}>
-                            <button className='contatoHeader'
-                            onClick={() => {verContato(contato.id)}}>
-                                <img id={`img${contato.id}`} src={Down} alt="abrir"/>
-                                <div className='nome'>{contato.nome}</div>
-                                <div className='contatoDescricao'>{contato.descricao}</div>
-                                
-                            </button>
-                            <div className='contatoBody'>
-                                <div className='contatoTelefone'>
-                                    {contato.telefone}
-                                    
+
+                            <div id={`contato${contato.id}`} className='contato fechado' key={contato.id}>
+                                <div className='contatoHeader'
+                                >
+                                    <div className='divLeftContato'>
+                                        <img 
+                                            id={`img${contato.id}`} 
+                                            src={Down} alt="abrir"
+                                            onClick={() => {verContato(contato.id)}}/>
+                                        <div className='nome'>{contato.nome}</div>
+                                    </div>
+                                    <div className='bttsContato'>
+                                        <button className='contatoEdit'
+                                        onClick={() => {handleViewContContato(contato.id)}}>
+                                            Editar
+                                        </button>
+                                        <button className='contatoExcluir'
+                                        onClick={() => {
+                                            handleDeletarContato(contato.id)
+                                        }}>
+                                            Excluir
+                                        </button>
+                                    </div>
                                 </div>
-                                <div className='contatoEmail'>
-                                    {contato.email}
+                                <div className='contatoBody'>
+                                    <div className='contatoDescricao'>{contato.descricao}</div>
+                                    <div className='contatoTelefone'>
+                                        {contato.telefone}
+                                        
+                                    </div>
+                                    <div className='contatoEmail'>
+                                        {contato.email}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         ))
                     }
                     </div>
@@ -367,7 +451,7 @@ function Cliente() {
                 </section>
             </main>
             {
-                !viewNovoContato ? '' :
+                !viewContContato ? '' :
                 <div id='shadowBG'>
                     <section id='secNovoCliente'>
                         <h2>{`Novo Contato`}</h2>
@@ -397,7 +481,7 @@ function Cliente() {
                             onChange={(e) => handleEditContato(e.target.value, "telefone")}/>
                         </div>
                         <div>
-                            <button onClick={changeNovoCliente}>cancelar</button>
+                            <button onClick={handleViewContContato}>cancelar</button>
                             <button onClick={handleAddContato}>Adicionar contato</button>
                         </div>
                     </section>

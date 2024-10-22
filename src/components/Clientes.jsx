@@ -1,5 +1,5 @@
 
-import {getClientes} from '../services/clientesAPI.js'
+import {getClientes, postCliente} from '../services/clientesAPI.js'
 
 import Nav from './public/Nav'
 import Loading from './public/Loading.jsx'
@@ -13,17 +13,84 @@ function Clientes() {
     const navigate = useNavigate();
     const [reqstClientes, setReqstClientes] = useState()
     const [clientes, setClientes] = useState()
+    const [novoCliente, setNovoCliente] = useState(null)
+    const [showNovoCliente, setShowNovoCliente] = useState(null)
+    const [mensagem, setMensagem] = useState(null)
 
-    const handleCreateClick = () => {
-        navigate(`/cliente`)
+    const handleCancelar = () => {
+        setShowNovoCliente(null)
+        setNovoCliente(null)
     }
-    const handleEditClick = (idCliente) => {
+    const handleCriarCliente = async () => {
+        if (novoCliente.nome == '' ) {
+            setMensagem('O nome do cliente é obrigatório.')
+            setTimeout(() => {
+                setMensagem(null)
+            }, 5000)
+            return 
+        }
+        if ( novoCliente.cnpj.length != 14) {
+            // TODO dá pra adicionar uma verificação de CNPJ por api
+            setMensagem('CNPJ inválido')
+            setTimeout(() => {
+                setMensagem(null)
+            }, 5000)
+            return 
+        }
+        let result
+        try {
+            result = await postCliente(novoCliente)
+            console.warn(result)
+        } catch (err) {
+            console.error(err)
+        }
+        if(result.success) {
+            handleEditCliente(result.response.data.id)
+        } else {
+            window.alert("Erro ao criar este cliente.")
+            console.log(result.error)
+        }
+    }
+    const handleShowNovoCliente = () => {
+        setNovoCliente({
+            nome: "novo cliente",
+            cnpj: "",
+            contatos: [
+                // TODO ver se consegue mudar para permitir enviar novos clientes sem contato
+                {
+                    nome: "contato obrigatório",
+                    descricao: "todo cliente deve ter ao menos 1 contato",
+                    telefone: "",
+                    email: ""
+                }
+            ],
+            endereco: {
+                cep: "",
+                logradouro: "",
+                numero: "",
+                bairro: "",
+                cidade: "",
+                uf: "",
+                complemento: ""
+            }
+        })
+        setShowNovoCliente(true)
+        
+        //navigate(`/cliente`)
+    }
+    const handleEditCliente = (idCliente) => {
         navigate(`/cliente?id=${idCliente}`)
     }
     const formatCNPJ = (cnpj) => {
         if (!cnpj) return ""
         const cnpjLimpo = cnpj.replace(/\D/g, '')
         return cnpjLimpo.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, "$1.$2.$3/$4-$5")
+    }
+    const handleEditDado = (valor, field) => {
+        setNovoCliente(prevState => ({
+            ...prevState,
+            [field]: valor,
+        }))
     }
     const fetchClientes = async () => {
         try {
@@ -48,8 +115,7 @@ function Clientes() {
             <section id='secListClientes'>
                 <div id='tabelaClientes'>
                     <div id='containerH2Novo'>
-                        <h2>Clientes</h2>
-                        <button onClick={() => handleCreateClick(null)}>Novo cliente</button>
+                        <button onClick={() => handleShowNovoCliente()}>Novo cliente</button>
                     </div>
                     <div id='cabecalho'>
                         <div id='cNome'>nome</div>
@@ -68,7 +134,7 @@ function Clientes() {
                                     { formatCNPJ(cliente.cnpj) }
                                 </div>
                                 <div className='endereco'>endereço talvez</div>
-                                <div className='options' onClick={() => handleEditClick(cliente.id)}>
+                                <div className='options' onClick={() => handleEditCliente(cliente.id)}>
                                     <img src={Edit} alt="" />
                                 </div>
                             </div>
@@ -78,6 +144,33 @@ function Clientes() {
                 </div>
             </section>
         </main>
+        {
+            !showNovoCliente ? '' :
+                <div id='shadowBG'>
+                    <div id='contNovoCliente'>
+                        <h2>Criando um novo cliente</h2>
+                        <div id='nome'>
+                            <label>Nome:</label>
+                            <input type="text" value={novoCliente.nome || ""}
+                            onChange={(e) => handleEditDado(e.target.value, "nome")}
+                            />
+                        </div>
+                        <div id='cnpj'>
+                            <label>CNPJ:</label>
+                            <input type="text" value={novoCliente.cnpj || ""}
+                            onChange={(e) => handleEditDado(e.target.value, 'cnpj')}
+                            />
+                        </div>
+                        {
+                            <p id='msgNovoCliente' style={{ visibility: mensagem ? 'visible' : 'hidden' }}>{mensagem || 'vazio'}</p>
+                        }
+                        <div id='contAcaoNovoCliente'>
+                            <button id='bttCancelar' onClick={handleCancelar}>Cancelar</button>
+                            <button id='bttSalvar' onClick={handleCriarCliente}>Salvar</button>
+                        </div>
+                    </div>
+                </div>
+        }
         </div>
     )
 }

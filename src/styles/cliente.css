@@ -254,37 +254,76 @@
                     box-sizing: border-box;
                     .contatoHeader {
                         all: unset;
-                        cursor: pointer;
                         display: flex;
                         align-items: center;
-                        justify-content: left;
-                        gap: 1rem   ;
+                        justify-content: space-between;
+                        gap: 1rem;
                         font-size: 0.9rem;
                         font-weight: 500;
-
 
                         padding: 0.2rem 0.5rem;
                         color: var(--salmao2);
                         background-color: var(--marrom);
-                        img {
-                            width: 1.7rem;
+
+                        .divLeftContato {
+                            display: flex;
+                            align-items: center;
+                            gap: 0.3rem;
+                            
+                            img {
+                                cursor: pointer;
+                                width: 1.7rem;
+                            }
+                            .nome {
+                            }
+                        } 
+                        .bttsContato {
+                            display: flex;
+                            gap: 0.5rem;
+                            button {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                cursor: pointer;
+                                font-size: 0.9rem;
+                                font-weight: 600;
+
+                                box-sizing: border-box;
+                                width: auto;
+                                height: auto;
+                                padding: 0.15rem 1rem;
+                                border: 0;
+                                border-radius: 0.3rem;
+                                color: var(--marrom1);
+                                background-color: var(--salmao1);
+
+                                transition: 150ms;
+                            }
+                            button:hover {
+                                background-color: var(--salmao3);
+                            }
                         }
                     }
                     .contatoBody {
                         grid-template-columns: 1fr 1fr;
                         grid-template-areas: 
+                        "descricao descricao"
                         "telefone email"
-                        "descricao descricao";
+                        ;
                         text-align: center;
                         background-color: var(--salmao3);
                         padding: 0.3rem 0.3rem;
                         border: 0.1rem solid var(--marrom);
+                        border-top: 0;
                         font-size: 0.9rem;
                         .contatoTelefone {
                             grid-area: telefone;
                         }
                         .contatoEmail {
                             grid-area: email;
+                        }
+                        .contatoDescricao {
+                            grid-area: descricao;
                         }
                     }
                 }
@@ -321,6 +360,8 @@
         height: 100%;
         box-sizing: border-box;
         #secNovoCliente {
+            display: flex;
+            flex-direction: column;
             padding: 1rem;
             border: 0.1rem solid var(--marrom);
             border-radius: 10px;

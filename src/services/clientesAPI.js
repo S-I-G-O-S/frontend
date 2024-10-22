@@ -44,11 +44,11 @@ export const deleteCliente = async (id) => {
     }
 }
 
-export const postCliente = async (contato) => {
+export const postCliente = async (cliente) => {
     try {
-        const response = await axios.post(`${config.url}/api/clientes`, contato)
+        const response = await axios.post(`${config.url}/api/clientes`, cliente)
         
-        return { success: true, data: response }
+        return { success: true, response: response }
     } catch (error) {
         return {
             success: false,
@@ -59,12 +59,72 @@ export const postCliente = async (contato) => {
 
 export const putCliente = async (cliente) => {
     try {
-        const response = await axios.put(`${config.url}/api/clientes`, cliente)
+        const response = await axios.put(`${config.url}/api/clientes`, {
+            id: cliente.id,
+            nome: cliente.nome,
+            cnpj: cliente.cnpj,
+            endereco: {
+                cep: cliente.endereco.cep,
+                logradouro: cliente.endereco.logradouro,
+                numero: cliente.endereco.numero,
+                bairro: cliente.endereco.bairro,
+                cidade: cliente.endereco.cidade,
+                uf: cliente.endereco.uf,
+                complemento: cliente.endereco.complemento
+            }
+        })
         return { success: true, response: response }
     } catch (error) {
         return {
             success: false,
             error: `Erro ao salvar: ${error.response?.data?.message || error.message}`,
+        }
+    }
+}
+
+export const getContatosPorID = async (id) => {
+    try {
+        const response = await axios.get(`${config.url}/api/clientes/${id}/contatos`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        return response
+    } catch (error) {
+        throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
+    }
+}
+export const postContato = async (contato) => {
+    try {
+        const response = await axios.post(`${config.url}/api/clientes/contatos`, contato)
+        
+        return { success: true, response: response }
+    } catch (error) {
+        return {
+            success: false,
+            error: `Erro: ${error.response?.data?.message || error.message}`,
+        }
+    }
+}
+export const putContato = async (contato) => {
+    try {
+        const response = await axios.put(`${config.url}/api/clientes/contatos`, contato)
+        return { success: true, response: response }
+    } catch (error) {
+        return {
+            success: false,
+            error: `Erro ao salvar: ${error.response?.data?.message || error.message}`,
+        }
+    }
+}
+export const deleteContato = async (id) => {
+    try {
+        const response = await axios.delete(`${config.url}/api/clientes/contatos/${id}`)
+        return { success: true, response: response}
+    } catch (error) {
+        return {
+            success: false,
+            error: `Erro ao deletar: ${error.response?.data?.message || error.message}`,
         }
     }
 }
