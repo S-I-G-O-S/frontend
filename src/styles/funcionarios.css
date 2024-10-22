@@ -26,14 +26,14 @@
 #pageFuncionarios {
     display: grid;
     grid-template-columns: max-content auto;
-    grid-template-rows: 3rem auto;
+    grid-template-rows: 3rem calc(100vh - 3rem);
     grid-template-areas: 
     "nav header"
     "nav main";
     padding: 0;
     margin: 0;
     min-height: 100vh;
-    width: 100%;
+    min-width: 100vw;
     background-color: #F2E8DF;
     box-sizing: border-box;
     
@@ -42,7 +42,7 @@
         width: 100%;
         grid-area: main;
         box-sizing: border-box;
-        padding: 1rem 2rem;
+        padding: 1rem;
 
         #secList {
             grid-area: sec1;
@@ -52,58 +52,43 @@
             border: 0.1rem solid var(--marrom);
             border-radius: 0.4rem;
             box-sizing: border-box;
-            h2 {
-                font-size: 1.1rem;
-                color: var(--marrom);
-                margin: 0;
-                
-            }
-            #containerH2Criar {
+            #contEspecsNovoFunc {
                 display: flex;
-                flex-direction: row;
                 align-items: center;
-                justify-content: space-between;
-                height: 2rem;
+                height: auto;
+                gap: 1rem;
                 margin-bottom: 1.5rem;
-                #contEspecsNovoFunc {
+                .btt {
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    height: 100%;
-                    gap: 1rem;
-                    
-                    .btt {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        cursor: pointer;
-                        text-align: center;
-                        font-size: 0.9rem;
-                        font-weight: 600;
+                    cursor: pointer;
+                    text-align: center;
+                    font-size: 0.9rem;
+                    font-weight: 600;
 
-                        box-sizing: border-box;
-                        width: auto;
-                        height: 1.5rem;
-                        padding: 0.1rem 1rem;
-                        border: 0.1rem solid var(--marrom);
-                        border-radius: 0.3rem;
-                        color: var(--salmao2);
-                        background-color: var(--marrom);
+                    box-sizing: border-box;
+                    width: auto;
+                    height: auto;
+                    padding: 0.2rem 1rem;
+                    border: 0.1rem solid var(--marrom);
+                    border-radius: 0.3rem;
+                    color: var(--salmao2);
+                    background-color: var(--marrom);
 
-                        transition: 150ms;
+                    transition: 150ms;
 
-                        #goToEspecialidades {
-                            all: unset;
-                        }
+                    #goToEspecialidades {
+                        all: unset;
                     }
-                    .btt:hover {
-                        padding: 0.1rem 2rem;
-                    }
+                }
+                .btt:hover {
+                    padding: 0.2rem 2rem;
                 }
             }
             #titleList {
                 display: grid;
-                grid-template-columns: 3fr 3fr 3fr 2fr 3fr 1fr 1fr;
+                grid-template-columns: minmax(10rem, 3fr) minmax(7rem, 3fr) minmax(10rem, 3fr) minmax(5rem, 2fr) minmax(7rem, 3fr) 3rem 3rem;
                 background-color: var(--marrom);
                 padding: 0.2rem 0;
                 padding-right: 1.1rem;
@@ -112,29 +97,35 @@
                     font-size: 1rem;
                     text-align: center;
                     color: var(--salmao2);
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
             }
             #listFuncs {
-                /* TODO rolagem lateral ao quebrar a tabela */
                 display: flex;
                 flex-direction: column;
                 
                 background-color: var(--branco);
 
                 overflow-y: scroll;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
                 box-sizing: border-box;
                 max-height: 69vh;
                 
                 border: 0.1rem solid var(--marrom);
                 border-top: 0;
+                white-space: nowrap;
                 .funcs {
                     border-top: 0.1rem solid var(--marrom);
                     .cardFunc {
                         display: grid;
-                        grid-template-columns: 3fr 3fr 3fr 2fr 3fr 1fr 1fr;
+                        grid-template-columns: minmax(10rem, 3fr) minmax(7rem, 3fr) minmax(10rem, 3fr) minmax(5rem, 2fr) minmax(7rem, 3fr) 3rem 3rem;
                         grid-template-areas: 
                         "nome cell ultAtv cargo status setaSkillsFunc options";
 
+                        /* min-width: 35rem; */
                         box-sizing: border-box;
                         padding: 0.1rem 0;
                         
@@ -146,15 +137,15 @@
                             display: flex;
                             align-items: center;
                             justify-content: center;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
                         }
                         .nomeFunc {
                             grid-area: nome;
                             display: flex;
                             height: 1.5rem;
                             max-height: 2rem;
-                            white-space: nowrap;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
                         }
                         .cellFunc {
                             grid-area: cell;
@@ -162,23 +153,14 @@
                             height: 1.5rem;
                             align-items: self-start;
                             max-height: 2.5rem;
-                            white-space: nowrap;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
                         }
                         .ultAtvFunc {
                             grid-area: ultAtv;
                             overflow-y: hidden;
                             max-height: 1.5rem;
-                            white-space: nowrap;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
                         }
                         .cargoFunc {
                             grid-area: cargo;
-                            white-space: nowrap;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
                             max-height: 2rem;
                         }
                         .statusFunc {
@@ -238,9 +220,31 @@
         }
     }
 }
-@media screen and (width <= 1000px) {
+@media screen and (width <= 1024px) {
     #pageFuncionarios >
     #mainFuncionarios {
-        padding: 1rem 0.5rem;
+        padding: 0.5rem;
+        /* #secList {
+            #listFuncs {
+                overflow: scroll;
+            }
+        } */
+    }
+}
+@media screen and (width <= 600px) {
+    #pageFuncionarios >
+    #mainFuncionarios {
+        padding: 0.1rem;
+        #secList {
+            #contEspecsNovoFunc {
+                flex-direction: column;
+                gap: 0.2rem;
+                margin-bottom: 0.5rem;
+                .btt:hover {
+                    padding: 0.2rem 1rem;
+                }
+            }
+            
+        }
     }
 }

@@ -6,6 +6,7 @@ import homeIcon from '../../assets/homeIcon.png'
 import funcsIcon from '../../assets/funcsIcon.png'
 import clientesIcon from '../../assets/clientesIcon.png'
 import ordensIcon from '../../assets/ordensIcon.png'
+import especsIcon from '../../assets/tag.png'
 import { useEffect, useState } from 'react'
 
 function Nav() {
@@ -76,6 +77,15 @@ function Nav() {
                     >
                     <img src={ordensIcon} alt="ordens" />
                     <p className='nomeGoTo' id='goToOrdensP'>ordens</p>
+                </NavLink>
+                <NavLink 
+                    className="links" 
+                    id='goToEspecs' 
+                    to="/especialidades"
+                    activeClassName="active" 
+                    >
+                    <img src={especsIcon} alt="ordens" />
+                    <p className='nomeGoTo' id='goToEspecsP'>especialidades & serviços</p>
                 </NavLink>
             </div>
         </nav>

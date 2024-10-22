@@ -121,20 +121,17 @@ function Funcionarios() {
         <Nav></Nav>
         <main id='mainFuncionarios'>
             <section id='secList'>
-                <div id='containerH2Criar'>
-                    <h2>Funcionários</h2>
-                    <div id='contEspecsNovoFunc'>
-                        <button className='btt' onClick={() => goToEspecialidades()}>
-                                Especialidades e Serviços
-                        </button>
-                        <button className='btt'
-                        onClick={() => handleCreateClick()}>Novo Funcionário</button>
-                    </div>
+                <div id='contEspecsNovoFunc'>
+                    <button className='btt' onClick={() => goToEspecialidades()}>
+                            Especialidades e Serviços
+                    </button>
+                    <button className='btt'
+                    onClick={() => handleCreateClick()}>Novo Funcionário</button>
                 </div>
                 <div id='titleList'>
                     <div className='nomeTitle'>nome</div>
                     <div className='cellTitle'>celular</div>
-                    <div>Ultima atividade</div>
+                    <div className='ultAtvTitle'>Ultima atividade</div>
                     <div className='cargoTitle'>cargo</div>
                     <div className='statusTitle'>status</div>
                 </div>

@@ -8,6 +8,7 @@ import Nav from '../public/Nav'
 import Header from '../public/Header'
 import { useLocation, useNavigate  } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import Loading from '../public/Loading.jsx'
 // import { useQuery } from ‘react-query’
 
 function Funcionario() {
@@ -243,8 +244,8 @@ function Funcionario() {
             <Header titulo={
                 idFuncionario !== null
                 ? ( !funcionario ? 
-                    `Editando funcionário` :
-                    `Editando funcionário "${funcionario.nome}"`
+                    `Editando funcionário(a)` :
+                    `Editando funcionário(a) "${funcionario.nome}"`
                 )
                 : 'Novo funcionário'
             }>
@@ -254,7 +255,7 @@ function Funcionario() {
             {
                 !funcionario ? 
                 <section id='secInfos'>
-                    <h2>carregando...</h2>
+                    <Loading></Loading>
                 </section> :
                 <section id='secInfos'>
                     <h2>Informações gerais</h2>
@@ -373,7 +374,7 @@ function Funcionario() {
                         />
                         <datalist id='dtListEspecialidades'>
                             {
-                                !especialidades ? "" : 
+                                !especialidades ? '' : 
                                 especialidades
                                     .map(espec => (
                                         <option key={espec.id} value={espec.nome}>
@@ -388,7 +389,7 @@ function Funcionario() {
                         {/* listagem  */}
                         {
                             !funcionario || !especialidades ? (
-                                <p>Carregando...</p>
+                                <Loading></Loading>
                             ) : ('id' in funcionario) ? (
                                 funcionario.especialidades && funcionario.especialidades.length > 0 ? (
                                     funcionario.especialidades.map(espec => (

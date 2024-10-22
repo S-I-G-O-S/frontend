@@ -273,9 +273,12 @@ function Especialidades() {
         setTipoJanela(null)
     }
     const handleAttLista = () => {
-        fetchEspecialidades()
-        fetchServicos()
-    } 
+        const fetchData = async () => {
+            fetchEspecialidades()
+            fetchServicos()
+        }
+        fetchData()
+    }
     const fetchEspecialidades = async () => {
         try {
             const response = await getEspecialidades()
@@ -290,6 +293,7 @@ function Especialidades() {
             const data = await getServicos()
             setReqstServicos(data)
             setServicos(data.content)
+        
         } catch (error) {
             setErro(error.message)
         }
@@ -437,11 +441,11 @@ function Especialidades() {
                             </div>
                         </div>
                         <div id='contFimAcao'>
-                        <button onClick={handleCancel}>cancelar</button>
-                        <button onClick={handleSalvar}>salvar</button>
+                        <button id='bttCancelar' onClick={handleCancel}>cancelar</button>
+                        <button id='bttSalvar' onClick={handleSalvar}>salvar</button>
                         {
                             especAberta.id == "nova" ? '' :
-                            <button onClick={handleDeletar}>deletar</button>
+                            <button id='bttExcluir' onClick={handleDeletar}>deletar</button>
                         }
                         </div>
                     </section> :
@@ -472,11 +476,11 @@ function Especialidades() {
                                 <p>lugar para relacionar especialidades</p>
                             </div>
                             <div id='contAcaoConfigServ'>
-                                <button onClick={handleCancel}>cancelar</button>
-                                <button onClick={handleSalvar}>salvar</button>
+                                <button id='bttCancelar' onClick={handleCancel}>cancelar</button>
+                                <button id='bttSalvar' onClick={handleSalvar}>salvar</button>
                                 {
                                     servicoAberto.id == "novo" ? '' :
-                                    <button onClick={handleDeletar}>deletar</button>
+                                    <button id='bttExcluir' onClick={handleDeletar}>deletar</button>
                                 }
                             </div>
                         </section>
