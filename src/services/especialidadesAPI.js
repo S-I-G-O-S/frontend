@@ -32,7 +32,7 @@ export const postEspecialidade = async (espec) => {
             descricao: espec.descricao,
             cor: espec.cor,
         })
-        return { success: true, data: response.data }
+        return { success: true, response: response }
     } catch (error) {
         return {
             success: false,
@@ -48,7 +48,7 @@ export const putEspecialidade = async (espec) => {
             descricao: espec.descricao,
             cor: espec.cor
         })
-        return { success: true, data: response.data }
+        return { success: true, response: response }
     } catch (error) {
         return {
             success: false,

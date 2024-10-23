@@ -472,7 +472,7 @@ function Cliente() {
                         </div>
                         <div id='emailInfoNovoContato'>
                             <label>Email:</label>
-                            <input type="text" value={contato.email || ""}
+                            <input type='email' value={contato.email || ""}
                             onChange={(e) => handleEditContato(e.target.value, "email")}/>
                         </div>
                         <div id='telefoneInfoNovoContato'>

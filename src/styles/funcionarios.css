@@ -187,33 +187,31 @@
                         justify-content: center;
                         gap: 1rem;
                         padding: 0 0.1rem 0.3rem 0.1rem;
+                        box-sizing: border-box;
                         .skillsFunc {
                             font-size: 0.8rem;
                             font-weight: 500;
                             color: var(--branco);
-
+                            
                             border: 0.1rem solid black;
                             border-radius: 5px;
                             padding: 0.15rem 0.5rem;
                         }
-                        .skill1 {
-                            background-color: #e25353;
-                        }   
-                        .skill2 {
-                            background-color: #063504;
-                        }
-                        .skill3 {
-                            background-color: #610404;
-                        }
-                        .skill4 {
-                            background-color: #090785;
-                        }
                     }
                     .skillsAberto {
                         display: flex;
+                        animation: loop 5s linear infinite; 
                     }
                     .skillsFechado {
                         display: none;
+                    }
+                    @keyframes loop {
+                        0% {
+                            transform: translateX(1%);
+                        }
+                        100% {
+                            transform: translate(50%);
+                        }
                     }
                 }
             }

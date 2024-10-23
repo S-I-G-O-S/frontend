@@ -43,6 +43,18 @@
             width: 100%;
             box-sizing: border-box;
         }
+        #secInfosUser {
+            background-color: #d7ffe1;
+            h2 {
+                font-weight: 600;
+                font-size: 0.95rem;
+                text-align: left;
+                margin: 0 0 0.9rem 0.1rem;
+            }
+            p {
+                margin: 0;
+            }
+        }
         #secTecnicosDisponiveis {
             background-color: var(--salmao1);
             h2 {

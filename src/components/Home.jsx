@@ -6,13 +6,13 @@ import Loading from './public/Loading'
 
 
 function Home() {
-    // TODO Colocar mais conteudo como atalhos
     const [showUsuario, setShowUsuario] = useState(null)
     const [funcDisponiveis, setFuncDisponiveis] = useState(null)
     const [ordensAbertas, SetOrdensAbertas] = useState(null)
     const [ordensEmAtendimento, setOrdensEmAtendimento] = useState(null)
-
+    const [showInfosUser, setShowInfosUser] = useState(true)    // TODO Puxar do sessionStorage
     const fetchFuncs = async () => {
+        // TODO ja posso puxar os funcionarios disponiveis
         setFuncDisponiveis('vazio')
     }
     const fetchOrdens = async () => {
@@ -28,10 +28,13 @@ function Home() {
         <Header titulo={"Página inicial"}></Header>
         <Nav></Nav>
         <main id="mainHome">
-            {/* SEÇÃO DE ORDENS DE SERVIÇOS ABERTOS */}
-            
-            {/* SEÇÃO DE ORDENS DE SERVIÇOS SENDO ATENDIDAS */}
-            
+            {
+                !showInfosUser ? '' :
+                <section id='secInfosUser'>
+                    <h2>Usuario de teste</h2>
+                    <p>Você está logado como usuário de desenvolvimento.</p>
+                </section>
+            }
             {
                 !funcDisponiveis ? 
                 <Loading></Loading> :

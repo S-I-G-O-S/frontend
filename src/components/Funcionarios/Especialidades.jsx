@@ -114,6 +114,7 @@ function Especialidades() {
             //  TODO As cores não estão sendo atualizadas
                 result = await putEspecialidade(especAberta)
             }
+            console.warn(result.response)
             if (result.success) {
                 window.alert('Alterações salvas com sucesso!')
                 fecharEspec()

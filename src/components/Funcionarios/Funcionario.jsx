@@ -171,7 +171,6 @@ function Funcionario() {
         } else {
             console.warn("Debbug "+ viewSenha)
             if(viewSenha) {
-                //  TODO Endereço não está atualizando
                 result = await postFuncionario(funcionario, arrayEspecs)
             } else {
                 setViewSenha(true)
@@ -220,7 +219,7 @@ function Funcionario() {
             const response = await getFuncionarioPorID(idFuncionario)
             setFuncionario(response.data)
             setReqstFuncionarios(response)
-            console.warn(response)
+            // console.warn(response)
         } catch (error) {
             console.error(error.message)
         }
