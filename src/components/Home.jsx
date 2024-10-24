@@ -3,6 +3,7 @@ import Header from './public/Header'
 import '../styles/home.css'
 import { useEffect, useState } from 'react'
 import Loading from './public/Loading'
+import { getFuncionariosDisponiveis } from '../services/funcionariosAPI'
 
 
 function Home() {
@@ -10,126 +11,110 @@ function Home() {
     const [funcDisponiveis, setFuncDisponiveis] = useState(null)
     const [ordensAbertas, SetOrdensAbertas] = useState(null)
     const [ordensEmAtendimento, setOrdensEmAtendimento] = useState(null)
-    const [showInfosUser, setShowInfosUser] = useState(true)    // TODO Puxar do sessionStorage
+    const [showInfosUser, setShowInfosUser] = useState(true)
+    const [usuario, setUsuario] = useState()
+    
     const fetchFuncs = async () => {
-        // TODO ja posso puxar os funcionarios disponiveis
-        setFuncDisponiveis('vazio')
+        try {
+            const result = await getFuncionariosDisponiveis()
+            setFuncDisponiveis(result.data.content)
+            console.warn(result)
+        } catch (err) {
+            console.error(err)
+        }
     }
     const fetchOrdens = async () => {
         setOrdensEmAtendimento('vazio')
         SetOrdensAbertas('vazio')
     }
     useEffect(() => {
+        const storedUsuario = JSON.parse(sessionStorage.getItem('usuario'))
+        if (storedUsuario) {
+            setUsuario(storedUsuario)
+        } else {
+            setUsuario({cargo: 'adm'})
+        }
         fetchOrdens()
         fetchFuncs()
     }, [])
     return (
         <div id='pageHome'>
         <Header titulo={"Página inicial"}></Header>
-        <Nav></Nav>
+        <Nav cargo={usuario?.cargo || 'tecnico'}></Nav>
         <main id="mainHome">
             {
-                !showInfosUser ? '' :
-                <section id='secInfosUser'>
-                    <h2>Usuario de teste</h2>
-                    <p>Você está logado como usuário de desenvolvimento.</p>
-                </section>
-            }
-            {
-                !funcDisponiveis ? 
-                <Loading></Loading> :
-                (
-                    <section id='secTecnicosDisponiveis'>
-                        <h2>Tecnicos disponiveis</h2>
-                        <div id='listTecsDisp'>
-                        {
-                            funcDisponiveis == 'vazio' ? 'Nenhum técnico disponível' :
-                            funcDisponiveis.map(func => 
-                                <div id={`funcDisp${func.id}`} className="funcsDisp" key={func.id}>
-                                    <div className="nomeFunc">{func.nome}</div>
-                                </div>
+                !usuario ? '' : (
+                    <>
+                        {/* informações do usuário */}
+                        {showInfosUser && (
+                            <section id='secInfosUser'>
+                                <h2>Usuario de teste</h2>
+                                <p>Você está logado como usuário de desenvolvimento.</p>
+                            </section>
+                        )}
+
+                        {/* funcionários disponíveis se o usuário for 'base' ou 'adm' */}
+                        {(usuario.cargo === 'base' || usuario.cargo === 'adm') && (
+                            !funcDisponiveis ? 
+                            <Loading /> : (
+                                <section id='secTecnicosDisponiveis'>
+                                    <h2>Tecnicos disponiveis</h2>
+                                    <div id='listTecsDisp'>
+                                        {funcDisponiveis === 'vazio' ? 'Nenhum técnico disponível' : (
+                                            funcDisponiveis.map(func => (
+                                                <div id={`funcDisp${func.id}`} className="funcsDisp" key={func.id}>
+                                                    <div className="nomeFunc">{func.nome}</div>
+                                                </div>
+                                            ))
+                                        )}
+                                    </div>
+                                </section>
                             )
-                        }
-                        </div>
-                    </section>
+                        )}
+
+                        {/* Ordens abertas e ordens em atendimento se o usuário for 'base' ou 'adm' */}
+                        {(usuario.cargo === 'base' || usuario.cargo === 'adm') && (
+                            <section id='secOrdens'>
+                                {/* Ordens Abertas */}
+                                {!ordensAbertas ? 
+                                <Loading /> : (
+                                    ordensAbertas === 'vazio' ? '' : (
+                                        <div id="contOrdensAbertas">
+                                            <h2>Ordens Abertas</h2>
+                                            {ordensAbertas.map(ordem => (
+                                                <div id={`ordemAberta${ordem.id}`} className="ordensAbertas ordens" key={ordem.id}>
+                                                    <div className="nomeCliente">{ordem.cliente.nome}</div>
+                                                    <div className="dataHora">{ordem.abertura}</div>
+                                                    <div className="local">{ordem.cliente.endereco}</div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )
+                                )}
+
+                                {/* Ordens em Atendimento */}
+                                {!ordensAbertas ? 
+                                <Loading /> : (
+                                    ordensEmAtendimento === 'vazio' ? '' : (
+                                        <div id="secOrdensSendoAtendidas">
+                                            <h2>Ordens em atendimento</h2>
+                                            {ordensEmAtendimento.map(ordem => (
+                                                <div id={`ordenSendoAtendida1${ordem.id}`} className="ordensSendoAtendidas ordens" key={ordem.id}>
+                                                    <div className="nomeCliente">{ordem.nome}</div>
+                                                    <div className="dataHora">{ordem.data}</div>
+                                                    <div className="local">{ordem.endereco}</div>
+                                                    <div className="tecnico">{ordem.tecnico}</div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )
+                                )}
+                            </section>
+                        )}
+                    </>
                 )
             }
-            {
-            ordensAbertas || ordensEmAtendimento ? 
-            // Teste
-            <section id='secOrdens'> 
-                <div id='contOrdensAbertas'>
-                    <h2>Ordens Abertas</h2>
-                    <div className="ordensAbertas ordens">
-                        <div className="nomeCliente">Nome do cliente</div>
-                        <div className="dataHora">data e hora</div>
-                        <div className="local">endereço do cliente</div>
-                    </div>
-                </div>
-                <div id="contOrdensSendoAtendidas">
-                    <h2>Ordens em atendimento</h2>
-                    <div className="ordensSendoAtendidas ordens">
-                        <div className="nomeCliente">Nome do cliente</div>
-                        <div className="dataHora">data e hora</div>
-                        <div className="local">endereço do cliente</div>
-                        <div className="tecnico">tecnico responsável    </div>
-                    </div>
-                    <div className="ordensSendoAtendidas ordens">
-                        <div className="nomeCliente">Nome do cliente</div>
-                        <div className="dataHora">data e hora</div>
-                        <div className="local">endereço com nome grande do cliente</div>
-                        <div className="tecnico">tecnico responsável    </div>
-                    </div>
-                </div>
-            </section> :
-            <section id='secOrdens'>
-            {
-                !ordensAbertas ? 
-                <Loading></Loading> :
-                (
-                    ordensAbertas == 'vazio' ? 
-                    <div id="contOrdensAbertas">
-                    
-                    </div> :
-                    <div id="contOrdensAbertas">
-                        <h2>Ordens Abertas</h2>
-                        {
-                            ordensAbertas.map(ordem => 
-                                <div id={`ordemAberta${ordem.id}`} className="ordensAbertas ordens" key={ordem.id}>
-                                    <div className="nomeCliente">{ordem.cliente.nome}</div>
-                                    <div className="dataHora">{ordem.abertura}</div>
-                                    <div className="local">{ordem.cliente.endereco}</div>
-                                </div>
-                            )
-                        }
-                    </div>
-                )
-            }
-            {
-                !ordensAbertas ? 
-                <Loading></Loading> :
-                (
-                    ordensEmAtendimento == 'vazio' ? 
-                    <div id="contOrdensSendoAtendidas">
-                    </div> :
-                    <div id="secOrdensSendoAtendidas">
-                        <h2>Ordens em atendimento</h2>
-                        {
-                            
-                            ordensEmAtendimento.map(ordem => 
-                                <div id={`ordenSendoAtendida1${ordem.id}`} className="ordensSendoAtendidas ordens" key={ordem.id}>
-                                    <div className="nomeCliente">{ordem.nome}</div>
-                                    <div className="dataHora">{ordem.data}</div>
-                                    <div className="local">{ordem.endereco}</div>
-                                    <div className="tecnico">{ordem.tecnico}</div>
-                                </div>
-                            )
-                        }
-                    </div>
-                )
-            }
-            </section>
-            }
+
         </main>
         </div>
     )

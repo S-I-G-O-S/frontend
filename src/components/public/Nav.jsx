@@ -9,15 +9,15 @@ import ordensIcon from '../../assets/ordensIcon.png'
 import especsIcon from '../../assets/tag.png'
 import { useEffect, useState } from 'react'
 
-function Nav() {
+function Nav(cargo) {
     const [sessionConfig, setSessionConfig] = useState({
         abertoNav: true
     })
     const saveSessionConfig = (config) => {
-        sessionStorage.setItem('sessionConfig', JSON.stringify(config))
+        sessionStorage.setItem('preferencias', JSON.stringify(config))
     }
     useEffect(() => {
-        const storedSessionConfig = JSON.parse(sessionStorage.getItem('sessionConfig'))
+        const storedSessionConfig = JSON.parse(sessionStorage.getItem('preferencias'))
         if (storedSessionConfig) {
             setSessionConfig(storedSessionConfig)
         }
@@ -52,6 +52,11 @@ function Nav() {
                     <img src={homeIcon} alt="home" />
                     <p className='nomeGoTo' id='goToHomeP'>home</p>
                 </NavLink>
+                
+                {
+                    
+                cargo.cargo == 'base' && cargo.cargo == 'adm' ? '' :
+                <> 
                 <NavLink 
                     className={({ isActive }) => (isActive ? "links active" : "links ")}
                     id='goToFuncionarios' 
@@ -88,6 +93,8 @@ function Nav() {
                     <img src={especsIcon} alt="ordens" />
                     <p className='nomeGoTo' id='goToEspecsP'>especialidades & serviços</p>
                 </NavLink>
+                </>
+                }
             </div>
         </nav>
     )

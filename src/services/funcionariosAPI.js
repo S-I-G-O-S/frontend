@@ -8,11 +8,51 @@ export const getFuncionarios = async () => {
                 'Content-Type': 'application/json',
             },
         })
-        return response.data
+        return response
     } catch (error) {
         throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
     }
 }
+export const getFuncionariosDisponiveis = async () => {
+    try {
+        const response = await axios.get(`${config.url}/api/funcionarios?disponiveis=true&ativo=true`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        return response
+    } catch (error) {
+        throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
+    }
+}
+export const getPageFuncionarios = async (pagina, filtros) => {
+    let filtragem = ''
+    if( filtros.nome || 
+        filtros.cargo || 
+        filtros.especialidade ||
+        filtros.disponivel ||
+        filtros.ativo) {    
+        filtragem = `?
+            ${!filtros.nome ? '' : `nome$={filtros.nome}`}
+            ${!filtros.cargo ? '' : `cargo=${filtros.cargo}`}
+            ${!filtros.especialidade ? '' : `especialidade=${filtros.especialidade}`}
+            ${!filtros.disponivel ? '' : `disponivel=${filtros.disponivel}`}
+            ${!filtros.ativo ? '' : `ativo=${filtros.ativo}`}
+        `
+        console.log(filtragem)
+    }
+    try {
+        const response = await axios.get(`${config.url}/api/funcionarios?page=${pagina}&size=15`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        return response
+    } catch (error) {
+        throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
+    }
+}
+
 export const getFuncionarioPorID = async (id) => {
     try {
         const response = await axios.get(`${config.url}/api/funcionarios/${id}`, {

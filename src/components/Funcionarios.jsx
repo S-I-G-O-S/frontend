@@ -4,7 +4,7 @@ import simuGetEspecialidades from '../dadosSimulados/especialidades.js'
 import simuGetFuncionarios from '../dadosSimulados/funcionarios.js'
 
 // Funções de requisições
-import {getFuncionarios} from '../services/funcionariosAPI.js'
+import {getFuncionarios, getPageFuncionarios} from '../services/funcionariosAPI.js'
 import {getEspecialidades} from '../services/especialidadesAPI.js'
 
 // Estilização
@@ -28,6 +28,13 @@ function Funcionarios() {
     const [funcionarios, setFuncionarios] = useState()
     const [especialidades, setEspecialidades] = useState()
     const [erro, setErro] = useState()
+    const [filtros, setFiltros] = useState({
+        nome: null,
+        cargo: null,
+        especialidade: null,
+        disponivel: null,
+        ativo: null,
+    })
 
     const navigate = useNavigate()
     const goToEspecialidades = () => {
@@ -82,34 +89,46 @@ function Funcionarios() {
             const response = await getEspecialidades()
             setReqstEspecialidades(response)
             setEspecialidades(response.data.content)
-            console.warn(response.data.content)
             console.warn(response)
         } catch (error) {
             console.error(error.message)
         }
     }
-    const fetchFuncionarios = async () => {
+    const fetchFuncionarios = async (pagina) => {
         try {
-            const data = await getFuncionarios()
-            ///setReqstFuncionarios(data)
-            setFuncionarios(data.content)
-            console.log(data.content)
+            const result = await getPageFuncionarios(pagina, filtros)
+            setReqstFuncionarios(result)
+            setFuncionarios(result.data.content)
+            console.warn(result)
         } catch (error) {
             setErro(error.message)
         }
     }
+    const handlePageClick = (pagina) => {
+        fetchFuncionarios(pagina)
+    }
+
+    const renderPaginas = () => {
+        const totalPages = reqstFuncionarios.data.page.totalPages
+        let render = []
+        for (let pags = 0; pags < totalPages; pags++) {
+            render.push(
+                <button 
+                    key={pags} 
+                    className="pagina-item"
+                    onClick={() => handlePageClick(pags)}
+                >
+                    {pags + 1}
+                </button>
+            )
+        }
+        return render
+    }
+
     useEffect(() => {
         const fetchData = async () => {
-            if (config.simularDados) {
-                setReqstEspecialidades(simuGetEspecialidades)
-                setReqstFuncionarios(simuGetFuncionarios)
-
-                setFuncionarios(simuGetFuncionarios.content)
-                setEspecialidades(simuGetEspecialidades.content)
-            } else {
-                fetchFuncionarios()
-                fetchEspecialidades()
-            }
+            fetchFuncionarios(0)
+            fetchEspecialidades()
         }
         fetchData()
     }, [])
@@ -180,7 +199,12 @@ function Funcionarios() {
                         ))
                     }
                 </div>
-                <div id='contPagesFuncionarios' className='paginacao'></div>
+                <div id='contPagesFuncionarios' className='paginacao'>
+                    {
+                        !reqstFuncionarios ? '' :
+                        renderPaginas()
+                    }
+                </div>
             </section>
         </main>
         </div>

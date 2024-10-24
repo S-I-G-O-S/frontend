@@ -16,7 +16,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 0.2rem;
-    padding: 0 1rem;
+    padding: 0 2rem 0 1rem;
     height: 3rem;
 
     z-index: 96;
@@ -28,19 +28,67 @@
         margin-left: 2rem;
         color: var(--salmao1);
     }
-    #sair {
-        cursor: pointer;
-        font-size: 0.95rem;
-        font-weight: 500;
-        text-decoration: none;
-        text-align: center;
-        padding: 0.2rem;
-        width: 5rem;
-        border-radius: 0.3rem;
-        color: var(--marrom);
-        background-color: var(--salmao1);
-    }
-    #sair:hover {
-        background-color: var(--salmao2);
+    #headerRight {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        #contIconUser {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            height: 1.5rem;
+            width: 1.5rem;
+            background-image: url(../../assets/userIcon.png);
+            background-size: 100%;
+        }
+        #contIconUser:hover {
+            background-image: url(../../assets/userIconHover.png);
+        }
+        #sair {
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-decoration: none;
+            text-align: center;
+            padding: 0.2rem 0.7rem;
+            width: auto;
+            border-radius: 0.3rem;
+            color: var(--marrom);
+            background-color: var(--salmao1);
+        }
+        #sair:hover {
+            background-color: var(--salmao2);
+        }
+        #contConfigUser {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+
+            position: fixed;
+            top: 3rem;
+            right: 4rem;
+            
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--marrom);
+            border-top: 0;
+            box-shadow: 0 0.6rem 0.8rem rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            background-color: var(--branco);
+
+            #nomeUsuario {
+                font-size: 0.8rem;
+                font-weight: 500;
+                color: var(--marrom);
+                margin: 0;
+            }
+            #toUserConfig {
+                color: var(--marrom);
+                text-decoration: none;
+            }
+            #toUserConfig:hover {
+                text-decoration: underline;
+            }
+            
+        }
     }
 }

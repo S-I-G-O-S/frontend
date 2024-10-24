@@ -7,6 +7,7 @@ import Especialidades from "./components/Funcionarios/Especialidades";
 import Ordens from "./components/Ordens";
 import Clientes from "./components/Clientes";
 import Cliente from "./components/Clientes/Cliente"
+import UserConfig from "./components/UserConfig";
 
 
 function AppRoutes() {
@@ -15,6 +16,7 @@ function AppRoutes() {
             <Routes>
                 <Route path="/" element={ <Login/> }></Route>
                 <Route path="/home" element={ <Home/> }></Route>
+                <Route path="/usuario" element={ <UserConfig/> }></Route>
                 <Route path="/funcionarios" element={ <Funcionarios/> }></Route>
                 <Route path="/funcionario" element={ <Funcionario/> }></Route>
                 <Route path="/especialidades" element={ <Especialidades/> }></Route>

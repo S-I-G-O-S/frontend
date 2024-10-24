@@ -107,7 +107,6 @@ function Funcionario() {
         }
     }
     const handleChangeDados = (value, field) => {
-        if(field == 'cargo') { console.warn('mudando cargo para: '+ value) }
         setFuncionario(prevState => ({
             ...prevState,
             [field]: value,

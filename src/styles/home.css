@@ -49,9 +49,10 @@
                 font-weight: 600;
                 font-size: 0.95rem;
                 text-align: left;
-                margin: 0 0 0.9rem 0.1rem;
+                margin: 0 0 0.5rem;
             }
             p {
+                font-size: 0.9rem;
                 margin: 0;
             }
         }
@@ -62,6 +63,12 @@
                 font-size: 0.95rem;
                 text-align: left;
                 margin: 0 0 0.9rem 0.1rem;
+            }
+            #listTecsDisp {
+                display: flex;
+                .funcsDisp {
+                    width: auto;
+                }
             }
         }
         #secOrdens {

@@ -275,8 +275,13 @@ function Especialidades() {
     }
     const handleAttLista = () => {
         const fetchData = async () => {
-            fetchEspecialidades()
-            fetchServicos()
+            if(layoutEspecServicos == 'layoutEspecs') {
+                await fetchEspecialidades()
+                await fetchServicos()
+            } else {
+                await fetchServicos()
+                await fetchEspecialidades()
+            }
         }
         fetchData()
     }
@@ -328,10 +333,6 @@ function Especialidades() {
                         Nova Especialidade</button>
                     <button onClick={() => {abrirServico("novo")}}>Novo Serviço</button>
                 </div>
-                {/* 
-                    Nome ASC/DESC
-                    Mudar layout
-                */}
                 <div id='contFiltrosEspecServ'>
                     <div id='orderFiltrosEspecServ'>
                         <p>Ordernar por:</p>

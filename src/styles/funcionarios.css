@@ -39,6 +39,8 @@
     
     #mainFuncionarios {
         display: flex;
+        flex-direction: column;
+        align-items: center;
         width: 100%;
         grid-area: main;
         box-sizing: border-box;
@@ -47,6 +49,7 @@
         #secList {
             grid-area: sec1;
             width: 100%;
+            max-width: 70rem;
             background-color: var(--salmao2);
             padding: 1rem;
             border: 0.1rem solid var(--marrom);
