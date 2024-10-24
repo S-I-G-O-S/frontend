@@ -20,7 +20,7 @@ function Header(props) {
                 <h1 className='tituloPag'>{props.titulo}</h1>
             </div>
             <div id='headerRight'>
-                <div id='contIconUser' onClick={handleViewConfiguser}>
+                <div id='contIconUser' onClick={handleViewConfiguser} >
                     
                 </div>
                 {
@@ -28,7 +28,7 @@ function Header(props) {
                     <div id='contConfigUser'>
                         <p id='nomeUsuario'>Usuário teste</p>
                         <p id='cargoUsuario'>{usuario.cargo}</p>
-                        <Link id='toUserConfig' to={'/usuario'}>usuário</Link>
+                        <Link id='toUserConfig' to={'/usuario'}>usuário </Link>
                     </div>
                 }
                 <Link id="sair" to="/">

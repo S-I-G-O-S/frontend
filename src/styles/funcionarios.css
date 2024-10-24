@@ -49,7 +49,7 @@
         #secList {
             grid-area: sec1;
             width: 100%;
-            max-width: 70rem;
+            max-width: 65rem;
             background-color: var(--salmao2);
             padding: 1rem;
             border: 0.1rem solid var(--marrom);
@@ -116,7 +116,7 @@
                 -webkit-overflow-scrolling: touch;
                 box-sizing: border-box;
                 max-height: 69vh;
-                
+                width: 100%;
                 border: 0.1rem solid var(--marrom);
                 border-top: 0;
                 white-space: nowrap;
@@ -189,12 +189,15 @@
                     .containerSkillsFunc {
                         justify-content: center;
                         gap: 1rem;
-                        padding: 0 0.1rem 0.3rem 0.1rem;
+                        padding: 0.2rem 0.1rem 0.5rem 0.1rem;
+                        border-top: 0.1rem solid var(--salmao1);
                         box-sizing: border-box;
+                        max-width: 100%;
+                        background-color: var(--salmao3);
+                        overflow-x: hidden;
                         .skillsFunc {
                             font-size: 0.8rem;
                             font-weight: 500;
-                            color: var(--branco);
                             
                             border: 0.1rem solid black;
                             border-radius: 5px;
@@ -205,16 +208,16 @@
                         display: flex;
                         animation: loop 5s linear infinite; 
                     }
-                    .skillsFechado {
-                        display: none;
-                    }
                     @keyframes loop {
                         0% {
-                            transform: translateX(1%);
+                            transform: translateX(0%);
                         }
                         100% {
-                            transform: translate(50%);
+                            transform: translate(100%);
                         }
+                    }
+                    .skillsFechado {
+                        display: none;
                     }
                 }
             }

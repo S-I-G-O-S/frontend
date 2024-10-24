@@ -9,14 +9,16 @@ import Header from '../public/Header'
 import { useLocation, useNavigate  } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Loading from '../public/Loading.jsx'
-// import { useQuery } from ‘react-query’
 
 function Funcionario() {
-    // const nomeCompleto = "Leonardo Martinez Nunes Barbosa Silva Almeida";
-    // const nomes = nomeCompleto.split(" "); // separa a string em um array
-    // const primeiroNome = nomes[0]; // primeiro elemento do array
-    // const ultimoNome = nomes[nomes.length - 1]; // último elemento do array
-    // const resultado = `${primeiroNome} ${ultimoNome}`
+    {/*
+    // TODO adicionar metodo p/ pegaro 1º e ultimo nome do funcionario
+    const nomeCompleto = "Leonardo Martinez Nunes Barbosa Silva Almeida";
+    const nomes = nomeCompleto.split(" "); // separa a string em um array
+    const primeiroNome = nomes[0]; // primeiro elemento do array
+    const ultimoNome = nomes[nomes.length - 1]; // último elemento do array
+    const resultado = `${primeiroNome} ${ultimoNome}`
+    */}
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search)
     let idFuncionario = searchParams?.get('id') ?? null

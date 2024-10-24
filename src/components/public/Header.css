@@ -64,12 +64,13 @@
             flex-direction: column;
 
             position: fixed;
-            top: 3rem;
-            right: 4rem;
+            top: 1.5rem;
+            right: 7.5rem;
             
             padding: 0.5rem 1rem;
             border: 1px solid var(--marrom);
             border-top: 0;
+            border-radius: 0.5rem 0 0.5rem 0.5rem;
             box-shadow: 0 0.6rem 0.8rem rgba(0, 0, 0, 0.1);
             z-index: 100;
             background-color: var(--branco);
@@ -89,6 +90,8 @@
                 margin-bottom: 0.5rem;
             }
             #toUserConfig {
+                font-size: 0.95rem;
+                text-align: center;
                 color: var(--marrom);
                 text-decoration: none;
             }
