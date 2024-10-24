@@ -62,7 +62,6 @@
         #contConfigUser {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
 
             position: fixed;
             top: 3rem;
@@ -77,9 +76,17 @@
 
             #nomeUsuario {
                 font-size: 0.8rem;
+                text-align: center;
                 font-weight: 500;
                 color: var(--marrom);
                 margin: 0;
+            }
+            #cargoUsuario {
+                font-size: 0.8rem;
+                text-align: center;
+                font-weight: 500;
+                margin: 0;
+                margin-bottom: 0.5rem;
             }
             #toUserConfig {
                 color: var(--marrom);

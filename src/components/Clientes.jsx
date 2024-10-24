@@ -16,7 +16,10 @@ function Clientes() {
     const [novoCliente, setNovoCliente] = useState(null)
     const [showNovoCliente, setShowNovoCliente] = useState(null)
     const [mensagem, setMensagem] = useState(null)
-
+    const [usuario, setUsuario] = useState(() => {
+        const storedUsuario = sessionStorage.getItem('usuario')
+        return storedUsuario ? JSON.parse(storedUsuario) : { cargo: 'dev' }
+    })
     const handleCancelar = () => {
         setShowNovoCliente(null)
         setNovoCliente(null)
@@ -114,9 +117,12 @@ function Clientes() {
             {/* Listagem */}
             <section id='secListClientes'>
                 <div id='tabelaClientes'>
-                    <div id='containerH2Novo'>
-                        <button onClick={() => handleShowNovoCliente()}>Novo cliente</button>
-                    </div>
+                    {
+                        usuario.cargo == 'adm' || usuario.cargo == 'dev' ?
+                        <div id='containerH2Novo'>
+                            <button onClick={() => handleShowNovoCliente()}>Novo cliente</button>
+                        </div> : ''
+                    }
                     <div id='cabecalho'>
                         <div id='cNome'>nome</div>
                         <div id='cCNPJ'>CNPJ</div>

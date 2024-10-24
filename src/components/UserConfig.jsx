@@ -5,27 +5,30 @@ import { useEffect, useState } from 'react'
 import Loading from './public/Loading'
 
 function UserConfig() {
-    const [usuario, setUsuario] = useState({
+    const [usuario, setUsuario] = useState(() => {
+        const storedUsuario = sessionStorage.getItem('usuario')
+        return storedUsuario ? JSON.parse(storedUsuario) : { cargo: 'dev' }
     })
-    // const saveSessionConfig = (usuario) => {
-    //     sessionStorage.setItem('usuario', JSON.stringify(usuario))
-    // }
     const handleChangeUsuario = (value, field) => {
         setUsuario(prevState => ({
             ...prevState,
             [field]: value,
         }))
-        salvarUsuario()
-    }
-    const salvarUsuario = () => {
-        sessionStorage.setItem('usuario', JSON.stringify())
     }
     useEffect(() => {
-        const storedUsuario = JSON.parse(sessionStorage.getItem('usuario'))
-        console.log(storedUsuario.cargo)
-        if (storedUsuario) {
-            setUsuario(storedUsuario)
+        if (usuario) {
+            sessionStorage.setItem('usuario', JSON.stringify(usuario))
         }
+    }, [usuario])
+    useEffect(() => {
+        // const storedUsuario = JSON.parse(sessionStorage.getItem('usuario'))
+        // if (storedUsuario) {
+        //     console.log(storedUsuario.cargo)
+        //     setUsuario(storedUsuario)
+        // } else {
+        //     setUsuario({cargo: 'adm'})
+        //     sessionStorage.setItem('usuario', JSON.stringify({cargo: 'adm'}))
+        // }
     }, [])
     return (
         <div id='pagePerfilConfig'>
@@ -43,6 +46,7 @@ function UserConfig() {
                         <option value="tecnico">Técnico</option>
                         <option value="base">Base</option>
                         <option value="adm">ADM</option>
+                        <option value="dev">Dev</option>
                     </select>
                 </div>
             </section>

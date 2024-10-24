@@ -3,7 +3,7 @@ import Login from "./components/Login"
 import Home from "./components/Home";
 import Funcionarios from "./components/Funcionarios";
 import Funcionario from "./components/Funcionarios/Funcionario";
-import Especialidades from "./components/Funcionarios/Especialidades";
+import Especialidades from "./components/Especialidades";
 import Ordens from "./components/Ordens";
 import Clientes from "./components/Clientes";
 import Cliente from "./components/Clientes/Cliente"

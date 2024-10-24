@@ -9,39 +9,33 @@ import ordensIcon from '../../assets/ordensIcon.png'
 import especsIcon from '../../assets/tag.png'
 import { useEffect, useState } from 'react'
 
-function Nav(cargo) {
-    const [sessionConfig, setSessionConfig] = useState({
-        abertoNav: true
+function Nav() {
+    const [sessPreferencias, setSessPreferencias] = useState(() => {
+        const storedUsuario = sessionStorage.getItem('preferencias')
+        return storedUsuario ? JSON.parse(storedUsuario) : { abertoNav: true }
     })
-    const saveSessionConfig = (config) => {
-        sessionStorage.setItem('preferencias', JSON.stringify(config))
-    }
+    const [usuario, setUsuario] = useState(() => {
+        const storedUsuario = sessionStorage.getItem('usuario')
+        return storedUsuario ? JSON.parse(storedUsuario) : { cargo: 'adm' }
+    })
     useEffect(() => {
-        const storedSessionConfig = JSON.parse(sessionStorage.getItem('preferencias'))
-        if (storedSessionConfig) {
-            setSessionConfig(storedSessionConfig)
+        if (sessPreferencias) {
+            sessionStorage.setItem('preferencias', JSON.stringify(sessPreferencias))
         }
-    }, [])
-    const abrirNav = () => {
-        setSessionConfig({ abertoNav: true })
-        saveSessionConfig({ abertoNav: true })
-    }
-    const fecharNav = () => {
-        setSessionConfig({ abertoNav: false })
-        saveSessionConfig({ abertoNav: false })
-    }
+        
+    }, [sessPreferencias])
     const changeNav = () => {
-        if (sessionConfig.abertoNav) {
-            fecharNav()
+        if (sessPreferencias.abertoNav) {
+            setSessPreferencias({ abertoNav: false })
         } else {
-            abrirNav()
+            setSessPreferencias({ abertoNav: true })
         }
     }
     return (
-        <nav id='nav' className={sessionConfig.abertoNav ? "navAberto" : "navFechado"}>
+        <nav id='nav' className={sessPreferencias.abertoNav ? "navAberto" : "navFechado"}>
             <img id="bttNav" 
-                src={sessionConfig.abertoNav ? navLeft : navRight}
-                onClick={changeNav} className={sessionConfig.abertoNav ? "navFechar" : "navAbrir"}/>
+                src={sessPreferencias.abertoNav ? navLeft : navRight}
+                onClick={changeNav} className={sessPreferencias.abertoNav ? "navFechar" : "navAbrir"}/>
             <div id='containerLinks'>
                 <NavLink
                     className={({ isActive }) => (isActive ? "links active" : "links ")}
@@ -53,47 +47,46 @@ function Nav(cargo) {
                     <p className='nomeGoTo' id='goToHomeP'>home</p>
                 </NavLink>
                 
-                {
-                    
-                cargo.cargo == 'base' && cargo.cargo == 'adm' ? '' :
+                {/* Paginas exibidas só para usuarios 'base' ou 'adm' */}
+                {usuario.cargo === 'base' || usuario.cargo === 'adm' || usuario.cargo == 'dev' ?
                 <> 
-                <NavLink 
-                    className={({ isActive }) => (isActive ? "links active" : "links ")}
-                    id='goToFuncionarios' 
-                    to="/funcionarios"
-                    // activeClassName="active" 
-                    >
-                    <img src={funcsIcon} alt="funcionarios" />
-                    <p className='nomeGoTo' id='goToFuncionariosP'>funcionarios</p>
-                </NavLink>
-                <NavLink 
-                    className={({ isActive }) => (isActive ? "links active" : "links ")} 
-                    id='goToClientes' 
-                    to="/clientes"
-                    // activeClassName="active" 
-                    >
-                    <img src={clientesIcon} alt="clientes" />
-                    <p className='nomeGoTo' id='goToClientesP'>clientes</p>
-                </NavLink>
-                <NavLink 
-                    className={({ isActive }) => (isActive ? "links active" : "links ")}
-                    id='goToOrdens' 
-                    to="/ordens"
-                    // activeClassName="active" 
-                    >
-                    <img src={ordensIcon} alt="ordens" />
-                    <p className='nomeGoTo' id='goToOrdensP'>ordens</p>
-                </NavLink>
-                <NavLink 
-                    className={({ isActive }) => (isActive ? "links active" : "links ")}
-                    id='goToEspecs' 
-                    to="/especialidades"
-                    // activeClassName="active" 
-                    >
-                    <img src={especsIcon} alt="ordens" />
-                    <p className='nomeGoTo' id='goToEspecsP'>especialidades & serviços</p>
-                </NavLink>
-                </>
+                    <NavLink 
+                        className={({ isActive }) => (isActive ? "links active" : "links ")}
+                        id='goToFuncionarios' 
+                        to="/funcionarios"
+                        // activeClassName="active" 
+                        >
+                        <img src={funcsIcon} alt="funcionarios" />
+                        <p className='nomeGoTo' id='goToFuncionariosP'>funcionarios</p>
+                    </NavLink>
+                    <NavLink 
+                        className={({ isActive }) => (isActive ? "links active" : "links ")} 
+                        id='goToClientes' 
+                        to="/clientes"
+                        // activeClassName="active" 
+                        >
+                        <img src={clientesIcon} alt="clientes" />
+                        <p className='nomeGoTo' id='goToClientesP'>clientes</p>
+                    </NavLink>
+                    <NavLink 
+                        className={({ isActive }) => (isActive ? "links active" : "links ")}
+                        id='goToOrdens' 
+                        to="/ordens"
+                        // activeClassName="active" 
+                        >
+                        <img src={ordensIcon} alt="ordens" />
+                        <p className='nomeGoTo' id='goToOrdensP'>ordens</p>
+                    </NavLink>
+                    <NavLink 
+                        className={({ isActive }) => (isActive ? "links active" : "links ")}
+                        id='goToEspecs' 
+                        to="/especialidades"
+                        // activeClassName="active" 
+                        >
+                        <img src={especsIcon} alt="ordens" />
+                        <p className='nomeGoTo' id='goToEspecsP'>especialidades & serviços</p>
+                    </NavLink>
+                </> :  ''
                 }
             </div>
         </nav>

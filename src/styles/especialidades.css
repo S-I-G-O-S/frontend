@@ -49,7 +49,7 @@
             #contNovo {
                 display: flex;
                 align-items: center;
-                justify-content: space-between;
+                justify-content: left;
                 gap: 1rem;
                 margin-bottom: 1rem;
                 button {

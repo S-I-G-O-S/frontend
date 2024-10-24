@@ -3,7 +3,10 @@ import './Header.css'
 import { useState } from 'react'
 function Header(props) {
     const [viewContUser, setViewContUser] = useState(false)
-
+    const [usuario, setUsuario] = useState(() => {
+        const storedUsuario = sessionStorage.getItem('usuario')
+        return storedUsuario ? JSON.parse(storedUsuario) : { cargo: 'dev' }
+    })
     const handleViewConfiguser = () => {
         if(viewContUser) {
             setViewContUser(false)
@@ -24,6 +27,7 @@ function Header(props) {
                     !viewContUser ? '' :
                     <div id='contConfigUser'>
                         <p id='nomeUsuario'>Usuário teste</p>
+                        <p id='cargoUsuario'>{usuario.cargo}</p>
                         <Link id='toUserConfig' to={'/usuario'}>usuário</Link>
                     </div>
                 }

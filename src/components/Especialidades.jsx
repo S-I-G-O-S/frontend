@@ -1,15 +1,15 @@
 // Funções de requisições
-import { getEspecialidades, postEspecialidade, deleteEspec, putEspecialidade } from '../../services/especialidadesAPI'
-import { getServicos, getServicoPorID, postServico, putServico, deleteServico } from '../../services/servicosAPi'
+import { getEspecialidades, postEspecialidade, deleteEspec, putEspecialidade } from '../services/especialidadesAPI'
+import { getServicos, getServicoPorID, postServico, putServico, deleteServico } from '../services/servicosAPi'
 
-import '../../styles/especialidades.css'
+import '../styles/especialidades.css'
 
-import Nav from '../public/Nav'
-import Header from '../public/Header'
+import Nav from './public/Nav'
+import Header from './public/Header'
 import UnitEspec from './Especialidades/unitEspecialidade'
 import { useEffect, useState } from 'react'
 import { Await } from 'react-router-dom'
-import Loading from '../public/Loading'
+import Loading from './public/Loading'
 
 // https://www.delftstack.com/pt/howto/react/for-loop-in-react/
 
@@ -19,6 +19,10 @@ function Especialidades() {
     const [layoutEspecServicos, setLayoutEspecServicos] = useState("layoutEspecs")
     const [ordemEspecServicos, setOrdemEspecServicos] = useState("asc")
     const [erro, setErro] = useState('')
+    const [usuario, setUsuario] = useState(() => {
+        const storedUsuario = sessionStorage.getItem('usuario')
+        return storedUsuario ? JSON.parse(storedUsuario) : { cargo: 'dev' }
+    })
     
     // Especialidades
     const [reqstEspecialidades, setReqstEspecialidades] = useState([])
@@ -328,11 +332,15 @@ function Especialidades() {
             }
         >
             <section id='sec1'>
-                <div id='contNovo'>
-                    <button onClick={() => {abrirEspec("nova")}}>
-                        Nova Especialidade</button>
-                    <button onClick={() => {abrirServico("novo")}}>Novo Serviço</button>
-                </div>
+                {
+                    usuario.cargo == 'adm' || usuario.cargo == 'dev' ?
+                    <div id='contNovo'>
+                        <button onClick={() => {abrirEspec("nova")}}>
+                            Nova Especialidade</button>
+                        <button onClick={() => {abrirServico("novo")}}>Novo Serviço</button>
+                    </div>
+                    : ''
+                }
                 <div id='contFiltrosEspecServ'>
                     <div id='orderFiltrosEspecServ'>
                         <p>Ordernar por:</p>
@@ -359,12 +367,13 @@ function Especialidades() {
                             !especialidades ? 
                             <Loading></Loading> :
                             especialidades.map(espec => 
-                            <UnitEspec key={espec.id} espec={espec} onClick={() => abrirEspec(espec.id)}></UnitEspec>
+                            <UnitEspec key={espec.id} espec={espec} onClick={() => abrirEspec(espec.id)} cargo={usuario.cargo}></UnitEspec>
                         )) :
                         (
                             !servicos ? <Loading></Loading> :
                             servicos.map(serv => 
-                            <div className='servicos' key={serv.id} onClick={() => {abrirServico(serv.id)}}>
+                            <div className='servicos' key={serv.id}
+                                onClick={() => {abrirServico(serv.id)}}>
                                 <h4>
                                     {serv.nome}
                                 </h4>

@@ -1,10 +1,10 @@
-import '../../../styles/unitEspecialidade.css'
-import Down from '../../../assets/dark/down.png' 
-import Up from '../../../assets/dark/up.png'
-import Edit from '../../../assets/edit-text.png'
+import '../../styles/unitEspecialidade.css'
+import Down from '../../assets/dark/down.png' 
+import Up from '../../assets/dark/up.png'
+import Edit from '../../assets/edit-text.png'
 // import { Link, useNavigate } from 'react-router-dom';
 // import { esbuildVersion } from 'vite'
-import PropTypes, { func } from 'prop-types'
+import PropTypes from 'prop-types'
 
 UnitEspec.propTypes = {
     espec: PropTypes.shape({

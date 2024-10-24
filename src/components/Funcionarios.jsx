@@ -35,6 +35,10 @@ function Funcionarios() {
         disponivel: null,
         ativo: null,
     })
+    const [usuario, setUsuario] = useState(() => {
+        const storedUsuario = sessionStorage.getItem('usuario')
+        return storedUsuario ? JSON.parse(storedUsuario) : { cargo: 'dev' }
+    })
 
     const navigate = useNavigate()
     const goToEspecialidades = () => {
@@ -143,8 +147,12 @@ function Funcionarios() {
                     <button className='btt' onClick={() => goToEspecialidades()}>
                             Especialidades e Serviços
                     </button>
+                    {   
+                    usuario.cargo == 'adm' ?
                     <button className='btt'
-                    onClick={() => handleCreateClick()}>Novo Funcionário</button>
+                        onClick={() => handleCreateClick()}>Novo Funcionário</button>
+                    : ''
+                    } 
                 </div>
                 <div id='titleList'>
                     <div className='nomeTitle'>nome</div>

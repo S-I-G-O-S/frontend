@@ -12,8 +12,11 @@ function Home() {
     const [ordensAbertas, SetOrdensAbertas] = useState(null)
     const [ordensEmAtendimento, setOrdensEmAtendimento] = useState(null)
     const [showInfosUser, setShowInfosUser] = useState(true)
-    const [usuario, setUsuario] = useState()
-    
+    const [usuario, setUsuario] = useState(() => {
+        const storedUsuario = sessionStorage.getItem('usuario')
+        return storedUsuario ? JSON.parse(storedUsuario) : { cargo: 'dev' }
+    })
+
     const fetchFuncs = async () => {
         try {
             const result = await getFuncionariosDisponiveis()
@@ -24,16 +27,11 @@ function Home() {
         }
     }
     const fetchOrdens = async () => {
+        //  TODO Adicionar quando /api/ordens estiver pronta
         setOrdensEmAtendimento('vazio')
         SetOrdensAbertas('vazio')
     }
     useEffect(() => {
-        const storedUsuario = JSON.parse(sessionStorage.getItem('usuario'))
-        if (storedUsuario) {
-            setUsuario(storedUsuario)
-        } else {
-            setUsuario({cargo: 'adm'})
-        }
         fetchOrdens()
         fetchFuncs()
     }, [])
@@ -54,7 +52,7 @@ function Home() {
                         )}
 
                         {/* funcionários disponíveis se o usuário for 'base' ou 'adm' */}
-                        {(usuario.cargo === 'base' || usuario.cargo === 'adm') && (
+                        {(usuario.cargo === 'base' || usuario.cargo === 'adm' || usuario.cargo == 'dev') && (
                             !funcDisponiveis ? 
                             <Loading /> : (
                                 <section id='secTecnicosDisponiveis'>
@@ -73,7 +71,7 @@ function Home() {
                         )}
 
                         {/* Ordens abertas e ordens em atendimento se o usuário for 'base' ou 'adm' */}
-                        {(usuario.cargo === 'base' || usuario.cargo === 'adm') && (
+                        {(usuario.cargo === 'base' || usuario.cargo === 'adm' || usuario.cargo == 'dev') && (
                             <section id='secOrdens'>
                                 {/* Ordens Abertas */}
                                 {!ordensAbertas ? 
