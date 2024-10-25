@@ -15,7 +15,7 @@ export const getFuncionarios = async () => {
 }
 export const getFuncionariosDisponiveis = async () => {
     try {
-        const response = await axios.get(`${config.url}/api/funcionarios?disponiveis=true&ativo=true`, {
+        const response = await axios.get(`${config.url}/api/funcionarios?size=30&disponiveis=true&ativo=true`, {
             headers: {
                 'Content-Type': 'application/json',
             },

@@ -9,6 +9,10 @@
     --marrom: #26110D;
     --preto: #000;
 }
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 body {
   margin: 0px;
   padding: 0px;
@@ -27,7 +31,28 @@ body {
     min-height: 100vh;
     width: 100%;
     box-sizing: border-box;
-  }
+    .paginacao {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.3rem;
+        padding: 0.5rem;
+        padding-bottom: 0;
+        .paginaItem {
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--salmao3);
+            background-color: var(--marrom);
+            padding: 0.3rem 0.5rem;
+            border: 0;
+            border-radius: 0.3rem;
+        }
+        .paginaItem:hover {
+            background-color: var(--marrom2);
+        }
+    }
+}
 }
 /* Customizando a largura da barra de rolagem */
 /* ::-webkit-scrollbar {

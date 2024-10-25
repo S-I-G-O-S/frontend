@@ -6,6 +6,7 @@ import '../styles/especialidades.css'
 
 import Nav from './public/Nav'
 import Header from './public/Header'
+import removeIcon from '../assets/remove.png'
 import UnitEspec from './Especialidades/unitEspecialidade'
 import { useEffect, useState } from 'react'
 import { Await } from 'react-router-dom'
@@ -34,7 +35,7 @@ function Especialidades() {
     const [reqstServicos, setReqstServicos] = useState([])
     const [servicos, setServicos] = useState(reqstServicos)
     const [servicoAberto, setServicoAberto] = useState(null)
-
+    const [pesqAddEspec, setPesqAddEspec] = useState('')
     //  LISTAGEM
     const mudarLayoutEspecServicos = () => {
         if(layoutEspecServicos == "layoutEspecs") {
@@ -101,6 +102,53 @@ function Especialidades() {
         }))
     }
     // EDIÇÃO SERVIÇO
+    const addEspecToServ = () => {
+        console.info("ADICIONANDO ESPECIALIDADE")
+        let especToAdd = especialidades.find(espec => espec.nome.toLowerCase() === pesqAddEspec.toLowerCase())
+        if (!especToAdd) {
+            console.error("Serviço não encontrado!")
+            setPesqAddEspec("Especialidade não encontrada")
+            setTimeout(() => {
+                setPesqAddEspec('')
+            }, 2000)
+            return
+        }
+
+        if (servicoAberto.especialidades.some(espec => espec.id === especToAdd.id)) {
+            setPesqAddEspec('')
+            console.error("Esta especialidade já foi adicionado a este serviço!");
+            return
+        }
+        setServicoAberto(especState => ({
+            ...especState,
+            especialidades: [...especState.especialidades, especToAdd]
+        }))
+        setPesqAddEspec('')
+    }
+    const deleteEspecServ = (idEspec) => {
+        setServicoAberto(especState => ({
+            ...especState,
+            especialidades: especState.especialidades.filter(espec => espec.id !== idEspec)
+        }))
+    }
+    const changePesqAddEspec = (value) => {
+        setPesqAddEspec(value)
+    }
+    const converterEspecs = (especialidade) => {
+        const [cor1, cor2] = especialidade.cor.split('/')
+        return (
+            <div className='skillsServ' key={especialidade.id}
+                style={{
+                        borderColor: cor2,
+                        backgroundColor: cor1,
+                        color: cor2
+                }}
+            >
+                <p>{especialidade.nome}</p>
+                <img src={removeIcon} onClick={() => {deleteEspecServ(especialidade.id)}}/>
+            </div>
+        )
+    }
     const mudarInfoServico = (valor, campo) => {
         setServicoAberto(serv => ({
             ...serv,
@@ -122,7 +170,7 @@ function Especialidades() {
             if (result.success) {
                 window.alert('Alterações salvas com sucesso!')
                 fecharEspec()
-                handleAttLista()
+                fecharEspec()
             } else {
                 window.alert("Não foi possivel salvar esta especialidade.")
                 console.error(result.error)
@@ -135,7 +183,12 @@ function Especialidades() {
             servicoAberto.especialidades.map(espec => (
                 arrayEspecs.push(espec.id)
             ))
-            if (servicoAberto.id === "novo") {
+            console.warn("DEBBUG editando serviço")
+            console.warn(servicoAberto.id)
+            console.warn(servicoAberto.id)
+            console.warn(servicoAberto.id)
+            console.warn(arrayEspecs)
+            if (servicoAberto.id == "novo") {
                 result = await postServico(servicoAberto, arrayEspecs)
             } else {
             //  TODO Retornando ERRO 405
@@ -144,7 +197,7 @@ function Especialidades() {
             if (result.success) {
                 window.alert('Alterações salvas com sucesso!')
                 fecharEspec()
-                handleAttLista()
+                fecharServ()
             } else {
                 window.alert("Não foi possivel salvar este serviço.")
                 console.error(result.error)
@@ -253,9 +306,8 @@ function Especialidades() {
         } else {
         //  Serviço existente
             try {
-                const data = await getServicoPorID(idServ)
-                setServicoAberto(data)
-                console.warn(servicoAberto)
+                const result = await getServicoPorID(idServ)
+                setServicoAberto(result.data)
                 // if (!servicoAberto) {
                 //     console.error('Erro ao abrir serviço.')
                 //     return;
@@ -385,10 +437,10 @@ function Especialidades() {
                     }
                 </div>
             </section>
-            { !tipoJanela  ?
-                    ''
-                : (
-                    tipoJanela == 'espec' ?
+            {
+            !tipoJanela  ?
+                '': 
+                (tipoJanela == 'espec' ?
                     <section id='secConfigEspec'>
                         <h2>Editando especialidade</h2>
                         <div id='contInfosEspecEdit'>
@@ -460,8 +512,7 @@ function Especialidades() {
                         }
                         </div>
                     </section> :
-                    (
-                        !servicoAberto ? 
+                    (!servicoAberto ? 
                         <Loading></Loading> : 
                         <section id='secConfigServico'>
                             <h2>Editando Serviço</h2>
@@ -484,15 +535,46 @@ function Especialidades() {
                                 </div>
                             </div>
                             <div id='contEspecsConfigServ'>
-                                <p>lugar para relacionar especialidades</p>
-                            </div>
-                            <div id='contAcaoConfigServ'>
-                                <button id='bttCancelar' onClick={handleCancel}>cancelar</button>
-                                <button id='bttSalvar' onClick={handleSalvar}>salvar</button>
+                                <div id='contAddEspecFunc'>
+                                    {/* pesquisar */}
+                                    <input type="text" list='dtListEspecialidades'
+                                        value={pesqAddEspec}
+                                        onChange={(e) => changePesqAddEspec(e.target.value)}
+                                    />
+                                    <datalist id='dtListEspecialidades'>
+                                        {
+                                            !especialidades ? '' : 
+                                            especialidades
+                                                .map(espec => (
+                                                    <option key={espec.id} value={espec.nome}>
+                                                        {espec.nome}
+                                                    </option>
+                                                ))
+                                        }
+                                    </datalist>
+                                    <button onClick={addEspecToServ}>Adicionar</button>
+                                </div>
+                                <div id="contListEspecFunc">
                                 {
-                                    servicoAberto.id == "novo" ? '' :
-                                    <button id='bttExcluir' onClick={handleDeletar}>deletar</button>
+                                !servicoAberto ? 
+                                    (<Loading></Loading>) : 
+                                    ('id' in servicoAberto) ?
+                                        (servicoAberto.especialidades && servicoAberto.especialidades.length > 0 ? 
+                                            (servicoAberto.especialidades.map(espec => (
+                                                converterEspecs(espec)
+                                            ))) : 
+                                            (<p>Nenhuma especialidade adicionada</p>)) : 
+                                        (<p>Nenhuma especialidade adicionada</p>)
                                 }
+                                </div>
+                                        </div>
+                                        <div id='contAcaoConfigServ'>
+                                            <button id='bttCancelar' onClick={handleCancel}>cancelar</button>
+                                            <button id='bttSalvar' onClick={handleSalvar}>salvar</button>
+                                            {
+                                                servicoAberto.id == "novo" ? '' :
+                                                <button id='bttExcluir' onClick={handleDeletar}>deletar</button>
+                                            }
                             </div>
                         </section>
                     )

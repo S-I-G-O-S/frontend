@@ -44,7 +44,7 @@
             background-color: var(--salmao2);
             #containerH2Novo {
                 display: flex;
-                justify-content: right;
+                justify-content: left;
                 margin-bottom: 1rem;
                 
                 button {

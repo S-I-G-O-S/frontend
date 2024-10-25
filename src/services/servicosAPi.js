@@ -20,7 +20,7 @@ export const getServicoPorID = async (id) => {
                 'Content-Type': 'application/json',
             },
         })
-        return response.data
+        return response
     } catch (error) {
         throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
     }
@@ -55,12 +55,12 @@ export const postServico = async (servico, especs) => {
 }
 export const putServico = async (servico, especs) => {
     try {
-        console.warn("Enviadando " + 
-            servico.id + " " +
-            servico.nome + " " +
-            servico.descricao + " " +
-            especs)
-        const response = await axios.put(`${config.url}/api/servicos/${servico.id}`, {
+        // console.warn("Enviadando " + 
+        //     servico.id + " " +
+        //     servico.nome + " " +
+        //     servico.descricao + " " +
+        //     especs)
+        const response = await axios.put(`${config.url}/api/servicos`, {
             id: servico.id,
             nome: servico.nome,
             descricao: servico.descricao,

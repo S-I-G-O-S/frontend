@@ -124,7 +124,7 @@
                     border-top: 0.1rem solid var(--marrom);
                     .cardFunc {
                         display: grid;
-                        grid-template-columns: minmax(10rem, 3fr) minmax(7rem, 3fr) minmax(10rem, 3fr) minmax(5rem, 2fr) minmax(7rem, 3fr) 3rem 3rem;
+                        grid-template-columns: minmax(10rem, 3fr) minmax(6rem, 3fr) minmax(10rem, 3fr) minmax(5rem, 2fr) minmax(7rem, 3fr) 3rem 3rem;
                         grid-template-areas: 
                         "nome cell ultAtv cargo status setaSkillsFunc options";
 
@@ -132,9 +132,8 @@
                         box-sizing: border-box;
                         padding: 0.1rem 0;
                         
-
                         text-align: center;
-                        font-size: 0.95rem;
+                        font-size: 0.9rem;
 
                         div {
                             display: flex;
@@ -199,7 +198,6 @@
                             font-size: 0.8rem;
                             font-weight: 500;
                             
-                            border: 0.1rem solid black;
                             border-radius: 5px;
                             padding: 0.15rem 0.5rem;
                         }
@@ -213,7 +211,7 @@
                             transform: translateX(0%);
                         }
                         100% {
-                            transform: translate(100%);
+                            transform: translateX(100%);
                         }
                     }
                     .skillsFechado {
@@ -221,6 +219,7 @@
                     }
                 }
             }
+            
         }
     }
 }

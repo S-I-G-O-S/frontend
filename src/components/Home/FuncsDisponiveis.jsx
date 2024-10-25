@@ -17,20 +17,19 @@ function FuncsDisponiveis() {
     }, [])
     return !funcDisponiveis ? (<Loading /> ): 
         (<section id="secTecnicosDisponiveis">
-        <h2>Tecnicos disponiveis</h2>
-        <div id="listTecsDisp">
-            {funcDisponiveis === "vazio"
-            ? "Nenhum técnico disponível"
-            : funcDisponiveis.map((func) => (
-                <div
-                    id={`funcDisp${func.id}`}
-                    className="funcsDisp"
-                    key={func.id}
-                >
-                    <div className="nomeFunc">{func.nome}</div>
-                </div>
-                ))}
-        </div>
+            <h2>Tecnicos disponiveis</h2>
+            <div id="listTecsDisp">
+                {!funcDisponiveis ? 
+                    "Nenhum técnico disponível" : 
+                    funcDisponiveis.map(func => (
+                        <div id={`funcDisp${func.id}`}
+                            className="funcsDisp"
+                            key={func.id}>
+                            <p className="nomeFunc">{func.primeiro} {func.ultimo}</p>
+                        </div>
+                    ))
+                }
+            </div>
         </section>)
 }
 export default FuncsDisponiveis;
