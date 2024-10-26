@@ -31,6 +31,7 @@ function Funcionario() {
     const [cepMensagem, setCepMensagem] = useState('')
     const [erro, setErro] = useState()
     const [viewSenha, setViewSenha] = useState(false)
+
     
     const addEspecToFunc = () => {
         console.info("ADICIONANDO ESPECIALIDADE")
