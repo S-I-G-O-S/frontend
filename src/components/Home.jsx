@@ -18,9 +18,8 @@ function Home() {
         return storedUsuario ? JSON.parse(storedUsuario) : { cargo: 'dev' }
     })
 
-    
-    
     useEffect(() => {
+        console.clear()
     }, [])
     return (
         <div id='pageHome'>
