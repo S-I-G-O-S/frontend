@@ -24,15 +24,15 @@
 
     #imgBG1 {
         position: fixed;
-        height: 512px;
-        left: 55%;
-        top: 50%;
+        height: 412px;
+        right: 1%;
+        bottom: 1%;
     }
     #imgBG2 {
         position: fixed;
         height: 350px;
-        left: 5%;
-        top: 9%;
+        left: 1vw;
+        top: 9vh;
     }
     #secLogin {
         display: flex;
@@ -128,6 +128,7 @@
                     text-align: center;
                     font-size: 1.2rem;
                     margin: 0;
+                    margin-bottom: 1rem;
                 }
                 p {
                     font-size: 0.91rem;
@@ -139,6 +140,22 @@
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
+                #contForcaSenha {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: var(--salmao2);
+                    padding: 0.1rem 0.5rem;
+                    border-radius: 0.3rem;
+                    p {
+                        font-size: 0.8rem;
+                        margin: 0;
+                    }
+                }
+            }
+            #msgNovaSenha {
+                text-align: center;
+                margin: 0   ;
             }
             #contAcaoPrimeiroAcesso {
                 display: flex;

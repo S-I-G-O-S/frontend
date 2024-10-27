@@ -29,6 +29,7 @@ function Home() {
             {
             !usuario ? '' : (
                 <>
+                
                 {/* informações do usuário */}
                 {showInfosUser && (
                     <InfosUser></InfosUser>
