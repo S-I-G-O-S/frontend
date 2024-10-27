@@ -7,7 +7,7 @@ import Loading from './public/Loading'
 import InfosUser from './Home/InfosUser'
 import FuncsDisponiveis from './Home/FuncsDisponiveis'
 import OrdensAbertas from './Home/OrdensAbertas'
-import OrdensEmAtendimento from './Home/ordensEmAtendimento'
+import OrdensEmAtendimento from './Home/OrdensEmAtendimento'
 
 
 function Home() {
