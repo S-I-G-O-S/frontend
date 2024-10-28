@@ -6,8 +6,8 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
 	const [token, setToken_] = useState(sessionStorage.getItem("token"));
 
-	const setToken = (newToken) => {
-		setToken_(newToken);
+	const setToken = (novoToken) => {
+		setToken_(novoToken);
 	};
 
 	useEffect(() => {

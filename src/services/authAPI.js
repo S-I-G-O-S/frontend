@@ -1,9 +1,9 @@
 import axios from 'axios'
 import config from '../services/devConfig'
 
-export const getFuncionarioPorID = async (id) => {
+export const autenticarFunc = async (email, senha) => {
     try {
-        const response = await axios.get(`${config.url}/api/funcionarios/${id}`, {
+        const response = await axios.get(`${config.url}/login/`, {
             headers: {
                 'Content-Type': 'application/json',
             },

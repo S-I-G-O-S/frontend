@@ -39,13 +39,6 @@ function Login() {
         nivel: 1,
         msg: 'muito fraca'
     })
-    const [criteriosNovaSenhas, setCriteriosNovaSenhas] = useState({
-        maiuscula: false,
-        minuscula: false,
-        especial: false,
-        numero: false,
-        tamMinimo: false
-    })
     const handleChangeNovaSenha = (value, field) => {
         setMsgNovaSenha(null)
         setNovaSenha(prevState => ({
