@@ -35,7 +35,10 @@ function Login() {
     const [msgLogin, setMsgLogin] = useState(null)
     const [funcionario, setFuncionario] = useState()
     const [request, setRequest] = useState(null)
-    const [forcaSenha, setForcaSenha] = useState('fraca')
+    const [forcaSenha, setForcaSenha] = useState({
+        nivel: 1,
+        msg: 'muito fraca'
+    })
     const [criteriosNovaSenhas, setCriteriosNovaSenhas] = useState({
         maiuscula: false,
         minuscula: false,
@@ -43,15 +46,6 @@ function Login() {
         numero: false,
         tamMinimo: false
     })
-    const validFuncionario = async () => {
-        try {
-            const response = await getFuncionarioPorID()
-            setFuncionario(response.data)
-            setRequest(response)
-        } catch (error) {
-            console.error(error.message)
-        }
-    }
     const handleChangeNovaSenha = (value, field) => {
         setMsgNovaSenha(null)
         setNovaSenha(prevState => ({
@@ -67,7 +61,7 @@ function Login() {
             [field]: value,
         }))
     }
-    const changeCriterioNovaSenha = (senha) => {
+    const changeCriterioNovaSenha = (field, value) => {
         setCriteriosNovaSenhas(prevState => ({
             ...prevState,
             [field]: value,
@@ -75,10 +69,35 @@ function Login() {
     }
     const changeForcaNovaSenha = (senha) => {
         const auxForca = zxcvbn(senha)
-        if (auxForca.score == 1) setForcaSenha({valor: 'muito fraca', cor: '#b32a00'})
-        if (auxForca.score == 2) setForcaSenha({valor: 'fraca', cor: '#c26e00'})
-        if (auxForca.score == 3) setForcaSenha({valor: 'mediana', cor: '#dfc800'})
-        if (auxForca.score >= 4) setForcaSenha({valor: 'forte', cor: '#028313'})
+        if (auxForca.score == 1) {
+            setForcaSenha({
+                nivel: auxForca.score,
+                msg: 'muito fraca', 
+                cor: '#b32a00'
+            }
+        )}
+        if (auxForca.score == 2) {
+            setForcaSenha({
+                nivel: auxForca.score,
+                valor: 'fraca', 
+                cor: '#c26e00'
+            }
+        )}
+        if (auxForca.score == 3) {
+            setForcaSenha({
+                nivel: auxForca.score,
+                valor: 'mediana',
+                cor: '#dfc800'
+            }
+        )}
+        if (auxForca.score >= 4) {
+            setForcaSenha({
+                nivel: auxForca.score,
+                valor: 'forte',
+                cor: '#028313'
+            }
+        )}
+
 
     }
     const handleRegSenha = () => {
@@ -86,7 +105,7 @@ function Login() {
             setMsgNovaSenha('senhas diferentes!')
             return
         }
-        if(forcaSenha.score < minForca) {
+        if(forcaSenha.nivel < minForca) {
             setMsgNovaSenha('É necessaria uma senha forte!')
             return
         }
@@ -95,6 +114,16 @@ function Login() {
     const changePrimeiroAcesso = () => {
         setPrimeiroAcesso(!primeiroAcesso)
     }
+    useEffect(() => {
+        if (msgLogin) {
+            console.log(msgLogin)
+        }
+    }, [msgLogin])
+    useEffect(() => {
+        if (msgNovaSenha) {
+            console.log(msgNovaSenha)
+        }
+    }, [msgNovaSenha])
     useEffect(() => {
         if(request) {
             console.warn(request)
@@ -108,7 +137,7 @@ function Login() {
                 <input id="senha" type="text" placeholder='senha' onChange={(e) => handleChangeUsuario(e.target.value, "senha")}/>
                 <button id="entrar" onClick={handleLogin}>entrar</button>
                 <a id="esqueciMinhaSenha" href="">esqueci minha senha</a>
-                <p onClick={changePrimeiroAcesso}>primeiro acesso</p>            
+                {/* <p onClick={changePrimeiroAcesso}>primeiro acesso</p>             */}
             </section>
             {/* <img id='imgBG1' src={Negocio} alt="" />
             <img id='imgBG2' src={Analise} alt="" /> */}
@@ -130,7 +159,7 @@ function Login() {
                             <input type="text" onChange={(e) => handleChangeNovaSenha(e.target.value, "rSenha")}/>
                         </div>
                         <div id='contForcaSenha' style={{ visibility: novaSenha.senha ? 'visible' : 'hidden'}}>
-                            <p style={{color: forcaSenha.cor}}>senha {forcaSenha.valor}</p>
+                            <p style={{color: forcaSenha.cor}}>senha {forcaSenha.msg}</p>
                         </div>
                     </div>
                     {/* <div id='contMsgNovaSenha'>
