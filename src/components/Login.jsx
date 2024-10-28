@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import '../styles/login.css'
 import Negocio from '../assets/negocio.png'
 import Analise from '../assets/analise.png'
@@ -6,9 +6,22 @@ import { useEffect, useState } from 'react'
 import { getFuncionarioPorID } from '../services/authAPI'
 import zxcvbn from 'zxcvbn';
 import Popup from './public/Popup'
+import { useAuth } from '../provider/authProvider'
 
 function Login() {
     const minForca = 3  // nivel obrigatorio da nova senha
+    
+    //  AUTH
+    const { setToken } = useAuth()
+    const navigate = useNavigate()
+
+    // TODO fazer as requisições /login/
+    const handleLogin = () => {
+        setToken("imagine um token JWT aqui k")
+        navigate("/home", { replace: true })
+    }
+
+    //  Resto da pagina
     const [primeiroAcesso, setPrimeiroAcesso] = useState(false)
     const [usuario, setUsuario] = useState({
         email: '',
@@ -93,7 +106,7 @@ function Login() {
                 <h2>Bem-vindo ao SIGOS</h2>
                 <input id="email" type="text" placeholder='email' onChange={(e) => handleChangeUsuario(e.target.value, "email")}/>
                 <input id="senha" type="text" placeholder='senha' onChange={(e) => handleChangeUsuario(e.target.value, "senha")}/>
-                <Link id="entrar" to="/home">entrar</Link>
+                <button id="entrar" onClick={handleLogin}>entrar</button>
                 <a id="esqueciMinhaSenha" href="">esqueci minha senha</a>
                 <p onClick={changePrimeiroAcesso}>primeiro acesso</p>            
             </section>

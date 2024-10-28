@@ -1,10 +1,11 @@
-import { useState } from 'react'
-import './App.css'
-import AppRoutes from './routes'
+import AuthProvider from "./provider/authProvider";
+import AppRoutes from './router/routes'
 
 function App() {
   return (
-    <AppRoutes/>
+    <AuthProvider>
+      <AppRoutes/>
+    </AuthProvider>
   )
 }
 
