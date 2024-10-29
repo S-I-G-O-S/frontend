@@ -4,18 +4,18 @@ import { createContext, useContext, useEffect, useMemo, useState } from "react";
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-	const [token, setToken_] = useState(sessionStorage.getItem("token"));
+	const [token, setToken_] = useState(sessionStorage.getItem("token"))
 
 	const setToken = (novoToken) => {
-		setToken_(novoToken);
-	};
+		setToken_(novoToken)
+	}
 
 	useEffect(() => {
 		if (token) {
-			axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+			// axios.defaults.headers.common["Authorization"] = "Bearer " + token;
 			sessionStorage.setItem("token", token);
 		} else {
-			delete axios.defaults.headers.common["Authorization"];
+			// delete axios.defaults.headers.common["Authorization"];
 			sessionStorage.removeItem("token");
 		}
 	}, [token]);

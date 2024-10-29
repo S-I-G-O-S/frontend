@@ -3,7 +3,7 @@ import '../styles/login.css'
 import Negocio from '../assets/negocio.png'
 import Analise from '../assets/analise.png'
 import { useEffect, useState } from 'react'
-import { getFuncionarioPorID } from '../services/authAPI'
+import { autenticarFunc } from '../services/authAPI'
 import zxcvbn from 'zxcvbn';
 import Popup from './public/Popup'
 import { useAuth } from '../provider/authProvider'
