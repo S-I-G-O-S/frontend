@@ -3,7 +3,7 @@ import '../styles/login.css'
 import Negocio from '../assets/negocio.png'
 import Analise from '../assets/analise.png'
 import { useEffect, useState } from 'react'
-import { autenticarFunc } from '../services/authAPI'
+import {  loginFunc } from '../services/authAPI'
 import zxcvbn from 'zxcvbn';
 import Popup from './public/Popup'
 import { useAuth } from '../provider/authProvider'
@@ -15,10 +15,18 @@ function Login() {
     const { setToken } = useAuth()
     const navigate = useNavigate()
 
-    // TODO fazer as requisições /login/
-    const handleLogin = () => {
-        setToken("imagine um token JWT aqui k")
+    const handleLogin = async () => {
+        if(!usuario) {window.alert("")}
+        setToken('Imagina um token JWT aqui')
         navigate("/home", { replace: true })
+        // try {
+        //     const result = await loginFunc(usuario)
+        //     setToken(result.data.tokenJWT)
+        //     navigate("/home", { replace: true })
+        // } catch (error) {
+        //     console.log(error)
+        //     window.alert(error)
+        // }
     }
 
     //  Resto da pagina

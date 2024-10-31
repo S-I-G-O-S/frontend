@@ -122,6 +122,7 @@
                 white-space: nowrap;
                 .funcs {
                     border-top: 0.1rem solid var(--marrom);
+                    overflow-x: auto;
                     .cardFunc {
                         display: grid;
                         grid-template-columns: minmax(10rem, 3fr) minmax(6rem, 3fr) minmax(10rem, 3fr) minmax(5rem, 2fr) minmax(7rem, 3fr) 3rem 3rem;

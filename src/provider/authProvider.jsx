@@ -1,7 +1,7 @@
 import axios from "axios";
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react"
 
-const AuthContext = createContext();
+const AuthContext = createContext()
 
 const AuthProvider = ({ children }) => {
 	const [token, setToken_] = useState(sessionStorage.getItem("token"))
@@ -12,13 +12,13 @@ const AuthProvider = ({ children }) => {
 
 	useEffect(() => {
 		if (token) {
-			// axios.defaults.headers.common["Authorization"] = "Bearer " + token;
-			sessionStorage.setItem("token", token);
+			axios.defaults.headers.common["Authorization"] = "Bearer " + token
+			sessionStorage.setItem("token", token)
 		} else {
-			// delete axios.defaults.headers.common["Authorization"];
-			sessionStorage.removeItem("token");
+			delete axios.defaults.headers.common["Authorization"]
+			sessionStorage.removeItem("token")
 		}
-	}, [token]);
+	}, [token])
 
 	const contextValue = useMemo(
 		() => ({
@@ -26,15 +26,15 @@ const AuthProvider = ({ children }) => {
 			setToken,
 		}),
 		[token]
-	);
+	)
 
 	return (
 		<AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
-	);
-};
+	)
+}
 
 export const useAuth = () => {
-	return useContext(AuthContext);
-};
+	return useContext(AuthContext)
+}
 
-export default AuthProvider;
+export default AuthProvider

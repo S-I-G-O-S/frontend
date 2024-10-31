@@ -1,12 +1,11 @@
 import axios from 'axios'
 import config from '../services/devConfig'
 
-export const autenticarFunc = async (email, senha) => {
+export const loginFunc = async (usuario) => {
     try {
-        const response = await axios.get(`${config.url}/login/`, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
+        const response = await axios.post(`${config.url}/login/`, {
+            email: usuario.email,
+            senha: usuario.senha
         })
         return response
     } catch (error) {
