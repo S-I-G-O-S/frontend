@@ -34,6 +34,7 @@
     margin: 0;
     min-height: 100vh;
     min-width: 100vw;
+    max-width: 100%;
     background-color: #F2E8DF;
     box-sizing: border-box;
     
@@ -47,9 +48,10 @@
         padding: 1rem;
 
         #secList {
+            display: flex;
+            flex-direction: column;
             grid-area: sec1;
             width: 100%;
-            max-width: 65rem;
             background-color: var(--salmao2);
             padding: 1rem;
             border: 0.1rem solid var(--marrom);
@@ -89,134 +91,50 @@
                     padding: 0.2rem 2rem;
                 }
             }
-            #titleList {
-                display: grid;
-                grid-template-columns: minmax(10rem, 3fr) minmax(7rem, 3fr) minmax(10rem, 3fr) minmax(5rem, 2fr) minmax(7rem, 3fr) 3rem 3rem;
-                background-color: var(--marrom);
-                padding: 0.2rem 0;
-                padding-right: 1.1rem;
-                div {
-                    height: auto;
-                    font-size: 1rem;
-                    text-align: center;
-                    color: var(--salmao2);
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                }
+            #tableWrapper {
+                width: 100%;
+                overflow-x: auto; /* Habilita rolagem horizontal apenas dentro deste contêiner */
+                margin-bottom: 1rem; /* Para garantir um espaçamento entre o conteúdo e a borda */
             }
             #listFuncs {
-                display: flex;
-                flex-direction: column;
-                
-                background-color: var(--branco);
-
-                overflow-y: scroll;
+                gap: 0;
+                width: 100%; /* Define a largura da tabela com base no conteúdo */
+                max-width: 100%; /* Limita a largura ao tamanho do contêiner pai */
+                border-collapse: collapse; /* Remove espaços entre células */
                 overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
+                border: 0.1rem solid;
                 box-sizing: border-box;
-                max-height: 69vh;
-                width: 100%;
-                border: 0.1rem solid var(--marrom);
-                border-top: 0;
-                white-space: nowrap;
-                .funcs {
-                    border-top: 0.1rem solid var(--marrom);
-                    overflow-x: auto;
-                    .cardFunc {
-                        display: grid;
-                        grid-template-columns: minmax(10rem, 3fr) minmax(6rem, 3fr) minmax(10rem, 3fr) minmax(5rem, 2fr) minmax(7rem, 3fr) 3rem 3rem;
-                        grid-template-areas: 
-                        "nome cell ultAtv cargo status setaSkillsFunc options";
-
-                        /* min-width: 35rem; */
-                        box-sizing: border-box;
-                        padding: 0.1rem 0;
-                        
+                border-spacing: 0;
+                /* TODO Add temas */
+                background-color: var(--branco);
+                border-color: var(--marrom);
+                #titleList {
+                    background-color: var(--marrom);
+                    gap: 0;
+                    th {
+                        height: auto;
+                        font-size: 1rem;
                         text-align: center;
-                        font-size: 0.9rem;
+                        color: var(--salmao2);
+                        font-weight: 400;
+                        border: 0;
+                    }
+                }
+                .funcs {
+                    box-sizing: border-box;
+                    border-top: 0.1rem solid var(--marrom);
+                    td {
+                        text-align: center;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
 
-                        div {
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            white-space: nowrap;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                        }
-                        .nomeFunc {
-                            grid-area: nome;
-                            display: flex;
-                            height: 1.5rem;
-                            max-height: 2rem;
-                        }
-                        .cellFunc {
-                            grid-area: cell;
-                            display: flex;
-                            height: 1.5rem;
-                            align-items: self-start;
-                            max-height: 2.5rem;
-                        }
-                        .ultAtvFunc {
-                            grid-area: ultAtv;
-                            overflow-y: hidden;
-                            max-height: 1.5rem;
-                        }
-                        .cargoFunc {
-                            grid-area: cargo;
-                            max-height: 2rem;
-                        }
-                        .statusFunc {
-                            grid-area: status;
-                        }
-                        .setaSkillsFunc {
-                            grid-area: setaSkillsFunc;
-                            cursor: pointer;
-                            border-left: 0.1rem solid var(--marrom);
-                            img {
-                                height: 1.5rem;
-                            }
-                        }
-                        .editFunc {
-                            grid-area: options;
-                            cursor: pointer;
-                            border-left: 0.1rem solid var(--marrom);
-                            img {
-                                height: 1.2rem;
-                            }
-                        }
                     }
-                    .containerSkillsFunc {
-                        justify-content: center;
-                        gap: 1rem;
-                        padding: 0.2rem 0.1rem 0.5rem 0.1rem;
-                        border-top: 0.1rem solid var(--salmao1);
-                        box-sizing: border-box;
-                        max-width: 100%;
-                        background-color: var(--salmao3);
-                        overflow-x: hidden;
-                        .skillsFunc {
-                            font-size: 0.8rem;
-                            font-weight: 500;
-                            
-                            border-radius: 5px;
-                            padding: 0.15rem 0.5rem;
-                        }
+                    .imgSetaSKills {
+                        height: 1.2rem;
                     }
-                    .skillsAberto {
-                        display: flex;
-                        animation: loop 5s linear infinite; 
-                    }
-                    @keyframes loop {
-                        0% {
-                            transform: translateX(0%);
-                        }
-                        100% {
-                            transform: translateX(100%);
-                        }
-                    }
-                    .skillsFechado {
-                        display: none;
+                    .imgEditFunc {
+                        height: 1.2rem;
                     }
                 }
             }
