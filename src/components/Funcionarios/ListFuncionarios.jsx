@@ -112,58 +112,56 @@ function ListFuncionarios() {
     }, [])
     return(
         <>
-        <div id='titleList'>
-            <div className='nomeTitle'>nome</div>
-            <div className='cellTitle'>celular</div>
-            <div className='ultAtvTitle'>Ultima atividade</div>
-            <div className='cargoTitle'>cargo</div>
-            <div className='statusTitle'>status</div>
-        </div>
-        <div id='listFuncs'>
+        <div id="tableWrapper">
+        <table id='listFuncs'>
+            <thead id='titleList'>
+                <tr >
+                    <th className='nomeTitle cl1'>nome</th>
+                    <th className='cellTitle cl2'>celular</th>
+                    <th className='ultAtvTitle cl3'>ultima atividade</th>
+                    <th className='cargoTitle cl4'>cargo</th>
+                    <th className='statusTitle cl5'>status</th>
+                    <th className='cl6'></th>
+                    <th className='cl7'></th>
+                </tr>
+            </thead>
+            <tbody>
             {
                 !funcionarios ? 
                 <Loading></Loading> :
                 funcionarios.map(funcionario => (
-                    <div id={`funcionario${funcionario.id}`} className='funcs skillsFechado' key={funcionario.id}>
-                        <div className='cardFunc' >
-                            <div className='nomeFunc'>
-                                {funcionario.primeiro + ' ' + funcionario.ultimo}
-                            </div>
-                            <div className='cellFunc'>
-                                {funcionario.celular}
-                            </div>
-                            <div className='ultAtvFunc'>
-                                {converterDtHr(funcionario.ultimaAtividade)}
-                            </div>
-                            <div className='cargoFunc'>
-                                {funcionario.cargo}
-                            </div>
-                            <div className='statusFunc'>
-                                {
-                                    funcionario.isDisponivel
-                                        ? 'disponível'
-                                        : 'indisponível'
-                                }
-                            </div>
-                            <div className='setaSkillsFunc'
-                            onClick={() => verEspecialidades(funcionario.id)}>
-                                <img id={`imgSetaSkillsFunc${funcionario.id}`} src={Down} alt="ver especialidades"/>
-                            </div>
-                            <div className='editFunc' onClick={() => handleEditClick(funcionario.id)}>
-                                <img src={Edit} alt="editar"/>
-                            </div>
-                        </div>
-                        <div id={`contSkillsFunc${funcionario.id}`} className='containerSkillsFunc skillsFechado'>
+                    <tr id={`funcionario${funcionario.id}`} className='funcs skillsFechado' key={funcionario.id}>
+                        <td className='nomeFunc cl1'>
+                            {funcionario.primeiro + ' ' + funcionario.ultimo}
+                        </td>
+                        <td className='cellFunc cl2'>
+                            {funcionario.celular}
+                        </td>
+                        <td className='ultAtvFunc cl3'>
+                            {converterDtHr(funcionario.ultimaAtividade)}
+                        </td>
+                        <td className='cargoFunc cl4'>
+                            {funcionario.cargo}
+                        </td>
+                        <td className='statusFunc cl5'>
                             {
-                                !especialidades ? 'carregando...' :
-                                funcionario.especialidades.map(especID => (
-                                    converterEspecs(especID)
-                                ))
+                                funcionario.isDisponivel
+                                    ? 'disponível'
+                                    : 'indisponível'
                             }
-                        </div>
-                    </div>
+                        </td>
+                        <td className='setaSkillsFunc cl6'
+                        onClick={() => verEspecialidades(funcionario.id)}>
+                            <img id={`imgSetaSkillsFunc${funcionario.id}`} className='imgSetaSKills' src={Down} alt="ver especialidades"/>
+                        </td>
+                        <td className='editFunc cl7' onClick={() => handleEditClick(funcionario.id)}>
+                            <img className='imgEditFunc' src={Edit} alt="editar"/>
+                        </td>
+                    </tr>
                 ))
             }
+            </tbody>
+        </table>
         </div>
         <div id='contPagesFuncionarios' className='paginacao'>
             {
@@ -171,6 +169,14 @@ function ListFuncionarios() {
                 renderPaginas()
             }
         </div>
+        {/* <div id={`contSkillsFunc${funcionario.id}`} className='containerSkillsFunc skillsFechado'>
+            {
+                !especialidades ? 'carregando...' :
+                funcionario.especialidades.map(especID => (
+                    converterEspecs(especID)
+                ))
+            }
+        </div> */}
         </>
     )
 }
