@@ -16,9 +16,10 @@ export const getOrdens = async () => {
 export const postNovaOrdem = async (ordem) => {
     try {
         const response = await axios.post(`${config.url}/api/ordens`, {
-            nome: espec.nome,
-            descricao: espec.descricao,
-            cor: espec.cor,
+            criadoPor: ordem.criadoPor,
+            cliente: ordem.cliente,
+            servico: ordem.servico,
+            descricao: ordem.descricao,
         })
         return { success: true, response: response }
     } catch (error) {
