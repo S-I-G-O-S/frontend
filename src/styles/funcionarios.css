@@ -102,6 +102,7 @@
                 max-width: 100%; /* Limita a largura ao tamanho do contêiner pai */
                 border-collapse: collapse; /* Remove espaços entre células */
                 overflow-x: auto;
+                overflow-y: auto;
                 border: 0.1rem solid;
                 box-sizing: border-box;
                 border-spacing: 0;
@@ -128,13 +129,19 @@
                         white-space: nowrap;
                         overflow: hidden;
                         text-overflow: ellipsis;
-
+                        padding: 0.1rem 0.2rem;
                     }
-                    .imgSetaSKills {
-                        height: 1.2rem;
+                    .setaSkillsFunc {
+                        padding: 0.1rem 0.5rem;
+                        .imgSetaSKills {
+                            height: 1.2rem;
+                        }
                     }
-                    .imgEditFunc {
-                        height: 1.2rem;
+                    .editFunc {
+                        padding: 0.1rem 0.5rem;
+                        .imgEditFunc {
+                            height: 1.2rem;
+                        }
                     }
                 }
             }

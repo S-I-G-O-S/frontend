@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
 import './Header.css'
 import { useState } from 'react'
+import { useAuth } from '../../provider/authProvider'
 function Header(props) {
+    const { setToken } = useAuth()
     const [viewContUser, setViewContUser] = useState(false)
     const [usuario, setUsuario] = useState(() => {
         const storedUsuario = sessionStorage.getItem('usuario')
@@ -13,6 +15,9 @@ function Header(props) {
         } else {
             setViewContUser(true)
         }
+    }
+    const handleLogout = () => {
+        setToken(null)   
     }
     return (
         <header id='header'>
@@ -31,9 +36,9 @@ function Header(props) {
                         <Link id='toUserConfig' to={'/usuario'}>usuário </Link>
                     </div>
                 }
-                <Link id="sair" to="/">
+                <button id="sair" onClick={handleLogout}>
                     sair
-                </Link>
+                </button>
             </div>
         </header>
     )
