@@ -11,7 +11,6 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { cepAPI } from '../../services/cepAPI.js'
 import Loading from '../public/Loading.jsx'
 
-// TODO POST Cliente e Contatos tudo junto. PUT Cliente enviar PUT Contatos separados
 function Cliente() {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search)

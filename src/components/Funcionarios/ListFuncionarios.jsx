@@ -23,6 +23,9 @@ function ListFuncionarios() {
         disponivel: null,
         ativo: null,
     })
+    //  Testando outro layout da listagem de funcionarios
+    const testeLayout = false
+
     const handleEditClick = (idFuncionario) => {
         navigate(`/funcionario?id=${idFuncionario}`);
     }
@@ -112,10 +115,51 @@ function ListFuncionarios() {
     }, [])
     return(
         <>
-        <div id="tableWrapper">
+        {
+        testeLayout ? 
+        <div id='layoutMobile'>
+        {
+            !funcionarios ? 
+            <Loading></Loading> :
+            funcionarios.map(funcionario => (
+                <div id={`funcionario${funcionario.id}`} className='funcs skillsFechado' key={funcionario.id}>
+                    <div className='infosFunc'>
+                        <div className='nomeFunc'>
+                            <span>Nome: </span>
+                            {funcionario.primeiro + ' ' + funcionario.ultimo}
+                        </div>
+                        <div className='cellFunc'>
+                            <span>Cel: </span>
+                            {funcionario.celular}
+                        </div>
+                        <div className='ultAtvFunc'>
+                            <span>Ultima atividade: </span>
+                            {converterDtHr(funcionario.ultimaAtividade)}
+                        </div>
+                        <div className='cargoFunc'>
+                            <span>Cargo: </span>
+                            {funcionario.cargo}
+                        </div>
+                        <div className='statusFunc'>
+                            <span>Status: </span>
+                            {
+                                funcionario.isDisponivel
+                                    ? 'disponível'
+                                    : 'indisponível'
+                            }
+                        </div>
+                    </div>
+                    <div className='editFunc' onClick={() => handleEditClick(funcionario.id)}>
+                        <img className='imgEditFunc' src={Edit} alt="editar"/>
+                    </div>
+                </div>
+            ))
+        }
+        </div> 
+        :
+        <div id="contListFuncs">
         <table id='listFuncs'>
-            <thead id='titleList'>
-                <tr >
+                <tr id='titleList'>
                     <th className='nomeTitle cl1'>nome</th>
                     <th className='cellTitle cl2'>celular</th>
                     <th className='ultAtvTitle cl3'>ultima atividade</th>
@@ -124,8 +168,6 @@ function ListFuncionarios() {
                     <th className='cl6'></th>
                     <th className='cl7'></th>
                 </tr>
-            </thead>
-            <tbody>
             {
                 !funcionarios ? 
                 <Loading></Loading> :
@@ -160,10 +202,10 @@ function ListFuncionarios() {
                     </tr>
                 ))
             }
-            </tbody>
         </table>
         </div>
-        <div id='contPagesFuncionarios' className='paginacao'>
+        }
+        <div className='paginacao'>
             {
                 !reqstFuncionarios ? '' :
                 renderPaginas()

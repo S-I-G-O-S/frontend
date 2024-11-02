@@ -46,8 +46,8 @@
                 display: flex;
                 align-items: center;
                 height: auto;
-                gap: 1rem;
-                margin-bottom: 1.5rem;
+                gap: 0.2rem 1rem;
+                margin-bottom: 1rem;
                 .btt {
                     display: flex;
                     align-items: center;
@@ -76,54 +76,94 @@
                     padding: 0.2rem 2rem;
                 }
             }
-            #tableWrapper {
+            #layoutMobile {
+                display: flex;
+                flex-direction: column;
                 width: 100%;
-                overflow-x: auto; /* Habilita rolagem horizontal apenas dentro deste contêiner */
-                margin-bottom: 1rem; /* Para garantir um espaçamento entre o conteúdo e a borda */
-            }
-            #listFuncs {
-                gap: 0;
-                overflow-x: auto;
-                overflow-y: auto;
                 border: 0.1rem solid;
-                border-collapse: collapse;
-                border-spacing: 0;
-                /* TODO Add temas */
-                background-color: var(--branco);
+                border-bottom: 0;
                 border-color: var(--marrom);
-                #titleList {
-                    background-color: var(--marrom);
-                    gap: 0;
-                    th {
-                        height: auto;
-                        font-size: 1rem;
-                        text-align: center;
-                        color: var(--salmao2);
-                        font-weight: 400;
-                        border: 0;
-                    }
-                }
+
                 .funcs {
-                    font-size: 0.9rem;
-                    box-sizing: border-box;
-                    border-top: 0.1rem solid var(--marrom);
-                    td {
-                        text-align: center;
-                        white-space: nowrap;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        padding: 0.1rem 0.2rem;
-                    }
-                    .setaSkillsFunc {
-                        padding: 0.1rem 0.5rem;
-                        .imgSetaSKills {
-                            height: 1.2rem;
+                    display: grid;
+                    grid-template-columns: auto 2rem;
+                    
+                    max-width: 100%;
+                    
+                    border-bottom: 0.1rem solid;
+                    border-color: var(--marrom);
+                    background-color: var(--branco);
+                    
+                    .infosFunc {
+                        display: flex;
+                        flex-wrap: wrap;
+                        column-gap: 0.95rem;
+                        padding: 0.1rem 0.3rem;
+                        span {
+                            font-weight: 500;
                         }
                     }
                     .editFunc {
-                        padding: 0.1rem 0.5rem;
-                        .imgEditFunc {
-                            height: 1.2rem;
+                        display: flex;
+                        align-items: start;
+                        justify-content: center;
+                        background-color: var(--branco2);
+                        img {
+                            cursor: pointer;
+                            height: 1.9rem;
+                            width: auto;
+                        }
+                    }
+
+                }
+            }
+            #contListFuncs {
+                width: 100%;
+                overflow-x: auto;
+                #listFuncs {
+                    gap: 0;
+                    overflow-x: auto;
+                    overflow-y: auto;
+                    border: 0.1rem solid;
+                    border-collapse: collapse;
+                    border-spacing: 0;
+                    /* TODO Add temas */
+                    background-color: var(--branco);
+                    border-color: var(--marrom);
+                    #titleList {
+                        background-color: var(--marrom);
+                        gap: 0;
+                        th {
+                            height: auto;
+                            font-size: 1rem;
+                            text-align: center;
+                            color: var(--salmao2);
+                            font-weight: 400;
+                            border: 0;
+                        }
+                    }
+                    .funcs {
+                        font-size: 0.9rem;
+                        box-sizing: border-box;
+                        border-top: 0.1rem solid var(--marrom);
+                        td {
+                            text-align: center;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            padding: 0.1rem 0.2rem;
+                        }
+                        .setaSkillsFunc {
+                            padding: 0.1rem 0.5rem;
+                            .imgSetaSKills {
+                                height: 1.2rem;
+                            }
+                        }
+                        .editFunc {
+                            padding: 0.1rem 0.5rem;
+                            .imgEditFunc {
+                                height: 1.2rem;
+                            }
                         }
                     }
                 }

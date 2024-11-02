@@ -56,14 +56,16 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                gap: 0.2rem 0.1rem;
                 overflow: hidden;
                 flex-wrap: wrap;
                 
                 .funcsDisp {
                     display: flex;
                     padding: 0.1rem  0.5rem;
-                    box-sizing: border-box;
                     border: 0.1rem solid var(--marrom1);
+                    border-radius: 0.3rem;
+                    background-color: var(--salmao3);
                     .nomeFunc {
                         font-size: 0.9rem;
                         padding: 0;

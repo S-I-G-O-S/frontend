@@ -45,7 +45,7 @@ function Funcionarios() {
                             Especialidades e Serviços
                     </button>
                     {   
-                    usuario.cargo == 'adm' ?
+                    usuario.cargo == 'adm' || usuario.cargo == 'dev' ?
                     <button className='btt'
                         onClick={() => handleCreateClick()}>Novo Funcionário</button>
                     : ''
