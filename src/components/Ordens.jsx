@@ -61,7 +61,7 @@ function Ordens() {
     }, [])
 
     return (
-        <div id="pageOrdens">
+        <div id="pageOrdens" className='paginas'>
         <Header titulo={"Histórico de Ordens"}></Header>
         <Nav></Nav>
         <main id="mainOrdens">

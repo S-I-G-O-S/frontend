@@ -35,7 +35,7 @@ function Funcionarios() {
     }, [])
 
     return (
-        <div id='pageFuncionarios'>
+        <div id='pageFuncionarios' className='paginas'>
         <Header titulo={"Funcionários"}></Header>
         <Nav></Nav>
         <main id='mainFuncionarios'>

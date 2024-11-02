@@ -22,7 +22,7 @@ function Home() {
         console.clear()
     }, [])
     return (
-        <div id='pageHome'>
+        <div id='pageHome' className='paginas'>
         <Header titulo={"Página inicial"}></Header>
         <Nav cargo={usuario?.cargo || 'tecnico'}></Nav>
         <main id="mainHome">

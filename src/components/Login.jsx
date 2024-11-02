@@ -18,15 +18,16 @@ function Login() {
     const handleLogin = async () => {
         if(!usuario) {window.alert("")}
         setToken('Imagina um token JWT aqui')
+        /*try {
+            const result = await loginFunc(usuario)
+            setToken(result.data.tokenJWT)
+            navigate("/home", { replace: true })
+        } catch (error) {
+            console.log(error)
+            window.alert(error)
+            return    
+        }*/
         navigate("/home", { replace: true })
-        // try {
-        //     const result = await loginFunc(usuario)
-        //     setToken(result.data.tokenJWT)
-        //     navigate("/home", { replace: true })
-        // } catch (error) {
-        //     console.log(error)
-        //     window.alert(error)
-        // }
     }
 
     //  Resto da pagina

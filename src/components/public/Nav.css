@@ -18,7 +18,6 @@
     height: 100%;
     background-color: var(--azul);
     transition: 0.25s;
-    z-index: 98;
     #bttNav {
         width: 3rem;
         position: fixed;
@@ -93,4 +92,42 @@
 }
 a.active {
     background-color: var(--laranja);
+}
+@media screen and (width <= 950px) {
+    #nav,
+    .navFechado,
+    .navAberto  {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        padding: 0;
+        width: 100%;
+        transition: none;
+        #bttNav {
+            display: none;
+        }
+        #containerLinks {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin: 0;
+            .links {
+                width: auto;
+                .nomeGoTo {
+                    font-size: 0.8rem;
+                    display: none;
+                } 
+            }
+            a.active {
+                background-color: var(--laranja);
+                .nomeGoTo {
+                    /* display: block; */
+                }
+            }
+        }
+    }
 }

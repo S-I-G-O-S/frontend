@@ -32,7 +32,7 @@ function Funcionario() {
     const [erro, setErro] = useState()
     const [viewSenha, setViewSenha] = useState(false)
 
-    
+    //  Especialidades do Funcionario
     const addEspecToFunc = () => {
         console.info("ADICIONANDO ESPECIALIDADE")
         let especToAdd = especialidades.find(espec => espec.nome.toLowerCase() === pesqAddEspec.toLowerCase())
@@ -64,6 +64,8 @@ function Funcionario() {
     const changePesqAddEspec = (value) => {
         setPesqAddEspec(value)
     }
+
+    //  Endereço do Funcionario
     const handleCEP = (value) => {
         const cep = value.replace(/\D/g, '');
         if (cep.length <= 8) {
@@ -109,12 +111,6 @@ function Funcionario() {
                 }, 5000)
         }
     }
-    const handleChangeDados = (value, field) => {
-        setFuncionario(prevState => ({
-            ...prevState,
-            [field]: value,
-        }))
-    }
     const handleChangeEndereco = (value, field) => {
         setFuncionario(prevState => ({
             ...prevState,
@@ -124,10 +120,44 @@ function Funcionario() {
             }
         }))
     }
+
+    //  Dados do Funcionario
+    const handleChangeDados = (value, field) => {
+        setFuncionario(prevState => ({
+            ...prevState,
+            [field]: value,
+        }))
+    }
+    function formatNome(nome) {
+        const nomeSanitizado = nome.trim().replace(/[^a-zA-Z\s]/g, '');
+
+        if (!nomeSanitizado) {
+            console.error("O campo de nome está vazio.");
+            return false;
+        }
+        if (nomeSanitizado.length > 30) {
+            console.error("O nome deve ter no máximo 30 caracteres.");
+            return false;
+        }
+
+        const partesNome = nomeSanitizado.split(/\s+/).map(
+            parte => parte.charAt(0).toUpperCase() + parte.slice(1).toLowerCase()
+        );
+
+        const primeiro = partesNome[0] || '';
+        const ultimo = partesNome.length > 1 ? partesNome.slice(1).join(' ') : '';
+        handleChangeDados(primeiro, "primeiro")
+        handleChangeDados(ultimo, "ultimo")
+        return true;
+    }
+
+    //  Geral
     const novoFuncionario = () => {
         setFuncionario(
             {
                 "nome": "",
+                "primeiro": "",
+                "ultimo": "",
                 "email": "",
                 "celular": "",
                 "senha": "",
@@ -162,8 +192,12 @@ function Funcionario() {
         navigate(`/funcionarios`)
     }
     const handleSalvar = async () => {
+        if (!formatNome()) {
+            return
+        }
         let arrayEspecs = []
         console.warn(funcionario)
+
         funcionario.especialidades.map(espec => (
             arrayEspecs.push(espec.id)
         ))
@@ -211,7 +245,7 @@ function Funcionario() {
             const response = await getEspecialidades()
             setReqstEspecialidades(response)
             setEspecialidades(response.data.content)
-            console.warn(response)
+            // console.warn(response)
         } catch (error) {
             console.error(error.message)
         }
@@ -221,12 +255,13 @@ function Funcionario() {
             const response = await getFuncionarioPorID(idFuncionario)
             setFuncionario(response.data)
             setReqstFuncionarios(response)
-            // console.warn(response)
+            console.warn(response)
         } catch (error) {
             console.error(error.message)
         }
     }
     useEffect(() => {
+        console.clear()
         const fetchData = async () => {
             try {
                 idFuncionario !== null
@@ -241,7 +276,7 @@ function Funcionario() {
         fetchData()
     }, [])
     return(
-        <div id="pageFuncionario">
+        <div id="pageFuncionario" className='paginas'>
             <Header titulo={
                 idFuncionario !== null
                 ? ( !funcionario ? 

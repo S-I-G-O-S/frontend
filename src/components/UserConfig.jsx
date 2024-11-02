@@ -31,7 +31,7 @@ function UserConfig() {
         // }
     }, [])
     return (
-        <div id='pagePerfilConfig'>
+        <div id='pagePerfilConfig' className='paginas'>
         <Header titulo={"Configuração de usuário"}></Header>
         <Nav></Nav>
         <main id="mainPerfilConfig">

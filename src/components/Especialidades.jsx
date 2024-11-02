@@ -376,7 +376,7 @@ function Especialidades() {
         fetchData()
     }, [])
     return(
-        <div id='pageEspecialidades'>
+        <div id='pageEspecialidades' className='paginas'>
         <Header titulo={"Especialidades & Serviços"}></Header>
         <Nav></Nav>
         <main className={

@@ -110,7 +110,7 @@ function Clientes() {
         fetchClientes()
     }, [])
     return (
-        <div id='pageClientes'>
+        <div id='pageClientes' className='paginas'>
         <Header titulo={"Clientes"}></Header>
         <Nav></Nav>
         <main id='mainClientes'>

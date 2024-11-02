@@ -306,7 +306,7 @@ function Cliente() {
         }
     }, [])
     return(
-        <div id="pageCliente">
+        <div id="pageCliente" className='paginas'>
             <Header titulo={
                 idCliente !== null
                 ? ( !cliente ? 
