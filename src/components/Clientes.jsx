@@ -1,5 +1,5 @@
 
-import {getClientes, postCliente} from '../services/clientesAPI.js'
+import {getClientes, getPageClientes, postCliente} from '../services/clientesAPI.js'
 
 import Nav from './public/Nav'
 import Loading from './public/Loading.jsx'
@@ -20,6 +20,11 @@ function Clientes() {
     const [usuario, setUsuario] = useState(() => {
         const storedUsuario = sessionStorage.getItem('usuario')
         return storedUsuario ? JSON.parse(storedUsuario) : { cargo: 'dev' }
+    })
+    const [filtros, setFiltros] = useState({
+        nome: null,
+        cnpj: null,
+        ativo: null
     })
     const handleCancelar = () => {
         setShowNovoCliente(null)
@@ -96,9 +101,9 @@ function Clientes() {
             [field]: valor,
         }))
     }
-    const fetchClientes = async () => {
+    const fetchClientes = async (pagina) => {
         try {
-            const response = await getClientes()
+            const response = await getPageClientes(pagina, filtros)
             ///setReqstFuncionarios(data)
             setReqstClientes(response)
             setClientes(response.data.content)
@@ -108,10 +113,10 @@ function Clientes() {
         }
     }
     const changePage = (current, pageSize) => {
-        fetchClientes()
+        fetchClientes((current - 1))
     }
     useEffect(() => {
-        fetchClientes()
+        fetchClientes(0)
     }, [])
     return (
         <div id='pageClientes' className='paginas'>

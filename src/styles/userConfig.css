@@ -30,6 +30,11 @@
             background-color: var(--salmao1);
             width: 100%;
             box-sizing: border-box;
+            h2 {
+                font-size: 1rem;
+                margin: 0;
+                margin-bottom: 0.99rem;
+            }
         }
     }
 }

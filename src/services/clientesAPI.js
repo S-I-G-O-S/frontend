@@ -19,6 +19,24 @@ export const getClientes = async () => {
         throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
     }
 }
+export const getPageClientes = async (pagina, filtros) => {
+    try {
+        const response = await axios.get(`${config.url}/api/clientes?page=${pagina}&size=15`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        return response
+        /*{
+            "id": 0,
+            "nome": "string",
+            "cnpj": "string",
+            "ativo": true
+        }*/
+    } catch (error) {
+        throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
+    }
+}
 export const getClientePorID = async (id) => {
     try {
         const response = await axios.get(`${config.url}/api/clientes/${id}`, {

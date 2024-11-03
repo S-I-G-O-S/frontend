@@ -11,14 +11,6 @@ import { useEffect, useState } from 'react'
 import Loading from '../public/Loading.jsx'
 
 function Funcionario() {
-    {/*
-    // TODO adicionar metodo p/ pegaro 1º e ultimo nome do funcionario
-    const nomeCompleto = "Leonardo Martinez Nunes Barbosa Silva Almeida";
-    const nomes = nomeCompleto.split(" "); // separa a string em um array
-    const primeiroNome = nomes[0]; // primeiro elemento do array
-    const ultimoNome = nomes[nomes.length - 1]; // último elemento do array
-    const resultado = `${primeiroNome} ${ultimoNome}`
-    */}
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search)
     let idFuncionario = searchParams?.get('id') ?? null
@@ -107,9 +99,9 @@ function Funcionario() {
         } else {
             setErro("São necessários 8 digitos.")
             setCepMensagem("São necessários 8 digitos.")
-                setTimeout(() => {
-                    setCepMensagem('')
-                }, 5000)
+            setTimeout(() => {
+                setCepMensagem('')
+            }, 5000)
         }
     }
     const handleChangeEndereco = (value, field) => {
@@ -363,10 +355,10 @@ function Funcionario() {
                             onChange={(e) => handleCEP(e.target.value)}
                             />
                             <button onClick={fetchCEP}>Pesquisar CEP</button>
-                            <p>{cepMensagem}</p>
+                            <p>{cepMensagem || 'São necessários 8 digitos.'}</p>
                         </div>
                         <div id='contRuaFunc'>
-                            <label>Rua/logradouro:</label>
+                            <label>Rua:</label>
                             <input
                             type="text"
                             value={funcionario.endereco?.logradouro || ""}

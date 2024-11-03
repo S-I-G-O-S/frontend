@@ -70,9 +70,9 @@ function Cliente() {
         } else {
             console.error("São necessários 8 digitos.")
             setMsgCEP("São necessários 8 digitos.")
-                setTimeout(() => {
-                    setMsgCEP('')
-                }, 5000)
+            setTimeout(() => {
+                setMsgCEP('')
+            }, 5000)
         }
     }
     // CONTATOS
@@ -103,7 +103,6 @@ function Cliente() {
         if (window.confirm("Deseja APAGAR este contato de "+ cliente.nome +"?")){
             let result
             try {
-                // TODO Erro 400 Referential integrity constraint violation: "CONSTRAINT_64C: PUBLIC.CLIENTES FOREIGN KEY(CONTATO_ID) REFERENCES PUBLIC.CONTATOS(ID) (CAST(25 AS BIGINT))"
                 result = await deleteContato(idContato)
                 console.warn(result.response)
             } catch (err) {
@@ -221,7 +220,6 @@ function Cliente() {
         if(!window.confirm("Deseja APAGAR o cliente " + cliente.nome + "?")) {
             return
         }
-        //  TODO Retornando erro 405
         const result = await deleteCliente(cliente.id);
         console.warn(result.response)
         if (result.success) {

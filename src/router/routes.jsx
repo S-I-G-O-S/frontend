@@ -10,6 +10,7 @@ import Ordens from "../components/Ordens";
 import Clientes from "../components/Clientes";
 import Cliente from "../components/Clientes/Cliente"
 import UserConfig from "../components/UserConfig";
+import PaginaIncorreta from "../components/PaginaIncorreta";
 
 
 function AppRoutes() {
@@ -68,8 +69,8 @@ function AppRoutes() {
     const rotasParaNaoAutenticados = [
     //  TODO criar tela de acesso á pagina invalida ou pagina não encontrada
         {
-            path: "/",
-            element: <Login/>,
+            path: "/erro404",
+            element: <PaginaIncorreta/>,
         }
     ]
     const router = createBrowserRouter([

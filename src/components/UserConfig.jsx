@@ -37,19 +37,48 @@ function UserConfig() {
         <main id="mainPerfilConfig">
             {
             !usuario ? <Loading></Loading> :
+            <>
+            <section>
+                <h2>Configurações de desenvolvimento</h2>
+                <label>cargo</label>
+                <select name="" id="" 
+                    value={usuario.cargo}
+                    onChange={(e) => handleChangeUsuario(e.target.value, "cargo")}>
+                    <option value="tecnico">Técnico</option>
+                    <option value="base">Base</option>
+                    <option value="adm">ADM</option>
+                    <option value="dev">Dev</option>
+                </select>
+            </section>
             <section id='secUserConfig'>
+                <h2>Minhas informações</h2>
                 <div>
-                    <label>cargo</label>
-                    <select name="" id="" 
-                        value={usuario.cargo}
-                        onChange={(e) => handleChangeUsuario(e.target.value, "cargo")}>
-                        <option value="tecnico">Técnico</option>
-                        <option value="base">Base</option>
-                        <option value="adm">ADM</option>
-                        <option value="dev">Dev</option>
-                    </select>
+                    <div>Nome: Usuario Teste</div>
+                    <div>Cargo: {usuario.cargo}</div>
+                    <div>Tel./Cel.: (13) 99999-9999</div>
                 </div>
             </section>
+            <section>
+                <h2>Preferências</h2>
+                <div>
+                    <div>
+                        <label>Tema: </label>
+                        <select name="" id="">
+                            <option value="">claro</option>
+                            <option value="">noturno</option>
+                        </select>
+                    </div>
+                    <div>
+
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h2>Meu endereço</h2>
+                <div>
+                </div>
+            </section>
+            </>
             }
         </main>
         </div>

@@ -95,12 +95,16 @@ function Especialidades() {
             ...prevState,
             [corTipo]: corPrev
         }))
-        
-        setEspecAberta(especAberta => ({
-            ...especAberta,
-            cor: `${prevEspec.cor1}/${prevEspec.cor2}`,
-        }))
     }
+    useEffect(() => {
+        if(prevEspec && especAberta) {
+            setEspecAberta(especAberta => ({
+                ...especAberta,
+                cor: `${prevEspec.cor1}/${prevEspec.cor2}`,
+            }))
+            console.log(`DEBBUG cor: ${prevEspec.cor1}/${prevEspec.cor2}`)
+        }
+    }, [prevEspec])
     // EDIÇÃO SERVIÇO
     const addEspecToServ = () => {
         console.info("ADICIONANDO ESPECIALIDADE")
@@ -191,7 +195,6 @@ function Especialidades() {
             if (servicoAberto.id == "novo") {
                 result = await postServico(servicoAberto, arrayEspecs)
             } else {
-            //  TODO Retornando ERRO 405
                 result = await putServico(servicoAberto, arrayEspecs)
             }
             if (result.success) {

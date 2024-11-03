@@ -50,20 +50,23 @@
         }
         #secTecnicosDisponiveis {
             background-color: var(--salmao1);
+            width: 100%;
+
             h2 {
                 font-weight: 600;
                 font-size: 0.95rem;
                 text-align: left;
-                margin: 0 0 0.9rem 0.1rem;
+                margin: 0 0 0.1rem 0.1rem;
             }
             #listTecsDisp {
-                display: flex;
-                align-items: center;
-                justify-content: center;
+                display: none;
+                white-space: nowrap;
+                animation: marquee var(--marquee-duration, 0s) linear infinite;
+                flex-direction: row;
+                width: 100%;
+                height: min-content;
                 gap: 0.2rem 0.1rem;
-                overflow: hidden;
-                flex-wrap: wrap;
-                
+                overflow: auto;
                 .funcsDisp {
                     display: flex;
                     padding: 0.1rem  0.5rem;
@@ -150,6 +153,14 @@
             }
         }
     }
+}
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }
 @media screen and (width <= 750px) {
     #pageHome{

@@ -33,7 +33,7 @@ function Header(props) {
                     <div id='contConfigUser'>
                         <p id='nomeUsuario'>Usuário teste</p>
                         <p id='cargoUsuario'>{usuario.cargo}</p>
-                        <Link id='toUserConfig' to={'/usuario'}>usuário </Link>
+                        <Link id='toUserConfig' to={'/usuario'}>Configurações</Link>
                     </div>
                 }
                 <button id="sair" onClick={handleLogout}>
