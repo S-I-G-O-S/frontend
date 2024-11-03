@@ -24,6 +24,7 @@ function Funcionario() {
     let idFuncionario = searchParams?.get('id') ?? null
     const navigate = useNavigate()
     const [funcionario, setFuncionario] = useState()
+    const [carregando, setCarregando] = useState(true)
     const [reqstFuncionarios, setReqstFuncionarios] = useState()
     const [especialidades, setEspecialidades] = useState()
     const [reqstEspecialidades, setReqstEspecialidades] = useState()
@@ -128,8 +129,8 @@ function Funcionario() {
             [field]: value,
         }))
     }
-    function formatNome(nome) {
-        const nomeSanitizado = nome.trim().replace(/[^a-zA-Z\s]/g, '');
+    function formatNome() {
+        const nomeSanitizado = funcionario.nome.trim().replace(/[^a-zA-Z\s]/g, '');
 
         if (!nomeSanitizado) {
             console.error("O campo de nome está vazio.");
@@ -145,9 +146,14 @@ function Funcionario() {
         );
 
         const primeiro = partesNome[0] || '';
-        const ultimo = partesNome.length > 1 ? partesNome.slice(1).join(' ') : '';
+        const ultimo = partesNome.length > 1 ? partesNome[partesNome.length - 1]  : '';
         handleChangeDados(primeiro, "primeiro")
         handleChangeDados(ultimo, "ultimo")
+        setFuncionario({
+            ...funcionario,
+            primeiro: primeiro ? primeiro : '',
+            ultimo: ultimo ? ultimo : '' 
+        })
         return true;
     }
 
@@ -249,6 +255,7 @@ function Funcionario() {
         } catch (error) {
             console.error(error.message)
         }
+        
     }
     const fetchFuncionario = async () => {
         try {
@@ -256,10 +263,25 @@ function Funcionario() {
             setFuncionario(response.data)
             setReqstFuncionarios(response)
             console.warn(response)
+
         } catch (error) {
             console.error(error.message)
         }
+        
+        
     }
+    useEffect(() => {
+        if (!carregando) {
+            formatNome()
+            console.log(`primeiro: ${funcionario.primeiro} e ultimo: ${funcionario.ultimo}`)
+        }
+    }, [funcionario?.nome])
+    useEffect(() => {
+        if (funcionario && carregando) {
+            setCarregando(false)
+            console.warn(funcionario)
+        }
+    }, [funcionario])
     useEffect(() => {
         console.clear()
         const fetchData = async () => {
