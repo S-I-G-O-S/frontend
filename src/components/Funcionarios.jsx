@@ -1,5 +1,3 @@
-
-
 // Estilização
 import '../styles/funcionarios.css'
 

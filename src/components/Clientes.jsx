@@ -8,6 +8,7 @@ import Header from './public/Header'
 import Edit from '../assets/edit-text.png'
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { Pagination } from 'antd'
 
 function Clientes() {
     const navigate = useNavigate();
@@ -106,6 +107,9 @@ function Clientes() {
             console.error(error.message)
         }
     }
+    const changePage = (current, pageSize) => {
+        fetchClientes()
+    }
     useEffect(() => {
         fetchClientes()
     }, [])
@@ -146,6 +150,26 @@ function Clientes() {
                             </div>
                         ))
                     }
+                    </div>
+                    <div className='paginacao'>
+                        {
+                            !reqstClientes ? '' :
+                            // renderPaginas()
+                            <Pagination 
+                                defaultCurrent={1} 
+                                total={reqstClientes.data.page.totalPages}
+                                disabled={reqstClientes.data.page.totalPages == 1}
+                                pageSize={1}
+                                responsive
+                                showSizeChanger={false}
+                                onChange={changePage}
+                                theme={{
+                                    token: {
+
+                                    }
+                                }}
+                                />
+                        }
                     </div>
                 </div>
             </section>

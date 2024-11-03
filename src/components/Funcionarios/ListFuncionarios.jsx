@@ -4,6 +4,7 @@ import {getEspecialidades} from '../../services/especialidadesAPI.js'
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Pagination } from 'antd'
 import '../../styles/funcionarios.css'
 import Edit from '../../assets/edit-text.png'
 import Down from '../../assets/dark/down.png' 
@@ -12,6 +13,19 @@ import Loading from './../public/Loading.jsx'
 
 function ListFuncionarios() {
     const navigate = useNavigate()
+    const paleta = {
+        azul: "#395873",
+        nav: "#395873ea",
+        laranja: "#D96704",
+        salmao1: "#F2AE72",
+        salmao2: "#f7cba4",
+        salmao3: "#fcd8b9",
+        branco: "#F2E8DF",
+        marrom1: "#26110D",
+        marrom2: "#3b1f17",
+        marrom3: "#462b18",
+        preto: "#000"
+    }
     const [reqstFuncionarios, setReqstFuncionarios] = useState()
     const [reqstEspecialidades, setReqstEspecialidades] = useState()
     const [funcionarios, setFuncionarios] = useState()
@@ -23,6 +37,7 @@ function ListFuncionarios() {
         disponivel: null,
         ativo: null,
     })
+    const [pag, setPag] = useState(0)
     //  Testando outro layout da listagem de funcionarios
     const testeLayout = false
 
@@ -105,6 +120,9 @@ function ListFuncionarios() {
             )
         }
         return render
+    }
+    const changePage = (current, pageSize) => {
+        fetchFuncionarios(current - 1)
     }
     useEffect(() => {
         const fetchData = async () => {
@@ -208,7 +226,21 @@ function ListFuncionarios() {
         <div className='paginacao'>
             {
                 !reqstFuncionarios ? '' :
-                renderPaginas()
+                // renderPaginas()
+                <Pagination 
+                    defaultCurrent={1} 
+                    total={reqstFuncionarios.data.page.totalPages}
+                    disabled={reqstFuncionarios.data.page.totalPages == 1}
+                    pageSize={1}
+                    responsive
+                    showSizeChanger={false}
+                    onChange={changePage}
+                    theme={{
+                        token: {
+
+                        }
+                    }}
+                    />
             }
         </div>
         {/* <div id={`contSkillsFunc${funcionario.id}`} className='containerSkillsFunc skillsFechado'>

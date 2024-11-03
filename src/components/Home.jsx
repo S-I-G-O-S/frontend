@@ -34,7 +34,13 @@ function Home() {
                 {showInfosUser && (
                     <InfosUser></InfosUser>
                 )}
-
+                {(usuario.cargo === 'tecnico') && (
+                    <section id='secTecnico'>
+                        <div id='cont'>
+                            
+                        </div>
+                    </section>
+                )}
                 {/* funcionários disponíveis se o usuário for 'base' ou 'adm' */}
                 {(usuario.cargo === 'base' || usuario.cargo === 'adm' || usuario.cargo == 'dev') && (
                     <FuncsDisponiveis></FuncsDisponiveis>
