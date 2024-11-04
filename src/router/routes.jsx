@@ -62,6 +62,10 @@ function AppRoutes() {
                 {
                     path: "/cliente",
                     element: <Cliente/> ,
+                },
+                {
+                    path: "*",
+                    element: <PaginaIncorreta/>,
                 }
             ]
         }
@@ -69,8 +73,8 @@ function AppRoutes() {
     const rotasParaNaoAutenticados = [
     //  TODO criar tela de acesso á pagina invalida ou pagina não encontrada
         {
-            path: "/erro404",
-            element: <PaginaIncorreta/>,
+            path: "/",
+            element: <Login/>,
         }
     ]
     const router = createBrowserRouter([
