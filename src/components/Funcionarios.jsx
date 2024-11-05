@@ -17,7 +17,6 @@ function Funcionarios() {
         const storedUsuario = sessionStorage.getItem('usuario')
         return storedUsuario ? JSON.parse(storedUsuario) : { cargo: 'dev' }
     })
-
     const navigate = useNavigate()
     const goToEspecialidades = () => {
         navigate(`/especialidades`)
@@ -25,8 +24,6 @@ function Funcionarios() {
     const handleCreateClick = () => {
         navigate(`/funcionario`)
     }
-    
-
     useEffect(() => {
         console.clear()
         console.log(isMobile ? 'é mobile' : 'não é mobile' )

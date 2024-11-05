@@ -1,11 +1,16 @@
-import { Link } from "react-router-dom"
-
+import { Link, useNavigate } from "react-router-dom"
+import '../styles/paginaIncorreta.css'
+import { useEffect } from "react"
 function PaginaIncorreta() {
+    const navigate = useNavigate()
+    useEffect(() => {
+        navigate(`/home`)
+    })
     return(
         <>
-        <main>
+        <main id="paginaErro404">
             <div>pagina não encontrada</div>
-            <Link to="/">sair</Link>
+            <Link to="/home">menu principal</Link>
         </main>
         </>
     )

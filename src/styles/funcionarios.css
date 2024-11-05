@@ -6,7 +6,9 @@
     --salmao2: #f7cba4;
     --salmao3: #fcd8b9;
     --branco: #F2E8DF;
-    --marrom: #26110D;
+    --marrom1: #26110D;
+    --marrom2: #3b1f17;
+    --marrom3: #462b18;
     --preto: #000;
 }
 .checkbox {
@@ -39,6 +41,7 @@
             max-width: 95%;
             background-color: var(--salmao2);
             padding: 1rem;
+            padding-bottom: 0.5rem;
             border: 0.1rem solid var(--marrom);
             border-radius: 0.4rem;
             box-sizing: border-box;
@@ -74,6 +77,28 @@
                 }
                 .btt:hover {
                     padding: 0.2rem 2rem;
+                }
+            }
+            #contFiltros {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                
+                height: auto;
+                width: 100%;
+                padding: 0.1rem;
+                margin-bottom: 0.2rem;
+
+                color: var(--salmao2);
+                background-color: var(--marrom1);
+                #contQTD {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.2rem;
+                }
+                #contPesq {
+                    display: flex;
+                    align-items: center;
                 }
             }
             #layoutMobile {

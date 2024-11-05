@@ -36,6 +36,7 @@ function ListFuncionarios() {
         especialidade: null,
         disponivel: null,
         ativo: null,
+        qtd: 15
     })
     const [pag, setPag] = useState(0)
     //  Testando outro layout da listagem de funcionarios
@@ -102,37 +103,35 @@ function ListFuncionarios() {
             setErro(error.message)
         }
     }
-    const handlePageClick = (pagina) => {
-        fetchFuncionarios(pagina)
-    }
-    const renderPaginas = () => {
-        const totalPages = reqstFuncionarios.data.page.totalPages
-        let render = []
-        for (let pags = 0; pags < totalPages; pags++) {
-            render.push(
-                <button 
-                    key={pags} 
-                    className="paginaItem"
-                    onClick={() => handlePageClick(pags)}
-                >
-                    {pags + 1}
-                </button>
-            )
-        }
-        return render
-    }
     const changePage = (current, pageSize) => {
         fetchFuncionarios(current - 1)
     }
     useEffect(() => {
         const fetchData = async () => {
-            fetchFuncionarios(0)
+            fetchFuncionarios(0, filtros)
             fetchEspecialidades()
         }
         fetchData()
     }, [])
     return(
         <>
+        <div id='contFiltros'>
+            <div id='contQTD'>
+                <label>Quantidade: </label>
+                <select id="selectQTD">
+                    <option value="15">15</option>
+                    <option value="30">30</option>
+                    <option value="40">40</option>
+                </select>
+            </div>
+            <div>
+                
+            </div>
+            <div id='contPesq'>
+                <input type="text" />
+                <button>P</button>
+            </div>
+        </div>
         {
         testeLayout ? 
         <div id='layoutMobile'>
@@ -235,11 +234,6 @@ function ListFuncionarios() {
                     responsive
                     showSizeChanger={false}
                     onChange={changePage}
-                    theme={{
-                        token: {
-
-                        }
-                    }}
                     />
             }
         </div>

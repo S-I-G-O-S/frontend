@@ -5,7 +5,6 @@ import Analise from '../assets/analise.png'
 import { useEffect, useState } from 'react'
 import {  loginFunc } from '../services/authAPI'
 import zxcvbn from 'zxcvbn';
-import Popup from './public/Popup'
 import { useAuth } from '../provider/authProvider'
 
 function Login() {
