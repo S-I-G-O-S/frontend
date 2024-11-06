@@ -57,19 +57,14 @@
     
             color: var(--marrom);
         }
-        
-        input {
-            font-size: 0.9rem;
-
-            width: 12rem;
-            padding: 0.2rem;
-            border-width: 0.1rem;
-            border-style: solid;
-            border-radius: 5px;
-            border-color: var(--laranja);
-        }
-        #email {
-            margin: 0 0 0.2rem 0;
+        #inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            
+            #email {
+                border-color: var(--laranja);
+            }
         }
         #entrar {
             display: flex;

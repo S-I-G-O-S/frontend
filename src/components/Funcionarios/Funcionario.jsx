@@ -10,7 +10,7 @@ import { useLocation, useNavigate  } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Loading from '../public/Loading.jsx'
 
-import {notification, Alert, Popconfirm} from 'antd';
+import {notification, Alert, Popconfirm, Input} from 'antd';
 
 function Funcionario() {
     const location = useLocation();
@@ -26,6 +26,7 @@ function Funcionario() {
     const [cepMensagem, setCepMensagem] = useState('')
     const [erro, setErro] = useState()
     const [viewSenha, setViewSenha] = useState(false)
+    const [headerNomeFunc, setHeaderNomeFunc] = useState('')
 
     //  Especialidades do Funcionario
     const addEspecToFunc = () => {
@@ -161,7 +162,6 @@ function Funcionario() {
     }
 
     //  Geral
-    
     const novoFuncionario = () => {
         setFuncionario(
             {
@@ -285,6 +285,7 @@ function Funcionario() {
         if (funcionario && carregando) {
             setCarregando(false)
             console.warn(funcionario)
+            setHeaderNomeFunc(funcionario.nome)
         }
     }, [funcionario])
     useEffect(() => {
@@ -308,7 +309,7 @@ function Funcionario() {
                 idFuncionario !== null
                 ? ( !funcionario ? 
                     `Editando funcionário(a)` :
-                    `Editando funcionário(a) "${funcionario.nome}"`
+                    `Editando funcionário(a) "${headerNomeFunc}"`
                 )
                 : 'Novo funcionário'
             }>
@@ -326,11 +327,12 @@ function Funcionario() {
                     <div id='contGeralFunc'>
                         <div id='contNomeFunc'>
                             <label>Nome:</label>
-                            <input
-                            type="text"
-                            value={funcionario.nome || ""}
-                            onChange={(e) => handleChangeDados(e.target.value, "nome")}
-                            />
+                            <Input 
+                                status={""} 
+                                placeholder=""
+                                value={funcionario.nome || ""}
+                                onChange={(e) => handleChangeDados(e.target.value, "nome")}
+                                />
                         </div>
                         <div id='contEmailFunc'>
                             <label>Email:</label>

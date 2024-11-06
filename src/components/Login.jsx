@@ -6,14 +6,14 @@ import { useEffect, useState } from 'react'
 import {  loginFunc } from '../services/authAPI'
 import zxcvbn from 'zxcvbn';
 import { useAuth } from '../provider/authProvider'
+import { Input } from 'antd'
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons'
 
 function Login() {
     const minForca = 3  // nivel obrigatorio da nova senha
-    
     //  AUTH
     const { setToken } = useAuth()
     const navigate = useNavigate()
-
     const handleLogin = async () => {
         if(!usuario) {window.alert("")}
         setToken('Imagina um token JWT aqui')
@@ -28,7 +28,6 @@ function Login() {
         }*/
         navigate("/home", { replace: true })
     }
-
     //  Resto da pagina
     const [primeiroAcesso, setPrimeiroAcesso] = useState(false)
     const [usuario, setUsuario] = useState({
@@ -134,8 +133,19 @@ function Login() {
         <main id='mainLogin'>
             <section id="secLogin">
                 <h2>Bem-vindo ao SIGOS</h2>
-                <input id="email" type="text" placeholder='email' onChange={(e) => handleChangeUsuario(e.target.value, "email")}/>
-                <input id="senha" type="text" placeholder='senha' onChange={(e) => handleChangeUsuario(e.target.value, "senha")}/>
+                <div id='inputs'>
+                    <Input
+                        id="email"
+                        placeholder='email'
+                        onChange={(e) => handleChangeUsuario(e.target.value, "email")}
+                    />
+                    <Input.Password
+                        id="senha"
+                        placeholder="senha"
+                        iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+                        onChange={(e) => handleChangeUsuario(e.target.value, "senha")}
+                    />
+                </div>
                 <button id="entrar" onClick={handleLogin}>entrar</button>
                 <a id="esqueciMinhaSenha" href="">esqueci minha senha</a>
                 {/* <p onClick={changePrimeiroAcesso}>primeiro acesso</p>             */}

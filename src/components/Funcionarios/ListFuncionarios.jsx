@@ -4,7 +4,7 @@ import {getEspecialidades} from '../../services/especialidadesAPI.js'
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Pagination, Skeleton, Input } from 'antd'
+import { Pagination, Skeleton, Input, Select } from 'antd'
 const { Search } = Input
 
 import '../../styles/funcionarios.css'
@@ -131,11 +131,20 @@ function ListFuncionarios() {
         <div id='contFiltros'>
             <div id='contQTD'>
                 <label>Quantidade: </label>
-                <select id="selectQTD">
-                    <option value="15">15</option>
-                    <option value="30">30</option>
-                    <option value="40">40</option>
-                </select>
+                <Select
+                    defaultValue={15}
+                    options={[
+                    { 
+                        value: 15, label: 15 
+                    },
+                    {
+                        value: 30, label: 30
+                    },
+                    {
+                        value: 40, label: 40
+                    }
+                    ]} 
+                />
             </div>
             <div>
                 

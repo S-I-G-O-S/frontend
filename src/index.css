@@ -52,6 +52,26 @@ body {
         z-index: 999;
     }
 }
+.ant-input-password {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2 0.5rem;
+    width: auto;
+    height: auto;
+    border-color: var(--laranja);
+    width: 12rem;
+
+    input {
+        font-size: 0.9rem;
+        height: 1rem;
+        padding: 0;
+        /* border-width: 0.1rem;
+        border-style: solid;
+        border-radius: 5px; */
+    }
+    
+}
 .paginacao {
     display: flex;
     align-items: center;
