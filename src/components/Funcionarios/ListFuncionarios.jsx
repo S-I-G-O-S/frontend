@@ -4,7 +4,9 @@ import {getEspecialidades} from '../../services/especialidadesAPI.js'
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Pagination } from 'antd'
+import { Pagination, Skeleton, Input } from 'antd'
+const { Search } = Input
+
 import '../../styles/funcionarios.css'
 import Edit from '../../assets/edit-text.png'
 import Down from '../../assets/dark/down.png' 
@@ -30,6 +32,10 @@ function ListFuncionarios() {
     const [reqstEspecialidades, setReqstEspecialidades] = useState()
     const [funcionarios, setFuncionarios] = useState()
     const [especialidades, setEspecialidades] = useState()
+    const [procurarNome, setProcurarNome] = useState({
+        nome: '',
+        is: false
+    })
     const [filtros, setFiltros] = useState({
         nome: null,
         cargo: null,
@@ -106,6 +112,13 @@ function ListFuncionarios() {
     const changePage = (current, pageSize) => {
         fetchFuncionarios(current - 1)
     }
+    const procurarPorNome = (value, _e, info) => {
+        setProcurarNome({
+            nome: value,
+            is: true
+        })
+        console.log(info?.source, value)
+    }
     useEffect(() => {
         const fetchData = async () => {
             fetchFuncionarios(0, filtros)
@@ -128,16 +141,30 @@ function ListFuncionarios() {
                 
             </div>
             <div id='contPesq'>
-                <input type="text" />
-                <button>P</button>
-            </div>
+            {/* TODO ver uma forma de limpar o value ao pesquisar*/}
+            {
+                <Search
+                    placeholder={procurarNome.is ? 'procurando funcionário...' : "procurar funcionário"}
+                    onSearch={procurarPorNome}
+                    allowClear
+                    addonAfter
+                    loading={procurarNome.is}
+                    status=''
+                    
+                    style={{
+                        width: 200,
+                    }}
+                    />
+                    
+            }
+            </div> 
         </div>
         {
         testeLayout ? 
         <div id='layoutMobile'>
         {
             !funcionarios ? 
-            <Loading></Loading> :
+            <Skeleton/> :
             funcionarios.map(funcionario => (
                 <div id={`funcionario${funcionario.id}`} className='funcs skillsFechado' key={funcionario.id}>
                     <div className='infosFunc'>
@@ -187,7 +214,7 @@ function ListFuncionarios() {
                 </tr>
             {
                 !funcionarios ? 
-                <Loading></Loading> :
+                <Skeleton/>:
                 funcionarios.map(funcionario => (
                     <tr id={`funcionario${funcionario.id}`} className='funcs skillsFechado' key={funcionario.id}>
                         <td className='nomeFunc cl1'>

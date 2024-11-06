@@ -1,39 +1,42 @@
 import { useEffect, useState } from "react";
+import {notification, Alert} from 'antd';
 
 const IsOnline = () => {
-    const [networkState, setNetworkState] = useState({
-        isOnline: navigator.onLine,
-        effectiveType: "",
-        downlink: 0,
-        rtt: 0,
+    const [isOnline, setIsOnline] = useState(true)
+    function verificarConexaoInternet() {
+        const verif = navigator.onLine 
+        console.warn(verif)
+        // if (verif) {
+        //     showNotification('bottomLeft')
+        // }
+        setIsOnline(verif)
+    }
+    window.addEventListener("offline", () => {
+        setIsOnline(false)
+    })
+    window.addEventListener("online", () => {
+        setIsOnline(true)
     });
     useEffect(() => {
-        console.log(networkState)
-    }, [networkState])
-    useEffect(() => {
-        const updateNetState = () => {
-            const connection = navigator.connection;
-            if (connection) {
-                setNetworkState({
-                    isOnline: navigator.onLine,
-                    effectiveType: connection.effectiveType,
-                    downlink: connection.downlink,
-                    rtt: connection.rtt,
-                });
-            }
-        };
-        window.addEventListener("load", updateNetState);
-        window.addEventListener("online", updateNetState);
-        window.addEventListener("offline", updateNetState);
-
-        return () => {
-            window.removeEventListener("load", updateNetState);
-            window.removeEventListener("online", updateNetState);
-            window.removeEventListener("offline", updateNetState);
-        };
-    }, []);
-
-    return networkState;
+        console.clear()
+        verificarConexaoInternet()
+        
+    }, [])
+    return (
+        <>
+        {
+            !isOnline && (
+            <Alert
+                message="Desconectado da internet"
+                banner
+                closable
+                showIcon
+                type='error'
+                />
+            ) 
+        }
+        </>
+    )
 };
 
 export default IsOnline;

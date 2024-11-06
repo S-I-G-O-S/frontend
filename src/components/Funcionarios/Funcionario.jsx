@@ -10,6 +10,8 @@ import { useLocation, useNavigate  } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Loading from '../public/Loading.jsx'
 
+import {notification, Alert, Popconfirm} from 'antd';
+
 function Funcionario() {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search)
@@ -89,21 +91,30 @@ function Funcionario() {
                     }
                 }))
             } catch (error) {
-                setErro("Erro ao buscar CEP:", error)
-                setCepMensagem("CEP não encontrado ou inválido.")
-                setTimeout(() => {
-                    setCepMensagem('')
-                }, 5000)
-                // alert("CEP não encontrado ou inválido.");
+                // setErro("Erro ao buscar CEP:", error)
+                // setCepMensagem("CEP não encontrado ou inválido.")
+                // setTimeout(() => {
+                //     setCepMensagem('')
+                // }, 5000)
+                showNotifCEP('bottomLeft')
             }
         } else {
-            setErro("São necessários 8 digitos.")
-            setCepMensagem("São necessários 8 digitos.")
-            setTimeout(() => {
-                setCepMensagem('')
-            }, 5000)
+            // setErro("São necessários 8 digitos.")
+            // setCepMensagem("São necessários 8 digitos.")
+            // setTimeout(() => {
+            //     setCepMensagem('')
+            // }, 5000)
+            showNotifCEP('bottomLeft')
         }
     }
+    const showNotifCEP = (placement) => {
+        notification.error({
+        message: `CEP inválido ou não encontrado`,
+        // description: 'Reconecte-se a internet',
+        placement,
+         
+        });
+    };
     const handleChangeEndereco = (value, field) => {
         setFuncionario(prevState => ({
             ...prevState,
@@ -150,6 +161,7 @@ function Funcionario() {
     }
 
     //  Geral
+    
     const novoFuncionario = () => {
         setFuncionario(
             {
@@ -176,11 +188,7 @@ function Funcionario() {
     const goToFuncionarios = () => {
         navigate(`/funcionarios`)
     }
-    const handleDelete = async () => {
-        if(!window.confirm("Deseja APAGAR o funcionário " + funcionario.nome + "?")) {
-            return
-        }
-        
+    const confirmDelete = async (e) => {
         const result = await deleteFuncionario(funcionario.id);
         if (result.success) {
             setFuncionario((prev) => prev.filter((func) => func.id !== funcionario.id))
@@ -188,6 +196,11 @@ function Funcionario() {
             console.error(result.error)
         }
         navigate(`/funcionarios`)
+    };
+    const cancelDelete = async (e) => {
+    };
+    const handleDelete = async () => {
+        // O codigo de exclusão ficava todo aqui
     }
     const handleSalvar = async () => {
         if (!formatNome()) {
@@ -355,7 +368,7 @@ function Funcionario() {
                             onChange={(e) => handleCEP(e.target.value)}
                             />
                             <button onClick={fetchCEP}>Pesquisar CEP</button>
-                            <p>{cepMensagem || 'São necessários 8 digitos.'}</p>
+                            {/* <p>{cepMensagem}</p> */}
                         </div>
                         <div id='contRuaFunc'>
                             <label>Rua:</label>
@@ -410,7 +423,16 @@ function Funcionario() {
                     <div id='contControle'>
                         <button id='bttCancelar' onClick={goToFuncionarios}>Cancelar</button>
                         <button id='bttSalvar' onClick={handleSalvar}>Salvar</button>
-                        <button id='bttExcluir' onClick={handleDelete}>Excluir</button>
+                        {/* TODO Adicionar este elemento em todas as confirmações de exclusões */}
+                        <Popconfirm
+                            title="Apagar funcionário"
+                            description={`Deseja mesmo excluir '${funcionario.nome}'?`}
+                            onConfirm={confirmDelete}
+                            onCancel={cancelDelete}
+                            okText="SIM"
+                            cancelText="NÃO">     
+                            <button id='bttExcluir' onClick={handleDelete}>Excluir</button>
+                        </Popconfirm>
                     </div>
                 </section>
             }
