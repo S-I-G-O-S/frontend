@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import Loading from '../public/Loading'
 import { getFuncionariosDisponiveis } from '../../services/funcionariosAPI'
+import Marquee from "react-fast-marquee"
+
 function FuncsDisponiveis() {
     const listRef = useRef(null);
     const [funcDisponiveis, setFuncDisponiveis] = useState(null)
@@ -40,21 +42,29 @@ function FuncsDisponiveis() {
     return !funcDisponiveis ? (<Loading /> ): 
         (<section id="secTecnicosDisponiveis">
             <h2>Tecnicos disponiveis</h2>
-            <marquee direction="" >
-            </marquee>
              {/* TODO ajustar o quanto antes a exibição ddos funcionarios disponiveis */}
-            <div id="listTecsDisp" ref={listRef}>
+            <Marquee 
+                id="listTecsDisp" 
+                ref={listRef}
+                autoFill
+                pauseOnHover
+            >
                 {!funcDisponiveis ? 
                     "Nenhum técnico disponível" : 
                     funcDisponiveis.map(func => (
-                        <div id={`funcDisp${func.id}`}
-                            className="funcsDisp"
-                            key={func.id}>
-                            <p className="nomeFunc">{func.primeiro} {func.ultimo}</p>
-                        </div>
+                        <UnitFuncsDisponiveis key={func.id} func={func}></UnitFuncsDisponiveis>
                     ))
                 }
-            </div>
+            </Marquee>
         </section>)
+}
+function UnitFuncsDisponiveis({ func }) {
+    return(
+        <div id={`funcDisp${func.id}`}
+            className="funcsDisp"
+            key={func.id}>
+            <p className="nomeFunc">{func.primeiro} {func.ultimo}</p>
+        </div>
+    )
 }
 export default FuncsDisponiveis;

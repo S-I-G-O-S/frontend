@@ -55,7 +55,8 @@ function Home() {
                 )}
                 {/* funcionários disponíveis se o usuário for 'base' ou 'adm' */}
                 {(usuario.cargo === 'base' || usuario.cargo === 'adm' || usuario.cargo == 'dev') && (
-                    <FuncsDisponiveis></FuncsDisponiveis>
+                    // <FuncsDisponiveis></FuncsDisponiveis>
+                    ''
                 )}
 
                 {/* Ordens abertas e ordens em atendimento se o usuário for 'base' ou 'adm' */}

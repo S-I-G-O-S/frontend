@@ -60,15 +60,10 @@
                 text-align: left;
                 margin: 0 0 0.1rem 0.1rem;
             }
-            #listTecsDisp {
-                display: none;
-                white-space: nowrap;
-                animation: marquee var(--marquee-duration, 0s) linear infinite;
-                flex-direction: row;
-                width: 100%;
-                height: min-content;
-                gap: 0.2rem 0.1rem;
-                overflow: auto;
+            .rfm-marquee-container  {
+                width: 90%;
+                box-sizing: border-box;
+            }
                 .funcsDisp {
                     display: flex;
                     padding: 0.1rem  0.5rem;
@@ -81,7 +76,17 @@
                         margin: 0;
                     }
                 }
-            }
+            /* #listTecsDisp {
+                display: none;
+                white-space: nowrap;
+                animation: marquee var(--marquee-duration, 0s) linear infinite;
+                flex-direction: row;
+                width: 100%;
+                height: min-content;
+                gap: 0.2rem 0.1rem;
+                overflow: auto;
+                
+            } */
         }
         #secOrdens {
             display: flex;

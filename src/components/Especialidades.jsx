@@ -422,7 +422,7 @@ function Especialidades() {
                             !especialidades ? 
                             <Loading></Loading> :
                             especialidades.map(espec => 
-                            <UnitEspec key={espec.id} espec={espec} onClick={() => abrirEspec(espec.id)} cargo={usuario.cargo}></UnitEspec>
+                            <UnitEspec key={espec.id} espec={espec} onClick={() => abrirEspec(espec.id)}></UnitEspec>
                         )) :
                         (
                             !servicos ? <Loading></Loading> :
