@@ -132,6 +132,31 @@
                             background-color: var(--salmao1);
                         }
                 }
+                .paginacao {
+                    .ant-pagination {
+                        .ant-pagination-item {
+                            background-color: var(--salmao1);
+                            border-color: var(--marrom1);
+                            a {
+                                color: var(--marrom1);
+                            }
+                        }
+                        .ant-pagination-item:hover {
+                            background-color: var(--salmao2);
+                        }
+                        .ant-pagination-item-active {
+                            border-color: var(--laranja);
+                            background-color: var(--marrom1);
+                            a {
+                            color: var(--salmao2);
+
+                            }
+                        }
+                        .ant-pagination-item-active:hover {
+                            background-color: var(--marrom2);
+                        }
+                    }
+                }
             }
         }
         #sombra {

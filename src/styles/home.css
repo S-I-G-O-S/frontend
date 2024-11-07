@@ -52,8 +52,8 @@
         }
         #secTecnicosDisponiveis {
             background-color: var(--salmao1);
-            width: 100%;
-
+            width: 100%;    
+            border-radius: 0.5rem;
             h2 {
                 font-weight: 600;
                 font-size: 0.95rem;
@@ -89,68 +89,44 @@
             flex-wrap: wrap;
             padding: 0;
             border: 0;
-            .ordens {
-                display: flex;
-                flex-direction: column;
-                gap: 0.1rem;
-                font-size: 0.9rem;
-                
-                padding: 0.5rem;
-                border: 0.1rem solid var(--marrom);
-                border-radius: 5px;
-                margin-bottom: 0.5rem;
-
-                background-color: var(--branco);
-            }
-            #contOrdensAbertas {
+            .ant-card {
                 display: flex;
                 flex-direction: column;
                 grid-area: ordensAbertas;
                 
-                background-color: var(--salmao1);
                 height: min-content;
-                padding: 0.5rem;
+                padding: 0.1rem;
                 border: 0.1rem solid var(--marrom1);
-                border-radius: 0.3rem;
+                border-radius: 0.5rem;
                 flex-grow: 1;
                 flex-basis: 20rem;
-                h2 {
-                    font-weight: 500;
-                    font-size: 0.95rem;
-                    text-align: left;
-                    margin: 0 0 0.5rem 0.2rem;
-                }
-                .ordensAbertas{
-                    /* grid-template-columns: 1fr 7rem;
-                    grid-template-rows: auto auto;
-                    grid-template-areas: 
-                        "nomeCliente dataHora"
-                        "local local"; */
-                }
-            }
-            #contOrdensSendoAtendidas {
-                grid-area: ordensSendoAtendidas;
+
                 background-color: var(--salmao1);
-                
-                padding: 0.5rem;
-                border: 0.1rem solid var(--marrom1);
-                border-radius: 0.3rem;
-                height: min-content;
-                flex-grow: 1;
-                flex-basis: 20rem;
-                h2 {
-                    font-weight: 500;
-                    font-size: 0.95rem;
-                    text-align: left;
-                    margin: 0 0 0.5rem 0.2rem;
+                .ant-card-head {
+                    padding: 0 1rem;
+                    border-bottom-color: var(--marrom1);
+                    .ant-card-head-title {
+                        font-weight: 500;
+                        font-size: 0.95rem;
+                        text-align: left;
+                        margin: 0;
+                    }
                 }
-                .ordensSendoAtendidas {
-                    /* grid-template-columns: 1fr 7rem;
-                    grid-template-rows: auto auto;
-                    grid-template-areas: 
-                        "nomeCliente dataHora"
-                        "local local"
-                        "tecnico tecnico"; */
+                .ant-card-body {
+                    padding: 0.5rem;
+                    .ordens {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0.1rem;
+                        font-size: 0.9rem;
+                        
+                        padding: 0.5rem;
+                        border: 0.1rem solid var(--marrom);
+                        border-radius: 5px;
+                        margin-bottom: 0.5rem;
+
+                        background-color: var(--branco);
+                    }
                 }
             }
         }

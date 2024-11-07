@@ -106,7 +106,7 @@ function ListFuncionarios() {
             setFuncionarios(result.data.content)
             console.warn(result)
         } catch (error) {
-            setErro(error.message)
+            console.log(error.message)
         }
     }
     const changePage = (current, pageSize) => {
@@ -270,6 +270,7 @@ function ListFuncionarios() {
                     responsive
                     showSizeChanger={false}
                     onChange={changePage}
+                    showTitle={false}
                     />
             }
         </div>

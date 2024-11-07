@@ -26,6 +26,19 @@
                 margin-bottom: 1.5rem;
             }
         }
+        .ant-btn {
+            padding: 0.1rem 0.5rem;
+            font-weight: 500;
+            height: auto;
+            color: var(--salmao2);
+            background-color: var(--marrom1);
+        }
+
+        .ant-btn:hover {
+            color: var(--salmao2);
+            background-color: var(--marrom2);
+            box-shadow: none;
+        }
         #secInfos {
             display: flex;
             flex-direction: column;
@@ -93,15 +106,12 @@
                     }
                 }
                 #contCepFunc {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                     width: 100%;
                     input {
                         width: 6rem;
-                    }
-                    p {
-                        display: flex;
-                        width: auto;
-                        margin: 0;
-                        color: #a80000;
                     }
                 }
                 #contRuaFunc {

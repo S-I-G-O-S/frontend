@@ -10,7 +10,8 @@ import { useLocation, useNavigate  } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Loading from '../public/Loading.jsx'
 
-import {notification, Alert, Popconfirm, Input} from 'antd';
+import {notification, Alert, Popconfirm, Input, Button, Select} from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
 
 function Funcionario() {
     const location = useLocation();
@@ -352,13 +353,22 @@ function Funcionario() {
                         </div>
                         <div id='contCargoFunc'>
                             <label>Cargo:</label>
-                            <select name="" id="" 
-                                value={funcionario.cargo || ""}
-                                onChange={(e) => handleChangeDados(e.target.value, "cargo")}>
-                                <option value="técnico">Técnico</option>
-                                <option value="base">Base</option>
-                                <option value="adm">ADM</option>
-                            </select>
+                            <Select
+                                
+                                defaultValue={funcionario.cargo || 'técnico'}
+                                options={[
+                                { 
+                                    value: "técnico", label: "técnico" 
+                                },
+                                {
+                                    value: "base", label: "base"
+                                },
+                                {
+                                    value: "adm", label: "adm"
+                                }
+                                ]} 
+                                onChange={(e) => handleChangeDados(e.target.value, "cargo")}
+                            />
                         </div>
                     </div>
                     <div id='contEndFunc'>
@@ -369,7 +379,14 @@ function Funcionario() {
                             value={funcionario.endereco.cep || ""}
                             onChange={(e) => handleCEP(e.target.value)}
                             />
-                            <button onClick={fetchCEP}>Pesquisar CEP</button>
+                            <Button 
+                                type="text" 
+                                icon={<SearchOutlined />}  
+                                iconPosition={'end'}
+                                onClick={fetchCEP}
+                            >
+                                Pesquisar CEP
+                            </Button>
                             {/* <p>{cepMensagem}</p> */}
                         </div>
                         <div id='contRuaFunc'>

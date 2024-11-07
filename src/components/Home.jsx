@@ -51,9 +51,6 @@ function Home() {
                 )}
                 {(usuario.cargo === 'tecnico') && (
                     <section id='secTecnico'>
-                        <div id='cont'>
-                            
-                        </div>
                     </section>
                 )}
                 {/* funcionários disponíveis se o usuário for 'base' ou 'adm' */}
