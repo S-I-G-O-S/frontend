@@ -15,4 +15,3 @@ export function getCookie(nome) {
 export function deleteCookie(nome) {
   document.cookie = `${nome}=; expires=${new Date(0).toUTCString()}; path=/`
 }
-

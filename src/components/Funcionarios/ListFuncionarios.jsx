@@ -4,8 +4,9 @@ import {getEspecialidades} from '../../services/especialidadesAPI.js'
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Pagination, Skeleton, Input, Select } from 'antd'
+import { Pagination, Skeleton, Input, Select, Button } from 'antd'
 const { Search } = Input
+import { FilterFilled } from '@ant-design/icons'
 
 import '../../styles/funcionarios.css'
 import Edit from '../../assets/edit-text.png'
@@ -149,24 +150,25 @@ function ListFuncionarios() {
             <div>
                 
             </div>
-            <div id='contPesq'>
-            {/* TODO ver uma forma de limpar o value ao pesquisar*/}
-            {
-                <Search
-                    placeholder={procurarNome.is ? 'procurando funcionário...' : "procurar funcionário"}
-                    onSearch={procurarPorNome}
-                    allowClear
-                    addonAfter
-                    loading={procurarNome.is}
-                    status=''
-                    
-                    style={{
-                        width: 200,
-                    }}
-                    />
-                    
-            }
-            </div> 
+            <Search
+                placeholder={procurarNome.is ? 'procurando funcionário...' : "procurar funcionário"}
+                onSearch={procurarPorNome}
+                allowClear
+                addonAfter
+                loading={procurarNome.is}
+                status=''
+                
+                style={{
+                    width: 200,
+                }}
+                />
+            <Button 
+                type="text" 
+                icon={<FilterFilled />}  
+                iconPosition={'end'}
+            >
+                Filtros
+            </Button>
         </div>
         {
         testeLayout ? 

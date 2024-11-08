@@ -18,7 +18,23 @@ const AuthProvider = ({ children }) => {
 			deleteCookie("token");
 		}
 	};
+	useEffect(() => {
+        const requestInterceptor = axios.interceptors.request.use(
+            (config) => {
+                const jwtToken = getCookie("token")?.jwt;
+                if (jwtToken) {
+                    config.headers["Authorization"] = `Bearer ${jwtToken}`;
+                }
+                return config;
+            },
+            (error) => {
+                return Promise.reject(error);
+            }
+        );
 
+        // Limpa o interceptor ao desmontar
+        return () => axios.interceptors.request.eject(requestInterceptor);
+    }, []);
 	useEffect(() => {
 		if (token) {
 			// Define o header Authorization no axios com o token JWT

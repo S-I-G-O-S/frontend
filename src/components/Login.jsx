@@ -6,8 +6,10 @@ import { useEffect, useState } from 'react'
 import {  loginFunc } from '../services/authAPI'
 import zxcvbn from 'zxcvbn';
 import { useAuth } from '../provider/authProvider'
-import { Input } from 'antd'
+import { Input, notification } from 'antd'
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons'
+import { setCookie } from '../services/cookies'
+import { putRegSenha } from '../services/usuarioAPI'
 
 function Login() {
     const minForca = 3  // nivel obrigatorio da nova senha
@@ -15,19 +17,45 @@ function Login() {
     const { setToken } = useAuth()
     const navigate = useNavigate()
     const handleLogin = async () => {
-        if(!usuario) {window.alert("")}
-        setToken('Imagina um token JWT aqui')
-        /*try {
-            const result = await loginFunc(usuario)
-            setToken(result.data.tokenJWT)
-            navigate("/home", { replace: true })
+        if(usuario.email=='' || usuario.senha=='') {
+            showNotif(
+                    'bottomLeft', 
+                    `Erro ao fazer login!`, 
+                    'Campos email e senha são obrigatórios.')
+            return
+        }
+        let result
+        try {
+            result = await loginFunc(usuario)
+            console.log(result.data.tokenJWT)
+            
         } catch (error) {
             console.log(error)
-            window.alert(error)
+            showNotif('bottomLeft', `Erro ao fazer login!`, 'Tente novamente mais tarde ou entre em contato com o suporte.')
             return    
-        }*/
+        }
+        if(result.data.funcionario.ultimaAtividade == null) {
+            setUsuario({
+                email: result.data.funcionario.login
+            })
+            setPrimeiroAcesso(true)
+            return
+        }
+        // TODO Verificar se o usuario primeiro login deve trazer o token junto,
+        // TODO Verificar se o usuario desativado deve trazer o token junto
+        setToken(result.data.tokenJWT)
+        setCookie('usuario', result.data.funcionario, 1)
+        setCookie('tema', result.data.funcionario.tema, 1)
         navigate("/home", { replace: true })
     }
+    const showNotif = (placement, message, description) => {
+        notification.error({
+        message,
+        description,
+        placement,
+        
+        });
+    };
     //  Resto da pagina
     const [primeiroAcesso, setPrimeiroAcesso] = useState(false)
     const [usuario, setUsuario] = useState({
@@ -40,8 +68,9 @@ function Login() {
     })
     const [msgNovaSenha, setMsgNovaSenha] = useState(null)
     const [msgLogin, setMsgLogin] = useState(null)
-    const [funcionario, setFuncionario] = useState()
+    // const [funcionario, setFuncionario] = useState()
     const [request, setRequest] = useState(null)
+    // const [requestUsuario, setRequestUsuario] = useState()
     const [forcaSenha, setForcaSenha] = useState({
         nivel: 1,
         msg: 'muito fraca'
@@ -100,8 +129,9 @@ function Login() {
 
 
     }
-    const handleRegSenha = () => {
+    const handleRegSenha = async () => {
         if(novaSenha.senha != novaSenha.rSenha) {
+            showNotif('')
             setMsgNovaSenha('senhas diferentes!')
             return
         }
@@ -109,6 +139,22 @@ function Login() {
             setMsgNovaSenha('É necessaria uma senha forte!')
             return
         }
+        let result
+        try {
+            result = await putRegSenha(
+                usuario.email,
+                novaSenha.senha,
+                novaSenha.rSenha
+            )
+            console.warn(result)
+        } catch (error) {
+            console.log(error)
+            showNotif(
+                'bottomLeft', 
+                `Erro ao registrar nova senha!`, 
+                'Tente novamente mais tarde ou entre em contato com o suporte.')
+        }
+
         console.log('Validação completa.')
     }
     const changePrimeiroAcesso = () => {
@@ -163,11 +209,19 @@ function Login() {
                     <div id='contSenhas'>
                         <div id='contSenha'>
                             <label>Nova senha:</label>
-                            <input type="text" onChange={(e) => handleChangeNovaSenha(e.target.value, "senha")}/>
+                            <Input.Password
+                                placeholder=""
+                                iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+                                onChange={(e) => handleChangeNovaSenha(e.target.value, "senha")}
+                            />
                         </div>
                         <div id='contRepetirSenha'>
                             <label>Repetir senha:</label>
-                            <input type="text" onChange={(e) => handleChangeNovaSenha(e.target.value, "rSenha")}/>
+                            <Input.Password
+                                placeholder=""
+                                iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+                                onChange={(e) => handleChangeNovaSenha(e.target.value, "rSenha")}
+                            />
                         </div>
                         <div id='contForcaSenha' style={{ visibility: novaSenha.senha ? 'visible' : 'hidden'}}>
                             <p style={{color: forcaSenha.cor}}>senha {forcaSenha.msg}</p>
