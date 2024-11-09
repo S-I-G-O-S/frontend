@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import '../styles/login.css'
 import Negocio from '../assets/negocio.png'
 import Analise from '../assets/analise.png'
@@ -12,10 +12,13 @@ import { setCookie } from '../services/cookies'
 import { putRegSenha } from '../services/usuarioAPI'
 
 function Login() {
+    const navigate = useNavigate()
     const minForca = 3  // nivel obrigatorio da nova senha
     //  AUTH
-    const { setToken } = useAuth()
-    const navigate = useNavigate()
+    const { setToken, token } = useAuth()
+    if (token) {
+        return <Navigate to="/home"/>
+    }
     const handleLogin = async () => {
         if(usuario.email=='' || usuario.senha=='') {
             showNotif(
@@ -45,7 +48,11 @@ function Login() {
         // TODO Verificar se o usuario desativado deve trazer o token junto
         setToken(result.data.tokenJWT)
         setCookie('usuario', result.data.funcionario, 1)
-        setCookie('tema', result.data.funcionario.tema, 1)
+        if(result.data.funcionario.tema == null) {
+            setCookie('tema', 'claro', 1)
+        } else {
+            setCookie('tema', result.data.funcionario.tema, 1)
+        }
         navigate("/home", { replace: true })
     }
     const showNotif = (placement, message, description) => {

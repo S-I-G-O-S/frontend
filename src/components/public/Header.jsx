@@ -1,8 +1,11 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './Header.css'
 import { useState } from 'react'
 import { useAuth } from '../../provider/authProvider'
+import { navigate } from '@storybook/addon-links'
+import { deleteCookie } from '../../services/cookies'
 function Header(props) {
+    const navigate = useNavigate()
     const { setToken } = useAuth()
     const [viewContUser, setViewContUser] = useState(false)
     const [usuario, setUsuario] = useState(() => {
@@ -17,7 +20,10 @@ function Header(props) {
         }
     }
     const handleLogout = () => {
-        setToken(null)   
+        setToken(null)
+        deleteCookie('usuario')
+        deleteCookie('tema')
+        navigate("/", { replace: true })
     }
     return (
         <header id='header'>
