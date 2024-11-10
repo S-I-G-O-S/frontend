@@ -11,6 +11,7 @@ import View from "../assets/view.png"
 import Hide from "../assets/hide.png"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
+import { getCookie } from '../services/cookies.js'
 
 // TODO Paginação devido a alta qtd de ordens
 // TODO Criação e Edição de Ordens por ordem de redirecionamento
@@ -20,9 +21,13 @@ function Ordens() {
     const [ordemAberta, setOrdemAberta] = useState(null)
     const [error, setError] = useState()
     const navigate = useNavigate()
-
+    const [usuario, setUsuario] = useState(() => {
+        const cookieUsuario = getCookie('usuario')
+        return cookieUsuario ? cookieUsuario : ''
+    })
     function changeViewDetalhes(idOrdem) {
         const btt = document.getElementById('viewOrdem' + idOrdem)
+        
 
         if (!ordemAberta) {
             btt.src = Hide
@@ -62,8 +67,8 @@ function Ordens() {
 
     return (
         <div id="pageOrdens" className='paginas'>
-        <Header titulo={"Histórico de Ordens"}></Header>
-        <Nav></Nav>
+        <Header titulo={"Página inicial"} usuario={usuario}></Header>
+        <Nav cargo={usuario?.cargo || ''}></Nav>
         <main id="mainOrdens">
             <section>
                 <div>

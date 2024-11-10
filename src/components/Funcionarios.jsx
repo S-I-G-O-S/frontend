@@ -7,15 +7,15 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { isMobile } from 'react-device-detect'
 import ListFuncionarios from './Funcionarios/ListFuncionarios';
-
+import { getCookie } from '../services/cookies'
 
 // TODO tratamento para evitar espaços no começo e no final dos nomes
 
 //https://community.revelo.com.br/react-query-um-guia-pratico/
 function Funcionarios() {
     const [usuario, setUsuario] = useState(() => {
-        const storedUsuario = sessionStorage.getItem('usuario')
-        return storedUsuario ? JSON.parse(storedUsuario) : { cargo: 'dev' }
+        const cookieUsuario = getCookie('usuario')
+        return cookieUsuario ? cookieUsuario : ''
     })
     const navigate = useNavigate()
     const goToEspecialidades = () => {
@@ -25,14 +25,14 @@ function Funcionarios() {
         navigate(`/funcionario`)
     }
     useEffect(() => {
-        console.clear()
-        console.log(isMobile ? 'é mobile' : 'não é mobile' )
+        //console.clear()
+        // console.log(isMobile ? 'é mobile' : 'não é mobile' )
     }, [])
 
     return (
         <div id='pageFuncionarios' className='paginas'>
-        <Header titulo={"Funcionários"}></Header>
-        <Nav></Nav>
+        <Header titulo={"Página inicial"} usuario={usuario}></Header>
+        <Nav cargo={usuario?.cargo || ''}></Nav>
         <main id='mainFuncionarios'>
             <section id='secList'>
                 <div id='contEspecsNovoFunc'>

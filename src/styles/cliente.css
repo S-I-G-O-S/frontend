@@ -19,7 +19,6 @@
         "sec2 sec3";
         grid-template-columns: 1fr 1fr;
         grid-template-rows: max-content 1fr;
-        padding: 1rem;
         gap: 0.5rem;
         section {
             padding: 1rem;

@@ -12,6 +12,7 @@ import Loading from '../public/Loading.jsx'
 
 import {notification, Alert, Popconfirm, Input, Button, Select} from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
+import { getCookie } from '../../services/cookies.js'
 
 function Funcionario() {
     const location = useLocation();
@@ -28,7 +29,10 @@ function Funcionario() {
     const [erro, setErro] = useState()
     const [viewSenha, setViewSenha] = useState(false)
     const [headerNomeFunc, setHeaderNomeFunc] = useState('')
-
+    const [usuario, setUsuario] = useState(() => {
+        const cookieUsuario = getCookie('usuario')
+        return cookieUsuario ? cookieUsuario : ''
+    })
     //  Especialidades do Funcionario
     const addEspecToFunc = () => {
         console.info("ADICIONANDO ESPECIALIDADE")
@@ -313,9 +317,10 @@ function Funcionario() {
                     `Editando funcionário(a) "${headerNomeFunc}"`
                 )
                 : 'Novo funcionário'
-            }>
+            }
+            usuario={usuario}>
             </Header>
-            <Nav></Nav>
+            <Nav cargo={usuario?.cargo || ''}></Nav>
             <main>
             {
                 !funcionario ? 

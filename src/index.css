@@ -118,6 +118,9 @@ body {
     nav {
 
     }
+    main {
+        padding: 0.5rem 1rem;
+    }
 }
 @media screen and (width <= 950px) {
     .paginas {

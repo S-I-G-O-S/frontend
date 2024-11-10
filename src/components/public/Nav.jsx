@@ -9,15 +9,16 @@ import ordensIcon from '../../assets/ordensIcon.png'
 import especsIcon from '../../assets/tag.png'
 import { useEffect, useState } from 'react'
 
-function Nav() {
+function Nav(props) {
     const [sessPreferencias, setSessPreferencias] = useState(() => {
         const storedUsuario = sessionStorage.getItem('preferencias')
         return storedUsuario ? JSON.parse(storedUsuario) : { abertoNav: true }
     })
-    const [usuario, setUsuario] = useState(() => {
-        const storedUsuario = sessionStorage.getItem('usuario')
-        return storedUsuario ? JSON.parse(storedUsuario) : { cargo: 'adm' }
-    })
+    // const [usuario, setUsuario] = useState(() => {
+    //     const storedUsuario = sessionStorage.getItem('usuario')
+    //     return storedUsuario ? JSON.parse(storedUsuario) : { cargo: 'adm' }
+    // })
+    const cargo = props.cargo
     useEffect(() => {
         if (sessPreferencias) {
             sessionStorage.setItem('preferencias', JSON.stringify(sessPreferencias))
@@ -48,7 +49,7 @@ function Nav() {
                 </NavLink>
                 
                 {/* Paginas exibidas só para usuarios 'base' ou 'adm' */}
-                {usuario.cargo === 'base' || usuario.cargo === 'adm' || usuario.cargo == 'dev' ?
+                {cargo === 'BASE' || cargo === 'ADM' || cargo == 'DEV' ?
                 <> 
                     <NavLink 
                         className={({ isActive }) => (isActive ? "links active" : "links ")}

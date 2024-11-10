@@ -11,6 +11,7 @@ import UnitEspec from './Especialidades/unitEspecialidade'
 import { useEffect, useState } from 'react'
 import { Await } from 'react-router-dom'
 import Loading from './public/Loading'
+import { getCookie } from '../services/cookies'
 
 // https://www.delftstack.com/pt/howto/react/for-loop-in-react/
 
@@ -21,8 +22,8 @@ function Especialidades() {
     const [ordemEspecServicos, setOrdemEspecServicos] = useState("asc")
     const [erro, setErro] = useState('')
     const [usuario, setUsuario] = useState(() => {
-        const storedUsuario = sessionStorage.getItem('usuario')
-        return storedUsuario ? JSON.parse(storedUsuario) : { cargo: 'dev' }
+        const cookieUsuario = getCookie('usuario')
+        return cookieUsuario ? cookieUsuario : ''
     })
     
     // Especialidades
@@ -380,8 +381,8 @@ function Especialidades() {
     }, [])
     return(
         <div id='pageEspecialidades' className='paginas'>
-        <Header titulo={"Especialidades & Serviços"}></Header>
-        <Nav></Nav>
+        <Header titulo={"Página inicial"} usuario={usuario}></Header>
+        <Nav cargo={usuario?.cargo || ''}></Nav>
         <main className={
                 !tipoJanela ? "secConfigFechada" : "secConfigAberta"
             }

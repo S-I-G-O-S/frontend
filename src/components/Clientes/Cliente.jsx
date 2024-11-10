@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { cepAPI } from '../../services/cepAPI.js'
 import Loading from '../public/Loading.jsx'
+import { getCookie } from '../../services/cookies.js'
 
 function Cliente() {
     const location = useLocation();
@@ -23,7 +24,10 @@ function Cliente() {
     const [contato, setContato] = useState(null)
     const [historico, setHistorico] = useState(null)
     const [countContatos, setCountContatos] = useState(0)
-
+    const [usuario, setUsuario] = useState(() => {
+        const cookieUsuario = getCookie('usuario')
+        return cookieUsuario ? cookieUsuario : ''
+    })
     
     const formatarCNPJ = (cnpj) => {
         if(cnpj == '') {return}
@@ -292,6 +296,7 @@ function Cliente() {
         }
     }
     useEffect(() => {
+        console.clear()
         if (idCliente) {
             try {
                 fetchCliente(idCliente)
@@ -311,8 +316,10 @@ function Cliente() {
                     `Editando cliente "${cliente.nome}"`
                 )
                 : 'Novo cliente'
-            }></Header>
-            <Nav></Nav>
+            }
+            usuario={usuario}
+            ></Header>
+            <Nav cargo={usuario?.cargo || ''}></Nav>
             <main id='mainCliente'>
                 
                 <section id='secInfos'>

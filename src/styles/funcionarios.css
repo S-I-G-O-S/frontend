@@ -32,7 +32,6 @@
         align-items: center;
         width: 100%;
         grid-area: main;
-        padding: 1rem;
 
         #secList {
             display: flex;
@@ -185,7 +184,7 @@
                             white-space: nowrap;
                             overflow: hidden;
                             text-overflow: ellipsis;
-                            padding: 0.1rem 0.2rem;
+                            padding: 0.1rem 0.5rem;
                         }
                         .setaSkillsFunc {
                             padding: 0.1rem 0.5rem;

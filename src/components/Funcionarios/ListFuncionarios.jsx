@@ -45,24 +45,26 @@ function ListFuncionarios() {
         ativo: null,
         qtd: 15
     })
-    const [pag, setPag] = useState(0)
     //  Testando outro layout da listagem de funcionarios
     const testeLayout = false
 
     const handleEditClick = (idFuncionario) => {
-        navigate(`/funcionario?id=${idFuncionario}`);
+        navigate(`/funcionario?id=${idFuncionario}`)
     }
     const converterDtHr = (dataHora) => {
-        const data = new Date(dataHora)
-        // Formata para o estilo desejado
-        const dataLegivel = data.toLocaleDateString('pt-BR', {
-            day: '2-digit',
+        const [dia, mes, anoHora] = dataHora.split('-')
+        const [ano, hora] = anoHora.split(' ')
+        const dataISO = `${ano}-${mes}-${dia}T${hora}`
+
+        const data = new Date(dataISO);
+        if (isNaN(data.getTime())) return "Data Inválida"
+            return data.toLocaleDateString('pt-BR', {
+            day: 'numeric',
             month: '2-digit',
             year: 'numeric',
             hour: '2-digit',
             minute: '2-digit',
         })
-        return dataLegivel
     }
     const converterEspecs = (idEspec) => {
         let especialidade = especialidades.find(espec => espec.id == idEspec)
@@ -110,6 +112,12 @@ function ListFuncionarios() {
             console.log(error.message)
         }
     }
+    const handleChangeFilters = (value, field) => {
+        setFiltros(prevState => ({
+            ...prevState,
+            [field]: value,
+        }))
+    }
     const changePage = (current, pageSize) => {
         fetchFuncionarios(current - 1)
     }
@@ -121,9 +129,12 @@ function ListFuncionarios() {
         console.log(info?.source, value)
     }
     useEffect(() => {
+        fetchFuncionarios(0)
+    }, [filtros.qtd])
+    useEffect(() => {
         const fetchData = async () => {
-            fetchFuncionarios(0, filtros)
-            fetchEspecialidades()
+            fetchFuncionarios(0)
+            //fetchEspecialidades()
         }
         fetchData()
     }, [])
@@ -134,6 +145,7 @@ function ListFuncionarios() {
                 <label>Quantidade: </label>
                 <Select
                     defaultValue={15}
+                    onChange={(e) => handleChangeFilters(e.target.value, 'qtd')}
                     options={[
                     { 
                         value: 15, label: 15 
@@ -198,7 +210,7 @@ function ListFuncionarios() {
                         <div className='statusFunc'>
                             <span>Status: </span>
                             {
-                                funcionario.isDisponivel
+                                funcionario.disponivel
                                     ? 'disponível'
                                     : 'indisponível'
                             }
@@ -214,6 +226,7 @@ function ListFuncionarios() {
         :
         <div id="contListFuncs">
         <table id='listFuncs'>
+        <thead>
                 <tr id='titleList'>
                     <th className='nomeTitle cl1'>nome</th>
                     <th className='cellTitle cl2'>celular</th>
@@ -223,11 +236,18 @@ function ListFuncionarios() {
                     <th className='cl6'></th>
                     <th className='cl7'></th>
                 </tr>
+        </thead>
+        <tbody>
             {
                 !funcionarios ? 
-                <Skeleton/>:
+                <tr>
+                    <td colSpan='6'>
+                    <Loading/>
+                    </td>
+                </tr>
+                :
                 funcionarios.map(funcionario => (
-                    <tr id={`funcionario${funcionario.id}`} className='funcs skillsFechado' key={funcionario.id}>
+                    <tr id={`funcionario${funcionario.id}`} className='funcs' key={funcionario.id}>
                         <td className='nomeFunc cl1'>
                             {funcionario.primeiro + ' ' + funcionario.ultimo}
                         </td>
@@ -242,7 +262,7 @@ function ListFuncionarios() {
                         </td>
                         <td className='statusFunc cl5'>
                             {
-                                funcionario.isDisponivel
+                                funcionario.disponivel
                                     ? 'disponível'
                                     : 'indisponível'
                             }
@@ -257,6 +277,7 @@ function ListFuncionarios() {
                     </tr>
                 ))
             }
+        </tbody>
         </table>
         </div>
         }
@@ -266,8 +287,8 @@ function ListFuncionarios() {
                 // renderPaginas()
                 <Pagination 
                     defaultCurrent={1} 
-                    total={reqstFuncionarios.data.page.totalPages}
-                    disabled={reqstFuncionarios.data.page.totalPages == 1}
+                    total={reqstFuncionarios.data.totalPages}
+                    disabled={reqstFuncionarios.data.totalPages == 1}
                     pageSize={1}
                     responsive
                     showSizeChanger={false}

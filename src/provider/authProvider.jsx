@@ -5,20 +5,18 @@ import { setCookie, getCookie, deleteCookie } from "../services/cookies"; // Imp
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-	// Inicializa o estado do token com o valor do cookie, em vez do sessionStorage
 	const [token, setToken_] = useState(getCookie("token"));
-
 	const setToken = (novoToken) => {
 		setToken_(novoToken);
-		// Atualiza o cookie com o novo token ou deleta se for null
 		if (novoToken) {
-			setCookie("token", novoToken, 1); // Define o cookie para expirar em 1 dia, por exemplo
+			setCookie("token", novoToken, 1);
 		} else {
 			deleteCookie("token");
 		}
 	};
-	/*useEffect(() => {
-        const requestInterceptor = axios.interceptors.request.use(
+	useEffect(() => {
+        const requestInterceptor = axios.interceptors.request.
+		use(
             (config) => {
                 const jwtToken = getCookie("token");
                 if (jwtToken) {
@@ -33,13 +31,11 @@ const AuthProvider = ({ children }) => {
 
         // Limpa o interceptor ao desmontar
         return () => axios.interceptors.request.eject(requestInterceptor);
-    }, []);*/
+    }, []);
 	useEffect(() => {
 		if (token) {
-			// Define o header Authorization no axios com o token JWT
 			axios.defaults.headers.common["Authorization"] = "Bearer " + token;
 		} else {
-			// Remove o header Authorization caso o token seja removido
 			delete axios.defaults.headers.common["Authorization"];
 		}
 	}, [token]);

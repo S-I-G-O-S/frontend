@@ -1,5 +1,4 @@
-
-import {getClientes, getPageClientes, postCliente} from '../services/clientesAPI.js'
+import {getPageClientes, postCliente} from '../services/clientesAPI.js'
 
 import Nav from './public/Nav'
 import Loading from './public/Loading.jsx'
@@ -9,6 +8,7 @@ import Edit from '../assets/edit-text.png'
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Pagination } from 'antd'
+import { getCookie } from '../services/cookies.js'
 
 function Clientes() {
     const navigate = useNavigate();
@@ -18,8 +18,8 @@ function Clientes() {
     const [showNovoCliente, setShowNovoCliente] = useState(null)
     const [mensagem, setMensagem] = useState(null)
     const [usuario, setUsuario] = useState(() => {
-        const storedUsuario = sessionStorage.getItem('usuario')
-        return storedUsuario ? JSON.parse(storedUsuario) : { cargo: 'dev' }
+        const cookieUsuario = getCookie('usuario')
+        return cookieUsuario ? cookieUsuario : ''
     })
     const [filtros, setFiltros] = useState({
         nome: null,
@@ -116,12 +116,13 @@ function Clientes() {
         fetchClientes((current - 1))
     }
     useEffect(() => {
+        console.clear()
         fetchClientes(0)
     }, [])
     return (
         <div id='pageClientes' className='paginas'>
-        <Header titulo={"Clientes"}></Header>
-        <Nav></Nav>
+        <Header titulo={"Página inicial"} usuario={usuario}></Header>
+        <Nav cargo={usuario?.cargo || ''}></Nav>
         <main id='mainClientes'>
             {/* Listagem */}
             <section id='secListClientes'>

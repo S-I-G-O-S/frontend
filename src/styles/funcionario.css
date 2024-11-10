@@ -9,8 +9,6 @@
         align-items: self-start;
         grid-area: main;
         width: 100%;
-        
-        padding: 1rem;
         gap: 0.5rem;
         section {
             padding: 1rem;

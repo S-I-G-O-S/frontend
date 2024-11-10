@@ -33,7 +33,7 @@ export const getPageFuncionarios = async (pagina, filtros) => {
         filtros.disponivel ||
         filtros.ativo) {    
         filtragem = `?
-            ${!filtros.nome ? '' : `nome$={filtros.nome}`}
+            ${!filtros.nome ? '' : `nome=${filtros.nome}`}
             ${!filtros.cargo ? '' : `cargo=${filtros.cargo}`}
             ${!filtros.especialidade ? '' : `especialidade=${filtros.especialidade}`}
             ${!filtros.disponivel ? '' : `disponivel=${filtros.disponivel}`}
@@ -42,8 +42,9 @@ export const getPageFuncionarios = async (pagina, filtros) => {
         console.log(filtragem)
     }
     try {
-        const response = await axios.get(`${config.url}/api/funcionarios?page=${pagina}&size=15`, {
+        const response = await axios.get(`${config.url}/api/funcionarios?page=${pagina}&size=${filtros.qtd}`, {
             headers: {
+                'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json',
             },
         })
@@ -57,6 +58,7 @@ export const getFuncionarioPorID = async (id) => {
     try {
         const response = await axios.get(`${config.url}/api/funcionarios/${id}`, {
             headers: {
+                
                 'Content-Type': 'application/json',
             },
         })
