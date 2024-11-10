@@ -128,7 +128,7 @@ function Clientes() {
             <section id='secListClientes'>
                 <div id='tabelaClientes'>
                     {
-                        usuario.cargo == 'adm' || usuario.cargo == 'dev' ?
+                        usuario.cargo == 'ADM' || usuario.cargo == 'DEV' ?
                         <div id='containerH2Novo'>
                             <button onClick={() => handleShowNovoCliente()}>Novo cliente</button>
                         </div> : ''
@@ -149,7 +149,7 @@ function Clientes() {
                                 <div className='cnpj'>
                                     { formatCNPJ(cliente.cnpj) }
                                 </div>
-                                <div className='endereco'>endereço talvez</div>
+                                <div className='endereco'>{cliente.endereco.logradouro}, {cliente.endereco.numero}, {cliente.endereco.complemento}</div>
                                 <div className='options' onClick={() => handleEditCliente(cliente.id)}>
                                     <img src={Edit} alt="" />
                                 </div>
@@ -163,8 +163,8 @@ function Clientes() {
                             // renderPaginas()
                             <Pagination 
                                 defaultCurrent={1} 
-                                total={reqstClientes.data.page.totalPages}
-                                disabled={reqstClientes.data.page.totalPages == 1}
+                                total={reqstClientes.data.totalPages}
+                                disabled={reqstClientes.data.totalPages == 1}
                                 pageSize={1}
                                 responsive
                                 showSizeChanger={false}

@@ -1,10 +1,10 @@
 // Funções de requisições
-import {getFuncionarios, getPageFuncionarios} from '../../services/funcionariosAPI.js'
+import {getPageFuncionarios} from '../../services/funcionariosAPI.js'
 import {getEspecialidades} from '../../services/especialidadesAPI.js'
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Pagination, Skeleton, Input, Select, Button } from 'antd'
+import { Pagination, Skeleton, Input, Select, Button, Modal } from 'antd'
 const { Search } = Input
 import { FilterFilled } from '@ant-design/icons'
 
@@ -14,7 +14,7 @@ import Down from '../../assets/dark/down.png'
 import Up from '../../assets/dark/up.png'
 import Loading from './../public/Loading.jsx'
 
-function ListFuncionarios() {
+function ListFuncionarios({cargo}) {
     const navigate = useNavigate()
     const paleta = {
         azul: "#395873",
@@ -33,10 +33,12 @@ function ListFuncionarios() {
     const [reqstEspecialidades, setReqstEspecialidades] = useState()
     const [funcionarios, setFuncionarios] = useState()
     const [especialidades, setEspecialidades] = useState()
+    const [showContFiltros, setShowContFiltros] = useState(false)
     const [procurarNome, setProcurarNome] = useState({
         nome: '',
         is: false
     })
+    const [especsFiltro, setEspecsFiltro] = useState({})
     const [filtros, setFiltros] = useState({
         nome: null,
         cargo: null,
@@ -100,8 +102,20 @@ function ListFuncionarios() {
             console.warn(response)
         } catch (error) {
             console.error(error.message)
+            return
         }
     }
+    useEffect(() => {
+        if(especialidades) {
+            setEspecsFiltro(especialidades.map(espec => (
+                {
+                    label: espec.nome, 
+                    value: espec.id
+                }
+            )))
+        }
+        console.table(especsFiltro)
+    }, [especialidades])
     const fetchFuncionarios = async (pagina) => {
         try {
             const result = await getPageFuncionarios(pagina, filtros)
@@ -118,23 +132,35 @@ function ListFuncionarios() {
             [field]: value,
         }))
     }
+    const handleChangeQTD = (value) => {
+        setFiltros(prevState => ({
+            ...prevState,
+            qtd: value
+        }))
+        fetchFuncionarios(0)
+    } 
     const changePage = (current, pageSize) => {
         fetchFuncionarios(current - 1)
     }
     const procurarPorNome = (value, _e, info) => {
         setProcurarNome({
             nome: value,
-            is: true
+            is: (value==''? false : true)
         })
         console.log(info?.source, value)
     }
-    useEffect(() => {
+    const handleChangeContFiltros = () => {
+        setShowContFiltros(!showContFiltros)
+    }
+    const handleAplicarFiltros = () => {
         fetchFuncionarios(0)
-    }, [filtros.qtd])
+        setShowContFiltros(false)
+    }
     useEffect(() => {
+        console.log(cargo)
         const fetchData = async () => {
             fetchFuncionarios(0)
-            //fetchEspecialidades()
+            fetchEspecialidades()
         }
         fetchData()
     }, [])
@@ -144,8 +170,9 @@ function ListFuncionarios() {
             <div id='contQTD'>
                 <label>Quantidade: </label>
                 <Select
+                    size='small'
                     defaultValue={15}
-                    onChange={(e) => handleChangeFilters(e.target.value, 'qtd')}
+                    onChange={handleChangeQTD}
                     options={[
                     { 
                         value: 15, label: 15 
@@ -159,10 +186,8 @@ function ListFuncionarios() {
                     ]} 
                 />
             </div>
-            <div>
-                
-            </div>
             <Search
+                size='small'
                 placeholder={procurarNome.is ? 'procurando funcionário...' : "procurar funcionário"}
                 onSearch={procurarPorNome}
                 allowClear
@@ -175,9 +200,11 @@ function ListFuncionarios() {
                 }}
                 />
             <Button 
+                size='small'
                 type="text" 
                 icon={<FilterFilled />}  
                 iconPosition={'end'}
+                onClick={handleChangeContFiltros}
             >
                 Filtros
             </Button>
@@ -237,7 +264,7 @@ function ListFuncionarios() {
                     <th className='cl7'></th>
                 </tr>
         </thead>
-        <tbody>
+        <tbody className='tbody'>
             {
                 !funcionarios ? 
                 <tr>
@@ -305,7 +332,112 @@ function ListFuncionarios() {
                 ))
             }
         </div> */}
+        <Modal 
+            title="Filtros"
+            open={showContFiltros}
+            onOk={handleAplicarFiltros}
+            onCancel={handleChangeContFiltros}
+            footer={[
+                <Button 
+                    key='back'
+                    type='default'
+                    onClick={handleChangeContFiltros}
+                    >
+                    Cancelar
+                </Button>,
+                <Button 
+                    key='submit'
+                    type='default'
+                    onClick={handleAplicarFiltros}
+                    >
+                    Aplicar filtros
+                </Button>
+            ]}
+            >
+            <div className='contModal'>
+            
+            <div>
+                <label>Cargo: </label>
+                <Select
+                    size={'small'}
+                    defaultValue={'Todos'}
+                    // TODO ajustar tamanho para n cortar toas as opções
+                    onChange={handleChangeQTD}
+                    options={[
+                    {
+                        value: null, label: 'Todos'
+                    },
+                    { 
+                        value: 'TECNICO', label: 'Técnico' 
+                    },
+                    {
+                        value: 'BASE', label: 'Base'
+                    },
+                    {
+                        value: 'ADM', label: 'ADM'
+                    },
+                    {
+                        value: 'DEV', label: 'Dev'
+                    }
+                    ]} 
+                />
+            </div>
+            <div>
+                <label>Especialidade: </label>
+                <Select
+                    size={'small'}
+                    allowClear
+                    showSearch
+                    placeholder='pesquisar especialidade'
+                    optionFilterProp='label'
+                    // onChange={null}
+                    options={especsFiltro || {label: 'sem especialidades', value: 'null'}}
+                />
+            </div>
+            <div>
+                <label>Disponibilidade: </label>
+                <Select
+                    size={'small'}
+                    defaultValue={'Todos'}
+                    // TODO ajustar tamanho para n cortar toas as opções
+                    onChange={handleChangeQTD}
+                    options={[
+                    {
+                        value: null, label: 'Todos'
+                    },
+                    { 
+                        value: true, label: 'Disponiveis' 
+                    },
+                    {
+                        value: false, label: 'Indisponiveis'
+                    }
+                    ]} 
+                />
+            </div>
+            {
+                cargo=='ADM'|| cargo=='DEV' ? 
+                <div>
+                    <label>Funcionarios ativos: </label>
+                    <Select
+                        size={'small'}
+                        defaultValue={'Ativos'}
+                        // TODO ajustar tamanho para n cortar toas as opções
+                        onChange={handleChangeQTD}
+                        options={[
+                        {
+                            value: true, label: 'Ativos'
+                        },
+                        {
+                            value: false, label: 'Inativos'
+                        }
+                        ]} 
+                    />
+                </div> : ''
+            }
+            </div>
+        </Modal>
         </>
+
     )
 }
 export default ListFuncionarios

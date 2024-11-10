@@ -5,27 +5,27 @@ import { setCookie, getCookie, deleteCookie } from "../services/cookies"; // Imp
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-	const [token, setToken_] = useState(getCookie("token"));
+	const [token, setToken_] = useState(getCookie("token"))
 	const setToken = (novoToken) => {
-		setToken_(novoToken);
+		setToken_(novoToken)
 		if (novoToken) {
-			setCookie("token", novoToken, 1);
+			setCookie("token", novoToken, 1)	// TODO ver o tempo token
 		} else {
-			deleteCookie("token");
+			deleteCookie("token")
 		}
 	};
 	useEffect(() => {
         const requestInterceptor = axios.interceptors.request.
 		use(
             (config) => {
-                const jwtToken = getCookie("token");
+                const jwtToken = getCookie("token")
                 if (jwtToken) {
-                    config.headers["Authorization"] = `Bearer ${jwtToken}`;
+                    config.headers["Authorization"] = `Bearer ${jwtToken}`
                 }
-                return config;
+                return config
             },
             (error) => {
-                return Promise.reject(error);
+                return Promise.reject(error)
             }
         )
 

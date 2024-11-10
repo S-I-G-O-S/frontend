@@ -85,7 +85,8 @@
                 
                 height: auto;
                 width: 100%;
-                padding: 0.1rem;
+                padding: 0.3rem 0.5rem;
+                border-radius: 0.3rem;
                 margin-bottom: 0.2rem;
 
                 color: var(--salmao2);
@@ -175,6 +176,10 @@
                             border: 0;
                         }
                     }
+                    .tbody {
+                        max-height: 30rem;
+                        overflow-y: scroll;
+                    }
                     .funcs {
                         font-size: 0.9rem;
                         box-sizing: border-box;
@@ -193,11 +198,15 @@
                             }
                         }
                         .editFunc {
+                            cursor: pointer;
                             padding: 0.1rem 0.5rem;
                             .imgEditFunc {
                                 height: 1.2rem;
                             }
                         }
+                    }
+                    .funcs:hover {
+                        background-color: var(--salmao3);
                     }
                 }
             }

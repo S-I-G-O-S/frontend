@@ -46,7 +46,7 @@ function Funcionarios() {
                     : ''
                     } 
                 </div>
-                <ListFuncionarios></ListFuncionarios>
+                <ListFuncionarios cargo={usuario.cargo}></ListFuncionarios>
             </section>
         </main>
         </div>

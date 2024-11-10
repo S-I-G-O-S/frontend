@@ -26,23 +26,23 @@ export const getFuncionariosDisponiveis = async () => {
     }
 }
 export const getPageFuncionarios = async (pagina, filtros) => {
-    let filtragem = ''
+    let filtragem=''
     if( filtros.nome || 
         filtros.cargo || 
         filtros.especialidade ||
         filtros.disponivel ||
         filtros.ativo) {    
-        filtragem = `?
-            ${!filtros.nome ? '' : `nome=${filtros.nome}`}
-            ${!filtros.cargo ? '' : `cargo=${filtros.cargo}`}
-            ${!filtros.especialidade ? '' : `especialidade=${filtros.especialidade}`}
-            ${!filtros.disponivel ? '' : `disponivel=${filtros.disponivel}`}
-            ${!filtros.ativo ? '' : `ativo=${filtros.ativo}`}
+        filtragem = `
+            ${filtros.nome == null ? '' : `&nome=${filtros.nome}`}
+            ${!filtros.cargo ? '' : `&cargo=${filtros.cargo}`}
+            ${!filtros.especialidade ? '' : `&especialidade=${filtros.especialidade}`}
+            ${filtros.disponivel == null ? '' : `&disponivel=${filtros.disponivel}`}
+            ${!filtros.ativo ? '' : `&ativo=${filtros.ativo}`}
         `
         console.log(filtragem)
     }
     try {
-        const response = await axios.get(`${config.url}/api/funcionarios?page=${pagina}&size=${filtros.qtd}`, {
+        const response = await axios.get(`${config.url}/api/funcionarios?page=${pagina}&size=${filtros.qtd}${filtragem}`, {
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json',
