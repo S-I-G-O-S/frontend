@@ -58,7 +58,11 @@
         #sair:hover {
             background-color: var(--salmao2);
         }
-        #contConfigUser {
+        .customDropdown {
+            background-color: #F2AE72 !important;
+        }
+        
+        /* #contConfigUser {
             display: flex;
             flex-direction: column;
 
@@ -97,6 +101,6 @@
                 text-decoration: underline;
             }
             
-        }
+        } */
     }
 }

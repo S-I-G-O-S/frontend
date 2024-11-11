@@ -34,17 +34,32 @@ function ListFuncionarios({cargo}) {
     const [funcionarios, setFuncionarios] = useState()
     const [especialidades, setEspecialidades] = useState()
     const [showContFiltros, setShowContFiltros] = useState(false)
-    const [procurarNome, setProcurarNome] = useState({
+    const [nomeProcurado, setNomeProcurado] = useState({
         nome: '',
         is: false
     })
     const [especsFiltro, setEspecsFiltro] = useState({})
     const [filtros, setFiltros] = useState({
-        nome: null,
-        cargo: null,
-        especialidade: null,
-        disponivel: null,
-        ativo: null,
+        nome: {
+            valor: '',
+            is: false
+        },
+        cargo: {
+            valor: '',
+            is: false
+        },
+        especialidade: {
+            valor: '',
+            is: false
+        },
+        disponivel: {
+            valor: '',
+            is: false
+        },
+        ativo: {
+            valor: '',
+            is: false
+        },
         qtd: 15
     })
     //  Testando outro layout da listagem de funcionarios
@@ -126,10 +141,13 @@ function ListFuncionarios({cargo}) {
             console.log(error.message)
         }
     }
-    const handleChangeFilters = (value, field) => {
+    const handleChangeFilters = (value, _e, info, field) => {
         setFiltros(prevState => ({
             ...prevState,
-            [field]: value,
+            [field]: {
+                value,
+                is: true
+            },
         }))
     }
     const handleChangeQTD = (value) => {
@@ -138,17 +156,36 @@ function ListFuncionarios({cargo}) {
             qtd: value
         }))
         fetchFuncionarios(0)
-    } 
+    }
+    useEffect(() => {
+        
+    }, [filtros.qtd])
     const changePage = (current, pageSize) => {
         fetchFuncionarios(current - 1)
     }
     const procurarPorNome = (value, _e, info) => {
-        setProcurarNome({
+        // setProcurarNome({
+        //     nome: value,
+        //     is: (value==''? false : true)
+        // })
+        setFiltros(prevState => ({
+            ...prevState,
             nome: value,
-            is: (value==''? false : true)
-        })
+        }))
         console.log(info?.source, value)
     }
+    const clearProcurarNome = () => {
+        setFiltros(prevState => ({
+            ...prevState,
+            nome: {
+                value: null,
+                is: false
+            },
+        }))
+    }
+    useEffect(() => {
+        fetchFuncionarios(0)
+    }, [filtros.nome])
     const handleChangeContFiltros = () => {
         setShowContFiltros(!showContFiltros)
     }
@@ -157,9 +194,8 @@ function ListFuncionarios({cargo}) {
         setShowContFiltros(false)
     }
     useEffect(() => {
-        console.log(cargo)
         const fetchData = async () => {
-            fetchFuncionarios(0)
+            // fetchFuncionarios(0)
             fetchEspecialidades()
         }
         fetchData()
@@ -188,11 +224,11 @@ function ListFuncionarios({cargo}) {
             </div>
             <Search
                 size='small'
-                placeholder={procurarNome.is ? 'procurando funcionário...' : "procurar funcionário"}
+                placeholder={"procurar funcionário"}
                 onSearch={procurarPorNome}
                 allowClear
+                onClear={clearProcurarNome}
                 addonAfter
-                loading={procurarNome.is}
                 status=''
                 
                 style={{
@@ -362,7 +398,7 @@ function ListFuncionarios({cargo}) {
                     size={'small'}
                     defaultValue={'Todos'}
                     // TODO ajustar tamanho para n cortar toas as opções
-                    onChange={handleChangeQTD}
+                    onChange={() => handleChangeFilters('cargo')}
                     options={[
                     {
                         value: null, label: 'Todos'
@@ -400,7 +436,7 @@ function ListFuncionarios({cargo}) {
                     size={'small'}
                     defaultValue={'Todos'}
                     // TODO ajustar tamanho para n cortar toas as opções
-                    onChange={handleChangeQTD}
+                    onChange={() => handleChangeFilters('disponivel')}
                     options={[
                     {
                         value: null, label: 'Todos'

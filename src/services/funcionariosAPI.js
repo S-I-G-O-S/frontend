@@ -26,21 +26,9 @@ export const getFuncionariosDisponiveis = async () => {
     }
 }
 export const getPageFuncionarios = async (pagina, filtros) => {
-    let filtragem=''
-    if( filtros.nome || 
-        filtros.cargo || 
-        filtros.especialidade ||
-        filtros.disponivel ||
-        filtros.ativo) {    
-        filtragem = `
-            ${filtros.nome == null ? '' : `&nome=${filtros.nome}`}
-            ${!filtros.cargo ? '' : `&cargo=${filtros.cargo}`}
-            ${!filtros.especialidade ? '' : `&especialidade=${filtros.especialidade}`}
-            ${filtros.disponivel == null ? '' : `&disponivel=${filtros.disponivel}`}
-            ${!filtros.ativo ? '' : `&ativo=${filtros.ativo}`}
-        `
-        console.log(filtragem)
-    }
+    let filtragem=''  
+    filtragem = `${!filtros.nome.is ? '' : `&nome=${filtros.nome.value}`}${!filtros.cargo.is ? '' : `&cargo=${filtros.cargo.value}`}${!filtros.especialidade.is ? '' : `&especialidade=${filtros.especialidade.value}`}${!filtros.disponivel.is ? '' : `&disponivel=${filtros.disponivel.value}`}${!filtros.ativo.is ? '' : `&ativo=${filtros.ativo.value}`}
+    `
     try {
         const response = await axios.get(`${config.url}/api/funcionarios?page=${pagina}&size=${filtros.qtd}${filtragem}`, {
             headers: {
