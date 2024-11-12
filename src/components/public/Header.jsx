@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useAuth } from '../../provider/authProvider'
 import { deleteCookie } from '../../services/cookies'
 import { Dropdown } from 'antd'
-import { DownOutlined, SettingOutlined } from '@ant-design/icons'
+import { SettingOutlined } from '@ant-design/icons'
 
 function Header({usuario, titulo}) {
     const navigate = useNavigate()

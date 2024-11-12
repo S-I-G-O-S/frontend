@@ -31,7 +31,7 @@ function Funcionarios() {
 
     return (
         <div id='pageFuncionarios' className='paginas'>
-        <Header titulo={"Página inicial"} usuario={usuario}></Header>
+        <Header titulo={"Funcionarios"} usuario={usuario}></Header>
         <Nav cargo={usuario?.cargo || ''}></Nav>
         <main id='mainFuncionarios'>
             <section id='secList'>

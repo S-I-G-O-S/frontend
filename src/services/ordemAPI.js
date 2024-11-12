@@ -1,5 +1,5 @@
 import axios from 'axios'
-import config from '../services/devConfig'
+import config from '../services/config'
 
 export const getOrdens = async () => {
     try {

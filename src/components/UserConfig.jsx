@@ -4,6 +4,7 @@ import '../styles/userConfig.css'
 import { useEffect, useState } from 'react'
 import Loading from './public/Loading'
 import { getCookie } from '../services/cookies'
+import { getDeployStatus } from '../services/renderAPI'
 
 function UserConfig() {
     const [usuario, setUsuario] = useState(() => {
@@ -21,12 +22,21 @@ function UserConfig() {
             sessionStorage.setItem('usuario', JSON.stringify(usuario))
         }
     }, [usuario])
+    const fetchRender = async () => {
+        try {
+            const result = await getDeployStatus()
+            console.warn(result)
+        } catch (err) {
+            console.error(err)
+        }
+    }
     useEffect(() => {
+        console.clear()
         console.log(usuario)
     }, [])
     return (
         <div id='pagePerfilConfig' className='paginas'>
-        <Header titulo={"Página inicial"} usuario={usuario}></Header>
+        <Header titulo={"Configurações"} usuario={usuario}></Header>
         <Nav cargo={usuario?.cargo || ''}></Nav>
         <main id="mainPerfilConfig">
             {

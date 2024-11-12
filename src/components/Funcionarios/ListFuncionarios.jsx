@@ -110,38 +110,7 @@ function ListFuncionarios({cargo}) {
             img.src = Down
         }
     }
-    const fetchEspecialidades = async () => {
-        try {
-            const response = await getEspecialidades()
-            setReqstEspecialidades(response)
-            setEspecialidades(response.data.content)
-            console.warn(response)
-        } catch (error) {
-            console.error(error.message)
-            return
-        }
-    }
-    useEffect(() => {
-        if(especialidades) {
-            setEspecsFiltro(especialidades.map(espec => (
-                {
-                    label: espec.nome, 
-                    value: espec.id
-                }
-            )))
-        }
-        console.table(especsFiltro)
-    }, [especialidades])
-    const fetchFuncionarios = async (pagina) => {
-        try {
-            const result = await getPageFuncionarios(pagina, filtros)
-            setReqstFuncionarios(result)
-            setFuncionarios(result.data.content)
-            console.warn(result)
-        } catch (error) {
-            console.log(error.message)
-        }
-    }
+
     const handleChangeFilters = (value, field) => {
         setFiltros(prevState => ({
             ...prevState,
@@ -183,6 +152,39 @@ function ListFuncionarios({cargo}) {
     }
     const handlePesquisarNome = () => {
         fetchFuncionarios(0)
+    }
+        const fetchEspecialidades = async () => {
+        try {
+            const response = await getEspecialidades()
+            setReqstEspecialidades(response)
+            setEspecialidades(response.data.content)
+            console.warn(response)
+        } catch (error) {
+            console.error(error.message)
+            return
+        }
+    }
+
+    useEffect(() => {
+        if(especialidades) {
+            setEspecsFiltro(especialidades.map(espec => (
+                {
+                    label: espec.nome, 
+                    value: espec.id
+                }
+            )))
+        }
+        console.table(especsFiltro)
+    }, [especialidades])
+    const fetchFuncionarios = async (pagina) => {
+        try {
+            const result = await getPageFuncionarios(pagina, filtros)
+            setReqstFuncionarios(result)
+            setFuncionarios(result.data.content)
+            console.warn(result)
+        } catch (error) {
+            console.log(error.message)
+        }
     }
     useEffect(() => {
         const fetchData = async () => {
@@ -334,6 +336,11 @@ function ListFuncionarios({cargo}) {
                                     : 'indisponível'
                             }
                         </td>
+                        {/* 
+                            TODO [FUNC] Deixar só a seta pra baixo, expandido e mostrando as opções de :
+                                Editar funcionario (base)
+                                Mostrar Especialidades (base e ADM)
+                        */}
                         <td className='setaSkillsFunc cl6'
                         onClick={() => verEspecialidades(funcionario.id)}>
                             <img id={`imgSetaSkillsFunc${funcionario.id}`} className='imgSetaSKills' src={Down} alt="ver especialidades"/>

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import config from './devConfig'
+import config from './config'
 
 export const getClientes = async () => {
     try {

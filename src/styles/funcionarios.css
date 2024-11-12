@@ -197,7 +197,6 @@
                 #listFuncs {
                     gap: 0;
                     overflow-x: auto;
-                    overflow-y: scroll;
                     border: 0.1rem solid;
                     border-collapse: collapse;
                     border-spacing: 0;
@@ -219,35 +218,35 @@
                     .tbody {
                         max-height: 20rem;
                         overflow-y: scroll;
-
-                    }
-                    .funcs {
-                        font-size: 0.9rem;
-                        box-sizing: border-box;
-                        border-top: 0.1rem solid var(--marrom);
-                        td {
-                            text-align: center;
-                            white-space: nowrap;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            padding: 0.1rem 0.5rem;
-                        }
-                        .setaSkillsFunc {
-                            padding: 0.1rem 0.5rem;
-                            .imgSetaSKills {
-                                height: 1.2rem;
+                    
+                        .funcs {
+                            font-size: 0.9rem;
+                            box-sizing: border-box;
+                            border-top: 0.1rem solid var(--marrom);
+                            td {
+                                text-align: center;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                padding: 0.1rem 0.5rem;
+                            }
+                            .setaSkillsFunc {
+                                padding: 0.1rem 0.5rem;
+                                .imgSetaSKills {
+                                    height: 1.2rem;
+                                }
+                            }
+                            .editFunc {
+                                cursor: pointer;
+                                padding: 0.1rem 0.5rem;
+                                .imgEditFunc {
+                                    height: 1.2rem;
+                                }
                             }
                         }
-                        .editFunc {
-                            cursor: pointer;
-                            padding: 0.1rem 0.5rem;
-                            .imgEditFunc {
-                                height: 1.2rem;
-                            }
+                        .funcs:hover {
+                            background-color: var(--salmao3);
                         }
-                    }
-                    .funcs:hover {
-                        background-color: var(--salmao3);
                     }
                 }
             }
