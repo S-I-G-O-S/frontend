@@ -14,5 +14,5 @@ export function getCookie(nome) {
     return JSON.parse(jsonString)
 }
 export function deleteCookie(nome) {
-  document.cookie = `${nome}=; expires=${new Date(0).toUTCString()}; path=/`
+    document.cookie = `${nome}=; expires=${new Date(0).toUTCString()}; path=/`
 }

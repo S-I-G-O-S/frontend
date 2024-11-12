@@ -6,13 +6,14 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Pagination, Skeleton, Input, Select, Button, Modal } from 'antd'
 const { Search } = Input
-import { FilterFilled } from '@ant-design/icons'
+import { FilterFilled, SearchOutlined } from '@ant-design/icons'
 
 import '../../styles/funcionarios.css'
 import Edit from '../../assets/edit-text.png'
 import Down from '../../assets/dark/down.png' 
 import Up from '../../assets/dark/up.png'
 import Loading from './../public/Loading.jsx'
+import { color } from 'storybook/internal/theming';
 
 function ListFuncionarios({cargo}) {
     const navigate = useNavigate()
@@ -141,12 +142,12 @@ function ListFuncionarios({cargo}) {
             console.log(error.message)
         }
     }
-    const handleChangeFilters = (value, _e, info, field) => {
+    const handleChangeFilters = (value, field) => {
         setFiltros(prevState => ({
             ...prevState,
             [field]: {
                 value,
-                is: true
+                is: (value == '' ? false : true)
             },
         }))
     }
@@ -163,17 +164,7 @@ function ListFuncionarios({cargo}) {
     const changePage = (current, pageSize) => {
         fetchFuncionarios(current - 1)
     }
-    const procurarPorNome = (value, _e, info) => {
-        // setProcurarNome({
-        //     nome: value,
-        //     is: (value==''? false : true)
-        // })
-        setFiltros(prevState => ({
-            ...prevState,
-            nome: value,
-        }))
-        console.log(info?.source, value)
-    }
+    // TODO [ACESS] implementar func de apagar todo o campo da pesquisa
     const clearProcurarNome = () => {
         setFiltros(prevState => ({
             ...prevState,
@@ -183,9 +174,6 @@ function ListFuncionarios({cargo}) {
             },
         }))
     }
-    useEffect(() => {
-        fetchFuncionarios(0)
-    }, [filtros.nome])
     const handleChangeContFiltros = () => {
         setShowContFiltros(!showContFiltros)
     }
@@ -193,15 +181,20 @@ function ListFuncionarios({cargo}) {
         fetchFuncionarios(0)
         setShowContFiltros(false)
     }
+    const handlePesquisarNome = () => {
+        fetchFuncionarios(0)
+    }
     useEffect(() => {
         const fetchData = async () => {
-            // fetchFuncionarios(0)
+            fetchFuncionarios(0)
             fetchEspecialidades()
         }
         fetchData()
     }, [])
     return(
         <>
+        {
+        !funcionarios ? '' :
         <div id='contFiltros'>
             <div id='contQTD'>
                 <label>Quantidade: </label>
@@ -222,7 +215,16 @@ function ListFuncionarios({cargo}) {
                     ]} 
                 />
             </div>
-            <Search
+            <div id='contPesqFunc'>
+                <input type="text" 
+                    value={filtros.nome.valor}
+                    onChange={(e) => handleChangeFilters(e.target.value, "nome")}
+                />
+                <button onClick={handlePesquisarNome}>
+                    <SearchOutlined style={{color: '#fcd8b9'}}/>
+                </button>
+            </div>
+            {/* <Search
                 size='small'
                 placeholder={"procurar funcionário"}
                 onSearch={procurarPorNome}
@@ -232,9 +234,10 @@ function ListFuncionarios({cargo}) {
                 status=''
                 
                 style={{
+                    display: 'none',
                     width: 200,
                 }}
-                />
+                /> */}
             <Button 
                 size='small'
                 type="text" 
@@ -245,6 +248,7 @@ function ListFuncionarios({cargo}) {
                 Filtros
             </Button>
         </div>
+        }
         {
         testeLayout ? 
         <div id='layoutMobile'>

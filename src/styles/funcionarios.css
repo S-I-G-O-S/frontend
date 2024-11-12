@@ -58,7 +58,7 @@
                     cursor: pointer;
                     text-align: center;
                     font-size: 0.9rem;
-                    font-weight: 600;
+                    font-weight: 500;
 
                     box-sizing: border-box;
                     width: auto;
@@ -69,20 +69,18 @@
                     color: var(--salmao2);
                     background-color: var(--marrom);
 
-                    transition: 150ms;
-
                     #goToEspecialidades {
                         all: unset;
                     }
                 }
                 .btt:hover {
-                    padding: 0.2rem 2rem;
+                    background-color: var(--marrom2);
                 }
             }
             #contFiltros {
                 display: flex;
                 align-items: center;
-                justify-content: space-around;
+                justify-content: space-between;
                 
                 height: auto;
                 width: 100%;
@@ -96,6 +94,47 @@
                     display: flex;
                     align-items: center;
                     gap: 0.2rem;
+                }
+                #contPesqFunc {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 0.3rem;
+                    border: 0.1rem solid;
+                    border-color: var(--salmao1);
+
+                    input {
+                        padding: 0 0.3rem;
+                        border: 0.1rem solid var(--marrom1);
+                        border-radius: 0.3rem 0 0 0.3rem;
+                        height: 1.3rem;
+                    }
+                    input:focus {
+                        outline: none;
+                    }
+                    button {
+                        all: unset;
+                        display: flex;
+                        
+                        box-sizing: border-box;
+
+                        cursor: pointer;
+                        padding: 0.1rem 0.3rem;
+                        border: 0.1rem solid var(--marrom1);
+                        border-radius: 0 0.3rem 0.3rem 0;
+                        background-color: var(--marrom1);
+                        height: 1.3rem;
+                    }
+                    input:focus {
+                        outline: none;
+                    }
+                    button:focus, 
+                    button:hover {
+                        height: 1.2rem;
+                        /* border: 0.1rem solid var(--laranja); */
+                        background-color: var(--marrom2);
+                        outline: none;
+                    }
                 }
                 .ant-input-group-wrapper {
                     border-color: var(--laranja);

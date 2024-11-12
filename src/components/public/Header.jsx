@@ -66,6 +66,7 @@ function Header({usuario, titulo}) {
                                 flexDirection: 'column',
                                 alignItems: 'center',
                                 fontSize: '0.75rem',
+                                fontWeight: '500'
                             }}>
                                 <div>{usuario.nome}</div>
                                 <div>{usuario.cargo}</div>
