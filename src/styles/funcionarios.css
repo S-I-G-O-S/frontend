@@ -38,6 +38,7 @@
             flex-direction: column;
             grid-area: sec1;
             max-width: 95%;
+            max-height: 95%;
             background-color: var(--salmao2);
             padding: 1rem;
             padding-bottom: 0.5rem;
@@ -157,7 +158,7 @@
                 #listFuncs {
                     gap: 0;
                     overflow-x: auto;
-                    overflow-y: auto;
+                    overflow-y: scroll;
                     border: 0.1rem solid;
                     border-collapse: collapse;
                     border-spacing: 0;
@@ -177,8 +178,9 @@
                         }
                     }
                     .tbody {
-                        max-height: 30rem;
+                        max-height: 20rem;
                         overflow-y: scroll;
+
                     }
                     .funcs {
                         font-size: 0.9rem;

@@ -47,11 +47,11 @@ function Login() {
         // TODO Verificar se o usuario primeiro login deve trazer o token junto,
         // TODO Verificar se o usuario desativado deve trazer o token junto
         setToken(result.data.tokenJWT)
-        setCookie('usuario', result.data.funcionario, 1)
+        setCookie('usuario', result.data.funcionario, 12)
         if(result.data.funcionario.tema == null) {
-            setCookie('tema', 'claro', 1)
+            setCookie('tema', 'claro', 12)
         } else {
-            setCookie('tema', result.data.funcionario.tema, 1)
+            setCookie('tema', result.data.funcionario.tema, 12)
         }
         navigate("/home", { replace: true })
     }
