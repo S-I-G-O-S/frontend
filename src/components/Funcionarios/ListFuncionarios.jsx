@@ -1,5 +1,5 @@
 // Funções de requisições
-import {getPageFuncionarios} from '../../services/funcionariosAPI.js'
+import {getPageFuncionarios} from '../..services/funcionariosAPI.js'
 import {getEspecialidades} from '../../services/especialidadesAPI.js'
 
 import { useEffect, useState } from "react";
@@ -465,7 +465,7 @@ function ListFuncionarios({cargo}) {
                 </div>
             )
         */}
-        <Modal 
+        {/* <Modal 
             title="Filtros"
             open={showContFiltros}
             onOk={handleAplicarFiltros}
@@ -553,7 +553,7 @@ function ListFuncionarios({cargo}) {
                     </select>
                 </div>
             </div>
-        </Modal>
+        </Modal> */}
         </>
 
     )

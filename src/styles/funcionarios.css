@@ -288,18 +288,40 @@
         #contFiltros {
             display: flex;
             flex-direction: column;
-            padding: 1rem;
+            gap: 2rem;
+            padding: 1.5rem 2rem;
             border: 0.1rem solid var(--marrom);
             border-radius: 0.5rem;
-            background-color: var(--salmao1);
+            
+
+            background-color: var(--salmao3);
+
             height: min-content;
             width: min-content;
             min-width: 20rem;
             #headerContFiltros {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
                 font-size: 1.05rem;
                 color: var(--marrom);
-                margin: 0;
-                margin-bottom: 1rem;                  
+                h2 {
+                    font-size: 1.2rem;
+                    font-weight: 500;
+                }
+                #closeModel {
+                    cursor: pointer;
+                    padding: 0.1rem 0.3rem;
+                    border-radius: 0.3rem;
+                    transition: 200ms;
+                    svg {
+                        height: 1.2rem;
+                        color: var(--marrom1);
+                    }
+                }
+                #closeModel:hover {
+                    background-color: var(--salmao2);
+                }
             }
             #subContFiltros {
                 
@@ -315,36 +337,34 @@
                     align-items: center;
                     justify-content: center;
                     cursor: pointer;
-                    font-size: 0.95rem;
+                    font-size: 0.9rem;
                     font-weight: 500;
-                    
 
-                    height: 1.5rem;
-                    width: 8rem;
+                    height: auto;
+                    width: 7rem;
+                    padding: 0.1rem 0.1rem;
                     border: 0.1rem solid var(--marrom);
                     border-radius: 0.3rem;
                     color: var(--marrom);
                     
                     transition: 150ms;
                 }
-                
-                button:hover {
-                    width: 11rem;
-                    
-                }
                 button:focus {
                     text-decoration: underline;
                     border: 0.1rem solid var(--laranja);
                 }
                 #bttCancelar {
-                    background-color: #ecea57;
+                    background-color: var(--salmao1);
                 }
-                #bttSalvar {
-                    background-color: #40ec5d;
+                #bttAplicar {
+                    color: var(--salmao2);
+                    background-color: var(--marrom1);
                 }
-                #bttExcluir {
-                    background-color: #fc8c8c;
-                    
+                #bttCancelar:hover {
+                    background-color: var(--salmao2);
+                }
+                #bttAplicar:hover {
+                    background-color: var(--marrom2);
                 }
             }
         }
