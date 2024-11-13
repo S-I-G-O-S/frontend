@@ -13,7 +13,6 @@ import Edit from '../../assets/edit-text.png'
 import Down from '../../assets/dark/down.png' 
 import Up from '../../assets/dark/up.png'
 import Loading from './../public/Loading.jsx'
-import { color } from 'storybook/internal/theming';
 
 function ListFuncionarios({cargo}) {
     const navigate = useNavigate()
@@ -39,26 +38,25 @@ function ListFuncionarios({cargo}) {
         nome: '',
         is: false
     })
-    const [especsFiltro, setEspecsFiltro] = useState({})
     const [filtros, setFiltros] = useState({
         nome: {
-            valor: '',
+            value: 'default',
             is: false
         },
         cargo: {
-            valor: '',
+            value: 'default',
             is: false
         },
         especialidade: {
-            valor: '',
+            value: 'default',
             is: false
         },
         disponivel: {
-            valor: '',
+            value: 'default',
             is: false
         },
         ativo: {
-            valor: '',
+            value: 'default',
             is: false
         },
         qtd: 15
@@ -110,13 +108,13 @@ function ListFuncionarios({cargo}) {
             img.src = Down
         }
     }
-
     const handleChangeFilters = (value, field) => {
+        field=='nome' ? null : console.log("Debbug filtro " + value + ' ' + field)
         setFiltros(prevState => ({
             ...prevState,
             [field]: {
                 value,
-                is: (value == '' ? false : true)
+                is: (value=='' || value=='default'? false : true)
             },
         }))
     }
@@ -127,9 +125,6 @@ function ListFuncionarios({cargo}) {
         }))
         fetchFuncionarios(0)
     }
-    useEffect(() => {
-        
-    }, [filtros.qtd])
     const changePage = (current, pageSize) => {
         fetchFuncionarios(current - 1)
     }
@@ -147,13 +142,43 @@ function ListFuncionarios({cargo}) {
         setShowContFiltros(!showContFiltros)
     }
     const handleAplicarFiltros = () => {
+        console.log('Aplicando filtros:')
+        console.warn(filtros)
         fetchFuncionarios(0)
         setShowContFiltros(false)
+    }
+    const handleLimparFiltros = () => {
+        setFiltros({
+            nome: {
+                value: 'default',
+                is: false
+            },
+            cargo: {
+                value: 'default',
+                is: false
+            },
+            especialidade: {
+                value: 'default',
+                is: false
+            },
+            disponivel: {
+                value: 'default',
+                is: false
+            },
+            ativo: {
+                value: 'default',
+                is: false
+            },
+            qtd: 15
+        })
+        setTimeout(() => {
+            fetchFuncionarios(0)
+        }, 1500)
     }
     const handlePesquisarNome = () => {
         fetchFuncionarios(0)
     }
-        const fetchEspecialidades = async () => {
+    const fetchEspecialidades = async () => {
         try {
             const response = await getEspecialidades()
             setReqstEspecialidades(response)
@@ -164,18 +189,6 @@ function ListFuncionarios({cargo}) {
             return
         }
     }
-
-    useEffect(() => {
-        if(especialidades) {
-            setEspecsFiltro(especialidades.map(espec => (
-                {
-                    label: espec.nome, 
-                    value: espec.id
-                }
-            )))
-        }
-        console.table(especsFiltro)
-    }, [especialidades])
     const fetchFuncionarios = async (pagina) => {
         try {
             const result = await getPageFuncionarios(pagina, filtros)
@@ -188,7 +201,7 @@ function ListFuncionarios({cargo}) {
     }
     useEffect(() => {
         const fetchData = async () => {
-            fetchFuncionarios(0)
+            filtros ? fetchFuncionarios(0) : ''
             fetchEspecialidades()
         }
         fetchData()
@@ -198,28 +211,10 @@ function ListFuncionarios({cargo}) {
         {
         !funcionarios ? '' :
         <div id='contFiltros'>
-            <div id='contQTD'>
-                <label>Quantidade: </label>
-                <Select
-                    size='small'
-                    defaultValue={15}
-                    onChange={handleChangeQTD}
-                    options={[
-                    { 
-                        value: 15, label: 15 
-                    },
-                    {
-                        value: 30, label: 30
-                    },
-                    {
-                        value: 40, label: 40
-                    }
-                    ]} 
-                />
-            </div>
+            
             <div id='contPesqFunc'>
                 <input type="text" 
-                    value={filtros.nome.valor}
+                    value={filtros.nome.value == 'default' ? '' : filtros.nome.value}
                     onChange={(e) => handleChangeFilters(e.target.value, "nome")}
                 />
                 <button onClick={handlePesquisarNome}>
@@ -379,108 +374,184 @@ function ListFuncionarios({cargo}) {
                 ))
             }
         </div> */}
+        {/*
+            showContFiltros && (
+                <div id='contFiltros'>
+                    <div id='headerContFiltros'>
+                    <h2>Filtros</h2>
+                    </div>
+                    <div id='subContFiltros'>
+                        <div id='contCargoFiltro'>
+                            <label>Cargo: </label>
+                            <select 
+                                value={filtros?.cargo.value}
+                                onChange={(e)=> handleChangeFilters(e.target.value, 'cargo')}
+                                >
+                                <option value="default">Todos</option>
+                                <option value="TECNICO">Técnicos</option>
+                                <option value="BASE">Base</option>
+                                <option value="ADM">ADM</option>
+                                <option value="DEV">Dev</option>
+                            </select>
+                        </div>
+                        <div id='contEspecFiltro'>
+                            <label>Especialidade: </label>
+                            <select
+                                value={filtros?.especialidade.value}
+                                onChange={(e)=> handleChangeFilters(e.target.value, 'especialidade')} 
+                                >
+                            {
+                                especialidades && [
+                                    <option key="default" value="default">Todos</option>,
+                                    ...especialidades.map(espec => (
+                                        <option key={espec.id} value={espec.id}>{espec.nome}</option>
+                                    ))
+                                ]
+                            }
+                            </select>
+                        </div>
+                        <div id='contDispFiltro'>
+                            <label>Disponibilidade: </label>
+                            <select
+                                value={filtros?.disponivel.value}
+                                onChange={(e)=> handleChangeFilters(e.target.value, 'disponivel')}
+                                >
+                                <option value="default">Todos</option>
+                                <option value="true">Disponíveis</option>
+                                <option value="false">Indisponíveis</option>
+                            </select>
+                        </div>
+                        {
+                            cargo=='ADM'|| cargo=='DEV' ? 
+                            <div id='contAtivoFiltro'>
+                                <label>Funcionarios ativos: </label>
+                                <select
+                                    value={filtros?.ativo.value}
+                                    onChange={(e)=> handleChangeFilters(e.target.value, 'ativo')}
+                                    >
+                                    <option value="default">Todos</option>
+                                    <option value="true">Ativos</option>
+                                    <option value="false">Inativos</option>
+                                </select>
+                            </div> : ''
+                        }
+                        <div id='contQTDFiltro'>
+                            <label>Quantidade: </label>
+                            <select 
+                                id="selectQTD"
+                                value={filtros?.qtd}
+                                onChange={(e) => handleChangeQTD(e.target.value)}
+                                >
+                                <option value="15">15</option>
+                                <option value="30">30</option>
+                                <option value="40">40</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id='footerContFiltros'>
+                        <button 
+                            key='cancelar'
+                            onClick={handleChangeContFiltros}
+                            >
+                            Cancelar
+                        </button>,
+                        <button 
+                            key='filtar'
+                            onClick={handleAplicarFiltros}
+                            >
+                            Aplicar filtros
+                        </button>
+                    </div>
+                </div>
+            )
+        */}
         <Modal 
             title="Filtros"
             open={showContFiltros}
             onOk={handleAplicarFiltros}
             onCancel={handleChangeContFiltros}
             footer={[
-                <Button 
-                    key='back'
-                    type='default'
+                <button 
+                    key='cancelar'
                     onClick={handleChangeContFiltros}
                     >
                     Cancelar
-                </Button>,
-                <Button 
-                    key='submit'
-                    type='default'
+                </button>,
+                <button 
+                    key='filtar'
                     onClick={handleAplicarFiltros}
                     >
                     Aplicar filtros
-                </Button>
+                </button>
             ]}
             >
             <div className='contModal'>
-            
-            <div>
-                <label>Cargo: </label>
-                <Select
-                    size={'small'}
-                    defaultValue={'Todos'}
-                    // TODO ajustar tamanho para n cortar toas as opções
-                    onChange={() => handleChangeFilters('cargo')}
-                    options={[
+                <div id='contCargoFiltro'>
+                    <label>Cargo: </label>
+                    <select 
+                        value={filtros?.cargo.value}
+                        onChange={(e)=> handleChangeFilters(e.target.value, 'cargo')}
+                        >
+                        <option value="default">Todos</option>
+                        <option value="TECNICO">Técnicos</option>
+                        <option value="BASE">Base</option>
+                        <option value="ADM">ADM</option>
+                        <option value="DEV">Dev</option>
+                    </select>
+                </div>
+                <div id='contEspecFiltro'>
+                    <label>Especialidade: </label>
+                    <select
+                        value={filtros?.especialidade.value}
+                        onChange={(e)=> handleChangeFilters(e.target.value, 'especialidade')} 
+                        >
                     {
-                        value: null, label: 'Todos'
-                    },
-                    { 
-                        value: 'TECNICO', label: 'Técnico' 
-                    },
-                    {
-                        value: 'BASE', label: 'Base'
-                    },
-                    {
-                        value: 'ADM', label: 'ADM'
-                    },
-                    {
-                        value: 'DEV', label: 'Dev'
+                        especialidades && [
+                            <option key="default" value="default">Todos</option>,
+                            ...especialidades.map(espec => (
+                                <option key={espec.id} value={espec.id}>{espec.nome}</option>
+                            ))
+                        ]
                     }
-                    ]} 
-                />
-            </div>
-            <div>
-                <label>Especialidade: </label>
-                <Select
-                    size={'small'}
-                    allowClear
-                    showSearch
-                    placeholder='pesquisar especialidade'
-                    optionFilterProp='label'
-                    // onChange={null}
-                    options={especsFiltro || {label: 'sem especialidades', value: 'null'}}
-                />
-            </div>
-            <div>
-                <label>Disponibilidade: </label>
-                <Select
-                    size={'small'}
-                    defaultValue={'Todos'}
-                    // TODO ajustar tamanho para n cortar toas as opções
-                    onChange={() => handleChangeFilters('disponivel')}
-                    options={[
-                    {
-                        value: null, label: 'Todos'
-                    },
-                    { 
-                        value: true, label: 'Disponiveis' 
-                    },
-                    {
-                        value: false, label: 'Indisponiveis'
-                    }
-                    ]} 
-                />
-            </div>
-            {
-                cargo=='ADM'|| cargo=='DEV' ? 
-                <div>
-                    <label>Funcionarios ativos: </label>
-                    <Select
-                        size={'small'}
-                        defaultValue={'Ativos'}
-                        // TODO ajustar tamanho para n cortar toas as opções
-                        onChange={handleChangeQTD}
-                        options={[
-                        {
-                            value: true, label: 'Ativos'
-                        },
-                        {
-                            value: false, label: 'Inativos'
-                        }
-                        ]} 
-                    />
-                </div> : ''
-            }
+                    </select>
+                </div>
+                <div id='contDispFiltro'>
+                    <label>Disponibilidade: </label>
+                    <select
+                        value={filtros?.disponivel.value}
+                        onChange={(e)=> handleChangeFilters(e.target.value, 'disponivel')}
+                        >
+                        <option value="default">Todos</option>
+                        <option value="true">Disponíveis</option>
+                        <option value="false">Indisponíveis</option>
+                    </select>
+                </div>
+                {
+                    cargo=='ADM'|| cargo=='DEV' ? 
+                    <div id='contAtivoFiltro'>
+                        <label>Funcionarios ativos: </label>
+                        <select
+                            value={filtros?.ativo.value}
+                            onChange={(e)=> handleChangeFilters(e.target.value, 'ativo')}
+                            >
+                            <option value="default">Todos</option>
+                            <option value="true">Ativos</option>
+                            <option value="false">Inativos</option>
+                        </select>
+                    </div> : ''
+                }
+                <div id='contQTDFiltro'>
+                    <label>Quantidade: </label>
+                    <select 
+                        id="selectQTD"
+                        value={filtros?.qtd}
+                        onChange={(e) => handleChangeQTD(e.target.value)}
+                        >
+                        <option value="15">15</option>
+                        <option value="30">30</option>
+                        <option value="40">40</option>
+                    </select>
+                </div>
             </div>
         </Modal>
         </>

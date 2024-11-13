@@ -275,6 +275,80 @@
             }
         }
     }
+    #shadowBG {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        background-color: #000000da;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        
+        #contFiltros {
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            border: 0.1rem solid var(--marrom);
+            border-radius: 0.5rem;
+            background-color: var(--salmao1);
+            height: min-content;
+            width: min-content;
+            min-width: 20rem;
+            #headerContFiltros {
+                font-size: 1.05rem;
+                color: var(--marrom);
+                margin: 0;
+                margin-bottom: 1rem;                  
+            }
+            #subContFiltros {
+                
+            }
+            #footerContFiltros {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 1rem;
+                button {
+                    all: unset;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    font-size: 0.95rem;
+                    font-weight: 500;
+                    
+
+                    height: 1.5rem;
+                    width: 8rem;
+                    border: 0.1rem solid var(--marrom);
+                    border-radius: 0.3rem;
+                    color: var(--marrom);
+                    
+                    transition: 150ms;
+                }
+                
+                button:hover {
+                    width: 11rem;
+                    
+                }
+                button:focus {
+                    text-decoration: underline;
+                    border: 0.1rem solid var(--laranja);
+                }
+                #bttCancelar {
+                    background-color: #ecea57;
+                }
+                #bttSalvar {
+                    background-color: #40ec5d;
+                }
+                #bttExcluir {
+                    background-color: #fc8c8c;
+                    
+                }
+            }
+        }
+    }
 }
 @media screen and (width <= 1024px) {
     #pageFuncionarios >
