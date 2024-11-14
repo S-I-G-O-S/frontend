@@ -20,6 +20,8 @@ function NovaOrdem() {
         cliente: '',
         servicoID: '',
         servico: '',
+        tecnicoID: '',
+        tecnico: '',
         descricao: ''
     })
     const [showComponents, setShowComponents] = useState({
@@ -102,6 +104,7 @@ function NovaOrdem() {
         console.warn(servicoToAdd)
         handleChangeNovaOrdem(servicoToAdd.id, 'servicoID')
         setServico(servicoToAdd)
+        // TODO Ajustar para procurar os tecnicos que possuam ao menos uma das especialidades do Serviço
         fetchTecnicos()
     }
     const fetchServicos = async () => {
@@ -174,7 +177,7 @@ function NovaOrdem() {
                     }
                 </div>
                 {
-                    showComponents.infosCliente &&
+                    // showComponents.infosCliente &&
                     cliente && 
                     <>
                     <div id="contInfosCliente">
@@ -207,10 +210,34 @@ function NovaOrdem() {
                         }
                     </div>
                     {
-                        showComponents.contTecnico &&
-                        <div id="contTecnico">
-
+                        // showComponents.contTecnico &&
+                        servico &&
+                        <>
+                        <div id="contInfosServico">
+                            <div id='nomeServico'>{servico.nome}</div>
+                            <div id="descricaoServico">{servico.descricao}</div>
                         </div>
+                        <div id="contTecnico">
+                            <label>Funcionário: </label>
+                            <input type="text"  
+                                list='dtListTecnicos' 
+                                value={formNovaOrdem.tecnico}
+                                onChange={(e) => handleChangeNovaOrdem(e.target.value, 'tecnico')}
+                                />
+                            <datalist id="dtListTecnicos">
+                                {
+                                    tecnicos && 
+                                    tecnicos.map(tecnico => (
+                                        <option key={tecnico.id} value={tecnico.nome}>{tecnico.nome}</option>
+                                    ))
+                                }
+                            </datalist>
+                            {
+                                showComponents.bttConfirmServico &&
+                                <button onClick={confirmServico}>Confirmar</button>
+                            }
+                        </div>
+                        </>
                     }
                     </>
                 }
