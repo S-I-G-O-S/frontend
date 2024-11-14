@@ -1,16 +1,22 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { useAuth } from "../provider/authProvider";
 import { ProtectedRoute } from "./ProtectedRoute";
+// GERAL
 import Login from "../components/Login"
 import Home from "../components/Home";
-import Funcionarios from "../components/Funcionarios";
-import Funcionario from "../components/Funcionarios/Funcionario";
-import Especialidades from "../components/Especialidades";
-import Ordens from "../components/Ordens";
-import Clientes from "../components/Clientes";
-import Cliente from "../components/Clientes/Cliente"
 import UserConfig from "../components/UserConfig";
 import PaginaIncorreta from "../components/PaginaIncorreta";
+// CLIENTE
+import Clientes from "../components/Clientes";
+import Cliente from "../components/Clientes/Cliente"
+// FUNCIONARIO
+import Funcionarios from "../components/Funcionarios";
+import Funcionario from "../components/Funcionarios/Funcionario";
+// ESPECIALIDADE & SERVIÇOS
+import Especialidades from "../components/Especialidades";
+// ORDEM
+import Ordens from "../components/Ordens";
+import NovaOrdem from "../components/Ordens/NovaOrdem";
 
 
 function AppRoutes() {
@@ -54,6 +60,10 @@ function AppRoutes() {
                 {
                     path: "/ordens",
                     element: <Ordens/> ,
+                },
+                {
+                    path: "/nova-ordem",
+                    element: <NovaOrdem/> ,
                 },
                 {
                     path: "/clientes",

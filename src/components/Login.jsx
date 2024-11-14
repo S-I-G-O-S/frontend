@@ -153,6 +153,7 @@ function Login() {
                 novaSenha.senha,
                 novaSenha.rSenha
             )
+            // TODO [FUNC] Função primeira senha
             console.warn(result)
         } catch (error) {
             console.log(error)

@@ -32,7 +32,6 @@ export const getPageFuncionarios = async (pagina, filtros) => {
     try {
         const response = await axios.get(`${config.url}/api/funcionarios?page=${pagina}&size=${filtros.qtd}${filtragem}`, {
             headers: {
-                'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json',
             },
         })
@@ -41,7 +40,18 @@ export const getPageFuncionarios = async (pagina, filtros) => {
         throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
     }
 }
-
+export const getTecnicos = async () => {
+    try {
+        const response = await axios.get(`${config.url}/api/funcionarios?size=50&cargo=TECNICO`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        return response
+    } catch (error) {
+        throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
+    }
+}
 export const getFuncionarioPorID = async (id) => {
     try {
         const response = await axios.get(`${config.url}/api/funcionarios/${id}`, {

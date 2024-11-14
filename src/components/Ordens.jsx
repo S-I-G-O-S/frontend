@@ -9,21 +9,22 @@ import { getCookie } from '../services/cookies.js'
 
 // TODO Criação e Edição de Ordens por ordem de redirecionamento
 function Ordens() {
+    const navigate = useNavigate()
     const [reqstOrdens, setReqstOrdens] = useState()
     const [ordens, setOrdens] = useState()
     const [ordemAberta, setOrdemAberta] = useState(null)
-    const [error, setError] = useState()
-    const navigate = useNavigate()
     const [usuario, setUsuario] = useState(() => {
         const cookieUsuario = getCookie('usuario')
         return cookieUsuario ? cookieUsuario : ''
     })
+    const handleNovaOrdem = () => {
+        navigate('/nova-ordem')
+    }
     useEffect(() => {
-        const fetchData = async () => {   
+        const fetchData = async () => {
         }
         fetchData()
     }, [])
-
     return (
         <div id="pageOrdens" className='paginas'>
         <Header titulo={"Ordens"} usuario={usuario}></Header>
@@ -31,7 +32,7 @@ function Ordens() {
         <main id="mainOrdens">
             <section>
                 <div>
-                    <button>
+                    <button onClick={handleNovaOrdem}>
                         Nova Ordem
                     </button>
                 </div>

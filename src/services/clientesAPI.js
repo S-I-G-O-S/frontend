@@ -3,7 +3,7 @@ import config from './config'
 
 export const getClientes = async () => {
     try {
-        const response = await axios.get(`${config.url}/api/clientes`, {
+        const response = await axios.get(`${config.url}/api/clientes?ativo=true`, {
             headers: {
                 'Content-Type': 'application/json',
             },
