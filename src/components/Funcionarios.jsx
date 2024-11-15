@@ -13,8 +13,8 @@ import { useEffect, useState } from 'react'
 import { isMobile } from 'react-device-detect'
 
 
-import { Pagination, Skeleton, Input, Select, Button, Modal } from 'antd'
-import { CloseOutlined, FilterFilled, SearchOutlined } from '@ant-design/icons'
+import { Pagination, Skeleton, Input, Select, Button, Modal, Dropdown } from 'antd'
+import { EditFilled, OrderedListOutlined, CloseOutlined, FilterFilled, SearchOutlined, DownOutlined, UnorderedListOutlined } from '@ant-design/icons'
 
 import Edit from '../assets/edit-text.png'
 import Down from '../assets/dark/down.png' 
@@ -123,6 +123,19 @@ function Funcionarios() {
                 {especialidade.nome}
             </div>
         )
+    }
+    const listEspecialidades = (ids) => {
+        return ids.map((id) => {
+            const especialidade = especialidades.find((esp) => esp.id === id)
+            if (especialidade) {
+            console.log(especialidade)
+            return {
+                key: especialidade.id,
+                label: especialidade.nome
+            }
+            }
+            return null;
+        }).filter(Boolean)
     }
     const verEspecialidades = (idFuncionario) => {
         const contato = document.getElementById(`contSkillsFunc${idFuncionario}`)
@@ -248,7 +261,7 @@ function Funcionarios() {
                             Especialidades e Serviços
                     </button>
                     {   
-                    usuario.cargo == 'adm' || usuario.cargo == 'dev' ?
+                    usuario.cargo == 'ADM' || usuario.cargo == 'DEV' ?
                     <button className='btt'
                         onClick={() => handleCreateClick()}>Novo Funcionário</button>
                     : ''
@@ -330,8 +343,10 @@ function Funcionarios() {
                             <th className='ultAtvTitle cl3'>ultima atividade</th>
                             <th className='cargoTitle cl4'>cargo</th>
                             <th className='statusTitle cl5'>status</th>
-                            <th className='cl6'></th>
-                            <th className='cl7'></th>
+                            {   // TODO Só mostrar para ADM e DEV
+                            usuario.cargo=='ADM' || usuario.cargo=='DEV' ?
+                            <th className='cl6'></th> : ''
+                            }
                         </tr>
                 </thead>
                 <tbody className='tbody'>
@@ -369,13 +384,50 @@ function Funcionarios() {
                                         Editar funcionario (base)
                                         Mostrar Especialidades (base e ADM)
                                 */}
+                                {   // TODO Só mostrar para ADM e DEV
+                                usuario.cargo=='ADM' || usuario.cargo=='DEV' ?
                                 <td className='setaSkillsFunc cl6'
                                 onClick={() => verEspecialidades(funcionario.id)}>
-                                    <img id={`imgSetaSkillsFunc${funcionario.id}`} className='imgSetaSKills' src={Down} alt="ver especialidades"/>
-                                </td>
-                                <td className='editFunc cl7' onClick={() => handleEditClick(funcionario.id)}>
+                                { 
+                                    especialidades &&
+                                    <Dropdown
+                                    placement='bottom'
+                                    menu={{
+                                        items: [
+                                            {
+                                                key: 1,
+                                                label: (
+                                                    <div onClick={() => handleEditClick(funcionario.id)}>editar</div>
+                                                ),
+                                                icon: <EditFilled style={{color: '#26110D'}}/>
+                                            },
+                                            {
+                                                key: '2',
+                                                label: 'especialidades',
+                                                children: listEspecialidades(funcionario.especialidades),
+                                                icon: <OrderedListOutlined style={{color: '#26110D'}}/>
+                                            },
+                                        ],
+                                        style: {
+                                            backgroundColor: '#F2E8DF',
+                                            fontWeight: '500'
+                                        }
+                                    }}
+                                    overlayStyle={{
+                                        border: "0.1rem solid #26110D",
+                                        borderRadius: '0.5rem'
+                                    }}
+                                    >
+                                        {/* <img id={`imgSetaSkillsFunc${funcionario.id}`} className='imgSetaSKills' src={Down} alt="ver esp :ecialidades"/> */}
+                                        <DownOutlined style={{color: '#26110D'}}/>
+                                    </Dropdown>
+                                }
+                                </td> 
+                                : ''
+                                }
+                                {/* <td className='editFunc cl7' onClick={() => handleEditClick(funcionario.id)}>
                                     <img className='imgEditFunc' src={Edit} alt="editar"/>
-                                </td>
+                                </td> */}
                             </tr>
                         ))
                     }

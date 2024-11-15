@@ -50,7 +50,7 @@
             background-color: var(--salmao1);
         }
         #secTecnicosDisponiveis {
-            background-color: var(--salmao1);
+            background-color: var(--salmao2);
             width: 100%;    
             border-radius: 0.5rem;
             h2 {
@@ -105,7 +105,7 @@
                 flex-grow: 1;
                 flex-basis: 20rem;
 
-                background-color: var(--salmao1);
+                background-color: var(--salmao2);
                 .ant-card-head {
                     padding: 0 1rem;
                     border-bottom-color: var(--marrom1);

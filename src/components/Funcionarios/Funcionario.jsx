@@ -10,7 +10,7 @@ import { useLocation, useNavigate  } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Loading from '../public/Loading.jsx'
 
-import {notification, Alert, Popconfirm, Input, Button, Select} from 'antd';
+import {notification, Popconfirm, Input, Button, Select} from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { getCookie } from '../../services/cookies.js'
 
@@ -358,7 +358,7 @@ function Funcionario() {
                         </div>
                         <div id='contCargoFunc'>
                             <label>Cargo:</label>
-                            <Select
+                            {/* <Select
                                 
                                 defaultValue={funcionario.cargo || 'técnico'}
                                 options={[
@@ -373,7 +373,15 @@ function Funcionario() {
                                 }
                                 ]} 
                                 onChange={(e) => handleChangeDados(e.target.value, "cargo")}
-                            />
+                            />   */}
+                            <select id=""
+                                value={funcionario.cargo}
+                                onChange={(e) => handleChangeDados(e.target.value, "cargo")}>
+                                <option value="TECNICO">técnico</option>
+                                <option value="BASE">base</option>
+                                <option value="ADM">adm</option>
+                                <option value="DEV">dev</option>
+                            </select>
                         </div>
                     </div>
                     <div id='contEndFunc'>

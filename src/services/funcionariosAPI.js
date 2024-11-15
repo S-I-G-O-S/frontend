@@ -42,7 +42,7 @@ export const getPageFuncionarios = async (pagina, filtros) => {
 }
 export const getTecnicos = async () => {
     try {
-        const response = await axios.get(`${config.url}/api/funcionarios?size=50&cargo=TECNICO`, {
+        const response = await axios.get(`${config.url}/api/funcionarios?size=50&disponivel=true&cargo=TECNICO`, {
             headers: {
                 'Content-Type': 'application/json',
             },
