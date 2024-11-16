@@ -89,13 +89,31 @@ div {
 #descricaoServico {
     font-size: 0.75rem;
 }
-#contTecnico {
+#contDescricao {
     display: grid;
-    grid-template-columns: min-content auto 5rem;
+    grid-template-columns: min-content auto;
     gap: 0.5rem;
     
     padding: 0.9rem;
     border: 0.1rem solid;
     border-radius: 0.3rem;
     border-color: var(--salmao1);
+    
+    textarea {
+        border-radius: 0.2rem;
+        border: 0.1rem solid;
+        border-color: var(--marrom1);
+        background-color: white;
+    }
+    textarea:focus {
+        outline: 0.1rem solid var(--marrom1);
+        border-radius: 0.2rem;
+        border: 0.1rem solid;
+        border-color: var(--marrom1);
+    }
+}
+#contFinalizar {
+    display: flex;
+    align-items: center;
+    justify-content: right;
 }

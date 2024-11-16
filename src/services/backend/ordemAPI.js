@@ -1,5 +1,5 @@
 import axios from 'axios'
-import config from '../services/config'
+import config from '../config'
 
 export const getOrdens = async () => {
     try {
@@ -16,10 +16,9 @@ export const getOrdens = async () => {
 export const postNovaOrdem = async (ordem) => {
     try {
         const response = await axios.post(`${config.url}/api/ordens`, {
-            criadoPor: ordem.criadoPor,
-            cliente: ordem.cliente,
-            servico: ordem.servico,
+            cliente: ordem.clienteID,
             descricao: ordem.descricao,
+            servico: ordem.servicoID
         })
         return { success: true, response: response }
     } catch (error) {

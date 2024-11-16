@@ -6,6 +6,7 @@ import Hide from "../assets/hide.png"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { getCookie } from '../services/cookies.js'
+import { getOrdens } from "../services/backend/ordemAPI.js"
 
 // TODO Criação e Edição de Ordens por ordem de redirecionamento
 function Ordens() {
@@ -20,8 +21,19 @@ function Ordens() {
     const handleNovaOrdem = () => {
         navigate('/nova-ordem')
     }
+    const fetchOrdens = async () => {
+        try {
+            const response = await getOrdens()
+            setOrdens(response.data.content)
+            console.warn(response)
+        } catch (error) {
+            console.error(error.message)
+        }
+    }
     useEffect(() => {
+        console.clear()
         const fetchData = async () => {
+            fetchOrdens()
         }
         fetchData()
     }, [])
@@ -31,8 +43,8 @@ function Ordens() {
         <Nav cargo={usuario?.cargo || ''}></Nav>
         <main id="mainOrdens">
             <section>
-                <div>
-                    <button onClick={handleNovaOrdem}>
+                <div id="ContNovo">
+                    <button id="bttNovaOrdem" onClick={handleNovaOrdem}>
                         Nova Ordem
                     </button>
                 </div>

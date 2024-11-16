@@ -14,23 +14,26 @@
 #pageClientes {
     #mainClientes {
         grid-area: main;
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: max-content;
-        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
         width: 100%;
         height: 100%;
-        max-width: 900px;
-        margin: 0 auto;
 
         background-color: var(--branco);
         #secListClientes {
-            padding: 1rem;
-            border: 0.1rem solid var(--marrom);
-            border-radius: 10px;
-
+            display: flex;
+            flex-direction: column;
+            grid-area: sec1;
+            max-width: 95%;
+            max-height: 95%;
             background-color: var(--salmao2);
+            padding: 1rem;
+            padding-bottom: 0.5rem;
+            border: 0.1rem solid var(--marrom);
+            border-radius: 0.4rem;
+            box-sizing: border-box;
             #containerH2Novo {
                 display: flex;
                 justify-content: left;
@@ -42,7 +45,7 @@
                     justify-content: center;
                     cursor: pointer;
                     font-size: 0.9rem;
-                    font-weight: 600;
+                    font-weight: 500;
 
                     box-sizing: border-box;
                     width: auto;
@@ -56,41 +59,36 @@
                     transition: 150ms;
                 }
                 button:hover {
-                    padding: 0.1rem 3rem;
+                    background-color: var(--marrom2);
                 }
             }
             #tabelaClientes {
-                width: auto;
+                gap: 0;
+                overflow-x: auto;
+                border: 0.1rem solid;
+                border-collapse: collapse;
+                min-width: 100%;
+                border-spacing: 0;
+                /* TODO Add temas */
+                background-color: var(--branco);
+                border-color: var(--marrom);
                 #cabecalho {
-                    display: grid;
-                    grid-template-columns: 1fr 9rem 1fr 4rem;
-                    height: 1.6rem; 
-
-                    div {
+                    height: auto;
+                    th {
                         text-align: center;
                         font-size: 1rem;
+                        font-weight: 400;
                         padding: 0.1rem 0.5rem;
                         
 
                         color: var(--salmao2);
-                        background-color: var(--marrom);
+                        background-color: var(--marrom1);
                     }
-                    #adicionarCliente {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        
-                    }
+                    
                 }
                 #listClientes {
-                    display: flex;
-                    flex-direction: column;
-                    border: 0.1rem solid var(--marrom);
-                    border-top: 0;
+                    
                     .clientes {
-                        display: grid;
-                        grid-template-columns: 1fr minmax(6rem, 1fr) 1fr 4rem;
-
                         font-size: 0.95rem;
                         height: auto;    
                         border-top: 0.1rem solid var(--marrom);
@@ -121,41 +119,47 @@
                             text-align: center;
                             font-weight: 500;
                             transition: 150ms;
+                            padding: 0.1rem 0.3rem;
                             img {
                                 height: 1.3rem;
                             }
+                        }
+                        .options:hover {
+                            background-color: var(--salmao1);
+                            
                         }
                         /* .options:hover {
                             background-color: var(--salmao1);
                         } */
                     }
                     .clientes:hover {
-                            background-color: var(--salmao2);
-                        }
+                        background-color: var(--salmao3);
+                    }
                 }
-                .paginacao {
-                    .ant-pagination {
-                        .ant-pagination-item {
-                            background-color: var(--salmao1);
-                            border-color: var(--marrom1);
-                            a {
-                                color: var(--marrom1);
-                            }
+                
+            }
+            .paginacao {
+                .ant-pagination {
+                    .ant-pagination-item {
+                        background-color: var(--salmao1);
+                        border-color: var(--marrom1);
+                        a {
+                            color: var(--marrom1);
                         }
-                        .ant-pagination-item:hover {
-                            background-color: var(--salmao2);
-                        }
-                        .ant-pagination-item-active {
-                            border-color: var(--laranja);
-                            background-color: var(--marrom1);
-                            a {
-                            color: var(--salmao2);
+                    }
+                    .ant-pagination-item:hover {
+                        background-color: var(--salmao2);
+                    }
+                    .ant-pagination-item-active {
+                        border-color: var(--laranja);
+                        background-color: var(--marrom1);
+                        a {
+                        color: var(--salmao2);
 
-                            }
                         }
-                        .ant-pagination-item-active:hover {
-                            background-color: var(--marrom2);
-                        }
+                    }
+                    .ant-pagination-item-active:hover {
+                        background-color: var(--marrom2);
                     }
                 }
             }

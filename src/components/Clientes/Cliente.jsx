@@ -1,5 +1,5 @@
 
-import {getClientePorID, postCliente, putCliente, deleteCliente, putContato, postContato, deleteContato, getContatosPorID} from '../../services/clientesAPI.js'
+import {getClientePorID, postCliente, putCliente, deleteCliente, putContato, postContato, deleteContato, getContatosPorID} from '../../services/backend/clientesAPI.js'
 
 import Nav from '../public/Nav'
 import '../../styles/cliente.css'

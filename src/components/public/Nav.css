@@ -7,7 +7,9 @@
     --salmao2: #f7cba4;
     --salmao3: #fcd8b9;
     --branco: #F2E8DF;
-    --marrom: #110c0b;
+    --marrom1: #26110D;
+    --marrom2: #3b1f17;
+    --marrom3: #462b18;
     --preto: #000;
 }
 #nav {
@@ -44,9 +46,16 @@
             color: var(--branco);
             padding: 0.3rem 0.7rem 0.3rem 1.2rem;
             margin: 0;
+
+            .iconNav, svg {
+                box-sizing: border-box;
+            }
+            .iconNav,
+            .iconNav > svg,
             img {
+                color: var(--branco);
                 height: 1.5rem;
-                transition: 0.2s;
+                width: 1.5rem;
             }
             .nomeGoTo {
                 transition: 0.6s;
@@ -70,9 +79,22 @@
         transition: 0.6s;
         a {
             gap: 1rem;
+            .iconNav, svg {
+                box-sizing: border-box;
+            }
+            .iconNav,
+            .iconNav > svg,
+            img {
+                color: var(--branco);
+                height: 1.5rem;
+                width: 1.5rem;
+            }
             .nomeGoTo {
                 display: flex;
             }
+        }
+        #goToEspecs {
+            align-items: flex-start;
         }
     }
 }
@@ -84,6 +106,16 @@
     #containerLinks {
         transition: 0.6s;
         .links {
+            .iconNav, svg {
+                box-sizing: border-box;
+            }
+            .iconNav,
+            .iconNav > svg,
+            img {
+                color: var(--branco);
+                height: 1.5rem;
+                width: 1.5rem;
+            }
             .nomeGoTo {
                 display: none;
             }
@@ -120,7 +152,8 @@ a.active {
                 .nomeGoTo {
                     font-size: 0.8rem;
                     display: none;
-                } 
+                }
+
             }
             a.active {
                 background-color: var(--laranja);

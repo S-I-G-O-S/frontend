@@ -2,12 +2,14 @@ import './Nav.css'
 import { NavLink } from 'react-router-dom'
 import navLeft  from '../../assets/navLeft.png'
 import navRight  from '../../assets/navRight.png'
-import homeIcon from '../../assets/homeIcon.png'
+// import homeIcon from '../../assets/homeIcon.png'
 import funcsIcon from '../../assets/funcsIcon.png'
 import clientesIcon from '../../assets/clientesIcon.png'
 import ordensIcon from '../../assets/ordensIcon.png'
 import especsIcon from '../../assets/tag.png'
 import { useEffect, useState } from 'react'
+import { HomeFilled }  from '@ant-design/icons'
+import { IconFuncionarios } from './IconsSVG'
 
 function Nav(props) {
     const [sessPreferencias, setSessPreferencias] = useState(() => {
@@ -44,7 +46,8 @@ function Nav(props) {
                     to="/home"
                     // activeClassName="active" 
                     >
-                    <img src={homeIcon} alt="home" />
+                    <HomeFilled className='iconNav'/>
+                    {/* <img src={homeIcon} alt="home" /> */}
                     <p className='nomeGoTo' id='goToHomeP'>home</p>
                 </NavLink>
                 
@@ -57,7 +60,8 @@ function Nav(props) {
                         to="/funcionarios"
                         // activeClassName="active" 
                         >
-                        <img src={funcsIcon} alt="funcionarios" />
+                        {/* <IconFuncionarios className='iconNav'></IconFuncionarios> */}
+                        <img src={funcsIcon} alt="" />
                         <p className='nomeGoTo' id='goToFuncionariosP'>funcionarios</p>
                     </NavLink>
                     <NavLink 
@@ -84,7 +88,7 @@ function Nav(props) {
                         to="/especialidades"
                         // activeClassName="active" 
                         >
-                        <img src={especsIcon} alt="ordens" />
+                        <img src={especsIcon} alt="ordens"/>
                         <p className='nomeGoTo' id='goToEspecsP'>especialidades & serviços</p>
                     </NavLink>
                 </> :  ''

@@ -1,4 +1,4 @@
-import {getPageClientes, postCliente} from '../services/clientesAPI.js'
+import {getPageClientes, postCliente} from '../services/backend/clientesAPI.js'
 
 import Nav from './public/Nav'
 import Loading from './public/Loading.jsx'
@@ -126,57 +126,59 @@ function Clientes() {
         <main id='mainClientes'>
             {/* Listagem */}
             <section id='secListClientes'>
-                <div id='tabelaClientes'>
-                    {
-                        usuario.cargo == 'ADM' || usuario.cargo == 'DEV' ?
-                        <div id='containerH2Novo'>
-                            <button onClick={() => handleShowNovoCliente()}>Novo cliente</button>
-                        </div> : ''
-                    }
-                    <div id='cabecalho'>
-                        <div id='cNome'>nome</div>
-                        <div id='cCNPJ'>CNPJ</div>
-                        <div id='cEndereco'>endereço</div>
-                        <div></div>
-                    </div>
-                    <div id='listClientes'>
+                {
+                    usuario.cargo == 'ADM' || usuario.cargo == 'DEV' ?
+                    <div id='containerH2Novo'>
+                        <button onClick={() => handleShowNovoCliente()}>Novo cliente</button>
+                    </div> : ''
+                }
+                <table id='tabelaClientes'>
+                    <thead>
+                    <tr id='cabecalho'>
+                        <th id='cNome'>nome</th>
+                        <th id='cCNPJ'>CNPJ</th>
+                        <th id='cEndereco'>endereço</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody id='listClientes'>
                     {
                         !clientes ? 
                         <Loading></Loading> :
                         clientes.map(cliente => (
-                            <div key={cliente.id} className='clientes'>
-                                <div className='nome'>{cliente.nome}</div>
-                                <div className='cnpj'>
+                            <tr key={cliente.id} className='clientes'>
+                                <td className='nome'>{cliente.nome}</td>
+                                <td className='cnpj'>
                                     { formatCNPJ(cliente.cnpj) }
-                                </div>
-                                <div className='endereco'>{cliente.endereco.logradouro}, {cliente.endereco.numero}, {cliente.endereco.complemento}</div>
-                                <div className='options' onClick={() => handleEditCliente(cliente.id)}>
+                                </td>
+                                <td className='endereco'>{cliente.endereco.logradouro}, {cliente.endereco.numero}, {cliente.endereco.complemento}</td>
+                                <td className='options' onClick={() => handleEditCliente(cliente.id)}>
                                     <img src={Edit} alt="" />
-                                </div>
-                            </div>
+                                </td>
+                            </tr>
                         ))
                     }
-                    </div>
-                    <div className='paginacao'>
-                        {
-                            !reqstClientes ? '' :
-                            // renderPaginas()
-                            <Pagination 
-                                defaultCurrent={1} 
-                                total={reqstClientes.data.totalPages}
-                                disabled={reqstClientes.data.totalPages == 1}
-                                pageSize={1}
-                                responsive
-                                showSizeChanger={false}
-                                onChange={changePage}
-                                theme={{
-                                    token: {
+                    </tbody>
+                </table>
+                <div className='paginacao'>
+                    {
+                        !reqstClientes ? '' :
+                        // renderPaginas()
+                        <Pagination 
+                            defaultCurrent={1} 
+                            total={reqstClientes.data.totalPages}
+                            disabled={reqstClientes.data.totalPages == 1}
+                            pageSize={1}
+                            responsive
+                            showSizeChanger={false}
+                            onChange={changePage}
+                            theme={{
+                                token: {
 
-                                    }
-                                }}
-                                />
-                        }
-                    </div>
+                                }
+                            }}
+                            />
+                    }
                 </div>
             </section>
         </main>

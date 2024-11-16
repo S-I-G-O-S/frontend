@@ -1,6 +1,6 @@
 // Funções de requisições
-import { getEspecialidades, postEspecialidade, deleteEspec, putEspecialidade } from '../services/especialidadesAPI'
-import { getServicos, getServicoPorID, postServico, putServico, deleteServico } from '../services/servicosAPi'
+import { getEspecialidades, postEspecialidade, deleteEspec, putEspecialidade } from '../services/backend/especialidadesAPI'
+import { getServicos, getServicoPorID, postServico, putServico, deleteServico } from '../services/backend/servicosAPi'
 
 import '../styles/especialidades.css'
 

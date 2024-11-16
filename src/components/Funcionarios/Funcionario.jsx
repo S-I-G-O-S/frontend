@@ -1,6 +1,6 @@
 // Funções de requisições
-import {getFuncionarioPorID, deleteFuncionario, postFuncionario, putFuncionario} from '../../services/funcionariosAPI.js'
-import {getEspecialidades} from '../../services/especialidadesAPI.js'
+import {getFuncionarioPorID, deleteFuncionario, postFuncionario, putFuncionario} from '../../services/backend/funcionariosAPI.js'
+import {getEspecialidades} from '../../services/backend/especialidadesAPI.js'
 import { cepAPI } from '../../services/cepAPI.js'
 
 import '../../styles/funcionario.css'

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import Loading from '../public/Loading'
-import { getFuncionariosDisponiveis } from '../../services/funcionariosAPI'
+import { getFuncionariosDisponiveis } from '../../services/backend/funcionariosAPI'
 import Marquee from "react-fast-marquee"
 
 function FuncsDisponiveis() {

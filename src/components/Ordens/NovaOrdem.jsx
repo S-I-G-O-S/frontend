@@ -3,35 +3,23 @@ import { getCookie } from "../../services/cookies"
 import Header from "../public/Header"
 import Nav from "../public/Nav"
 import { useNavigate } from "react-router-dom"
-import { getClientes } from "../../services/clientesAPI"
-import { getFuncionarioPorID, getTecnicos } from "../../services/funcionariosAPI"
+import { getClientes } from "../../services/backend/clientesAPI"
+import { getFuncionarioPorID, getTecnicos } from "../../services/backend/funcionariosAPI"
 import '../../styles/ordens/novaOrdem.css'
-import { getServicos } from "../../services/servicosAPi"
+import { getServicos } from "../../services/backend/servicosAPI"
 import { notification, Popconfirm } from "antd"
-//  TODO Listar funcionarios de acordo com os serviços requisitados
-//  TODO Tentar criar endpoint para retornar os tecnicos:
-/* 
-    [{
-        id: int,
-        nome: string,
-
-    }]
-*/
+import TextArea from "antd/es/input/TextArea"
+import { postNovaOrdem } from "../../services/backend/ordemAPI"
 function NovaOrdem() {
     const [clientes, setClientes] = useState([])
     const [cliente, setCliente] = useState({})
-    const [tecnicos, setTecnicos] = useState([])
-    const [tecnico, setTecnico] = useState({})
     const [servicos, setServicos] = useState([])
     const [servico, setServico] = useState({})    // TODO ? O cliente pode pedir mais de 1 serviço junto?
     const [formNovaOrdem, setFormNovaOrdem] = useState({
-        criadoPor: '',
         clienteID: '',
         cliente: '',
         servicoID: '',
         servico: '',
-        tecnicoID: '',
-        tecnico: '',
         descricao: ''
     })
     const [showComponents, setShowComponents] = useState({
@@ -39,8 +27,6 @@ function NovaOrdem() {
         infosCliente: false,
         contServico: false,
         bttConfirmServico: false,
-        contTecnico: false,
-        bttConfirmTecnico: false,
         contFinalizar: false
     }) 
     const [usuario, setUsuario] = useState(() => {
@@ -67,21 +53,13 @@ function NovaOrdem() {
             ...prevState,
             [field]: value
         }))
-        /*setTimeout(() => {
-            console.log('DEBBUG ')
-            console.table(showComponents)
-        }, 1000)*/
     }
     useEffect(() => {
-        // criadoPor
-        // cliente
         if (formNovaOrdem.cliente=='') {
             changeShowComponents(false, 'bttConfirmCliente')
         } else {
             changeShowComponents(true, 'bttConfirmCliente')
         }        
-        // servico
-        // descricao
     }, [formNovaOrdem.cliente])
     useEffect(() => {
         if (formNovaOrdem.servico=='') {
@@ -90,13 +68,6 @@ function NovaOrdem() {
             changeShowComponents(true, 'bttConfirmServico')
         }        
     }, [formNovaOrdem.servico])
-    useEffect(() => {
-        if (formNovaOrdem.tecnico=='') {
-            changeShowComponents(false, 'bttConfirmTecnico')
-        } else {
-            changeShowComponents(true, 'bttConfirmTecnico')
-        }     
-    }, [formNovaOrdem.tecnico])
     const confirmCliente = () => {
         const clienteToAdd = clientes.find(cliente => cliente.nome.toLowerCase() === formNovaOrdem.cliente.toLowerCase())
         //  Se o cliente inserido não existir
@@ -124,31 +95,27 @@ function NovaOrdem() {
         console.warn(servicoToAdd)
         handleChangeNovaOrdem(servicoToAdd.id, 'servicoID')
         setServico(servicoToAdd)
-        // TODO Ajustar para procurar os tecnicos que possuam ao menos uma das especialidades do Serviço
-        fetchTecnicos()
-        changeShowComponents(true, 'contTecnico')
-    }
-    const confirmTecnico = () => {
-        fetchFuncionario()
-    }
-    useEffect(() => {
-        if (!tecnico) {
-            console.error("Tecnico não encontrado.")
-            showNotif('Tecnico não encontrado.')
-            handleChangeNovaOrdem('', 'tecnico')
-            return
-        }
-        console.warn(tecnico)
         changeShowComponents(true, 'contFinalizar')
-    }, [tecnico])
-    const handleGerarOrdem = () => {
-        showNotif('TESTE DE CRIAÇÃO DE ORDEM CONCLUIDO')
+    }
+    const handleGerarOrdem = async () => {
+        try {
+            const result = await postNovaOrdem(formNovaOrdem)
+            console.warn(result?.response)
+        } catch (error) {
+            console.error(error?.message)
+            showNotif('Erro ao gerar ordem')
+        }
+        notification.success({
+            message: 'Ordem gerada com sucesso.',
+            // description: 'Reconecte-se a internet',
+            placement: 'bottomLeft',
+        })
     }
     const showNotif = (message) => {
         notification.error({
-        message,
-        // description: 'Reconecte-se a internet',
-        placement: 'bottomLeft',
+            message ,
+            // description: 'Reconecte-se a internet',
+            placement: 'bottomLeft',
         })
     }
     const fetchServicos = async () => {
@@ -160,37 +127,20 @@ function NovaOrdem() {
             console.error(error.message)
         }
     }
-    //  TODO Problema de performance, preciso fazer outra requisição pra ter o nome completo do funcionario.
-    const fetchFuncionario = async () => {
-        try {
-            const response = await getFuncionarioPorID()
-            console.warn(response)
-            setTecnico(response.data)
-        } catch (error) {
-            console.error(error.message)
-        }
-    }
-    const fetchTecnicos = async () => {
-        try {
-            const response = await getTecnicos()
-            console.warn(response.data.content)
-            setTecnicos(response.data.content)
-        } catch (error) {
-            console.error(error.message)
-        }
-    }
     const fetchClientes = async () => {
         try {
             const response = await getClientes()
             setClientes(response.data.content)
-            console.log(response)
+            console.warn(response)
         } catch (error) {
             console.error(error.message)
         }
     }
     useEffect(() => {
-        handleChangeNovaOrdem(usuario.id, 'criadoPor')
-        fetchClientes()
+        console.clear()
+        setTimeout(() => {
+            fetchClientes()
+        }, 100)
     }, [])
     return (
         <div id="pageNovaOrdem" className="paginas">
@@ -253,72 +203,40 @@ function NovaOrdem() {
                         }
                     </div>
                     {
-                        showComponents.contTecnico &&
+                        showComponents.contFinalizar &&
                         servico &&
                         <>
                         <div id="contInfosServico">
                             <div id='nomeServico'>{servico.nome}</div>
                             <div id="descricaoServico">{servico.descricao}</div>
                         </div>
-                        <div id="contTecnico">
-                            <label>Funcionário: </label>
-                            {/* <input type="text"  
-                                list='dtListTecnicos' 
-                                value={formNovaOrdem.tecnico}
-                                onChange={(e) => handleChangeNovaOrdem(e.target.value, 'tecnico')}
-                                />
-                            <datalist id="dtListTecnicos">
-                            {
-                                tecnicos && 
-                                tecnicos.map(tecnico => (
-                                    <option key={tecnico.id} value={tecnico.id}>{tecnico.primeiro}{tecnico.ultimo}</option>
-                                ))
-                            }
-                            </datalist> */}
-                            <select id=""
-                                onChange={(e) => handleChangeNovaOrdem(e.target.value, 'tecnicoID')}
-                                >
-                            {
-                                tecnicos && [
-                                    <option key={0} value="0"></option>,
-                                    ...tecnicos.map(tecnico => (
-                                        <option key={tecnico.id} value={tecnico.id}>{tecnico.primeiro} {tecnico.ultimo}</option>
-                                    ))
-                                ]
-                            }    
-                            </select>
-                            {
-                                showComponents.bttConfirmTecnico &&
-                                <button onClick={confirmTecnico}>Confirmar</button>
-                            }
+                        <div id="contDescricao">
+                            <label>Descrição: </label>
+                            <TextArea
+                                value={formNovaOrdem.descricao}
+                                onChange={(e) => handleChangeNovaOrdem(e.target.value, 'descricao')}
+                                placeholder="Opcional"
+                                maxLength={250}
+                                autoSize={{
+                                minRows: 2,
+                                maxRows: 6,
+                                }}
+                                style={{
+                                    resize: 'none'
+                                }}
+                            />
                         </div>
-                        {
-                            showComponents.contFinalizar &&
-                            tecnico &&
-                            <>
-                            <div id="contInfosTecnico">
-                                <div>Nome: {tecnico.prieiro} {tecnico.ultimo}</div>
-                                <div>CPF: {tecnico.cpf}</div>
-                            </div>
-                            <div id="contDescricao">
-                                <label>Descrição: </label>
-                                <input type="text"  
-                                    value={formNovaOrdem.descricao}
-                                    onChange={(e) => handleChangeNovaOrdem(e.target.value, 'descricao')}/>
-                            </div>
-                            <div id="contFinalizar">
-                                <Popconfirm
-                                    title=""
-                                    description={`Confirma os dados inseridos?`}
-                                    onConfirm={handleGerarOrdem}
-                                    onCancel={null}
-                                    okText="sim"
-                                    cancelText="não">     
-                                    <button id='bttExcluir'>Gerar Ordem</button>
-                                </Popconfirm>
-                            </div>
-                            </>
-                        }
+                        <div id="contFinalizar">
+                            <Popconfirm
+                                title=""
+                                description={`Confirma os dados inseridos?`}
+                                onConfirm={handleGerarOrdem}
+                                onCancel={null}
+                                okText="sim"
+                                cancelText="não">     
+                                <button id='bttExcluir'>Gerar Ordem</button>
+                            </Popconfirm>
+                        </div>
                         </>
                     }
                     </>

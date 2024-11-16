@@ -1,5 +1,5 @@
 import axios from 'axios'
-import config from '../services/config'
+import config from '../config'
 
 export const putRegSenha = async (email, senha, novaSenha) => {
     try {

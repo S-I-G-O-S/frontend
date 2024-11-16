@@ -3,13 +3,13 @@ import '../styles/login.css'
 import Negocio from '../assets/negocio.png'
 import Analise from '../assets/analise.png'
 import { useEffect, useState } from 'react'
-import {  loginFunc } from '../services/authAPI'
+import {  loginFunc } from '../services/backend/authAPI'
 import zxcvbn from 'zxcvbn';
 import { useAuth } from '../provider/authProvider'
 import { Input, notification } from 'antd'
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons'
 import { setCookie } from '../services/cookies'
-import { putRegSenha } from '../services/usuarioAPI'
+import { putRegSenha } from '../services/backend/usuarioAPI'
 
 function Login() {
     const navigate = useNavigate()
