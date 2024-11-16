@@ -44,9 +44,10 @@ function Nav(props) {
                     className={({ isActive }) => (isActive ? "links active" : "links ")}
                     id='goToHome' 
                     to="/home"
+                    title='Home'
                     // activeClassName="active" 
                     >
-                    <HomeFilled className='iconNav'/>
+                    <HomeFilled className='iconNav' />
                     {/* <img src={homeIcon} alt="home" /> */}
                     <p className='nomeGoTo' id='goToHomeP'>home</p>
                 </NavLink>
@@ -58,6 +59,7 @@ function Nav(props) {
                         className={({ isActive }) => (isActive ? "links active" : "links ")}
                         id='goToFuncionarios' 
                         to="/funcionarios"
+                        title='Funcionário'
                         // activeClassName="active" 
                         >
                         {/* <IconFuncionarios className='iconNav'></IconFuncionarios> */}
@@ -68,6 +70,7 @@ function Nav(props) {
                         className={({ isActive }) => (isActive ? "links active" : "links ")} 
                         id='goToClientes' 
                         to="/clientes"
+                        title='Clientes'
                         // activeClassName="active" 
                         >
                         <img src={clientesIcon} alt="clientes" />
@@ -77,6 +80,7 @@ function Nav(props) {
                         className={({ isActive }) => (isActive ? "links active" : "links ")}
                         id='goToOrdens' 
                         to="/ordens"
+                        title='Ordens'
                         // activeClassName="active" 
                         >
                         <img src={ordensIcon} alt="ordens" />
@@ -86,9 +90,10 @@ function Nav(props) {
                         className={({ isActive }) => (isActive ? "links active" : "links ")}
                         id='goToEspecs' 
                         to="/especialidades"
+                        title='Especialidades e serviços'
                         // activeClassName="active" 
                         >
-                        <img src={especsIcon} alt="ordens"/>
+                        <img src={especsIcon} alt="ordens" />
                         <p className='nomeGoTo' id='goToEspecsP'>especialidades & serviços</p>
                     </NavLink>
                 </> :  ''

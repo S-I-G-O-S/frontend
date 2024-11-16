@@ -148,7 +148,11 @@ a.active {
             width: 100%;
             margin: 0;
             .links {
-                width: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0.4rem 1rem;
+                width: min-content;
                 .nomeGoTo {
                     font-size: 0.8rem;
                     display: none;

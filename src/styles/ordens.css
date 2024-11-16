@@ -66,7 +66,6 @@
                 flex-grow: 1;
                 flex-basis: 10rem;
 
-                border: 0.1rem solid;
                 border-radius: 0.3rem;
 
                 background-color: var(--salmao1);
@@ -77,21 +76,36 @@
                     align-items: center;
                     justify-content: space-between;
                     font-size: 1rem;
-                    padding: 0.3rem 0.5rem;
-                    border-radius: 0.2rem;
-                    border: 0.1rem solid;
+                    padding: 0.3rem 1rem;
+                    border-radius: 0.3rem;
                     
                     border-color: var(--marrom1);
                     background-color: var(--branco);
-                    p {
-                        font-weight: 600;
+                    .anticon  {
+                        box-sizing: border-box;
                     }
-                    .iconExpandir {
-                        
+                    .leftCont {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.5rem;
+                        .anticon  > svg {
+                            box-sizing: border-box;
+                            width: 1.2rem;
+                            height: 1.2rem;
+                        }
+                        p {
+                            font-weight: 500;
+                        }
+                    }
+                    .anticon  > svg {
+                        box-sizing: border-box;
+                        width: 1.2rem;
+                        height: 1.2rem;
                     }
                 }
                 .bodyList {
                     padding: 0.2rem 0.2rem;
+                    transition: 150ms;
                     .itemListOrdens {
                         cursor: pointer;
                         font-size: 0.9rem;
@@ -106,6 +120,19 @@
                         border-color: var(--marrom1);
                         background-color: var(--salmao2);
                     }
+                }
+            }
+            .listOrdensAberto {
+                border: 0.1rem solid;
+                .headList {
+                    border: 0;
+                    border-bottom: 0.1rem solid;
+                }
+            }
+            .listOrdensFechado {
+                border: 0;
+                .headList {
+                    border: 0.1rem solid;
                 }
             }
             #contOrdensPendentes > button {
@@ -136,6 +163,9 @@
         box-sizing: border-box;
         
         section {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
             padding: 1rem;
             border: 0.1rem solid var(--marrom);
             border-radius: 10px;
@@ -143,9 +173,26 @@
             background-color: var(--salmao2);
             h2 {
                 font-size: 1.1rem;
+                text-align: left;
                 color: var(--marrom);
                 margin: 0;
-                margin-bottom: 1.5rem;
+                margin-bottom: 1.1rem;
+            }
+            #infosOrdemAberta {
+                padding: 0.5rem;
+                border: 0.13rem solid;
+                border-color: var(--salmao1);
+                border-radius: 0.3rem;
+                font-weight: 500;
+                span {
+                    font-weight: 400;
+                }
+            }
+            #acoesOrdemAberta {
+                padding: 0.5rem;
+                border: 0.15rem solid;
+                border-color: var(--salmao1);
+                border-radius: 0.3rem;
             }
         }
     }

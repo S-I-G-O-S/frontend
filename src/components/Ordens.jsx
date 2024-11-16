@@ -8,7 +8,7 @@ import { useEffect, useState } from "react"
 import { getCookie } from '../services/cookies.js'
 import { getOrdens, getOrdensPorSituacao } from "../services/backend/ordemAPI.js"
 
-import { DownOutlined, UpOutlined } from '@ant-design/icons'
+import { DownOutlined, FieldTimeOutlined, LoadingOutlined, RollbackOutlined, UpOutlined } from '@ant-design/icons'
 
 // TODO Criação e Edição de Ordens por ordem de redirecionamento
 function Ordens() {
@@ -28,18 +28,56 @@ function Ordens() {
         finalizada: false,
         cancelada: false
     })
+    const [varRenders, setVarRenders] = useState({
+        editarOrdem: false,
+    })
 
     const [usuario, setUsuario] = useState(() => {
         const cookieUsuario = getCookie('usuario')
         return cookieUsuario ? cookieUsuario : ''
     })
+    const converterDtHr = (dataHora) => {
+        const [dia, mes, anoHora] = dataHora.split('-')
+        const [ano, hora] = anoHora.split(' ')
+        const dataISO = `${ano}-${mes}-${dia}T${hora}`
+
+        const data = new Date(dataISO);
+        if (isNaN(data.getTime())) return "Data Inválida"
+            return data.toLocaleDateString('pt-BR', {
+            day: 'numeric',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+        })
+    }
     const handleNovaOrdem = () => {
         navigate('/nova-ordem')
     }
     const handleAbrirOrdem = (idOrdem, tipo) => {
         console.log('DEBBUG ABRIR ORDEM')
         console.warn([tipo])
-        const ordemToAbrir = [tipo].find(ordem => ordem.id == idOrdem)
+        let ordemToAbrir
+        
+        switch (tipo) {
+            case 'PENDENTE':
+                ordemToAbrir = pendente.find(ordem => ordem.id == idOrdem)
+                break;
+            case 'EM_EXECUCAO':
+                ordemToAbrir = emExecucao.find(ordem => ordem.id == idOrdem)
+                break;
+            case 'RETORNO':
+                ordemToAbrir = retorno.find(ordem => ordem.id == idOrdem)
+                break;
+            case 'FINALIZADA':
+                ordemToAbrir = finalizada.find(ordem => ordem.id == idOrdem)
+                break;
+            case 'CANCELADA':
+                ordemToAbrir = cancelada.find(ordem => ordem.id == idOrdem)
+                break;
+            default: console.warn('Erro de tipagem das ordens!')
+                break;
+        }
         if (!ordemToAbrir) {
             console.error('Erro ao abrir ordem!')
             return
@@ -116,12 +154,17 @@ function Ordens() {
                 {
                     (pendente || emExecucao || retorno) &&
                     <section id="sec2">
-                        <div id="contOrdensPendentes" className="listOrdens">
+                        <div id="contOrdensPendentes" 
+                            className={expandLists.pendente ? 'listOrdensAberto listOrdens' : 'listOrdensFechado listOrdens'}
+                            >
                             <button className="headList"
                                 onClick={() => handleChangeExpandLists('pendente', !expandLists.pendente)}
                                 disabled={!pendente}
-                            >
-                                <p>Pendente</p>
+                                >
+                                <div className="leftCont">
+                                    <LoadingOutlined />
+                                    <p>Pendente</p>
+                                </div>
                                 {
                                     expandLists.pendente ?
                                         <UpOutlined className="iconExpandir" /> :
@@ -135,23 +178,26 @@ function Ordens() {
                                     {pendente.map(ordem =>
                                         <div key={ordem.id}         
                                             className="itemListOrdens"
-                                            onClick={() => handleAbrirOrdem(ordem.id, 'pendente')}>
+                                            onClick={() => handleAbrirOrdem(ordem.id, 'PENDENTE')}>
                                             <div>Cliente: {ordem.cliente}</div>
                                             <div>Serviço: {ordem.servico}</div>
-                                            <div>Data abertura: {ordem.dtAbertura}</div>
+                                            <div>Data abertura: {converterDtHr(ordem.dtAbertura)}</div>
                                         </div>
                                     )}
                                 </div>)
                             }
                         </div>
-                        <div id="contOrdensEmExecucao" className="listOrdens">
+                        <div id="contOrdensEmExecucao"
+                            className={expandLists.emExecucao ? 'listOrdensAberto listOrdens' : 'listOrdensFechado listOrdens'}
+                            >
                             <button className="headList"
-                                onClick={() => handleChangeExpandLists('pendente', !expandLists.emExecucao)}
+                                onClick={() => handleChangeExpandLists('emExecucao', !expandLists.emExecucao)}
                                 disabled={!emExecucao}
                                 >
-                                <p>
-                                    Em execução
-                                </p>
+                                <div className="leftCont">
+                                    <FieldTimeOutlined />
+                                    <p>Em execução</p>
+                                </div>
                                 {
                                     expandLists.emExecucao ?
                                     <UpOutlined className="iconExpandir" /> :
@@ -165,23 +211,27 @@ function Ordens() {
                                     {emExecucao.map(ordem =>
                                         <div key={ordem.id} 
                                             className="itemListOrdens"
-                                            onClick={() => handleAbrirOrdem(ordem.id, 'emExecucao')}>
+                                            onClick={() => handleAbrirOrdem(ordem.id, 'EM_EXECUCAO')}>
                                             <div>Cliente: {ordem.cliente}</div>
                                             <div>Serviço: {ordem.servico}</div>
-                                            <div>Data abertura: {ordem.dtAbertura}</div>
+                                            <div>Data abertura: {converterDtHr(ordem.dtAbertura)}</div>
                                         </div>
                                     )}
                                 </div>)
                             }
                         </div>
-                        <div id="contOrdensRetorno" className="listOrdens">
+                        <div id="contOrdensRetorno" 
+                            className={expandLists.retorno ? 'listOrdensAberto listOrdens' : 'listOrdensFechado listOrdens'}
+                            
+                            >
                             <button className="headList"
                                 onClick={() => handleChangeExpandLists('retorno', !expandLists.retorno)}
                                 disabled={!retorno}
                                 >
-                                <p>
-                                    Retorno
-                                </p>
+                                <div className="leftCont">
+                                    <RollbackOutlined/>
+                                    <p>Retorno</p>
+                                </div>
                                 {
                                     expandLists.retorno ?
                                     <UpOutlined className="iconExpandir" /> :
@@ -195,10 +245,10 @@ function Ordens() {
                                     {retorno.map(ordem =>
                                         <div key={ordem.id} 
                                             className="itemListOrdens"
-                                            onClick={() => handleAbrirOrdem(ordem.id, 'retorno')}>
+                                            onClick={() => handleAbrirOrdem(ordem.id, 'RETORNO')}>
                                             <div>Cliente: {ordem.cliente}</div>
                                             <div>Serviço: {ordem.servico}</div>
-                                            <div>Data abertura: {ordem.dtAbertura}</div>
+                                            <div>Data abertura: {converterDtHr(ordem.dtAbertura)}</div>
                                         </div>
                                     )}
                                 </div>)
@@ -211,15 +261,18 @@ function Ordens() {
                 ordemAberta &&
                 <div className='shadowBG'>
                     <section>
-                        <h2>Ordem Nº{ordemAberta.id}</h2>
-                        <div>Cliente: {ordemAberta.cliente}</div>
-                        <div>Endereço: {ordemAberta.endereco.logradouro}, {ordemAberta.endereco.numero} - {ordemAberta.endereco.complemento} - {ordemAberta.endereco.bairro}, {ordemAberta.endereco.cidade}-{ordemAberta.endereco.uf}</div>
-                        <div>Data de abertura: {ordemAberta.dtAbertura}</div>
-                        <div>Funcionário: {ordemAberta.funcionario || 'vazio'}</div>
-                        <div>Descrição: {ordemAberta.descricao || 'sem descrição'}</div>
-                        <div>Situação: {ordemAberta.situacao}</div>
+                        <h2>#{ordemAberta.id}</h2>
+                        <div id="infosOrdemAberta">
+                            <div><span>Cliente: </span>{ordemAberta.cliente}</div>
+                            <div><span>Endereço: </span>{ordemAberta.endereco.logradouro}, {ordemAberta.endereco.numero} - {ordemAberta.endereco.complemento} - {ordemAberta.endereco.bairro}, {ordemAberta.endereco.cidade}-{ordemAberta.endereco.uf}</div>
+                            <div><span>Data de abertura: </span>{converterDtHr(ordemAberta.dtAbertura)}</div>
+                            <div><span>Funcionário: </span>{ordemAberta.funcionario || ''}</div>
+                            <div><span>Descrição: </span>{ordemAberta.descricao || ''}</div>
+                            <div><span>Situação: </span>{ordemAberta.situacao}</div>
+                        </div>
                         <div id='acoesOrdemAberta'>
-                            <button>cancelar</button>
+                            <button onClick={handleFecharOrdem}>cancelar</button>
+                            <button>editar</button>
                         </div>
                     </section>
                 </div>
