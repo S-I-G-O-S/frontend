@@ -12,22 +12,27 @@
     --preto: #000;
     --leftBttNav: 5rem;
 }
+:root {
+    --pendente: #639ef5;
+    --emExecucao: #f6ff77;
+    --retorno: #ffb968;
+    --cancelada: #ff8888;
+    --finalizada: #32ff70;
+}
 #pageOrdens {
-
     #mainOrdens {
-        display: grid;
         grid-area: main;
-        box-sizing: border-box;
-        align-items: start;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
         width: 100%;
-        margin: 0 auto;
-        box-sizing: border-box;
-
-        background-color: var(--branco);
+        
         section {
             padding: 1rem;
             border: 0.1rem solid var(--marrom);
             border-radius: 10px;
+            min-width: 70%;
 
             #bttNovaOrdem {
                 all: unset;
@@ -45,62 +50,78 @@
                 background-color: var(--marrom2);
             }
             background-color: var(--salmao2);
-            #containerListOrdens {
-                #cabecalho {
-                    display: grid;
-                    grid-template-columns: 1fr 2fr 2fr 2fr 2fr 5rem;
-                    height: 1.5rem;
-                    background-color: var(--marrom);
-                    div {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        height: 100%;
-                        color: var(--salmao2);
-                        white-space: nowrap;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
+        }
+        #sec1 {
+
+        }
+        #sec2 {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            .listOrdens {
+                display: flex;
+                flex-direction: column;
+                flex-grow: 1;
+                flex-basis: 10rem;
+
+                border: 0.1rem solid;
+                border-radius: 0.3rem;
+
+                background-color: var(--salmao1);
+                border-color: var(--marrom1);
+                .headList {
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    font-size: 1rem;
+                    padding: 0.3rem 0.5rem;
+                    border-radius: 0.2rem;
+                    border: 0.1rem solid;
+                    
+                    border-color: var(--marrom1);
+                    background-color: var(--branco);
+                    p {
+                        font-weight: 600;
+                    }
+                    .iconExpandir {
+                        
                     }
                 }
-                #listOrdens {
-                    border-left: 0.1rem solid var(--marrom); 
-                    border-right: 0.1rem solid var(--marrom); 
-                    .ordem {
-                        display: grid;
-                        grid-template-columns: 1fr 2fr 2fr 2fr 2fr 5rem;
-                        height: 1.8rem;
-                        background-color: var(--branco);
-                        div {
-                            font-size: 0.9rem;
-                            white-space: nowrap;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            box-sizing: border-box;
-                            padding: 0.2rem 0.5rem;
-                            border-bottom: 0.1rem solid var(--marrom);
-                        }
-                        .ordemCliente {
-                            justify-content: left;
-                            
-                        }
-                        .ordemDetalhes {
-                            cursor: pointer;
-                            padding: 0;
-                            img {
-                                height: 1.5rem;
-                            }
-                        }
-                        .ordemDetalhes:hover {
-                            background-color: var(--salmao1);
-                        }
-                        .barraTabela {
-                            border-left: 0.1rem solid black;
-                        }
+                .bodyList {
+                    padding: 0.2rem 0.2rem;
+                    .itemListOrdens {
+                        cursor: pointer;
+                        font-size: 0.9rem;
+                        padding: 0.3rem;
+                        border: 0.1rem solid;
+                        border-radius: 0.3rem;
+
+                        border-color: var(--salmao3);
+                        background-color: var(--salmao3);
+                    }
+                    .itemListOrdens:hover {
+                        border-color: var(--marrom1);
+                        background-color: var(--salmao2);
                     }
                 }
+            }
+            #contOrdensPendentes > button {
+                background-color: var(--pendente);
+            }
+            #contOrdensEmExecucao > button {
+                background-color: var(--emExecucao);
+            }
+            #contOrdensRetorno > button {
+                background-color: var(--retorno);
+            }
+            #contOrdensCancelada > button {
+                background-color: var(--cancelada);
+            }
+            #contOrdensEmFinalizada > button {
+                background-color: var(--finalizada);
             }
         }
     }

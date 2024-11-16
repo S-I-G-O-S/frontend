@@ -105,11 +105,13 @@ function NovaOrdem() {
             console.error(error?.message)
             showNotif('Erro ao gerar ordem')
         }
-        notification.success({
-            message: 'Ordem gerada com sucesso.',
-            // description: 'Reconecte-se a internet',
-            placement: 'bottomLeft',
-        })
+        setTimeout(() => {
+            notification.success({
+                message: 'Ordem gerada com sucesso.',
+                // description: 'Reconecte-se a internet',
+                placement: 'bottomLeft',
+            })
+        }, 1000)
     }
     const showNotif = (message) => {
         notification.error({
