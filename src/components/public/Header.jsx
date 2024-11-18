@@ -5,6 +5,7 @@ import { useAuth } from '../../provider/authProvider'
 import { deleteCookie } from '../../services/cookies'
 import { Dropdown } from 'antd'
 import { SettingOutlined } from '@ant-design/icons'
+import { logoutFunc } from '../../services/backend/authAPI'
 
 function Header({usuario, titulo}) {
     const navigate = useNavigate()
@@ -13,7 +14,13 @@ function Header({usuario, titulo}) {
     const handleViewConfiguser = () => {
         setViewContUser(!viewContUser)
     }
-    const handleLogout = () => {
+    const handleLogout = async () => {
+        try {
+            const result = await logoutFunc()
+        } catch (error) {
+            console.error(error)
+            return
+        }
         setToken(null)
         deleteCookie('usuario')
         deleteCookie('tema')

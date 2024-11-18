@@ -21,9 +21,7 @@ import Down from '../assets/dark/down.png'
 import Up from '../assets/dark/up.png'
 import Loading from './public/Loading.jsx'
 
-// TODO tratamento para evitar espaços no começo e no final dos nomes
 
-//https://community.revelo.com.br/react-query-um-guia-pratico/
 function Funcionarios() {
     const navigate = useNavigate()
     const [usuario, setUsuario] = useState(() => {
