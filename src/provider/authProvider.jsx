@@ -9,7 +9,7 @@ const AuthProvider = ({ children }) => {
 	const setToken = (novoToken) => {
 		setToken_(novoToken)
 		if (novoToken) {
-			setCookie("token", novoToken, 12)	// TODO ver o tempo token
+			setCookie("token", novoToken, 12)
 		} else {
 			deleteCookie("token")
 		}

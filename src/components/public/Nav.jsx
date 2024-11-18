@@ -11,28 +11,24 @@ import { useEffect, useState } from 'react'
 import { HomeFilled }  from '@ant-design/icons'
 import { IconFuncionarios } from './IconsSVG'
 
-function Nav(props) {
+function Nav({ cargo }) {
     const [sessPreferencias, setSessPreferencias] = useState(() => {
         const storedUsuario = sessionStorage.getItem('preferencias')
-        return storedUsuario ? JSON.parse(storedUsuario) : { abertoNav: true }
+        return storedUsuario ? JSON.parse(storedUsuario) : {
+            tema: 'claro',
+            abertoNav: true 
+        }
     })
-    // const [usuario, setUsuario] = useState(() => {
-    //     const storedUsuario = sessionStorage.getItem('usuario')
-    //     return storedUsuario ? JSON.parse(storedUsuario) : { cargo: 'adm' }
-    // })
-    const cargo = props.cargo
     useEffect(() => {
         if (sessPreferencias) {
             sessionStorage.setItem('preferencias', JSON.stringify(sessPreferencias))
         }
-        
     }, [sessPreferencias])
     const changeNav = () => {
-        if (sessPreferencias.abertoNav) {
-            setSessPreferencias({ abertoNav: false })
-        } else {
-            setSessPreferencias({ abertoNav: true })
-        }
+        setSessPreferencias(prevState => ({
+            ...prevState,
+            abertoNav: !sessPreferencias.abertoNav
+        }))
     }
     return (
         <nav id='nav' className={sessPreferencias.abertoNav ? "navAberto" : "navFechado"}>
@@ -94,7 +90,7 @@ function Nav(props) {
                         // activeClassName="active" 
                         >
                         <img src={especsIcon} alt="ordens" />
-                        <p className='nomeGoTo' id='goToEspecsP'>especialidades & serviços</p>
+                        <p className='nomeGoTo' id='goToEspecsP'>especialidades <span>& serviços</span></p>
                     </NavLink>
                 </> :  ''
                 }

@@ -104,6 +104,9 @@
                     }
                 }
                 .bodyList {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.3rem;
                     padding: 0.2rem 0.2rem;
                     transition: 150ms;
                     .itemListOrdens {
@@ -166,33 +169,82 @@
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
-            padding: 1rem;
+            padding: 1.5rem 2rem;
             border: 0.1rem solid var(--marrom);
             border-radius: 10px;
 
             background-color: var(--salmao2);
-            h2 {
+            #headOrdemAberta {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
                 font-size: 1.1rem;
-                text-align: left;
                 color: var(--marrom);
                 margin: 0;
-                margin-bottom: 1.1rem;
+                margin-bottom: 0.9rem;
+                h2 {
+                    font-size: 1.1rem;
+                }
+                #fecharOrdemAberta {
+                    cursor: pointer;
+                    padding: 0.1rem;
+                    border-radius: 0.3rem;
+                    transition: 180ms;
+                }   
+                #fecharOrdemAberta:hover {
+                    background-color: var(--salmao1);
+                }
+                #fecharOrdemAberta > svg {
+                    color: var(--marrom1);
+                    height: 1.2rem;
+                    width: 1.2rem;
+                }
             }
             #infosOrdemAberta {
-                padding: 0.5rem;
-                border: 0.13rem solid;
+                padding: 01rem;
+                border: 0.1rem solid;
                 border-color: var(--salmao1);
                 border-radius: 0.3rem;
                 font-weight: 500;
+                font-size: 0.93rem;
                 span {
                     font-weight: 400;
                 }
             }
             #acoesOrdemAberta {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
                 padding: 0.5rem;
-                border: 0.15rem solid;
+                border: 0.1rem solid;
                 border-color: var(--salmao1);
                 border-radius: 0.3rem;
+            }
+            #acoesOrdemAberta > button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                font-size: 0.9rem;
+                font-weight: 500;
+                padding: 0.2rem 2rem;
+                border: 0.1rem solid;
+                border-color: #000;
+                border-radius: 0.3rem;
+            }
+            #bttFecharOrdemAberta {
+                background-color: #ff8888;
+            }
+            #bttFecharOrdemAberta:hover {
+                background-color: #f37272;
+                text-decoration: underline;
+            }
+            #bttEditarOrdem {
+                background-color: #84aff0;
+            }
+            #bttEditarOrdem:hover {
+                background-color: #6b9ae2;
+                text-decoration: underline;
             }
         }
     }

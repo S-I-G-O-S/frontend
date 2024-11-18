@@ -17,7 +17,8 @@ import Especialidades from "../components/Especialidades";
 // ORDEM
 import Ordens from "../components/Ordens";
 import NovaOrdem from "../components/Ordens/NovaOrdem";
-
+import TesteLayout from "../components/TesteLayout";
+import Ordem from "../components/Ordens/Ordem";
 
 function AppRoutes() {
     const { token } = useAuth();
@@ -62,6 +63,10 @@ function AppRoutes() {
                     element: <Ordens/> ,
                 },
                 {
+                    path: "/ordem",
+                    element: <Ordem/> ,
+                },
+                {
                     path: "/nova-ordem",
                     element: <NovaOrdem/> ,
                 },
@@ -71,12 +76,16 @@ function AppRoutes() {
                 },
                 {
                     path: "/cliente",
-                    element: <Cliente/> ,
+                    element: <Cliente/>,
+                },
+                {
+                    path: "/teste",
+                    element: <TesteLayout/>
                 },
                 {
                     path: "*",
                     element: <PaginaIncorreta/>,
-                }
+                },
             ]
         }
     ]

@@ -7,6 +7,7 @@ import { getCookie } from '../services/cookies'
 import { getDeployStatus } from '../services/renderAPI'
 
 function UserConfig() {
+    const data = new Date()
     const [usuario, setUsuario] = useState(() => {
         const cookieUsuario = getCookie('usuario')
         return cookieUsuario ? cookieUsuario : ''
@@ -44,7 +45,7 @@ function UserConfig() {
             <>
                 {
                 usuario.cargo == 'DEV' ?
-                <section>
+                <section id='secDevConfigs'>
                     <h2>Configurações de desenvolvimento</h2>
                     <label>cargo</label>
                     <select name="" id="" 
@@ -57,19 +58,19 @@ function UserConfig() {
                     </select>
                 </section> : ''
                 }
-                <section id='secUserConfig'>
+                <section id='secInfosFuncionario'>
                     <h2>Minhas informações</h2>
-                    <div>
+                    <div id='contInfosFunc'>
                         <div>Nome: {usuario.nome}</div>
                         <div>Cargo: {usuario.cargo}</div>
                         <div>Tel./Cel.: {usuario.celular}</div>
                         <div>Email: {usuario.email}</div>
                         <div>
-                            Endereço: {usuario.endereco.logradouro}, Nº{usuario.endereco.numero}, {usuario.endereco.complemento} - {usuario.endereco.cidade}-{usuario.endereco.uf} 
+                            Endereço: {usuario.endereco.logradouro}, Nº{usuario.endereco.numero} - {usuario.endereco.cidade}-{usuario.endereco.uf} 
                         </div>
                     </div>
                 </section>
-                <section>
+                <section id='secUserConfig'>
                     <h2>Preferências</h2>
                     <div>
                         <div>
@@ -80,6 +81,12 @@ function UserConfig() {
                                 <option value="">noturno</option>
                             </select>
                         </div>
+                    </div>
+                    <div>
+                        <div>Versão 0.1.0</div>
+                        <div>©{data.getFullYear()} SIGOS inc.</div>
+                        <a href="">Sobre o SIGOS</a>
+
                     </div>
                 </section>
             </>

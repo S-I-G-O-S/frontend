@@ -8,7 +8,7 @@ import { useEffect, useState } from "react"
 import { getCookie } from '../services/cookies.js'
 import { getOrdens, getOrdensPorSituacao } from "../services/backend/ordemAPI.js"
 
-import { DownOutlined, FieldTimeOutlined, LoadingOutlined, RollbackOutlined, UpOutlined } from '@ant-design/icons'
+import { CloseOutlined, DownOutlined, FieldTimeOutlined, LoadingOutlined, RollbackOutlined, UpOutlined } from '@ant-design/icons'
 
 // TODO Criação e Edição de Ordens por ordem de redirecionamento
 function Ordens() {
@@ -31,11 +31,13 @@ function Ordens() {
     const [varRenders, setVarRenders] = useState({
         editarOrdem: false,
     })
-
     const [usuario, setUsuario] = useState(() => {
         const cookieUsuario = getCookie('usuario')
         return cookieUsuario ? cookieUsuario : ''
     })
+    const handleEditClick = (idOrdem) => {
+        navigate(`/ordem?id=${idOrdem}`)
+    }
     const converterDtHr = (dataHora) => {
         const [dia, mes, anoHora] = dataHora.split('-')
         const [ano, hora] = anoHora.split(' ')
@@ -261,7 +263,10 @@ function Ordens() {
                 ordemAberta &&
                 <div className='shadowBG'>
                     <section>
-                        <h2>#{ordemAberta.id}</h2>
+                        <div id="headOrdemAberta">
+                            <h2>Ordem códº{ordemAberta.id}</h2>
+                            <CloseOutlined id="fecharOrdemAberta" onClick={handleFecharOrdem}/>
+                        </div>
                         <div id="infosOrdemAberta">
                             <div><span>Cliente: </span>{ordemAberta.cliente}</div>
                             <div><span>Endereço: </span>{ordemAberta.endereco.logradouro}, {ordemAberta.endereco.numero} - {ordemAberta.endereco.complemento} - {ordemAberta.endereco.bairro}, {ordemAberta.endereco.cidade}-{ordemAberta.endereco.uf}</div>
@@ -271,8 +276,8 @@ function Ordens() {
                             <div><span>Situação: </span>{ordemAberta.situacao}</div>
                         </div>
                         <div id='acoesOrdemAberta'>
-                            <button onClick={handleFecharOrdem}>cancelar</button>
-                            <button>editar</button>
+                            <button id="bttFecharOrdemAberta" onClick={handleFecharOrdem}>cancelar</button>
+                            <button id="bttEditarOrdem" onClick={() => handleEditClick(ordemAberta.id)}>editar</button>
                         </div>
                     </section>
                 </div>

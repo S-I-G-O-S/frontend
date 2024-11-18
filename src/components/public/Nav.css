@@ -95,16 +95,25 @@
         }
         #goToEspecs {
             align-items: flex-start;
+            
+            p {
+                display: flex;
+                flex-direction: column;
+                justify-content: left;
+            }
+            span {
+                font-size: 0.8rem;
+            }
         }
     }
 }
 .navFechado {
+    transition: 400ms;
     width: 4rem;
     #bttNav {
         margin-left: 2.4rem;
     }
     #containerLinks {
-        transition: 0.6s;
         .links {
             .iconNav, svg {
                 box-sizing: border-box;
