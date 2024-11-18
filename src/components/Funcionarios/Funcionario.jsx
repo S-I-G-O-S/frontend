@@ -118,7 +118,6 @@ function Funcionario() {
         message: `CEP inválido ou não encontrado`,
         // description: 'Reconecte-se a internet',
         placement,
-         
         });
     };
     const handleChangeEndereco = (value, field) => {
@@ -297,9 +296,11 @@ function Funcionario() {
         console.clear()
         const fetchData = async () => {
             try {
-                idFuncionario !== null
-                ? fetchFuncionario()
-                : novoFuncionario()
+                if(idFuncionario) {
+                    fetchFuncionario()
+                } else {
+                    novoFuncionario()
+                }
                 
                 fetchEspecialidades()
             } catch (error) {
@@ -475,6 +476,7 @@ function Funcionario() {
                         <input type="text" list='dtListEspecialidades'
                             value={pesqAddEspec}
                             onChange={(e) => changePesqAddEspec(e.target.value)}
+                            autocomplete="off"
                         />
                         <datalist id='dtListEspecialidades'>
                             {

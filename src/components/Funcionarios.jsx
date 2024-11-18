@@ -126,7 +126,6 @@ function Funcionarios() {
         return ids.map((id) => {
             const especialidade = especialidades.find((esp) => esp.id === id)
             if (especialidade) {
-            console.log(especialidade)
             return {
                 key: especialidade.id,
                 label: especialidade.nome
@@ -243,9 +242,10 @@ function Funcionarios() {
             filtros ? fetchFuncionarios(0) : ''
             fetchEspecialidades()
         }
-        setTimeout(() => {
-            fetchData()
-        }, 1000)
+        fetchData()
+        // setTimeout(() => {
+        //     fetchData()
+        // }, 1000)
     }, [])
 
     return (

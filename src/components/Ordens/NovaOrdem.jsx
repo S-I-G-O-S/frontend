@@ -14,7 +14,7 @@ function NovaOrdem() {
     const [clientes, setClientes] = useState([])
     const [cliente, setCliente] = useState({})
     const [servicos, setServicos] = useState([])
-    const [servico, setServico] = useState({})    // TODO ? O cliente pode pedir mais de 1 serviço junto?
+    const [servico, setServico] = useState({})
     const [formNovaOrdem, setFormNovaOrdem] = useState({
         clienteID: '',
         cliente: '',
