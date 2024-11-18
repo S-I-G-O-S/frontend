@@ -1,16 +1,16 @@
 // Funções de requisições
-import {getFuncionarioPorID, deleteFuncionario, postFuncionario, putFuncionario} from '../../services/backend/funcionariosAPI.js'
-import {getEspecialidades} from '../../services/backend/especialidadesAPI.js'
+import { getFuncionarioPorID, deleteFuncionario, postFuncionario, putFuncionario } from '../../services/backend/funcionariosAPI.js'
+import { getEspecialidades } from '../../services/backend/especialidadesAPI.js'
 import { cepAPI } from '../../services/cepAPI.js'
 
 import '../../styles/funcionario.css'
 import Nav from '../public/Nav'
 import Header from '../public/Header'
-import { useLocation, useNavigate  } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Loading from '../public/Loading.jsx'
 
-import {notification, Popconfirm, Input, Button, Select} from 'antd';
+import { notification, Popconfirm, Input, Button, Select } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { getCookie } from '../../services/cookies.js'
 
@@ -37,6 +37,7 @@ function Funcionario() {
     const addEspecToFunc = () => {
         console.info("ADICIONANDO ESPECIALIDADE")
         let especToAdd = especialidades.find(espec => espec.nome.toLowerCase() === pesqAddEspec.toLowerCase())
+        console.warn(especToAdd)
         if (!especToAdd) {
             console.error("Serviço não encontrado!")
             setPesqAddEspec("Especialidade não encontrada")
@@ -47,12 +48,15 @@ function Funcionario() {
         }
 
         if (funcionario.especialidades.some(espec => espec.id === pesqAddEspec.id)) {
-            console.error("Esta especialidade já foi adicionado a este funcionario!");
+            console.error("Esta especialidade já foi adicionado a este funcionario!")
             return
         }
         setFuncionario(especState => ({
             ...especState,
-            especialidades: [...especState.especialidades, especToAdd]
+            especialidades: [
+                ...especState.especialidades,
+                especToAdd
+            ]
         }))
         setPesqAddEspec('')
     }
@@ -115,9 +119,9 @@ function Funcionario() {
     }
     const showNotifCEP = (placement) => {
         notification.error({
-        message: `CEP inválido ou não encontrado`,
-        // description: 'Reconecte-se a internet',
-        placement,
+            message: `CEP inválido ou não encontrado`,
+            // description: 'Reconecte-se a internet',
+            placement,
         });
     };
     const handleChangeEndereco = (value, field) => {
@@ -154,13 +158,13 @@ function Funcionario() {
         );
 
         const primeiro = partesNome[0] || '';
-        const ultimo = partesNome.length > 1 ? partesNome[partesNome.length - 1]  : '';
+        const ultimo = partesNome.length > 1 ? partesNome[partesNome.length - 1] : '';
         handleChangeDados(primeiro, "primeiro")
         handleChangeDados(ultimo, "ultimo")
         setFuncionario({
             ...funcionario,
             primeiro: primeiro ? primeiro : '',
-            ultimo: ultimo ? ultimo : '' 
+            ultimo: ultimo ? ultimo : ''
         })
         return true;
     }
@@ -220,8 +224,8 @@ function Funcionario() {
         if ('id' in funcionario) {
             result = await putFuncionario(funcionario, arrayEspecs)
         } else {
-            console.warn("Debbug "+ viewSenha)
-            if(viewSenha) {
+            console.warn("Debbug " + viewSenha)
+            if (viewSenha) {
                 result = await postFuncionario(funcionario, arrayEspecs)
             } else {
                 setViewSenha(true)
@@ -238,20 +242,22 @@ function Funcionario() {
         }
     }
     const converterEspecs = (espec) => {
-        const [cor1, cor2] = espec?.cor?.includes('/') 
-                ? espec.cor.split('/') 
-                : [espec.cor, '#000']
+        console.log('DEBBUG ESPECIALIDADES')
+        console.warn(espec)
+        const [cor1, cor2] = espec?.cor?.includes('/')
+            ? espec.cor.split('/')
+            : [espec.cor, '#000']
         return (
             <div className='especFunc' key={espec.id}
                 style={{
-                        borderColor: cor2,
-                        backgroundColor: cor1,
-                        color: cor2
+                    borderColor: cor2,
+                    backgroundColor: cor1,
+                    color: cor2
                 }}
                 title={espec.descricao}
             >
                 <p>{espec.nome}</p>
-                <button onClick={() => {deleteEspecFunc(espec.id)}}>X</button>
+                <button onClick={() => { deleteEspecFunc(espec.id) }}>X</button>
             </div>
         )
     }
@@ -264,7 +270,7 @@ function Funcionario() {
         } catch (error) {
             console.error(error.message)
         }
-        
+
     }
     const fetchFuncionario = async () => {
         try {
@@ -276,8 +282,8 @@ function Funcionario() {
         } catch (error) {
             console.error(error.message)
         }
-        
-        
+
+
     }
     useEffect(() => {
         if (!carregando) {
@@ -296,12 +302,12 @@ function Funcionario() {
         console.clear()
         const fetchData = async () => {
             try {
-                if(idFuncionario) {
+                if (idFuncionario) {
                     fetchFuncionario()
                 } else {
                     novoFuncionario()
                 }
-                
+
                 fetchEspecialidades()
             } catch (error) {
                 console.error(error.message)
@@ -309,57 +315,57 @@ function Funcionario() {
         }
         fetchData()
     }, [])
-    return(
+    return (
         <div id="pageFuncionario" className='paginas'>
             <Header titulo={
                 idFuncionario !== null
-                ? ( !funcionario ? 
-                    `Editando funcionário(a)` :
-                    `Editando funcionário(a) "${headerNomeFunc}"`
-                )
-                : 'Novo funcionário'
+                    ? (!funcionario ?
+                        `Editando funcionário(a)` :
+                        `Editando funcionário(a) "${headerNomeFunc}"`
+                    )
+                    : 'Novo funcionário'
             }
-            usuario={usuario}>
+                usuario={usuario}>
             </Header>
             <Nav cargo={usuario?.cargo || ''}></Nav>
             <main>
-            {
-                !funcionario ? 
-                <section id='secInfos'>
-                    <Loading></Loading>
-                </section> :
-                <section id='secInfos'>
-                    <h2>Informações gerais</h2>
-                    {/* Infos do funcionarios */}
-                    <div id='contGeralFunc'>
-                        <div id='contNomeFunc'>
-                            <label>Nome:</label>
-                            <Input 
-                                status={""} 
-                                placeholder=""
-                                value={funcionario.nome || ""}
-                                onChange={(e) => handleChangeDados(e.target.value, "nome")}
-                                />
-                        </div>
-                        <div id='contEmailFunc'>
-                            <label>Email:</label>
-                            <input
-                            type="text"
-                            value={funcionario.email || ""}
-                            onChange={(e) => handleChangeDados(e.target.value, "email")}
-                            />
-                        </div>
-                        <div id='contCellFunc'>
-                            <label>Celular:</label>
-                            <input
-                            type="text"
-                            value={funcionario.celular || ""}
-                            onChange={(e) => handleChangeDados(e.target.value, "celular")}
-                            />
-                        </div>
-                        <div id='contCargoFunc'>
-                            <label>Cargo:</label>
-                            {/* <Select
+                {
+                    !funcionario ?
+                        <section id='secInfos'>
+                            <Loading></Loading>
+                        </section> :
+                        <section id='secInfos'>
+                            <h2>Informações gerais</h2>
+                            {/* Infos do funcionarios */}
+                            <div id='contGeralFunc'>
+                                <div id='contNomeFunc'>
+                                    <label>Nome:</label>
+                                    <Input
+                                        status={""}
+                                        placeholder=""
+                                        value={funcionario.nome || ""}
+                                        onChange={(e) => handleChangeDados(e.target.value, "nome")}
+                                    />
+                                </div>
+                                <div id='contEmailFunc'>
+                                    <label>Email:</label>
+                                    <input
+                                        type="text"
+                                        value={funcionario.email || ""}
+                                        onChange={(e) => handleChangeDados(e.target.value, "email")}
+                                    />
+                                </div>
+                                <div id='contCellFunc'>
+                                    <label>Celular:</label>
+                                    <input
+                                        type="text"
+                                        value={funcionario.celular || ""}
+                                        onChange={(e) => handleChangeDados(e.target.value, "celular")}
+                                    />
+                                </div>
+                                <div id='contCargoFunc'>
+                                    <label>Cargo:</label>
+                                    {/* <Select
                                 
                                 defaultValue={funcionario.cargo || 'técnico'}
                                 options={[
@@ -375,100 +381,100 @@ function Funcionario() {
                                 ]} 
                                 onChange={(e) => handleChangeDados(e.target.value, "cargo")}
                             />   */}
-                            <select id=""
-                                value={funcionario.cargo}
-                                onChange={(e) => handleChangeDados(e.target.value, "cargo")}>
-                                <option value="TECNICO">técnico</option>
-                                <option value="BASE">base</option>
-                                <option value="ADM">adm</option>
-                                <option value="DEV">dev</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div id='contEndFunc'>
-                        <div id='contCepFunc'>
-                            <label>CEP:</label>
-                            <input
-                            type="text"
-                            value={funcionario.endereco.cep || ""}
-                            onChange={(e) => handleCEP(e.target.value)}
-                            />
-                            <Button 
-                                type="text" 
-                                icon={<SearchOutlined />}  
-                                iconPosition={'end'}
-                                onClick={fetchCEP}
-                            >
-                                Pesquisar CEP
-                            </Button>
-                            {/* <p>{cepMensagem}</p> */}
-                        </div>
-                        <div id='contRuaFunc'>
-                            <label>Rua:</label>
-                            <input
-                            type="text"
-                            value={funcionario.endereco?.logradouro || ""}
-                            onChange={(e) => handleChangeEndereco(e.target.value, "logradouro")}
-                            />
-                        </div>
-                        <div id='contNumFunc'>
-                            <label>Nº:</label>
-                            <input
-                            type="text"
-                            value={funcionario.endereco?.numero || ""}
-                            onChange={(e) => handleChangeEndereco(e.target.value, "numero")}
-                            />
-                        </div>
-                        <div id='contCompFunc'>
-                            <label>Complemento:</label>
-                            <input
-                            type="text"
-                            value={funcionario.endereco?.complemento || ""}
-                            onChange={(e) => handleChangeEndereco(e.target.value, "complemento")}
-                            />
-                        </div>
-                        <div id='contBairroFunc'>
-                            <label>Bairro:</label>
-                            <input
-                            type="text"
-                            value={funcionario.endereco?.bairro || ""}
-                            onChange={(e) => handleChangeEndereco(e.target.value, "bairro")}
-                            />
-                        </div>
-                        <div id='contCidadeFunc'>
-                            <label>Cidade:</label>
-                            <input
-                            type="text"
-                            value={funcionario.endereco?.cidade || ""}
-                            onChange={(e) => handleChangeEndereco(e.target.value, "cidade")}
-                            />
-                        </div>
-                        <div id='contUFFunc'>
-                            <label>UF:</label>
-                            <input
-                            type="text"
-                            value={funcionario.endereco?.uf || ""}
-                            onChange={(e) => handleChangeEndereco(e.target.value, "uf")}
-                            />
-                        </div>
-                    </div>
+                                    <select id=""
+                                        value={funcionario.cargo}
+                                        onChange={(e) => handleChangeDados(e.target.value, "cargo")}>
+                                        <option value="TECNICO">técnico</option>
+                                        <option value="BASE">base</option>
+                                        <option value="ADM">adm</option>
+                                        <option value="DEV">dev</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div id='contEndFunc'>
+                                <div id='contCepFunc'>
+                                    <label>CEP:</label>
+                                    <input
+                                        type="text"
+                                        value={funcionario.endereco.cep || ""}
+                                        onChange={(e) => handleCEP(e.target.value)}
+                                    />
+                                    <Button
+                                        type="text"
+                                        icon={<SearchOutlined />}
+                                        iconPosition={'end'}
+                                        onClick={fetchCEP}
+                                    >
+                                        Pesquisar CEP
+                                    </Button>
+                                    {/* <p>{cepMensagem}</p> */}
+                                </div>
+                                <div id='contRuaFunc'>
+                                    <label>Rua:</label>
+                                    <input
+                                        type="text"
+                                        value={funcionario.endereco?.logradouro || ""}
+                                        onChange={(e) => handleChangeEndereco(e.target.value, "logradouro")}
+                                    />
+                                </div>
+                                <div id='contNumFunc'>
+                                    <label>Nº:</label>
+                                    <input
+                                        type="text"
+                                        value={funcionario.endereco?.numero || ""}
+                                        onChange={(e) => handleChangeEndereco(e.target.value, "numero")}
+                                    />
+                                </div>
+                                <div id='contCompFunc'>
+                                    <label>Complemento:</label>
+                                    <input
+                                        type="text"
+                                        value={funcionario.endereco?.complemento || ""}
+                                        onChange={(e) => handleChangeEndereco(e.target.value, "complemento")}
+                                    />
+                                </div>
+                                <div id='contBairroFunc'>
+                                    <label>Bairro:</label>
+                                    <input
+                                        type="text"
+                                        value={funcionario.endereco?.bairro || ""}
+                                        onChange={(e) => handleChangeEndereco(e.target.value, "bairro")}
+                                    />
+                                </div>
+                                <div id='contCidadeFunc'>
+                                    <label>Cidade:</label>
+                                    <input
+                                        type="text"
+                                        value={funcionario.endereco?.cidade || ""}
+                                        onChange={(e) => handleChangeEndereco(e.target.value, "cidade")}
+                                    />
+                                </div>
+                                <div id='contUFFunc'>
+                                    <label>UF:</label>
+                                    <input
+                                        type="text"
+                                        value={funcionario.endereco?.uf || ""}
+                                        onChange={(e) => handleChangeEndereco(e.target.value, "uf")}
+                                    />
+                                </div>
+                            </div>
 
-                    <div id='contControle'>
-                        <button id='bttCancelar' onClick={goToFuncionarios}>Cancelar</button>
-                        <button id='bttSalvar' onClick={handleSalvar}>Salvar</button>
-                        {/* TODO Adicionar este elemento em todas as confirmações de exclusões */}
-                        <Popconfirm
-                            title="Apagar funcionário"
-                            description={`Deseja mesmo excluir '${funcionario.nome}'?`}
-                            onConfirm={confirmDelete}
-                            onCancel={cancelDelete}
-                            okText="SIM"
-                            cancelText="NÃO">     
-                            <button id='bttExcluir' onClick={handleDelete}>Excluir</button>
-                        </Popconfirm>
-                    </div>
-                </section>
-            }
+                            <div id='contControle'>
+                                <button id='bttCancelar' onClick={goToFuncionarios}>Cancelar</button>
+                                <button id='bttSalvar' onClick={handleSalvar}>Salvar</button>
+                                {/* TODO Adicionar este elemento em todas as confirmações de exclusões */}
+                                <Popconfirm
+                                    title="Apagar funcionário"
+                                    description={`Deseja mesmo excluir '${funcionario.nome}'?`}
+                                    onConfirm={confirmDelete}
+                                    onCancel={cancelDelete}
+                                    okText="SIM"
+                                    cancelText="NÃO">
+                                    <button id='bttExcluir' onClick={handleDelete}>Excluir</button>
+                                </Popconfirm>
+                            </div>
+                        </section>
+                }
                 <section id='secEspecialidades'>
                     <h2>Especialidades</h2>
                     <div id='contAddEspecFunc'>
@@ -480,13 +486,13 @@ function Funcionario() {
                         />
                         <datalist id='dtListEspecialidades'>
                             {
-                                !especialidades ? '' : 
-                                especialidades
-                                    .map(espec => (
-                                        <option key={espec.id} value={espec.nome}>
-                                            {espec.nome}
-                                        </option>
-                                    ))
+                                !especialidades ? '' :
+                                    especialidades
+                                        .map(espec => (
+                                            <option key={espec.id} value={espec.nome}>
+                                                {espec.nome}
+                                            </option>
+                                        ))
                             }
                         </datalist>
                         <button onClick={addEspecToFunc}>Adicionar</button>
@@ -494,9 +500,9 @@ function Funcionario() {
                     <div id="contListEspecFunc">
                         {/* listagem  */}
                         {
-                            !funcionario || !especialidades ? (
+                            !funcionario?.especialidades ? (
                                 <Loading></Loading>
-                            ) : ('id' in funcionario) ? (
+                            ) :(
                                 funcionario.especialidades && funcionario.especialidades.length > 0 ? (
                                     funcionario.especialidades.map(espec => (
                                         converterEspecs(espec)
@@ -504,8 +510,6 @@ function Funcionario() {
                                 ) : (
                                     <p>Nenhuma especialidade adicionada</p>
                                 )
-                            ) : (
-                                <p>Nenhuma especialidade adicionada</p>
                             )
                         }
                     </div>
@@ -513,23 +517,23 @@ function Funcionario() {
             </main>
             {
                 viewSenha ?
-                <div id='shadowBG'>
-                    <section id='secTempSenha'>
-                        <h2>Definindo senha temporária</h2>
-                        <p>Esta será a senha fornecida ao funcionário para seu primeiro acesso. </p>
-                        <div>
-                            <input type="text" name="" id="" 
-                            value={funcionario.senha || ""}
-                            onChange={(e) => handleChangeDados(e.target.value, "senha")}/>
-                            {/* TODO Adicionar função de senha automatica */}
-                            <button>Gerar senha automatica</button>
-                        </div>
-                        <div>
-                            <button onClick={setViewSenha(false)}>voltar</button>
-                            <button onClick={handleSalvar}>salvar</button>
-                        </div>
-                    </section>
-                </div> : ''
+                    <div id='shadowBG'>
+                        <section id='secTempSenha'>
+                            <h2>Definindo senha temporária</h2>
+                            <p>Esta será a senha fornecida ao funcionário para seu primeiro acesso. </p>
+                            <div>
+                                <input type="text" name="" id=""
+                                    value={funcionario.senha || ""}
+                                    onChange={(e) => handleChangeDados(e.target.value, "senha")} />
+                                {/* TODO Adicionar função de senha automatica */}
+                                <button>Gerar senha automatica</button>
+                            </div>
+                            <div>
+                                <button onClick={setViewSenha(false)}>voltar</button>
+                                <button onClick={handleSalvar}>salvar</button>
+                            </div>
+                        </section>
+                    </div> : ''
             }
         </div>
     )
