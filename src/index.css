@@ -119,14 +119,9 @@ body {
     box-sizing: border-box;
     overflow-y: hidden;
     
-    header {
-    
-    }
-    nav {
-
-    }
     main {
         padding: 0.5rem 1rem;
+        max-height: 60%;
     }
 }
 @media screen and (width <= 950px) {

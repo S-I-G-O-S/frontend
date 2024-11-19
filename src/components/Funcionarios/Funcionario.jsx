@@ -508,7 +508,7 @@ function Funcionario() {
                                         converterEspecs(espec)
                                     ))
                                 ) : (
-                                    <p>Nenhuma especialidade adicionada</p>
+                                    <p id='semEspecialidades'>Nenhuma especialidade adicionada</p>
                                 )
                             )
                         }

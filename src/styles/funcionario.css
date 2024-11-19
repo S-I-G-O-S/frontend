@@ -7,6 +7,7 @@
         display: flex;
         flex-direction: row;
         align-items: self-start;
+        justify-content: center;
         grid-area: main;
         width: 100%;
         gap: 0.5rem;
@@ -31,7 +32,6 @@
             color: var(--salmao2);
             background-color: var(--marrom1);
         }
-
         .ant-btn:hover {
             color: var(--salmao2);
             background-color: var(--marrom2);
@@ -41,6 +41,7 @@
             display: flex;
             flex-direction: column;
             gap: 0.3rem;
+            width: min-content;
             font-size: 0.91rem;
             #contGeralFunc,
             #contEndFunc,
@@ -58,6 +59,7 @@
                 row-gap: 0.5rem;
                 div {
                     display: flex;
+                    align-items: center;
                     gap: 0.2rem;
 
                     input {
@@ -72,6 +74,22 @@
                     input:focus {
                         border: 0.1rem solid var(--laranja);
                         font-weight: 500;
+                    }
+                    select {
+                        all: unset;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        text-align: center;
+                        border-radius: 0.3rem;
+                        font-size: 0.9rem;
+                        padding: 0.1rem 0.5rem;
+                        height: auto;
+                        border: 0.1rem solid var(--marrom);
+                        background-color: var(--branco);
+                        option {
+                            text-align: left;
+                        }
                     }
                 }
             }
@@ -181,7 +199,6 @@
             display: flex;
             flex-direction: column;
             gap: 0.25rem;
-            height: max-content;
             box-sizing: border-box;
             div {
                 padding: 0.3rem;
@@ -225,6 +242,9 @@
                         font-size: 0.9rem;
                     }
                 }
+                #semEspecialidades {
+                    text-align: center;
+                }
             }
         }
     }
@@ -260,16 +280,15 @@
             section {
                 width: 100%;
                 max-width: 100%;
-
                 
             }
             #secInfos {
+                width: auto;
                 p, 
                 label,
                 input {
                     font-size: 0.8rem;
                 }
-                
             }
         }
     }

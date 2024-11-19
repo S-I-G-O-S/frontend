@@ -6,6 +6,7 @@ import Loading from './public/Loading'
 import { getCookie } from '../services/cookies'
 import { getDeployStatus } from '../services/renderAPI'
 
+//  TODO Verificar se o token do usuario ainda é valido
 function UserConfig() {
     const data = new Date()
     const [usuario, setUsuario] = useState(() => {

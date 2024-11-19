@@ -194,9 +194,11 @@
             #contListFuncs {
                 width: 100%;
                 overflow-x: auto;
+                overflow-y: auto;
                 #listFuncs {
                     gap: 0;
                     overflow-x: auto;
+                    overflow-y: scroll;
                     border: 0.1rem solid;
                     border-collapse: collapse;
                     border-spacing: 0;
@@ -216,7 +218,7 @@
                         }
                     }
                     .tbody {
-                        max-height: 20rem;
+                        max-height: 50%;
                         overflow-y: scroll;
                     
                         .funcs {
