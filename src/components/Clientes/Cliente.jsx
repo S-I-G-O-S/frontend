@@ -11,6 +11,8 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { cepAPI } from '../../services/cepAPI.js'
 import Loading from '../public/Loading.jsx'
 import { getCookie } from '../../services/cookies.js'
+import { getOrdens, getOrdensPorCliente } from '../../services/backend/ordemAPI.js'
+import { Pagination } from 'antd'
 
 function Cliente() {
     const location = useLocation();
@@ -20,65 +22,17 @@ function Cliente() {
     const [reqstCliente, setReqstCliente] = useState()
     const [cliente, setCliente] = useState()
     const [msgCEP, setMsgCEP] = useState()
+    
+    const [historico, setHistorico] = useState(null)
+    const [reqstHistorico, setReqstHistorico] = useState(null)
+
     const [viewContContato, setViewContContato] = useState(false)
     const [contato, setContato] = useState(null)
-    const [historico, setHistorico] = useState(null)
     const [countContatos, setCountContatos] = useState(0)
     const [usuario, setUsuario] = useState(() => {
         const cookieUsuario = getCookie('usuario')
         return cookieUsuario ? cookieUsuario : ''
     })
-    
-    const formatarCNPJ = (cnpj) => {
-        if(cnpj == '') {return}
-        const cnpjLimpo = cnpj.replace(/\D/g, '')
-        handleEditDado(cnpjLimpo.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, "$1.$2.$3/$4-$5"), 'cnpj')
-    }
-    const handleCEP = (value) => {
-        const cep = value.replace(/\D/g, '');
-        if (cep.length <= 8) {
-            setCliente(prevState => ({
-                ...prevState,
-                endereco: {
-                    ...prevState.endereco,
-                    cep: cep,
-                }
-            }))
-        }
-    }
-    const fetchCEP = async () => {
-        const cep = cliente.endereco.cep.replace(/\D/g, '')
-        if (cep.length === 8) {
-            try {
-                const response = await cepAPI(cep)
-                console.warn(response)
-                const { street, neighborhood, city, state } = response.data
-                setCliente(prevState => ({
-                    ...prevState,
-                    endereco: {
-                        ...prevState.endereco,
-                        logradouro: street,
-                        bairro: neighborhood,
-                        cidade: city,
-                        uf: state
-                    }
-                }))
-            } catch (error) {
-                console.error("Erro ao buscar CEP:", error)
-                setMsgCEP("CEP não encontrado ou inválido.")
-                setTimeout(() => {
-                    setMsgCEP('')
-                }, 5000)
-                // alert("CEP não encontrado ou inválido.");
-            }
-        } else {
-            console.error("São necessários 8 digitos.")
-            setMsgCEP("São necessários 8 digitos.")
-            setTimeout(() => {
-                setMsgCEP('')
-            }, 5000)
-        }
-    }
     // CONTATOS
     const verContato = (idContato) => {
         const contato = document.getElementById(`contato${idContato}`)
@@ -180,6 +134,23 @@ function Cliente() {
         }
     }
     // INFOS
+    const formatarCNPJ = (cnpj) => {
+        if(cnpj == '') {return}
+        const cnpjLimpo = cnpj.replace(/\D/g, '')
+        handleEditDado(cnpjLimpo.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, "$1.$2.$3/$4-$5"), 'cnpj')
+    }
+    const handleCEP = (value) => {
+        const cep = value.replace(/\D/g, '');
+        if (cep.length <= 8) {
+            setCliente(prevState => ({
+                ...prevState,
+                endereco: {
+                    ...prevState.endereco,
+                    cep: cep,
+                }
+            }))
+        }
+    }
     const handleEditDado = (valor, field) => {
         setCliente(prevState => ({
             ...prevState,
@@ -270,6 +241,56 @@ function Cliente() {
         }
     }
 
+    // HISTORICO DE ORDENS
+    const converterDtHr = (dataHora) => {
+        const [dia, mes, anoHora] = dataHora.split('-')
+        const [ano, hora] = anoHora.split(' ')
+        const dataISO = `${ano}-${mes}-${dia}T${hora}`
+
+        const data = new Date(dataISO);
+        if (isNaN(data.getTime())) return "Data Inválida"
+            return data.toLocaleDateString('pt-BR', {
+            day: 'numeric',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+        })
+    }
+    // REQUISIÇÕES
+    const fetchCEP = async () => {
+        const cep = cliente.endereco.cep.replace(/\D/g, '')
+        if (cep.length === 8) {
+            try {
+                const response = await cepAPI(cep)
+                console.warn(response)
+                const { street, neighborhood, city, state } = response.data
+                setCliente(prevState => ({
+                    ...prevState,
+                    endereco: {
+                        ...prevState.endereco,
+                        logradouro: street,
+                        bairro: neighborhood,
+                        cidade: city,
+                        uf: state
+                    }
+                }))
+            } catch (error) {
+                console.error("Erro ao buscar CEP:", error)
+                setMsgCEP("CEP não encontrado ou inválido.")
+                setTimeout(() => {
+                    setMsgCEP('')
+                }, 5000)
+                // alert("CEP não encontrado ou inválido.");
+            }
+        } else {
+            console.error("São necessários 8 digitos.")
+            setMsgCEP("São necessários 8 digitos.")
+            setTimeout(() => {
+                setMsgCEP('')
+            }, 5000)
+        }
+    }
     const fetchContatos = async () => {
         let response
         try {
@@ -295,6 +316,26 @@ function Cliente() {
             console.error(error.message)
         }
     }
+    
+    const fecthHistOrdens = async (page) => {
+        try {
+            const result = await getOrdensPorCliente(page, cliente.id)
+            console.warn(result.data.content)
+            setReqstHistorico(result)
+            setHistorico(result.data.content)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+    const changePage = (current, pageSize) => {
+        fecthHistOrdens(current - 1)
+    }
+    useEffect(() => {
+        if (!cliente) {
+            return
+        }
+        fecthHistOrdens(0)
+    }, cliente)
     useEffect(() => {
         console.clear()
         if (idCliente) {
@@ -320,8 +361,7 @@ function Cliente() {
             usuario={usuario}
             ></Header>
             <Nav cargo={usuario?.cargo || ''}></Nav>
-            <main id='mainCliente'>
-                
+            <main id='mainCliente'>        
                 <section id='secInfos'>
                     <h2>Informações do cliente</h2>
                     {
@@ -447,11 +487,49 @@ function Cliente() {
                 </section>
                 <section id='secHistorico'>
                     <h2>Histórico de ordens</h2>
+                    <table id='contListHistoricos'>
+                    <thead>
+                        <tr>
+                            <th>cód.</th>
+                            <th>serviço</th>
+                            <th>tecnico</th>
+                            <th>abertura</th>
+                            <th>situação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     {
-                        !historico ? 
-                        <Loading></Loading> :
-                        'em breve...' 
+                        !historico || historico.length==0 ? 
+                        <Loading></Loading> :(
+                        historico.map(ordem => (
+                            <tr key={ordem.id}>
+                                <td>{ordem.id}</td>
+                                <td>{ordem.servico}</td>
+                                <td>{ordem.tecnico || 'nenhum'}</td>
+                                <td>{converterDtHr(ordem.dtAbertura)}</td>
+                                <td>{ordem.situacao}</td>
+                            </tr>
+                        ))
+                        )
                     }
+                    </tbody>
+                    </table>
+                    <div className='paginacao'>
+                    {
+                        historico &&
+                        // renderPaginas()
+                        <Pagination 
+                            defaultCurrent={1} 
+                            total={reqstHistorico.data.totalPages}
+                            disabled={reqstHistorico.data.totalPages == 1}
+                            pageSize={1}
+                            responsive
+                            showSizeChanger={false}
+                            onChange={changePage}
+                            showTitle={false}
+                            />
+                    }
+                    </div>
                 </section>
             </main>
             {

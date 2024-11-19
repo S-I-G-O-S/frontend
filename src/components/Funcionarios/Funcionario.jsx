@@ -21,12 +21,9 @@ function Funcionario() {
     const navigate = useNavigate()
     const [funcionario, setFuncionario] = useState()
     const [carregando, setCarregando] = useState(true)
-    const [reqstFuncionarios, setReqstFuncionarios] = useState()
     const [especialidades, setEspecialidades] = useState()
-    const [reqstEspecialidades, setReqstEspecialidades] = useState()
     const [pesqAddEspec, setPesqAddEspec] = useState('')
     const [cepMensagem, setCepMensagem] = useState('')
-    const [erro, setErro] = useState()
     const [viewSenha, setViewSenha] = useState(false)
     const [headerNomeFunc, setHeaderNomeFunc] = useState('')
     const [usuario, setUsuario] = useState(() => {
@@ -125,6 +122,24 @@ function Funcionario() {
         });
     };
     const handleChangeEndereco = (value, field) => {
+        if(field == 'logradouro' && value.length > 100) {
+            return
+        }
+        if(field == 'numero' && value.length > 10) {
+            return
+        }
+        if(field == 'bairro' && value.length > 50) {
+            return
+        }
+        if(field == 'cidade' && value.length > 50) {
+            return
+        }
+        if(field == 'uf' && value.length > 2) {
+            return
+        }
+        if(field == 'complemento' && value.length > 100) {
+            return
+        }
         setFuncionario(prevState => ({
             ...prevState,
             endereco: {
@@ -133,9 +148,21 @@ function Funcionario() {
             }
         }))
     }
-
     //  Dados do Funcionario
     const handleChangeDados = (value, field) => {
+        if(field == 'nome' && value.length > 100) {
+            return
+        }
+        if(field == 'cpf' && value.length > 11) {
+            return
+        }
+        if(field == 'email' && value.length > 100) {
+            return
+        }
+        if(field == 'celular' && value.length > 15) {
+            return
+        }
+        
         setFuncionario(prevState => ({
             ...prevState,
             [field]: value,
@@ -145,7 +172,6 @@ function Funcionario() {
         const nomeSanitizado = funcionario.nome.trim().replace(/[^a-zA-Z\s]/g, '');
 
         if (!nomeSanitizado) {
-            console.error("O campo de nome está vazio.");
             return false;
         }
         if (nomeSanitizado.length > 30) {
@@ -216,6 +242,7 @@ function Funcionario() {
         }
         let arrayEspecs = []
         console.warn(funcionario)
+        console.warn
 
         funcionario.especialidades.map(espec => (
             arrayEspecs.push(espec.id)
@@ -224,26 +251,31 @@ function Funcionario() {
         if ('id' in funcionario) {
             result = await putFuncionario(funcionario, arrayEspecs)
         } else {
-            console.warn("Debbug " + viewSenha)
-            if (viewSenha) {
-                result = await postFuncionario(funcionario, arrayEspecs)
-            } else {
-                setViewSenha(true)
-                return
-            }
+            //  TODO [ERRO] Retornando erro 400
+            result = await postFuncionario(funcionario, arrayEspecs)
+            /*
+            
+            */
         }
 
         if (result.success) {
-            window.alert('Alterações salvas com sucesso!')
+            // window.alert('Alterações salvas com sucesso!')
+            notification.success({
+                message: 'Alterações salvas com sucesso.',
+                // description: 'Reconecte-se a internet',
+                placement: 'bottomLeft',
+            })
             // window.location.reload()
             goToFuncionarios()
         } else {
-            window.alert(result.error)
+            notification.error({
+                message: 'Erro ao salvar dados.',
+                description: result.error,
+                placement: 'bottomLeft',
+            })
         }
     }
     const converterEspecs = (espec) => {
-        console.log('DEBBUG ESPECIALIDADES')
-        console.warn(espec)
         const [cor1, cor2] = espec?.cor?.includes('/')
             ? espec.cor.split('/')
             : [espec.cor, '#000']
@@ -264,7 +296,6 @@ function Funcionario() {
     const fetchEspecialidades = async () => {
         try {
             const response = await getEspecialidades()
-            setReqstEspecialidades(response)
             setEspecialidades(response.data.content)
             // console.warn(response)
         } catch (error) {
@@ -276,19 +307,16 @@ function Funcionario() {
         try {
             const response = await getFuncionarioPorID(idFuncionario)
             setFuncionario(response.data)
-            setReqstFuncionarios(response)
             console.warn(response)
 
         } catch (error) {
             console.error(error.message)
         }
-
-
     }
     useEffect(() => {
         if (!carregando) {
             formatNome()
-            console.log(`primeiro: ${funcionario.primeiro} e ultimo: ${funcionario.ultimo}`)
+            // console.log(`primeiro: ${funcionario.primeiro} e ultimo: ${funcionario.ultimo}`)
         }
     }, [funcionario?.nome])
     useEffect(() => {

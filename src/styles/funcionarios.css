@@ -198,10 +198,10 @@
                 #listFuncs {
                     gap: 0;
                     overflow-x: auto;
-                    overflow-y: scroll;
                     border: 0.1rem solid;
                     border-collapse: collapse;
                     border-spacing: 0;
+                    width: 100%;
                     /* TODO Add temas */
                     background-color: var(--branco);
                     border-color: var(--marrom);
@@ -218,7 +218,7 @@
                         }
                     }
                     .tbody {
-                        max-height: 50%;
+                        max-height: 80%;
                         overflow-y: scroll;
                     
                         .funcs {

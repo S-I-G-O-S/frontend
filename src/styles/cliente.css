@@ -337,6 +337,31 @@
         #secHistorico {
             grid-area: sec3;
         }
+        #secHistorico > h2 {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+        #contListHistoricos {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            background-color: var(--branco);
+        }
+        #contListHistoricos > thead {
+            background-color: var(--marrom1);
+            color: var(--salmao2);
+        }
+        #contListHistoricos 
+        th, td {
+            font-weight: 400;
+            padding: 0.1rem 0.2rem;
+            text-align: center;
+            border: 0.1rem solid;
+            border-color: var(--marrom1);
+        }
+        #contListHistoricos td {
+            font-size: 0.9rem;
+        }
     }
     #shadowBG {
         display: flex;

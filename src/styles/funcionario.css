@@ -13,14 +13,14 @@
         gap: 0.5rem;
         section {
             padding: 1rem;
-            border: 0.1rem solid var(--marrom);
+            border: 0.1rem solid var(--marrom1);
             border-radius: 10px;
 
             background-color: var(--salmao2);
             
             h2 {
                 font-size: 1.1rem;
-                color: var(--marrom);
+                color: var(--marrom1);
                 margin: 0;
                 margin-bottom: 1.5rem;
             }
@@ -65,7 +65,7 @@
                     input {
                         all: unset;
                         background-color: var(--branco);
-                        border: 0.1rem solid var(--marrom);
+                        border: 0.1rem solid var(--marrom1);
                         border-radius: 0.3rem;
                         font-size: 0.9rem;
                         padding: 0.1rem 0.3rem;
@@ -79,13 +79,15 @@
                         all: unset;
                         display: flex;
                         align-items: center;
+                        align-self: center;
+                        align-content: center;
                         justify-content: center;
                         text-align: center;
                         border-radius: 0.3rem;
                         font-size: 0.9rem;
                         padding: 0.1rem 0.5rem;
                         height: auto;
-                        border: 0.1rem solid var(--marrom);
+                        border: 0.1rem solid var(--marrom1);
                         background-color: var(--branco);
                         option {
                             text-align: left;
@@ -110,7 +112,7 @@
                     input {
                         all: unset;
                         background-color: var(--branco);
-                        border: 0.1rem solid var(--marrom);
+                        border: 0.1rem solid var(--marrom1);
                         border-radius: 0.3rem;
                         font-size: 0.9rem;
                         padding: 0.1rem 0.3rem;
@@ -169,15 +171,11 @@
 
                     height: 1.5rem;
                     width: 8rem;
-                    border: 0.1rem solid var(--marrom);
+                    border: 0.1rem solid var(--marrom1);
                     border-radius: 0.3rem;
-                    color: var(--marrom);
+                    color: var(--marrom1);
 
                     transition: 150ms;
-                }
-                
-                button:hover {
-                    width: 11rem;
                 }
                 button:focus {
                     text-decoration: underline;
@@ -186,11 +184,21 @@
                 #bttCancelar {
                     background-color: #ecea57;
                 }
+                #bttCancelar:hover  {
+                    background-color: #faf736;
+                }
                 #bttSalvar {
                     background-color: #40ec5d;
                 }
+                #bttSalvar:hover {
+                    background-color: #30fa52;
+                }
                 #bttExcluir {
                     background-color: #fc8c8c;
+                    
+                }
+                #bttExcluir:hover {
+                    background-color: #ff6e6e;
                     
                 }
             }

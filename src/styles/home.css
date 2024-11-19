@@ -98,6 +98,7 @@
                 flex-direction: column;
                 grid-area: ordensAbertas;
                 
+                line-height: normal;
                 height: min-content;
                 padding: 0.1rem;
                 border: 0.1rem solid var(--marrom1);
@@ -107,8 +108,11 @@
 
                 background-color: var(--salmao2);
                 .ant-card-head {
-                    padding: 0 1rem;
+                    padding: 0.5rem 0.8rem;
+                    height: auto;
+                    min-height: 0;
                     border-bottom-color: var(--marrom1);
+                    
                     .ant-card-head-title {
                         font-weight: 500;
                         font-size: 0.95rem;
@@ -117,17 +121,20 @@
                     }
                 }
                 .ant-card-body {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.3rem;
                     padding: 0.5rem;
                     .ordens {
                         display: flex;
-                        flex-direction: column;
+                        flex-direction: row;
+                        justify-content: space-between;
                         gap: 0.1rem;
                         font-size: 0.9rem;
                         
-                        padding: 0.5rem;
+                        padding: 0.2rem 0.5rem;
                         border: 0.1rem solid var(--marrom);
                         border-radius: 5px;
-                        margin-bottom: 0.5rem;
 
                         background-color: var(--branco);
                     }

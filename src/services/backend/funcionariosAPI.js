@@ -88,16 +88,17 @@ export const postFuncionario = async (f, especialidades) => {
             email: f.email,
             celular: f.celular,
             cargo: f.cargo,
-            endereco: {
-                cep: f.endereco.cep,
-                logradouro: f.endereco.logradouro,
-                numero: f.endereco.numero,
-                bairro: f.endereco.bairro,
-                cidade: f.endereco.cidade,
-                uf: f.endereco.uf,
-                complemento: f.endereco.complemento
-            },
-            especialidades: especialidades
+            endereco: f.endereco,
+            // {
+            //     cep: f.endereco.cep,
+            //     logradouro: f.endereco.logradouro,
+            //     numero: f.endereco.numero,
+            //     bairro: f.endereco.bairro,
+            //     cidade: f.endereco.cidade,
+            //     uf: f.endereco.uf,
+            //     complemento: f.endereco.complemento
+            // },
+            especialidades
         })
         
         return { success: true, data: response.data }

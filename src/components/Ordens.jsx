@@ -151,113 +151,112 @@ function Ordens() {
                             Nova Ordem
                         </button>
                     </div>
-                    <div></div>
-                </section>
-                {
-                    (pendente || emExecucao || retorno) &&
-                    <section id="sec2">
-                        <div id="contOrdensPendentes" 
-                            className={expandLists.pendente ? 'listOrdensAberto listOrdens' : 'listOrdensFechado listOrdens'}
-                            >
-                            <button className="headList"
-                                onClick={() => handleChangeExpandLists('pendente', !expandLists.pendente)}
-                                disabled={!pendente}
+                    {
+                        <div id="contOrdens">
+                            <div id="contOrdensPendentes" 
+                                className={expandLists.pendente ? 'listOrdensAberto listOrdens' : 'listOrdensFechado listOrdens'}
                                 >
-                                <div className="leftCont">
-                                    <LoadingOutlined />
-                                    <p>Pendente</p>
-                                </div>
+                                <button className="headList"
+                                    onClick={() => handleChangeExpandLists('pendente', !expandLists.pendente)}
+                                    disabled={!pendente}
+                                    >
+                                    <div className="leftCont">
+                                        <LoadingOutlined />
+                                        <p>Pendente</p>
+                                    </div>
+                                    {
+                                        expandLists.pendente ?
+                                            <UpOutlined className="iconExpandir" /> :
+                                            <DownOutlined className="iconExpandir" />
+                                    }
+                                </button>
                                 {
-                                    expandLists.pendente ?
+                                    pendente &&
+                                    expandLists.pendente &&
+                                    (<div className="bodyList">
+                                        {pendente.map(ordem =>
+                                            <div key={ordem.id}         
+                                                className="itemListOrdens"
+                                                onClick={() => handleAbrirOrdem(ordem.id, 'PENDENTE')}>
+                                                <div>Cliente: {ordem.cliente}</div>
+                                                <div>Serviço: {ordem.servico}</div>
+                                                <div>Data abertura: {converterDtHr(ordem.dtAbertura)}</div>
+                                            </div>
+                                        )}
+                                    </div>)
+                                }
+                            </div>
+                            <div id="contOrdensEmExecucao"
+                                className={expandLists.emExecucao ? 'listOrdensAberto listOrdens' : 'listOrdensFechado listOrdens'}
+                                >
+                                <button className="headList"
+                                    onClick={() => handleChangeExpandLists('emExecucao', !expandLists.emExecucao)}
+                                    disabled={!emExecucao}
+                                    >
+                                    <div className="leftCont">
+                                        <FieldTimeOutlined />
+                                        <p>Em execução</p>
+                                    </div>
+                                    {
+                                        expandLists.emExecucao ?
                                         <UpOutlined className="iconExpandir" /> :
                                         <DownOutlined className="iconExpandir" />
-                                }
-                            </button>
-                            {
-                                pendente &&
-                                expandLists.pendente &&
-                                (<div className="bodyList">
-                                    {pendente.map(ordem =>
-                                        <div key={ordem.id}         
-                                            className="itemListOrdens"
-                                            onClick={() => handleAbrirOrdem(ordem.id, 'PENDENTE')}>
-                                            <div>Cliente: {ordem.cliente}</div>
-                                            <div>Serviço: {ordem.servico}</div>
-                                            <div>Data abertura: {converterDtHr(ordem.dtAbertura)}</div>
-                                        </div>
-                                    )}
-                                </div>)
-                            }
-                        </div>
-                        <div id="contOrdensEmExecucao"
-                            className={expandLists.emExecucao ? 'listOrdensAberto listOrdens' : 'listOrdensFechado listOrdens'}
-                            >
-                            <button className="headList"
-                                onClick={() => handleChangeExpandLists('emExecucao', !expandLists.emExecucao)}
-                                disabled={!emExecucao}
-                                >
-                                <div className="leftCont">
-                                    <FieldTimeOutlined />
-                                    <p>Em execução</p>
-                                </div>
+                                    }
+                                </button>
                                 {
-                                    expandLists.emExecucao ?
-                                    <UpOutlined className="iconExpandir" /> :
-                                    <DownOutlined className="iconExpandir" />
+                                    emExecucao &&
+                                    expandLists.emExecucao &&
+                                    (<div className="bodyList">
+                                        {emExecucao.map(ordem =>
+                                            <div key={ordem.id} 
+                                                className="itemListOrdens"
+                                                onClick={() => handleAbrirOrdem(ordem.id, 'EM_EXECUCAO')}>
+                                                <div>Cliente: {ordem.cliente}</div>
+                                                <div>Serviço: {ordem.servico}</div>
+                                                <div>Data abertura: {converterDtHr(ordem.dtAbertura)}</div>
+                                            </div>
+                                        )}
+                                    </div>)
                                 }
-                            </button>
-                            {
-                                emExecucao &&
-                                expandLists.emExecucao &&
-                                (<div className="bodyList">
-                                    {emExecucao.map(ordem =>
-                                        <div key={ordem.id} 
-                                            className="itemListOrdens"
-                                            onClick={() => handleAbrirOrdem(ordem.id, 'EM_EXECUCAO')}>
-                                            <div>Cliente: {ordem.cliente}</div>
-                                            <div>Serviço: {ordem.servico}</div>
-                                            <div>Data abertura: {converterDtHr(ordem.dtAbertura)}</div>
-                                        </div>
-                                    )}
-                                </div>)
-                            }
-                        </div>
-                        <div id="contOrdensRetorno" 
-                            className={expandLists.retorno ? 'listOrdensAberto listOrdens' : 'listOrdensFechado listOrdens'}
-                            
-                            >
-                            <button className="headList"
-                                onClick={() => handleChangeExpandLists('retorno', !expandLists.retorno)}
-                                disabled={!retorno}
+                            </div>
+                            <div id="contOrdensRetorno" 
+                                className={expandLists.retorno ? 'listOrdensAberto listOrdens' : 'listOrdensFechado listOrdens'}
+                                
                                 >
-                                <div className="leftCont">
-                                    <RollbackOutlined/>
-                                    <p>Retorno</p>
-                                </div>
+                                <button className="headList"
+                                    onClick={() => handleChangeExpandLists('retorno', !expandLists.retorno)}
+                                    disabled={!retorno}
+                                    >
+                                    <div className="leftCont">
+                                        <RollbackOutlined/>
+                                        <p>Retorno</p>
+                                    </div>
+                                    {
+                                        expandLists.retorno ?
+                                        <UpOutlined className="iconExpandir" /> :
+                                        <DownOutlined className="iconExpandir" />
+                                    }
+                                </button>
                                 {
-                                    expandLists.retorno ?
-                                    <UpOutlined className="iconExpandir" /> :
-                                    <DownOutlined className="iconExpandir" />
+                                    retorno &&
+                                    expandLists.retorno &&
+                                    (<div className="bodyList">
+                                        {retorno.map(ordem =>
+                                            <div key={ordem.id} 
+                                                className="itemListOrdens"
+                                                onClick={() => handleAbrirOrdem(ordem.id, 'RETORNO')}>
+                                                <div>Cliente: {ordem.cliente}</div>
+                                                <div>Serviço: {ordem.servico}</div>
+                                                <div>Data abertura: {converterDtHr(ordem.dtAbertura)}</div>
+                                            </div>
+                                        )}
+                                    </div>)
                                 }
-                            </button>
-                            {
-                                retorno &&
-                                expandLists.retorno &&
-                                (<div className="bodyList">
-                                    {retorno.map(ordem =>
-                                        <div key={ordem.id} 
-                                            className="itemListOrdens"
-                                            onClick={() => handleAbrirOrdem(ordem.id, 'RETORNO')}>
-                                            <div>Cliente: {ordem.cliente}</div>
-                                            <div>Serviço: {ordem.servico}</div>
-                                            <div>Data abertura: {converterDtHr(ordem.dtAbertura)}</div>
-                                        </div>
-                                    )}
-                                </div>)
-                            }
+                            </div>
                         </div>
-                    </section>
-                }
+                    }
+                </section>
+                
             </main>
             {
                 ordemAberta &&

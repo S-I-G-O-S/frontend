@@ -12,7 +12,19 @@
     --marrom3: #462b18;
     --preto: #000;
 }
-
+[data-theme="normal-light"]{
+    --navColor: #395873;
+    --nav: #395873ea;
+    --primary1: #26110D;
+    --primary2: #3b1f17;
+    --primary3: #462b18;
+    --laranja: #d96704;
+    --secondary1: #f2ae72;
+    --secondary2: #f7cba4;
+    --secondary3: #fcd8b9;
+    --secondary4: #f2e8df;
+    --cinza1: #dfdcd9;
+}
 *,
 *::before,
 *::after {
@@ -121,7 +133,6 @@ body {
     
     main {
         padding: 0.5rem 1rem;
-        max-height: 60%;
     }
 }
 @media screen and (width <= 950px) {

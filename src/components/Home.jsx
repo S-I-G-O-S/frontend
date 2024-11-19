@@ -10,7 +10,7 @@ import {notification, Alert} from 'antd';
 
 import InfosUser from './Home/InfosUser'
 import FuncsDisponiveis from './Home/FuncsDisponiveis'
-import OrdensAbertas from './Home/OrdensAbertas'
+import OrdensPendentes from./Home/OrdensPendentesntes'
 import OrdensEmAtendimento from './Home/OrdensEmAtendimento'
 import { getCookie } from '../services/cookies'
 
@@ -64,7 +64,7 @@ function Home() {
                 {(usuario.cargo === 'base' || usuario.cargo === 'ADM' || usuario.cargo == 'DEV') && (
                     <section id='secOrdens'>
                         {/* Ordens Abertas */}
-                        <OrdensAbertas></OrdensAbertas>
+                        <OrdensPendentes></OrdensPendentes>
 
                         {/* Ordens em Atendimento */}
                         <OrdensEmAtendimento></OrdensEmAtendimento>

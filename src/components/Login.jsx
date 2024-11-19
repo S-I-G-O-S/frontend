@@ -218,6 +218,7 @@ function Login() {
                             <h1>Olá Nome do funcionario</h1>
                             <p>Para garantir a segurança de sua conta, precisamos que você defina sua senha de acesso.</p>
                         </div>
+                        <form>
                         <div id='contSenhas'>
                             <div id='contSenha'>
                                 <label>Nova senha:</label>
@@ -239,6 +240,7 @@ function Login() {
                                 <p style={{ color: forcaSenha.cor }}>senha {forcaSenha.msg}</p>
                             </div>
                         </div>
+                        </form>
                         {/* <div id='contMsgNovaSenha'>
                         <p id='msgNovaSenha' style={{ visibility: msgNovaSenha ? 'visible' : 'hidden'}}>{msgNovaSenha}</p>
                     </div> */}
