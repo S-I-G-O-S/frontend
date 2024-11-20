@@ -11,145 +11,212 @@
     --marrom3: #462b18;
     --preto: #000;
 }
+#mainHome {
+    grid-area: main;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+    margin: 0 auto;
+    box-sizing: border-box;
 
-#pageHome {
-    #mainHome {
-        grid-area: main;
-        display: flex;
-        align-items: start;
-        flex-direction: column;
-        width: 100%;
-        gap: 1rem;
-        margin: 0 auto;
+    background-color: var(--branco);
+}
+#mainHome
+section {
+    width: 100%;
+}
+#secInfosUser {
+    background-color: #d7ffe1;
+    h2 {
+        font-weight: 600;
+        font-size: 0.95rem;
+        text-align: left;
+        margin: 0 0 0.5rem;
+    }
+    p {
+        font-size: 0.9rem;
+        margin: 0;
+    }
+}
+#secTecnico {
+    background-color: var(--salmao1);
+}
+#secTecnicosDisponiveis {
+    background-color: var(--salmao2);
+    width: 100%;    
+    border-radius: 0.5rem;
+    h2 {
+        font-weight: 600;
+        font-size: 0.95rem;
+        text-align: left;
+        margin: 0 0 0.1rem 0.1rem;
+    }
+    .rfm-marquee-container  {
+        width: 90%;
         box-sizing: border-box;
-
-        background-color: var(--branco);
-        section {
-            padding: 1rem;
-            border: 0.1rem solid var(--marrom);
-            border-radius: 10px;
-            
-            width: 100%;
-            box-sizing: border-box;
+    }
+    .funcsDisp {
+        display: flex;
+        padding: 0.1rem  0.5rem;
+        border: 0.1rem solid var(--marrom1);
+        border-radius: 0.3rem;
+        background-color: var(--salmao3);
+        .nomeFunc {
+            font-size: 0.9rem;
+            padding: 0;
+            margin: 0;
         }
-        #secInfosUser {
-            background-color: #d7ffe1;
-            h2 {
-                font-weight: 600;
+    }
+}
+#secOrdens {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 0;
+    border: 0;
+    .ant-card {
+        display: flex;
+        flex-direction: column;
+        grid-area: ordensAbertas;
+        
+        line-height: normal;
+        height: min-content;
+        padding: 0.1rem;
+        border: 0.1rem solid var(--marrom1);
+        border-radius: 0.5rem;
+        flex-grow: 1;
+        flex-basis: 20rem;
+
+        background-color: var(--salmao2);
+        .ant-card-head {
+            padding: 0.5rem 0.8rem;
+            height: auto;
+            min-height: 0;
+            border-bottom-color: var(--marrom1);
+            
+            .ant-card-head-title {
+                font-weight: 500;
                 font-size: 0.95rem;
                 text-align: left;
-                margin: 0 0 0.5rem;
-            }
-            p {
-                font-size: 0.9rem;
                 margin: 0;
             }
         }
-        #secTecnico {
-            
-            background-color: var(--salmao1);
-        }
-        #secTecnicosDisponiveis {
-            background-color: var(--salmao2);
-            width: 100%;    
-            border-radius: 0.5rem;
-            h2 {
-                font-weight: 600;
-                font-size: 0.95rem;
-                text-align: left;
-                margin: 0 0 0.1rem 0.1rem;
-            }
-            .rfm-marquee-container  {
-                width: 90%;
-                box-sizing: border-box;
-            }
-                .funcsDisp {
-                    display: flex;
-                    padding: 0.1rem  0.5rem;
-                    border: 0.1rem solid var(--marrom1);
-                    border-radius: 0.3rem;
-                    background-color: var(--salmao3);
-                    .nomeFunc {
-                        font-size: 0.9rem;
-                        padding: 0;
-                        margin: 0;
-                    }
-                }
-            /* #listTecsDisp {
-                display: none;
-                white-space: nowrap;
-                animation: marquee var(--marquee-duration, 0s) linear infinite;
-                flex-direction: row;
-                width: 100%;
-                height: min-content;
-                gap: 0.2rem 0.1rem;
-                overflow: auto;
-                
-            } */
-        }
-        #secOrdens {
+        .ant-card-body {
             display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            padding: 0;
-            border: 0;
-            .ant-card {
-                display: flex;
-                flex-direction: column;
-                grid-area: ordensAbertas;
+            flex-direction: column;
+            gap: 0.15rem;
+            padding: 0.5rem;
+            .ordens {
+                gap: 0.1rem;
+                font-size: 0.9rem;
                 
-                line-height: normal;
-                height: min-content;
-                padding: 0.1rem;
-                border: 0.1rem solid var(--marrom1);
-                border-radius: 0.5rem;
-                flex-grow: 1;
-                flex-basis: 20rem;
+                padding: 0.2rem 0.5rem;
+                border: 0.1rem solid var(--marrom);
+                border-radius: 5px;
 
-                background-color: var(--salmao2);
-                .ant-card-head {
-                    padding: 0.5rem 0.8rem;
-                    height: auto;
-                    min-height: 0;
-                    border-bottom-color: var(--marrom1);
-                    
-                    .ant-card-head-title {
-                        font-weight: 500;
-                        font-size: 0.95rem;
-                        text-align: left;
-                        margin: 0;
-                    }
-                }
-                .ant-card-body {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 0.3rem;
-                    padding: 0.5rem;
-                    .ordens {
-                        display: flex;
-                        flex-direction: row;
-                        justify-content: space-between;
-                        gap: 0.1rem;
-                        font-size: 0.9rem;
-                        
-                        padding: 0.2rem 0.5rem;
-                        border: 0.1rem solid var(--marrom);
-                        border-radius: 5px;
-
-                        background-color: var(--branco);
-                    }
-                }
+                background-color: var(--branco);
+                
+            }
+            .ordensPendentes {
+                display: grid;
+                grid-template-columns: 1fr 2fr min-content;
+                grid-column: 1fr;
+            }
+            .ordensPendentes div {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
         }
     }
 }
+#secOrdens .contsOrdens {
+    flex-grow: 1;
+    flex-basis: 20rem;
+    
+    padding: 0 0.2rem;
+    border: 0.1rem solid;
+    border-radius: 0.4rem;
+    
+    border-color: var(--marrom1);
+    background-color: var(--salmao2);
+}
+.headContsOrdens {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    padding: 0.5rem 0.7rem;
+    border-bottom: 0.1rem solid;
+    
+    border-color: var(--marrom1);
+}
+.headContsOrdens .titulo {
+    font-size: 0.95rem;
+    font-weight: 500;
+
+    color: var(--marrom1);
+}
+.headContsOrdens .link {
+    font-size: 0.91rem;
+    font-weight: 500;
+    text-decoration: none;
+
+    color: var(--marrom3);
+}
+.headContsOrdens .link:hover {
+    color: var(--laranja);
+}
+.bodyContsOrdens {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.5rem;
+    
+    
+}
+.contsOrdens 
+.ordens {
+    gap: 0.3rem;
+    font-size: 0.9rem;
+    
+    padding: 0.2rem 0.5rem;
+    border: 0.1rem solid var(--marrom);
+    border-radius: 5px;
+
+    background-color: var(--branco);
+    
+}
+.contsOrdens .ordensPendentes {
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 1fr 2fr min-content;
+    grid-column: 1fr;
+}
+.contsOrdens .ordensEmAtendimento {
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 1fr 2fr min-content;
+    grid-column: 1fr;
+}
+.bodyContsOrdens .ordens:hover {
+    background-color: var(--salmao3);
+    border-color: var(--laranja);
+}   
+.ordens div {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 @keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
 }
 @media screen and (width <= 750px) {
     #pageHome{

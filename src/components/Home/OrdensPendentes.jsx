@@ -2,9 +2,11 @@ import { useEffect, useState } from "react"
 import Loading from "../public/Loading"
 import { Card } from "antd"
 import { getOrdensForHome } from "../../services/backend/ordemAPI"
+import { Link } from "react-router-dom"
 
 function OrdensPendentes() {
-    const [ordensPendentes, SetOrdensPendentes] = useState(null)
+    const [ordensPendentes, setOrdensPendentes] = useState(null)
+    const [reqstOrdensPendentes, setReqstOrdensPendentes] = useState(null)
     const converterDtHr = (dataHora) => {
         const [dia, mes, anoHora] = dataHora.split('-')
         const [ano, hora] = anoHora.split(' ')
@@ -23,7 +25,9 @@ function OrdensPendentes() {
     const fetchOrdens = async () => {
         try {
             const result = await getOrdensForHome('PENDENTE')
-            SetOrdensPendentes(result.data.content)
+            setReqstOrdensPendentes(result)
+            setOrdensPendentes(result.data.content)
+            console.warn(result)
         } catch (error) {
             console.error(error)
         }
@@ -31,21 +35,47 @@ function OrdensPendentes() {
     useEffect(() => {
         fetchOrdens()
     }, [])
-    return !ordensPendentes ? (<Loading />) : (
+    return !ordensPendentes ? /*(<Loading />)*/ '' : (
         ordensPendentes === 'vazio' ? '' : (
-            <Card
-                id="contOrdensAbertas"
+            <>
+            {/* <Card
+                // id="contOrdensAbertas"
                 title="Ordens Pendentes"
                 bordered={false}
+                extra={
+                    <Link to={'/ordens'}>Mais</Link>
+                }
             >
                 {ordensPendentes.map(ordem => (
-                    <div className="ordensAbertas ordens" key={ordem.id}>
+                    <div className="ordensPendentes ordens" key={ordem.id}>
                         <div className="nomeCliente">{ordem.cliente}</div>
                         <div className="serviço">{ordem.servico}</div>
                         <div className="dataHora">{converterDtHr(ordem.dtAbertura)}</div>
                     </div>
                 ))}
-            </Card>
+            </Card> */}
+            <div id="contOrdensPendentes" className="contsOrdens">
+                <div className="headContsOrdens">
+                    <div className="titulo">Ordens Pendentes</div>
+                    {
+                        (reqstOrdensPendentes.data.totalElements - 5 ) > 0 &&
+                        (<Link className="link" to={'/ordens'}>
+                            mais {reqstOrdensPendentes.data.totalElements - 5}
+                        </Link>)
+                    }
+                </div>
+                <div className="bodyContsOrdens">
+                    {ordensPendentes.map(ordem => (
+                        <div className="ordensPendentes ordens" key={ordem.id}>
+                            <div className="nomeCliente">{ordem.cliente}</div>
+                            <div className="serviço">{ordem.servico}</div>
+                            <div className="dataHora">{converterDtHr(ordem.dtAbertura)}</div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+            </>
+
         )
     )
 }

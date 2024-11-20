@@ -10,7 +10,7 @@ import {notification, Alert} from 'antd';
 
 import InfosUser from './Home/InfosUser'
 import FuncsDisponiveis from './Home/FuncsDisponiveis'
-import OrdensPendentes from./Home/OrdensPendentesntes'
+import OrdensPendentes from './Home/OrdensPendentes'
 import OrdensEmAtendimento from './Home/OrdensEmAtendimento'
 import { getCookie } from '../services/cookies'
 
@@ -23,7 +23,9 @@ function Home() {
         });
     };
     // showNotification('bottomLeft')
-
+    const [isLoading, setIsLoading] = useState({
+        ordensEmAtendimento: true
+    })
     const [showUsuario, setShowUsuario] = useState(null)
     const [showInfosUser, setShowInfosUser] = useState(true)
     const [usuario, setUsuario] = useState(() => {
@@ -62,6 +64,7 @@ function Home() {
 
                 {/* Ordens abertas e ordens em atendimento se o usuário for 'base' ou 'adm' */}
                 {(usuario.cargo === 'base' || usuario.cargo === 'ADM' || usuario.cargo == 'DEV') && (
+
                     <section id='secOrdens'>
                         {/* Ordens Abertas */}
                         <OrdensPendentes></OrdensPendentes>
