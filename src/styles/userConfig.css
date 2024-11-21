@@ -22,15 +22,12 @@
     width: 100%;
     margin: 0 auto;
     box-sizing: border-box;
-
-    background-color: var(--branco);
 }
 #mainPerfilConfig
 > section {
     padding: 1.5rem 1.5rem;
-    border: 0.1rem solid var(--marrom);
+    border: 0.1rem solid;
     border-radius: 10px;
-    background-color: var(--salmao2);
     width: 100%;
     box-sizing: border-box;
     h2 {
@@ -49,7 +46,6 @@
     font-size: 0.9rem;
     padding: 0.5rem;
     border: 0.1rem solid;
-    border-color: var(--salmao1);
     border-radius: 0.3rem;
 }
 #secUserConfig {

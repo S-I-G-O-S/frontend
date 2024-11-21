@@ -71,14 +71,19 @@ function Login() {
             setPrimeiroAcesso(true)
             return
         }
-        // TODO Verificar se o usuario primeiro login deve trazer o token junto,
-        // TODO Verificar se o usuario desativado deve trazer o token junto
-        setToken(result.data.tokenJWT)
-        setCookie('usuario', result.data.funcionario, 12)
+        setToken(result.data.tokenJWT)  // Definir o token no Authorization
+
+        setCookie('usuario', result.data.funcionario, 12)   // Definir o cookie do usuario
         if (result.data.funcionario.tema == null) {
-            setCookie('tema', 'claro', 12)
+            sessionStorage.setItem('preferencias', JSON.stringify({
+                tema: 'salmaoLight',
+                abertoNav: true 
+            }))
         } else {
-            setCookie('tema', result.data.funcionario.tema, 12)
+            sessionStorage.setItem('preferencias', JSON.stringify({
+                tema: result.data.funcionario.tema,
+                abertoNav: true 
+            }))
         }
         navigate("/home", { replace: true })
     }

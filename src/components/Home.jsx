@@ -32,6 +32,10 @@ function Home() {
         const cookieUsuario = getCookie('usuario')
         return cookieUsuario ? cookieUsuario : ''
     })
+    // TODO Pedir para adicionar endpoint para alterar tema do usuario
+    if (!usuario.tema) {
+
+    }
 
     useEffect(() => {
         console.clear()

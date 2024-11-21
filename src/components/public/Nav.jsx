@@ -10,20 +10,19 @@ import especsIcon from '../../assets/tag.png'
 import { useEffect, useState } from 'react'
 import { HomeFilled }  from '@ant-design/icons'
 import { IconFuncionarios } from './IconsSVG'
+import { usePreferencias } from '../../context/PreferenciasContext'
 
 function Nav({ cargo }) {
-    const [sessPreferencias, setSessPreferencias] = useState(() => {
-        const storedUsuario = sessionStorage.getItem('preferencias')
-        return storedUsuario ? JSON.parse(storedUsuario) : {
-            tema: 'claro',
-            abertoNav: true 
-        }
-    })
+    const { sessPreferencias, setSessPreferencias } = usePreferencias()
+    /*
     useEffect(() => {
         if (sessPreferencias) {
+            console.log('DEBBUG THEME')
+            console.warn(sessPreferencias)
             sessionStorage.setItem('preferencias', JSON.stringify(sessPreferencias))
         }
-    }, [sessPreferencias])
+    }, [sessPreferencias.abertoNav])
+    */
     const changeNav = () => {
         setSessPreferencias(prevState => ({
             ...prevState,
