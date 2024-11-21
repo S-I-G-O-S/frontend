@@ -59,7 +59,7 @@ function OrdensPendentes() {
                     <div className="titulo">Ordens Pendentes</div>
                     {
                         (reqstOrdensPendentes.data.totalElements - 5 ) > 0 &&
-                        (<Link className="link" to={'/ordens'}>
+                        (<Link className="link" to={'/ordens?situacao=PENDENTES'}>
                             mais {reqstOrdensPendentes.data.totalElements - 5}
                         </Link>)
                     }

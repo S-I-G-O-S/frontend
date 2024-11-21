@@ -81,7 +81,7 @@ function HistoricoOrdens() {
     useEffect(() => {
         console.clear()
         console.log('Situacao: ' + situacaoParam)
-        handleChangeFilters(situacaoParam, 'situacao')
+    handleChangeFilters(situacaoParam, 'situacao')
         fetchOrdens(0)
     }, [])
     return(

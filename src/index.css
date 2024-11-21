@@ -135,6 +135,18 @@ body {
         padding: 0.5rem 1rem;
     }
 }
+.paginas
+.shadowBG 
+section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.5rem 2rem;
+    border: 0.1rem solid var(--marrom);
+    border-radius: 10px;
+
+    background-color: var(--salmao2);
+}
 @media screen and (width <= 950px) {
     .paginas {
         width: 100vw;

@@ -5,11 +5,14 @@
     flex-direction: column;
     width: 100%;
     padding: 1rem;
-    img {
-        height: 2.5rem;
-    }
-    p {
-        margin: 0;
-        font-size: 0.9rem;
-    }
+}
+#contCarregando
+#loadingIMG svg {
+    height: 2rem;
+    width: 2rem;
+}
+#contCarregando
+p {
+    margin: 0;
+    font-size: 0.9rem;
 }

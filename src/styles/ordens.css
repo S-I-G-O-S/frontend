@@ -32,269 +32,23 @@
     max-height: 98%;
 }
 
-#pageOrdens {
-    #mainOrdens {
-        section {
-            padding: 1rem;
-            border: 0.1rem solid var(--marrom);
-            border-radius: 10px;
+#mainOrdens section {
+    padding: 1rem;
+    border: 0.1rem solid var(--marrom);
+    border-radius: 10px;
 
-            background-color: var(--salmao2);
-        }
-
-        #sec1 {
-            max-height: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 0.3rem;
-        }
-
-        #contOrdens {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: space-between;
-            /* flex-wrap: wrap; */
-            gap: 0.5rem;
-            max-height: 40%;
-
-            padding: 0.5rem;
-            border: 0.1rem solid;
-            border-color: var(--salmao1);
-            border-radius: 0.3rem;
-
-            .listOrdens {
-                display: flex;
-                flex-direction: column;
-                /* flex-grow: 1;
-                flex-basis: 10rem; */
-                border-radius: 0.3rem;
-                max-height: 70%;
-                width: 100%;
-
-                background-color: var(--salmao1);
-                border-color: var(--marrom1);
-
-                .headList {
-                    cursor: pointer;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    font-size: 1rem;
-                    padding: 0.3rem 1rem;
-                    border-radius: 0.3rem;
-
-                    border-color: var(--marrom1);
-                    background-color: var(--branco);
-
-                    .anticon {
-                        box-sizing: border-box;
-                    }
-
-                    .leftCont {
-                        display: flex;
-                        align-items: center;
-                        gap: 0.5rem;
-
-                        .anticon>svg {
-                            box-sizing: border-box;
-                            width: 1.2rem;
-                            height: 1.2rem;
-                        }
-
-                        p {
-                            font-weight: 500;
-                        }
-                    }
-
-                    .anticon>svg {
-                        box-sizing: border-box;
-                        width: 1.2rem;
-                        height: 1.2rem;
-                    }
-                }
-
-                .bodyList {}
-            }
-
-            .listOrdensAberto {
-                border: 0.1rem solid;
-
-                .headList {
-                    border: 0;
-                    border-bottom: 0.1rem solid;
-                }
-
-                .bodyList {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 0.3rem;
-
-                    overflow-y: auto;
-                    max-height: 60%;
-                    padding: 0.2rem 0.2rem;
-                    transition: 150ms;
-
-                    .itemListOrdens {
-                        cursor: pointer;
-                        font-size: 0.81rem;
-                        padding: 0.3rem;
-                        border: 0.1rem solid;
-                        border-radius: 0.3rem;
-
-                        border-color: var(--salmao3);
-                        background-color: var(--salmao3);
-                    }
-
-                    .itemListOrdens:hover {
-                        border-color: var(--marrom1);
-                        background-color: var(--salmao2);
-                    }
-                }
-            }
-
-            .listOrdensFechado {
-                border: 0;
-
-                .headList {
-                    border: 0.1rem solid;
-                }
-            }
-
-            #contOrdensPendentes>button {
-                background-color: var(--pendente);
-            }
-
-            #contOrdensEmExecucao>button {
-                background-color: var(--emExecucao);
-            }
-
-            #contOrdensRetorno>button {
-                background-color: var(--retorno);
-            }
-
-            #contOrdensCancelada>button {
-                background-color: var(--cancelada);
-            }
-
-            #contOrdensEmFinalizada>button {
-                background-color: var(--finalizada);
-            }
-        }
-    }
-
-    .shadowBG {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: fixed;
-        background-color: #000000da;
-        width: 100%;
-        height: 100%;
-        box-sizing: border-box;
-
-        section {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            padding: 1.5rem 2rem;
-            border: 0.1rem solid var(--marrom);
-            border-radius: 10px;
-
-            background-color: var(--salmao2);
-
-            #headOrdemAberta {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                font-size: 1.1rem;
-                color: var(--marrom);
-                margin: 0;
-                margin-bottom: 0.9rem;
-
-                h2 {
-                    font-size: 1.1rem;
-                }
-
-                #fecharOrdemAberta {
-                    cursor: pointer;
-                    padding: 0.1rem;
-                    border-radius: 0.3rem;
-                    transition: 180ms;
-                }
-
-                #fecharOrdemAberta:hover {
-                    background-color: var(--salmao1);
-                }
-
-                #fecharOrdemAberta>svg {
-                    color: var(--marrom1);
-                    height: 1.2rem;
-                    width: 1.2rem;
-                }
-            }
-
-            #infosOrdemAberta {
-                padding: 01rem;
-                border: 0.1rem solid;
-                border-color: var(--salmao1);
-                border-radius: 0.3rem;
-                font-weight: 500;
-                font-size: 0.93rem;
-
-                span {
-                    font-weight: 400;
-                }
-            }
-
-            #acoesOrdemAberta {
-                display: flex;
-                align-items: center;
-                justify-content: space-around;
-                padding: 0.5rem;
-                border: 0.1rem solid;
-                border-color: var(--salmao1);
-                border-radius: 0.3rem;
-            }
-
-            #acoesOrdemAberta>button {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                font-size: 0.9rem;
-                font-weight: 500;
-                padding: 0.2rem 2rem;
-                border: 0.1rem solid;
-                border-color: #000;
-                border-radius: 0.3rem;
-            }
-
-            #bttFecharOrdemAberta {
-                background-color: #ff8888;
-            }
-
-            #bttFecharOrdemAberta:hover {
-                background-color: #f37272;
-                text-decoration: underline;
-            }
-
-            #bttEditarOrdem {
-                background-color: #84aff0;
-            }
-
-            #bttEditarOrdem:hover {
-                background-color: #6b9ae2;
-                text-decoration: underline;
-            }
-        }
-    }
+    background-color: var(--salmao2);
 }
-
+#mainOrdens #sec1 {
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
 #mainOrdens #ContNovo {
     display: flex;
     align-items: center;
-    justify-content: left;
+    justify-content: center;
     padding: 0.5rem;
     border: 0.1rem solid;
     border-color: var(--salmao1);
@@ -303,19 +57,24 @@
 
 #mainOrdens #bttNovaOrdem {
     all: unset;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
     font-size: 0.9rem;
-    padding: 0.1rem 1rem;
+    
+    padding: 0.2rem 1rem;
     border: 0;
     border-radius: 0.3rem;
+
     color: var(--salmao2);
     background-color: var(--marrom1);
 }
 
 #mainOrdens #bttNovaOrdem:hover {
     background-color: var(--marrom2);
+    color: var(--salmao1);
 }
 
 #mainOrdens #contSituacoes {
@@ -332,9 +91,9 @@
 
 #mainOrdens .bttsSituacao {
     display: flex;
-    justify-content: left;
+    justify-content: space-between;
     align-items: center;
-    gap: 0.3rem;
+    gap: 0.5rem;
     cursor: pointer;
     /* min-width: 9rem; */
 
@@ -373,10 +132,24 @@
 }
 
 #mainOrdens .bttsSituacao div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+}
+#mainOrdens .bttsSituacao p {
     font-size: 0.95rem;
     font-weight: 500;
 }
-
+#mainOrdens 
+.bttSelecionado {
+    border: 0.15rem solid;
+    border-color: var(--laranja);
+}
+#mainOrdens 
+.bttSelecionado p {
+    font-weight: 500;
+}
 #mainOrdens #secHistOrdens {
     display: flex;
     flex-direction: column;
@@ -415,6 +188,7 @@
 #mainOrdens th {
     text-align: center;
     font-weight: 400;
+    padding: 0.1rem 0.5rem;
 }
 
 #mainOrdens #listOrdens {}
@@ -471,7 +245,118 @@
         background-color: var(--marrom2);
     }
 }
+#pageOrdens
+.shadowBG {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    background-color: #000000da;
+    width: 100%;
+    height: 100%;
+}
+#secOrdemAberta
+#headOrdemAberta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    color: var(--marrom);
+    margin: 0;
+    margin-bottom: 0.5rem;
+}
+#secOrdemAberta
+#headOrdemAberta
+h2 {
+    font-size: 1.1rem;
+}
+#secOrdemAberta
+#fecharOrdemAberta {
+    cursor: pointer;
+    padding: 0.1rem;
+    border-radius: 0.3rem;
+    transition: 180ms;
+}
+#secOrdemAberta
+#fecharOrdemAberta:hover {
+    background-color: var(--salmao1);
+}
+#secOrdemAberta
+#fecharOrdemAberta>svg {
+    color: var(--marrom1);
+    height: 1.2rem;
+    width: 1.2rem;
+}
+#secOrdemAberta
+#infosOrdemAberta {
+    padding: 0.5rem 01rem;
+    border: 0.1rem solid;
+    border-radius: 0.3rem;
+    font-size: 0.93rem;
 
+    border-color: var(--salmao1);
+    background-color: var(--branco);
+
+}
+#secOrdemAberta
+#infosOrdemAberta
+div {
+    font-weight: 400;
+    padding: 0.15rem 0;
+    border-bottom: 0.1rem solid;
+    border-color: var(--marrom1);
+}
+#secOrdemAberta
+#infosOrdemAberta
+#infoSituacaoOrdemAberta {
+    border: 0;
+}
+#secOrdemAberta
+#infosOrdemAberta
+span {
+    font-weight: 500;
+}
+#secOrdemAberta
+#acoesOrdemAberta {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0.5rem;
+    border: 0.1rem solid;
+    border-color: var(--salmao1);
+    border-radius: 0.3rem;
+}
+#secOrdemAberta
+#acoesOrdemAberta>button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.2rem 2rem;
+    border: 0.1rem solid;
+    border-color: #000;
+    border-radius: 0.3rem;
+}
+#secOrdemAberta
+#bttFecharOrdemAberta {
+    background-color: #ff8888;
+}
+#secOrdemAberta
+#bttFecharOrdemAberta:hover {
+    background-color: #f37272;
+    text-decoration: underline;
+}
+#secOrdemAberta
+#bttEditarOrdem {
+    background-color: #84aff0;
+}
+#secOrdemAberta
+#bttEditarOrdem:hover {
+    background-color: #6b9ae2;
+    text-decoration: underline;
+}
 @media screen and (width <=750px) {
     #mainOrdens {
         justify-content: center;
