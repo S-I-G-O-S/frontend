@@ -44,7 +44,6 @@
             padding-bottom: 0.5rem;
             border: 0.1rem solid var(--marrom);
             border-radius: 0.4rem;
-            box-sizing: border-box;
             #contEspecsNovoFunc {
                 display: flex;
                 align-items: center;

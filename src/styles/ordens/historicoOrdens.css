@@ -1,0 +1,65 @@
+#mainHistoricoOrdens {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+}
+
+#mainHistoricoOrdens
+#secHistOrdens {
+    display: flex;
+    flex-direction: column;
+    max-width: 95%;
+    max-height: 95%;
+    background-color: var(--salmao2);
+    padding: 1rem;
+    padding-bottom: 0.5rem;
+    border: 0.1rem solid var(--marrom1);
+    border-radius: 0.4rem;
+}
+#mainHistoricoOrdens
+#tableHistOrdens {
+    gap: 0;
+    overflow-x: auto;
+    border: 0.1rem solid;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    /* TODO Add temas */
+    background-color: var(--branco);
+    border-color: var(--marrom1);
+}
+#mainHistoricoOrdens 
+#titleList {
+    
+
+    color: var(--salmao1);
+    background-color: var(--marrom1);
+}
+#mainHistoricoOrdens
+th {
+    text-align: center;
+    font-weight: 400;
+}
+#mainHistoricoOrdens
+#listOrdens {
+}
+#mainHistoricoOrdens
+.ordem {
+    cursor: pointer;
+    border-top: 0.1rem solid;
+    border-color: var(--marrom1);
+}
+#mainHistoricoOrdens
+.ordem:hover {
+    background-color: var(--salmao3);
+}   
+#mainHistoricoOrdens
+td {
+    font-size: 0.93rem;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0.1rem 0.5rem;
+}

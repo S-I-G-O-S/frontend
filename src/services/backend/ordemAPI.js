@@ -34,9 +34,28 @@ export const getOrdens = async () => {
         throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
     }
 }
+export const getPageOrdens = async (pagina, filtros) => {
+    if (!filtros) {
+        return
+    }
+    console.log(filtros.situacao.value)
+    let filtragem=''  
+    filtragem = `${!filtros.situacao.is ? '' : `&situacao=${filtros.situacao.value}`}${!filtros.funcionario.is ? '' : `&funcionario=${filtros.funcionario.value}`}${!filtros.servico.is ? '' : `&servico=${filtros.servico.value}`}
+    `
+    try {
+        const response = await axios.get(`${config.url}/api/ordens?page=${pagina}&size=${filtros.qtd}${filtragem}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        return response
+    } catch (error) {
+        throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
+    }
+}
 export const getOrdensPorSituacao = async (situacao) => {
     try {
-        const response = await axios.get(`${config.url}/api/ordens?situacao=${situacao}`, {
+        const response = await axios.get(`${config.url}/api/ordens?size=15&situacao=${situacao}`, {
             headers: {
                 'Content-Type': 'application/json',
             },

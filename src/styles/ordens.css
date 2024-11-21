@@ -1,94 +1,80 @@
 :root {
     --azul: #395873;
     --nav: #395873ea;
-    --laranja: #D96704;
-    --salmao1: #F2AE72;
+    --laranja: #d96704;
+    --salmao1: #f2ae72;
     --salmao2: #f7cba4;
     --salmao3: #fcd8b9;
-    --branco: #F2E8DF;
-    --marrom1: #26110D;
+    --branco: #f2e8df;
+    --marrom1: #26110d;
     --marrom2: #3b1f17;
     --marrom3: #462b18;
     --preto: #000;
     --leftBttNav: 5rem;
 }
+
 :root {
-    --pendente: #639ef5;
-    --emExecucao: #f6ff77;
+    --pendente: #8fcdff;
+    --emExecucao: #f6ff7b;
     --retorno: #ffb968;
     --cancelada: #ff8888;
-    --finalizada: #32ff70;
+    --finalizada: #0cda4a;
 }
+
+#mainOrdens {
+    grid-area: main;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    max-height: 98%;
+}
+
 #pageOrdens {
     #mainOrdens {
-        grid-area: main;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-        width: 100%;
-        max-height: 98%;
-        
         section {
             padding: 1rem;
             border: 0.1rem solid var(--marrom);
             border-radius: 10px;
-            min-width: 70%;
 
             background-color: var(--salmao2);
         }
+
         #sec1 {
             max-height: 100%;
             display: flex;
             flex-direction: column;
             gap: 0.3rem;
         }
-        #ContNovo {
-            display: flex;
-            align-items: center;
-            justify-content: left;
-            padding: 0.5rem;
-            border: 0.1rem solid;
-            border-color: var(--salmao1);
-            border-radius: 0.3rem;
-        }
-        #bttNovaOrdem {
-            all: unset;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            padding: 0.1rem 1rem;
-            border: 0;
-            border-radius: 0.3rem;
-            color: var(--salmao2);
-            background-color: var(--marrom1);
-        }
-        #bttNovaOrdem:hover {
-            background-color: var(--marrom2);
-        }
+
         #contOrdens {
             display: flex;
+            flex-direction: column;
             align-items: flex-start;
             justify-content: space-between;
-            flex-wrap: wrap;
+            /* flex-wrap: wrap; */
             gap: 0.5rem;
-            max-height: 90%;
+            max-height: 40%;
 
             padding: 0.5rem;
             border: 0.1rem solid;
             border-color: var(--salmao1);
             border-radius: 0.3rem;
+
             .listOrdens {
                 display: flex;
                 flex-direction: column;
-                flex-grow: 1;
-                flex-basis: 10rem;
+                /* flex-grow: 1;
+                flex-basis: 10rem; */
                 border-radius: 0.3rem;
-                max-height: 100%;
+                max-height: 70%;
+                width: 100%;
 
                 background-color: var(--salmao1);
                 border-color: var(--marrom1);
+
                 .headList {
                     cursor: pointer;
                     display: flex;
@@ -97,40 +83,58 @@
                     font-size: 1rem;
                     padding: 0.3rem 1rem;
                     border-radius: 0.3rem;
-                    
+
                     border-color: var(--marrom1);
                     background-color: var(--branco);
-                    .anticon  {
+
+                    .anticon {
                         box-sizing: border-box;
                     }
+
                     .leftCont {
                         display: flex;
                         align-items: center;
                         gap: 0.5rem;
-                        .anticon  > svg {
+
+                        .anticon>svg {
                             box-sizing: border-box;
                             width: 1.2rem;
                             height: 1.2rem;
                         }
+
                         p {
                             font-weight: 500;
                         }
                     }
-                    .anticon  > svg {
+
+                    .anticon>svg {
                         box-sizing: border-box;
                         width: 1.2rem;
                         height: 1.2rem;
                     }
                 }
+
+                .bodyList {}
+            }
+
+            .listOrdensAberto {
+                border: 0.1rem solid;
+
+                .headList {
+                    border: 0;
+                    border-bottom: 0.1rem solid;
+                }
+
                 .bodyList {
                     display: flex;
                     flex-direction: column;
                     gap: 0.3rem;
-                    
+
                     overflow-y: auto;
-                    max-height: 90%;
+                    max-height: 60%;
                     padding: 0.2rem 0.2rem;
                     transition: 150ms;
+
                     .itemListOrdens {
                         cursor: pointer;
                         font-size: 0.81rem;
@@ -141,42 +145,44 @@
                         border-color: var(--salmao3);
                         background-color: var(--salmao3);
                     }
+
                     .itemListOrdens:hover {
                         border-color: var(--marrom1);
                         background-color: var(--salmao2);
                     }
                 }
             }
-            .listOrdensAberto {
-                border: 0.1rem solid;
-                .headList {
-                    border: 0;
-                    border-bottom: 0.1rem solid;
-                }
-            }
+
             .listOrdensFechado {
                 border: 0;
+
                 .headList {
                     border: 0.1rem solid;
                 }
             }
-            #contOrdensPendentes > button {
+
+            #contOrdensPendentes>button {
                 background-color: var(--pendente);
             }
-            #contOrdensEmExecucao > button {
+
+            #contOrdensEmExecucao>button {
                 background-color: var(--emExecucao);
             }
-            #contOrdensRetorno > button {
+
+            #contOrdensRetorno>button {
                 background-color: var(--retorno);
             }
-            #contOrdensCancelada > button {
+
+            #contOrdensCancelada>button {
                 background-color: var(--cancelada);
             }
-            #contOrdensEmFinalizada > button {
+
+            #contOrdensEmFinalizada>button {
                 background-color: var(--finalizada);
             }
         }
     }
+
     .shadowBG {
         display: flex;
         align-items: center;
@@ -186,7 +192,7 @@
         width: 100%;
         height: 100%;
         box-sizing: border-box;
-        
+
         section {
             display: flex;
             flex-direction: column;
@@ -196,6 +202,7 @@
             border-radius: 10px;
 
             background-color: var(--salmao2);
+
             #headOrdemAberta {
                 display: flex;
                 align-items: center;
@@ -204,24 +211,29 @@
                 color: var(--marrom);
                 margin: 0;
                 margin-bottom: 0.9rem;
+
                 h2 {
                     font-size: 1.1rem;
                 }
+
                 #fecharOrdemAberta {
                     cursor: pointer;
                     padding: 0.1rem;
                     border-radius: 0.3rem;
                     transition: 180ms;
-                }   
+                }
+
                 #fecharOrdemAberta:hover {
                     background-color: var(--salmao1);
                 }
-                #fecharOrdemAberta > svg {
+
+                #fecharOrdemAberta>svg {
                     color: var(--marrom1);
                     height: 1.2rem;
                     width: 1.2rem;
                 }
             }
+
             #infosOrdemAberta {
                 padding: 01rem;
                 border: 0.1rem solid;
@@ -229,10 +241,12 @@
                 border-radius: 0.3rem;
                 font-weight: 500;
                 font-size: 0.93rem;
+
                 span {
                     font-weight: 400;
                 }
             }
+
             #acoesOrdemAberta {
                 display: flex;
                 align-items: center;
@@ -242,7 +256,8 @@
                 border-color: var(--salmao1);
                 border-radius: 0.3rem;
             }
-            #acoesOrdemAberta > button {
+
+            #acoesOrdemAberta>button {
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -254,20 +269,217 @@
                 border-color: #000;
                 border-radius: 0.3rem;
             }
+
             #bttFecharOrdemAberta {
                 background-color: #ff8888;
             }
+
             #bttFecharOrdemAberta:hover {
                 background-color: #f37272;
                 text-decoration: underline;
             }
+
             #bttEditarOrdem {
                 background-color: #84aff0;
             }
+
             #bttEditarOrdem:hover {
                 background-color: #6b9ae2;
                 text-decoration: underline;
             }
         }
+    }
+}
+
+#mainOrdens #ContNovo {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding: 0.5rem;
+    border: 0.1rem solid;
+    border-color: var(--salmao1);
+    border-radius: 0.3rem;
+}
+
+#mainOrdens #bttNovaOrdem {
+    all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    padding: 0.1rem 1rem;
+    border: 0;
+    border-radius: 0.3rem;
+    color: var(--salmao2);
+    background-color: var(--marrom1);
+}
+
+#mainOrdens #bttNovaOrdem:hover {
+    background-color: var(--marrom2);
+}
+
+#mainOrdens #contSituacoes {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 0.5rem;
+    border: 0.1rem solid;
+    border-color: var(--salmao1);
+    border-radius: 0.3rem;
+
+    background-color: var(--azul);
+}
+
+#mainOrdens .bttsSituacao {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 0.3rem;
+    cursor: pointer;
+    /* min-width: 9rem; */
+
+    padding: 0.2rem 2.1rem;
+    border: 0.1rem solid;
+    border-radius: 0.3rem;
+    border-color: var(--marrom1);
+
+    transition: 100ms;
+}
+
+#mainOrdens .bttsSituacao:hover {
+    border-color: var(--laranja);
+    padding: 0.3rem 2.1rem;
+    height: 2fr;
+}
+
+#mainOrdens #bttSituacaoPendente {
+    background-color: var(--pendente);
+}
+
+#mainOrdens #bttSituacaoEmExecucao {
+    background-color: var(--emExecucao);
+}
+
+#mainOrdens #bttSituacaoRetorno {
+    background-color: var(--retorno);
+}
+
+#mainOrdens #bttSituacaoCancelada {
+    background-color: var(--cancelada);
+}
+
+#mainOrdens #bttSituacaoFinalizada {
+    background-color: var(--finalizada);
+}
+
+#mainOrdens .bttsSituacao div {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+#mainOrdens #secHistOrdens {
+    display: flex;
+    flex-direction: column;
+    max-height: 95%;
+    background-color: var(--salmao2);
+    padding: 1rem;
+    padding-bottom: 0.5rem;
+    border: 0.1rem solid var(--marrom1);
+    border-radius: 0.4rem;
+}
+
+#mainOrdens #contTableHistOrdens {
+    padding: 0.5rem;
+    border: 0.1rem solid;
+    border-color: var(--salmao1);
+    border-radius: 0.3rem;
+}
+
+#mainOrdens #tableHistOrdens {
+    gap: 0;
+    overflow-x: auto;
+    border: 0.1rem solid;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    /* TODO Add temas */
+    background-color: var(--branco);
+    border-color: var(--marrom1);
+}
+
+#mainOrdens #titleList {
+    color: var(--salmao1);
+    background-color: var(--marrom1);
+}
+
+#mainOrdens th {
+    text-align: center;
+    font-weight: 400;
+}
+
+#mainOrdens #listOrdens {}
+
+#mainOrdens .ordem {
+    cursor: pointer;
+    border-top: 0.1rem solid;
+    border-color: var(--marrom1);
+}
+
+#mainOrdens .ordem:hover {
+    background-color: var(--salmao3);
+}
+
+#mainOrdens td {
+    font-size: 0.93rem;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0.1rem 0.5rem;
+}
+
+#mainOrdens #msgSemOrdens td {
+    color: #960101;
+    font-weight: 500;
+    padding: 0.2rem 0.5rem;
+}
+
+#mainOrdens .ant-pagination {
+    .ant-pagination-item {
+        background-color: var(--salmao1);
+        border-color: var(--marrom1);
+
+        a {
+            color: var(--marrom1);
+        }
+    }
+
+    .ant-pagination-item:hover {
+        background-color: var(--salmao2);
+    }
+
+    .ant-pagination-item-active {
+        border-color: var(--laranja);
+        background-color: var(--marrom1);
+
+        a {
+            color: var(--salmao2);
+        }
+    }
+
+    .ant-pagination-item-active:hover {
+        background-color: var(--marrom2);
+    }
+}
+
+@media screen and (width <=750px) {
+    #mainOrdens {
+        justify-content: center;
+        align-items: start;
+        flex-direction: column;
+    }
+    #mainOrdens 
+    section {
+        width: 100%;
     }
 }

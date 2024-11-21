@@ -19,6 +19,7 @@ import Ordens from "../components/Ordens";
 import NovaOrdem from "../components/Ordens/NovaOrdem";
 import TesteLayout from "../components/TesteLayout";
 import Ordem from "../components/Ordens/Ordem";
+import HistoricoOrdens from "../components/Ordens/HistoricoOrdens";
 
 function AppRoutes() {
     const { token } = useAuth();
@@ -69,6 +70,10 @@ function AppRoutes() {
                 {
                     path: "/nova-ordem",
                     element: <NovaOrdem/> ,
+                },
+                {
+                    path: "/historico-ordens",
+                    element: <HistoricoOrdens/> ,
                 },
                 {
                     path: "/clientes",
