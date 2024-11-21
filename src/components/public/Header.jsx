@@ -17,13 +17,14 @@ function Header({usuario, titulo}) {
     const handleLogout = async () => {
         try {
             const result = await logoutFunc()
+            console.warn(result)
         } catch (error) {
             console.error(error)
             return
         }
+        sessionStorage.clear()
         setToken(null)
         deleteCookie('usuario')
-        deleteCookie('tema')
         navigate("/", { replace: true })
     }
     const itensMenu = [

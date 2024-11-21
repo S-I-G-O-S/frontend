@@ -3,16 +3,41 @@ import Header from './public/Header'
 import '../styles/userConfig.css'
 import { useEffect, useState } from 'react'
 import Loading from './public/Loading'
-import { getCookie } from '../services/cookies'
+import { getCookie, setCookie } from '../services/cookies'
 import { getDeployStatus } from '../services/renderAPI'
+import { usePreferencias } from '../context/PreferenciasContext'
 
-//  TODO Verificar se o token do usuario ainda é valido
 function UserConfig() {
     const data = new Date()
     const [usuario, setUsuario] = useState(() => {
         const cookieUsuario = getCookie('usuario')
         return cookieUsuario ? cookieUsuario : ''
     })
+    const { sessPreferencias, setSessPreferencias } = usePreferencias()
+    /*
+    useEffect(() => {
+        if (sessPreferencias) {
+            console.log('Mudando tema para: '+ sessPreferencias.tema)
+            sessionStorage.setItem('preferencias', JSON.stringify(sessPreferencias))
+        }
+    }, [sessPreferencias.tema])
+    */
+    const changeTheme = (tema) => {
+        let linkElement = document.getElementById('themeCSS')
+
+        if (!linkElement) {
+            linkElement = document.createElement('link')
+            linkElement.rel = 'stylesheet'
+            linkElement.id = 'themeCSS'
+            document.head.appendChild(linkElement)
+        }
+
+        linkElement.href = `./src/styles/themes/${tema}.css`
+        setSessPreferencias(prevState => ({
+            ...prevState,
+            tema: tema
+        }))
+    }
     const handleChangeUsuario = (value, field) => {
         setUsuario(prevState => ({
             ...prevState,
@@ -33,8 +58,9 @@ function UserConfig() {
         }
     }
     useEffect(() => {
-        console.clear()
         console.log(usuario)
+        console.log(sessPreferencias)
+        changeTheme(sessPreferencias.tema)
     }, [])
     return (
         <div id='pagePerfilConfig' className='paginas'>
@@ -44,8 +70,8 @@ function UserConfig() {
             {
             !usuario ? <Loading></Loading> :
             <>
-                {
-                usuario.cargo == 'DEV' ?
+                {/*
+                usuario.cargo == 'DEV' &&
                 <section id='secDevConfigs'>
                     <h2>Configurações de desenvolvimento</h2>
                     <label>cargo</label>
@@ -57,8 +83,8 @@ function UserConfig() {
                         <option value="ADM">ADM</option>
                         <option value="DEV">DEV</option>
                     </select>
-                </section> : ''
-                }
+                </section>
+                */}
                 <section id='secInfosFuncionario'>
                     <h2>Minhas informações</h2>
                     <div id='contInfosFunc'>
@@ -76,10 +102,10 @@ function UserConfig() {
                     <div>
                         <div>
                             <label>Tema: </label>
-                            <select name="" id="">
+                            <select name="" id="" onChange={(e) => changeTheme(e.target.value)}>
                                 value={usuario.tema}
-                                <option value="">claro</option>
-                                <option value="">noturno</option>
+                                <option value="salmaoLight">salmão claro</option>
+                                <option value="salmaoDark">salmão noturno</option>
                             </select>
                         </div>
                     </div>

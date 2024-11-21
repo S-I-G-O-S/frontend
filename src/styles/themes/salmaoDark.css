@@ -1,0 +1,33 @@
+:root {
+    --nav: #2d485f;
+    --azul: #2d485f;
+    --azulBG: #1c3042;
+    --laranja: #D96704;
+    --salmao1: #F2AE72;
+    --salmao2: #f7cba4;
+    --salmao3: #fcd8b9;
+    --branco: #F2E8DF;
+    --marrom1: #26110D;
+    --marrom2: #3b1f17;
+    --marrom3: #4e2a1f;
+    --preto: #000;
+}
+#mainPerfilConfig {
+    background-color: var(--azulBG);
+}
+#mainPerfilConfig
+> section {
+    color: var(--salmao3);
+    border-color: var(--salmao1);
+    background-color: var(--marrom1);
+}
+#mainPerfilConfig
+#contInfosFunc {
+    border-color: var(--salmao1);
+    background-color: var(--marrom2);
+}
+#mainHome
+.bodyContsOrdens .ordens:hover {
+    background-color: var(--salmao3);
+    border-color: var(--laranja);
+}

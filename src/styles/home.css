@@ -27,6 +27,7 @@
 section {
     width: 100%;
 }
+#mainHome
 #secInfosUser {
     background-color: #d7ffe1;
     h2 {
@@ -40,9 +41,11 @@ section {
         margin: 0;
     }
 }
+#mainHome
 #secTecnico {
     background-color: var(--salmao1);
 }
+#mainHome
 #secTecnicosDisponiveis {
     background-color: var(--salmao2);
     width: 100%;    
@@ -70,6 +73,7 @@ section {
         }
     }
 }
+#mainHome
 #secOrdens {
     display: flex;
     gap: 1rem;
@@ -132,6 +136,7 @@ section {
         }
     }
 }
+#mainHome
 #secOrdens .contsOrdens {
     flex-grow: 1;
     flex-basis: 20rem;
@@ -143,6 +148,7 @@ section {
     border-color: var(--marrom1);
     background-color: var(--salmao2);
 }
+#mainHome
 .headContsOrdens {
     display: flex;
     align-items: center;
@@ -153,12 +159,14 @@ section {
     
     border-color: var(--marrom1);
 }
+#mainHome
 .headContsOrdens .titulo {
     font-size: 0.95rem;
     font-weight: 500;
 
     color: var(--marrom1);
 }
+#mainHome
 .headContsOrdens .link {
     font-size: 0.91rem;
     font-weight: 500;
@@ -166,9 +174,11 @@ section {
 
     color: var(--marrom3);
 }
+#mainHome
 .headContsOrdens .link:hover {
     color: var(--laranja);
 }
+#mainHome
 .bodyContsOrdens {
     display: flex;
     flex-direction: column;
@@ -177,6 +187,7 @@ section {
     
     
 }
+#mainHome
 .contsOrdens 
 .ordens {
     gap: 0.3rem;
@@ -189,22 +200,22 @@ section {
     background-color: var(--branco);
     
 }
+#mainHome
 .contsOrdens .ordensPendentes {
     cursor: pointer;
     display: grid;
     grid-template-columns: 1fr 2fr min-content;
     grid-column: 1fr;
 }
+#mainHome
 .contsOrdens .ordensEmAtendimento {
     cursor: pointer;
     display: grid;
     grid-template-columns: 1fr 2fr min-content;
     grid-column: 1fr;
 }
-.bodyContsOrdens .ordens:hover {
-    background-color: var(--salmao3);
-    border-color: var(--laranja);
-}   
+
+#mainHome
 .ordens div {
     white-space: nowrap;
     overflow: hidden;
