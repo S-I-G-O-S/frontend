@@ -53,9 +53,9 @@ function OrdensEmAtendimento() {
                 <div className="headContsOrdens">
                     <div className="titulo">Ordens Pendentes</div>
                     {
-                        (1 - 5 ) > 0 &&
-                        (<Link className="link" to={'/ordens'}>
-                            mais {1 - 5}
+                        (6 - 5 ) > 0 &&
+                        (<Link className="link" to={'/ordens?situacao=EM_EXECUCAO'}>
+                            mais {6 - 5}
                         </Link>)
                     }
                 </div>

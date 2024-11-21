@@ -3,7 +3,7 @@ import Nav from "./public/Nav"
 import '../styles/ordens.css'
 import View from "../assets/view.png"
 import Hide from "../assets/hide.png"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { getCookie } from '../services/cookies.js'
 import { getOrdens, getOrdensPorSituacao, getPageOrdens } from "../services/backend/ordemAPI.js"
@@ -14,6 +14,9 @@ import { Pagination } from "antd"
 
 // TODO Criação e Edição de Ordens por ordem de redirecionamento
 function Ordens() {
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search)
+    let situacaoParam = searchParams?.get('situacao') ?? ''
     const navigate = useNavigate()
     const [ordemAberta, setOrdemAberta] = useState(null)
     const [pendente, setPendente] = useState(null)
@@ -45,9 +48,14 @@ function Ordens() {
         finalizada: false,
         cancelada: false
     })
-    const [varRenders, setVarRenders] = useState({
+    const [loadings, setLoadings] = useState({
         editarOrdem: false,
         situacao: false,
+        bttPendente: false,
+        bttEmExecucao: false,
+        bttRetorno: false,
+        bttCancelada: false,
+        bttFinalizada: false
     })
     const [usuario, setUsuario] = useState(() => {
         const cookieUsuario = getCookie('usuario')
@@ -63,7 +71,6 @@ function Ordens() {
     // const goToHistOrdens = () => {
     //     navigate('/historico-ordens')
     // }
-    
     const handleNovaOrdem = () => {
         navigate('/nova-ordem')
     }
@@ -83,7 +90,6 @@ function Ordens() {
         })
     }
 
-    //  SEC 1
     const handleAbrirOrdem = (idOrdem) => {
         const ordemToAbrir = ordens.find(ordem => ordem.id == idOrdem)
         
@@ -115,20 +121,46 @@ function Ordens() {
     const handleFecharOrdem = () => {
         setOrdemAberta(null)
     }
-    const handleChangeExpandLists = (field, value) => {
-        setExpandLists(prevState => ({
-            ...prevState,
-            [field]: value
-        }))
-    }
+    //  SEC 1
     useEffect(() => {
+        console.clear()
+        console.log(ordemAberta)
         if(filtros.situacao.is) {
-            console.log('Filtrando por situação: '+ filtros.situacao.value)
-            fetchOrdens(0)
         }
+        console.log('Filtrando por situação: '+ filtros.situacao.value)
+        fetchOrdens(0)
     }, [filtros.situacao.value])
-    //  SEC 2
+    
     const handleChangeFilters = (value, field) => {
+        // setloadings(prevState => ({
+        //     ...prevState,
+        //     situacao: true,
+        // }))
+        console.log('DEBBUG: ' + value + ' ' + filtros.situacao.value)
+        if (value==filtros.situacao.value) {
+            //  Quando o usuario clicar no mesmo botão de situação, ele vai ser anulado
+            value='default'
+        }
+        switch (value) {
+            case 'PENDENTE':
+                changeLoadings(!loadings.bttPendente, 'bttPendente')
+                break;
+            case 'EM_EXECUCAO':
+                changeLoadings(!loadings.bttEmExecucao, 'bttEmExecucao')
+                break;
+            case 'RETORNO':
+                changeLoadings(!loadings.bttRetorno, 'bttRetorno')
+                break;
+            case 'FINALIZADA':
+                changeLoadings(!loadings.bttFinalizada, 'bttFinalizada')
+                break;
+            case 'CANCELADA':
+                changeLoadings(!loadings.bttCancelada, 'bttCancelada')
+                break;
+            default: console.warn('Erro de tipagem das ordens!')
+                break;
+        }
+        
         setFiltros(prevState => ({
             ...prevState,
             [field]: {
@@ -137,6 +169,20 @@ function Ordens() {
             },
         }))
     }
+    const changeAllSituacaoLoadings = () => {
+        changeLoadings(false, 'bttPendente')
+        changeLoadings(false, 'bttEmExecucao')
+        changeLoadings(false, 'bttRetorno')
+        changeLoadings(false, 'bttFinalizada')
+        changeLoadings(false, 'bttCancelada')
+    }
+    const changeLoadings = (value, field) => {
+        setLoadings(prevState => ({
+            ...prevState,
+            [field]: value
+        }))
+    }
+    //  SEC 2
     const handleChangeQTD = (value) => {
         setFiltros(prevState => ({
             ...prevState,
@@ -190,6 +236,11 @@ function Ordens() {
         } catch (error) {
             console.error(error)
         }
+        changeAllSituacaoLoadings()
+        // setloadings(prevState => ({
+        //     ...prevState,
+        //     situacao: false,
+        // }))
     }
     useEffect(() => {
         console.clear()
@@ -201,9 +252,13 @@ function Ordens() {
             // fetchOrdensSituacao('CANCELADA')
             fetchOrdens(0)
         }
-        setTimeout(() => {
-            fetchData()
-        }, 200)
+        if (situacaoParam=='') {
+            setTimeout(() => {
+                fetchData()
+            }, 200)
+        } else {
+            handleChangeFilters(situacaoParam, 'situacao')
+        }
     }, [])
     return (
         <div id="pageOrdens" className='paginas'>
@@ -326,43 +381,78 @@ function Ordens() {
                 <div id="contSituacoes">
                     <button
                         id="bttSituacaoPendente"
-                        className="bttsSituacao"
+                        className={ `bttsSituacao ${filtros.situacao.value=='PENDENTE' ? 'bttSelecionado' : ''}`}
                         onClick={() => handleChangeFilters('PENDENTE', 'situacao')}
+                        disabled={loadings.bttPendente}
                         >
-                        <FieldTimeOutlined />
-                        <div>Pendentes</div>
+                        <div>
+                            <FieldTimeOutlined />
+                            <p>Pendentes</p>
+                        </div>
+                        {/* 
+                            loadings.bttPendente &&
+                            <LoadingOutlined />
+                        */}
                     </button>
                     <button
                         id="bttSituacaoEmExecucao"
-                        className="bttsSituacao"
+                        className={ `bttsSituacao ${filtros.situacao.value=='EM_EXECUCAO' ? 'bttSelecionado' : ''}`}
                         onClick={() => handleChangeFilters('EM_EXECUCAO', 'situacao')}
+                        disabled={loadings.bttEmExecucao}
                         >
-                        <ToolOutlined />
-                        <div>Em execução</div>
+                        <div>
+                            <ToolOutlined />
+                            <p>Em execução</p>
+                        </div>
+                        {/*
+                            loadings.bttEmExecucao &&
+                            <LoadingOutlined/>
+                        */}
                     </button>
                     <button
                         id="bttSituacaoRetorno"
-                        className="bttsSituacao"
+                        className={ `bttsSituacao ${filtros.situacao.value=='RETORNO' ? 'bttSelecionado' : ''}`}
                         onClick={() => handleChangeFilters('RETORNO', 'situacao')}
+                        disabled={loadings.bttRetorno}
                         >
-                        <RollbackOutlined/>
-                        <div>Em retorno</div>
+                        <div>
+                            <RollbackOutlined/>
+                            <p>Em retorno</p>
+                        </div>
+                        {/*
+                            loadings.bttRetorno &&
+                            <LoadingOutlined/>
+                        */}
                     </button>
                     <button
                         id="bttSituacaoCancelada"
-                        className="bttsSituacao"
+                        className={ `bttsSituacao ${filtros.situacao.value=='CANCELADA' ? 'bttSelecionado' : ''}`}
                         onClick={() => handleChangeFilters('CANCELADA', 'situacao')}
+                        disabled={loadings.bttCancelada}
                         >
-                        <CloseCircleOutlined />
-                        <div>Canceladas</div>
+                        <div>
+                            <CloseCircleOutlined />
+                            <p>Canceladas</p>
+                        </div>
+                        {/*
+                            loadings.bttCancelada &&
+                            <LoadingOutlined/>
+                        */}
                     </button>
                     <button
                         id="bttSituacaoFinalizada"
-                        className="bttsSituacao"
+                        className={ `bttsSituacao ${filtros.situacao.value=='FINALIZADA' ? 'bttSelecionado' : ''}`}
                         onClick={() => handleChangeFilters('FINALIZADA', 'situacao')}
+                        disabled={loadings.bttFinalizada}
                         >
-                        <CheckCircleOutlined />
-                        <div>Finalizadas</div>
+                        <div>
+                            <CheckCircleOutlined />
+                            <p>Finalizadas</p>
+                        </div>
+                        {/*
+                            loadings.bttFinalizada &&
+                            <LoadingOutlined/>
+                        */}
                     </button>
                 </div>
             </section>
@@ -390,7 +480,9 @@ function Ordens() {
                                 (
                                     ordens.length==0 ? 
                                     <tr id="msgSemOrdens">
-                                        <td colSpan='6'>Sem ordens</td>
+                                        <td colSpan='6'>
+                                            sem ordens
+                                        </td>
                                     </tr>
                                     :
                                     ordens?.map(ordem => (
@@ -434,7 +526,7 @@ function Ordens() {
             {
                 ordemAberta &&
                 <div className='shadowBG'>
-                    <section >
+                    <section id="secOrdemAberta">
                         <div id="headOrdemAberta">
                             <h2>Ordem códº{ordemAberta.id}</h2>
                             <CloseOutlined id="fecharOrdemAberta" onClick={handleFecharOrdem}/>
@@ -445,7 +537,7 @@ function Ordens() {
                             <div><span>Data de abertura: </span>{converterDtHr(ordemAberta.dtAbertura)}</div>
                             <div><span>Funcionário: </span>{ordemAberta.funcionario || ''}</div>
                             <div><span>Descrição: </span>{ordemAberta.descricao || ''}</div>
-                            <div><span>Situação: </span>{ordemAberta.situacao}</div>
+                            <div id="infoSituacaoOrdemAberta"><span>Situação: </span>{ordemAberta.situacao}</div>
                         </div>
                         <div id='acoesOrdemAberta'>
                             <button id="bttFecharOrdemAberta" onClick={handleFecharOrdem}>cancelar</button>
