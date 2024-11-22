@@ -1,5 +1,5 @@
 :root {
-    --nav: #2d485f;
+    --azulNav: #2a445a;
     --azul: #2d485f;
     --azulBG: #1c3042;
     --laranja: #D96704;
@@ -12,22 +12,129 @@
     --marrom3: #4e2a1f;
     --preto: #000;
 }
-#mainPerfilConfig {
+
+.paginas {
     background-color: var(--azulBG);
 }
-#mainPerfilConfig
-> section {
-    color: var(--salmao3);
-    border-color: var(--salmao1);
+.paginacao {
+    border-color: var(--marrom1);
+}
+.paginaItem {
+    color: var(--salmao2);
     background-color: var(--marrom1);
 }
-#mainPerfilConfig
-#contInfosFunc {
-    border-color: var(--salmao1);
-    background-color: var(--marrom2);
+.paginacao 
+.paginaItem:hover,
+.paginaItem:focus {
+    background-color: var(--marrom3);
 }
-#mainHome
-.bodyContsOrdens .ordens:hover {
-    background-color: var(--salmao3);
-    border-color: var(--laranja);
+.paginas
+.shadowBG 
+section {
+    background-color: var(--salmao2);
+}
+#pagePerfilConfig {
+    #mainPerfilConfig
+    > section {
+        color: var(--salmao3);
+        border-color: var(--salmao1);
+        background-color: var(--marrom1);
+    }
+    #mainPerfilConfig
+    #contInfosFunc {
+        border-color: var(--salmao1);
+        background-color: var(--marrom2);
+    }
+}
+#pageHome {
+    #mainHome {
+        color: var(--salmao2);
+    }
+    #mainHome
+    section {
+        background-color: var(--marrom1);
+    }
+    #mainHome
+    #secTecnicosDisponivei
+    .funcsDisp {
+        border-color: var(--salmao2);
+        background-color: var(--salmao3);
+    } 
+    #mainHome
+    #secOrdens {
+        background-color: transparent;
+    }
+    #mainHome
+    #secOrdens .contsOrdens {
+        border-color: var(--salmao1);
+        background-color: var(--marrom1);
+    }
+    #mainHome
+    .headContsOrdens {
+        border-color: var(--salmao2);
+    }
+    #mainHome
+    .headContsOrdens .link {
+        color: var(--salmao1);
+    }
+    #mainHome
+    .headContsOrdens .link:hover {
+        color: var(--laranja);
+    }
+    #mainHome
+    .contsOrdens .ordens:hover {
+        background-color: var(--marrom2);
+        border-color: var(--laranja);
+    }
+    #mainHome
+    .contsOrdens 
+    .ordens {
+        background-color: var(--marrom3);
+    }
+}
+
+#header {
+    background-color: var(--marrom1);
+    border-bottom: 0.1rem solid;
+    border-color: var(--salmao1);
+    .tituloPag {
+        color: var(--salmao1);
+    }
+    #iconUser {
+        background-color: var(--salmao1);
+    }
+    #iconUser:hover {
+        background-color: var(--salmao2 );
+    }
+    #iconUser
+    svg {
+        color: var(--marrom1);
+    }
+    #sair {
+        color: var(--marrom1);
+        background-color: var(--salmao1);
+    }
+    #sair:hover {
+        background-color: var(--salmao2);
+    }
+}
+#nav {
+    background-color: var(--azulNav);
+    .links {
+        color: var(--branco);
+    }
+    .links:hover {
+        background-color: var(--azul);
+    }
+    .iconNav,
+    .iconNav > svg,
+    img {
+        color: var(--branco);
+    }
+    #containerLinks img {
+        color: var(--branco);
+    }
+    a.active {
+        background-color: var(--marrom2);
+    }
 }

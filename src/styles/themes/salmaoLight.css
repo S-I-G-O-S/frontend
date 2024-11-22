@@ -8,22 +8,221 @@
     --branco: #F2E8DF;
     --marrom1: #26110D;
     --marrom2: #3b1f17;
-    --marrom3: #462b18;
+    --marrom3: #4e2a1f;
     --preto: #000;
 }
-#mainPerfilConfig {
-    background-color: var(--branco);
+.paginas {
+    background-color: #F2E8DF;
 }
-#mainPerfilConfig
-> section {
+.paginacao {
     border-color: var(--marrom1);
+}
+.paginaItem {
+    color: var(--salmao2);
+    background-color: var(--marrom1);
+}
+.paginacao 
+.paginaItem:hover,
+.paginaItem:focus {
+    background-color: var(--marrom3);
+}
+.paginas
+.shadowBG 
+section {
     background-color: var(--salmao2);
 }
-#contInfosFunc {
-    border-color: var(--salmao1);
+#pagePerfilConfig {
+    #mainPerfilConfig {
+        background-color: var(--branco);
+    }
+    #mainPerfilConfig
+    > section {
+        border-color: var(--marrom1);
+        background-color: var(--salmao2);
+    }
+    #contInfosFunc {
+        border-color: var(--salmao1);
+    }
 }
-#mainHome
-.bodyContsOrdens .ordens:hover {
-    background-color: var(--salmao3);
-    border-color: var(--laranja);
+#pageHome {
+    #mainHome {
+        color: var(--marrom1);
+    }
+    #mainHome
+    section {
+        background-color: var(--salmao2);
+    }
+    #mainHome
+    #secTecnicosDisponivei
+    .funcsDisp {
+        border-color: var(--marrom1);
+        background-color: var(--salmao3);
+    } 
+    #mainHome
+    #secOrdens {
+        background-color: transparent;
+    }
+    #mainHome
+    #secOrdens .contsOrdens {
+        border-color: var(--marrom1);
+        background-color: var(--salmao2);
+    }
+    #mainHome
+    .headContsOrdens {
+        border-color: var(--marrom1);
+    }
+    #mainHome
+    .headContsOrdens .link {
+        color: var(--marrom3);
+    }
+    #mainHome
+    .headContsOrdens .link:hover {
+        color: var(--laranja);
+    }
+    #mainHome
+    .bodyContsOrdens .ordens:hover {
+        background-color: var(--salmao3);
+        border-color: var(--laranja);
+    }
+    #mainHome
+    .contsOrdens 
+    .ordens {
+        background-color: var(--branco);
+    }
+}
+#pageFuncionarios {
+    #mainFuncionarios
+    section {
+        background-color: var(--salmao2);
+        border-color: var(--marrom1);
+    }
+    #contEspecsNovoFunc
+    .btt {
+        color: var(--salmao2);
+        background-color: var(--marrom1);
+    }
+    #contEspecsNovoFunc
+    .btt:hover {
+        background-color: var(--marrom2);
+    }
+    #contFiltros {
+        color: var(--salmao2);
+        background-color: var(--marrom1);
+    }
+    #contFiltros
+    #contPesqFunc {
+        border-color: var(--salmao1);
+    }
+    #contFiltros
+    #contPesqFunc
+    input {
+        border-color: var(--marrom1);
+    }
+    #contFiltros
+    #contPesqFunc
+    button {
+        border-color: var(--marrom1);
+        background-color: var(--marrom1);
+    }
+    #contFiltros
+    #contPesqFunc
+    button:hover {
+        background-color: var(--marrom2);
+    }
+    #contFiltros
+    #contPesqFunc
+    button:focus{
+        background-color: var(--marrom2);
+        svg {
+            color: var(--salmao3);
+        }
+    }
+    #bttFiltros {
+        background-color: var(--salmao1);
+        color: var(--marrom1);
+    }
+    #bttFiltros:hover {
+        background-color: var(--salmao2);
+    }
+    #secFiltros {
+        background-color: var(--salmao2);
+        border-color: var(--marrom1);
+    }
+    #secFiltros 
+    #closeModel 
+    svg {
+        color: var(--marrom1);
+    }
+    #secFiltros
+    #closeModel:hover {
+        background-color: var(--salmao1);
+    }
+    #secFiltros
+    #subContFiltros {
+        border-color: var(--salmao1);
+    }
+    #secFiltros 
+    #bttCancelar {
+        background-color: var(--salmao1);
+    }
+    #secFiltros
+    #bttAplicar {
+        color: var(--salmao2);
+        background-color: var(--marrom1);
+    }
+    #secFiltros
+    #bttCancelar:hover {
+        background-color: var(--salmao3);
+    }
+    #secFiltros
+    #bttAplicar:hover {
+        background-color: var(--marrom3);
+    }
+    #secFiltros
+    button:focus {
+        border-color: var(--laranja);
+    }
+}
+#header {
+    background-color: var(--marrom1);
+    .tituloPag {
+        color: var(--salmao1);
+    }
+    #iconUser {
+        background-color: var(--salmao1);
+    }
+    #iconUser:hover {
+        background-color: var(--salmao2 );
+    }
+    #iconUser
+    svg {
+        color: var(--marrom1);
+    }
+    #sair {
+        color: var(--marrom1);
+        background-color: var(--salmao1);
+    }
+    #sair:hover {
+        background-color: var(--salmao2);
+    }
+}
+#nav {
+    background-color: var(--azul);
+    .links {
+        color: var(--branco);
+    }
+    .links:hover {
+        background-color: var(--azulHover);
+    }
+    .iconNav,
+    .iconNav > svg,
+    img {
+        color: var(--branco);
+    }
+    #containerLinks img {
+        color: var(--branco);
+    }
+    a.active {
+        background-color: var(--laranja);
+    }
 }

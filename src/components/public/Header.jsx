@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useAuth } from '../../provider/authProvider'
 import { deleteCookie } from '../../services/cookies'
 import { Dropdown } from 'antd'
-import { SettingOutlined } from '@ant-design/icons'
+import { SettingOutlined, UserOutlined } from '@ant-design/icons'
 import { logoutFunc } from '../../services/backend/authAPI'
 
 function Header({usuario, titulo}) {
@@ -84,8 +84,9 @@ function Header({usuario, titulo}) {
                         </div>
                     )}
                 >
-                    <div id='contIconUser' /*onClick={handleViewConfiguser} */>
-                    </div>
+                    {/* <div id='contIconUser'>
+                    </div> */}
+                    <UserOutlined id="iconUser"/>
                 </Dropdown>
                 {/*
                     viewContUser &&

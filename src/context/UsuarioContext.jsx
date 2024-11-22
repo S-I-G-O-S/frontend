@@ -5,19 +5,16 @@ const PreferenciasContext = createContext();
 
 // Provedor do contexto
 export const PreferenciasProvider = ({ children }) => {
-    const [sessPreferencias, setSessPreferencias] = useState(() => {
-        const storedPreferencias = sessionStorage.getItem('preferencias');
-        return storedPreferencias
-            ? JSON.parse(storedPreferencias)
-            : {
-                tema: 'salmaoLight',
-                abertoNav: true,
-            };
+    const [usuario, setUsuario] = useState(() => {
+        const storedUsuario = sessionStorage.getItem('usuario');
+        return storedUsuario
+            ? JSON.parse(storedUsuario)
+            : {};
     });
 
     useEffect(() => {
-        sessionStorage.setItem('preferencias', JSON.stringify(sessPreferencias));
-    }, [sessPreferencias]);
+        sessionStorage.setItem('usuario', JSON.stringify(sessPreferencias));
+    }, [usuario]);
 
     return (
         <PreferenciasContext.Provider value={{ sessPreferencias, setSessPreferencias }}>

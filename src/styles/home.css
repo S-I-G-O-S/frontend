@@ -1,16 +1,3 @@
-:root {
-    --azul: #395873;
-    --nav: #395873ea;
-    --laranja: #D96704;
-    --salmao1: #F2AE72;
-    --salmao2: #f7cba4;
-    --salmao3: #fcd8b9;
-    --branco: #F2E8DF;
-    --marrom1: #26110D;
-    --marrom2: #3b1f17;
-    --marrom3: #462b18;
-    --preto: #000;
-}
 #mainHome {
     grid-area: main;
     display: flex;
@@ -19,9 +6,6 @@
     width: 100%;
     gap: 1rem;
     margin: 0 auto;
-    box-sizing: border-box;
-
-    background-color: var(--branco);
 }
 #mainHome
 section {
@@ -29,7 +13,6 @@ section {
 }
 #mainHome
 #secInfosUser {
-    background-color: #d7ffe1;
     h2 {
         font-weight: 600;
         font-size: 0.95rem;
@@ -42,12 +25,7 @@ section {
     }
 }
 #mainHome
-#secTecnico {
-    background-color: var(--salmao1);
-}
-#mainHome
 #secTecnicosDisponiveis {
-    background-color: var(--salmao2);
     width: 100%;    
     border-radius: 0.5rem;
     h2 {
@@ -144,9 +122,6 @@ section {
     padding: 0 0.2rem;
     border: 0.1rem solid;
     border-radius: 0.4rem;
-    
-    border-color: var(--marrom1);
-    background-color: var(--salmao2);
 }
 #mainHome
 .headContsOrdens {
@@ -156,27 +131,17 @@ section {
     
     padding: 0.5rem 0.7rem;
     border-bottom: 0.1rem solid;
-    
-    border-color: var(--marrom1);
 }
 #mainHome
 .headContsOrdens .titulo {
     font-size: 0.95rem;
     font-weight: 500;
-
-    color: var(--marrom1);
 }
 #mainHome
 .headContsOrdens .link {
     font-size: 0.91rem;
     font-weight: 500;
     text-decoration: none;
-
-    color: var(--marrom3);
-}
-#mainHome
-.headContsOrdens .link:hover {
-    color: var(--laranja);
 }
 #mainHome
 .bodyContsOrdens {
@@ -184,8 +149,6 @@ section {
     flex-direction: column;
     gap: 0.15rem;
     padding: 0.5rem;
-    
-    
 }
 #mainHome
 .contsOrdens 
@@ -196,9 +159,6 @@ section {
     padding: 0.2rem 0.5rem;
     border: 0.1rem solid var(--marrom);
     border-radius: 5px;
-
-    background-color: var(--branco);
-    
 }
 #mainHome
 .contsOrdens .ordensPendentes {
@@ -214,7 +174,6 @@ section {
     grid-template-columns: 1fr 2fr min-content;
     grid-column: 1fr;
 }
-
 #mainHome
 .ordens div {
     white-space: nowrap;
