@@ -14,15 +14,6 @@ import { usePreferencias } from '../../context/PreferenciasContext'
 
 function Nav({ cargo }) {
     const { sessPreferencias, setSessPreferencias } = usePreferencias()
-    /*
-    useEffect(() => {
-        if (sessPreferencias) {
-            console.log('DEBBUG THEME')
-            console.warn(sessPreferencias)
-            sessionStorage.setItem('preferencias', JSON.stringify(sessPreferencias))
-        }
-    }, [sessPreferencias.abertoNav])
-    */
     const changeNav = () => {
         setSessPreferencias(prevState => ({
             ...prevState,

@@ -269,7 +269,6 @@ function Funcionarios() {
                 {
                 !funcionarios ? '' :
                 <div id='contFiltros'>
-                    
                     <div id='contPesqFunc'>
                         <input type="text" 
                             value={filtros.nome.value == 'default' ? '' : filtros.nome.value}
@@ -279,7 +278,7 @@ function Funcionarios() {
                             <SearchOutlined style={{color: '#fcd8b9'}}/>
                         </button>
                     </div>
-                    <Button 
+                    {/* <Button 
                         size='small'
                         type="text" 
                         icon={<FilterFilled />}  
@@ -287,7 +286,13 @@ function Funcionarios() {
                         onClick={handleChangeContFiltros}
                     >
                         Filtros
-                    </Button>
+                    </Button> */}
+                    <button id="bttFiltros" onClick={handleChangeContFiltros}>
+                        <p>
+                            filtros
+                        </p>
+                        <FilterFilled />
+                    </button>
                 </div>
                 }
                 {
@@ -454,7 +459,7 @@ function Funcionarios() {
         {
         showContFiltros && (
         <div id='shadowBG'>
-            <div id='contFiltros'>
+            <section id='secFiltros'>
                 <div id='headerContFiltros'>
                     <h2>Filtros</h2>
                     <div 
@@ -547,7 +552,7 @@ function Funcionarios() {
                         Aplicar filtros
                     </button>
                 </div>
-            </div>
+            </section>
         </div>
         )
         }
