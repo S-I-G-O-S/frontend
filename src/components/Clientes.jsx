@@ -1,4 +1,5 @@
 import {getPageClientes, postCliente} from '../services/backend/clientesAPI.js'
+import { getCookie } from '../services/cookies.js'
 
 import Nav from './public/Nav'
 import Loading from './public/Loading.jsx'
@@ -8,7 +9,8 @@ import Edit from '../assets/edit-text.png'
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Pagination } from 'antd'
-import { getCookie } from '../services/cookies.js'
+import { HomeFilled, EditFilled }  from '@ant-design/icons'
+
 
 function Clientes() {
     const navigate = useNavigate();
@@ -153,7 +155,8 @@ function Clientes() {
                                 </td>
                                 <td className='endereco'>{cliente.endereco.logradouro}, {cliente.endereco.numero}, {cliente.endereco.complemento}</td>
                                 <td className='options' onClick={() => handleEditCliente(cliente.id)}>
-                                    <img src={Edit} alt="" />
+                                    {/* <img src={Edit} alt="" /> */}
+                                    <EditFilled />
                                 </td>
                             </tr>
                         ))

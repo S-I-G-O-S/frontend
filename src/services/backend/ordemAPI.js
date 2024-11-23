@@ -38,7 +38,6 @@ export const getPageOrdens = async (pagina, filtros) => {
     if (!filtros) {
         return
     }
-    console.log(filtros.situacao.value)
     let filtragem=''  
     filtragem = `${!filtros.situacao.is ? '' : `&situacao=${filtros.situacao.value}`}${!filtros.funcionario.is ? '' : `&funcionario=${filtros.funcionario.value}`}${!filtros.servico.is ? '' : `&servico=${filtros.servico.value}`}
     `

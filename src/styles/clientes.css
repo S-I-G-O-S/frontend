@@ -94,21 +94,15 @@
                 #listClientes {
 
                     .clientes {
-                        font-size: 0.95rem;
                         height: auto;
                         border-top: 0.1rem solid var(--marrom);
                         background-color: var(--branco);
-
-                        .nome {
-                            text-align: left;
-
-                        }
-
                         .nome,
                         .cnpj,
                         .endereco {
                             white-space: nowrap;
                             overflow: hidden;
+                            font-size: 0.95rem; 
                             text-overflow: ellipsis;
                             text-align: center;
 
@@ -118,18 +112,17 @@
                         }
 
                         .options {
-                            all: unset;
                             display: flex;
                             align-items: center;
                             justify-content: center;
                             cursor: pointer;
-                            text-align: center;
-                            font-weight: 500;
+                            padding: 0.1rem 0.4rem;
+                            height: 100%;
                             transition: 150ms;
-                            padding: 0.1rem 0.3rem;
-
-                            img {
-                                height: 1.3rem;
+                            svg {
+                                height: 1.25rem;
+                                width: 1.2rem;
+                                margin: 0;
                             }
                         }
 

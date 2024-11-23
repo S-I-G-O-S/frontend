@@ -16,7 +16,7 @@ export const PreferenciasProvider = ({ children }) => {
     });
 
     useEffect(() => {
-        console.log('Mudando tema para: '+ sessPreferencias.tema)
+        // console.log('Mudando tema para: '+ sessPreferencias.tema)
         sessionStorage.setItem('preferencias', JSON.stringify(sessPreferencias));
     }, [sessPreferencias]);
     useEffect(() => {
