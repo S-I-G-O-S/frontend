@@ -8,7 +8,7 @@ import clientesIcon from '../../assets/clientesIcon.png'
 import ordensIcon from '../../assets/ordensIcon.png'
 import especsIcon from '../../assets/tag.png'
 import { useEffect, useState } from 'react'
-import { HomeFilled }  from '@ant-design/icons'
+import { HomeFilled, SettingFilled, SettingOutlined }  from '@ant-design/icons'
 import { IconFuncionarios } from './IconsSVG'
 import { usePreferencias } from '../../context/PreferenciasContext'
 
@@ -37,6 +37,7 @@ function Nav({ cargo }) {
                     {/* <img src={homeIcon} alt="home" /> */}
                     <p className='nomeGoTo' id='goToHomeP'>home</p>
                 </NavLink>
+                
                 
                 {/* Paginas exibidas só para usuarios 'base' ou 'adm' */}
                 {cargo === 'BASE' || cargo === 'ADM' || cargo == 'DEV' ?
@@ -80,10 +81,21 @@ function Nav({ cargo }) {
                         // activeClassName="active" 
                         >
                         <img src={especsIcon} alt="ordens" />
-                        <p className='nomeGoTo' id='goToEspecsP'>especialidades <span>& serviços</span></p>
+                        <p className='nomeGoTo' id='goToEspecsP'>serviços</p>
                     </NavLink>
                 </> :  ''
                 }
+                <NavLink
+                    className={({ isActive }) => (isActive ? "links active" : "links ")}
+                    id='goToHome' 
+                    to="/usuario"
+                    title='Configurações'
+                    // activeClassName="active" 
+                    >
+                    <SettingFilled className='iconNav' />
+                    {/* <img src={homeIcon} alt="home" /> */}
+                    <p className='nomeGoTo' id='goToConfigsP'>Configurações</p>
+                </NavLink>
             </div>
         </nav>
     )

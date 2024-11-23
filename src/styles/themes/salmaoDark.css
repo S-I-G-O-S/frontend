@@ -18,15 +18,14 @@
 }
 .paginacao {
     border-color: var(--marrom1);
-}
-.paginaItem {
-    color: var(--salmao2);
-    background-color: var(--marrom1);
-}
-.paginacao 
-.paginaItem:hover,
-.paginaItem:focus {
-    background-color: var(--marrom3);
+    .paginaItem {
+        color: var(--salmao2);
+        background-color: var(--marrom1);
+    }
+    .paginaItem:hover,
+    .paginaItem:focus {
+        background-color: var(--marrom3);
+    }
 }
 .paginas
 .shadowBG 
@@ -92,7 +91,153 @@ section {
         background-color: var(--marrom3);
     }
 }
+#pageFuncionarios {
+    #mainFuncionarios
+    section {
+        background-color: var(--marrom1);
+        border-color: var(--salmao1);
+    }
+    #contEspecsNovoFunc
+    .btt {
+        color: var(--salmao2);
+        border: 0.1rem solid var(--salmao1);
+        background-color: var(--marrom1);
+    }
+    #contEspecsNovoFunc
+    .btt:hover {
+        background-color: var(--marrom2);
+    }
+    #contFiltros {
+        color: var(--salmao2);
+        background-color: var(--marrom2);
+        border-color: var(--salmao1);
+        #contPesqFunc {
+            border-color: var(--salmao1);
+        }
+        #contPesqFunc
+        input {
+            border-color: var(--marrom1);
+        }
+        #contPesqFunc
+        button {
+            border-color: var(--marrom1);
+            background-color: var(--marrom1);
+        }
+        #contPesqFunc
+        button:hover {
+            background-color: var(--marrom2);
+        }
+        button:focus{
+            background-color: var(--marrom2);
+            svg {
+                color: var(--salmao3);
+            }
+        }
+        #bttFiltros {
+            background-color: var(--salmao1);
+            color: var(--marrom1);
+        }
+        #bttFiltros:hover {
+            background-color: var(--salmao2);
+        }
+    }
+    #layoutMobile {
+        border-color: var(--marrom1);
+        .funcs {
+            border-color: var(--marrom1);
+            background-color: var(--branco);
+            .editFunc {
+                background-color: var(--branco);
+            }
+        }
+    }
+    #contListFuncs {
+        #listFuncs {
+            border-color: var(--salmao1);
+            background-color: var(--marrom2);
+            #titleList {
+                background-color: var(--marrom1);
+                color: var(--salmao2);
+            }
+            tbody {
+                color: var(--salmao2);
+                .funcs {
+                    border-top-color: var(--salmao1);
+                }
+                .funcs:hover {
+                    background-color: var(--marrom3);
+                }
+                .cl6 {
+                    svg {
+                        color: var(--salmao1);
+                    }
+                }
+                .cl6:hover {
+                    background-color: var(--laranja);
+                    svg {
+                        color: var(--marrom1);
+                    }
+                }
+            }
+        }
+    }
+    .ant-pagination {
+        .ant-pagination-item {
+            background-color: var(--salmao1);
+            border-color: var(--marrom1);
+            a {
+                color: var(--marrom1);
+            }
+            .anticon {
+                color: var(--salmao1);
+            }
+        }
+        .ant-pagination-item:hover {
+            background-color: var(--salmao2);
+        }
+        .ant-pagination-item-active {
+            border-color: var(--laranja);
+            background-color: var(--marrom1);
+            a {
+            color: var(--salmao2);
 
+            }
+        }
+        .ant-pagination-item-active:hover {
+            background-color: var(--marrom2);
+        }
+    }
+    #secFiltros {
+        background-color: var(--salmao2);
+        border-color: var(--marrom1);
+        #closeModel 
+        svg {
+            color: var(--marrom1);
+        }
+        #closeModel:hover {
+            background-color: var(--salmao1);
+        }
+        #subContFiltros {
+            border-color: var(--salmao1);
+        }
+        #bttCancelar {
+            background-color: var(--salmao1);
+        }
+        #bttAplicar {
+            color: var(--salmao2);
+            background-color: var(--marrom1);
+        }
+        #bttCancelar:hover {
+            background-color: var(--salmao3);
+        }
+        #bttAplicar:hover {
+            background-color: var(--marrom3);
+        }
+        button:focus {
+            border-color: var(--laranja);
+        }
+    }
+}
 #header {
     background-color: var(--marrom1);
     border-bottom: 0.1rem solid;

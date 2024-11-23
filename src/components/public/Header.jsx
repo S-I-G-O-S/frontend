@@ -20,7 +20,6 @@ function Header({usuario, titulo}) {
             console.warn(result)
         } catch (error) {
             console.error(error)
-            return
         }
         sessionStorage.clear()
         setToken(null)

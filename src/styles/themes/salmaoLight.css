@@ -100,6 +100,7 @@ section {
     .btt {
         color: var(--salmao2);
         background-color: var(--marrom1);
+        border-color: var(--marrom1);
     }
     #contEspecsNovoFunc
     .btt:hover {
@@ -108,80 +109,124 @@ section {
     #contFiltros {
         color: var(--salmao2);
         background-color: var(--marrom1);
-    }
-    #contFiltros
-    #contPesqFunc {
-        border-color: var(--salmao1);
-    }
-    #contFiltros
-    #contPesqFunc
-    input {
         border-color: var(--marrom1);
-    }
-    #contFiltros
-    #contPesqFunc
-    button {
-        border-color: var(--marrom1);
-        background-color: var(--marrom1);
-    }
-    #contFiltros
-    #contPesqFunc
-    button:hover {
-        background-color: var(--marrom2);
-    }
-    #contFiltros
-    #contPesqFunc
-    button:focus{
-        background-color: var(--marrom2);
-        svg {
-            color: var(--salmao3);
+        #contPesqFunc {
+            border-color: var(--salmao1);
+        }
+        #contPesqFunc
+        input {
+            border-color: var(--marrom1);
+        }
+        #contPesqFunc
+        button {
+            border-color: var(--marrom1);
+            background-color: var(--marrom1);
+        }
+        #contPesqFunc
+        button:hover {
+            background-color: var(--marrom2);
+        }
+        button:focus{
+            background-color: var(--marrom2);
+            svg {
+                color: var(--salmao3);
+            }
+        }
+        #bttFiltros {
+            background-color: var(--salmao1);
+            color: var(--marrom1);
+        }
+        #bttFiltros:hover {
+            background-color: var(--salmao2);
         }
     }
-    #bttFiltros {
-        background-color: var(--salmao1);
-        color: var(--marrom1);
+    #layoutMobile {
+        border-color: var(--marrom1);
+        .funcs {
+            border-color: var(--marrom1);
+            background-color: var(--branco);
+            .editFunc {
+                background-color: var(--branco);
+            }
+        }
     }
-    #bttFiltros:hover {
-        background-color: var(--salmao2);
+    #contListFuncs {
+        #listFuncs {
+            border-color: var(--marrom1);
+            background-color: var(--branco);
+            #titleList {
+                background-color: var(--marrom1);
+                color: var(--salmao2);
+            }
+            tbody {
+                .funcs {
+                    border-top-color: var(--marrom1);
+                }
+                .funcs:hover {
+                    background-color: var(--salmao3);
+                }
+                .cl6:hover {
+                    background-color: var(--salmao2);
+                }
+            }
+        }
+    }
+    .ant-pagination {
+        .ant-pagination-item {
+            background-color: var(--salmao1);
+            border-color: var(--marrom1);
+            a {
+                color: var(--marrom1);
+            }
+        }
+        .ant-pagination-item:hover {
+            background-color: var(--salmao2);
+        }
+        .ant-pagination-item-active {
+            border-color: var(--laranja);
+            background-color: var(--marrom1);
+            a {
+            color: var(--salmao2);
+
+            }
+        }
+        .ant-pagination-item-active:hover {
+            background-color: var(--marrom2);
+        }
     }
     #secFiltros {
         background-color: var(--salmao2);
         border-color: var(--marrom1);
+        #closeModel 
+        svg {
+            color: var(--marrom1);
+        }
+        #closeModel:hover {
+            background-color: var(--salmao1);
+        }
+        #subContFiltros {
+            border-color: var(--salmao1);
+        }
+        #bttCancelar {
+            background-color: var(--salmao1);
+        }
+        #bttAplicar {
+            color: var(--salmao2);
+            background-color: var(--marrom1);
+        }
+        #bttCancelar:hover {
+            background-color: var(--salmao3);
+        }
+        #bttAplicar:hover {
+            background-color: var(--marrom3);
+        }
+        button:focus {
+            border-color: var(--laranja);
+        }
     }
-    #secFiltros 
-    #closeModel 
-    svg {
-        color: var(--marrom1);
-    }
-    #secFiltros
-    #closeModel:hover {
-        background-color: var(--salmao1);
-    }
-    #secFiltros
-    #subContFiltros {
-        border-color: var(--salmao1);
-    }
-    #secFiltros 
-    #bttCancelar {
-        background-color: var(--salmao1);
-    }
-    #secFiltros
-    #bttAplicar {
-        color: var(--salmao2);
-        background-color: var(--marrom1);
-    }
-    #secFiltros
-    #bttCancelar:hover {
-        background-color: var(--salmao3);
-    }
-    #secFiltros
-    #bttAplicar:hover {
-        background-color: var(--marrom3);
-    }
-    #secFiltros
-    button:focus {
-        border-color: var(--laranja);
-    }
+}
+#pageClientes {
+
 }
 #header {
     background-color: var(--marrom1);
