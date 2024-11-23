@@ -208,11 +208,12 @@ section {
         }
     }
     #secFiltros {
-        background-color: var(--salmao2);
-        border-color: var(--marrom1);
+        background-color: var(--marrom2);
+        border-color: var(--salmao1);
+        color: var(--salmao2);
         #closeModel 
         svg {
-            color: var(--marrom1);
+            color: var(--salmao2);
         }
         #closeModel:hover {
             background-color: var(--salmao1);
@@ -222,10 +223,12 @@ section {
         }
         #bttCancelar {
             background-color: var(--salmao1);
+            border-color: var(--marrom1);
         }
         #bttAplicar {
             color: var(--salmao2);
             background-color: var(--marrom1);
+            border-color: var(--salmao1);
         }
         #bttCancelar:hover {
             background-color: var(--salmao3);
@@ -272,14 +275,14 @@ section {
         background-color: var(--azul);
     }
     .iconNav,
-    .iconNav > svg,
-    img {
-        color: var(--branco);
-    }
-    #containerLinks img {
+    .iconNav > svg {
         color: var(--branco);
     }
     a.active {
         background-color: var(--marrom2);
+        color: var(--salmao3);
+        svg {
+            color: var(--salmao3);
+        }
     }
 }
