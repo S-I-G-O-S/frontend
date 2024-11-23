@@ -8,7 +8,7 @@ import clientesIcon from '../../assets/clientesIcon.png'
 import ordensIcon from '../../assets/ordensIcon.png'
 import especsIcon from '../../assets/tag.png'
 import { useEffect, useState } from 'react'
-import { HomeFilled, SettingFilled, SettingOutlined }  from '@ant-design/icons'
+import { HomeFilled, IdcardFilled, ScheduleFilled, SettingFilled, SettingOutlined, ShoppingFilled, TagFilled }  from '@ant-design/icons'
 import { IconFuncionarios } from './IconsSVG'
 import { usePreferencias } from '../../context/PreferenciasContext'
 
@@ -50,7 +50,8 @@ function Nav({ cargo }) {
                         // activeClassName="active" 
                         >
                         {/* <IconFuncionarios className='iconNav'></IconFuncionarios> */}
-                        <img src={funcsIcon} alt="" />
+                        {/* <img src={funcsIcon} alt="" /> */}
+                        <IdcardFilled className='iconNav'/>
                         <p className='nomeGoTo' id='goToFuncionariosP'>funcionarios</p>
                     </NavLink>
                     <NavLink 
@@ -60,7 +61,8 @@ function Nav({ cargo }) {
                         title='Clientes'
                         // activeClassName="active" 
                         >
-                        <img src={clientesIcon} alt="clientes" />
+                        {/* <img src={clientesIcon} alt="clientes" /> */}
+                        <ShoppingFilled className='iconNav'/>
                         <p className='nomeGoTo' id='goToClientesP'>clientes</p>
                     </NavLink>
                     <NavLink 
@@ -70,7 +72,8 @@ function Nav({ cargo }) {
                         title='Ordens'
                         // activeClassName="active" 
                         >
-                        <img src={ordensIcon} alt="ordens" />
+                        {/* <img src={ordensIcon} alt="ordens" /> */}
+                        <ScheduleFilled className='iconNav' />
                         <p className='nomeGoTo' id='goToOrdensP'>ordens</p>
                     </NavLink>
                     <NavLink 
@@ -80,7 +83,8 @@ function Nav({ cargo }) {
                         title='Especialidades e serviços'
                         // activeClassName="active" 
                         >
-                        <img src={especsIcon} alt="ordens" />
+                        {/* <img src={especsIcon} alt="ordens" /> */}
+                        <TagFilled className='iconNav'/>
                         <p className='nomeGoTo' id='goToEspecsP'>serviços</p>
                     </NavLink>
                 </> :  ''

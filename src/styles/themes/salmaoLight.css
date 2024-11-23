@@ -260,14 +260,14 @@ section {
         background-color: var(--azulHover);
     }
     .iconNav,
-    .iconNav > svg,
-    img {
-        color: var(--branco);
-    }
-    #containerLinks img {
+    .iconNav > svg{
         color: var(--branco);
     }
     a.active {
         background-color: var(--laranja);
+        color: var(--branco);
+        svg {
+            color: var(--branco);
+        }
     }
 }
