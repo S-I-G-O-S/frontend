@@ -34,10 +34,9 @@
 
 #mainOrdens section {
     padding: 1rem;
-    border: 0.1rem solid var(--marrom);
-    border-radius: 10px;
-
-    background-color: var(--salmao2);
+    border-style: solid;
+    border-width: 0.1rem;
+    border-radius: 0.3rem;
 }
 #mainOrdens #sec1 {
     max-height: 100%;
@@ -45,36 +44,31 @@
     flex-direction: column;
     gap: 0.3rem;
 }
-#mainOrdens #ContNovo {
+#mainOrdens 
+#contNovo {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0.5rem;
-    border: 0.1rem solid;
-    border-color: var(--salmao1);
+    border-style: solid;
+    border-width: 0.1rem;
     border-radius: 0.3rem;
 }
 
-#mainOrdens #bttNovaOrdem {
-    all: unset;
+#mainOrdens 
+#bttNovaOrdem {
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     font-size: 0.9rem;
+    font-weight: 500;
     
     padding: 0.2rem 1rem;
-    border: 0;
+    border-style: solid;
+    border-width: 0.1rem;
     border-radius: 0.3rem;
-
-    color: var(--salmao2);
-    background-color: var(--marrom1);
-}
-
-#mainOrdens #bttNovaOrdem:hover {
-    background-color: var(--marrom2);
-    color: var(--salmao1);
 }
 
 #mainOrdens #contSituacoes {
@@ -82,11 +76,12 @@
     flex-direction: column;
     gap: 0.3rem;
     padding: 0.5rem;
-    border: 0.1rem solid;
-    border-color: var(--salmao1);
+    border-style: solid;
+    border-width: 0.1rem;
+    
     border-radius: 0.3rem;
 
-    background-color: var(--azul);
+    
 }
 
 #mainOrdens .bttsSituacao {
@@ -98,37 +93,15 @@
     /* min-width: 9rem; */
 
     padding: 0.2rem 2.1rem;
-    border: 0.1rem solid;
+    border-style: solid;
+    border-width: 0.1rem;
     border-radius: 0.3rem;
-    border-color: var(--marrom1);
-
     transition: 100ms;
 }
 
 #mainOrdens .bttsSituacao:hover {
-    border-color: var(--laranja);
     padding: 0.3rem 2.1rem;
     height: 2fr;
-}
-
-#mainOrdens #bttSituacaoPendente {
-    background-color: var(--pendente);
-}
-
-#mainOrdens #bttSituacaoEmExecucao {
-    background-color: var(--emExecucao);
-}
-
-#mainOrdens #bttSituacaoRetorno {
-    background-color: var(--retorno);
-}
-
-#mainOrdens #bttSituacaoCancelada {
-    background-color: var(--cancelada);
-}
-
-#mainOrdens #bttSituacaoFinalizada {
-    background-color: var(--finalizada);
 }
 
 #mainOrdens .bttsSituacao div {
@@ -144,7 +117,6 @@
 #mainOrdens 
 .bttSelecionado {
     border: 0.15rem solid;
-    border-color: var(--laranja);
 }
 #mainOrdens 
 .bttSelecionado p {
@@ -154,56 +126,36 @@
     display: flex;
     flex-direction: column;
     max-height: 95%;
-    background-color: var(--salmao2);
-    padding: 1rem;
-    padding-bottom: 0.5rem;
-    border: 0.1rem solid var(--marrom1);
-    border-radius: 0.4rem;
 }
 
 #mainOrdens #contTableHistOrdens {
     padding: 0.5rem;
-    border: 0.1rem solid;
-    border-color: var(--salmao1);
+    border-style: solid;
+    border-width: 0.1rem;
     border-radius: 0.3rem;
 }
 
 #mainOrdens #tableHistOrdens {
     gap: 0;
     overflow-x: auto;
-    border: 0.1rem solid;
+    border-style: solid;
+    border-width: 0.1rem;
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
-    /* TODO Add temas */
-    background-color: var(--branco);
-    border-color: var(--marrom1);
 }
-
-#mainOrdens #titleList {
-    color: var(--salmao1);
-    background-color: var(--marrom1);
-}
-
 #mainOrdens th {
     text-align: center;
     font-weight: 400;
     padding: 0.1rem 0.5rem;
 }
-
-#mainOrdens #listOrdens {}
-
 #mainOrdens .ordem {
     cursor: pointer;
-    border-top: 0.1rem solid;
-    border-color: var(--marrom1);
+    border-style: solid;
+    border-width: 0.1rem;
 }
 
-#mainOrdens .ordem:hover {
-    background-color: var(--salmao3);
-}
-
-#mainOrdens td {
+#mainOrdens .ordem td {
     font-size: 0.93rem;
     text-align: center;
     white-space: nowrap;
@@ -211,40 +163,20 @@
     text-overflow: ellipsis;
     padding: 0.1rem 0.5rem;
 }
+#mainOrdens .ordem
+.cl1,
+.cl2,
+.cl3,
+.cl4 {
+    border-right-width: 0.1rem;
+    border-right-style: solid;
+}
 
 #mainOrdens #msgSemOrdens td {
-    color: #960101;
     font-weight: 500;
     padding: 0.2rem 0.5rem;
 }
 
-#mainOrdens .ant-pagination {
-    .ant-pagination-item {
-        background-color: var(--salmao1);
-        border-color: var(--marrom1);
-
-        a {
-            color: var(--marrom1);
-        }
-    }
-
-    .ant-pagination-item:hover {
-        background-color: var(--salmao2);
-    }
-
-    .ant-pagination-item-active {
-        border-color: var(--laranja);
-        background-color: var(--marrom1);
-
-        a {
-            color: var(--salmao2);
-        }
-    }
-
-    .ant-pagination-item-active:hover {
-        background-color: var(--marrom2);
-    }
-}
 #pageOrdens
 .shadowBG {
     display: flex;
@@ -261,7 +193,6 @@
     align-items: center;
     justify-content: space-between;
     font-size: 1.1rem;
-    color: var(--marrom);
     margin: 0;
     margin-bottom: 0.5rem;
 }
@@ -278,12 +209,7 @@ h2 {
     transition: 180ms;
 }
 #secOrdemAberta
-#fecharOrdemAberta:hover {
-    background-color: var(--salmao1);
-}
-#secOrdemAberta
 #fecharOrdemAberta>svg {
-    color: var(--marrom1);
     height: 1.2rem;
     width: 1.2rem;
 }
@@ -293,10 +219,6 @@ h2 {
     border: 0.1rem solid;
     border-radius: 0.3rem;
     font-size: 0.93rem;
-
-    border-color: var(--salmao1);
-    background-color: var(--branco);
-
 }
 #secOrdemAberta
 #infosOrdemAberta
@@ -304,7 +226,6 @@ div {
     font-weight: 400;
     padding: 0.15rem 0;
     border-bottom: 0.1rem solid;
-    border-color: var(--marrom1);
 }
 #secOrdemAberta
 #infosOrdemAberta
@@ -323,7 +244,7 @@ span {
     justify-content: space-around;
     padding: 0.5rem;
     border: 0.1rem solid;
-    border-color: var(--salmao1);
+    
     border-radius: 0.3rem;
 }
 #secOrdemAberta
@@ -339,24 +260,7 @@ span {
     border-color: #000;
     border-radius: 0.3rem;
 }
-#secOrdemAberta
-#bttFecharOrdemAberta {
-    background-color: #ff8888;
-}
-#secOrdemAberta
-#bttFecharOrdemAberta:hover {
-    background-color: #f37272;
-    text-decoration: underline;
-}
-#secOrdemAberta
-#bttEditarOrdem {
-    background-color: #84aff0;
-}
-#secOrdemAberta
-#bttEditarOrdem:hover {
-    background-color: #6b9ae2;
-    text-decoration: underline;
-}
+
 @media screen and (width <=750px) {
     #mainOrdens {
         justify-content: center;

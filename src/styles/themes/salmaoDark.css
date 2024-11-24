@@ -32,9 +32,8 @@
 section {
     background-color: var(--salmao2);
 }
-#pagePerfilConfig {
-    #mainPerfilConfig
-    > section {
+#pagePerfilConfig { 
+    section {
         color: var(--salmao3);
         border-color: var(--salmao1);
         background-color: var(--marrom1);
@@ -238,6 +237,247 @@ section {
         }
         button:focus {
             border-color: var(--laranja);
+        }
+    }
+}
+#pageClientes {
+    section {
+        color: var(--salmao2);
+        background-color: var(--marrom1);
+        border-color: var(--salmao1);
+    }
+    #containerH2Novo {
+        button {
+            background-color: var(--salmao1);
+            color: var(--marrom1);
+            border-color: var(--salmao1);
+        }
+        button:hover {
+            background-color: var(--salmao2);
+        }
+    }
+    #tabelaClientes {
+        background-color: var(--marrom2);
+        border-color: var(--salmao1);
+        #cabecalho {
+            color: var(--salmao2);
+            background-color: var(--marrom1);
+        }
+        #listClientes {
+            .nome,
+            .cnpj,
+            .endereco {
+                border-right-color: var(--marrom1);
+            }
+            .options:hover {
+                background-color: var(--laranja);
+                color: var(--marrom1);
+            }
+            .clientes:hover {
+                background-color: var(--marrom3);
+            }
+        }
+    }
+    .ant-pagination {
+        /* TODO Estilizar paginação */
+        .ant-pagination-item {
+            background-color: var(--salmao1);
+            border-color: var(--marrom1);
+            a {
+                color: var(--marrom1);
+            }
+            .anticon-left
+            .anticon {
+                color: var(--salmao1);
+            }
+        }
+        .ant-pagination-item:hover {
+            background-color: var(--salmao2);
+        }
+        .ant-pagination-item-active {
+            border-color: var(--laranja);
+            background-color: var(--marrom1);
+            a {
+            color: var(--salmao2);
+
+            }
+        }
+        .ant-pagination-item-active:hover {
+            background-color: var(--marrom2);
+        }
+    }
+    #contNovoCliente {
+        background-color: var(--marrom2);
+        border-color: var(--salmao1);
+        color: var(--salmao2);
+        #contInfosNovoCliente {
+            border-color: var(--salmao1);
+        }
+        #contAcaoNovoCliente {
+            border-color: var(--salmao1);
+            button {
+                all: unset;
+                border-color: var(--marrom1);
+                color: var(--marrom1);
+            }
+            button:focus {
+                border-color: var(--laranja);
+            }
+            #bttCancelar {
+                background-color: #ecea57;
+            }
+            #bttCancelar:hover {
+                background-color: #f5f23b;
+            }
+
+            #bttSalvar {
+                background-color: #41dd5b;
+            }
+            #bttSalvar:hover {
+                background-color: #21f143;
+            }
+        }
+    }
+}
+#pageOrdens {
+    section {
+        background-color: var(--marrom1);
+        border-color: var(--salmao1);
+        color: var(--salmao2);
+    }
+    #sec1 {
+        #contNovo {
+            border-color: var(--salmao1);
+            #bttNovaOrdem {
+                color: var(--marrom1);
+                background-color: var(--salmao1);
+                border-color: var(--marrom1);
+            }
+            #bttNovaOrdem:hover {
+                background-color: var(--salmao2);
+                color: var(--marrom1);
+            }
+        }
+        #contSituacoes {
+            border-color: var(--salmao1);
+            background-color: var(--azul);
+            .bttsSituacao {
+                border-color: var(--marrom2);
+                color: var(--marrom1);
+            }
+            .bttsSituacao:hover {
+                border-color: var(--laranja);
+            } 
+            #bttSituacaoPendente {
+                background-color: var(--pendente);
+            }
+            #bttSituacaoEmExecucao {
+                background-color: var(--emExecucao);
+            }
+            #bttSituacaoRetorno {
+                background-color: var(--retorno);
+            }
+            #bttSituacaoCancelada {
+                background-color: var(--cancelada);
+            }
+            #bttSituacaoFinalizada {
+                background-color: var(--finalizada);
+            }
+            .bttSelecionado {
+                border-color: var(--laranja);
+            }
+        }
+    }
+    #secHistOrdens {
+        #contTableHistOrdens {
+            border-color: var(--salmao1);
+            background-color: var(--marrom1);
+        }
+        #tableHistOrdens {
+            background-color: var(--marrom2);
+            border-color: var(--salmao1);
+            color: var(--salmao2);
+            #titleList {
+                color: var(--salmao2);
+                background-color: var(--marrom1);
+            }
+            .ordem {
+                .cl1,
+                .cl2,
+                .cl3,
+                .cl4 {
+                    border-right-color: var(--salmao1);
+                }
+            }
+            .ordem:hover {
+                background-color: var(--marrom3);
+            }
+            #msgSemOrdens td {
+                color: #960101;
+            }
+        }
+    }
+    .ant-pagination {
+        .ant-pagination-item {
+            background-color: var(--salmao1);
+            border-color: var(--marrom1);
+
+            a {
+                color: var(--marrom1);
+            }
+        }
+
+        .ant-pagination-item:hover {
+            background-color: var(--salmao2);
+        }
+
+        .ant-pagination-item-active {
+            border-color: var(--laranja);
+            background-color: var(--marrom1);
+
+            a {
+                color: var(--salmao2);
+            }
+        }
+
+        .ant-pagination-item-active:hover {
+            background-color: var(--marrom2);
+        }
+    }
+    #secOrdemAberta {
+        #fecharOrdemAberta:hover {
+            background-color: var(--salmao1);
+        }
+        #fecharOrdemAberta>svg {
+            color: var(--salmao2);
+        }
+        #infosOrdemAberta  {
+            border-color: var(--salmao1);
+            background-color: var(--marrom2);
+            div {
+                border-color: var(--marrom1);
+            }
+        }
+        #acoesOrdemAberta {
+            border-color: var(--salmao1);
+            color: var(--marrom1);
+            button {
+                border-color: var(--salmao1);
+            }
+            #bttFecharOrdemAberta {
+                background-color: #ff8888;
+            }
+            #bttFecharOrdemAberta:hover {
+                background-color: #f37272;
+                text-decoration: underline;
+            }
+            #bttEditarOrdem {
+                background-color: #84aff0;
+            }
+            #bttEditarOrdem:hover {
+                background-color: #6b9ae2;
+                text-decoration: underline;
+            }
         }
     }
 }

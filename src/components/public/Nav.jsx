@@ -92,7 +92,7 @@ function Nav({ cargo }) {
                 <NavLink
                     className={({ isActive }) => (isActive ? "links active" : "links ")}
                     id='goToHome' 
-                    to="/usuario"
+                    to="/configuracoes"
                     title='Configurações'
                     // activeClassName="active" 
                     >
