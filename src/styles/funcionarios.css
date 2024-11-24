@@ -181,7 +181,6 @@
                             font-size: 1rem;
                             text-align: center;
                             font-weight: 400;
-                            border: 0;
                         }
                     }
                     tbody {
@@ -199,6 +198,14 @@
                                 overflow: hidden;
                                 text-overflow: ellipsis;
                                 padding: 0.1rem 0.5rem;
+                            }
+                            .cl1,
+                            .cl2,
+                            .cl3,
+                            .cl4,
+                            .cl5 {
+                                border-right-style: solid;
+                                border-right-width: 0.1rem;
                             }
                             .cl6 {
                                 cursor: pointer;

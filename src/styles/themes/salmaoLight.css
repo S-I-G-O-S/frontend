@@ -11,6 +11,14 @@
     --marrom3: #4e2a1f;
     --preto: #000;
 }
+/* Ordens */
+:root {
+    --pendente: #8fcdff;
+    --emExecucao: #f6ff7b;
+    --retorno: #ffb968;
+    --cancelada: #ff8888;
+    --finalizada: #0cda4a;
+}
 .paginas {
     background-color: #F2E8DF;
 }
@@ -91,7 +99,6 @@ section {
     }
 }
 #pageFuncionarios {
-    #mainFuncionarios
     section {
         background-color: var(--salmao2);
         border-color: var(--marrom1);
@@ -159,14 +166,23 @@ section {
                 color: var(--salmao2);
             }
             tbody {
+                border-color: var(--marrom1);
                 .funcs {
                     border-top-color: var(--marrom1);
+                    
+                    .cl1,
+                    .cl2,
+                    .cl3,
+                    .cl4,
+                    .cl5 {
+                        border-right-color: var(--marrom1);
+                    }
+                    .cl6:hover {
+                        background-color: var(--salmao2);
+                    }
                 }
                 .funcs:hover {
                     background-color: var(--salmao3);
-                }
-                .cl6:hover {
-                    background-color: var(--salmao2);
                 }
             }
         }
@@ -226,7 +242,398 @@ section {
     }
 }
 #pageClientes {
+    section {
+        color: var(--marrom1);
+        background-color: var(--salmao2);
+        border-color: var(--marrom1);
+    }
+    #containerH2Novo {
+        button {
+            background-color: var(--marrom1);
+            color: var(--salmao2);
+            border-color: var(--marrom1);
+        }
+        button:hover {
+            background-color: var(--marrom2);
+        }
+    }
+    #tabelaClientes {
+        background-color: var(--branco);
+        border-color: var(--marrom1);
+        #cabecalho {
+            color: var(--salmao2);
+            background-color: var(--marrom1);
+        }
+        #listClientes {
+            .nome,
+            .cnpj,
+            .endereco {
+                border-right-color: var(--marrom1);
+            }
+            .options:hover {
+                background-color: var(--salmao1);
+            }
+            .clientes:hover {
+                background-color: var(--salmao3);
+            }
+        }
+    }
+    .paginacao {
+        .ant-pagination {
+            .ant-pagination-item {
+                background-color: var(--salmao1);
+                border-color: var(--marrom1);
 
+                a {
+                    color: var(--marrom1);
+                }
+            }
+
+            .ant-pagination-item:hover {
+                background-color: var(--salmao2);
+            }
+
+            .ant-pagination-item-active {
+                border-color: var(--laranja);
+                background-color: var(--marrom1);
+
+                a {
+                    color: var(--salmao2);
+
+                }
+            }
+
+            .ant-pagination-item-active:hover {
+                background-color: var(--marrom2);
+            }
+        }
+    }
+    #contNovoCliente {
+        background-color: var(--salmao2);
+        border-color: var(--marrom1);
+        color: var(--marrom1);
+        #contInfosNovoCliente {
+            border-color: var(--salmao1);
+        }
+        #contAcaoNovoCliente {
+            border-color: var(--salmao1);
+            button {
+                all: unset;
+                border-color: var(--marrom1);
+                color: var(--marrom1);
+            }
+            button:focus {
+                border-color: var(--laranja);
+            }
+            #bttCancelar {
+                background-color: #ecea57;
+            }
+            #bttCancelar:hover {
+                background-color: #f5f23b;
+            }
+
+            #bttSalvar {
+                background-color: #41dd5b;
+            }
+            #bttSalvar:hover {
+                background-color: #21f143;
+            }
+        }
+    }
+}
+#pageOrdens {
+    section {
+        background-color: var(--salmao2);
+        border-color: var(--marrom1);
+        color: var(--marrom1);
+    }
+    #sec1 {
+        #contNovo {
+            border-color: var(--salmao1);
+            #bttNovaOrdem {
+                color: var(--salmao2);
+                background-color: var(--marrom1);
+                border-color: var(--marrom1);
+            }
+            #bttNovaOrdem:hover {
+                background-color: var(--marrom2);
+                color: var(--salmao1);
+            }
+        }
+        #contSituacoes {
+            border-color: var(--salmao1);
+            background-color: var(--azul);
+            .bttsSituacao {
+                border-color: var(--marrom1);
+            }
+            .bttsSituacao:hover {
+                border-color: var(--laranja);
+            } 
+            #bttSituacaoPendente {
+                background-color: var(--pendente);
+            }
+            #bttSituacaoEmExecucao {
+                background-color: var(--emExecucao);
+            }
+            #bttSituacaoRetorno {
+                background-color: var(--retorno);
+            }
+            #bttSituacaoCancelada {
+                background-color: var(--cancelada);
+            }
+            #bttSituacaoFinalizada {
+                background-color: var(--finalizada);
+            }
+            .bttSelecionado {
+                border-color: var(--laranja);
+            }
+        }
+    }
+    #secHistOrdens {
+        #contTableHistOrdens {
+            border-color: var(--salmao1);
+        }
+        #tableHistOrdens {
+            background-color: var(--branco);
+            border-color: var(--marrom1);
+            #titleList {
+                color: var(--salmao2);
+                background-color: var(--marrom1);
+            }
+            .ordem {
+                .cl1,
+                .cl2,
+                .cl3,
+                .cl4 {
+                    border-right-color: var(--marrom1);
+                }
+            }
+            .ordem:hover {
+                background-color: var(--salmao3);
+            }
+            #msgSemOrdens td {
+                color: #960101;
+            }
+        }
+    }
+    .ant-pagination {
+        .ant-pagination-item {
+            background-color: var(--salmao1);
+            border-color: var(--marrom1);
+
+            a {
+                color: var(--marrom1);
+            }
+        }
+
+        .ant-pagination-item:hover {
+            background-color: var(--salmao2);
+        }
+
+        .ant-pagination-item-active {
+            border-color: var(--laranja);
+            background-color: var(--marrom1);
+
+            a {
+                color: var(--salmao2);
+            }
+        }
+
+        .ant-pagination-item-active:hover {
+            background-color: var(--marrom2);
+        }
+    }
+    #secOrdemAberta {
+        #fecharOrdemAberta:hover {
+            background-color: var(--salmao1);
+        }
+        #fecharOrdemAberta>svg {
+            color: var(--marrom1);
+        }
+        #infosOrdemAberta  {
+            border-color: var(--salmao1);
+            background-color: var(--branco);
+            div {
+                border-color: var(--marrom1);
+            }
+        }
+        #acoesOrdemAberta {
+            border-color: var(--salmao1);
+            #bttFecharOrdemAberta {
+                background-color: #ff8888;
+            }
+            #bttFecharOrdemAberta:hover {
+                background-color: #f37272;
+                text-decoration: underline;
+            }
+            #bttEditarOrdem {
+                background-color: #84aff0;
+            }
+            #bttEditarOrdem:hover {
+                background-color: #6b9ae2;
+                text-decoration: underline;
+            }
+        }
+    }
+}
+#pageEspecialidades {
+    section {
+        color: var(--marrom1);
+        background-color: var(--salmao2);
+    }
+    #sec1 {
+        #contNovo {
+            button {
+                border-color: var(--marrom1);
+                color: var(--salmao3);
+                background-color: var(--marrom1);
+            }
+            button:hover {
+                background-color: var(--marrom3);
+            }
+        }
+        #contFiltrosEspecServ {
+            color: var(--salmao1);
+            background-color: var(--marrom1);
+            border-color: var(--marrom1);
+            #orderFiltrosEspecServ {
+                button {
+                    background-color: var(--salmao1);
+                    color: var(--marrom1);
+                    border-color: var(--salmao1);
+                }
+                button:hover {
+                    background-color: var(--salmao3);
+                    border-color: var(--salmao3);
+                }
+            }
+            #groupFiltrosEspecServ {
+                button {
+                    background-color: var(--salmao1);
+                    color: var(--marrom1);
+                    border-color: var(--salmao1);
+                }
+                button:hover {
+                    background-color: var(--salmao3);
+                    border-color: var(--salmao3);
+                }
+            }
+        }
+        #contListEspecServ {
+            background-color: var(--salmao1);
+            border-color: var(--marrom1);
+        }
+        .layoutServicos {
+            .servicos {
+                border-color: var(--marrom1);
+                background-color: var(--salmao2);
+            }
+            .servicos:hover {
+                background-color: var(--salmao3);
+            }
+        }
+    }
+    #secConfigEspec {
+        #contInfosEspecEdit {
+            border-color: var(--salmao1);
+            #headPreVisu {
+                button {
+                    background-color: var(--marrom1);
+                    color: var(--salmao2);
+                    border-color: var(--marrom1);
+                }
+                button:hover {
+                    background-color: var(--marrom3);
+                }
+            }
+            #preVisu {
+                border-color: var(--salmao1);
+            }
+            .preVisuDark {
+                background-color: var(--marrom1);
+            }
+            .preVisuLight {
+                background-color: var(--salmao3);
+            }
+        }
+        #contFimAcao {
+            border-color: var(--salmao1);
+            button {
+                border-color: var(--marrom1);
+            }
+            button:focus {
+                border-color: var(--laranja);
+            }
+            #bttCancelar {
+                background-color: #ecea57;
+            }
+            #bttSalvar {
+                background-color: #53ee6c;
+            }
+            #bttExcluir {
+                background-color: #fc8c8c;
+                
+            }
+            #bttCancelar:hover {
+                background-color: #fffc4e;
+            }
+            #bttSalvar:hover {
+                background-color: #32ff54;
+            }
+            #bttExcluir:hover {
+                background-color: #ff6a6a;
+                
+            }
+        }
+    }
+    #secConfigServico {
+        #contDadosConfigServ {
+            border-color: var(--salmao1);
+        }
+        #contEspecsConfigServ {
+            border-color: var(--salmao1);
+            #contAddEspecFunc {
+                button {
+                    background-color: var(--marrom1);
+                    color: var(--salmao2);
+                    border-color: var(--marrom1);
+                }
+                button:hover {
+                    background-color: var(--marrom3);
+                }
+            }
+            #contListEspecFunc {
+
+            }
+        }
+        #contAcaoConfigServ {
+            border-color: var(--salmao1);
+            button {
+                border-color: var(--marrom1);
+            }
+            button:focus {
+                border-color: var(--laranja);
+            }
+            #bttCancelar {
+                background-color: #ecea57;
+            }
+            #bttSalvar {
+                background-color: #40ec5d;
+            }
+            #bttExcluir {
+                background-color: #fc8c8c;
+            }
+            #bttCancelar:hover {
+                background-color: #fffc49;
+            }
+            #bttSalvar:hover {
+                background-color: #2aff4e;
+            }
+            #bttExcluir:hover {
+                background-color: #fa6565;
+            }
+        }
+    }
 }
 #header {
     background-color: var(--marrom1);

@@ -39,7 +39,7 @@ function Header({usuario, titulo}) {
         {
             key: 1,
             label: (
-                <div onClick={()=>navigate("/usuario", { replace: true })}>configurações</div>
+                <div onClick={()=>navigate("/configuracoes", { replace: true })}>configurações</div>
             ),
             icon: <SettingOutlined/>
         }
