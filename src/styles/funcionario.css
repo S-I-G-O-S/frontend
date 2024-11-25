@@ -13,29 +13,14 @@
         gap: 0.5rem;
         section {
             padding: 1rem;
-            border: 0.1rem solid var(--marrom1);
+            border-width: 0.1rem;
+            border-style: solid;
             border-radius: 10px;
-
-            background-color: var(--salmao2);
-            
             h2 {
                 font-size: 1.1rem;
-                color: var(--marrom1);
                 margin: 0;
                 margin-bottom: 1.5rem;
             }
-        }
-        .ant-btn {
-            padding: 0.1rem 0.5rem;
-            font-weight: 500;
-            height: auto;
-            color: var(--salmao2);
-            background-color: var(--marrom1);
-        }
-        .ant-btn:hover {
-            color: var(--salmao2);
-            background-color: var(--marrom2);
-            box-shadow: none;
         }
         #secInfos {
             display: flex;
@@ -46,7 +31,8 @@
             #contGeralFunc,
             #contEndFunc,
             #contControle {
-                border: 0.1rem solid var(--salmao1);
+                border-width: 0.1rem;
+                border-style: solid;
                 border-radius: 0.3rem;
                 padding: 0.5rem;
             }
@@ -63,6 +49,7 @@
                     gap: 0.2rem;
 
                     input {
+                        /* TODO Arrumar quando for estilizar os inputs */
                         all: unset;
                         background-color: var(--branco);
                         border: 0.1rem solid var(--marrom1);
@@ -76,6 +63,7 @@
                         font-weight: 500;
                     }
                     select {
+                        /* TODO Arrumar quando for estilizar os selects */
                         all: unset;
                         display: flex;
                         align-items: center;
@@ -110,6 +98,7 @@
                     gap: 0.2rem;
                     box-sizing: border-box;
                     input {
+                        /* IDEM */
                         all: unset;
                         background-color: var(--branco);
                         border: 0.1rem solid var(--marrom1);
@@ -130,6 +119,23 @@
                     width: 100%;
                     input {
                         width: 6rem;
+                    }
+                    #bttPesqCEP {
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 0.3rem;
+                        font-size: 0.9rem;
+
+                        padding: 0.1rem 0.5rem;
+                        border-width: 0.1rem;
+                        border-style: solid;
+                        border-radius: 0.3rem;
+                        svg {
+                            height: 0.9rem;
+                            width: 0.9rem;
+                        }
                     }
                 }
                 #contRuaFunc {
@@ -160,7 +166,6 @@
                 justify-content: center;
                 column-gap: 2rem;                
                 button {
-                    all: unset;
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -171,35 +176,14 @@
 
                     height: 1.5rem;
                     width: 8rem;
-                    border: 0.1rem solid var(--marrom1);
+                    border-width: 0.1rem;
+                    border-style: solid;
                     border-radius: 0.3rem;
-                    color: var(--marrom1);
 
                     transition: 150ms;
                 }
-                button:focus {
+                button:focus, button:hover {
                     text-decoration: underline;
-                    border: 0.1rem solid var(--laranja);
-                }
-                #bttCancelar {
-                    background-color: #ecea57;
-                }
-                #bttCancelar:hover  {
-                    background-color: #faf736;
-                }
-                #bttSalvar {
-                    background-color: #40ec5d;
-                }
-                #bttSalvar:hover {
-                    background-color: #30fa52;
-                }
-                #bttExcluir {
-                    background-color: #fc8c8c;
-                    
-                }
-                #bttExcluir:hover {
-                    background-color: #ff6e6e;
-                    
                 }
             }
         }
@@ -210,7 +194,8 @@
             box-sizing: border-box;
             div {
                 padding: 0.3rem;
-                border: 0.1rem solid var(--salmao1);
+                border-width: 0.1rem;
+                border-style: solid;
                 border-radius: 0.25rem;
             }
             #contAddEspecFunc {
@@ -219,7 +204,6 @@
                 box-sizing: border-box;
                 gap: 0.3rem;
                 button {
-                    all: unset;
                     cursor: pointer;
                     font-size: 0.9rem;
                     text-align: center;
@@ -227,12 +211,10 @@
                     
                     padding: 0.1rem 1rem;
                     border-radius: 0.3rem;
-                    background-color: var(--marrom1);
-                    color: var(--salmao2);
+                    border-style: solid;
+                    border-width: 0.1rem;
                 }
-                button:hover {
-                    background-color: var(--marrom2);
-                }
+                
                 
             }
             #contListEspecFunc {

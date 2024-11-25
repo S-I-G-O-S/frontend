@@ -427,14 +427,10 @@ function Funcionario() {
                                         value={funcionario.endereco.cep || ""}
                                         onChange={(e) => handleCEP(e.target.value)}
                                     />
-                                    <Button
-                                        type="text"
-                                        icon={<SearchOutlined />}
-                                        iconPosition={'end'}
-                                        onClick={fetchCEP}
-                                    >
-                                        Pesquisar CEP
-                                    </Button>
+                                    <button id='bttPesqCEP'>
+                                        <p>Pesquisar CEP</p>
+                                        <SearchOutlined />
+                                    </button>
                                     {/* <p>{cepMensagem}</p> */}
                                 </div>
                                 <div id='contRuaFunc'>

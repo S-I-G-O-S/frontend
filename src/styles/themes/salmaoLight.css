@@ -241,6 +241,73 @@ section {
         }
     }
 }
+#pageFuncionario {
+    section {
+        background-color: var(--salmao2);
+        border-color: var(--marrom1);
+        color: var(--marrom1);
+    }
+    #secInfos {
+        #contGeralFunc,
+        #contEndFunc,
+        #contControle {
+            border-color: var(--salmao1);
+        }
+        #contEndFunc {
+            #contCepFunc {
+                #bttPesqCEP {
+                    background-color: var(--marrom1);
+                    border-color: var(--marrom1);
+                    color: var(--salmao2);
+                }
+                #bttPesqCEP:hover {
+                    background-color: var(--marrom2);
+                }
+            }
+        }
+        #contControle {
+            button:focus {
+                border-color: var(--laranja);
+            }
+            #bttCancelar {
+                background-color: #ecea57;
+            }
+            #bttCancelar:hover  {
+                background-color: #faf736;
+            }
+            #bttSalvar {
+                background-color: #40ec5d;
+            }
+            #bttSalvar:hover {
+                background-color: #30fa52;
+            }
+            #bttExcluir {
+                background-color: #fc8c8c;
+                
+            }
+            #bttExcluir:hover {
+                background-color: #ff6e6e;
+                
+            }
+        }
+    }
+    #secEspecialidades {
+        div {
+            border-color: var(--salmao1);
+        }
+        #contAddEspecFunc {
+            button {
+                color: var(--salmao2);
+                background-color: var(--marrom1);
+                border-color: var(--marrom1);
+                
+            }
+            button:hover {
+                background-color: var(--marrom2);
+            }
+        }
+    }
+}
 #pageClientes {
     section {
         color: var(--marrom1);
@@ -480,6 +547,7 @@ section {
     section {
         color: var(--marrom1);
         background-color: var(--salmao2);
+        border-color: var(--marrom1);
     }
     #sec1 {
         #contNovo {

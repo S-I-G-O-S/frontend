@@ -154,7 +154,7 @@
                     }
                     p {
                         font-size: 0.8rem;
-                        font-style: italic;
+                        /* font-style: italic; */
                         margin: 0;
                     }
                 }
@@ -290,7 +290,6 @@
                 border-radius: 0.2rem;
                 padding: 0.5rem;
                 button {
-                    all: unset;
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -374,6 +373,7 @@
                 #contListEspecFunc {
                     display: flex;
                     flex-direction: column;
+                    align-items: center;
                     gap: 0.15rem;
                     .skillsServ {
                         display: grid;
@@ -399,6 +399,9 @@
                             visibility: visible;
                         }
                     }
+                    #msgSemEspecs {
+                        font-size: 0.89rem;
+                    }
                 }
             }
             #contAcaoConfigServ {
@@ -411,7 +414,6 @@
                 border-radius: 0.2rem;
                 padding: 0.5rem;
                 button {
-                    all: unset;
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -449,16 +451,6 @@
         "sec1 sec2";
         grid-template-columns: 2fr 1fr;
         grid-template-rows: 1fr;
-
-    }
-    #shadowBG {
-        display: none;
-        position: fixed;
-        background-color: #000000da;
-        width: 100%;
-        height: 100%;
-        box-sizing: border-box;
-
     }
 }
 @media screen and (width <= 950px) {

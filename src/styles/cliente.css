@@ -14,7 +14,6 @@
 
 #pageCliente {
     main {
-        box-sizing: border-box;
         display: grid;
         grid-template-areas: 
         "sec1 sec3"
@@ -24,14 +23,11 @@
         gap: 0.5rem;
         section {
             padding: 1rem;
-            border: 0.1rem solid var(--marrom);
+            border-width: 0.1rem;
+            border-style: solid;
             border-radius: 10px;
-
-            background-color: var(--salmao2);
-            
             h2 {
                 font-size: 1.1rem;
-                color: var(--marrom);
                 margin: 0;
             }
         }
@@ -42,15 +38,14 @@
             gap: 0.3rem;
             h2 {
                 font-size: 1.1rem;
-                color: var(--marrom);
                 margin: 0;
                 margin-bottom: 1.5rem;
             }
             input {
                 padding: 0.1rem 0.3rem;
-                border: 0.1rem solid var(--marrom);
+                border-width: 0.1rem;
+                border-style: solid;
                 border-radius: 0.3rem;
-                background-color: var(--branco);
             }
             input:focus {
                 font-weight: 500;
@@ -58,7 +53,8 @@
             #geral,
             #endereco,
             #fimAcao {
-                border: 0.1rem solid var(--salmao1);
+                border-width: 0.1rem;
+                border-style: solid;
                 border-radius: 0.3rem;
                 padding: 0.5rem;
             }
@@ -73,9 +69,8 @@
                     display: flex;
                     gap: 0.3rem;
                     input {
-                        all: unset;
-                        background-color: var(--branco);
-                        border: 0.1rem solid var(--marrom);
+                        border-width: 0.1rem;
+                        border-style: solid;
                         border-radius: 0.2rem;
                         font-size: 0.85rem;
                         padding: 0.1rem 0.3rem;
@@ -112,7 +107,6 @@
                         font-size: 0.95rem;
                     }
                     input {
-                        all: unset;
                         background-color: var(--branco);
                         border: 0.1rem solid var(--marrom);
                         border-radius: 0.2rem;
@@ -166,7 +160,6 @@
                 justify-content: center;
                 gap: 2rem;
                 button {
-                    all: unset;
                     display: flex;
                     align-items: center;
                     justify-content: center;
