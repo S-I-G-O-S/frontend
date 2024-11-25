@@ -163,16 +163,20 @@
     text-overflow: ellipsis;
     padding: 0.1rem 0.5rem;
 }
-#mainOrdens .ordem
-.cl1,
-.cl2,
-.cl3,
-.cl4 {
-    border-right-width: 0.1rem;
-    border-right-style: solid;
+#mainOrdens {
+    .ordem
+    .cl1,
+    .cl2,
+    .cl3,
+    .cl4 {
+        border-right-width: 0.1rem;
+        border-right-style: solid;
+    }
 }
 
 #mainOrdens #msgSemOrdens td {
+    align-content: center;
+    justify-items: center;
     font-weight: 500;
     padding: 0.2rem 0.5rem;
 }

@@ -69,6 +69,9 @@ body {
     button {
         all: unset;
     }
+    input[type="text"]{
+        all: unset;
+    }
     .popup {
         z-index: 999;
     }

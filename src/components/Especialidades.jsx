@@ -568,8 +568,8 @@ function Especialidades() {
                                             (servicoAberto.especialidades.map(espec => (
                                                 converterEspecs(espec)
                                             ))) : 
-                                            (<p>Nenhuma especialidade adicionada</p>)) : 
-                                        (<p>Nenhuma especialidade adicionada</p>)
+                                            (<p id='msgSemEspecs'>Nenhuma especialidade adicionada</p>)) : 
+                                        (<p id='msgSemEspecs'>Nenhuma especialidade adicionada</p>)
                                 }
                                 </div>
                                         </div>
@@ -586,9 +586,6 @@ function Especialidades() {
                 )
             }
         </main>
-        <div id='shadowBG'>
-            
-        </div>
         </div>
     )
 }

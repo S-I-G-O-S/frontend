@@ -16,21 +16,14 @@
 .paginas {
     background-color: var(--azulBG);
 }
-.paginacao {
-    border-color: var(--marrom1);
-    .paginaItem {
-        color: var(--salmao2);
-        background-color: var(--marrom1);
-    }
-    .paginaItem:hover,
-    .paginaItem:focus {
-        background-color: var(--marrom3);
-    }
+.anticon-left,
+.anticon-right {
+    color: var(--salmao1);
 }
 .paginas
 .shadowBG 
 section {
-    background-color: var(--salmao2);
+    background-color: var(--marrom1);
 }
 #pagePerfilConfig { 
     section {
@@ -207,7 +200,7 @@ section {
         }
     }
     #secFiltros {
-        background-color: var(--marrom2);
+        background-color: var(--marrom1);
         border-color: var(--salmao1);
         color: var(--salmao2);
         #closeModel 
@@ -219,10 +212,12 @@ section {
         }
         #subContFiltros {
             border-color: var(--salmao1);
+            background-color: var(--marrom2);
         }
         #bttCancelar {
             background-color: var(--salmao1);
-            border-color: var(--marrom1);
+            border-color: var(--salmao1);
+            color: var(--marrom1);
         }
         #bttAplicar {
             color: var(--salmao2);
@@ -230,13 +225,91 @@ section {
             border-color: var(--salmao1);
         }
         #bttCancelar:hover {
-            background-color: var(--salmao3);
+            background-color: var(--salmao2);
         }
         #bttAplicar:hover {
-            background-color: var(--marrom3);
+            background-color: var(--marrom2);
         }
         button:focus {
             border-color: var(--laranja);
+        }
+    }
+}
+#pageFuncionario {
+    section {
+        background-color: var(--marrom1);
+        border-color: var(--salmao1);
+        color: var(--salmao2);
+    }
+    #secInfos {
+        #contGeralFunc,
+        #contEndFunc,
+        #contControle {
+            border-color: var(--salmao1);
+            background-color: var(--marrom2);
+            /* TODO Gambiarra  */
+            color: var(--marrom1);
+            label {
+                color: var(--salmao2);
+            }
+        }
+        #contEndFunc {
+            #contCepFunc {
+                #bttPesqCEP {
+                    background-color: var(--salmao1);
+                    border-color: var(--salmao1);
+                    color: var(--marrom1);
+                }
+                #bttPesqCEP:hover {
+                    background-color: var(--salmao2);
+                }
+            }
+        }
+        #contControle {
+            button {
+                color: var(--marrom1);
+                border-color: var(--salmao1);
+            }
+            button:focus {
+                border-color: var(--laranja);
+            }
+            #bttCancelar {
+                background-color: #ecea57;
+            }
+            #bttCancelar:hover  {
+                background-color: #faf736;
+            }
+            #bttSalvar {
+                background-color: #40ec5d;
+            }
+            #bttSalvar:hover {
+                background-color: #30fa52;
+            }
+            #bttExcluir {
+                background-color: #fc8c8c;
+                
+            }
+            #bttExcluir:hover {
+                background-color: #ff6e6e;
+                
+            }
+        }
+    }
+    #secEspecialidades {
+        div {
+            border-color: var(--salmao1);
+            background-color: var(--marrom2);
+        }
+        #contAddEspecFunc {
+            button {
+                color: var(--marrom1);
+                background-color: var(--salmao1);
+                border-color: var(--salmao1);
+                
+            }
+            button:hover {
+                background-color: var(--salmao2);
+            }
         }
     }
 }
@@ -337,6 +410,20 @@ section {
                 background-color: #21f143;
             }
         }
+    }
+}
+#pageCliente {
+    section {
+        background-color: var(--marrom1);
+        color: var(--salmao2);
+        border-color: var(--salmao1);
+    }
+    input {
+        background-color: var(--branco);
+        color: var(--marrom1);
+        border-color: var(--);
+    }
+    #secInfos {
     }
 }
 #pageOrdens {
@@ -477,6 +564,171 @@ section {
             #bttEditarOrdem:hover {
                 background-color: #6b9ae2;
                 text-decoration: underline;
+            }
+        }
+    }
+}
+#pageEspecialidades {
+    section {
+        color: var(--salmao2);
+        background-color: var(--marrom1);
+        border-color: var(--salmao1);
+    }
+    #sec1 {
+        #contNovo {
+            button {
+                border-color: var(--salmao1);
+                color: var(--marrom1);
+                background-color: var(--salmao1);
+            }
+            button:hover {
+                background-color: var(--salmao3);
+            }
+        }
+        #contFiltrosEspecServ {
+            color: var(--salmao1);
+            background-color: var(--marrom1);
+            border-color: var(--salmao1);
+            #orderFiltrosEspecServ {
+                button {
+                    background-color: var(--salmao1);
+                    color: var(--marrom1);
+                    border-color: var(--salmao1);
+                }
+                button:hover {
+                    background-color: var(--salmao3);
+                    border-color: var(--salmao3);
+                }
+            }
+            #groupFiltrosEspecServ {
+                button {
+                    background-color: var(--salmao1);
+                    color: var(--marrom1);
+                    border-color: var(--salmao1);
+                }
+                button:hover {
+                    background-color: var(--salmao3);
+                    border-color: var(--salmao3);
+                }
+            }
+        }
+        #contListEspecServ {
+            background-color: var(--marrom2);
+            border-color: var(--salmao1);
+        }
+        .layoutServicos {
+            .servicos {
+                border-color: var(--salmao1);
+                background-color: var(--marrom1);
+            }
+            .servicos:hover {
+                background-color: var(--laranja);
+                color: var(--marrom1);
+            }
+        }
+    }
+    #secConfigEspec {
+        #contInfosEspecEdit {
+            border-color: var(--salmao1);
+            background-color: var(--marrom2);
+            #headPreVisu {
+                button {
+                    background-color: var(--salmao1);
+                    color: var(--marrom1);
+                    border-color: var(--salmao1);
+                }
+                button:hover {
+                    background-color: var(--salmao3);
+                }
+            }
+            #preVisu {
+                border-color: var(--salmao1);
+            }
+            .preVisuDark {
+                background-color: var(--marrom1);
+            }
+            .preVisuLight {
+                background-color: var(--salmao3);
+            }
+        }
+        #contFimAcao {
+            border-color: var(--salmao1);
+            background-color: var(--marrom2);
+            button {
+                border-color: var(--salmao1);
+                color: var(--marrom1);
+            }
+            button:focus {
+                border-color: var(--laranja);
+            }
+            #bttCancelar {
+                background-color: #ecea57;
+            }
+            #bttSalvar {
+                background-color: #53ee6c;
+            }
+            #bttExcluir {
+                background-color: #fc8c8c;
+                
+            }
+            #bttCancelar:hover {
+                background-color: #fffc4e;
+            }
+            #bttSalvar:hover {
+                background-color: #32ff54;
+            }
+            #bttExcluir:hover {
+                background-color: #ff6a6a;
+                
+            }
+        }
+    }
+    #secConfigServico {
+        #contDadosConfigServ {
+            border-color: var(--salmao1);
+            background-color: var(--marrom2);
+        }
+        #contEspecsConfigServ {
+            background-color: var(--marrom2);
+            border-color: var(--salmao1);
+            #contAddEspecFunc {
+                button {
+                    background-color: var(--salmao1);
+                    color: var(--marrom1);
+                    border-color: var(--salmao1);
+                }
+                button:hover {
+                    background-color: var(--salmao2);
+                }
+            }
+        }
+        #contAcaoConfigServ {
+            border-color: var(--salmao1);
+            background-color: var(--marrom2);
+            button {
+                border-color: var(--salmao1);
+                color: var(--marrom1);
+            }
+            button:focus {
+                border-color: var(--laranja);
+            }
+            #bttCancelar {
+                background-color: #ecea57;
+            }
+            #bttSalvar {
+                background-color: #40ec5d;
+            }
+            #bttExcluir {
+                background-color: #fc8c8c;
+            }
+            #bttCancelar:hover {
+                background-color: #fffc49;
+            }
+            #bttSalvar:hover {
+                background-color: #2aff4e;
+            }
+            #bttExcluir:hover {
+                background-color: #fa6565;
             }
         }
     }
