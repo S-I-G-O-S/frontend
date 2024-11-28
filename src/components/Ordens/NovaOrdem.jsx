@@ -11,6 +11,7 @@ import { notification, Popconfirm } from "antd"
 import TextArea from "antd/es/input/TextArea"
 import { postNovaOrdem } from "../../services/backend/ordemAPI"
 function NovaOrdem() {
+    const navigate = useNavigate()
     const [clientes, setClientes] = useState([])
     const [cliente, setCliente] = useState({})
     const [servicos, setServicos] = useState([])
@@ -110,6 +111,12 @@ function NovaOrdem() {
             // description: 'Reconecte-se a internet',
             placement: 'bottomLeft',
         })
+        setTimeout(() => {
+            goToOrdens()
+        }, 1000)
+    }
+    const handleCancel = () => {
+        goToOrdens()
     }
     const showNotif = (message) => {
         notification.error({
@@ -117,6 +124,9 @@ function NovaOrdem() {
             // description: 'Reconecte-se a internet',
             placement: 'bottomLeft',
         })
+    }
+    const goToOrdens = () => {
+        navigate(`/ordens`)
     }
     const fetchServicos = async () => {
         try {
@@ -213,6 +223,7 @@ function NovaOrdem() {
                         <div id="contDescricao">
                             <label>Descrição: </label>
                             <TextArea
+                                id="txtDescricao"
                                 value={formNovaOrdem.descricao}
                                 onChange={(e) => handleChangeNovaOrdem(e.target.value, 'descricao')}
                                 placeholder="Opcional"
@@ -227,6 +238,7 @@ function NovaOrdem() {
                             />
                         </div>
                         <div id="contFinalizar">
+                            <button id="bttCancelar" onClick={handleCancel}>cancelar</button>
                             <Popconfirm
                                 title=""
                                 description={`Confirma os dados inseridos?`}
@@ -234,7 +246,7 @@ function NovaOrdem() {
                                 onCancel={null}
                                 okText="sim"
                                 cancelText="não">     
-                                <button id='bttExcluir'>Gerar Ordem</button>
+                                <button id='bttGerarOrdem'>Gerar Ordem</button>
                             </Popconfirm>
                         </div>
                         </>

@@ -7,7 +7,7 @@ import { loginFunc } from '../services/backend/authAPI'
 import zxcvbn from 'zxcvbn';
 import { useAuth } from '../provider/authProvider'
 import { Input, notification } from 'antd'
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons'
+import { EyeInvisibleOutlined, EyeOutlined, EyeTwoTone, LoadingOutlined } from '@ant-design/icons'
 import { setCookie } from '../services/cookies'
 import { putRegSenha } from '../services/backend/usuarioAPI'
 
@@ -15,25 +15,20 @@ function Login() {
     const navigate = useNavigate()
     const minForca = 3  // nivel obrigatorio da nova senha
     
-    //  Resto da pagina
+    const [render, setRender] = useState({
+        senhaVisible: false,
+        bttSenhaVisible: false
+    })
     const [primeiroAcesso, setPrimeiroAcesso] = useState(false)
-    const [usuario, setUsuario] = useState({
-        email: '',
-        senha: ''
-    })
-    const [novaSenha, setNovaSenha] = useState({
-        senha: '',
-        rSenha: ''
-    })
+    const [login, setLogin] = useState({ email: '', senha: '' })
+    const [novaSenha, setNovaSenha] = useState({ senha: '', rSenha: '' })
+    const [forcaSenha, setForcaSenha] = useState({ nivel: 1, msg: 'muito fraca' })
     const [msgNovaSenha, setMsgNovaSenha] = useState(null)
     const [msgLogin, setMsgLogin] = useState(null)
     // const [funcionario, setFuncionario] = useState()
     const [request, setRequest] = useState(null)
     // const [requestUsuario, setRequestUsuario] = useState()
-    const [forcaSenha, setForcaSenha] = useState({
-        nivel: 1,
-        msg: 'muito fraca'
-    })
+    const [loading, setLoading] = useState(false)
     //  AUTH
     const { setToken, token } = useAuth()
     if (token) {
@@ -49,26 +44,30 @@ function Login() {
         });
     };
     const handleLogin = async () => {
-        if (usuario.email == '' || usuario.senha == '') {
+        setLoading(true)
+        if (login.email == '' || login.senha == '') {
             showNotif(
                 'bottomLeft',
                 `Erro ao fazer login!`,
                 'Campos email e senha são obrigatórios.')
+            setLoading(false)
             return
         }
         let result
         try {
-            result = await loginFunc(usuario)
+            result = await loginFunc(login)
         } catch (error) {
             console.log(error)
             showNotif('bottomLeft', `Erro ao fazer login!`, 'Tente novamente mais tarde ou entre em contato com o suporte.')
+            setLoading(false)
             return
         }
         if (result.data.funcionario.ultimaAtividade == null) {
-            setUsuario({
-                email: result.data.funcionario.login
-            })
+            // setLogin({
+            //     email: result.data.funcionario.login
+            // })
             setPrimeiroAcesso(true)
+            setLoading(false)
             return
         }
         setToken(result.data.tokenJWT)  // Definir o token no Authorization
@@ -96,8 +95,19 @@ function Login() {
         changeForcaNovaSenha(value)
         //  calcSegurancaSenha(value)
     }
-    const handleChangeUsuario = (value, field) => {
-        setUsuario(prevState => ({
+    const handleChangeLogin = (value, field) => {
+        if (field=='senha' && value=='') {
+            changeRender(false, 'bttSenhaVisible')
+        } else {
+            changeRender(true, 'bttSenhaVisible')
+        }
+        setLogin(prevState => ({
+            ...prevState,
+            [field]: value,
+        }))
+    }
+    const changeRender = (value, field) => {
+        setRender(prevState => ({
             ...prevState,
             [field]: value,
         }))
@@ -197,19 +207,53 @@ function Login() {
             <section id="secLogin">
                 <h2>Bem-vindo ao SIGOS</h2>
                 <div id='inputs'>
-                    <Input
+                    {/* <Input
                         id="email"
                         placeholder='email'
                         onChange={(e) => handleChangeUsuario(e.target.value, "email")}
+                    /> */}
+                    <input id="email" type="text" 
+                        placeholder='email'
+                        onChange={(e) => handleChangeLogin(e.target.value, "email")}
                     />
-                    <Input.Password
+                    
+                    <div id='senha'>
+                        <input 
+                            type={render.senhaVisible ? "text" : "password"} 
+                            placeholder="senha"
+                            onChange={(e) => handleChangeLogin(e.target.value, "senha")}
+                        />
+                        <button
+                            onClick={() => changeRender(!render.senhaVisible, "senhaVisible")}
+                            style={{ visibility: render.bttSenhaVisible ? 'visible' : 'hidden' }}
+                        >
+                        {
+                            render.senhaVisible ? (
+                                <EyeOutlined />
+                            ) : (
+                                <EyeInvisibleOutlined />
+                            )
+                            
+                        }
+                        </button>
+                    </div>
+                    {/* <Input.Password
                         id="senha"
                         placeholder="senha"
                         iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                         onChange={(e) => handleChangeUsuario(e.target.value, "senha")}
-                    />
+                    /> */}
                 </div>
-                <button id="entrar" onClick={handleLogin}>entrar</button>
+                <button id="entrar" className={loading ? 'loginCarregando' : 'loginNormal'} onClick={handleLogin}>
+                    <p>
+                        entrar
+                    </p>
+                    <LoadingOutlined id="iconLoading"/>
+                    {/* {
+                        loading &&
+                        <LoadingOutlined id="iconLoading"/>
+                    } */}
+                </button>
                 <a id="esqueciMinhaSenha" href="">esqueci minha senha</a>
                 {/* <p onClick={changePrimeiroAcesso}>primeiro acesso</p>             */}
             </section>
@@ -260,4 +304,4 @@ function Login() {
     )
 }
 
-export default Login
+export default Login 
