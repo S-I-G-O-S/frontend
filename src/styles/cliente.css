@@ -1,16 +1,3 @@
-:root {
-    --azul: #395873;
-    --nav: #395873ea;
-    --laranja: #D96704;
-    --salmao1: #F2AE72;
-    --salmao2: #f7cba4;
-    --salmao3: #fcd8b9;
-    --branco: #F2E8DF;
-    --marrom1: #26110D;
-    --marrom2: #3b1f17;
-    --marrom3: #462b18;
-    --preto: #000;
-}
 
 #pageCliente {
     main {
@@ -25,7 +12,7 @@
             padding: 1rem;
             border-width: 0.1rem;
             border-style: solid;
-            border-radius: 10px;
+            border-radius: 0.3rem;
             h2 {
                 font-size: 1.1rem;
                 margin: 0;
@@ -42,13 +29,11 @@
                 margin-bottom: 1.5rem;
             }
             input {
+                font-size: 0.9rem;
                 padding: 0.1rem 0.3rem;
                 border-width: 0.1rem;
                 border-style: solid;
                 border-radius: 0.3rem;
-            }
-            input:focus {
-                font-weight: 500;
             }
             #geral,
             #endereco,
@@ -63,23 +48,9 @@
                 flex-wrap: wrap;
                 gap: 0.5rem;
                 justify-content: left;
-                padding: 0.5rem;
-                box-sizing: border-box;
                 div {
                     display: flex;
                     gap: 0.3rem;
-                    input {
-                        border-width: 0.1rem;
-                        border-style: solid;
-                        border-radius: 0.2rem;
-                        font-size: 0.85rem;
-                        padding: 0.1rem 0.3rem;
-                        height: 1.1rem;
-                    }
-                    input:focus {
-                        border: 0.1rem solid var(--laranja);
-                        font-weight: 500;
-                    }
                 }
                 #nome {
                     input {
@@ -106,18 +77,6 @@
                     label {
                         font-size: 0.95rem;
                     }
-                    input {
-                        background-color: var(--branco);
-                        border: 0.1rem solid var(--marrom);
-                        border-radius: 0.2rem;
-                        font-size: 0.85rem;
-                        padding: 0.1rem 0.3rem;
-                        height: 1.1rem;
-                    }
-                    input:focus {
-                        border: 0.1rem solid var(--laranja);
-                        font-weight: 500;
-                    }
                 }
                 #cep {
                     grid-area: cep;
@@ -125,9 +84,19 @@
                     input {
                         width: 6rem;
                     }
-                    p {
-                        margin: 0;
-                        color: #a50000;
+                    button {
+                        cursor: pointer;
+                        align-content: center;
+                        justify-items: center;
+                        font-size: 0.9rem;
+                        padding: 0.1rem 0.5rem;
+                        border-width: 0.1rem;
+                        border-style: solid;
+                        border-radius: 0.3rem;
+                    }
+                    button:focus {
+                        outline-width: 0.1rem;
+                        outline-style: solid;
                     }
                 }
                 #rua {
@@ -167,33 +136,21 @@
                     font-size: 0.95rem;
                     font-weight: 500;
                     
-
-                    height: 1.5rem;
-                    width: 8rem;
-                    border: 0.1rem solid var(--marrom);
+                    height: auto;
+                    width: auto;
+                    padding: 0.1rem 1.5rem;
+                    border-width: 0.1rem;
+                    border-style: solid;
                     border-radius: 0.3rem;
-                    color: var(--marrom);
 
                     transition: 150ms;
                 }
-                
-                button:hover {
-                    width: 11rem;
-                }
                 button:focus {
                     text-decoration: underline;
-                    border: 0.1rem solid var(--laranja);
+                    outline-width: 0.1rem;
+                    outline-style: solid;
                 }
-                #bttCancelar {
-                    background-color: #ecea57;
-                }
-                #bttSalvar {
-                    background-color: #40ec5d;
-                }
-                #bttExcluir {
-                    background-color: #fc8c8c;
-                    
-                }
+                
             }
         }
         #secContatos {
@@ -210,31 +167,84 @@
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    font-size: 1rem;
-                    font-weight: 500;
+                    font-size: 0.95rem;
                     height: 1.5rem;
                     width: 6rem;
                     border: none;
-                    border-radius: 0.2rem;
-                    color: var(--branco);
-                    background-color: var(--marrom);
+                    border-radius: 0.3rem;
 
                 }
-                #bttNovoCtt:hover {
-                    opacity: 0.9;
+                #bttNovoCtt:focus {
+                    outline-width: 0.11rem;
+                    outline-style: solid;
                 }
             }
             #listContatos {
                 display: flex;
                 flex-direction: column;
                 gap: 0.2rem;
+                overflow-y: auto;
 
                 .contato {
                     display: flex;
-                    flex-direction: column;
-                    box-sizing: border-box;
-                    .contatoHeader {
-                        all: unset;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+                    
+                    font-size: 0.95rem;
+                    font-weight: 500;
+                    padding: 0.25rem 0.99rem;
+                    border-style: solid;
+                    border-width: 0.1rem;
+                    border-radius: 0.5rem;
+                    
+                    .contContatoLeft {
+                        display: flex;
+                        flex-direction: column;
+                        /* row-gap: 0.1rem; */
+                        h4 {
+                            font-size: 0.91rem;
+                        }
+                        p {
+                            font-size: 0.75rem;
+                            letter-spacing: 0.1rem;
+                        }
+                    }
+                    .contContatoRight {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 0.4rem;
+                        
+                        button {
+                            cursor: pointer;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-weight: 500;
+                            font-size: 0.9rem;
+                            padding: 0.2rem 0.5rem;
+                            border-style: solid;
+                            border-width: 0.1rem;
+                            border-radius: 0.3rem;
+                        }
+                        button:focus {
+                            outline-width: 0.1rem;
+                            outline-style: solid;
+                        }
+                        #iconMaisContato {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            box-sizing: border-box;
+                            padding: 0 0.1rem;
+                        }
+                        #iconMaisContato svg {
+                            height: 1.1rem;
+                            width: 1.1rem;
+                        }
+                    }
+                    /* .contatoHeader {
                         display: flex;
                         align-items: center;
                         justify-content: space-between;
@@ -243,8 +253,7 @@
                         font-weight: 500;
 
                         padding: 0.2rem 0.5rem;
-                        color: var(--salmao2);
-                        background-color: var(--marrom);
+                        
 
                         .divLeftContato {
                             display: flex;
@@ -286,31 +295,25 @@
                         }
                     }
                     .contatoBody {
-                        grid-template-columns: 1fr 1fr;
-                        grid-template-areas: 
-                        "descricao descricao"
-                        "telefone email"
-                        ;
-                        text-align: center;
-                        background-color: var(--salmao3);
-                        padding: 0.3rem 0.3rem;
-                        border: 0.1rem solid var(--marrom);
-                        border-top: 0;
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 0.1rem;
                         font-size: 0.9rem;
-                        .contatoTelefone {
-                            grid-area: telefone;
+                        padding: 0.3rem 0.3rem;                        
+                        border-style: solid;
+                        border-width: 0.1rem;
+                        border-top: 0;
+                        
+                        div {
+                            flex-grow: 1;
+                            flex-basis: 20rem;
+                            border: 0.1rem solid var(--marrom1);
                         }
-                        .contatoEmail {
-                            grid-area: email;
-                        }
-                        .contatoDescricao {
-                            grid-area: descricao;
-                        }
-                    }
+                    } */
                 }
-                .fechado {
+                /* .fechado {
                     .contatoHeader {
-                        border-radius: 0.5rem;
+                        border-radius: 0.3rem;
                     }
                     .contatoBody {
                         display: none;
@@ -318,13 +321,12 @@
                 }
                 .aberto {
                     .contatoHeader {
-                        border-radius: 0.5rem 0.5rem 0 0;
+                        border-radius: 0.3rem 0.3rem 0 0;
                     }
                     .contatoBody {
-                        display: grid;
-                        border-radius: 0 0 0.5rem 0.5rem;
+                        border-radius: 0 0 0.3rem 0.3rem;
                     }
-                }
+                } */
             }
         }
         #secHistorico {
@@ -335,25 +337,26 @@
             margin-bottom: 1.5rem;
         }
         #contListHistoricos {
-            width: 100%;
+            border-style: solid;
+            border-width: 0.1rem;
             border-collapse: collapse;
             border-spacing: 0;
-            background-color: var(--branco);
+            width: 100%;
+
         }
-        #contListHistoricos > thead {
-            background-color: var(--marrom1);
-            color: var(--salmao2);
-        }
-        #contListHistoricos 
+        /* #contListHistoricos 
         th, td {
             font-weight: 400;
             padding: 0.1rem 0.2rem;
             text-align: center;
             border: 0.1rem solid;
-            border-color: var(--marrom1);
+        } */
+        thead th{
+            font-weight: 400;
         }
-        #contListHistoricos td {
-            font-size: 0.9rem;
+        tbody td {
+            font-size: 0.95rem;
+            text-align: center;
         }
     }
     #shadowBG {
@@ -365,18 +368,88 @@
         width: 100%;
         height: 100%;
         box-sizing: border-box;
-        #secNovoCliente {
+        #secNovoContato {
             display: flex;
             flex-direction: column;
+            gap: 0.5rem;
             padding: 1rem;
-            border: 0.1rem solid var(--marrom);
-            border-radius: 10px;
-            background-color: var(--salmao2);
-            h2 {
-                font-size: 1.1rem;
-                color: var(--marrom);
-                margin: 0;
-                margin-bottom: 1.5rem;
+            /* min-width: 30rem; */
+            border-radius: 0.3rem;
+            #contHeadNovoContato {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 1rem;
+                h2 {
+                    font-size: 1.1rem;
+                }
+                #closeModel {
+                    cursor: pointer;
+                    display: block;
+                    align-content: center;
+                    justify-items: center;
+                    padding: 0.1rem 0.3rem;
+                    border-radius: 0.3rem;
+                    transition: 200ms;
+                    svg {
+                        height: 1.2rem;
+                        width: 1.2rem;
+                    }
+                }
+            }
+            #contFormNovoContato {
+                display: flex;
+                flex-direction: column;
+                row-gap: 0.2rem;
+                padding: 0.5rem 1rem;
+                border-radius: 0.3rem;
+                border-style: solid;
+                border-width: 0.1rem;
+                div {
+                    display: grid;
+                    grid-template-columns: min-content auto;
+                    gap: 0.4rem;
+                    label {
+                        font-weight: 500;
+                    }
+                    input {
+                        font-size: 0.9rem;
+                        padding: 0.1rem 0.3rem;
+                        border-width: 0.1rem;
+                        border-style: solid;
+                        border-radius: 0.3rem;
+                    }
+                }
+            }
+            #contFooterNovoContato {
+                display: flex;
+                justify-content: space-between;
+                padding: 0.5rem 1rem;
+                border-radius: 0.3rem;
+                border-style: solid;
+                border-width: 0.1rem;
+                button {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    font-size: 0.9rem;
+                    font-weight: 500;
+
+                    height: auto;
+                    width: 7rem;
+                    padding: 0.3rem 0.5rem;
+                    border-style: solid;
+                    border-width: 0.1rem;
+                    border-radius: 0.3rem;
+                    
+                    transition: 150ms;
+                }
+                button:focus {
+                    text-decoration: underline;
+                }
+                #bttAddContato {
+                    width: max-content;
+                }
             }
         }
     }
@@ -414,7 +487,6 @@
 
             height: 1.5rem;
             width: 80%;
-            border: 0.1rem solid var(--marrom);
             border-radius: 0.3rem;
             color: var(--marrom);
 

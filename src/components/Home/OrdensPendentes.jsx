@@ -35,25 +35,8 @@ function OrdensPendentes() {
     useEffect(() => {
         fetchOrdens()
     }, [])
-    return !ordensPendentes ? /*(<Loading />)*/ '' : (
-        ordensPendentes === 'vazio' ? '' : (
-            <>
-            {/* <Card
-                // id="contOrdensAbertas"
-                title="Ordens Pendentes"
-                bordered={false}
-                extra={
-                    <Link to={'/ordens'}>Mais</Link>
-                }
-            >
-                {ordensPendentes.map(ordem => (
-                    <div className="ordensPendentes ordens" key={ordem.id}>
-                        <div className="nomeCliente">{ordem.cliente}</div>
-                        <div className="serviço">{ordem.servico}</div>
-                        <div className="dataHora">{converterDtHr(ordem.dtAbertura)}</div>
-                    </div>
-                ))}
-            </Card> */}
+    return !ordensPendentes ? <Loading /> : (
+        ordensPendentes.length==0 ? '' : (
             <div id="contOrdensPendentes" className="contsOrdens">
                 <div className="headContsOrdens">
                     <div className="titulo">Ordens Pendentes</div>
@@ -74,8 +57,6 @@ function OrdensPendentes() {
                     ))}
                 </div>
             </div>
-            </>
-
         )
     )
 }

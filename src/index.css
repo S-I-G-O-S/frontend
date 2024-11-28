@@ -66,11 +66,20 @@ body {
     h3 {
         margin: 0;
     }
+    h4 {
+        all: unset;
+    }
     button {
         all: unset;
+        box-sizing: border-box;
     }
     input[type="text"]{
         all: unset;
+        box-sizing: border-box;
+    }
+    input[type="password"]{
+        all: unset;
+        box-sizing: border-box;
     }
     .popup {
         z-index: 999;
