@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useAuth } from '../../provider/authProvider'
 import { deleteCookie } from '../../services/cookies'
 import { Dropdown } from 'antd'
-import { SettingOutlined } from '@ant-design/icons'
+import { SettingOutlined, UserOutlined } from '@ant-design/icons'
 import { logoutFunc } from '../../services/backend/authAPI'
 
 function Header({usuario, titulo}) {
@@ -17,13 +17,13 @@ function Header({usuario, titulo}) {
     const handleLogout = async () => {
         try {
             const result = await logoutFunc()
+            console.warn(result)
         } catch (error) {
             console.error(error)
-            return
         }
+        sessionStorage.clear()
         setToken(null)
         deleteCookie('usuario')
-        deleteCookie('tema')
         navigate("/", { replace: true })
     }
     const itensMenu = [
@@ -39,7 +39,7 @@ function Header({usuario, titulo}) {
         {
             key: 1,
             label: (
-                <div onClick={()=>navigate("/usuario", { replace: true })}>configurações</div>
+                <div onClick={()=>navigate("/configuracoes", { replace: true })}>configurações</div>
             ),
             icon: <SettingOutlined/>
         }
@@ -83,8 +83,9 @@ function Header({usuario, titulo}) {
                         </div>
                     )}
                 >
-                    <div id='contIconUser' /*onClick={handleViewConfiguser} */>
-                    </div>
+                    {/* <div id='contIconUser'>
+                    </div> */}
+                    <UserOutlined id="iconUser"/>
                 </Dropdown>
                 {/*
                     viewContUser &&

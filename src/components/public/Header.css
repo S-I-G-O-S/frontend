@@ -1,15 +1,3 @@
-:root {
-    --azul: #395873;
-    --azulHover: #2a4358;
-    --nav: #395873ea;
-    --laranja: #D96704;
-    --salmao1: #F2AE72;
-    --salmao2: #f7cba4;
-    --salmao3: #fcd8b9;
-    --branco: #F2E8DF;
-    --marrom: #26110D;
-    --preto: #000;
-}
 #header {
     display: flex;
     grid-area: header;
@@ -18,50 +6,48 @@
     gap: 0.2rem;
     padding: 0 2rem 0 1rem;
     height: 3rem;
-
-    background-color: var(--marrom);
     .tituloPag {
         font-size: 1rem;
         font-weight: 500;
         margin-left: 2rem;
-        color: var(--salmao1);
     }
     #headerRight {
         display: flex;
         align-items: center;
         gap: 1rem;
-        #contIconUser {
+        #iconUser {
+            padding: 0.2rem 0.2rem;
+            border-radius: 50%;
+            height: auto;
+        }
+        #iconUser
+        svg {
+            height: 1.35rem;
+            width: 1.35rem;
+        }
+        #sair {
             cursor: pointer;
             display: flex;
             align-items: center;
-            height: 1.5rem;
-            width: 1.5rem;
-            background-image: url(../../assets/userIcon.png);
-            background-size: 100%;
-        }
-        #contIconUser:hover {
-            background-image: url(../../assets/userIconHover.png);
-        }
-        #sair {
-            all: unset;
-            cursor: pointer;
+            justify-content: center;
+
             font-size: 0.95rem;
             font-weight: 500;
             text-decoration: none;
-            text-align: center;
+            letter-spacing: auto;
+            word-spacing: auto;
+            line-height: auto;
+            text-transform: none;
+            text-indent: 0px;
+            text-shadow: none;
+
+            padding-block: 0;
+            padding-inline: 0;
             padding: 0.2rem 0.7rem;
             width: auto;
+            border: 0;
             border-radius: 0.3rem;
-            color: var(--marrom);
-            background-color: var(--salmao1);
         }
-        #sair:hover {
-            background-color: var(--salmao2);
-        }
-        .customDropdown {
-            background-color: #F2AE72 !important;
-        }
-        
         /* #contConfigUser {
             display: flex;
             flex-direction: column;

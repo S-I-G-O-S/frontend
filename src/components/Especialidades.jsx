@@ -18,7 +18,7 @@ import { getCookie } from '../services/cookies'
 function Especialidades() {
     // Geal
     const [tipoJanela, setTipoJanela] = useState(null)
-    const [layoutEspecServicos, setLayoutEspecServicos] = useState("layoutEspecs")
+    const [layoutEspecServicos, setLayoutEspecServicos] = useState("layoutServicos")
     const [ordemEspecServicos, setOrdemEspecServicos] = useState("asc")
     const [erro, setErro] = useState('')
     const [usuario, setUsuario] = useState(() => {
@@ -153,6 +153,7 @@ function Especialidades() {
                 <img src={removeIcon} onClick={() => {deleteEspecServ(especialidade.id)}}/>
             </div>
         )
+        //  TODO Trocar este img por svg
     }
     const mudarInfoServico = (valor, campo) => {
         setServicoAberto(serv => ({
@@ -389,7 +390,7 @@ function Especialidades() {
         >
             <section id='sec1'>
                 {
-                    usuario.cargo == 'adm' || usuario.cargo == 'dev' ?
+                    usuario.cargo == 'ADM' || usuario.cargo == 'DEV' ?
                     <div id='contNovo'>
                         <button onClick={() => {abrirEspec("nova")}}>
                             Nova Especialidade</button>
@@ -567,8 +568,8 @@ function Especialidades() {
                                             (servicoAberto.especialidades.map(espec => (
                                                 converterEspecs(espec)
                                             ))) : 
-                                            (<p>Nenhuma especialidade adicionada</p>)) : 
-                                        (<p>Nenhuma especialidade adicionada</p>)
+                                            (<p id='msgSemEspecs'>Nenhuma especialidade adicionada</p>)) : 
+                                        (<p id='msgSemEspecs'>Nenhuma especialidade adicionada</p>)
                                 }
                                 </div>
                                         </div>
@@ -585,9 +586,6 @@ function Especialidades() {
                 )
             }
         </main>
-        <div id='shadowBG'>
-            
-        </div>
         </div>
     )
 }

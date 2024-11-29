@@ -1,4 +1,5 @@
 import {getPageClientes, postCliente} from '../services/backend/clientesAPI.js'
+import { getCookie } from '../services/cookies.js'
 
 import Nav from './public/Nav'
 import Loading from './public/Loading.jsx'
@@ -7,8 +8,9 @@ import Header from './public/Header'
 import Edit from '../assets/edit-text.png'
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { Pagination } from 'antd'
-import { getCookie } from '../services/cookies.js'
+import { notification, Pagination } from 'antd'
+import { HomeFilled, EditFilled }  from '@ant-design/icons'
+
 
 function Clientes() {
     const navigate = useNavigate();
@@ -16,7 +18,6 @@ function Clientes() {
     const [clientes, setClientes] = useState()
     const [novoCliente, setNovoCliente] = useState(null)
     const [showNovoCliente, setShowNovoCliente] = useState(null)
-    const [mensagem, setMensagem] = useState(null)
     const [usuario, setUsuario] = useState(() => {
         const cookieUsuario = getCookie('usuario')
         return cookieUsuario ? cookieUsuario : ''
@@ -32,18 +33,28 @@ function Clientes() {
     }
     const handleCriarCliente = async () => {
         if (novoCliente.nome == '' ) {
-            setMensagem('O nome do cliente é obrigatório.')
-            setTimeout(() => {
-                setMensagem(null)
-            }, 5000)
+            // setMensagem('O nome do cliente é obrigatório.')
+            // setTimeout(() => {
+            //     setMensagem(null)
+            // }, 5000)
+            notification.error({
+                message: 'O nome do cliente é obrigatório.',
+                description: '',
+                placement: 'bottomLeft',
+            })
             return 
         }
         if ( novoCliente.cnpj.length != 14) {
             // TODO dá pra adicionar uma verificação de CNPJ por api
-            setMensagem('CNPJ inválido')
-            setTimeout(() => {
-                setMensagem(null)
-            }, 5000)
+            // setMensagem('CNPJ inválido')
+            // setTimeout(() => {
+            //     setMensagem(null)
+            // }, 5000)
+            notification.error({
+                message: 'CNPJ inválido',
+                description: '',
+                placement: 'bottomLeft',
+            })
             return 
         }
         let result
@@ -153,7 +164,8 @@ function Clientes() {
                                 </td>
                                 <td className='endereco'>{cliente.endereco.logradouro}, {cliente.endereco.numero}, {cliente.endereco.complemento}</td>
                                 <td className='options' onClick={() => handleEditCliente(cliente.id)}>
-                                    <img src={Edit} alt="" />
+                                    {/* <img src={Edit} alt="" /> */}
+                                    <EditFilled />
                                 </td>
                             </tr>
                         ))
@@ -187,21 +199,20 @@ function Clientes() {
                 <div id='shadowBG'>
                     <div id='contNovoCliente'>
                         <h2>Criando um novo cliente</h2>
-                        <div id='nome'>
-                            <label>Nome:</label>
-                            <input type="text" value={novoCliente.nome || ""}
-                            onChange={(e) => handleEditDado(e.target.value, "nome")}
-                            />
+                        <div id="contInfosNovoCliente">
+                            <div id='nome'>
+                                <label>Nome:</label>
+                                <input type="text" value={novoCliente.nome || ""}
+                                onChange={(e) => handleEditDado(e.target.value, "nome")}
+                                />
+                            </div>
+                            <div id='cnpj'>
+                                <label>CNPJ:</label>
+                                <input type="text" value={novoCliente.cnpj || ""}
+                                onChange={(e) => handleEditDado(e.target.value, 'cnpj')}
+                                />
+                            </div>
                         </div>
-                        <div id='cnpj'>
-                            <label>CNPJ:</label>
-                            <input type="text" value={novoCliente.cnpj || ""}
-                            onChange={(e) => handleEditDado(e.target.value, 'cnpj')}
-                            />
-                        </div>
-                        {
-                            <p id='msgNovoCliente' style={{ visibility: mensagem ? 'visible' : 'hidden' }}>{mensagem || 'vazio'}</p>
-                        }
                         <div id='contAcaoNovoCliente'>
                             <button id='bttCancelar' onClick={handleCancelar}>Cancelar</button>
                             <button id='bttSalvar' onClick={handleCriarCliente}>Salvar</button>

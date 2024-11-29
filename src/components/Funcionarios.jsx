@@ -72,6 +72,9 @@ function Funcionarios() {
         navigate(`/funcionario?id=${idFuncionario}`)
     }
     const converterDtHr = (dataHora) => {
+        if (!dataHora) {
+            return '--/--/----, --:--'
+        }
         const [dia, mes, anoHora] = dataHora.split('-')
         const [ano, hora] = anoHora.split(' ')
         const dataISO = `${ano}-${mes}-${dia}T${hora}`
@@ -269,7 +272,6 @@ function Funcionarios() {
                 {
                 !funcionarios ? '' :
                 <div id='contFiltros'>
-                    
                     <div id='contPesqFunc'>
                         <input type="text" 
                             value={filtros.nome.value == 'default' ? '' : filtros.nome.value}
@@ -279,7 +281,7 @@ function Funcionarios() {
                             <SearchOutlined style={{color: '#fcd8b9'}}/>
                         </button>
                     </div>
-                    <Button 
+                    {/* <Button 
                         size='small'
                         type="text" 
                         icon={<FilterFilled />}  
@@ -287,7 +289,13 @@ function Funcionarios() {
                         onClick={handleChangeContFiltros}
                     >
                         Filtros
-                    </Button>
+                    </Button> */}
+                    <button id="bttFiltros" onClick={handleChangeContFiltros}>
+                        <p>
+                            filtros
+                        </p>
+                        <FilterFilled />
+                    </button>
                 </div>
                 }
                 {
@@ -334,7 +342,7 @@ function Funcionarios() {
                 :
                 <div id="contListFuncs">
                 <table id='listFuncs'>
-                <thead>
+                    <thead>
                         <tr id='titleList'>
                             <th className='nomeTitle cl1'>nome</th>
                             <th className='cellTitle cl2'>celular</th>
@@ -346,90 +354,89 @@ function Funcionarios() {
                             <th className='cl6'></th> : ''
                             }
                         </tr>
-                </thead>
-                <tbody className='tbody'>
-                    {
-                        !funcionarios ? 
-                        <tr>
-                            <td colSpan='6'>
-                            <Loading/>
-                            </td>
-                        </tr>
-                        :
-                        funcionarios.map(funcionario => (
-                            <tr id={`funcionario${funcionario.id}`} className='funcs' key={funcionario.id}>
-                                <td className='nomeFunc cl1'>
-                                    {funcionario.primeiro + ' ' + funcionario.ultimo}
+                    </thead>
+                    <tbody className='tbody'>
+                        {
+                            !funcionarios ? 
+                            <tr>
+                                <td colSpan='6'>
+                                <Loading/>
                                 </td>
-                                <td className='cellFunc cl2'>
-                                    {funcionario.celular}
-                                </td>
-                                <td className='ultAtvFunc cl3'>
-                                    {converterDtHr(funcionario.ultimaAtividade)}
-                                </td>
-                                <td className='cargoFunc cl4'>
-                                    {converterCargo(funcionario.cargo)}
-                                </td>
-                                <td className='statusFunc cl5'>
-                                    {
-                                        funcionario.disponivel
-                                            ? 'disponível'
-                                            : 'indisponível'
-                                    }
-                                </td>
-                                {/* 
-                                    TODO [FUNC] Deixar só a seta pra baixo, expandido e mostrando as opções de :
-                                        Editar funcionario (base)
-                                        Mostrar Especialidades (base e ADM)
-                                */}
-                                {   // TODO Só mostrar para ADM e DEV
-                                usuario.cargo=='ADM' || usuario.cargo=='DEV' ?
-                                <td className='setaSkillsFunc cl6'
-                                onClick={() => verEspecialidades(funcionario.id)}>
-                                { 
-                                    especialidades &&
-                                    <Dropdown
-                                    placement='bottom'
-                                    menu={{
-                                        items: [
-                                            {
-                                                key: 1,
-                                                label: (
-                                                    <div onClick={() => handleEditClick(funcionario.id)}>editar</div>
-                                                ),
-                                                icon: <EditFilled style={{color: '#26110D'}}/>
-                                            },
-                                            {
-                                                key: '2',
-                                                label: 'especialidades',
-                                                children: listEspecialidades(funcionario.especialidades),
-                                                icon: <OrderedListOutlined style={{color: '#26110D'}}/>
-                                            },
-                                        ],
-                                        style: {
-                                            backgroundColor: '#F2E8DF',
-                                            fontWeight: '500'
-                                        }
-                                    }}
-                                    overlayStyle={{
-                                        border: "0.1rem solid #26110D",
-                                        borderRadius: '0.5rem'
-                                    }}
-                                    >
-                                        {/* <img id={`imgSetaSkillsFunc${funcionario.id}`} className='imgSetaSKills' src={Down} alt="ver esp :ecialidades"/> */}
-                                        <DownOutlined style={{color: '#26110D'}}/>
-                                    </Dropdown>
-                                }
-                                </td> 
-                                : ''
-                                }
-                                {/* <td className='editFunc cl7' onClick={() => handleEditClick(funcionario.id)}>
-                                    <img className='imgEditFunc' src={Edit} alt="editar"/>
-                                </td> */}
                             </tr>
-                        ))
-                    }
-                </tbody>
+                            :
+                            funcionarios.map(funcionario => (
+                                <tr id={`funcionario${funcionario.id}`} className='funcs' key={funcionario.id}>
+                                    <td className='nomeFunc cl1'>
+                                        {funcionario.primeiro + ' ' + funcionario.ultimo}
+                                    </td>
+                                    <td className='cellFunc cl2'>
+                                        {funcionario.celular}
+                                    </td>
+                                    <td className='ultAtvFunc cl3'>
+                                        {converterDtHr(funcionario.ultimaAtividade)}
+                                    </td>
+                                    <td className='cargoFunc cl4'>
+                                        {converterCargo(funcionario.cargo)}
+                                    </td>
+                                    <td className='statusFunc cl5'>
+                                        {
+                                            funcionario.disponivel
+                                                ? 'disponível'
+                                                : 'indisponível'
+                                        }
+                                    </td>
+                                    {/* 
+                                        TODO [FUNC] Deixar só a seta pra baixo, expandido e mostrando as opções de :
+                                            Editar funcionario (base)
+                                            Mostrar Especialidades (base e ADM)
+                                    */}
+                                    {   // TODO Só mostrar para ADM e DEV
+                                    usuario.cargo=='ADM' || usuario.cargo=='DEV' ?
+                                    <td className='setaSkillsFunc cl6'>
+                                    { 
+                                        especialidades &&
+                                        <Dropdown
+                                        placement='bottom'
+                                        menu={{
+                                            items: [
+                                                {
+                                                    key: 1,
+                                                    label: (
+                                                        <div onClick={() => handleEditClick(funcionario.id)}>editar</div>
+                                                    ),
+                                                    icon: <EditFilled style={{color: '#26110D'}}/>
+                                                },
+                                                {
+                                                    key: '2',
+                                                    label: 'especialidades',
+                                                    children: listEspecialidades(funcionario.especialidades),
+                                                    icon: <OrderedListOutlined style={{color: '#26110D'}}/>
+                                                },
+                                            ],
+                                            style: {
+                                                backgroundColor: '#F2E8DF',
+                                                fontWeight: '500'
+                                            }
+                                        }}
+                                        overlayStyle={{
+                                            border: "0.1rem solid #26110D",
+                                            borderRadius: '0.5rem'
+                                        }}
+                                        >
+                                            {/* <img id={`imgSetaSkillsFunc${funcionario.id}`} className='imgSetaSKills' src={Down} alt="ver esp :ecialidades"/> */}
+                                            <DownOutlined style={{color: '#26110D'}}/>
+                                        </Dropdown>
+                                    }
+                                    </td> 
+                                    : ''
+                                    }
+                                    {/* <td className='editFunc cl7' onClick={() => handleEditClick(funcionario.id)}>
+                                        <img className='imgEditFunc' src={Edit} alt="editar"/>
+                                    </td> */}
+                                </tr>
+                            ))
+                        }
+                    </tbody>
                 </table>
                 </div>
                 }
@@ -454,7 +461,7 @@ function Funcionarios() {
         {
         showContFiltros && (
         <div id='shadowBG'>
-            <div id='contFiltros'>
+            <section id='secFiltros'>
                 <div id='headerContFiltros'>
                     <h2>Filtros</h2>
                     <div 
@@ -547,7 +554,7 @@ function Funcionarios() {
                         Aplicar filtros
                     </button>
                 </div>
-            </div>
+            </section>
         </div>
         )
         }

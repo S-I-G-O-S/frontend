@@ -3,16 +3,31 @@ import Header from './public/Header'
 import '../styles/userConfig.css'
 import { useEffect, useState } from 'react'
 import Loading from './public/Loading'
-import { getCookie } from '../services/cookies'
+import { getCookie, setCookie } from '../services/cookies'
 import { getDeployStatus } from '../services/renderAPI'
+import { usePreferencias } from '../context/PreferenciasContext'
 
-//  TODO Verificar se o token do usuario ainda é valido
 function UserConfig() {
     const data = new Date()
     const [usuario, setUsuario] = useState(() => {
         const cookieUsuario = getCookie('usuario')
         return cookieUsuario ? cookieUsuario : ''
     })
+    const { sessPreferencias, setSessPreferencias } = usePreferencias()
+    /*
+    useEffect(() => {
+        if (sessPreferencias) {
+            console.log('Mudando tema para: '+ sessPreferencias.tema)
+            sessionStorage.setItem('preferencias', JSON.stringify(sessPreferencias))
+        }
+    }, [sessPreferencias.tema])
+    */
+    const changeTheme = (tema) => {
+        setSessPreferencias(prevState => ({
+            ...prevState,
+            tema: tema
+        }))
+    }
     const handleChangeUsuario = (value, field) => {
         setUsuario(prevState => ({
             ...prevState,
@@ -35,6 +50,8 @@ function UserConfig() {
     useEffect(() => {
         console.clear()
         console.log(usuario)
+        console.log(sessPreferencias)
+        // changeTheme(sessPreferencias.tema)
     }, [])
     return (
         <div id='pagePerfilConfig' className='paginas'>
@@ -44,8 +61,8 @@ function UserConfig() {
             {
             !usuario ? <Loading></Loading> :
             <>
-                {
-                usuario.cargo == 'DEV' ?
+                {/*
+                usuario.cargo == 'DEV' &&
                 <section id='secDevConfigs'>
                     <h2>Configurações de desenvolvimento</h2>
                     <label>cargo</label>
@@ -57,29 +74,35 @@ function UserConfig() {
                         <option value="ADM">ADM</option>
                         <option value="DEV">DEV</option>
                     </select>
-                </section> : ''
-                }
+                </section>
+                */}
                 <section id='secInfosFuncionario'>
                     <h2>Minhas informações</h2>
-                    <div id='contInfosFunc'>
-                        <div>Nome: {usuario.nome}</div>
-                        <div>Cargo: {usuario.cargo}</div>
-                        <div>Tel./Cel.: {usuario.celular}</div>
-                        <div>Email: {usuario.email}</div>
-                        <div>
-                            Endereço: {usuario.endereco.logradouro}, Nº{usuario.endereco.numero} - {usuario.endereco.cidade}-{usuario.endereco.uf} 
+                    {
+                        !usuario ? 
+                        <Loading></Loading> :
+                        <div id='contInfosFunc'>
+                            <div>Nome: {usuario.nome || ''}</div>
+                            <div>Cargo: {usuario.cargo || ''}</div>
+                            <div>Tel./Cel.: {usuario.celular || ''}</div>
+                            <div>Email: {usuario.email || ''}</div>
+                            <div>
+                                Endereço: {usuario.endereco.logradouro || ''}, Nº{usuario.endereco.numero || ''} - {usuario.endereco.cidade || ''}-{usuario.endereco.uf || ''} 
+                            </div>
                         </div>
-                    </div>
+                    }
                 </section>
                 <section id='secUserConfig'>
                     <h2>Preferências</h2>
                     <div>
                         <div>
                             <label>Tema: </label>
-                            <select name="" id="">
-                                value={usuario.tema}
-                                <option value="">claro</option>
-                                <option value="">noturno</option>
+                            <select name="" id="" 
+                                onChange={(e) => changeTheme(e.target.value)} 
+                                value={sessPreferencias.tema}>
+                                {/* <option value="" disabled hidden selected>--</option> */}
+                                <option value="salmaoLight">salmão claro</option>
+                                <option value="salmaoDark">salmão noturno</option>
                             </select>
                         </div>
                     </div>

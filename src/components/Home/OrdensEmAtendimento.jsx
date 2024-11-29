@@ -2,9 +2,11 @@ import { useEffect, useState } from "react"
 import Loading from "../public/Loading"
 import { Card } from "antd"
 import { Link } from "react-router-dom"
+import { getOrdensForHome } from "../../services/backend/ordemAPI"
 
 function OrdensEmAtendimento() {
-    const [ordensEmAtendimento, setOrdensEmAtendimento] = useState(null)
+    const [ordensEmExecucao, setOrdensEmExecucao] = useState(null)
+    const [reqstOrdensEmExecucao, setReqstOrdensEmExecucao] = useState(null)
     const converterDtHr = (dataHora) => {
         const [dia, mes, anoHora] = dataHora.split('-')
         const [ano, hora] = anoHora.split(' ')
@@ -20,38 +22,34 @@ function OrdensEmAtendimento() {
             minute: '2-digit',
         })
     }
+    const fetchOrdens = async () => {
+        try {
+            const result = await getOrdensForHome('EM_EXECUCAO')
+            setReqstOrdensEmExecucao(result)
+            setOrdensEmExecucao(result.data.content)
+            console.warn(result)
+        } catch (error) {
+            console.error(error)
+        }
+    }
     useEffect(() => {
-        setOrdensEmAtendimento([
-            {
-                id: 1,
-                dtAbertura: "21/11/2024",
-                cliente: "Cliente 1",
-                servico: 'Configuração de Redes',
-                endereco: "R. XV de novembro, 16 - Santos-SP",
-                tecnico: "Jusenir Almeida"
-            }
-        ])
+        // setOrdensEmAtendimento([
+        //     {
+        //         id: 1,
+        //         dtAbertura: "21/11/2024",
+        //         cliente: "Cliente 1",
+        //         servico: 'Configuração de Redes',
+        //         endereco: "R. XV de novembro, 16 - Santos-SP",
+        //         tecnico: "Jusenir Almeida"
+        //     }
+        // ])
+        fetchOrdens()
     }, [])
-    return !ordensEmAtendimento ? /*(<Loading />)*/ ''  : (
-        ordensEmAtendimento === 'vazio' ? '' : (
-            <>
-            {/* <Card
-                title="Ordens em atendimento (exemplo)"
-                bordered={false}
-                id="secOrdensSendoAtendidas"
-            >
-                {ordensEmAtendimento.map(ordem => (
-                    <div id={`ordenSendoAtendida1${ordem.id}`} className="ordensSendoAtendidas ordens" key={ordem.id}>
-                        <div className="nomeCliente">{ordem.cliente.nome}</div>
-                        <div className="dataHora">{ordem.data}</div>
-                        <div className="local">{ordem.cliente.endereco}</div>
-                        <div className="tecnico">{ordem.tecnico.nome}</div>
-                    </div>
-                ))}
-            </Card> */}
+    return !ordensEmExecucao ? <Loading />  : (
+        ordensEmExecucao.length==0 ? '' : (
             <div id="contOrdensEmAtendimento" className="contsOrdens">
                 <div className="headContsOrdens">
-                    <div className="titulo">Ordens Pendentes</div>
+                    <div className="titulo">Ordens em execução</div>
                     {
                         (6 - 5 ) > 0 &&
                         (<Link className="link" to={'/ordens?situacao=EM_EXECUCAO'}>
@@ -60,7 +58,7 @@ function OrdensEmAtendimento() {
                     }
                 </div>
                 <div className="bodyContsOrdens">
-                    {ordensEmAtendimento.map(ordem => (
+                    {ordensEmExecucao.map(ordem => (
                         <div className="ordensEmAtendimento ordens" key={ordem.id}>
                             <div className="nomeCliente">{ordem.cliente}</div>
                             <div className="serviço">{ordem.servico}</div>
@@ -69,7 +67,6 @@ function OrdensEmAtendimento() {
                     ))}
                 </div>
             </div>
-            </>
         )
     )
 }

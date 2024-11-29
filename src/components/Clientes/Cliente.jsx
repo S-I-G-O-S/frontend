@@ -12,41 +12,33 @@ import { cepAPI } from '../../services/cepAPI.js'
 import Loading from '../public/Loading.jsx'
 import { getCookie } from '../../services/cookies.js'
 import { getOrdens, getOrdensPorCliente } from '../../services/backend/ordemAPI.js'
-import { Pagination } from 'antd'
+import { Dropdown, notification, Pagination } from 'antd'
+import { CloseOutlined, CommentOutlined, InfoCircleOutlined, PhoneOutlined } from '@ant-design/icons'
+import { usePreferencias } from '../../context/PreferenciasContext.jsx'
+
 
 function Cliente() {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search)
     let idCliente = searchParams?.get('id') ?? null
     const navigate = useNavigate()
-    const [reqstCliente, setReqstCliente] = useState()
     const [cliente, setCliente] = useState()
-    const [msgCEP, setMsgCEP] = useState()
-    
     const [historico, setHistorico] = useState(null)
     const [reqstHistorico, setReqstHistorico] = useState(null)
-
     const [viewContContato, setViewContContato] = useState(false)
     const [contato, setContato] = useState(null)
-    const [countContatos, setCountContatos] = useState(0)
     const [usuario, setUsuario] = useState(() => {
         const cookieUsuario = getCookie('usuario')
         return cookieUsuario ? cookieUsuario : ''
     })
+    const { sessPreferencias, setSessPreferencias } = usePreferencias()
+    const [themeCores, setThemeCores] = useState(
+        {menu: {
+            bgColor: '#f7cba4',
+            txtColor: '#26110D'
+        }}
+    )
     // CONTATOS
-    const verContato = (idContato) => {
-        const contato = document.getElementById(`contato${idContato}`)
-        const img = document.getElementById(`img${idContato}`)
-        if (contato.classList == 'contato fechado') {
-            contato.classList = "contato aberto"
-            img.src = Up
-            console.log(`contato ${idContato} aberto`)
-        } else {
-            contato.classList = "contato fechado"
-            img.src = Down
-            console.log(`contato ${idContato} fechado`)
-        }
-    }
     const handleEditContato = (valor, field) => {
         setContato(prevState => ({
             ...prevState,
@@ -198,7 +190,11 @@ function Cliente() {
         const result = await deleteCliente(cliente.id);
         console.warn(result.response)
         if (result.success) {
-            window.alert("Cliente excluído com sucesso")
+            notification.success({
+                message: `Cliente excluído com sucesso.`,
+                // description: 'Reconecte-se a internet',
+                placement: 'bottomLeft',
+            })
         } else {
             console.error(result.error)
         }
@@ -209,11 +205,21 @@ function Cliente() {
     }
     const handleSalvar = async () => {
         if (cliente.contatos.length < 1) {
-            window.alert("Cliente não enviado por falta de contato.")
+            window.alert("")
+            notification.error({
+                message: `Cliente não enviado por falta de contato.`,
+                // description: 'Reconecte-se a internet',
+                placement: 'bottomLeft',
+            })
             return
         }
         if (cliente.nome == '' || cliente.cnpj.length < 14) {
-            window.alert("O nome e o CNPJ do cliente são obrigatórios!")
+            window.alert("")
+            notification.error({
+                message: `O nome e o CNPJ do cliente são obrigatórios!`,
+                // description: 'Reconecte-se a internet',
+                placement: 'bottomLeft',
+            })
             return
         }
         if (idCliente != null) {
@@ -222,7 +228,11 @@ function Cliente() {
                 try {
                     response = await putCliente(cliente)
                     console.warn(response)
-                    window.alert("Cliente atualizado com sucesso!")
+                    notification.success({
+                        message: `Cliente atualizado com sucesso.`,
+                        // description: 'Reconecte-se a internet',
+                        placement: 'bottomLeft',
+                    })
                 } catch (err) {
                     console.error(err.message)
                     return
@@ -231,7 +241,11 @@ function Cliente() {
                 try {
                     response = await postCliente(cliente)
                     console.warn(response)
-                    window.alert("Cliente criado com sucesso!")
+                    notification.success({
+                        message: `Cliente criado com sucesso.`,
+                        // description: 'Reconecte-se a internet',
+                        placement: 'bottomLeft',
+                    })
                 } catch (err) {
                     console.error(err.message)
                     return
@@ -240,7 +254,6 @@ function Cliente() {
             handleVoltar()
         }
     }
-
     // HISTORICO DE ORDENS
     const converterDtHr = (dataHora) => {
         const [dia, mes, anoHora] = dataHora.split('-')
@@ -277,25 +290,30 @@ function Cliente() {
                 }))
             } catch (error) {
                 console.error("Erro ao buscar CEP:", error)
-                setMsgCEP("CEP não encontrado ou inválido.")
-                setTimeout(() => {
-                    setMsgCEP('')
-                }, 5000)
+                // setMsgCEP("CEP não encontrado ou inválido.")
+                // setTimeout(() => {
+                //     setMsgCEP('')
+                // }, 5000)
+                notification.error({
+                    message: `CEP inválido ou não encontrado`,
+                    // description: 'Reconecte-se a internet',
+                    placement: 'bottomLeft',
+                })
                 // alert("CEP não encontrado ou inválido.");
             }
         } else {
             console.error("São necessários 8 digitos.")
-            setMsgCEP("São necessários 8 digitos.")
-            setTimeout(() => {
-                setMsgCEP('')
-            }, 5000)
+            notification.error({
+                message: `CEP inválido ou não encontrado`,
+                // description: 'Reconecte-se a internet',
+                placement: 'bottomLeft',
+            })
         }
     }
     const fetchContatos = async () => {
         let response
         try {
             response = await getContatosPorID(cliente.id)
-            setReqstCliente(response)
             console.warn(response)
         } catch (error) {
             console.error(error.message)
@@ -309,14 +327,12 @@ function Cliente() {
     const fetchCliente = async (id) => {
         try {
             const response = await getClientePorID(id)
-            setReqstCliente(response)
             setCliente(response.data)
             console.warn(response)
         } catch (error) {
             console.error(error.message)
         }
     }
-    
     const fecthHistOrdens = async (page) => {
         try {
             const result = await getOrdensPorCliente(page, cliente.id)
@@ -335,7 +351,25 @@ function Cliente() {
             return
         }
         fecthHistOrdens(0)
-    }, cliente)
+    }, [cliente])
+    useEffect(() => {
+        if (!sessPreferencias) {
+            return
+        }
+        switch(sessPreferencias) {
+            case 'salmaoLight': 
+                setThemeCores({
+                    menu: {
+                        bgColor: '#fcd8b9',
+                        txtColor: '#26110D',
+                    }
+                })
+                break;
+            default:
+                console.error('Erro ao definir cor')
+                break;
+        }
+    }, [sessPreferencias])
     useEffect(() => {
         console.clear()
         if (idCliente) {
@@ -350,198 +384,258 @@ function Cliente() {
     }, [])
     return(
         <div id="pageCliente" className='paginas'>
-            <Header titulo={
-                idCliente !== null
-                ? ( !cliente ? 
-                    `Editando cliente` :
-                    `Editando cliente "${cliente.nome}"`
-                )
-                : 'Novo cliente'
-            }
-            usuario={usuario}
-            ></Header>
-            <Nav cargo={usuario?.cargo || ''}></Nav>
-            <main id='mainCliente'>        
-                <section id='secInfos'>
-                    <h2>Informações do cliente</h2>
-                    {
-                    !cliente ? 
-                    <Loading></Loading> :
-                    <>
-                    <div id='geral'>
-                        <div id='nome'>
-                            <label>Nome:</label>
-                            <input type="text" value={cliente.nome || ""}
-                            onChange={(e) => handleEditDado(e.target.value, "nome")}
-                            />
-                        </div>
-                        <div id='cnpj'>
-                            <label>CNPJ:</label>
-                            <input type="text" value={cliente.cnpj || ""}
-                            onChange={(e) => handleEditDado(e.target.value, 'cnpj')}
-                            />
-                        </div>
+        <Header titulo={
+            idCliente !== null
+            ? ( !cliente ? 
+                `Editando cliente` :
+                `Editando cliente "${cliente.nome}"`
+            )
+            : 'Novo cliente'
+        }
+        usuario={usuario}
+        ></Header>
+        <Nav cargo={usuario?.cargo || ''}></Nav>
+        <main id='mainCliente'>        
+            <section id='secInfos'>
+                <h2>Informações do cliente</h2>
+                {
+                !cliente ? 
+                <Loading></Loading> :
+                <>
+                <div id='geral'>
+                    <div id='nome'>
+                        <label>Nome:</label>
+                        <input type="text" value={cliente.nome || ""}
+                        onChange={(e) => handleEditDado(e.target.value, "nome")}
+                        />
                     </div>
-                    <div id='endereco'>
-                        <div id='cep'>
-                            <label>CEP:</label>
-                            <input type="text" 
-                            value={cliente.endereco.cep || ""}
-                            onChange={(e) => handleCEP(e.target.value)}
-                            />
-                            <button onClick={fetchCEP}>Pesquisar CEP</button>
-                            <p>{msgCEP}</p>
-                        </div>
-                        <div id='rua'>
-                            <label>Rua/Logradouro:</label>
-                            <input type="text" value={cliente.endereco.logradouro || ""}
-                            onChange={(e) => handleEditEndereco(e.target.value, "logradouro")}
-                            />
-                        </div>
-                        <div id='num'>
-                            <label>Nº:</label>
-                            <input type="text" value={cliente.endereco.numero || ""}
-                            onChange={(e) => handleEditEndereco(e.target.value, "numero")}
-                            />
-                        </div>
-                        <div id='complemento'>
-                            <label>Complemento:</label>
-                            <input type="text" value={cliente.endereco.complemento || ""}
-                            onChange={(e) => handleEditEndereco(e.target.value, "complemento")}
-                            />
-                        </div>
-                        <div id='bairro'>
-                            <label>Bairro:</label>
-                            <input type="text" value={cliente.endereco.bairro || ""}
-                            onChange={(e) => handleEditEndereco(e.target.value, "bairro")}
-                            />
-                        </div>
-                        <div id='cidade'>
-                            <label>Cidade:</label>
-                            <input type="text" value={cliente.endereco.cidade || ""}
-                            onChange={(e) => handleEditEndereco(e.target.value, "cidade")}
-                            />
-                        </div>
-                        <div id='uf'>
-                            <label>UF:</label>
-                            <input type="text" value={cliente.endereco.uf || ""}
-                            onChange={(e) => handleEditEndereco(e.target.value, "uf")}
-                            />
-                        </div>
+                    <div id='cnpj'>
+                        <label>CNPJ:</label>
+                        <input type="text" value={cliente.cnpj || ""}
+                        onChange={(e) => handleEditDado(e.target.value, 'cnpj')}
+                        />
                     </div>
-                    </>
-                    }   
-                    <div id='fimAcao'>
-                        <button id='bttCancelar' onClick={handleVoltar}>Cancelar</button>
-                        <button id='bttSalvar' onClick={handleSalvar}>Salvar</button>
-                        <button id='bttExcluir' onClick={handleDelete}>Excluir</button>
+                </div>
+                <div id='endereco'>
+                    <div id='cep'>
+                        <label>CEP:</label>
+                        <input type="text" 
+                        value={cliente.endereco.cep || ""}
+                        onChange={(e) => handleCEP(e.target.value)}
+                        />
+                        <button onClick={fetchCEP}>Pesquisar CEP</button>
                     </div>
-                </section>
-                <section id='secContatos'>
-                    <div id='containerH2Novo'>
-                        <h2>Contatos</h2>
-                        <button id='bttNovoCtt' onClick={() => { handleViewContContato('novo')}}>novo</button>
+                    <div id='rua'>
+                        <label>Rua/Logradouro:</label>
+                        <input type="text" value={cliente.endereco.logradouro || ""}
+                        onChange={(e) => handleEditEndereco(e.target.value, "logradouro")}
+                        />
                     </div>
-                    <div id='listContatos'>
-                    {
-                        !cliente ? '' :
-                        cliente.contatos.map(contato => (
-
-                            <div id={`contato${contato.id}`} className='contato fechado' key={contato.id}>
-                                <div className='contatoHeader'
-                                >
-                                    <div className='divLeftContato'>
-                                        <img 
-                                            id={`img${contato.id}`} 
-                                            src={Down} alt="abrir"
-                                            onClick={() => {verContato(contato.id)}}/>
-                                        <div className='nome'>{contato.nome}</div>
-                                    </div>
-                                    <div className='bttsContato'>
-                                        <button className='contatoEdit'
-                                        onClick={() => {handleViewContContato(contato.id)}}>
-                                            Editar
-                                        </button>
-                                        <button className='contatoExcluir'
-                                        onClick={() => {
-                                            handleDeletarContato(contato.id)
-                                        }}>
-                                            Excluir
-                                        </button>
-                                    </div>
+                    <div id='num'>
+                        <label>Nº:</label>
+                        <input type="text" value={cliente.endereco.numero || ""}
+                        onChange={(e) => handleEditEndereco(e.target.value, "numero")}
+                        />
+                    </div>
+                    <div id='complemento'>
+                        <label>Complemento:</label>
+                        <input type="text" value={cliente.endereco.complemento || ""}
+                        onChange={(e) => handleEditEndereco(e.target.value, "complemento")}
+                        />
+                    </div>
+                    <div id='bairro'>
+                        <label>Bairro:</label>
+                        <input type="text" value={cliente.endereco.bairro || ""}
+                        onChange={(e) => handleEditEndereco(e.target.value, "bairro")}
+                        />
+                    </div>
+                    <div id='cidade'>
+                        <label>Cidade:</label>
+                        <input type="text" value={cliente.endereco.cidade || ""}
+                        onChange={(e) => handleEditEndereco(e.target.value, "cidade")}
+                        />
+                    </div>
+                    <div id='uf'>
+                        <label>UF:</label>
+                        <input type="text" value={cliente.endereco.uf || ""}
+                        onChange={(e) => handleEditEndereco(e.target.value, "uf")}
+                        />
+                    </div>
+                </div>
+                </>
+                }   
+                <div id='fimAcao'>
+                    <button id='bttCancelar' onClick={handleVoltar}>Cancelar</button>
+                    <button id='bttSalvar' onClick={handleSalvar}>Salvar</button>
+                    <button id='bttExcluir' onClick={handleDelete}>Excluir</button>
+                </div>
+            </section>
+            <section id='secContatos'>
+                <div id='containerH2Novo'>
+                    <h2>Contatos</h2>
+                    <button id='bttNovoCtt' onClick={() => { handleViewContContato('novo')}}>Novo</button>
+                </div>
+                <div id='listContatos'>
+                {
+                    !cliente ? '' :
+                    cliente.contatos.map(contato => (
+                        <>
+                        {/* <div id={`contato${contato.id}`} className='contato fechado' key={contato.id}>
+                            <div className='contatoHeader'
+                            >
+                                <div className='divLeftContato'>
+                                    <img 
+                                        id={`img${contato.id}`} 
+                                        src={Down} alt="abrir"
+                                        onClick={() => {verContato(contato.id)}}/>
+                                    <div className='nome'>{contato.nome}</div>
                                 </div>
-                                <div className='contatoBody'>
-                                    <div className='contatoDescricao'>{contato.descricao}</div>
-                                    <div className='contatoTelefone'>
-                                        {contato.telefone}
-                                        
-                                    </div>
-                                    <div className='contatoEmail'>
-                                        {contato.email}
-                                    </div>
+                                <div className='bttsContato'>
+                                    <button className='contatoEdit'
+                                    onClick={() => {handleViewContContato(contato.id)}}>
+                                        Editar
+                                    </button>
+                                    <button className='contatoExcluir'
+                                    onClick={() => {
+                                        handleDeletarContato(contato.id)
+                                    }}>
+                                        Excluir
+                                    </button>
                                 </div>
                             </div>
-                        ))
-                    }
-                    </div>
-                </section>
-                <section id='secHistorico'>
-                    <h2>Histórico de ordens</h2>
-                    <table id='contListHistoricos'>
-                    <thead>
+                        </div> */}
+                        <div className='contato' key={contato.id}>
+                            <div className='contContatoLeft'>
+                                <h4>
+                                {contato.nome}
+                                </h4>
+                                <p>{contato.descricao}</p>
+                            </div>
+                            <div className='contContatoRight'>
+                                <button className='contatoEdit'
+                                onClick={() => {handleViewContContato(contato.id)}}>
+                                    Editar
+                                </button>
+                                <button className='contatoExcluir'
+                                onClick={() => {
+                                    handleDeletarContato(contato.id)
+                                }}>
+                                    Excluir
+                                </button>
+                                <Dropdown
+                                    className='maisContato'
+                                    trigger={'hover'}
+                                    menu={{
+                                        items: [
+                                        // { 
+                                        //     key: 1, 
+                                        //     label: `${contato.descricao}`,
+                                        // },
+                                        { 
+                                            key: 2,
+                                            
+                                            icon: <PhoneOutlined />,
+                                            label: `${contato.telefone}`
+                                        },
+                                        { 
+                                            key: 3, 
+
+                                            icon: <CommentOutlined />,
+                                            label: `${contato.email}`
+                                        },
+                                        ],
+                                        style: {
+                                            backgroundColor: (themeCores.menu.bgColor),
+                                            color: (themeCores.menu.txtColor),
+                                            borderColor: (themeCores.menu.txtColor)
+                                        }
+                                    }}
+                                    overlayStyle={{ 
+                                        border: `0.1rem solid ${themeCores.menu.txtColor}`,
+                                        borderRadius: '0.3rem'
+                                    }}
+                                    arrow={false}
+                                >
+                                    <InfoCircleOutlined id='iconMaisContato'/>
+                                </Dropdown>
+                            </div>
+                        </div>
+                        </>
+                    ))
+                }
+                </div>
+            </section>
+            <section id='secHistorico'>
+                <h2>Histórico de ordens</h2>
+                <table id='contListHistoricos'>
+                <thead>
+                    <tr>
+                        <th>cód.</th>
+                        <th>serviço</th>
+                        <th>tecnico</th>
+                        <th>abertura</th>
+                        <th>situação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {
+                    !historico ? (
+                    <tr>
+                        <td colSpan={6}>
+                            <Loading></Loading> 
+                        </td>
+                    </tr>
+                    ):(
+                    historico.length==0 ? (
                         <tr>
-                            <th>cód.</th>
-                            <th>serviço</th>
-                            <th>tecnico</th>
-                            <th>abertura</th>
-                            <th>situação</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {
-                        !historico || historico.length==0 ? 
-                        <Loading></Loading> :(
+                            <td colSpan={6}>sem ordens</td>
+                        </tr>    
+                        ) : (
                         historico.map(ordem => (
                             <tr key={ordem.id}>
-                                <td>{ordem.id}</td>
-                                <td>{ordem.servico}</td>
-                                <td>{ordem.tecnico || 'nenhum'}</td>
-                                <td>{converterDtHr(ordem.dtAbertura)}</td>
-                                <td>{ordem.situacao}</td>
+                                <td className='cl1'>{ordem.id}</td>
+                                <td className='cl2'>{ordem.servico}</td>
+                                <td className='cl3'>{ordem.tecnico || 'nenhum'}</td>
+                                <td className='cl4'>{converterDtHr(ordem.dtAbertura)}</td>
+                                <td className='cl5'>{ordem.situacao}</td>
                             </tr>
                         ))
-                        )
-                    }
-                    </tbody>
-                    </table>
-                    <div className='paginacao'>
-                    {
-                        historico &&
-                        // renderPaginas()
-                        <Pagination 
-                            defaultCurrent={1} 
-                            total={reqstHistorico.data.totalPages}
-                            disabled={reqstHistorico.data.totalPages == 1}
-                            pageSize={1}
-                            responsive
-                            showSizeChanger={false}
-                            onChange={changePage}
-                            showTitle={false}
-                            />
-                    }
+                    )
+                    )
+                }
+                </tbody>
+                </table>
+                <div className='paginacao'>
+                {
+                    historico &&
+                    // renderPaginas()
+                    <Pagination 
+                        defaultCurrent={1} 
+                        total={reqstHistorico.data.totalPages}
+                        disabled={reqstHistorico.data.totalPages == 1}
+                        pageSize={1}
+                        responsive
+                        showSizeChanger={false}
+                        onChange={changePage}
+                        showTitle={false}
+                        />
+                }
+                </div>
+            </section>
+        </main>
+        {
+            !viewContContato ? '' :
+            <div id='shadowBG'>
+                <section id='secNovoContato'>
+                    <div id='contHeadNovoContato'>
+                        <h2>Novo Contato</h2>
+                        <div 
+                            id='closeModel'
+                            onClick={handleViewContContato}>
+                        <CloseOutlined />
                     </div>
-                </section>
-            </main>
-            {
-                !viewContContato ? '' :
-                <div id='shadowBG'>
-                    <section id='secNovoCliente'>
-                        <h2>{`Novo Contato`}</h2>
-                        {/* nome: "",
-                        cliente: 0,
-                        descricao: "",
-                        telefone: "",
-                        email: "" */}
+                    </div>
+                    <div id='contFormNovoContato'>
                         <div id='nomeInfoNovoContato'>
                             <label>Nome:</label>
                             <input type="text" value={contato.nome || ""}
@@ -554,7 +648,7 @@ function Cliente() {
                         </div>
                         <div id='emailInfoNovoContato'>
                             <label>Email:</label>
-                            <input type='email' value={contato.email || ""}
+                            <input type='text' value={contato.email || ""}
                             onChange={(e) => handleEditContato(e.target.value, "email")}/>
                         </div>
                         <div id='telefoneInfoNovoContato'>
@@ -562,13 +656,14 @@ function Cliente() {
                             <input type="text" value={contato.telefone || ""}
                             onChange={(e) => handleEditContato(e.target.value, "telefone")}/>
                         </div>
-                        <div>
-                            <button onClick={handleViewContContato}>cancelar</button>
-                            <button onClick={handleAddContato}>Adicionar contato</button>
-                        </div>
-                    </section>
-                </div>
-            }
+                    </div>
+                    <div id='contFooterNovoContato'>
+                        <button id='bttCancelar' onClick={handleViewContContato}>cancelar</button>
+                        <button id='bttAddContato' onClick={handleAddContato}>Adicionar contato</button>
+                    </div>
+                </section>
+            </div>
+        }
         </div>
     )
 }

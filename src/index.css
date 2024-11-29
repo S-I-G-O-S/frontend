@@ -11,6 +11,8 @@
     --marrom2: #3b1f17;
     --marrom3: #462b18;
     --preto: #000;
+    --font1: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
+    --font2: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 [data-theme="normal-light"]{
     --navColor: #395873;
@@ -47,7 +49,7 @@ body {
     display: flex;
     flex-direction: column;
 
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--font2);
 }
 
 #root {
@@ -64,7 +66,21 @@ body {
     h3 {
         margin: 0;
     }
-
+    h4 {
+        all: unset;
+    }
+    button {
+        all: unset;
+        box-sizing: border-box;
+    }
+    input[type="text"]{
+        all: unset;
+        box-sizing: border-box;
+    }
+    input[type="password"]{
+        all: unset;
+        box-sizing: border-box;
+    }
     .popup {
         z-index: 999;
     }
@@ -96,23 +112,16 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 0rem solid var(--marrom1);
+    border: 0rem solid;
     padding: 0.2rem 0.1rem;
     gap: 0.4rem;
     .paginaItem {
         all: unset;
         cursor: pointer;
         font-size: 1rem;
-
         padding: 0.1rem 0.5rem;
         border: 0;
         border-radius: 0.3rem;
-        color: var(--salmao2);
-        background-color: var(--marrom1);
-    }
-    .paginaItem:hover,
-    .paginaItem:focus {
-        background-color: var(--marrom3);
     }
 }
 .paginas {
@@ -127,10 +136,8 @@ body {
     min-height: 100vh;
     min-width: 100vw;
     max-width: 100vw;
-    background-color: #F2E8DF;
     box-sizing: border-box;
     overflow-y: hidden;
-    
     main {
         padding: 0.5rem 1rem;
     }
@@ -144,8 +151,6 @@ section {
     padding: 1.5rem 2rem;
     border: 0.1rem solid var(--marrom);
     border-radius: 10px;
-
-    background-color: var(--salmao2);
 }
 @media screen and (width <= 950px) {
     .paginas {
@@ -181,7 +186,7 @@ section {
         display: flex;
         align-items: center;
         justify-content: center;
-        border: 0rem solid var(--marrom1);
+        border: 0rem solid;
         padding: 0.2rem 0.1rem;
         gap: 0.4rem;
         .paginaItem {
@@ -192,12 +197,6 @@ section {
             padding: 0.1rem 0.5rem;
             border: 0;
             border-radius: 0.3rem;
-            color: var(--salmao2);
-            background-color: var(--marrom1);
-        }
-        .paginaItem:hover,
-        .paginaItem:focus {
-            background-color: var(--marrom3);
         }
     }
 }

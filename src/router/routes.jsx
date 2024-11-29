@@ -44,7 +44,7 @@ function AppRoutes() {
                     element: <Home/> ,
                 },
                 {
-                    path: "/usuario",
+                    path: "/configuracoes",
                     element: <UserConfig/> ,
                 },
                 {

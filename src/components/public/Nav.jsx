@@ -8,22 +8,12 @@ import clientesIcon from '../../assets/clientesIcon.png'
 import ordensIcon from '../../assets/ordensIcon.png'
 import especsIcon from '../../assets/tag.png'
 import { useEffect, useState } from 'react'
-import { HomeFilled }  from '@ant-design/icons'
+import { HomeFilled, IdcardFilled, ScheduleFilled, SettingFilled, SettingOutlined, ShoppingFilled, TagFilled }  from '@ant-design/icons'
 import { IconFuncionarios } from './IconsSVG'
+import { usePreferencias } from '../../context/PreferenciasContext'
 
 function Nav({ cargo }) {
-    const [sessPreferencias, setSessPreferencias] = useState(() => {
-        const storedUsuario = sessionStorage.getItem('preferencias')
-        return storedUsuario ? JSON.parse(storedUsuario) : {
-            tema: 'claro',
-            abertoNav: true 
-        }
-    })
-    useEffect(() => {
-        if (sessPreferencias) {
-            sessionStorage.setItem('preferencias', JSON.stringify(sessPreferencias))
-        }
-    }, [sessPreferencias])
+    const { sessPreferencias, setSessPreferencias } = usePreferencias()
     const changeNav = () => {
         setSessPreferencias(prevState => ({
             ...prevState,
@@ -48,6 +38,7 @@ function Nav({ cargo }) {
                     <p className='nomeGoTo' id='goToHomeP'>home</p>
                 </NavLink>
                 
+                
                 {/* Paginas exibidas só para usuarios 'base' ou 'adm' */}
                 {cargo === 'BASE' || cargo === 'ADM' || cargo == 'DEV' ?
                 <> 
@@ -59,7 +50,8 @@ function Nav({ cargo }) {
                         // activeClassName="active" 
                         >
                         {/* <IconFuncionarios className='iconNav'></IconFuncionarios> */}
-                        <img src={funcsIcon} alt="" />
+                        {/* <img src={funcsIcon} alt="" /> */}
+                        <IdcardFilled className='iconNav'/>
                         <p className='nomeGoTo' id='goToFuncionariosP'>funcionarios</p>
                     </NavLink>
                     <NavLink 
@@ -69,7 +61,8 @@ function Nav({ cargo }) {
                         title='Clientes'
                         // activeClassName="active" 
                         >
-                        <img src={clientesIcon} alt="clientes" />
+                        {/* <img src={clientesIcon} alt="clientes" /> */}
+                        <ShoppingFilled className='iconNav'/>
                         <p className='nomeGoTo' id='goToClientesP'>clientes</p>
                     </NavLink>
                     <NavLink 
@@ -79,7 +72,8 @@ function Nav({ cargo }) {
                         title='Ordens'
                         // activeClassName="active" 
                         >
-                        <img src={ordensIcon} alt="ordens" />
+                        {/* <img src={ordensIcon} alt="ordens" /> */}
+                        <ScheduleFilled className='iconNav' />
                         <p className='nomeGoTo' id='goToOrdensP'>ordens</p>
                     </NavLink>
                     <NavLink 
@@ -89,11 +83,23 @@ function Nav({ cargo }) {
                         title='Especialidades e serviços'
                         // activeClassName="active" 
                         >
-                        <img src={especsIcon} alt="ordens" />
-                        <p className='nomeGoTo' id='goToEspecsP'>especialidades <span>& serviços</span></p>
+                        {/* <img src={especsIcon} alt="ordens" /> */}
+                        <TagFilled className='iconNav'/>
+                        <p className='nomeGoTo' id='goToEspecsP'>serviços</p>
                     </NavLink>
                 </> :  ''
                 }
+                <NavLink
+                    className={({ isActive }) => (isActive ? "links active" : "links ")}
+                    id='goToHome' 
+                    to="/configuracoes"
+                    title='Configurações'
+                    // activeClassName="active" 
+                    >
+                    <SettingFilled className='iconNav' />
+                    {/* <img src={homeIcon} alt="home" /> */}
+                    <p className='nomeGoTo' id='goToConfigsP'>Configurações</p>
+                </NavLink>
             </div>
         </nav>
     )

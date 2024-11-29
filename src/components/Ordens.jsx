@@ -266,7 +266,7 @@ function Ordens() {
             <Nav cargo={usuario?.cargo || ''}></Nav>
             <main id="mainOrdens">
             <section id="sec1">
-                <div id="ContNovo">
+                <div id="contNovo">
                     <button id="bttNovaOrdem" onClick={handleNovaOrdem}>
                         Nova Ordem
                     </button>
@@ -493,11 +493,11 @@ function Ordens() {
                                                 handleAbrirOrdem(ordem.id)
                                             }
                                         >
-                                            <td>{ordem.id}</td>
-                                            <td>{converterDtHr(ordem.dtAbertura)}</td>
-                                            <td>{ordem.cliente}</td>
-                                            <td>{ordem.funcionario || 'nenhum'}</td>
-                                            <td>{ordem.situacao}</td>
+                                            <td className="cl1">{ordem.id}</td>
+                                            <td className="cl2">{converterDtHr(ordem.dtAbertura)}</td>
+                                            <td className="cl3">{ordem.cliente}</td>
+                                            <td className="cl4">{ordem.funcionario || 'nenhum'}</td>
+                                            <td className="cl5">{ordem.situacao}</td>
                                         </tr>
                                     ))
                                 )

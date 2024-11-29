@@ -21,21 +21,18 @@
 
         width: 100%;
         height: 100%;
-
-        background-color: var(--branco);
-
         #secListClientes {
             display: flex;
             flex-direction: column;
             grid-area: sec1;
             max-width: 95%;
             max-height: 95%;
-            background-color: var(--salmao2);
+            
             padding: 1rem;
             padding-bottom: 0.5rem;
-            border: 0.1rem solid var(--marrom);
+            border-width: 0.1rem;
+            border-style: solid;
             border-radius: 0.4rem;
-            box-sizing: border-box;
 
             #containerH2Novo {
                 display: flex;
@@ -54,29 +51,23 @@
                     width: auto;
                     height: 1.5rem;
                     padding: 0.1rem 2rem;
-                    border: 0.1rem solid var(--marrom);
+                    border-style: solid;
+                    border-width: 0.1rem;
                     border-radius: 0.3rem;
-                    color: var(--salmao2);
-                    background-color: var(--marrom);
 
                     transition: 150ms;
-                }
-
-                button:hover {
-                    background-color: var(--marrom2);
                 }
             }
 
             #tabelaClientes {
                 gap: 0;
                 overflow-x: auto;
-                border: 0.1rem solid;
+                border-style: solid;
+                border-width: 0.1rem;
                 border-collapse: collapse;
-                min-width: 100%;
                 border-spacing: 0;
+                min-width: 100%;
                 /* TODO Add temas */
-                background-color: var(--branco);
-                border-color: var(--marrom);
 
                 #cabecalho {
                     height: auto;
@@ -86,10 +77,6 @@
                         font-size: 1rem;
                         font-weight: 400;
                         padding: 0.1rem 0.5rem;
-
-
-                        color: var(--salmao2);
-                        background-color: var(--marrom1);
                     }
 
                 }
@@ -97,116 +84,47 @@
                 #listClientes {
 
                     .clientes {
-                        font-size: 0.95rem;
                         height: auto;
-                        border-top: 0.1rem solid var(--marrom);
-                        background-color: var(--branco);
-
-                        .nome {
-                            text-align: left;
-
-                        }
+                        border-style: solid;
+                        border-width: 0.1rem;
 
                         .nome,
                         .cnpj,
                         .endereco {
                             white-space: nowrap;
                             overflow: hidden;
+                            font-size: 0.95rem; 
                             text-overflow: ellipsis;
                             text-align: center;
 
                             padding: 0.15rem 0.5rem;
-                            border-right: 0.1rem solid var(--marrom);
+                            border-right-style: solid;
+                            border-right-width: 0.1rem;
 
                         }
 
                         .options {
-                            all: unset;
                             display: flex;
                             align-items: center;
                             justify-content: center;
                             cursor: pointer;
-                            text-align: center;
-                            font-weight: 500;
+                            padding: 0.1rem 0.4rem;
+                            height: 100%;
                             transition: 150ms;
-                            padding: 0.1rem 0.3rem;
-
-                            img {
-                                height: 1.3rem;
+                            svg {
+                                height: 1.25rem;
+                                width: 1.2rem;
+                                margin: 0;
                             }
                         }
-
-                        .options:hover {
-                            background-color: var(--salmao1);
-
-                        }
-
-                        /* .options:hover {
-                            background-color: var(--salmao1);
-                        } */
                     }
 
-                    .clientes:hover {
-                        background-color: var(--salmao3);
-                    }
+                    
                 }
 
             }
 
-            .paginacao {
-                .ant-pagination {
-                    .ant-pagination-item {
-                        background-color: var(--salmao1);
-                        border-color: var(--marrom1);
-
-                        a {
-                            color: var(--marrom1);
-                        }
-                    }
-
-                    .ant-pagination-item:hover {
-                        background-color: var(--salmao2);
-                    }
-
-                    .ant-pagination-item-active {
-                        border-color: var(--laranja);
-                        background-color: var(--marrom1);
-
-                        a {
-                            color: var(--salmao2);
-
-                        }
-                    }
-
-                    .ant-pagination-item-active:hover {
-                        background-color: var(--marrom2);
-                    }
-                }
-            }
-        }
-
-        #sombra {
-            display: none;
-            position: fixed;
-            background-color: #000000c0;
-            width: 100%;
-            height: 100%;
-        }
-
-        #janela {
-            display: none;
-
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 90;
-
-            width: auto;
-            height: auto;
-            padding: 2rem;
-            border: 0.1rem solid black;
-            border-radius: 10px;
+            
         }
     }
 
@@ -223,95 +141,76 @@
         #contNovoCliente {
             display: flex;
             flex-direction: column;
+            gap: 0.5rem;
             padding: 1rem;
-            border: 0.1rem solid var(--marrom);
+            border-style: solid;
+            border-width: 0.1rem;
             border-radius: 0.5rem;
-            background-color: var(--salmao1);
+            
             height: min-content;
             width: min-content;
             min-width: 20rem;
 
             h2 {
                 font-size: 1.05rem;
-                color: var(--marrom);
                 margin: 0;
                 margin-bottom: 1rem;
             }
-
-            #nome,
-            #cnpj {
+            #contInfosNovoCliente {
                 display: flex;
                 flex-direction: column;
-
-                label {
-                    font-weight: 500;
-                    font-size: 0.95rem;
+                gap: 0.2rem;
+                padding: 0.5rem;
+                border-style: solid;
+                border-width: 0.1rem;
+                border-radius: 0.3rem;
+                
+                div {
+                    display: grid;
+                    grid-template-columns: min-content auto;
+                    gap: 0.4rem;
+                    align-items: center;
+                    label {
+                        font-weight: 500;
+                    }
+                    input {
+                        /* TODO Estilizar Input */
+                    }
                 }
             }
-
-            #nome {
-                margin-bottom: 0.5rem;
-            }
-
-            #msgNovoCliente {
-                text-align: center;
-                font-size: 0.9rem;
-
-                padding: 0.1rem;
-                border-radius: 0.3rem;
-                margin: 0.2rem 0;
-
-                background-color: var(--branco);
-                color: rgb(151, 5, 5);
-            }
-
             #contAcaoNovoCliente {
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 gap: 1rem;
+                padding: 0.5rem;
+                border-style: solid;
+                border-width: 0.1rem;
+                
+                border-radius: 0.3rem;
 
                 button {
-                    all: unset;
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     cursor: pointer;
                     font-size: 0.95rem;
                     font-weight: 500;
-
-
                     height: 1.5rem;
                     width: 8rem;
-                    border: 0.1rem solid var(--marrom);
+                    border-style: solid;
+                    border-width: 0.1rem;
                     border-radius: 0.3rem;
-                    color: var(--marrom);
 
                     transition: 150ms;
                 }
-
-                button:hover {
-                    width: 11rem;
-
-                }
-
                 button:focus {
                     text-decoration: underline;
-                    border: 0.1rem solid var(--laranja);
+                    border-width: 0.1rem;
+                    border-style: solid;
                 }
 
-                #bttCancelar {
-                    background-color: #ecea57;
-                }
-
-                #bttSalvar {
-                    background-color: #40ec5d;
-                }
-
-                #bttExcluir {
-                    background-color: #fc8c8c;
-
-                }
+                
             }
         }
     }
