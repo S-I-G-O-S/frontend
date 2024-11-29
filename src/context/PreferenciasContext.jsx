@@ -29,7 +29,7 @@ export const PreferenciasProvider = ({ children }) => {
             document.head.appendChild(linkElement)
         }
 
-        linkElement.href = `./src/styles/themes/${sessPreferencias.tema}.css`
+        linkElement.href = `./src/themes/${sessPreferencias.tema}.css`
     }, [sessPreferencias.tema])
     return (
         <PreferenciasContext.Provider value={{ sessPreferencias, setSessPreferencias }}>

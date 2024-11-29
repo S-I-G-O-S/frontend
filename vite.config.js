@@ -15,8 +15,8 @@ export default defineConfig({
         // Configuração de chunks para temas
         manualChunks: {
           themes: [
-            './src/styles/themes/salmaoDark.css', 
-            './src/styles/themes/salmaoLight.css'], 
+            './src/themes/salmaoDark.css', 
+            './src/themes/salmaoLight.css'], 
         },
       },
     },
@@ -24,6 +24,7 @@ export default defineConfig({
     chunkSizeWarningLimit: 500, // Evita warnings para chunks grandes
     cssCodeSplit: true, // Divide o CSS em arquivos separados para otimização
   },
+  /*
   css: {
     preprocessorOptions: {
       scss: {
@@ -31,6 +32,7 @@ export default defineConfig({
       },
     },
   },
+  */
   server: {
     port: 5173, // Porta do servidor dev
     open: true, // Abre o navegador automaticamente
