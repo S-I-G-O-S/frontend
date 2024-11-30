@@ -1,19 +1,4 @@
 :root {
-    --azul: #395873;
-    --nav: #395873ea;
-    --laranja: #d96704;
-    --salmao1: #f2ae72;
-    --salmao2: #f7cba4;
-    --salmao3: #fcd8b9;
-    --branco: #f2e8df;
-    --marrom1: #26110d;
-    --marrom2: #3b1f17;
-    --marrom3: #462b18;
-    --preto: #000;
-    --leftBttNav: 5rem;
-}
-
-:root {
     --pendente: #8fcdff;
     --emExecucao: #f6ff7b;
     --retorno: #ffb968;
@@ -375,6 +360,142 @@ span {
 #bttEditarOrdem:hover {
     background-color: #6b9ae2;
     text-decoration: underline;
+}
+
+#pageOrdens {
+    section {
+        background-color: var(--salmao2);
+        border-color: var(--marrom1);
+        color: var(--marrom1);
+    }
+    #sec1 {
+        #contNovo {
+            border-color: var(--salmao1);
+            #bttNovaOrdem {
+                color: var(--salmao2);
+                background-color: var(--marrom1);
+                border-color: var(--marrom1);
+            }
+            #bttNovaOrdem:hover {
+                background-color: var(--marrom2);
+                color: var(--salmao1);
+            }
+        }
+        #contSituacoes {
+            border-color: var(--salmao1);
+            background-color: var(--azul);
+            .bttsSituacao {
+                border-color: var(--marrom1);
+            }
+            .bttsSituacao:hover {
+                border-color: var(--laranja);
+            } 
+            #bttSituacaoPendente {
+                background-color: var(--pendente);
+            }
+            #bttSituacaoEmExecucao {
+                background-color: var(--emExecucao);
+            }
+            #bttSituacaoRetorno {
+                background-color: var(--retorno);
+            }
+            #bttSituacaoCancelada {
+                background-color: var(--cancelada);
+            }
+            #bttSituacaoFinalizada {
+                background-color: var(--finalizada);
+            }
+            .bttSelecionado {
+                border-color: var(--laranja);
+            }
+        }
+    }
+    #secHistOrdens {
+        #contTableHistOrdens {
+            border-color: var(--salmao1);
+        }
+        #tableHistOrdens {
+            background-color: var(--branco);
+            border-color: var(--marrom1);
+            #titleList {
+                color: var(--salmao2);
+                background-color: var(--marrom1);
+            }
+            .ordem {
+                .cl1,
+                .cl2,
+                .cl3,
+                .cl4 {
+                    border-right-color: var(--marrom1);
+                }
+            }
+            .ordem:hover {
+                background-color: var(--salmao3);
+            }
+            #msgSemOrdens td {
+                color: #960101;
+            }
+        }
+    }
+    .ant-pagination {
+        .ant-pagination-item {
+            background-color: var(--salmao1);
+            border-color: var(--marrom1);
+
+            a {
+                color: var(--marrom1);
+            }
+        }
+
+        .ant-pagination-item:hover {
+            background-color: var(--salmao2);
+        }
+
+        .ant-pagination-item-active {
+            border-color: var(--laranja);
+            background-color: var(--marrom1);
+
+            a {
+                color: var(--salmao2);
+            }
+        }
+
+        .ant-pagination-item-active:hover {
+            background-color: var(--marrom2);
+        }
+    }
+    #secOrdemAberta {
+        #fecharOrdemAberta:hover {
+            background-color: var(--salmao1);
+        }
+        #fecharOrdemAberta>svg {
+            color: var(--marrom1);
+        }
+        #infosOrdemAberta  {
+            border-color: var(--salmao1);
+            background-color: var(--branco);
+            div {
+                border-color: var(--marrom1);
+            }
+        }
+        #acoesOrdemAberta {
+            border-color: var(--salmao1);
+            #bttFecharOrdemAberta {
+                background-color: #ff8888;
+            }
+            #bttFecharOrdemAberta:hover {
+                background-color: #f37272;
+                text-decoration: underline;
+            }
+            #bttEditarOrdem {
+                background-color: #84aff0;
+            }
+            #bttEditarOrdem:hover {
+                background-color: #6b9ae2;
+                text-decoration: underline;
+            }
+        }
+    }
 }
 @media screen and (width <=750px) {
     #mainOrdens {

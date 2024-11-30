@@ -180,6 +180,52 @@ section {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+#pageHome {
+    #mainHome {
+        color: var(--marrom1);
+    }
+    #mainHome
+    section {
+        background-color: var(--salmao2);
+    }
+    #mainHome
+    #secTecnicosDisponivei
+    .funcsDisp {
+        border-color: var(--marrom1);
+        background-color: var(--salmao3);
+    } 
+    #mainHome
+    #secOrdens {
+        background-color: transparent;
+    }
+    #mainHome
+    #secOrdens .contsOrdens {
+        border-color: var(--marrom1);
+        background-color: var(--salmao2);
+    }
+    #mainHome
+    .headContsOrdens {
+        border-color: var(--marrom1);
+    }
+    #mainHome
+    .headContsOrdens .link {
+        color: var(--marrom3);
+    }
+    #mainHome
+    .headContsOrdens .link:hover {
+        color: var(--laranja);
+    }
+    #mainHome
+    .bodyContsOrdens .ordens:hover {
+        background-color: var(--salmao3);
+        border-color: var(--laranja);
+    }
+    #mainHome
+    .contsOrdens 
+    .ordens {
+        background-color: var(--branco);
+    }
+}
 @keyframes marquee {
     0% {
         transform: translateX(0);

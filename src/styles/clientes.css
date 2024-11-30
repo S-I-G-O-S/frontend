@@ -215,5 +215,104 @@
         }
     }
 }
+#pageClientes {
+    section {
+        color: var(--marrom1);
+        background-color: var(--salmao2);
+        border-color: var(--marrom1);
+    }
+    #containerH2Novo {
+        button {
+            background-color: var(--marrom1);
+            color: var(--salmao2);
+            border-color: var(--marrom1);
+        }
+        button:hover {
+            background-color: var(--marrom2);
+        }
+    }
+    #tabelaClientes {
+        background-color: var(--branco);
+        border-color: var(--marrom1);
+        #cabecalho {
+            color: var(--salmao2);
+            background-color: var(--marrom1);
+        }
+        #listClientes {
+            .nome,
+            .cnpj,
+            .endereco {
+                border-right-color: var(--marrom1);
+            }
+            .options:hover {
+                background-color: var(--salmao1);
+            }
+            .clientes:hover {
+                background-color: var(--salmao3);
+            }
+        }
+    }
+    .paginacao {
+        .ant-pagination {
+            .ant-pagination-item {
+                background-color: var(--salmao1);
+                border-color: var(--marrom1);
 
+                a {
+                    color: var(--marrom1);
+                }
+            }
+
+            .ant-pagination-item:hover {
+                background-color: var(--salmao2);
+            }
+
+            .ant-pagination-item-active {
+                border-color: var(--laranja);
+                background-color: var(--marrom1);
+
+                a {
+                    color: var(--salmao2);
+
+                }
+            }
+
+            .ant-pagination-item-active:hover {
+                background-color: var(--marrom2);
+            }
+        }
+    }
+    #contNovoCliente {
+        background-color: var(--salmao2);
+        border-color: var(--marrom1);
+        color: var(--marrom1);
+        #contInfosNovoCliente {
+            border-color: var(--salmao1);
+        }
+        #contAcaoNovoCliente {
+            border-color: var(--salmao1);
+            button {
+                all: unset;
+                border-color: var(--marrom1);
+                color: var(--marrom1);
+            }
+            button:focus {
+                border-color: var(--laranja);
+            }
+            #bttCancelar {
+                background-color: #ecea57;
+            }
+            #bttCancelar:hover {
+                background-color: #f5f23b;
+            }
+
+            #bttSalvar {
+                background-color: #41dd5b;
+            }
+            #bttSalvar:hover {
+                background-color: #21f143;
+            }
+        }
+    }
+}
 @media screen and (width <=800px) {}

@@ -113,6 +113,26 @@
         }
     }
 }
+#nav {
+    background-color: var(--azul);
+    .links {
+        color: var(--branco);
+    }
+    .links:hover {
+        background-color: var(--azulHover);
+    }
+    .iconNav,
+    .iconNav > svg{
+        color: var(--branco);
+    }
+    a.active {
+        background-color: var(--laranja);
+        color: var(--branco);
+        svg {
+            color: var(--branco);
+        }
+    }
+}
 @media screen and (width <= 950px) {
     #nav,
     .navFechado,

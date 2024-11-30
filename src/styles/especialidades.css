@@ -453,6 +453,166 @@
         grid-template-rows: 1fr;
     }
 }
+#pageEspecialidades {
+    section {
+        color: var(--marrom1);
+        background-color: var(--salmao2);
+        border-color: var(--marrom1);
+    }
+    #sec1 {
+        #contNovo {
+            button {
+                border-color: var(--marrom1);
+                color: var(--salmao3);
+                background-color: var(--marrom1);
+            }
+            button:hover {
+                background-color: var(--marrom3);
+            }
+        }
+        #contFiltrosEspecServ {
+            color: var(--salmao1);
+            background-color: var(--marrom1);
+            border-color: var(--marrom1);
+            #orderFiltrosEspecServ {
+                button {
+                    background-color: var(--salmao1);
+                    color: var(--marrom1);
+                    border-color: var(--salmao1);
+                }
+                button:hover {
+                    background-color: var(--salmao3);
+                    border-color: var(--salmao3);
+                }
+            }
+            #groupFiltrosEspecServ {
+                button {
+                    background-color: var(--salmao1);
+                    color: var(--marrom1);
+                    border-color: var(--salmao1);
+                }
+                button:hover {
+                    background-color: var(--salmao3);
+                    border-color: var(--salmao3);
+                }
+            }
+        }
+        #contListEspecServ {
+            background-color: var(--salmao1);
+            border-color: var(--marrom1);
+        }
+        .layoutServicos {
+            .servicos {
+                border-color: var(--marrom1);
+                background-color: var(--salmao2);
+            }
+            .servicos:hover {
+                background-color: var(--salmao3);
+            }
+        }
+    }
+    #secConfigEspec {
+        #contInfosEspecEdit {
+            border-color: var(--salmao1);
+            #headPreVisu {
+                button {
+                    background-color: var(--marrom1);
+                    color: var(--salmao2);
+                    border-color: var(--marrom1);
+                }
+                button:hover {
+                    background-color: var(--marrom3);
+                }
+            }
+            #preVisu {
+                border-color: var(--salmao1);
+            }
+            .preVisuDark {
+                background-color: var(--marrom1);
+            }
+            .preVisuLight {
+                background-color: var(--salmao3);
+            }
+        }
+        #contFimAcao {
+            border-color: var(--salmao1);
+            button {
+                border-color: var(--marrom1);
+            }
+            button:focus {
+                border-color: var(--laranja);
+            }
+            #bttCancelar {
+                background-color: #ecea57;
+            }
+            #bttSalvar {
+                background-color: #53ee6c;
+            }
+            #bttExcluir {
+                background-color: #fc8c8c;
+                
+            }
+            #bttCancelar:hover {
+                background-color: #fffc4e;
+            }
+            #bttSalvar:hover {
+                background-color: #32ff54;
+            }
+            #bttExcluir:hover {
+                background-color: #ff6a6a;
+                
+            }
+        }
+    }
+    #secConfigServico {
+        #contDadosConfigServ {
+            border-color: var(--salmao1);
+        }
+        #contEspecsConfigServ {
+            border-color: var(--salmao1);
+            #contAddEspecFunc {
+                button {
+                    background-color: var(--marrom1);
+                    color: var(--salmao2);
+                    border-color: var(--marrom1);
+                }
+                button:hover {
+                    background-color: var(--marrom3);
+                }
+            }
+            #contListEspecFunc {
+
+            }
+        }
+        #contAcaoConfigServ {
+            border-color: var(--salmao1);
+            button {
+                border-color: var(--marrom1);
+            }
+            button:focus {
+                border-color: var(--laranja);
+            }
+            #bttCancelar {
+                background-color: #ecea57;
+            }
+            #bttSalvar {
+                background-color: #40ec5d;
+            }
+            #bttExcluir {
+                background-color: #fc8c8c;
+            }
+            #bttCancelar:hover {
+                background-color: #fffc49;
+            }
+            #bttSalvar:hover {
+                background-color: #2aff4e;
+            }
+            #bttExcluir:hover {
+                background-color: #fa6565;
+            }
+        }
+    }
+}
 @media screen and (width <= 950px) {
     #pageEspecialidades{
         main {

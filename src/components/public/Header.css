@@ -90,3 +90,26 @@
         } */
     }
 }
+#header {
+    background-color: var(--marrom1);
+    .tituloPag {
+        color: var(--salmao1);
+    }
+    #iconUser {
+        background-color: var(--salmao1);
+    }
+    #iconUser:hover {
+        background-color: var(--salmao2);
+    }
+    #iconUser
+    svg {
+        color: var(--marrom1);
+    }
+    #sair {
+        color: var(--marrom1);
+        background-color: var(--salmao1);
+    }
+    #sair:hover {
+        background-color: var(--salmao2);
+    }
+}

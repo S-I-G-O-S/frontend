@@ -40,6 +40,7 @@ section {
     background-color: var(--salmao2);
 }
 
+/* feito */
 #pagePerfilConfig {
     #mainPerfilConfig {
         background-color: var(--branco);
@@ -53,6 +54,8 @@ section {
         border-color: var(--salmao1);
     }
 }
+
+/* feito */
 #pageHome {
     #mainHome {
         color: var(--marrom1);
@@ -99,6 +102,8 @@ section {
         background-color: var(--branco);
     }
 }
+
+/* feito */
 #pageFuncionarios {
     section {
         background-color: var(--salmao2);
@@ -249,6 +254,8 @@ section {
         }
     }
 }
+
+/* feito */
 #pageFuncionario {
     section {
         background-color: var(--salmao2);
@@ -316,6 +323,8 @@ section {
         }
     }
 }
+
+/* feito */
 #pageClientes {
     section {
         color: var(--marrom1);
@@ -416,6 +425,8 @@ section {
         }
     }
 }
+
+/* feito */
 #pageCliente {
     section {
         background-color: var(--salmao2);
@@ -608,6 +619,8 @@ section {
         }
     }
 }
+
+/* feito */
 #pageOrdens {
     section {
         background-color: var(--salmao2);
@@ -743,6 +756,8 @@ section {
         }
     }
 }
+
+/* feito */
 #pageNovaOrdem {
     section {
         border-color: var(--marrom1);
@@ -822,6 +837,8 @@ section {
         }
     }
 }
+
+/* feito */
 #pageEspecialidades {
     section {
         color: var(--marrom1);
@@ -982,6 +999,8 @@ section {
         }
     }
 }
+
+/* feito */
 #header {
     background-color: var(--marrom1);
     .tituloPag {
@@ -1005,6 +1024,8 @@ section {
         background-color: var(--salmao2);
     }
 }
+
+/* feito */
 #nav {
     background-color: var(--azul);
     .links {

@@ -42,6 +42,20 @@
 #secUserConfig {
     grid-area: mainConfig;
 }
+
+#pagePerfilConfig {
+    #mainPerfilConfig {
+        background-color: var(--branco);
+    }
+    #mainPerfilConfig
+    > section {
+        border-color: var(--marrom1);
+        background-color: var(--salmao2);
+    }
+    #contInfosFunc {
+        border-color: var(--salmao1);
+    }
+}
 @media screen and (width <= 750px) {
 }
 @media screen and (width <= 550px) {

@@ -322,6 +322,156 @@
         }
     }
 }
+#pageFuncionarios {
+    section {
+        background-color: var(--salmao2);
+        border-color: var(--marrom1);
+    }
+    #contEspecsNovoFunc
+    .btt {
+        color: var(--salmao2);
+        background-color: var(--marrom1);
+        border-color: var(--marrom1);
+    }
+    #contEspecsNovoFunc
+    .btt:hover {
+        background-color: var(--marrom2);
+    }
+    #contFiltros {
+        color: var(--salmao2);
+        background-color: var(--marrom1);
+        border-color: var(--marrom1);   
+        #contPesqFunc {
+            border-color: var(--salmao1);
+        }
+        #contPesqFunc
+        input {
+            background-color: var(--branco);
+            color: var(--marrom1);
+            border-color: var(--marrom1);
+        }
+        #contPesqFunc
+        input:focus {
+            outline-color: var(--laranja);
+            border-color: var(--laranja);
+        }
+        #contPesqFunc
+        button {
+            border-color: var(--marrom1);
+            background-color: var(--marrom1);
+        }
+        #contPesqFunc
+        button:hover {
+            background-color: var(--marrom2);
+        }
+        button:focus{
+            background-color: var(--marrom2);
+            svg {
+                color: var(--salmao3);
+            }
+        }
+        #bttFiltros {
+            background-color: var(--salmao1);
+            color: var(--marrom1);
+        }
+        #bttFiltros:hover {
+            background-color: var(--salmao2);
+        }
+    }
+    #layoutMobile {
+        border-color: var(--marrom1);
+        .funcs {
+            border-color: var(--marrom1);
+            background-color: var(--branco);
+            .editFunc {
+                background-color: var(--branco);
+            }
+        }
+    }
+    #contListFuncs {
+        #listFuncs {
+            border-color: var(--marrom1);
+            background-color: var(--branco);
+            #titleList {
+                background-color: var(--marrom1);
+                color: var(--salmao2);
+            }
+            tbody {
+                border-color: var(--marrom1);
+                .funcs {
+                    border-top-color: var(--marrom1);
+                    
+                    .cl1,
+                    .cl2,
+                    .cl3,
+                    .cl4,
+                    .cl5 {
+                        border-right-color: var(--marrom1);
+                    }
+                    .cl6:hover {
+                        background-color: var(--salmao2);
+                    }
+                }
+                .funcs:hover {
+                    background-color: var(--salmao3);
+                }
+            }
+        }
+    }
+    .ant-pagination {
+        .ant-pagination-item {
+            background-color: var(--salmao1);
+            border-color: var(--marrom1);
+            a {
+                color: var(--marrom1);
+            }
+        }
+        .ant-pagination-item:hover {
+            background-color: var(--salmao2);
+        }
+        .ant-pagination-item-active {
+            border-color: var(--laranja);
+            background-color: var(--marrom1);
+            a {
+            color: var(--salmao2);
+
+            }
+        }
+        .ant-pagination-item-active:hover {
+            background-color: var(--marrom2);
+        }
+    }
+    #secFiltros {
+        background-color: var(--salmao2);
+        border-color: var(--marrom1);
+        #closeModel 
+        svg {
+            color: var(--marrom1);
+        }
+        #closeModel:hover {
+            background-color: var(--salmao1);
+        }
+        #subContFiltros {
+            border-color: var(--salmao1);
+        }
+        #bttCancelar {
+            background-color: var(--salmao1);
+        }
+        #bttAplicar {
+            color: var(--salmao2);
+            background-color: var(--marrom1);
+        }
+        #bttCancelar:hover {
+            background-color: var(--salmao3);
+        }
+        #bttAplicar:hover {
+            background-color: var(--marrom3);
+        }
+        button:focus {
+            border-color: var(--laranja);
+        }
+    }
+}
 @media screen and (width <= 1024px) {
     #pageFuncionarios >
     #mainFuncionarios {

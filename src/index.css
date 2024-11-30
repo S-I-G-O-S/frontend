@@ -1,3 +1,4 @@
+/* VARIAVEIS */
 :root {
     --azul: #395873;
     --nav: #395873ea;
@@ -27,12 +28,13 @@
     --secondary4: #f2e8df;
     --cinza1: #dfdcd9;
 }
+/* RESETE */
 *,
 *::before,
 *::after {
     box-sizing: border-box;
 }
-
+/* GERAIS */
 html, body {
     width: 100%;
     height: 100%;
@@ -51,7 +53,6 @@ body {
 
     font-family: var(--font2);
 }
-
 #root {
     padding: 0;
     margin: 0;
@@ -85,6 +86,13 @@ body {
         z-index: 999;
     }
 }
+/* TODO testar futuramente */
+/* .salmaoDark {
+
+}
+.salmaoLight {
+
+} */
 .ant-input-password {
     display: flex;
     align-items: center;
@@ -124,6 +132,18 @@ body {
         border-radius: 0.3rem;
     }
 }
+.paginacao {
+    border-color: var(--marrom1);
+}
+.paginaItem {
+    color: var(--salmao2);
+    background-color: var(--marrom1);
+}
+.paginacao 
+.paginaItem:hover,
+.paginaItem:focus {
+    background-color: var(--marrom3);
+}
 .paginas {
     display: grid;
     grid-template-columns: max-content auto;
@@ -142,6 +162,9 @@ body {
         padding: 0.5rem 1rem;
     }
 }
+.paginas {
+    background-color: #F2E8DF;
+}
 .paginas
 .shadowBG 
 section {
@@ -151,6 +174,11 @@ section {
     padding: 1.5rem 2rem;
     border: 0.1rem solid var(--marrom);
     border-radius: 10px;
+}
+.paginas
+.shadowBG 
+section {
+    background-color: var(--salmao2);
 }
 @media screen and (width <= 950px) {
     .paginas {

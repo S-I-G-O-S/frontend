@@ -149,3 +149,82 @@
         }
     }
 }
+#pageNovaOrdem {
+    section {
+        border-color: var(--marrom1);
+        background-color: var(--salmao2);
+    }
+    #sec1 {
+        input {
+            background-color: var(--branco);
+            color: var(--marrom1);
+            border-color: var(--marrom1);
+        }
+        input:focus {
+            outline-color: var(--marrom1);
+            outline-width: 0.1rem;
+            outline-style: solid;
+        }
+        button {
+            background-color: var(--marrom1);
+            color: var(--salmao2);
+            border-color: var(--marrom1);
+        }
+        button:hover {
+            background-color: var(--marrom2);
+        }
+        button:focus {
+            outline-color: var(--laranja);
+            border-color: var(--laranja);
+        }
+        #contCliente {
+            border-color: var(--salmao1);
+        }
+        #contInfosCliente {
+            border-color: var(--salmao1);
+            color: var(--salmao3);
+            background-color: var(--marrom3);
+        }
+        #contServico {
+            border-color: var(--salmao1);
+        }
+        #contInfosServico {
+            border-color: var(--salmao1);
+            color: var(--salmao3);
+            background-color: var(--marrom3);
+        }
+        #contDescricao {
+            textarea {
+                background-color: var(--branco);
+                border-color: var(--marrom1);
+            }
+            textarea:focus {
+                border-color: var(--marrom1);
+
+            }
+        }
+        #contFinalizar {
+            button {
+                border-color: var(--marrom1);
+            }
+            #bttCancelar {
+                background-color: var(--salmao1);
+                color: var(--marrom1);
+            }
+            #bttCancelar:hover {
+                background-color: var(--salmao2);
+            }
+            #bttGerarOrdem {
+                background-color: var(--marrom1);
+                color: var(--salmao2);
+            }
+            #bttGerarOrdem:hover {
+                background-color: var(--marrom2);
+            }
+            button:focus {
+                outline-color: var(--laranja);
+                border-color: var(--laranja);
+            }
+        }
+    }
+}
