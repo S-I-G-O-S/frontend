@@ -1,0 +1,161 @@
+#pageOrdem {
+    #mainOrdem {
+        grid-area: main;
+        display: grid;
+        grid-template-columns: 1fr 3fr auto;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 0.5rem;
+        width: 100%;
+        max-height: 98%;
+    }
+    section, aside {
+        padding: 1rem;
+        border-style: solid;
+        border-width: 0.1rem;
+        border-radius: 0.3rem;
+        /* box-shadow: var(--boxShadow); */
+        h2 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        #contGeral,
+        #contServico,
+        #contCliente,
+        #contEndereco,
+        #contFuncionario,
+        #contAcoes {
+            padding: 0.5rem;
+            border-radius: 0.3rem;
+            border-style: solid;
+            border-width: 0.1rem;
+        }
+    }
+    #asideAcoes {
+        display: flex;
+        flex-direction: column;
+        #contAcoes {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+
+            button {
+                cursor: pointer;
+                text-align: center;
+                font-size: 0.9rem;
+                padding: 0.2rem 0.5rem;
+                border-radius: 0.3rem;
+                border-style: solid;
+                border-width: 0.1rem;
+            }
+        }
+    }
+    #secPrincipal {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        h2 {
+            margin-bottom: 0.7rem;
+        }
+        span {
+            font-weight: 500;
+        }
+        #contGeral {
+            display: flex;
+            /* grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); */
+            flex-wrap: wrap;
+            justify-content: space-between;
+            div {
+                display: flex;
+                gap: 0.2rem;
+            }
+        }
+        #contServico {
+            div {
+                display: flex;
+                gap: 0.5rem;
+            }
+        }
+        #contCliente {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            div {
+                display: flex;
+                gap: 0.2rem;
+            }
+        }
+        #contEndereco {
+            display: flex;
+            gap: 0.5rem;
+        }
+    }
+    #secAtendimentos {
+        #msgSemAtendimentos {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+
+            padding: 1rem 4rem;
+            border-radius: 0.3rem;
+            border-style: solid;
+            border-width: 0.1rem;
+
+            p {
+                font-size: 0.96rem;
+            }
+            #iconSemAtendimentos {
+                box-sizing: border-box;
+                svg {
+                    height: 2rem;
+                    width: 2rem;
+                }
+            }
+        }
+    }
+}
+#pageOrdem {
+    color: var(--marrom1);
+    section, aside {
+        border-color: var(--marrom1);
+        background-color: var(--salmao2);
+
+        #contGeral,
+        #contServico,
+        #contCliente,
+        #contEndereco,
+        #contFuncionario,
+        #contAcoes {
+            border-color: var(--salmao1);
+            background-color: var(--salmao2);
+        }
+    }
+    #asideAcoes {
+        #contAcoes {
+            background-color: var(--salmao3);
+            button {
+                background-color: var(--marrom1);
+                color: var(--salmao2);
+                border-color: var(--marrom1);
+            }
+        }
+    }
+    #secPrincipal {
+        #contGeral,
+        #contServico,
+        #contCliente,
+        #contEndereco,
+        #contFuncionario {
+            background-color: var(--salmao3);
+        }
+    }
+    #secAtendimentos {
+        #msgSemAtendimentos {
+            background-color: var(--salmao3);
+            border-color: var(--salmao1);
+        }
+    }
+}

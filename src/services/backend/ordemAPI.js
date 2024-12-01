@@ -88,7 +88,30 @@ export const getOrdensPorCliente = async (pagina, idCliente) => {
         throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
     }
 }
-
+export const getAtendimentos = async (id) => {
+    try {
+        const response = await axios.get(`${config.url}/api/ordens/${id}/atendimentos`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        return response
+    } catch (error) {
+        throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
+    }
+}
+export const getOrdensPorID = async (id) => {
+    try {
+        const response = await axios.get(`${config.url}/api/ordens/${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        return response
+    } catch (error) {
+        throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
+    }
+}
 export const postNovaOrdem = async (ordem) => {
     try {
         const response = await axios.post(`${config.url}/api/ordens`, {

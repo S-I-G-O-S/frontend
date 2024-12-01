@@ -19,350 +19,684 @@
     --cancelada: #ff8888;
     --finalizada: #0cda4a;
 }
-.paginas {
-    background-color: #F2E8DF;
-}
-.paginacao {
-    border-color: var(--marrom1);
-}
-.paginaItem {
-    color: var(--salmao2);
-    background-color: var(--marrom1);
-}
-.paginacao 
-.paginaItem:hover,
-.paginaItem:focus {
-    background-color: var(--marrom3);
-}
-.paginas
-.shadowBG 
-section {
-    background-color: var(--salmao2);
-}
-
-/* feito */
-#pagePerfilConfig {
-    #mainPerfilConfig {
-        background-color: var(--branco);
+.salmaoLight {
+    .paginas {
+        background-color: #F2E8DF;
     }
-    #mainPerfilConfig
-    > section {
+    .paginacao {
         border-color: var(--marrom1);
-        background-color: var(--salmao2);
     }
-    #contInfosFunc {
-        border-color: var(--salmao1);
+    .paginaItem {
+        color: var(--salmao2);
+        background-color: var(--marrom1);
     }
-}
-
-/* feito */
-#pageHome {
-    #mainHome {
-        color: var(--marrom1);
+    .paginacao 
+    .paginaItem:hover,
+    .paginaItem:focus {
+        background-color: var(--marrom3);
     }
-    #mainHome
+    .paginas
+    .shadowBG 
     section {
         background-color: var(--salmao2);
     }
-    #mainHome
-    #secTecnicosDisponivei
-    .funcsDisp {
-        border-color: var(--marrom1);
-        background-color: var(--salmao3);
-    } 
-    #mainHome
-    #secOrdens {
-        background-color: transparent;
-    }
-    #mainHome
-    #secOrdens .contsOrdens {
-        border-color: var(--marrom1);
-        background-color: var(--salmao2);
-    }
-    #mainHome
-    .headContsOrdens {
-        border-color: var(--marrom1);
-    }
-    #mainHome
-    .headContsOrdens .link {
-        color: var(--marrom3);
-    }
-    #mainHome
-    .headContsOrdens .link:hover {
-        color: var(--laranja);
-    }
-    #mainHome
-    .bodyContsOrdens .ordens:hover {
-        background-color: var(--salmao3);
-        border-color: var(--laranja);
-    }
-    #mainHome
-    .contsOrdens 
-    .ordens {
-        background-color: var(--branco);
-    }
-}
 
-/* feito */
-#pageFuncionarios {
-    section {
-        background-color: var(--salmao2);
-        border-color: var(--marrom1);
-    }
-    #contEspecsNovoFunc
-    .btt {
-        color: var(--salmao2);
-        background-color: var(--marrom1);
-        border-color: var(--marrom1);
-    }
-    #contEspecsNovoFunc
-    .btt:hover {
-        background-color: var(--marrom2);
-    }
-    #contFiltros {
-        color: var(--salmao2);
-        background-color: var(--marrom1);
-        border-color: var(--marrom1);   
-        #contPesqFunc {
-            border-color: var(--salmao1);
-        }
-        #contPesqFunc
-        input {
+    /* feito */
+    #pagePerfilConfig {
+        #mainPerfilConfig {
             background-color: var(--branco);
-            color: var(--marrom1);
+        }
+        #mainPerfilConfig
+        > section {
             border-color: var(--marrom1);
-        }
-        #contPesqFunc
-        input:focus {
-            outline-color: var(--laranja);
-            border-color: var(--laranja);
-        }
-        #contPesqFunc
-        button {
-            border-color: var(--marrom1);
-            background-color: var(--marrom1);
-        }
-        #contPesqFunc
-        button:hover {
-            background-color: var(--marrom2);
-        }
-        button:focus{
-            background-color: var(--marrom2);
-            svg {
-                color: var(--salmao3);
-            }
-        }
-        #bttFiltros {
-            background-color: var(--salmao1);
-            color: var(--marrom1);
-        }
-        #bttFiltros:hover {
             background-color: var(--salmao2);
         }
+        #contInfosFunc {
+            border-color: var(--salmao1);
+        }
     }
-    #layoutMobile {
-        border-color: var(--marrom1);
-        .funcs {
+
+    /* feito */
+    #pageHome {
+        #mainHome {
+            color: var(--marrom1);
+        }
+        #mainHome
+        section {
+            background-color: var(--salmao2);
+        }
+        #mainHome
+        #secTecnicosDisponivei
+        .funcsDisp {
             border-color: var(--marrom1);
+            background-color: var(--salmao3);
+        } 
+        #mainHome
+        #secOrdens {
+            background-color: transparent;
+        }
+        #mainHome
+        #secOrdens .contsOrdens {
+            border-color: var(--marrom1);
+            background-color: var(--salmao2);
+        }
+        #mainHome
+        .headContsOrdens {
+            border-color: var(--marrom1);
+        }
+        #mainHome
+        .headContsOrdens .link {
+            color: var(--marrom3);
+        }
+        #mainHome
+        .headContsOrdens .link:hover {
+            color: var(--laranja);
+        }
+        #mainHome
+        .bodyContsOrdens .ordens:hover {
+            background-color: var(--salmao3);
+            border-color: var(--laranja);
+        }
+        #mainHome
+        .contsOrdens 
+        .ordens {
             background-color: var(--branco);
-            .editFunc {
+        }
+    }
+
+    /* feito */
+    #pageFuncionarios {
+        section {
+            background-color: var(--salmao2);
+            border-color: var(--marrom1);
+        }
+        #contEspecsNovoFunc
+        .btt {
+            color: var(--salmao2);
+            background-color: var(--marrom1);
+            border-color: var(--marrom1);
+        }
+        #contEspecsNovoFunc
+        .btt:hover {
+            background-color: var(--marrom2);
+        }
+        #contFiltros {
+            color: var(--salmao2);
+            background-color: var(--marrom1);
+            border-color: var(--marrom1);   
+            #contPesqFunc {
+                border-color: var(--salmao1);
+            }
+            #contPesqFunc
+            input {
                 background-color: var(--branco);
-            }
-        }
-    }
-    #contListFuncs {
-        #listFuncs {
-            border-color: var(--marrom1);
-            background-color: var(--branco);
-            #titleList {
-                background-color: var(--marrom1);
-                color: var(--salmao2);
-            }
-            tbody {
+                color: var(--marrom1);
                 border-color: var(--marrom1);
-                .funcs {
-                    border-top-color: var(--marrom1);
-                    
-                    .cl1,
-                    .cl2,
-                    .cl3,
-                    .cl4,
-                    .cl5 {
-                        border-right-color: var(--marrom1);
-                    }
-                    .cl6:hover {
-                        background-color: var(--salmao2);
-                    }
-                }
-                .funcs:hover {
-                    background-color: var(--salmao3);
+            }
+            #contPesqFunc
+            input:focus {
+                outline-color: var(--laranja);
+                border-color: var(--laranja);
+            }
+            #contPesqFunc
+            button {
+                border-color: var(--marrom1);
+                background-color: var(--marrom1);
+            }
+            #contPesqFunc
+            button:hover {
+                background-color: var(--marrom2);
+            }
+            button:focus{
+                background-color: var(--marrom2);
+                svg {
+                    color: var(--salmao3);
                 }
             }
-        }
-    }
-    .ant-pagination {
-        .ant-pagination-item {
-            background-color: var(--salmao1);
-            border-color: var(--marrom1);
-            a {
+            #bttFiltros {
+                background-color: var(--salmao1);
                 color: var(--marrom1);
             }
-        }
-        .ant-pagination-item:hover {
-            background-color: var(--salmao2);
-        }
-        .ant-pagination-item-active {
-            border-color: var(--laranja);
-            background-color: var(--marrom1);
-            a {
-            color: var(--salmao2);
-
+            #bttFiltros:hover {
+                background-color: var(--salmao2);
             }
         }
-        .ant-pagination-item-active:hover {
-            background-color: var(--marrom2);
+        #layoutMobile {
+            border-color: var(--marrom1);
+            .funcs {
+                border-color: var(--marrom1);
+                background-color: var(--branco);
+                .editFunc {
+                    background-color: var(--branco);
+                }
+            }
         }
-    }
-    #secFiltros {
-        background-color: var(--salmao2);
-        border-color: var(--marrom1);
-        #closeModel 
-        svg {
-            color: var(--marrom1);
-        }
-        #closeModel:hover {
-            background-color: var(--salmao1);
-        }
-        #subContFiltros {
-            border-color: var(--salmao1);
-        }
-        #bttCancelar {
-            background-color: var(--salmao1);
-        }
-        #bttAplicar {
-            color: var(--salmao2);
-            background-color: var(--marrom1);
-        }
-        #bttCancelar:hover {
-            background-color: var(--salmao3);
-        }
-        #bttAplicar:hover {
-            background-color: var(--marrom3);
-        }
-        button:focus {
-            border-color: var(--laranja);
-        }
-    }
-}
-
-/* feito */
-#pageFuncionario {
-    section {
-        background-color: var(--salmao2);
-        border-color: var(--marrom1);
-        color: var(--marrom1);
-    }
-    #secInfos {
-        #contGeralFunc,
-        #contEndFunc,
-        #contControle {
-            border-color: var(--salmao1);
-        }
-        #contEndFunc {
-            #contCepFunc {
-                #bttPesqCEP {
+        #contListFuncs {
+            #listFuncs {
+                border-color: var(--marrom1);
+                background-color: var(--branco);
+                #titleList {
                     background-color: var(--marrom1);
-                    border-color: var(--marrom1);
                     color: var(--salmao2);
                 }
-                #bttPesqCEP:hover {
+                tbody {
+                    border-color: var(--marrom1);
+                    .funcs {
+                        border-top-color: var(--marrom1);
+                        
+                        .cl1,
+                        .cl2,
+                        .cl3,
+                        .cl4,
+                        .cl5 {
+                            border-right-color: var(--marrom1);
+                        }
+                        .cl6:hover {
+                            background-color: var(--salmao2);
+                        }
+                    }
+                    .funcs:hover {
+                        background-color: var(--salmao3);
+                    }
+                }
+            }
+        }
+        .ant-pagination {
+            .ant-pagination-item {
+                background-color: var(--salmao1);
+                border-color: var(--marrom1);
+                a {
+                    color: var(--marrom1);
+                }
+            }
+            .ant-pagination-item:hover {
+                background-color: var(--salmao2);
+            }
+            .ant-pagination-item-active {
+                border-color: var(--laranja);
+                background-color: var(--marrom1);
+                a {
+                color: var(--salmao2);
+
+                }
+            }
+            .ant-pagination-item-active:hover {
+                background-color: var(--marrom2);
+            }
+        }
+        #secFiltros {
+            background-color: var(--salmao2);
+            border-color: var(--marrom1);
+            #closeModel 
+            svg {
+                color: var(--marrom1);
+            }
+            #closeModel:hover {
+                background-color: var(--salmao1);
+            }
+            #subContFiltros {
+                border-color: var(--salmao1);
+            }
+            #bttCancelar {
+                background-color: var(--salmao1);
+            }
+            #bttAplicar {
+                color: var(--salmao2);
+                background-color: var(--marrom1);
+            }
+            #bttCancelar:hover {
+                background-color: var(--salmao3);
+            }
+            #bttAplicar:hover {
+                background-color: var(--marrom3);
+            }
+            button:focus {
+                border-color: var(--laranja);
+            }
+        }
+    }
+
+    /* feito */
+    #pageFuncionario {
+        section {
+            background-color: var(--salmao2);
+            border-color: var(--marrom1);
+            color: var(--marrom1);
+        }
+        #secInfos {
+            #contGeralFunc,
+            #contEndFunc,
+            #contControle {
+                border-color: var(--salmao1);
+            }
+            #contEndFunc {
+                #contCepFunc {
+                    #bttPesqCEP {
+                        background-color: var(--marrom1);
+                        border-color: var(--marrom1);
+                        color: var(--salmao2);
+                    }
+                    #bttPesqCEP:hover {
+                        background-color: var(--marrom2);
+                    }
+                }
+            }
+            #contControle {
+                button:focus {
+                    border-color: var(--laranja);
+                }
+                #bttCancelar {
+                    background-color: #ecea57;
+                }
+                #bttCancelar:hover  {
+                    background-color: #faf736;
+                }
+                #bttSalvar {
+                    background-color: #40ec5d;
+                }
+                #bttSalvar:hover {
+                    background-color: #30fa52;
+                }
+                #bttExcluir {
+                    background-color: #fc8c8c;
+                    
+                }
+                #bttExcluir:hover {
+                    background-color: #ff6e6e;
+                    
+                }
+            }
+        }
+        #secEspecialidades {
+            div {
+                border-color: var(--salmao1);
+            }
+            #contAddEspecFunc {
+                button {
+                    color: var(--salmao2);
+                    background-color: var(--marrom1);
+                    border-color: var(--marrom1);
+                    
+                }
+                button:hover {
                     background-color: var(--marrom2);
                 }
             }
         }
-        #contControle {
-            button:focus {
-                border-color: var(--laranja);
-            }
-            #bttCancelar {
-                background-color: #ecea57;
-            }
-            #bttCancelar:hover  {
-                background-color: #faf736;
-            }
-            #bttSalvar {
-                background-color: #40ec5d;
-            }
-            #bttSalvar:hover {
-                background-color: #30fa52;
-            }
-            #bttExcluir {
-                background-color: #fc8c8c;
-                
-            }
-            #bttExcluir:hover {
-                background-color: #ff6e6e;
-                
-            }
-        }
     }
-    #secEspecialidades {
-        div {
-            border-color: var(--salmao1);
+
+    /* feito */
+    #pageClientes {
+        section {
+            color: var(--marrom1);
+            background-color: var(--salmao2);
+            border-color: var(--marrom1);
         }
-        #contAddEspecFunc {
+        #containerH2Novo {
             button {
-                color: var(--salmao2);
                 background-color: var(--marrom1);
+                color: var(--salmao2);
                 border-color: var(--marrom1);
-                
             }
             button:hover {
                 background-color: var(--marrom2);
             }
         }
-    }
-}
+        #tabelaClientes {
+            background-color: var(--branco);
+            border-color: var(--marrom1);
+            #cabecalho {
+                color: var(--salmao2);
+                background-color: var(--marrom1);
+            }
+            #listClientes {
+                .nome,
+                .cnpj,
+                .endereco {
+                    border-right-color: var(--marrom1);
+                }
+                .options:hover {
+                    background-color: var(--salmao1);
+                }
+                .clientes:hover {
+                    background-color: var(--salmao3);
+                }
+            }
+        }
+        .paginacao {
+            .ant-pagination {
+                .ant-pagination-item {
+                    background-color: var(--salmao1);
+                    border-color: var(--marrom1);
 
-/* feito */
-#pageClientes {
-    section {
-        color: var(--marrom1);
-        background-color: var(--salmao2);
-        border-color: var(--marrom1);
+                    a {
+                        color: var(--marrom1);
+                    }
+                }
+
+                .ant-pagination-item:hover {
+                    background-color: var(--salmao2);
+                }
+
+                .ant-pagination-item-active {
+                    border-color: var(--laranja);
+                    background-color: var(--marrom1);
+
+                    a {
+                        color: var(--salmao2);
+
+                    }
+                }
+
+                .ant-pagination-item-active:hover {
+                    background-color: var(--marrom2);
+                }
+            }
+        }
+        #contNovoCliente {
+            background-color: var(--salmao2);
+            border-color: var(--marrom1);
+            color: var(--marrom1);
+            #contInfosNovoCliente {
+                border-color: var(--salmao1);
+            }
+            #contAcaoNovoCliente {
+                border-color: var(--salmao1);
+                button {
+                    all: unset;
+                    border-color: var(--marrom1);
+                    color: var(--marrom1);
+                }
+                button:focus {
+                    border-color: var(--laranja);
+                }
+                #bttCancelar {
+                    background-color: #ecea57;
+                }
+                #bttCancelar:hover {
+                    background-color: #f5f23b;
+                }
+
+                #bttSalvar {
+                    background-color: #41dd5b;
+                }
+                #bttSalvar:hover {
+                    background-color: #21f143;
+                }
+            }
+        }
     }
-    #containerH2Novo {
-        button {
-            background-color: var(--marrom1);
-            color: var(--salmao2);
+
+    /* feito */
+    #pageCliente {
+        section {
+            background-color: var(--salmao2);
+            color: var(--marrom1);
             border-color: var(--marrom1);
         }
-        button:hover {
-            background-color: var(--marrom2);
-        }
-    }
-    #tabelaClientes {
-        background-color: var(--branco);
-        border-color: var(--marrom1);
-        #cabecalho {
-            color: var(--salmao2);
-            background-color: var(--marrom1);
-        }
-        #listClientes {
-            .nome,
-            .cnpj,
-            .endereco {
-                border-right-color: var(--marrom1);
+        #secInfos {
+            input {
+                background-color: var(--branco);
+                color: var(--marrom1);
+                border-color: var(--marrom1);
             }
-            .options:hover {
+            input:focus {
+                outline-color: var(--marrom1);
+                outline-width: 0.1rem;
+                outline-style: solid;
+            }
+            #geral,
+            #endereco,
+            #fimAcao {
+                border-color: var(--salmao1);
+            }
+            #endereco {
+                #cep {
+                    button {
+                        color: var(--salmao2);
+                        border-color: var(--marrom1);
+                        background-color: var(--marrom1);
+                    }
+                    button:hover {
+                        background-color: var(--marrom2);
+                    }
+                    button:focus {
+                        outline-color: var(--laranja);
+                        border-color: var(--laranja);
+                    }
+                }
+            }
+            #fimAcao {
+                button {
+                    border-color: var(--marrom1);
+                }
+                #bttCancelar {
+                    background-color: #ecea57;
+                }
+                #bttCancelar:hover,
+                #bttCancelar:focus {
+                    background-color: #fffc49;
+                }
+                #bttSalvar {
+                    background-color: #67fc80;
+                }
+                #bttSalvar:hover,
+                #bttSalvar:focus {
+                    background-color: #37ff58;
+                }
+                #bttExcluir {
+                    background-color: #fc8c8c;
+                    
+                }
+                #bttExcluir:hover,
+                #bttExcluir:hover {
+                    background-color: #ff6c6c;
+                    
+                }
+            }
+        }
+        #secContatos {
+            #containerH2Novo {
+                #bttNovoCtt {
+                    background-color: var(--marrom1);
+                    color: var(--salmao2);
+                    border-color: var(--marrom1);
+                }
+                #bttNovoCtt:hover {
+                    background-color: var(--marrom2);
+                }
+                #bttNovoCtt:focus {
+                    outline-color: var(--laranja)   ;
+                }
+            }
+            #listContatos {
+                .contato {
+                    background-color: var(--marrom1);
+                    color: var(--salmao2);
+                    .contContatoLeft {
+                        h4 {
+                            font-weight: 500;
+                        }
+                        p {
+                            font-weight: 400;
+                        }
+                    }
+                    .contContatoRight {
+                        button {
+                            background-color: var(--salmao1);
+                            color: var(--marrom1);
+                            border-color: var(--salmao1);
+                        }
+                        button:focus {
+                            outline-color: var(--laranja);
+                        }
+                        button:hover {
+                            background-color: var(--salmao2);
+                        }
+                        
+                    }
+                }
+            }
+        }
+        #secHistorico {
+            #contListHistoricos {
+                background-color: var(--branco);
+
+                thead {
+                    background-color: var(--marrom1);
+                    color: var(--salmao2);
+                }
+                th, td {
+                    border-color: var(--marrom1);
+                }
+            }
+        }
+        .ant-pagination {
+            .ant-pagination-item {
                 background-color: var(--salmao1);
+                border-color: var(--marrom1);
+                a {
+                    color: var(--marrom1);
+                }
             }
-            .clientes:hover {
-                background-color: var(--salmao3);
+            .ant-pagination-item:hover {
+                background-color: var(--salmao2);
+            }
+            .ant-pagination-item-active {
+                border-color: var(--laranja);
+                background-color: var(--marrom1);
+                a {
+                color: var(--salmao2);
+
+                }
+            }
+            .ant-pagination-item-active:hover {
+                background-color: var(--marrom2);
+            }
+        }
+        #secNovoContato {
+            #contHeadNovoContato {
+                #closeModel svg {
+                    color: var(--marrom1);
+                }
+                #closeModel:hover {
+                    background-color: var(--salmao1);
+                }
+            }
+            #contFormNovoContato {
+                border-color: var(--salmao1);
+                div {
+                    input {
+                        background-color: var(--branco);
+                        color: var(--marrom1);
+                        border-color: var(--marrom1);
+                    }
+                    input:focus {
+                        outline-color: var(--marrom1);
+                        outline-width: 0.1rem;
+                        outline-style: solid;
+                    }
+                }
+            }
+            #contFooterNovoContato  {
+                border-color: var(--salmao1);
+                #bttCancelar {
+                    background-color: var(--salmao1);
+                }
+                #bttAddContato {
+                    color: var(--salmao2);
+                    border-color: var(--marrom1);
+                    background-color: var(--marrom1);
+                }
+                #bttCancelar:hover {
+                    background-color: var(--salmao2);
+                }
+                #bttAddContato:hover {
+                    background-color: var(--marrom2);
+                }
+                button:focus {
+                    border-color: var(--laranja);
+                }
             }
         }
     }
-    .paginacao {
+
+    /* feito */
+    #pageOrdens {
+        section {
+            background-color: var(--salmao2);
+            border-color: var(--marrom1);
+            color: var(--marrom1);
+        }
+        #sec1 {
+            #contNovo {
+                border-color: var(--salmao1);
+                #bttNovaOrdem {
+                    color: var(--salmao2);
+                    background-color: var(--marrom1);
+                    border-color: var(--marrom1);
+                }
+                #bttNovaOrdem:hover {
+                    background-color: var(--marrom2);
+                    color: var(--salmao1);
+                }
+            }
+            #contSituacoes {
+                border-color: var(--salmao1);
+                background-color: var(--azul);
+                .bttsSituacao {
+                    border-color: var(--marrom1);
+                }
+                .bttsSituacao:hover {
+                    border-color: var(--laranja);
+                } 
+                #bttSituacaoPendente {
+                    background-color: var(--pendente);
+                }
+                #bttSituacaoEmExecucao {
+                    background-color: var(--emExecucao);
+                }
+                #bttSituacaoRetorno {
+                    background-color: var(--retorno);
+                }
+                #bttSituacaoCancelada {
+                    background-color: var(--cancelada);
+                }
+                #bttSituacaoFinalizada {
+                    background-color: var(--finalizada);
+                }
+                .bttSelecionado {
+                    border-color: var(--laranja);
+                }
+            }
+        }
+        #secHistOrdens {
+            #contTableHistOrdens {
+                border-color: var(--salmao1);
+            }
+            #tableHistOrdens {
+                background-color: var(--branco);
+                border-color: var(--marrom1);
+                #titleList {
+                    color: var(--salmao2);
+                    background-color: var(--marrom1);
+                }
+                .ordem {
+                    .cl1,
+                    .cl2,
+                    .cl3,
+                    .cl4 {
+                        border-right-color: var(--marrom1);
+                    }
+                }
+                .ordem:hover {
+                    background-color: var(--salmao3);
+                }
+                #msgSemOrdens td {
+                    color: #960101;
+                }
+            }
+        }
         .ant-pagination {
             .ant-pagination-item {
                 background-color: var(--salmao1);
@@ -383,7 +717,6 @@ section {
 
                 a {
                     color: var(--salmao2);
-
                 }
             }
 
@@ -391,72 +724,111 @@ section {
                 background-color: var(--marrom2);
             }
         }
-    }
-    #contNovoCliente {
-        background-color: var(--salmao2);
-        border-color: var(--marrom1);
-        color: var(--marrom1);
-        #contInfosNovoCliente {
-            border-color: var(--salmao1);
-        }
-        #contAcaoNovoCliente {
-            border-color: var(--salmao1);
-            button {
-                all: unset;
-                border-color: var(--marrom1);
+        #secOrdemAberta {
+            #fecharOrdemAberta:hover {
+                background-color: var(--salmao1);
+            }
+            #fecharOrdemAberta>svg {
                 color: var(--marrom1);
             }
+            #infosOrdemAberta  {
+                border-color: var(--salmao1);
+                background-color: var(--branco);
+                div {
+                    border-color: var(--marrom1);
+                }
+            }
+            #acoesOrdemAberta {
+                border-color: var(--salmao1);
+                #bttFecharOrdemAberta {
+                    background-color: #ff8888;
+                }
+                #bttFecharOrdemAberta:hover {
+                    background-color: #f37272;
+                    text-decoration: underline;
+                }
+                #bttEditarOrdem {
+                    background-color: #84aff0;
+                }
+                #bttEditarOrdem:hover {
+                    background-color: #6b9ae2;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    /* feito */
+    #pageNovaOrdem {
+        section {
+            border-color: var(--marrom1);
+            background-color: var(--salmao2);
+        }
+        #sec1 {
+            input {
+                background-color: var(--branco);
+                color: var(--marrom1);
+                border-color: var(--marrom1);
+            }
+            input:focus {
+                outline-color: var(--marrom1);
+                outline-width: 0.1rem;
+                outline-style: solid;
+            }
+            button {
+                background-color: var(--marrom1);
+                color: var(--salmao2);
+                border-color: var(--marrom1);
+            }
+            button:hover {
+                background-color: var(--marrom2);
+            }
             button:focus {
+                outline-color: var(--laranja);
                 border-color: var(--laranja);
             }
-            #bttCancelar {
-                background-color: #ecea57;
+            #contCliente {
+                border-color: var(--salmao1);
             }
-            #bttCancelar:hover {
-                background-color: #f5f23b;
+            #contInfosCliente {
+                border-color: var(--salmao1);
+                color: var(--salmao3);
+                background-color: var(--marrom3);
             }
-
-            #bttSalvar {
-                background-color: #41dd5b;
+            #contServico {
+                border-color: var(--salmao1);
             }
-            #bttSalvar:hover {
-                background-color: #21f143;
+            #contInfosServico {
+                border-color: var(--salmao1);
+                color: var(--salmao3);
+                background-color: var(--marrom3);
             }
-        }
-    }
-}
-
-/* feito */
-#pageCliente {
-    section {
-        background-color: var(--salmao2);
-        color: var(--marrom1);
-        border-color: var(--marrom1);
-    }
-    #secInfos {
-        input {
-            background-color: var(--branco);
-            color: var(--marrom1);
-            border-color: var(--marrom1);
-        }
-        input:focus {
-            outline-color: var(--marrom1);
-            outline-width: 0.1rem;
-            outline-style: solid;
-        }
-        #geral,
-        #endereco,
-        #fimAcao {
-            border-color: var(--salmao1);
-        }
-        #endereco {
-            #cep {
-                button {
-                    color: var(--salmao2);
+            #contDescricao {
+                textarea {
+                    background-color: var(--branco);
                     border-color: var(--marrom1);
-                    background-color: var(--marrom1);
                 }
-                button:hover {
+                textarea:focus {
+                    border-color: var(--marrom1);
+
+                }
+            }
+            #contFinalizar {
+                button {
+                    border-color: var(--marrom1);
+                }
+                #bttCancelar {
+                    background-color: var(--salmao1);
+                    color: var(--marrom1);
+                }
+                #bttCancelar:hover {
+                    background-color: var(--salmao2);
+                }
+                #bttGerarOrdem {
+                    background-color: var(--marrom1);
+                    color: var(--salmao2);
+                }
+                #bttGerarOrdem:hover {
                     background-color: var(--marrom2);
                 }
                 button:focus {
@@ -465,584 +837,214 @@ section {
                 }
             }
         }
-        #fimAcao {
-            button {
-                border-color: var(--marrom1);
-            }
-            #bttCancelar {
-                background-color: #ecea57;
-            }
-            #bttCancelar:hover,
-            #bttCancelar:focus {
-                background-color: #fffc49;
-            }
-            #bttSalvar {
-                background-color: #67fc80;
-            }
-            #bttSalvar:hover,
-            #bttSalvar:focus {
-                background-color: #37ff58;
-            }
-            #bttExcluir {
-                background-color: #fc8c8c;
-                
-            }
-            #bttExcluir:hover,
-            #bttExcluir:hover {
-                background-color: #ff6c6c;
-                
-            }
-        }
     }
-    #secContatos {
-        #containerH2Novo {
-            #bttNovoCtt {
-                background-color: var(--marrom1);
-                color: var(--salmao2);
-                border-color: var(--marrom1);
-            }
-            #bttNovoCtt:hover {
-                background-color: var(--marrom2);
-            }
-            #bttNovoCtt:focus {
-                outline-color: var(--laranja)   ;
-            }
+
+    /* feito */
+    #pageEspecialidades {
+        section {
+            color: var(--marrom1);
+            background-color: var(--salmao2);
+            border-color: var(--marrom1);
         }
-        #listContatos {
-            .contato {
-                background-color: var(--marrom1);
-                color: var(--salmao2);
-                .contContatoLeft {
-                    h4 {
-                        font-weight: 500;
-                    }
-                    p {
-                        font-weight: 400;
-                    }
+        #sec1 {
+            #contNovo {
+                button {
+                    border-color: var(--marrom1);
+                    color: var(--salmao3);
+                    background-color: var(--marrom1);
                 }
-                .contContatoRight {
+                button:hover {
+                    background-color: var(--marrom3);
+                }
+            }
+            #contFiltrosEspecServ {
+                color: var(--salmao1);
+                background-color: var(--marrom1);
+                border-color: var(--marrom1);
+                #orderFiltrosEspecServ {
                     button {
                         background-color: var(--salmao1);
                         color: var(--marrom1);
                         border-color: var(--salmao1);
                     }
-                    button:focus {
-                        outline-color: var(--laranja);
+                    button:hover {
+                        background-color: var(--salmao3);
+                        border-color: var(--salmao3);
+                    }
+                }
+                #groupFiltrosEspecServ {
+                    button {
+                        background-color: var(--salmao1);
+                        color: var(--marrom1);
+                        border-color: var(--salmao1);
                     }
                     button:hover {
-                        background-color: var(--salmao2);
+                        background-color: var(--salmao3);
+                        border-color: var(--salmao3);
                     }
+                }
+            }
+            #contListEspecServ {
+                background-color: var(--salmao1);
+                border-color: var(--marrom1);
+            }
+            .layoutServicos {
+                .servicos {
+                    border-color: var(--marrom1);
+                    background-color: var(--salmao2);
+                }
+                .servicos:hover {
+                    background-color: var(--salmao3);
+                }
+            }
+        }
+        #secConfigEspec {
+            #contInfosEspecEdit {
+                border-color: var(--salmao1);
+                #headPreVisu {
+                    button {
+                        background-color: var(--marrom1);
+                        color: var(--salmao2);
+                        border-color: var(--marrom1);
+                    }
+                    button:hover {
+                        background-color: var(--marrom3);
+                    }
+                }
+                #preVisu {
+                    border-color: var(--salmao1);
+                }
+                .preVisuDark {
+                    background-color: var(--marrom1);
+                }
+                .preVisuLight {
+                    background-color: var(--salmao3);
+                }
+            }
+            #contFimAcao {
+                border-color: var(--salmao1);
+                button {
+                    border-color: var(--marrom1);
+                }
+                button:focus {
+                    border-color: var(--laranja);
+                }
+                #bttCancelar {
+                    background-color: #ecea57;
+                }
+                #bttSalvar {
+                    background-color: #53ee6c;
+                }
+                #bttExcluir {
+                    background-color: #fc8c8c;
+                    
+                }
+                #bttCancelar:hover {
+                    background-color: #fffc4e;
+                }
+                #bttSalvar:hover {
+                    background-color: #32ff54;
+                }
+                #bttExcluir:hover {
+                    background-color: #ff6a6a;
                     
                 }
             }
         }
-    }
-    #secHistorico {
-        #contListHistoricos {
-            background-color: var(--branco);
-
-            thead {
-                background-color: var(--marrom1);
-                color: var(--salmao2);
-            }
-            th, td {
-                border-color: var(--marrom1);
-            }
-        }
-    }
-    .ant-pagination {
-        .ant-pagination-item {
-            background-color: var(--salmao1);
-            border-color: var(--marrom1);
-            a {
-                color: var(--marrom1);
-            }
-        }
-        .ant-pagination-item:hover {
-            background-color: var(--salmao2);
-        }
-        .ant-pagination-item-active {
-            border-color: var(--laranja);
-            background-color: var(--marrom1);
-            a {
-            color: var(--salmao2);
-
-            }
-        }
-        .ant-pagination-item-active:hover {
-            background-color: var(--marrom2);
-        }
-    }
-    #secNovoContato {
-        #contHeadNovoContato {
-            #closeModel svg {
-                color: var(--marrom1);
-            }
-            #closeModel:hover {
-                background-color: var(--salmao1);
-            }
-        }
-        #contFormNovoContato {
-            border-color: var(--salmao1);
-            div {
-                input {
-                    background-color: var(--branco);
-                    color: var(--marrom1);
-                    border-color: var(--marrom1);
-                }
-                input:focus {
-                    outline-color: var(--marrom1);
-                    outline-width: 0.1rem;
-                    outline-style: solid;
-                }
-            }
-        }
-        #contFooterNovoContato  {
-            border-color: var(--salmao1);
-            #bttCancelar {
-                background-color: var(--salmao1);
-            }
-            #bttAddContato {
-                color: var(--salmao2);
-                border-color: var(--marrom1);
-                background-color: var(--marrom1);
-            }
-            #bttCancelar:hover {
-                background-color: var(--salmao2);
-            }
-            #bttAddContato:hover {
-                background-color: var(--marrom2);
-            }
-            button:focus {
-                border-color: var(--laranja);
-            }
-        }
-    }
-}
-
-/* feito */
-#pageOrdens {
-    section {
-        background-color: var(--salmao2);
-        border-color: var(--marrom1);
-        color: var(--marrom1);
-    }
-    #sec1 {
-        #contNovo {
-            border-color: var(--salmao1);
-            #bttNovaOrdem {
-                color: var(--salmao2);
-                background-color: var(--marrom1);
-                border-color: var(--marrom1);
-            }
-            #bttNovaOrdem:hover {
-                background-color: var(--marrom2);
-                color: var(--salmao1);
-            }
-        }
-        #contSituacoes {
-            border-color: var(--salmao1);
-            background-color: var(--azul);
-            .bttsSituacao {
-                border-color: var(--marrom1);
-            }
-            .bttsSituacao:hover {
-                border-color: var(--laranja);
-            } 
-            #bttSituacaoPendente {
-                background-color: var(--pendente);
-            }
-            #bttSituacaoEmExecucao {
-                background-color: var(--emExecucao);
-            }
-            #bttSituacaoRetorno {
-                background-color: var(--retorno);
-            }
-            #bttSituacaoCancelada {
-                background-color: var(--cancelada);
-            }
-            #bttSituacaoFinalizada {
-                background-color: var(--finalizada);
-            }
-            .bttSelecionado {
-                border-color: var(--laranja);
-            }
-        }
-    }
-    #secHistOrdens {
-        #contTableHistOrdens {
-            border-color: var(--salmao1);
-        }
-        #tableHistOrdens {
-            background-color: var(--branco);
-            border-color: var(--marrom1);
-            #titleList {
-                color: var(--salmao2);
-                background-color: var(--marrom1);
-            }
-            .ordem {
-                .cl1,
-                .cl2,
-                .cl3,
-                .cl4 {
-                    border-right-color: var(--marrom1);
-                }
-            }
-            .ordem:hover {
-                background-color: var(--salmao3);
-            }
-            #msgSemOrdens td {
-                color: #960101;
-            }
-        }
-    }
-    .ant-pagination {
-        .ant-pagination-item {
-            background-color: var(--salmao1);
-            border-color: var(--marrom1);
-
-            a {
-                color: var(--marrom1);
-            }
-        }
-
-        .ant-pagination-item:hover {
-            background-color: var(--salmao2);
-        }
-
-        .ant-pagination-item-active {
-            border-color: var(--laranja);
-            background-color: var(--marrom1);
-
-            a {
-                color: var(--salmao2);
-            }
-        }
-
-        .ant-pagination-item-active:hover {
-            background-color: var(--marrom2);
-        }
-    }
-    #secOrdemAberta {
-        #fecharOrdemAberta:hover {
-            background-color: var(--salmao1);
-        }
-        #fecharOrdemAberta>svg {
-            color: var(--marrom1);
-        }
-        #infosOrdemAberta  {
-            border-color: var(--salmao1);
-            background-color: var(--branco);
-            div {
-                border-color: var(--marrom1);
-            }
-        }
-        #acoesOrdemAberta {
-            border-color: var(--salmao1);
-            #bttFecharOrdemAberta {
-                background-color: #ff8888;
-            }
-            #bttFecharOrdemAberta:hover {
-                background-color: #f37272;
-                text-decoration: underline;
-            }
-            #bttEditarOrdem {
-                background-color: #84aff0;
-            }
-            #bttEditarOrdem:hover {
-                background-color: #6b9ae2;
-                text-decoration: underline;
-            }
-        }
-    }
-}
-
-/* feito */
-#pageNovaOrdem {
-    section {
-        border-color: var(--marrom1);
-        background-color: var(--salmao2);
-    }
-    #sec1 {
-        input {
-            background-color: var(--branco);
-            color: var(--marrom1);
-            border-color: var(--marrom1);
-        }
-        input:focus {
-            outline-color: var(--marrom1);
-            outline-width: 0.1rem;
-            outline-style: solid;
-        }
-        button {
-            background-color: var(--marrom1);
-            color: var(--salmao2);
-            border-color: var(--marrom1);
-        }
-        button:hover {
-            background-color: var(--marrom2);
-        }
-        button:focus {
-            outline-color: var(--laranja);
-            border-color: var(--laranja);
-        }
-        #contCliente {
-            border-color: var(--salmao1);
-        }
-        #contInfosCliente {
-            border-color: var(--salmao1);
-            color: var(--salmao3);
-            background-color: var(--marrom3);
-        }
-        #contServico {
-            border-color: var(--salmao1);
-        }
-        #contInfosServico {
-            border-color: var(--salmao1);
-            color: var(--salmao3);
-            background-color: var(--marrom3);
-        }
-        #contDescricao {
-            textarea {
-                background-color: var(--branco);
-                border-color: var(--marrom1);
-            }
-            textarea:focus {
-                border-color: var(--marrom1);
-
-            }
-        }
-        #contFinalizar {
-            button {
-                border-color: var(--marrom1);
-            }
-            #bttCancelar {
-                background-color: var(--salmao1);
-                color: var(--marrom1);
-            }
-            #bttCancelar:hover {
-                background-color: var(--salmao2);
-            }
-            #bttGerarOrdem {
-                background-color: var(--marrom1);
-                color: var(--salmao2);
-            }
-            #bttGerarOrdem:hover {
-                background-color: var(--marrom2);
-            }
-            button:focus {
-                outline-color: var(--laranja);
-                border-color: var(--laranja);
-            }
-        }
-    }
-}
-
-/* feito */
-#pageEspecialidades {
-    section {
-        color: var(--marrom1);
-        background-color: var(--salmao2);
-        border-color: var(--marrom1);
-    }
-    #sec1 {
-        #contNovo {
-            button {
-                border-color: var(--marrom1);
-                color: var(--salmao3);
-                background-color: var(--marrom1);
-            }
-            button:hover {
-                background-color: var(--marrom3);
-            }
-        }
-        #contFiltrosEspecServ {
-            color: var(--salmao1);
-            background-color: var(--marrom1);
-            border-color: var(--marrom1);
-            #orderFiltrosEspecServ {
-                button {
-                    background-color: var(--salmao1);
-                    color: var(--marrom1);
-                    border-color: var(--salmao1);
-                }
-                button:hover {
-                    background-color: var(--salmao3);
-                    border-color: var(--salmao3);
-                }
-            }
-            #groupFiltrosEspecServ {
-                button {
-                    background-color: var(--salmao1);
-                    color: var(--marrom1);
-                    border-color: var(--salmao1);
-                }
-                button:hover {
-                    background-color: var(--salmao3);
-                    border-color: var(--salmao3);
-                }
-            }
-        }
-        #contListEspecServ {
-            background-color: var(--salmao1);
-            border-color: var(--marrom1);
-        }
-        .layoutServicos {
-            .servicos {
-                border-color: var(--marrom1);
-                background-color: var(--salmao2);
-            }
-            .servicos:hover {
-                background-color: var(--salmao3);
-            }
-        }
-    }
-    #secConfigEspec {
-        #contInfosEspecEdit {
-            border-color: var(--salmao1);
-            #headPreVisu {
-                button {
-                    background-color: var(--marrom1);
-                    color: var(--salmao2);
-                    border-color: var(--marrom1);
-                }
-                button:hover {
-                    background-color: var(--marrom3);
-                }
-            }
-            #preVisu {
+        #secConfigServico {
+            #contDadosConfigServ {
                 border-color: var(--salmao1);
             }
-            .preVisuDark {
-                background-color: var(--marrom1);
+            #contEspecsConfigServ {
+                border-color: var(--salmao1);
+                #contAddEspecFunc {
+                    button {
+                        background-color: var(--marrom1);
+                        color: var(--salmao2);
+                        border-color: var(--marrom1);
+                    }
+                    button:hover {
+                        background-color: var(--marrom3);
+                    }
+                }
+                #contListEspecFunc {
+
+                }
             }
-            .preVisuLight {
-                background-color: var(--salmao3);
-            }
-        }
-        #contFimAcao {
-            border-color: var(--salmao1);
-            button {
-                border-color: var(--marrom1);
-            }
-            button:focus {
-                border-color: var(--laranja);
-            }
-            #bttCancelar {
-                background-color: #ecea57;
-            }
-            #bttSalvar {
-                background-color: #53ee6c;
-            }
-            #bttExcluir {
-                background-color: #fc8c8c;
-                
-            }
-            #bttCancelar:hover {
-                background-color: #fffc4e;
-            }
-            #bttSalvar:hover {
-                background-color: #32ff54;
-            }
-            #bttExcluir:hover {
-                background-color: #ff6a6a;
-                
-            }
-        }
-    }
-    #secConfigServico {
-        #contDadosConfigServ {
-            border-color: var(--salmao1);
-        }
-        #contEspecsConfigServ {
-            border-color: var(--salmao1);
-            #contAddEspecFunc {
+            #contAcaoConfigServ {
+                border-color: var(--salmao1);
                 button {
-                    background-color: var(--marrom1);
-                    color: var(--salmao2);
                     border-color: var(--marrom1);
                 }
-                button:hover {
-                    background-color: var(--marrom3);
+                button:focus {
+                    border-color: var(--laranja);
+                }
+                #bttCancelar {
+                    background-color: #ecea57;
+                }
+                #bttSalvar {
+                    background-color: #40ec5d;
+                }
+                #bttExcluir {
+                    background-color: #fc8c8c;
+                }
+                #bttCancelar:hover {
+                    background-color: #fffc49;
+                }
+                #bttSalvar:hover {
+                    background-color: #2aff4e;
+                }
+                #bttExcluir:hover {
+                    background-color: #fa6565;
                 }
             }
-            #contListEspecFunc {
-
-            }
-        }
-        #contAcaoConfigServ {
-            border-color: var(--salmao1);
-            button {
-                border-color: var(--marrom1);
-            }
-            button:focus {
-                border-color: var(--laranja);
-            }
-            #bttCancelar {
-                background-color: #ecea57;
-            }
-            #bttSalvar {
-                background-color: #40ec5d;
-            }
-            #bttExcluir {
-                background-color: #fc8c8c;
-            }
-            #bttCancelar:hover {
-                background-color: #fffc49;
-            }
-            #bttSalvar:hover {
-                background-color: #2aff4e;
-            }
-            #bttExcluir:hover {
-                background-color: #fa6565;
-            }
         }
     }
-}
 
-/* feito */
-#header {
-    background-color: var(--marrom1);
-    .tituloPag {
-        color: var(--salmao1);
-    }
-    #iconUser {
-        background-color: var(--salmao1);
-    }
-    #iconUser:hover {
-        background-color: var(--salmao2);
-    }
-    #iconUser
-    svg {
-        color: var(--marrom1);
-    }
-    #sair {
-        color: var(--marrom1);
-        background-color: var(--salmao1);
-    }
-    #sair:hover {
-        background-color: var(--salmao2);
-    }
-}
-
-/* feito */
-#nav {
-    background-color: var(--azul);
-    .links {
-        color: var(--branco);
-    }
-    .links:hover {
-        background-color: var(--azulHover);
-    }
-    .iconNav,
-    .iconNav > svg{
-        color: var(--branco);
-    }
-    a.active {
-        background-color: var(--laranja);
-        color: var(--branco);
+    /* feito */
+    #header {
+        background-color: var(--marrom1);
+        .tituloPag {
+            color: var(--salmao1);
+        }
+        #iconUser {
+            background-color: var(--salmao1);
+        }
+        #iconUser:hover {
+            background-color: var(--salmao2);
+        }
+        #iconUser
         svg {
+            color: var(--marrom1);
+        }
+        #sair {
+            color: var(--marrom1);
+            background-color: var(--salmao1);
+        }
+        #sair:hover {
+            background-color: var(--salmao2);
+        }
+    }
+
+    /* feito */
+    #nav {
+        background-color: var(--azul);
+        .links {
             color: var(--branco);
+        }
+        .links:hover {
+            background-color: var(--azulHover);
+        }
+        .iconNav,
+        .iconNav > svg{
+            color: var(--branco);
+        }
+        a.active {
+            background-color: var(--laranja);
+            color: var(--branco);
+            svg {
+                color: var(--branco);
+            }
         }
     }
 }

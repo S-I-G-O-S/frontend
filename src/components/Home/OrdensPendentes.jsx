@@ -2,9 +2,10 @@ import { useEffect, useState } from "react"
 import Loading from "../public/Loading"
 import { Card } from "antd"
 import { getOrdensForHome } from "../../services/backend/ordemAPI"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 function OrdensPendentes() {
+    const navigate = useNavigate()
     const [ordensPendentes, setOrdensPendentes] = useState(null)
     const [reqstOrdensPendentes, setReqstOrdensPendentes] = useState(null)
     const converterDtHr = (dataHora) => {
@@ -21,6 +22,9 @@ function OrdensPendentes() {
             hour: '2-digit',
             minute: '2-digit',
         })
+    }
+    const handleAbrirOrdem = (idOrdem) => {
+        navigate(`/ordem?id=${idOrdem}`)
     }
     const fetchOrdens = async () => {
         try {
@@ -49,7 +53,9 @@ function OrdensPendentes() {
                 </div>
                 <div className="bodyContsOrdens">
                     {ordensPendentes.map(ordem => (
-                        <div className="ordensPendentes ordens" key={ordem.id}>
+                        <div key={ordem.id}
+                            className="ordensPendentes ordens" 
+                            onClick={() => handleAbrirOrdem(ordem.id)}>
                             <div className="nomeCliente">{ordem.cliente}</div>
                             <div className="serviço">{ordem.servico}</div>
                             <div className="dataHora">{converterDtHr(ordem.dtAbertura)}</div>

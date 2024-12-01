@@ -1,6 +1,6 @@
 import Header from "./public/Header"
 import Nav from "./public/Nav"
-import '../styles/ordens.css'
+import '@styles/ordens.css'
 import View from "../assets/view.png"
 import Hide from "../assets/hide.png"
 import { useNavigate, useLocation } from "react-router-dom"
@@ -41,6 +41,11 @@ function Ordens() {
         },
         qtd: 15
     })
+    const [render, setRender] = useState({
+        cliente: false,
+        funcionario: false,
+        servico: false
+    })
     const [expandLists, setExpandLists] = useState({
         pendente: false,
         emExecucao: false,
@@ -61,19 +66,7 @@ function Ordens() {
         const cookieUsuario = getCookie('usuario')
         return cookieUsuario ? cookieUsuario : ''
     })
-    const handleEditClick = (idOrdem) => {
-        navigate(`/ordem?id=${idOrdem}`)
-    }
-    // const handleVerMais = (situacao) => {
-    //     console.log('DEBBUG SITUACAO ' + situacao.toLowerCase())
-    //     // navigate(`/historico-ordens?situacao=${situacao.toLowerCase()}`)
-    // }
-    // const goToHistOrdens = () => {
-    //     navigate('/historico-ordens')
-    // }
-    const handleNovaOrdem = () => {
-        navigate('/nova-ordem')
-    }
+    
     const converterDtHr = (dataHora) => {
         const [dia, mes, anoHora] = dataHora.split('-')
         const [ano, hora] = anoHora.split(' ')
@@ -89,7 +82,41 @@ function Ordens() {
             minute: '2-digit',
         })
     }
-
+    //  SEC FILTRO GERAL
+    const handleFecharFiltro = (tipoFiltro) => {
+        setRender(prevState => ({
+            ...prev,
+            [tipoFiltro]: false
+        }))
+    }
+    //  SEC FILTRO SERVICO
+    const handleAbrirFiltroServico = () => {
+        setRender({
+            cliente: false,
+            funcionario: false,
+            servico: true
+        })
+    }
+    //  SEC FILTRO FUNCIONARIO
+    const handleAbrirFiltroFuncionario = () => {
+        setRender({
+            cliente: false,
+            funcionario: true,
+            servico: false
+        })
+    }
+    //  SEC FILTRO CLIENTE
+    const handleAbrirFiltroCliente = () => {
+        setRender({
+            cliente: true,
+            funcionario: false,
+            servico: false
+        })
+    }
+    //  SEC ORDEM ABERTA
+    const handleEditClick = (idOrdem) => {
+        navigate(`/ordem?id=${idOrdem}`)
+    }
     const handleAbrirOrdem = (idOrdem) => {
         const ordemToAbrir = ordens.find(ordem => ordem.id == idOrdem)
         
@@ -122,6 +149,9 @@ function Ordens() {
         setOrdemAberta(null)
     }
     //  SEC 1
+    const handleNovaOrdem = () => {
+        navigate('/nova-ordem')
+    }
     useEffect(() => {
         console.clear()
         console.log(ordemAberta)
@@ -130,7 +160,6 @@ function Ordens() {
         console.log('Filtrando por situação: '+ filtros.situacao.value)
         fetchOrdens(0)
     }, [filtros.situacao.value])
-    
     const handleChangeFilters = (value, field) => {
         // setloadings(prevState => ({
         //     ...prevState,
@@ -272,112 +301,6 @@ function Ordens() {
                     </button>
                     {/* <button id="bttGoToHistOrdens" onClick={goToHistOrdens}>Ver historico detalhado</button> */}
                 </div>
-                {/*
-                    <div id="contOrdens">
-                        <div id="contOrdensPendentes" 
-                            className={expandLists.pendente ? 'listOrdensAberto listOrdens' : 'listOrdensFechado listOrdens'}
-                            >
-                            <button className="headList"
-                                onClick={() => handleChangeExpandLists('pendente', !expandLists.pendente)}
-                                disabled={!pendente}
-                                >
-                                <div className="leftCont">
-                                {
-                                    expandLists.pendente ?
-                                        <UpOutlined className="iconExpandir" /> :
-                                        <DownOutlined className="iconExpandir" />
-                                }
-                                    <p>Pendente</p>
-                                </div>
-                                
-                                <div className="rightCont">
-                                </div>
-                            </button>
-                            {
-                                pendente &&
-                                expandLists.pendente &&
-                                (<div className="bodyList">
-                                    {pendente.map(ordem =>
-                                        <div key={ordem.id}         
-                                            className="itemListOrdens"
-                                            onClick={() => handleAbrirOrdem(ordem.id, 'PENDENTE')}>
-                                            <div>Cliente: {ordem.cliente}</div>
-                                            <div>Serviço: {ordem.servico}</div>
-                                            <div>Data abertura: {converterDtHr(ordem.dtAbertura)}</div>
-                                        </div>
-                                    )}
-                                </div>)
-                            }
-                        </div>
-                        <div id="contOrdensEmExecucao"
-                            className={expandLists.emExecucao ? 'listOrdensAberto listOrdens' : 'listOrdensFechado listOrdens'}
-                            >
-                            <button className="headList"
-                                onClick={() => handleChangeExpandLists('emExecucao', !expandLists.emExecucao)}
-                                disabled={!emExecucao}
-                                >
-                                <div className="leftCont">
-                                    <FieldTimeOutlined />
-                                    <p>Em execução</p>
-                                </div>
-                                {
-                                    expandLists.emExecucao ?
-                                    <UpOutlined className="iconExpandir" /> :
-                                    <DownOutlined className="iconExpandir" />
-                                }
-                            </button>
-                            {
-                                emExecucao &&
-                                expandLists.emExecucao &&
-                                (<div className="bodyList">
-                                    {emExecucao.map(ordem =>
-                                        <div key={ordem.id} 
-                                            className="itemListOrdens"
-                                            onClick={() => handleAbrirOrdem(ordem.id, 'EM_EXECUCAO')}>
-                                            <div>Cliente: {ordem.cliente}</div>
-                                            <div>Serviço: {ordem.servico}</div>
-                                            <div>Data abertura: {converterDtHr(ordem.dtAbertura)}</div>
-                                        </div>
-                                    )}
-                                </div>)
-                            }
-                        </div>
-                        <div id="contOrdensRetorno" 
-                            className={expandLists.retorno ? 'listOrdensAberto listOrdens' : 'listOrdensFechado listOrdens'}
-                            
-                            >
-                            <button className="headList"
-                                onClick={() => handleChangeExpandLists('retorno', !expandLists.retorno)}
-                                disabled={!retorno}
-                                >
-                                <div className="leftCont">
-                                    <RollbackOutlined/>
-                                    <p>Retorno</p>
-                                </div>
-                                {
-                                    expandLists.retorno ?
-                                    <UpOutlined className="iconExpandir" /> :
-                                    <DownOutlined className="iconExpandir" />
-                                }
-                            </button>
-                            {
-                                retorno &&
-                                expandLists.retorno &&
-                                (<div className="bodyList">
-                                    {retorno.map(ordem =>
-                                        <div key={ordem.id} 
-                                            className="itemListOrdens"
-                                            onClick={() => handleAbrirOrdem(ordem.id, 'RETORNO')}>
-                                            <div>Cliente: {ordem.cliente}</div>
-                                            <div>Serviço: {ordem.servico}</div>
-                                            <div>Data abertura: {converterDtHr(ordem.dtAbertura)}</div>
-                                        </div>
-                                    )}
-                                </div>)
-                            }
-                        </div>
-                    </div>
-                */}
                 <div id="contSituacoes">
                     <button
                         id="bttSituacaoPendente"
@@ -542,6 +465,38 @@ function Ordens() {
                         <div id='acoesOrdemAberta'>
                             <button id="bttFecharOrdemAberta" onClick={handleFecharOrdem}>cancelar</button>
                             <button id="bttEditarOrdem" onClick={() => handleEditClick(ordemAberta.id)}>editar</button>
+                        </div>
+                    </section>
+                </div>
+            }
+            {
+                render.cliente && 
+                <div className="shadowBG">
+                    <section id="secFiltroCliente" className="secsFiltro">
+                        <div id="HeaderFiltroCliente">
+                            <h2>Procurar por cliente</h2>
+                            <CloseOutlined className="fecharFiltro" onClick={() => handleFecharFiltro('cliente')}/>
+                        </div>
+                    </section>
+                </div>
+            }
+            {
+                render.funcionario && 
+                <div className="shadowBG">
+                    <section id="secFiltroFuncionario" className="secsFiltro">
+                        <div id="HeaderFiltroFuncionario">
+                            <CloseOutlined className="fecharFiltro" onClick={() => handleFecharFiltro('funcionario')}/>
+                        </div>
+                    </section>
+                </div>
+            }
+            {
+                render.servico && 
+                <div className="shadowBG">
+                    <section id="secFiltroServico" className="secsFiltro">
+                        <div id="HeaderFiltroServico">
+                            <h2>Procurar por serviço</h2>
+                            <CloseOutlined className="fecharFiltro" onClick={() => handleFecharFiltro('servico')}/>
                         </div>
                     </section>
                 </div>

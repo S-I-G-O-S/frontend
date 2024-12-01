@@ -122,6 +122,7 @@ section {
     padding: 0 0.2rem;
     border: 0.1rem solid;
     border-radius: 0.4rem;
+    max-width: 50%;
 }
 #mainHome
 .headContsOrdens {
@@ -184,9 +185,11 @@ section {
     #mainHome {
         color: var(--marrom1);
     }
-    #mainHome
     section {
         background-color: var(--salmao2);
+    }
+    #secAtalhos {
+        background-color: var(--marrom2);
     }
     #mainHome
     #secTecnicosDisponivei
@@ -217,7 +220,8 @@ section {
     }
     #mainHome
     .bodyContsOrdens .ordens:hover {
-        background-color: var(--salmao3);
+        color: var(--salmao2);
+        background-color: var(--marrom1);
         border-color: var(--laranja);
     }
     #mainHome

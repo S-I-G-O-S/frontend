@@ -6,13 +6,15 @@ import '../styles/home.css'
 import { useEffect, useState } from 'react'
 import Loading from './public/Loading'
 
-import {notification, Alert} from 'antd';  
+import {notification, Alert, FloatButton} from 'antd';  
+import { CommentOutlined, CustomerServiceOutlined } from '@ant-design/icons'
 
 import InfosUser from './Home/InfosUser'
 import FuncsDisponiveis from './Home/FuncsDisponiveis'
 import OrdensPendentes from './Home/OrdensPendentes'
 import OrdensEmAtendimento from './Home/OrdensEmAtendimento'
 import { getCookie } from '../services/cookies'
+import Atalhos from './Home/Atalhos'
 
 function Home() {
     const showNotification = (placement) => {
@@ -33,10 +35,7 @@ function Home() {
         return cookieUsuario ? cookieUsuario : ''
     })
     // TODO Pedir para adicionar endpoint para alterar tema do usuario
-    if (!usuario.tema) {
-
-    }
-
+    if (!usuario.tema) {}
     useEffect(() => {
         console.clear()
     }, [])
@@ -51,7 +50,7 @@ function Home() {
             {
                 !usuario ? '' : (
                 <>
-                
+                <Atalhos></Atalhos>
                 {/* informações do usuário */}
                 {showInfosUser && usuario.cargo == 'DEV' ? 
                     <InfosUser></InfosUser> : ''
@@ -71,7 +70,7 @@ function Home() {
 
                     <section id='secOrdens'>
                         {/* Ordens Abertas */}
-                        <OrdensPendentes></OrdensPendentes>
+                        <OrdensPendentes ></OrdensPendentes>
 
                         {/* Ordens em Atendimento */}
                         <OrdensEmAtendimento></OrdensEmAtendimento>
@@ -80,7 +79,28 @@ function Home() {
                 </>
             )
         }
-
+        {/* <FloatButton.Group
+            trigger="click"
+            type="primary"
+            style={{
+                insetInlineEnd: 24,
+            }}
+            icon={<CustomerServiceOutlined />}
+            >
+            <FloatButton />
+            <FloatButton icon={<CommentOutlined />} />
+        </FloatButton.Group>
+        <FloatButton.Group
+            trigger="hover"
+            type="primary"
+            style={{
+                insetInlineEnd: 94,
+            }}
+            icon={<CustomerServiceOutlined />}
+            >
+            <FloatButton />
+            <FloatButton icon={<CommentOutlined />} />
+        </FloatButton.Group> */}
         </main>
         </div>
         </>

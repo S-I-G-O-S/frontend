@@ -14,6 +14,7 @@
     --preto: #000;
     --font1: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
     --font2: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --boxShadow: 0 6px 16px 0 rgba(51, 6, 6, 0.08),0 3px 6px -4px rgba(0, 0, 0, 0.12),0 9px 28px 8px rgba(0, 0, 0, 0.05);
 }
 [data-theme="normal-light"]{
     --navColor: #395873;
