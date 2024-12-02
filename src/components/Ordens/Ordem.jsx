@@ -98,6 +98,10 @@ function Ordem() {
                             <span>Situação:</span>
                             {ordem.situacao}
                         </div>
+                        <div>
+                            <span>Descrição:</span>
+                            {ordem.descricao}
+                        </div>
                     </div>
                     <div id="contServico">
                         <div>

@@ -63,6 +63,7 @@
         #contGeral {
             display: flex;
             /* grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); */
+            gap: .2rem;
             flex-wrap: wrap;
             justify-content: space-between;
             div {
@@ -140,6 +141,9 @@
                 background-color: var(--marrom1);
                 color: var(--salmao2);
                 border-color: var(--marrom1);
+            }
+            button:hover {
+                background-color: var(--marrom2);
             }
         }
     }

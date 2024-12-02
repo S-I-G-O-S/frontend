@@ -2,36 +2,61 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: .5rem;
 
-    padding: .5rem .9rem;
-    border-radius: .3rem;
-    border-style: solid;
-    border-width: .1rem;
-    .atalhos {
+    #contAtalhos {    
         display: flex;
-        align-items: center;
+        flex-wrap: wrap;
         justify-content: center;
-        gap: .3rem;
-        text-decoration: none;
-        font-weight: 500;
-
-        padding: .25rem .99rem;
+        align-items: center;
+        gap: .5rem;
+        padding: .4rem 5vw;
         border-radius: .5rem;
-        border-width: .1rem;
         border-style: solid;
+        border-width: .1rem;
 
-        .iconAtalhos svg {
-            height: 1.2rem;
-            width: 1.2rem;
+        width: auto;
+        display: flex;
+        .atalhos {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .3rem;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: .97rem;
+
+            padding: .15rem .9rem;
+            border-radius: .5rem;
+            border-width: .1rem;
+            border-style: solid;
+
+            .iconAtalhos svg {
+                height: 1.2rem;
+                width: 1.2rem;
+            }
+        }
+        .atalhos:focus {
+            outline-width: 0.1rem;
+            outline-style: solid;
         }
     }
 }
 #secAtalhos {
-    background-color: var(--marrom1);
-    .atalhos {
-        color: var(--marrom1);
-        background-color: var(--salmao1);
-
+    background-color: transparent;
+    #contAtalhos {
+        background-color: var(--marrom1);
+        .atalhos {
+            color: var(--marrom1);
+            background-color: var(--salmao1);
+            border-color: var(--salmao1);
+        }
+        .atalhos:hover {
+            background-color: var(--salmao2);
+        }
+        .atalhos:focus {
+            background-color: var(--salmao2);
+            outline-color: var(--laranja);
+            border-color: var(--laranja);
+        }
     }
 }

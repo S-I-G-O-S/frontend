@@ -117,6 +117,7 @@
     background-color: var(--azul);
     .links {
         color: var(--branco);
+        background-color: var(--azul);
     }
     .links:hover {
         background-color: var(--azulHover);

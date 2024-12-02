@@ -13,13 +13,32 @@ import Loading from '../public/Loading.jsx'
 import { notification, Popconfirm, Input, Button, Select } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { getCookie } from '../../services/cookies.js'
+import { func } from 'prop-types'
 
 function Funcionario() {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search)
     let idFuncionario = searchParams?.get('id') ?? null
     const navigate = useNavigate()
-    const [funcionario, setFuncionario] = useState()
+    const [funcionario, setFuncionario] = useState({
+        "nome": "",
+        "primeiro": "",
+        "ultimo": "",
+        "email": "",
+        "celular": "",
+        "senha": "",
+        "cargo": "ADM",
+        "endereco": {
+            "cep": "",
+            "logradouro": "",
+            "numero": "",
+            "bairro": "",
+            "cidade": "",
+            "uf": "",
+            "complemento": ""
+        },
+        "especialidades": []
+    })
     const [carregando, setCarregando] = useState(true)
     const [especialidades, setEspecialidades] = useState()
     const [pesqAddEspec, setPesqAddEspec] = useState('')
@@ -119,8 +138,8 @@ function Funcionario() {
             message: `CEP inválido ou não encontrado`,
             // description: 'Reconecte-se a internet',
             placement,
-        });
-    };
+        })
+    }
     const handleChangeEndereco = (value, field) => {
         if(field == 'logradouro' && value.length > 100) {
             return
@@ -194,7 +213,6 @@ function Funcionario() {
         })
         return true;
     }
-
     //  Geral
     const novoFuncionario = () => {
         setFuncionario(
@@ -237,6 +255,17 @@ function Funcionario() {
         // O codigo de exclusão ficava todo aqui
     }
     const handleSalvar = async () => {
+        if (funcionario.nome=='' || 
+            funcionario.cpf=='' ||
+            (funcionario.celular=='' && funcionario.email=='') 
+            ) {
+            notification.error({
+                message: `Erro ao salvar funcionário.`,
+                description: `Campos 'NOME', 'CPF' são obrigatórios, e deve ter ao menos 'EMAIL' ou 'CELULAR' registrados.`,
+                placement: 'bottomLeft',
+                duration: 10
+            })
+        }
         if (!formatNome()) {
             return
         }
@@ -330,12 +359,9 @@ function Funcionario() {
         console.clear()
         const fetchData = async () => {
             try {
-                if (idFuncionario) {
-                    fetchFuncionario()
-                } else {
-                    novoFuncionario()
+                if (!idFuncionario) {
+                    novoFuncionario()  
                 }
-
                 fetchEspecialidades()
             } catch (error) {
                 console.error(error.message)
@@ -427,7 +453,9 @@ function Funcionario() {
                                         value={funcionario.endereco.cep || ""}
                                         onChange={(e) => handleCEP(e.target.value)}
                                     />
-                                    <button id='bttPesqCEP'>
+                                    <button id='bttPesqCEP'
+                                        onClick={fetchCEP}
+                                    >
                                         <p>Pesquisar CEP</p>
                                         <SearchOutlined />
                                     </button>
