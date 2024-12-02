@@ -257,8 +257,8 @@ function Login() {
                 <a id="esqueciMinhaSenha" href="">esqueci minha senha</a>
                 {/* <p onClick={changePrimeiroAcesso}>primeiro acesso</p>             */}
             </section>
-            {/* <img id='imgBG1' src={Negocio} alt="" />
-            <img id='imgBG2' src={Analise} alt="" /> */}
+            <img id='imgBG1' src={Negocio} alt="" />
+            <img id='imgBG2' src={Analise} alt="" />
             {
                 primeiroAcesso &&
                 (<div id='shadowBG'>

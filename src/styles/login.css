@@ -26,13 +26,16 @@
         position: fixed;
         height: 412px;
         right: 1%;
-        bottom: 1%;
+        bottom: 0%;
+        mix-blend-mode: multiply;
+        z-index: 2;
     }
     #imgBG2 {
         position: fixed;
         height: 350px;
         left: 1vw;
         top: 9vh;
+        z-index: 1;
     }
     #secLogin {
         display: flex;
@@ -217,4 +220,8 @@
         }
     }
 }
-
+@media screen and (width <= 980px) {
+    #imgBG1 {
+        display: none;
+    }
+}

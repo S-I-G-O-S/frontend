@@ -404,7 +404,7 @@ function Especialidades() {
                         <button id='nomeOrderFiltrosEspec' onClick={mudarOrdemEspecServicos}>
                             Nome {ordemEspecServicos.toUpperCase()}
                         </button>
-                        <button onClick={() => {handleAttLista}}>atualizar</button>
+                        <button onClick={() => {handleAttLista}}>Atualizar</button>
                     </div>
                     <div id='groupFiltrosEspecServ'>
                         <p>Agrupar por:</p>
