@@ -14,6 +14,19 @@
                 font-size: 1rem;
                 margin: 0;
             }
+            input[type="text"] {
+                border-radius: 0.3rem;
+                border-style: solid;
+                border-width: .1rem;
+                font-size: 0.9rem;
+                padding: 0.1rem 0.25rem;
+                height: auto;
+            }
+            input[type="text"]:focus {
+                font-weight: 400;
+                outline-width: .1rem;
+                outline-style: solid;
+            }
         }
         #sec1 {
             grid-area: sec1;
@@ -118,6 +131,7 @@
                 border-style: solid;
                 border-width: 0.1rem;
                 border-radius: 0 0 0.3rem 0.3rem;
+                overflow-y: auto;
             }
             .layoutEspecs {
                 display: flex;
@@ -136,7 +150,6 @@
                 display: flex;
                 flex-wrap: wrap;
                 /* grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); */
-                overflow-y: scroll;
                 max-height: 67vh;
                 
                 .servicos {
@@ -197,7 +210,18 @@
                         font-size: 0.95rem;
                         font-weight: 500;
                     }
-
+                    textarea {
+                        line-height: 1.1rem;
+                        border-radius: 0.3rem;
+                        border-width: 0.1rem;
+                        border-style: solid;
+                        box-shadow: none;
+                        transition: 0s;
+                    }
+                    textarea:focus {
+                        outline-width: 0.1rem;
+                        outline-style: solid;
+                    }
                 }
                 #contCamposCoresEspecEdit {
                     display: flex;
@@ -215,7 +239,8 @@
                             width: auto;
 
                             input[type="text"] {
-                                height: 1rem;
+                                font-size: .9rem;
+                                line-height: 1rem;
                                 max-width: 5rem;
                             }
                             input[type="color"] {
@@ -338,9 +363,18 @@
                 }
                 #descricaoDadosConfigServ {
                     textarea {
-                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                        width: auto;
+                        line-height: 1.1rem;
+                        border-radius: 0.3rem;
+                        border-width: 0.1rem;
+                        border-style: solid;
+                        box-shadow: none;
+                        transition: 0s;
                     }
+                    textarea:focus {
+                        outline-width: 0.1rem;
+                        outline-style: solid;
+                    }
+                    
                 }
             }
             #contEspecsConfigServ {
@@ -377,24 +411,47 @@
                     gap: 0.15rem;
                     .skillsServ {
                         display: grid;
-                        grid-template-columns: 1fr 1.5rem;
+                        grid-template-columns: 1fr auto;
+                        gap: .2rem;
                         align-items: center;
                         padding: 0.2rem 0.5rem;
-                        border-radius: 0.2rem;
+                        border-radius: 0.4rem;
+                        border-width: .1rem;
+                        border-style: solid;
+                        width: 100%;
                         p {
                             font-size: 0.85rem;
                             font-weight: 500;
                             margin: 0;
                         }
-                        img {
+                        .iconRmvEspec {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
                             visibility: hidden;
                             cursor: pointer;
-
+                            /* padding: 0.1rem 0.1rem; */
+                            border-radius: 1rem;
+                            vertical-align: middle;
+                            line-height: normal;
+                            
+                            background-color: var(--branco);
+                            
                             transition: 10ms;
+                            
+                            svg {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                height: 1.5rem;
+                                width: 1.5rem;
+                                
+                                color: var(--marrom1);
+                            }
                         }
                     }
                     .skillsServ:hover {
-                        img {
+                        .iconRmvEspec {
                             transition: 150ms;
                             visibility: visible;
                         }
@@ -458,6 +515,14 @@
         color: var(--marrom1);
         background-color: var(--salmao2);
         border-color: var(--marrom1);
+        input[type="text"] {
+            background-color: var(--branco);
+            border-color: var(--marrom1);
+        }
+        input[type="text"]:focus {
+            border-color: var(--laranja);
+            outline-color: var(--laranja);
+        }
     }
     #sec1 {
         #contNovo {
@@ -514,6 +579,15 @@
     #secConfigEspec {
         #contInfosEspecEdit {
             border-color: var(--salmao1);
+            textarea {
+                background-color: var(--branco);
+                border-color: var(--marrom1);
+                color: var(--marrom1);
+            }
+            textarea:focus {
+                border-color: var(--laranja);
+                outline-color: var(--laranja);
+            }
             #headPreVisu {
                 button {
                     background-color: var(--marrom1);
@@ -567,6 +641,15 @@
     #secConfigServico {
         #contDadosConfigServ {
             border-color: var(--salmao1);
+            textarea {
+                background-color: var(--branco);
+                border-color: var(--marrom1);
+                color: var(--marrom1);
+            }
+            textarea:focus {
+                border-color: var(--laranja);
+                outline-color: var(--laranja);
+            }
         }
         #contEspecsConfigServ {
             border-color: var(--salmao1);
@@ -579,9 +662,6 @@
                 button:hover {
                     background-color: var(--marrom3);
                 }
-            }
-            #contListEspecFunc {
-
             }
         }
         #contAcaoConfigServ {

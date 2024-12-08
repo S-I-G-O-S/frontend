@@ -1,10 +1,10 @@
 import axios from 'axios'
 import config from '../config'
 
-export const putRegSenha = async (email, senha, novaSenha) => {
+export const putRegSenha = async (login, senha, novaSenha) => {
     try {
-        const response = await axios.put(`${config.url}/login/`, {
-            email,
+        const response = await axios.put(`${config.url}/api/usuarios/login`, {
+            login,
             senha,
             novaSenha
         })
@@ -15,7 +15,7 @@ export const putRegSenha = async (email, senha, novaSenha) => {
 }
 export const editUsuario = async (usuario) => {
     try {
-        const response = await axios.put(`${config.url}/login/`, {
+        const response = await axios.put(`${config.url}/api/usuarios`, {
             nome: usuario.nome,
             primeiro: usuario.primeiro,
             ultimo: usuario.ultimo,

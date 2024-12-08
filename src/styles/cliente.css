@@ -567,7 +567,7 @@
     #secHistorico {
         #contListHistoricos {
             background-color: var(--branco);
-
+            border-color: var(--marrom1);
             thead {
                 background-color: var(--marrom1);
                 color: var(--salmao2);

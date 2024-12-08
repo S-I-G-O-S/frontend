@@ -12,6 +12,8 @@ import { useEffect, useState } from 'react'
 import { Await } from 'react-router-dom'
 import Loading from './public/Loading'
 import { getCookie } from '../services/cookies'
+import TextArea from 'antd/es/input/TextArea'
+import { MinusCircleFilled, MinusCircleTwoTone } from '@ant-design/icons'
 
 // https://www.delftstack.com/pt/howto/react/for-loop-in-react/
 
@@ -150,7 +152,12 @@ function Especialidades() {
                 }}
             >
                 <p>{especialidade.nome}</p>
-                <img src={removeIcon} onClick={() => {deleteEspecServ(especialidade.id)}}/>
+                {/* <img src={removeIcon} onClick={() => {deleteEspecServ(especialidade.id)}}/> 
+                <MinusCircleFilled />
+                */}
+                <MinusCircleFilled className='iconRmvEspec'
+                    onClick={() => deleteEspecServ(especialidade.id)}
+                /> 
             </div>
         )
         //  TODO Trocar este img por svg
@@ -446,7 +453,7 @@ function Especialidades() {
             !tipoJanela  ?
                 '': 
                 (tipoJanela == 'espec' ?
-                    <section id='secConfigEspec'>
+                    (<section id='secConfigEspec'>
                         <h2>Editando especialidade</h2>
                         <div id='contInfosEspecEdit'>
 
@@ -460,11 +467,26 @@ function Especialidades() {
                             </div>
                             <div id='campoDescricaoConfigEspec'>
                                 <label>Descrição:</label>
-                                <input type="text" id='descricaoConfigEspec' 
+                                {/* <input type="text" id='descricaoConfigEspec' 
                                     value={especAberta.descricao}
-                                    onChange={(e) => mudarDescricaoPrevEspec(e.target.value)}/>
+                                    onChange={(e) => mudarDescricaoPrevEspec(e.target.value)}/> */}
+                                <TextArea
+                                    id="txtDescricao"
+                                    value={especAberta.descricao}
+                                    onChange={(e) => mudarDescricaoPrevEspec(e.target.value)}
+                                    placeholder="Opcional"
+                                    maxLength={250} //  TODO Verificar limite de caract da descrição da especialidade
+                                    autoSize={{
+                                    minRows: 2,
+                                    maxRows: 6,
+                                    }}
+                                    style={{
+                                        resize: 'none'
+                                    }}
+                                />
                             </div>
                             <div id='contCamposCoresEspecEdit'>
+                                {/* TODO Talvez trocar cada input por um componente pronto*/}
                                 <div id='campoCor1ConfigEspec' className='campoConfigEspec'>
                                     <label>Cor de fundo:</label>
 
@@ -516,7 +538,7 @@ function Especialidades() {
                             <button id='bttExcluir' onClick={handleDeletar}>deletar</button>
                         }
                         </div>
-                    </section> :
+                    </section>) :
                     (!servicoAberto ? 
                         <Loading></Loading> : 
                         <section id='secConfigServico'>
@@ -532,10 +554,24 @@ function Especialidades() {
                                 </div>
                                 <div id='descricaoDadosConfigServ'>
                                     <label>Descrição:</label>
-                                    <textarea 
+                                    {/* <textarea 
                                         type="text" id='nomeConfigEspec' 
                                         value={servicoAberto.descricao}
                                         onChange={(e) => mudarInfoServico(e.target.value, 'descricao')}
+                                    /> */}
+                                    <TextArea
+                                        id="txtDescricao"
+                                        value={servicoAberto.descricao}
+                                        onChange={(e) => mudarInfoServico(e.target.value, 'descricao')}
+                                        placeholder="Opcional"
+                                        maxLength={250} //  TODO Verificar limite de caract da descrição do serviço
+                                        autoSize={{
+                                        minRows: 2,
+                                        maxRows: 6,
+                                        }}
+                                        style={{
+                                            resize: 'none'
+                                        }}
                                     />
                                 </div>
                             </div>

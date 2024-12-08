@@ -6,7 +6,10 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@styles': path.resolve(__dirname, './src/styles')
+      '@styles': path.resolve(__dirname, './src/styles'),
+      '@services': path.resolve(__dirname, './src/services'),
+      '@backend': path.resolve(__dirname, './src/services/backend'),
+      
     },
   },
   build: {

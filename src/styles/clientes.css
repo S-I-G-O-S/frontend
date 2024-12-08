@@ -49,8 +49,7 @@
 
                     box-sizing: border-box;
                     width: auto;
-                    height: 1.5rem;
-                    padding: 0.1rem 2rem;
+                    padding: 0.2rem 2rem;
                     border-style: solid;
                     border-width: 0.1rem;
                     border-radius: 0.3rem;
@@ -151,16 +150,38 @@
             width: min-content;
             min-width: 20rem;
 
-            h2 {
-                font-size: 1.05rem;
-                margin: 0;
+            #contHeadNovoCliente {
+                display: flex;
+                justify-content: space-between;
                 margin-bottom: 1rem;
+
+                h2 {
+                    font-size: 1.05rem;
+                }
+                #closeModel {
+                    cursor: pointer;
+                    display: block;
+                    align-content: center;
+                    justify-items: center;
+                    padding: 0.1rem 0.3rem;
+                    border-radius: 0.3rem;
+                    transition: 200ms;
+                    span {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        svg {
+                            height: 1.2rem;
+                            width: 1.2rem;
+                        }
+                    }
+                }
             }
             #contInfosNovoCliente {
                 display: flex;
                 flex-direction: column;
                 gap: 0.2rem;
-                padding: 0.5rem;
+                padding: 1rem;
                 border-style: solid;
                 border-width: 0.1rem;
                 border-radius: 0.3rem;
@@ -174,7 +195,17 @@
                         font-weight: 500;
                     }
                     input {
-                        /* TODO Estilizar Input */
+                        font-size: 0.9rem;
+                        padding: 0rem 0.3rem;
+                        border-style: solid;
+                        border-radius: 0.3rem;
+                        border-width: .1rem;
+                        height: auto;
+                        line-height: 1.2rem;
+                    }
+                    input:focus {
+                        outline-width: 0.1rem;
+                        outline-style: solid;
                     }
                 }
             }
@@ -183,12 +214,10 @@
                 align-items: center;
                 justify-content: center;
                 gap: 1rem;
-                padding: 0.5rem;
+                padding: 1rem;
                 border-style: solid;
                 border-width: 0.1rem;
-                
                 border-radius: 0.3rem;
-
                 button {
                     display: flex;
                     align-items: center;
@@ -204,10 +233,13 @@
 
                     transition: 150ms;
                 }
+                button:hover {
+                    text-decoration: underline;
+                }
                 button:focus {
                     text-decoration: underline;
-                    border-width: 0.1rem;
-                    border-style: solid;
+                    outline-style: solid;
+                    outline-width: .1rem;
                 }
 
                 
@@ -221,6 +253,7 @@
         background-color: var(--salmao2);
         border-color: var(--marrom1);
     }
+        
     #containerH2Novo {
         button {
             background-color: var(--marrom1);
@@ -286,18 +319,34 @@
         background-color: var(--salmao2);
         border-color: var(--marrom1);
         color: var(--marrom1);
+        #contHeadNovoCliente {
+            #closeModel svg {
+                color: var(--marrom1);
+            }
+            #closeModel:hover {
+                background-color: var(--salmao1);
+            }
+        }
         #contInfosNovoCliente {
             border-color: var(--salmao1);
+            input {
+                background-color: var(--branco);
+                border-color: var(--marrom1);
+            }
+            input:focus {
+                outline-color: var(--laranja);
+                border-color: var(--laranja);
+            }
         }
         #contAcaoNovoCliente {
             border-color: var(--salmao1);
             button {
-                all: unset;
                 border-color: var(--marrom1);
                 color: var(--marrom1);
             }
             button:focus {
                 border-color: var(--laranja);
+                outline-color: var(--laranja);
             }
             #bttCancelar {
                 background-color: #ecea57;
@@ -305,7 +354,6 @@
             #bttCancelar:hover {
                 background-color: #f5f23b;
             }
-
             #bttSalvar {
                 background-color: #41dd5b;
             }

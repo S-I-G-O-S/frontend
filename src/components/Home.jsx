@@ -34,15 +34,13 @@ function Home() {
         const cookieUsuario = getCookie('usuario')
         return cookieUsuario ? cookieUsuario : ''
     })
-    // TODO Pedir para adicionar endpoint para alterar tema do usuario
-    if (!usuario.tema) {}
     useEffect(() => {
-        console.clear()
+        // console.clear()
     }, [])
     return (
         <>
         {/* TODO Adicionar este componente em todas as paginas */}
-        <IsOnline></IsOnline>
+        {/* <IsOnline></IsOnline> */}
         <div id='pageHome' className='paginas'>
         <Header titulo={"Página inicial"} usuario={usuario}></Header>
         <Nav cargo={usuario?.cargo || ''}></Nav>

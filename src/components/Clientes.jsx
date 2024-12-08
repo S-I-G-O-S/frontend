@@ -9,7 +9,7 @@ import Edit from '../assets/edit-text.png'
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { notification, Pagination } from 'antd'
-import { HomeFilled, EditFilled }  from '@ant-design/icons'
+import { HomeFilled, EditFilled, CloseOutlined }  from '@ant-design/icons'
 
 
 function Clientes() {
@@ -160,9 +160,39 @@ function Clientes() {
                             <tr key={cliente.id} className='clientes'>
                                 <td className='nome'>{cliente.nome}</td>
                                 <td className='cnpj'>
-                                    { formatCNPJ(cliente.cnpj) }
+                                    { 
+                                        cliente.cnpj ? 
+                                        formatCNPJ(cliente.cnpj) :
+                                        'CNPJ não registrado'
+                                    }
                                 </td>
-                                <td className='endereco'>{cliente.endereco.logradouro}, {cliente.endereco.numero}, {cliente.endereco.complemento}</td>
+                                <td className='endereco'>
+                                {
+                                    cliente.endereco.logradouro!='' ?
+                                    (
+                                        <>
+                                        {cliente.endereco.logradouro}
+                                        {   
+                                            cliente.endereco.numero!='' &&
+                                            (
+                                                <>
+                                                , {cliente.endereco.numero}
+                                                </>
+                                            )
+                                        }
+                                        {   
+                                            cliente.endereco.complemento!='' &&
+                                            (
+                                                <>
+                                                , {cliente.endereco.complemento}
+                                                </>
+                                            )
+                                        }
+                                        </>
+                                    ) :
+                                    'Endereço não registrado'
+                                }
+                                </td>
                                 <td className='options' onClick={() => handleEditCliente(cliente.id)}>
                                     {/* <img src={Edit} alt="" /> */}
                                     <EditFilled />
@@ -198,7 +228,12 @@ function Clientes() {
             !showNovoCliente ? '' :
                 <div id='shadowBG'>
                     <div id='contNovoCliente'>
-                        <h2>Criando um novo cliente</h2>
+                        <div id='contHeadNovoCliente'>
+                            <h2>Criando um novo cliente</h2>
+                            <div id='closeModel' onClick={handleCancelar}>
+                                <CloseOutlined />
+                            </div>
+                        </div>
                         <div id="contInfosNovoCliente">
                             <div id='nome'>
                                 <label>Nome:</label>

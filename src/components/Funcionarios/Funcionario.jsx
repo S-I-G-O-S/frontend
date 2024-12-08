@@ -24,10 +24,10 @@ function Funcionario() {
         "nome": "",
         "primeiro": "",
         "ultimo": "",
+        "cpf": "",
         "email": "",
         "celular": "",
-        "senha": "",
-        "cargo": "ADM",
+        "cargo": "TECNICO",
         "endereco": {
             "cep": "",
             "logradouro": "",
@@ -357,17 +357,10 @@ function Funcionario() {
     }, [funcionario])
     useEffect(() => {
         console.clear()
-        const fetchData = async () => {
-            try {
-                if (!idFuncionario) {
-                    novoFuncionario()  
-                }
-                fetchEspecialidades()
-            } catch (error) {
-                console.error(error.message)
-            }
+        if (idFuncionario) {
+            fetchFuncionario()
         }
-        fetchData()
+        fetchEspecialidades()
     }, [])
     return (
         <div id="pageFuncionario" className='paginas'>
@@ -415,6 +408,14 @@ function Funcionario() {
                                         type="text"
                                         value={funcionario.celular || ""}
                                         onChange={(e) => handleChangeDados(e.target.value, "celular")}
+                                    />
+                                </div>
+                                <div id='contCPFFunc'>
+                                    <label>CPF:</label>
+                                    <input
+                                        type="text"
+                                        value={funcionario.cpf || ""}
+                                        onChange={(e) => handleChangeDados(e.target.value, "cpf")}
                                     />
                                 </div>
                                 <div id='contCargoFunc'>

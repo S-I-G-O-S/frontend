@@ -87,7 +87,7 @@ function Ordem() {
                     <h2>Informações</h2>
                     <div id="contGeral">
                         <div>
-                            <span>Código:</span>
+                            <span>ID ordem:</span>
                             {ordem.id}
                         </div>
                         <div>
@@ -105,7 +105,7 @@ function Ordem() {
                     </div>
                     <div id="contServico">
                         <div>
-                            <span>Nome:</span>
+                            <span>Serviço:</span>
                             {ordem.servico.nome}
                         </div>
                         <div>
@@ -124,7 +124,7 @@ function Ordem() {
                             {formatCNPJ(ordem.cliente.cnpj)}
                         </div>
                         <div>
-                            <span>Código cliente:</span>
+                            <span>ID cliente:</span>
                             {ordem.cliente.id}
                         </div>
                     </div>

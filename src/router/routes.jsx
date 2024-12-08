@@ -20,6 +20,7 @@ import NovaOrdem from "../components/Ordens/NovaOrdem";
 import TesteLayout from "../components/TesteLayout";
 import Ordem from "../components/Ordens/Ordem";
 import HistoricoOrdens from "../components/Ordens/HistoricoOrdens";
+import PrimeiroAcesso from "../components/Login/PrimeiroAcesso";
 
 function AppRoutes() {
     const { token } = useAuth();
@@ -38,6 +39,10 @@ function AppRoutes() {
                 {
                     path: "/",
                     element: <Login/>,
+                },
+                {
+                    path: "/novo-usuario",
+                    element: <PrimeiroAcesso/>,
                 },
                 {
                     path: "/home",
