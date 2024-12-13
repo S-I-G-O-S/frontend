@@ -1,26 +1,24 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { useAuth } from "../provider/authProvider";
+import { useAuth } from '@context/authContext'
 import { ProtectedRoute } from "./ProtectedRoute";
 // GERAL
-import Login from "../components/Login"
-import Home from "../components/Home";
-import UserConfig from "../components/UserConfig";
-import PaginaIncorreta from "../components/PaginaIncorreta";
+import Login from "@pages/Login"
+import Home from "@pages/Home";
+import UserConfig from "@pages/UserConfig";
+import PaginaIncorreta from "@pages/PaginaIncorreta";
 // CLIENTE
-import Clientes from "../components/Clientes";
-import Cliente from "../components/Clientes/Cliente"
+import Clientes from "@pages/Clientes";
+import Cliente from "@pages/Cliente"
 // FUNCIONARIO
-import Funcionarios from "../components/Funcionarios";
-import Funcionario from "../components/Funcionarios/Funcionario";
+import Funcionarios from "@pages/Funcionarios";
+import Funcionario from "@pages/Funcionario";
 // ESPECIALIDADE & SERVIÇOS
-import Especialidades from "../components/Especialidades";
+import Especialidades from "@pages/Especialidades";
 // ORDEM
-import Ordens from "../components/Ordens";
-import NovaOrdem from "../components/Ordens/NovaOrdem";
-import TesteLayout from "../components/TesteLayout";
-import Ordem from "../components/Ordens/Ordem";
-import HistoricoOrdens from "../components/Ordens/HistoricoOrdens";
-import PrimeiroAcesso from "../components/Login/PrimeiroAcesso";
+import Ordens from "@pages/Ordens";
+import NovaOrdem from "@pages/NovaOrdem";
+import Ordem from "@pages/Ordem";
+import PrimeiroAcesso from "@pages/PrimeiroAcesso";
 
 function AppRoutes() {
     const { token } = useAuth();
@@ -76,10 +74,10 @@ function AppRoutes() {
                     path: "/nova-ordem",
                     element: <NovaOrdem/> ,
                 },
-                {
-                    path: "/historico-ordens",
-                    element: <HistoricoOrdens/> ,
-                },
+                // {
+                //     path: "/historico-ordens",
+                //     element: <HistoricoOrdens/> ,
+                // },
                 {
                     path: "/clientes",
                     element: <Clientes/> ,
@@ -87,10 +85,6 @@ function AppRoutes() {
                 {
                     path: "/cliente",
                     element: <Cliente/>,
-                },
-                {
-                    path: "/teste",
-                    element: <TesteLayout/>
                 },
                 {
                     path: "*",

@@ -1,17 +1,17 @@
 // Funções de requisições
-import { getEspecialidades, postEspecialidade, deleteEspec, putEspecialidade } from '../services/backend/especialidadesAPI'
-import { getServicos, getServicoPorID, postServico, putServico, deleteServico } from '../services/backend/servicosAPI'
+import { getEspecialidades, postEspecialidade, deleteEspec, putEspecialidade } from '@backend/especialidadesAPI'
+import { getServicos, getServicoPorID, postServico, putServico, deleteServico } from '@backend/servicosAPI'
 
-import '../styles/especialidades.css'
+import '@styles/especialidades.css'
+import Nav from '@components/public/Nav'
+import Header from '@components/public/Header'
+import removeIcon from '@assets/remove.png'
+import UnitEspec from '@components/Especialidades/unitEspecialidade'
+import Loading from '@components/public/Loading'
+import { getCookie } from '@services/cookies'
 
-import Nav from './public/Nav'
-import Header from './public/Header'
-import removeIcon from '../assets/remove.png'
-import UnitEspec from './Especialidades/unitEspecialidade'
 import { useEffect, useState } from 'react'
 import { Await } from 'react-router-dom'
-import Loading from './public/Loading'
-import { getCookie } from '../services/cookies'
 import TextArea from 'antd/es/input/TextArea'
 import { MinusCircleFilled, MinusCircleTwoTone } from '@ant-design/icons'
 

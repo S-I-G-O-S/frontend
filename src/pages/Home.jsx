@@ -1,20 +1,20 @@
-import Nav from './public/Nav'
-import Header from './public/Header'
-import IsOnline from './public/IsOnline'
+import Nav from '@components/public/Nav'
+import Header from '@components/public/Header'
+import IsOnline from '@components/public/IsOnline'
+import Loading from '@components/public/Loading'
+import InfosUser from '@components/Home/InfosUser'
+import FuncsDisponiveis from '@components/Home/FuncsDisponiveis'
+import OrdensPendentes from '@components/Home/OrdensPendentes'
+import OrdensEmAtendimento from '@components/Home/OrdensEmAtendimento'
+import { getCookie } from '@services/cookies'
+import Atalhos from '@components/Home/Atalhos'
 
-import '../styles/home.css'
+import '@styles/home.css'
 import { useEffect, useState } from 'react'
-import Loading from './public/Loading'
 
 import {notification, Alert, FloatButton} from 'antd';  
 import { CommentOutlined, CustomerServiceOutlined } from '@ant-design/icons'
 
-import InfosUser from './Home/InfosUser'
-import FuncsDisponiveis from './Home/FuncsDisponiveis'
-import OrdensPendentes from './Home/OrdensPendentes'
-import OrdensEmAtendimento from './Home/OrdensEmAtendimento'
-import { getCookie } from '../services/cookies'
-import Atalhos from './Home/Atalhos'
 
 function Home() {
     const showNotification = (placement) => {

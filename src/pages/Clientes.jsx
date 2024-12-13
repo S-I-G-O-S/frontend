@@ -1,11 +1,11 @@
-import {getPageClientes, postCliente} from '../services/backend/clientesAPI.js'
-import { getCookie } from '../services/cookies.js'
-
-import Nav from './public/Nav'
-import Loading from './public/Loading.jsx'
+import {getPageClientes, postCliente} from '@backend/clientesAPI.js'
+import { getCookie } from '@services/cookies.js'
+import Nav from '@components/public/Nav.jsx'
+import Loading from '@components/public/Loading.jsx'
 import '../styles/clientes.css'
-import Header from './public/Header'
-import Edit from '../assets/edit-text.png'
+import Header from '@components/public/Header.jsx'
+import Edit from '@assets/edit-text.png'
+
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { notification, Pagination } from 'antd'

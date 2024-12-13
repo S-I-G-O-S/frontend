@@ -1,13 +1,13 @@
 // Funções de requisições
-import { getPageFuncionarios } from '../services/backend/funcionariosAPI.js'
-import { getEspecialidades } from '../services/backend/especialidadesAPI.js'
-import { getCookie } from '../services/cookies'
+import { getPageFuncionarios } from '@backend/funcionariosAPI.js'
+import { getEspecialidades } from '@backend/especialidadesAPI.js'
+import { getCookie } from '@services/cookies.js'
 
 // Estilização
-import '../styles/funcionarios.css'
+import '@styles/funcionarios.css'
+import Nav from '@components/public/Nav.jsx'
+import Header from '@components/public/Header.jsx'
 
-import Nav from './public/Nav'
-import Header from './public/Header'
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { isMobile } from 'react-device-detect'
@@ -19,7 +19,7 @@ import { EditFilled, OrderedListOutlined, CloseOutlined, FilterFilled, SearchOut
 import Edit from '../assets/edit-text.png'
 import Down from '../assets/dark/down.png' 
 import Up from '../assets/dark/up.png'
-import Loading from './public/Loading.jsx'
+import Loading from '../components/public/Loading.jsx'
 
 
 function Funcionarios() {

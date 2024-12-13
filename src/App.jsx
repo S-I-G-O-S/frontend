@@ -1,7 +1,6 @@
-import { ConfigProvider } from "antd";
-import AuthProvider from "./provider/authProvider";
+import AuthProvider from '@context/authContext';
 import AppRoutes from "./router/routes";
-import { PreferenciasProvider } from './context/PreferenciasContext';
+import { PreferenciasProvider } from '@context/PreferenciasContext';
 
 function App() {
     return (

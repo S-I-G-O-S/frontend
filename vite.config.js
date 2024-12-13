@@ -7,9 +7,13 @@ export default defineConfig({
   resolve: {
     alias: {
       '@styles': path.resolve(__dirname, './src/styles'),
+      '@assets': path.resolve(__dirname, './src/assets'),
       '@services': path.resolve(__dirname, './src/services'),
       '@backend': path.resolve(__dirname, './src/services/backend'),
-      
+      '@components': path.resolve(__dirname, './src/components'),
+      '@pages': path.resolve(__dirname, './src/pages'),
+      '@provider': path.resolve(__dirname, './src/provider'),
+      '@context': path.resolve(__dirname, './src/context'),
     },
   },
   build: {
@@ -17,9 +21,7 @@ export default defineConfig({
       output: {
         // Configuração de chunks para temas
         manualChunks: {
-          themes: [
-            './src/themes/salmaoDark.css', 
-            './src/themes/salmaoLight.css'], 
+          themes: './src/styles/themes.css', 
         },
       },
     },

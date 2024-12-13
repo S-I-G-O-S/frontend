@@ -1,20 +1,21 @@
 
-import {getClientePorID, postCliente, putCliente, deleteCliente, putContato, postContato, deleteContato, getContatosPorID} from '../../services/backend/clientesAPI.js'
+import {getClientePorID, postCliente, putCliente, deleteCliente, putContato, postContato, deleteContato, getContatosPorID} from '@backend/clientesAPI.js'
 
-import Nav from '../public/Nav.jsx'
-import '../../styles/cliente.css'
-import Header from '../public/Header.jsx'
-import Down from '../../assets/light/down.png' 
-import Up from '../../assets/light/up.png'
+import Nav from '@components/public/Nav.jsx'
+import '@styles/cliente.css'
+import Header from '@components/public/Header.jsx'
+import Down from '@assets/light/down.png' 
+import Up from '@assets/light/up.png'
+import { cepAPI } from '@services/cepAPI.js'
+import Loading from '@components/public/Loading.jsx'
+import { getCookie } from '@services/cookies.js'
+import { getOrdens, getOrdensPorCliente } from '@services/backend/ordemAPI.js'
+import { usePreferencias } from '@context/PreferenciasContext.jsx'
+
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { cepAPI } from '../../services/cepAPI.js'
-import Loading from '../public/Loading.jsx'
-import { getCookie } from '../../services/cookies.js'
-import { getOrdens, getOrdensPorCliente } from '../../services/backend/ordemAPI.js'
 import { Dropdown, notification, Pagination } from 'antd'
 import { CloseOutlined, CommentOutlined, InfoCircleOutlined, PhoneOutlined } from '@ant-design/icons'
-import { usePreferencias } from '../../context/PreferenciasContext.jsx'
 
 
 function Cliente() {

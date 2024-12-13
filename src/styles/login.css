@@ -90,12 +90,6 @@
             #email {
                 padding: 0.15rem 0.4rem;
             }
-            #email:focus,
-            #senha:focus {
-                outline-color: var(--laranja);
-                outline-width: 0.11rem;
-                outline-style: solid;
-            }
             #senha {
                 align-content: center;
             }
@@ -109,8 +103,14 @@
                 height: 100%;
                 border-radius: 0 0.3rem 0.3rem 0;
             }
-            #senha button:hover {
+            #senha button:hover :focus {
                 background-color: var(--salmao2);
+            }
+            #senha button:focus {
+                outline-width: 0.1rem;
+                outline-style: solid;
+                outline-color: var(--laranja);
+
             }
             #senha svg {
                 color: var(--marrom1);

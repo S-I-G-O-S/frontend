@@ -1,19 +1,18 @@
 // Funções de requisições
-import { getFuncionarioPorID, deleteFuncionario, postFuncionario, putFuncionario } from '../../services/backend/funcionariosAPI.js'
-import { getEspecialidades } from '../../services/backend/especialidadesAPI.js'
-import { cepAPI } from '../../services/cepAPI.js'
+import { getFuncionarioPorID, deleteFuncionario, postFuncionario, putFuncionario } from '@backend/funcionariosAPI.js'
+import { getEspecialidades } from '@backend/especialidadesAPI.js'
+import { cepAPI } from '@services/cepAPI.js'
 
-import '../../styles/funcionario.css'
-import Nav from '../public/Nav'
-import Header from '../public/Header'
+import '@styles/funcionario.css'
+import Nav from '@components/public/Nav.jsx'
+import Header from '@components/public/Header.jsx'
+import Loading from '@components/public/Loading.jsx'
+import { getCookie } from '@services/cookies.js'
+
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import Loading from '../public/Loading.jsx'
-
 import { notification, Popconfirm, Input, Button, Select } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import { getCookie } from '../../services/cookies.js'
-import { func } from 'prop-types'
 
 function Funcionario() {
     const location = useLocation();

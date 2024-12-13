@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { setCookie, getCookie, deleteCookie } from "../services/cookies"; // Importa as funções de cookies
+import { setCookie, getCookie, deleteCookie } from "@services/cookies";
 
 const AuthContext = createContext();
 

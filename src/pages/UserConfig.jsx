@@ -1,11 +1,11 @@
-import Nav from './public/Nav'
-import Header from './public/Header'
-import '../styles/userConfig.css'
+import Nav from '@components/public/Nav'
+import Header from '@components/public/Header'
+import '@styles/userConfig.css'
 import { useEffect, useState } from 'react'
-import Loading from './public/Loading'
-import { getCookie, setCookie } from '../services/cookies'
-import { getDeployStatus } from '../services/renderAPI'
-import { usePreferencias } from '../context/PreferenciasContext'
+import Loading from '@components/public/Loading'
+import { getCookie, setCookie } from '@services/cookies'
+import { getDeployStatus } from '@services/renderAPI'
+import { usePreferencias } from '@context/PreferenciasContext'
 
 function UserConfig() {
     const data = new Date()

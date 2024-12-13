@@ -1,4 +1,3 @@
-import carregando from "../../assets/loading1.gif";
 import './Loading.css'
 import {LoadingOutlined} from '@ant-design/icons'
 function Loading() {

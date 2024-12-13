@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react"
-import { getCookie } from "../../services/cookies"
-import Header from "../public/Header"
-import Nav from "../public/Nav"
-import { useNavigate } from "react-router-dom"
-import { getClientes } from "../../services/backend/clientesAPI"
-import { getFuncionarioPorID, getTecnicos } from "../../services/backend/funcionariosAPI"
-import '../../styles/ordens/novaOrdem.css'
-import { getServicos } from "../../services/backend/servicosAPI"
+import { getCookie } from "@services/cookies"
+import Header from "@components/public/Header"
+import Nav from "@components/public/Nav"
+import { getClientes } from '@backend/clientesAPI'
+import { getFuncionarioPorID, getTecnicos } from "@backend/funcionariosAPI"
+import '@styles/ordens/novaOrdem.css'
+import { getServicos } from "@backend/servicosAPI"
+import { postNovaOrdem } from "@backend/ordemAPI"
 import { notification, Popconfirm } from "antd"
 import TextArea from "antd/es/input/TextArea"
-import { postNovaOrdem } from "../../services/backend/ordemAPI"
+import { useNavigate } from "react-router-dom"
 function NovaOrdem() {
     const navigate = useNavigate()
     const [clientes, setClientes] = useState([])

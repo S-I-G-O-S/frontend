@@ -1,11 +1,10 @@
 import '@styles/primeiroAcesso.css'
-import '../../styles/primeiroAcesso.css'
+import { getCookie } from "@services/cookies"
+import { putRegSenha } from "@backend/usuarioAPI"
 
 import { useEffect, useState } from "react"
-import { getCookie } from "../../services/cookies"
 import { EyeInvisibleOutlined, EyeOutlined} from '@ant-design/icons'
 import { notification } from "antd"
-import { putRegSenha } from "../../services/backend/usuarioAPI"
 import zxcvbn from 'zxcvbn'
 import { useNavigate } from "react-router-dom"
 

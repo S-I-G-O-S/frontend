@@ -1,5 +1,5 @@
+import '@styles/paginaIncorreta.css'
 import { Link, useNavigate } from "react-router-dom"
-import '../styles/paginaIncorreta.css'
 import { useEffect } from "react"
 function PaginaIncorreta() {
     const navigate = useNavigate()

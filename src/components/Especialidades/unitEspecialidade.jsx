@@ -1,7 +1,7 @@
 import '../../styles/unitEspecialidade.css'
-import Down from '../../assets/dark/down.png' 
-import Up from '../../assets/dark/up.png'
-import Edit from '../../assets/edit-text.png'
+import Down from '@assets/dark/down.png' 
+import Up from '@assets/dark/up.png'
+import Edit from '@assets/edit-text.png'
 // import { Link, useNavigate } from 'react-router-dom';
 // import { esbuildVersion } from 'vite'
 import PropTypes from 'prop-types'

@@ -1,11 +1,11 @@
 import { Link, useNavigate } from 'react-router-dom'
 import './Header.css'
 import { useEffect, useState } from 'react'
-import { useAuth } from '../../provider/authProvider'
-import { deleteCookie } from '../../services/cookies'
+import { useAuth } from '@context/authContext'
+import { deleteCookie } from '@services/cookies'
 import { Dropdown } from 'antd'
 import { SettingOutlined, UserOutlined } from '@ant-design/icons'
-import { logoutFunc } from '../../services/backend/authAPI'
+import { logoutFunc } from '@backend/authAPI'
 
 function Header({usuario, titulo}) {
     const navigate = useNavigate()

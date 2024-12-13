@@ -1,11 +1,11 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import Header from "../public/Header";
-import Nav from "../public/Nav";
-import Loading from "../public/Loading";
-import { useEffect, useState } from "react";
-import { getCookie } from "../../services/cookies";
+import Header from "@components/public/Header";
+import Nav from "@components/public/Nav";
+import Loading from "@components/public/Loading";
+import { getCookie } from "@services/cookies";
 import '@styles/ordens/ordem.css'
-import { getAtendimentos, getOrdensPorID } from "../../services/backend/ordemAPI";
+import { getAtendimentos, getOrdensPorID } from "@backend/ordemAPI";
+import { useEffect, useState } from "react";
 import { ExceptionOutlined } from '@ant-design/icons'
 
 //  TODO Talvez seja redundante receber o endereço do cliente e da ordem

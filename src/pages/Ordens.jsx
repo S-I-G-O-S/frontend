@@ -1,15 +1,14 @@
-import Header from "./public/Header"
-import Nav from "./public/Nav"
+import Header from "@components/public/Header.jsx"
+import Nav from "@components/public/Nav.jsx"
 import '@styles/ordens.css'
-import View from "../assets/view.png"
-import Hide from "../assets/hide.png"
 import { useNavigate, useLocation } from "react-router-dom"
-import { useEffect, useState } from "react"
-import { getCookie } from '../services/cookies.js'
-import { getOrdens, getOrdensPorSituacao, getPageOrdens } from "../services/backend/ordemAPI.js"
+import Hide from "@assets/hide.png"
+import { getCookie } from '@services/cookies.js'
+import { getOrdens, getOrdensPorSituacao, getPageOrdens } from "@backend/ordemAPI.js"
+import Loading from "@components/public/Loading.jsx"
 
+import { useEffect, useState } from "react"
 import { CheckCircleOutlined, CloseCircleOutlined, CloseOutlined, DownOutlined, FieldTimeOutlined, LoadingOutlined, RollbackOutlined, ToolOutlined, UpOutlined } from '@ant-design/icons'
-import Loading from "./public/Loading.jsx"
 import { Pagination } from "antd"
 
 // TODO Criação e Edição de Ordens por ordem de redirecionamento
