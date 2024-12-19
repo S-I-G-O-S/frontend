@@ -41,6 +41,10 @@ function Login() {
         });
     };
     const handleLogin = async () => {
+        if (loading) {
+            console.log('foi')
+            return
+        }
         setLoading(true)
         if (login.email == '' || login.senha == '') {
             showNotif(
@@ -52,9 +56,9 @@ function Login() {
         }
         let result
         try {
-            console.log('DEBBUG LOGIN 1')
+            console.log('DEBUG LOGIN 1')
             result = await loginFunc(login)
-            console.log('DEBBUG LOGIN 2')
+            console.log('DEBUG LOGIN 2')
         } catch (error) {
             console.log(error)
             showNotif('bottomLeft', `Erro ao fazer login!`, 'Tente novamente mais tarde ou entre em contato com o suporte.')

@@ -1,24 +1,23 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { useAuth } from '@context/authContext'
 import { ProtectedRoute } from "./ProtectedRoute";
-// GERAL
-import Login from "@pages/Login"
-import Home from "@pages/Home";
-import UserConfig from "@pages/UserConfig";
-import PaginaIncorreta from "@pages/PaginaIncorreta";
-// CLIENTE
-import Clientes from "@pages/Clientes";
-import Cliente from "@pages/Cliente"
-// FUNCIONARIO
-import Funcionarios from "@pages/Funcionarios";
-import Funcionario from "@pages/Funcionario";
-// ESPECIALIDADE & SERVIÇOS
-import Especialidades from "@pages/Especialidades";
-// ORDEM
-import Ordens from "@pages/Ordens";
-import NovaOrdem from "@pages/NovaOrdem";
-import Ordem from "@pages/Ordem";
-import PrimeiroAcesso from "@pages/PrimeiroAcesso";
+import {
+    Login,
+    Home,
+    UserConfig,
+    PaginaIncorreta,
+    Clientes,
+    Cliente,
+    Funcionarios,
+    Funcionario,
+    Especialidades,
+    Ordens,
+    NovaOrdem,
+    Ordem,
+    PrimeiroAcesso,
+    Teste
+} from '@pages'
+
 
 function AppRoutes() {
     const { token } = useAuth();
@@ -26,7 +25,11 @@ function AppRoutes() {
     const rotasPublicas = [
         {
             path: "/",
-            element: <Login/>,
+            element: <Login />,
+        },
+        {
+            path: "/teste",
+            element: <Teste />,
         }
     ]
     const rotasProtegidas = [
@@ -36,43 +39,43 @@ function AppRoutes() {
             children: [
                 {
                     path: "/",
-                    element: <Login/>,
+                    element: <Login />,
                 },
                 {
                     path: "/novo-usuario",
-                    element: <PrimeiroAcesso/>,
+                    element: <PrimeiroAcesso />,
                 },
                 {
                     path: "/home",
-                    element: <Home/> ,
+                    element: <Home />,
                 },
                 {
                     path: "/configuracoes",
-                    element: <UserConfig/> ,
+                    element: <UserConfig />,
                 },
                 {
                     path: "/funcionarios",
-                    element: <Funcionarios/> ,
+                    element: <Funcionarios />,
                 },
                 {
                     path: "/funcionario",
-                    element: <Funcionario/> ,
+                    element: <Funcionario />,
                 },
                 {
                     path: "/especialidades",
-                    element: <Especialidades/> ,
+                    element: <Especialidades />,
                 },
                 {
                     path: "/ordens",
-                    element: <Ordens/> ,
+                    element: <Ordens />,
                 },
                 {
                     path: "/ordem",
-                    element: <Ordem/> ,
+                    element: <Ordem />,
                 },
                 {
                     path: "/nova-ordem",
-                    element: <NovaOrdem/> ,
+                    element: <NovaOrdem />,
                 },
                 // {
                 //     path: "/historico-ordens",
@@ -80,24 +83,24 @@ function AppRoutes() {
                 // },
                 {
                     path: "/clientes",
-                    element: <Clientes/> ,
+                    element: <Clientes />,
                 },
                 {
                     path: "/cliente",
-                    element: <Cliente/>,
+                    element: <Cliente />,
                 },
                 {
                     path: "*",
-                    element: <PaginaIncorreta/>,
+                    element: <PaginaIncorreta />,
                 },
             ]
         }
     ]
     const rotasParaNaoAutenticados = [
-    //  TODO criar tela de acesso á pagina invalida ou pagina não encontrada
+        //  TODO criar tela de acesso á pagina invalida ou pagina não encontrada
         {
             path: "/",
-            element: <Login/>,
+            element: <Login />,
         }
     ]
     const router = createBrowserRouter([
@@ -108,18 +111,3 @@ function AppRoutes() {
     return <RouterProvider router={router} />
 }
 export default AppRoutes
-
-{/* <BrowserRouter>
-    <Routes>
-        <Route path="/" element={ <Login/> }></Route>
-        <Route path="/home" element={ <Home/> }></Route>
-        <Route path="/usuario" element={ <UserConfig/> }></Route>
-        <Route path="/funcionarios" element={ <Funcionarios/> }></Route>
-        <Route path="/funcionario" element={ <Funcionario/> }></Route>
-        <Route path="/especialidades" element={ <Especialidades/> }></Route>
-        <Route path="/ordens" element={ <Ordens/> }></Route>
-        <Route path="/clientes" element={ <Clientes/> }></Route>
-        <Route path="/cliente" element={ <Cliente/> }></Route>
-        
-    </Routes>
-</BrowserRouter> */}
