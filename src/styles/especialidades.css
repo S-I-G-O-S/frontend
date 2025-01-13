@@ -225,34 +225,8 @@
                 }
                 #contCamposCoresEspecEdit {
                     display: flex;
-                    flex-direction: column;
-                    justify-content: space-evenly;
-                    div {
-                        display: flex;
-                        align-items: center;
-                        justify-content: space-between;
-                        gap: 0.4rem;
-                        label {
-                            font-weight: 500;
-                        }
-                        .inputsCamposCoresConfigEspec {
-                            width: auto;
-
-                            input[type="text"] {
-                                font-size: .9rem;
-                                line-height: 1rem;
-                                max-width: 5rem;
-                            }
-                            input[type="color"] {
-                                padding: 0;
-                                border-radius: 0.3rem;
-                                border: 0;
-                                height: 1.5rem;
-                                max-width: 2rem;
-                                
-                            }
-                        }
-                    }
+                    gap: .2rem;
+                    justify-content: space-between;
                 }
                 #contPreVisu {
                     display: flex;
@@ -510,6 +484,7 @@
         grid-template-rows: 1fr;
     }
 }
+
 #pageEspecialidades {
     section {
         color: var(--marrom1);

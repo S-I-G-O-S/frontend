@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react'
 import { Await } from 'react-router-dom'
 import TextArea from 'antd/es/input/TextArea'
 import { MinusCircleFilled, MinusCircleTwoTone } from '@ant-design/icons'
+import { ColorPicker } from 'antd'
 
 // https://www.delftstack.com/pt/howto/react/for-loop-in-react/
 
@@ -105,7 +106,6 @@ function Especialidades() {
                 ...especAberta,
                 cor: `${prevEspec.cor1}/${prevEspec.cor2}`,
             }))
-            console.log(`DEBBUG cor: ${prevEspec.cor1}/${prevEspec.cor2}`)
         }
     }, [prevEspec])
     // EDIÇÃO SERVIÇO
@@ -486,32 +486,24 @@ function Especialidades() {
                                 />
                             </div>
                             <div id='contCamposCoresEspecEdit'>
-                                {/* TODO Talvez trocar cada input por um componente pronto*/}
-                                <div id='campoCor1ConfigEspec' className='campoConfigEspec'>
-                                    <label>Cor de fundo:</label>
-
-                                    <div className='inputsCamposCoresConfigEspec'>
-                                        <input type="text" value={prevEspec.cor1}
-                                            onChange={(e) => mudarCorPrevEspec(e.target.value, 'cor1')}/>
-                                        <input 
-                                            type="color" name="" id="inpCorFundo" 
-                                            value={prevEspec.cor1}
-                                            onChange={(e) => mudarCorPrevEspec(e.target.value, 'cor1')}
-                                        />
-                                    </div>
-                                </div>
-                                <div id='campoCor2ConfigEspec' className='campoConfigEspec'>
-                                    <label>Cor da letra:</label>
-                                    <div className='inputsCamposCoresConfigEspec'>
-                                    <input type="text" value={prevEspec.cor2}
-                                        onChange={(e) => mudarCorPrevEspec(e.target.value, 'cor2')}/>
-                                    <input 
-                                        type="color" name="" id="inpCorLetra"
-                                        value={prevEspec.cor2}
-                                        onChange={(e) => mudarCorPrevEspec(e.target.value, 'cor2')}
-                                    />
-                                    </div>
-                                </div>
+                                <ColorPicker 
+                                    id="inpCorLetra"
+                                    value={prevEspec.cor1}
+                                    disabledAlpha
+                                    showText={(color) => 
+                                        <span>
+                                            <strong className='labelColor'>Cor de fundo</strong> {color.toHexString()}
+                                        </span>}
+                                    onChangeComplete={(color) => mudarCorPrevEspec(color.toHexString(), 'cor1')} />
+                                <ColorPicker
+                                    id="inpCorLetra"
+                                    value={prevEspec.cor2}
+                                    disabledAlpha
+                                    showText={(color) => 
+                                        <span>
+                                            <strong className='labelColor'>Cor da letra</strong> {color.toHexString()}
+                                        </span>}
+                                    onChangeComplete={(color) => mudarCorPrevEspec(color.toHexString(), 'cor2')} />
                             </div>
                             <div id='contPreVisu'>
                                 <div id='headPreVisu'>
