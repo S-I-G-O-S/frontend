@@ -41,7 +41,6 @@ function Funcionario() {
     const [carregando, setCarregando] = useState(true)
     const [especialidades, setEspecialidades] = useState()
     const [pesqAddEspec, setPesqAddEspec] = useState('')
-    const [cepMensagem, setCepMensagem] = useState('')
     const [viewSenha, setViewSenha] = useState(false)
     const [headerNomeFunc, setHeaderNomeFunc] = useState('')
     const [usuario, setUsuario] = useState(() => {
@@ -336,7 +335,6 @@ function Funcionario() {
             const response = await getFuncionarioPorID(idFuncionario)
             setFuncionario(response.data)
             console.warn(response)
-
         } catch (error) {
             console.error(error.message)
         }
@@ -420,22 +418,21 @@ function Funcionario() {
                                 <div id='contCargoFunc'>
                                     <label>Cargo:</label>
                                     {/* <Select
-                                
-                                defaultValue={funcionario.cargo || 'técnico'}
-                                options={[
-                                { 
-                                    value: "técnico", label: "técnico" 
-                                },
-                                {
-                                    value: "base", label: "base"
-                                },
-                                {
-                                    value: "adm", label: "adm"
-                                }
-                                ]} 
-                                onChange={(e) => handleChangeDados(e.target.value, "cargo")}
-                            />   */}
-                                    <select id=""
+                                        defaultValue={funcionario.cargo || 'técnico'}
+                                        options={[
+                                        { 
+                                            value: "técnico", label: "técnico" 
+                                        },
+                                        {
+                                            value: "base", label: "base"
+                                        },
+                                        {
+                                            value: "adm", label: "adm"
+                                        }
+                                        ]} 
+                                        onChange={(e) => handleChangeDados(e.target.value, "cargo")}
+                                    />   */}
+                                    <select id="selectCargo"
                                         value={funcionario.cargo}
                                         onChange={(e) => handleChangeDados(e.target.value, "cargo")}>
                                         <option value="TECNICO">técnico</option>
