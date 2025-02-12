@@ -40,7 +40,7 @@ function Ordem() {
     const cancelarOrdem = async () => {
         console.log('debug ordem sendo cancelada:')
         console.warn(ordem)
-        const result = await putCancelOrdem(ordem.id)
+        const result = await putCancelOrdem(ordem)
         if (!result.success) {
             console.error(result.error)
             return
