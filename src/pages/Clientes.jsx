@@ -2,7 +2,7 @@ import {getPageClientes, postCliente} from '@backend/clientesAPI.js'
 import { getCookie } from '@services/cookies.js'
 import Nav from '@components/public/Nav.jsx'
 import Loading from '@components/public/Loading.jsx'
-import '../styles/clientes.css'
+import '@styles/clientes.css'
 import Header from '@components/public/Header.jsx'
 import Edit from '@assets/edit-text.png'
 

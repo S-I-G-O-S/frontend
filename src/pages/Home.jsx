@@ -39,8 +39,6 @@ function Home() {
     }, [])
     return (
         <>
-        {/* TODO Adicionar este componente em todas as paginas */}
-        {/* <IsOnline></IsOnline> */}
         <div id='pageHome' className='paginas'>
         <Header titulo={"Página inicial"} usuario={usuario}></Header>
         <Nav cargo={usuario?.cargo || ''}></Nav>

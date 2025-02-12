@@ -16,10 +16,10 @@ import { isMobile } from 'react-device-detect'
 import { Pagination, Skeleton, Input, Select, Button, Modal, Dropdown } from 'antd'
 import { EditFilled, OrderedListOutlined, CloseOutlined, FilterFilled, SearchOutlined, DownOutlined, UnorderedListOutlined } from '@ant-design/icons'
 
-import Edit from '../assets/edit-text.png'
-import Down from '../assets/dark/down.png' 
-import Up from '../assets/dark/up.png'
-import Loading from '../components/public/Loading.jsx'
+import Edit from '@assets/edit-text.png'
+import Down from '@assets/dark/down.png' 
+import Up from '@assets/dark/up.png'
+import Loading from '@components/public/Loading.jsx'
 
 
 function Funcionarios() {

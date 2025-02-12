@@ -7,7 +7,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@styles': path.resolve(__dirname, './src/styles'),
-      '@assets': path.resolve(__dirname, './src/assets'),
+      '@assets': path.resolve(__dirname, './public/assets'),
       '@services': path.resolve(__dirname, './src/services'),
       '@backend': path.resolve(__dirname, './src/services/backend'),
       '@components': path.resolve(__dirname, './src/components'),
@@ -17,6 +17,7 @@ export default defineConfig({
     },
   },
   build: {
+  /* 
     rollupOptions: {
       output: {
         // Configuração de chunks para temas
@@ -25,6 +26,7 @@ export default defineConfig({
         },
       },
     },
+  */
     // Configurações gerais de build
     chunkSizeWarningLimit: 500, // Evita warnings para chunks grandes
     cssCodeSplit: true, // Divide o CSS em arquivos separados para otimização

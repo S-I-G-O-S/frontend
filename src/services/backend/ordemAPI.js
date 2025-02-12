@@ -107,9 +107,9 @@ export const getOrdensPorID = async (id) => {
                 'Content-Type': 'application/json',
             },
         })
-        return response
+        return { success: true, data: response.data }
     } catch (error) {
-        throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
+        return { success: false, error: error }
     }
 }
 export const postNovaOrdem = async (ordem) => {
@@ -125,5 +125,18 @@ export const postNovaOrdem = async (ordem) => {
             success: false,
             error: `Erro: ${error.response?.data?.message || error.message}`,
         }
+    }
+}
+export const putCancelOrdem = async (id) => {
+    console.log(id)
+    try {
+        const response = await axios.put(`${config.url}/api/ordens`, {
+            id: id,
+            situacao: "CANCELADA"
+        })
+        return { success: true, response: response }
+    } catch (err) {
+        return { success: false,
+            error: err }
     }
 }
