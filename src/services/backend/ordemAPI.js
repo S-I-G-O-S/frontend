@@ -134,13 +134,12 @@ export const putCancelOrdem = async (ordem) => {
         const response = await axios.put(`${config.url}/api/ordens`, {
             id: ordem.id,
             descricao: ordem.descricao,
-            funcionario: ordem.funcionario,
+            funcionario: ordem.funcionario || 0,
             situacao: "CANCELADA",
-            servico: ordem.servico  
+            servico: ordem.servico || 0
         })
         return { success: true, response: response }
     } catch (err) {
-        return { success: false,
-            error: err }
+        return { success: false, error: err }
     }
 }
