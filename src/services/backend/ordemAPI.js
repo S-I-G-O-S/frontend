@@ -127,12 +127,16 @@ export const postNovaOrdem = async (ordem) => {
         }
     }
 }
-export const putCancelOrdem = async (id) => {
-    console.log(id)
+export const putCancelOrdem = async (ordem) => {
+    console.log('debug cancelando ordem')
+    console.warn(ordem)
     try {
         const response = await axios.put(`${config.url}/api/ordens`, {
-            id: id,
-            situacao: "CANCELADA"
+            id: ordem.id,
+            descricao: ordem.descricao,
+            funcionario: ordem.funcionario,
+            situacao: "CANCELADA",
+            servico: ordem.servico  
         })
         return { success: true, response: response }
     } catch (err) {
