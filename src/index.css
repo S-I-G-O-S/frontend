@@ -213,7 +213,7 @@ body {
 .paginas {
     display: grid;
     grid-template-columns: max-content auto;
-    grid-template-rows: 3rem calc(100vh - 3rem);
+    grid-template-rows: 7vh calc(100vh - 3rem);
     grid-template-areas: 
     "nav header"
     "nav main";
@@ -254,7 +254,7 @@ section {
         #header {
             position: static;
             z-index: 80;
-            padding: 0 1rem;
+            padding: .12rem 1rem;
             .tituloPag {
                 margin-left: 0.1rem;
             }

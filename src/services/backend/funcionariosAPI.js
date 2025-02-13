@@ -68,7 +68,7 @@ export const getFuncionarioPorID = async (id) => {
 export const deleteFuncionario = async (id) => {
     try {
         const response = await axios.delete(`${config.url}/api/funcionarios/${id}`)
-        console.log(response)
+        console.warn(response)
         return { success: true }
     } catch (error) {
         return {
@@ -110,26 +110,26 @@ export const postFuncionario = async (f, especialidades) => {
     }
 }
 
-export const putFuncionario = async (f, especialidades) => {
+export const putFuncionario = async (funcionario, especialidades) => {
     try {
         const response = await axios.put(`${config.url}/api/funcionarios`, {
-            id: f.id,
-            nome: f.nome,
-            primeiro: f.primeiro,
-            ultimo: f.ultimo,
-            cpf: f.cpf,
-            email: f.email,
-            celular: f.celular,
-            cargo: f.cargo,
+            id: funcionario.id,
+            nome: funcionario.nome,
+            primeiro: funcionario.primeiro,
+            ultimo: funcionario.ultimo,
+            cpf: funcionario.cpf,
+            email: funcionario.email,
+            celular: funcionario.celular,
+            cargo: funcionario.cargo,
             endereco: {
-                id: f.endereco.id,
-                cep: f.endereco.cep,
-                logradouro: f.endereco.logradouro,
-                numero: f.endereco.numero,
-                bairro: f.endereco.bairro,
-                cidade: f.endereco.cidade,
-                uf: f.endereco.uf,
-                complemento: f.endereco.complemento
+                id: funcionario.endereco.id,
+                cep: funcionario.endereco.cep,
+                logradouro: funcionario.endereco.logradouro,
+                numero: funcionario.endereco.numero,
+                bairro: funcionario.endereco.bairro,
+                cidade: funcionario.endereco.cidade,
+                uf: funcionario.endereco.uf,
+                complemento: funcionario.endereco.complemento
             },
             especialidades: especialidades
         })

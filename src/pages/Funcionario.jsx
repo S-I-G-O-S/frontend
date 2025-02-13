@@ -87,15 +87,30 @@ function Funcionario() {
     //  Endereço do Funcionario
     const handleCEP = (value) => {
         const cep = value.replace(/\D/g, '');
-        if (cep.length <= 8) {
+        
+        if (cep.length > 8) {return}
+
+        if (cep.length === 0) {
             setFuncionario(prevState => ({
                 ...prevState,
                 endereco: {
                     ...prevState.endereco,
-                    cep: cep,
+                    cep: '',
                 }
-            }))
+            }));
+            return;3
         }
+        let formatted = cep;
+        if (cep.length > 5) {
+            formatted = `${cep.slice(0, 5)}-${cep.slice(5)}`;
+        }
+        setFuncionario(prevState => ({
+            ...prevState,
+            endereco: {
+                ...prevState.endereco,
+                cep: formatted,
+            }
+        }))
     }
     const fetchCEP = async () => {
         const cep = funcionario.endereco.cep.replace(/\D/g, '')
@@ -115,19 +130,9 @@ function Funcionario() {
                     }
                 }))
             } catch (error) {
-                // setErro("Erro ao buscar CEP:", error)
-                // setCepMensagem("CEP não encontrado ou inválido.")
-                // setTimeout(() => {
-                //     setCepMensagem('')
-                // }, 5000)
                 showNotifCEP('bottomLeft')
             }
         } else {
-            // setErro("São necessários 8 digitos.")
-            // setCepMensagem("São necessários 8 digitos.")
-            // setTimeout(() => {
-            //     setCepMensagem('')
-            // }, 5000)
             showNotifCEP('bottomLeft')
         }
     }
@@ -176,7 +181,9 @@ function Funcionario() {
         if(field == 'email' && value.length > 100) {
             return
         }
-        if(field == 'celular' && value.length > 15) {
+        if(field == 'celular' ) {
+            if (value.length > 15) {return}
+            formatCelular(value)
             return
         }
         
@@ -185,7 +192,31 @@ function Funcionario() {
             [field]: value,
         }))
     }
-    function formatNome() {
+    const formatCelular = (value) => {
+        let cleaned = value.replace(/\D/g, '');
+        if (cleaned.length === 0) {
+            setFuncionario(prevState => ({
+                ...prevState,
+                celular: ''
+            }));
+            return;
+        }
+
+        // Aplica a máscara progressivamente
+        let formatted = cleaned;
+
+        if (cleaned.length > 2) {
+            formatted = `(${cleaned.slice(0, 2)}) ${cleaned.slice(2)}`;
+        }
+        if (cleaned.length > 7) {
+            formatted = `(${cleaned.slice(0, 2)}) ${cleaned.slice(2, 7)}-${cleaned.slice(7)}`;
+        }
+        setFuncionario(prevState => ({
+            ...prevState,
+            celular: formatted,
+        }));
+    }
+    const formatNome = () => {
         const nomeSanitizado = funcionario.nome.trim().replace(/[^a-zA-Z\s]/g, '');
 
         if (!nomeSanitizado) {
@@ -238,7 +269,7 @@ function Funcionario() {
     const goToFuncionarios = () => {
         navigate(`/funcionarios`)
     }
-    const confirmDelete = async (e) => {
+    const handleDelete = async () => {
         const result = await deleteFuncionario(funcionario.id);
         if (result.success) {
             setFuncionario((prev) => prev.filter((func) => func.id !== funcionario.id))
@@ -246,11 +277,6 @@ function Funcionario() {
             console.error(result.error)
         }
         navigate(`/funcionarios`)
-    };
-    const cancelDelete = async (e) => {
-    };
-    const handleDelete = async () => {
-        // O codigo de exclusão ficava todo aqui
     }
     const handleSalvar = async () => {
         if (funcionario.nome=='' || 
@@ -362,10 +388,10 @@ function Funcionario() {
     return (
         <div id="pageFuncionario" className='paginas'>
             <Header titulo={
-                idFuncionario !== null
-                    ? (!funcionario ?
-                        `Editando funcionário(a)` :
-                        `Editando funcionário(a) "${headerNomeFunc}"`
+                idFuncionario !== null? 
+                (!funcionario ?
+                        `` :
+                        `Editando funcionário(a) ${funcionario.nome}`
                     )
                     : 'Novo funcionário'
             }
@@ -515,11 +541,15 @@ function Funcionario() {
                                 <Popconfirm
                                     title="Apagar funcionário"
                                     description={`Deseja mesmo excluir '${funcionario.nome}'?`}
-                                    onConfirm={confirmDelete}
-                                    onCancel={cancelDelete}
+                                    onConfirm={handleDelete}
+                                    onCancel={null}
                                     okText="SIM"
                                     cancelText="NÃO">
-                                    <button id='bttExcluir' onClick={handleDelete}>Excluir</button>
+                                    <button id='bttExcluir'
+                                        // onClick={handleDelete}
+                                        >
+                                        Excluir
+                                    </button>
                                 </Popconfirm>
                             </div>
                         </section>
