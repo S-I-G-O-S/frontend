@@ -462,7 +462,7 @@ function Funcionarios() {
         showContFiltros && (
         <div id='shadowBG'>
             <section id='secFiltros'>
-                <div id='headerContFiltros'>
+                <div id='headerFiltros'>
                     <h2>Filtros</h2>
                     <div 
                         id='closeModel'
@@ -538,7 +538,7 @@ function Funcionarios() {
                         </select>
                     </div>
                 </div>
-                <div id='footerContFiltros'>
+                <div id='footerFiltros'>
                     <button 
                         id='bttCancelar'
                         key='cancelar'

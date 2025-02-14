@@ -55,9 +55,10 @@
     }
 }
 .navAberto {
-    width: 16vw;
+    width: 13vw;
+    min-width: 10.5rem;
     #bttNav {
-        margin-left: 14vw;
+        margin-left: 10.5vw;
     }
     #containerLinks {
         transition: 0.6s;
@@ -134,7 +135,7 @@
         }
     }
 }
-@media screen and (width <= 950px) {
+@media screen and (width <= 900px) {
     #nav,
     .navFechado,
     .navAberto  {

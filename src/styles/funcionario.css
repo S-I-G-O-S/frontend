@@ -11,6 +11,7 @@
         grid-area: main;
         width: 100%;
         gap: 0.5rem;
+        overflow-y: scroll;
         section {
             padding: 1rem;
             border-width: 0.1rem;

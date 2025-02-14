@@ -246,7 +246,7 @@ section {
 section {
     background-color: var(--salmao2);
 }
-@media screen and (width <= 950px) {
+@media screen and (width <= 900px) {
     .paginas {
         width: 100vw;
         display: flex;

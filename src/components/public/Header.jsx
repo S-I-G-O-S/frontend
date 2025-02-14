@@ -58,7 +58,7 @@ function Header({usuario, titulo}) {
                             
                         }
                     }}
-                    arrow={true}
+                    arrow={false}
                     placement="bottom"
                     trigger={'click'}
                     overlayClassName="customDropdown"
