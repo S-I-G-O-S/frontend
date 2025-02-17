@@ -294,8 +294,6 @@ function Funcionario() {
             return
         }
         let arrayEspecs = []
-        console.warn(funcionario)
-        console.warn
 
         funcionario.especialidades.map(espec => (
             arrayEspecs.push(espec.id)
@@ -304,11 +302,7 @@ function Funcionario() {
         if ('id' in funcionario) {
             result = await putFuncionario(funcionario, arrayEspecs)
         } else {
-            //  TODO [ERRO] Retornando erro 400
             result = await postFuncionario(funcionario, arrayEspecs)
-            /*
-            
-            */
         }
 
         if (result.success) {

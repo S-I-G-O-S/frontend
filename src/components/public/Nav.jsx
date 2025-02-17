@@ -11,8 +11,12 @@ import { useEffect, useState } from 'react'
 import { HomeFilled, IdcardFilled, LogoutOutlined, ReadFilled, ScheduleFilled, SettingFilled, SettingOutlined, ShoppingFilled, TagFilled }  from '@ant-design/icons'
 import { IconFuncionarios } from './IconsSVG'
 import { usePreferencias } from '@context/PreferenciasContext'
+import { logoutFunc } from '@backend/authAPI'
+import { useAuth } from '@context/authContext'
+import { deleteCookie } from '@services/cookies'
 
 function Nav({ cargo }) {
+    const { setToken } = useAuth()
     const { sessPreferencias, setSessPreferencias } = usePreferencias()
     const changeNav = () => {
         setSessPreferencias(prevState => ({

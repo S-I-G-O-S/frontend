@@ -78,17 +78,30 @@ export const deleteFuncionario = async (id) => {
     }
 }
 
-export const postFuncionario = async (f, especialidades) => {
+export const postFuncionario = async (funcionario, especialidades) => {
+    console.info('debug put funcionario')
+    console.warn(funcionario)
+    console.warn(especialidades)
+    console.warn(funcionario.endereco)
+    let formatedCEP = funcionario.endereco.cep.replace(/\D/g, '')
     try {
         const response = await axios.post(`${config.url}/api/funcionarios`, {
-            nome: f.nome,
-            primeiro: f.primeiro,
-            ultimo: f.ultimo,
-            cpf: f.cpf,
-            email: f.email,
-            celular: f.celular,
-            cargo: f.cargo,
-            endereco: f.endereco,
+            nome: funcionario.nome,
+            primeiro: funcionario.primeiro,
+            ultimo: funcionario.ultimo,
+            cpf: funcionario.cpf,
+            email: funcionario.email,
+            celular: funcionario.celular,
+            cargo: funcionario.cargo,
+            endereco: {
+                  cep: formatedCEP,
+                  logradouro: funcionario.endereco.logradouro,
+                  numero: funcionario.endereco.numero,
+                  bairro: funcionario.endereco.bairro,
+                  cidade: funcionario.endereco.cidade,
+                  uf: funcionario.endereco.uf,
+                  complemento: funcionario.endereco.complemento,
+            },
             // {
             //     cep: f.endereco.cep,
             //     logradouro: f.endereco.logradouro,
