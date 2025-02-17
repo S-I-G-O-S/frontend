@@ -53,6 +53,7 @@ export const getTecnicos = async () => {
     }
 }
 export const getFuncionarioPorID = async (id) => {
+    // TODO a api não retorna o CPF
     try {
         const response = await axios.get(`${config.url}/api/funcionarios/${id}`, {
             headers: {

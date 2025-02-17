@@ -54,16 +54,14 @@ function Home() {
                 )}
 
                 {/* Ordens abertas e ordens em atendimento se o usuário for 'base' ou 'adm' */}
-                {(usuario.cargo === 'base' || usuario.cargo === 'ADM' || usuario.cargo == 'DEV') && (
-
-                    <section id='secOrdens'>
-                        {/* Ordens Abertas */}
-                        <OrdensPendentes ></OrdensPendentes>
-
-                        {/* Ordens em Atendimento */}
-                        <OrdensEmAtendimento></OrdensEmAtendimento>
-                    </section>
-                )}
+                <section id='secOrdens'>
+                    {/* Ordens Abertas */}
+                    <OrdensPendentes ></OrdensPendentes>
+                         {/* Ordens em Atendimento */}
+                        {(usuario.cargo==='BASE' || usuario.cargo==='ADM' || usuario.cargo==='DEV') && 
+                            <OrdensEmAtendimento></OrdensEmAtendimento>
+                        }
+                </section>
                 </>
             )
         }

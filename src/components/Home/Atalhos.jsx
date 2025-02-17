@@ -2,7 +2,6 @@ import '@styles/home/atalhos.css'
 import { Link } from 'react-router-dom'
 import { FieldTimeOutlined, FileAddOutlined, TeamOutlined, ToolOutlined } from '@ant-design/icons'
 function Atalhos({cargo}) {
-    
     return(
         <section id="secAtalhos">
             <div id='contAtalhos'>
@@ -30,9 +29,9 @@ function Atalhos({cargo}) {
                 {
                     cargo==='TECNICO' &&
                     <>
-                    {/* 
-                        meus atendimentos
-                     */}
+                    <Link className='atalhos' to={"/atendimentos"}>
+                        <div>meus atendimentos</div>
+                    </Link>
                     </>
                 }
             </div>

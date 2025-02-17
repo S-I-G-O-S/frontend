@@ -7,8 +7,8 @@ import '@styles/ordens/ordem.css'
 import { getAtendimentos, getOrdensPorID } from "@backend/ordemAPI";
 import { useEffect, useState } from "react";
 import { ExceptionOutlined } from '@ant-design/icons'
-import { putCancelOrdem } from "../services/backend/ordemAPI";
-import { Popconfirm } from "antd";
+import { putAtenderOrdem, putCancelOrdem } from "../services/backend/ordemAPI";
+import { notification, Popconfirm } from "antd";
 
 //  TODO Talvez seja redundante receber o endereço do cliente e da ordem
 function Ordem() {
@@ -58,22 +58,37 @@ function Ordem() {
             console.error(error)
         }
     }
-    const atenderOrdem = () => {
+    
+    const handleAtenderOrdem = async () => {
         /*
             * editar ordem e mudar 'funcionario' para o id do tecnico
         */
         // verificar se não tem um funcionario atendendo
-        if (ordem.situacao!=='PENDENTE' || ordem.situacao!=='RETORNO') {
+        if (ordem.situacao!=='PENDENTE' && ordem.situacao!=='RETORNO') {
             // Não da pra atender ele
             console.log('impossivel atender esta ordem.')
             return
         }
-        
+        // verificar se o funcionario é um técnico
+        if (usuario.cargo!=='TECNICO') {return}
+        console.log('debug idTecnico')
+        console.warn(usuario.id)
+        const result = await putAtenderOrdem(ordem, usuario.id)
+        if (!result.success) {
+            console.error(result.error)
+            return
+        }
+        console.log('ordem relacionada ao técnico ' + usuario.nome)
+        notification.success({
+            message: 'Ordem relacionada a você.',
+            description: 'Bom trabalho',
+            placement: 'bottomLeft',
+        })
     }
     useEffect(() => {
         if (!ordem?.id) {
             return
-        }
+        }   
         fetchAtendimentos(ordem.id)
     }, [ordem])
     const fetchOrdem = async (id) => {
@@ -84,7 +99,6 @@ function Ordem() {
         }
         setOrdem(result.data)
         setEditDados(result.data) // Dados exibidos na edição da ordem
-        console.warn(result)
     }
     useEffect(() => {
         console.clear()
@@ -124,10 +138,10 @@ function Ordem() {
                             </>
                         }
                         {
-                            usuario.cargo!=="TECNICO" &&
+                            usuario.cargo==="TECNICO" &&
                             (ordem.situacao==='PENDENTE' ||
                             ordem.situacao==='RETORNO') &&
-                            <button>atender ordem</button>
+                            <button onClick={handleAtenderOrdem}>atender ordem</button>
                         }
                     </div>
                 </aside>

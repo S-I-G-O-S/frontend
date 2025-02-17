@@ -105,7 +105,7 @@ function Nav({ cargo }) {
                 }
                 {/* Paginas exibidas só para usuarios 'tecnico' */}
                 {/* TODO pagina Meus Atendimentos mostrando para todos exceto tecnicos */}
-                {!cargo!=='TECNICO' ?
+                {cargo==='TECNICO' ?
                 <> 
                     <NavLink
                         className={({ isActive }) => (isActive ? "links active" : "links ")}

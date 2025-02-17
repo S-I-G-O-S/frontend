@@ -120,7 +120,6 @@ export const postNovaOrdem = async (ordem) => {
     }
 }
 
-
 export const putEditOrdem = async (novaOrdem) => {
     try {
         const response = await axios.put(`${config.url}/api/ordens`, {
@@ -136,10 +135,21 @@ export const putEditOrdem = async (novaOrdem) => {
     }
 }
 export const putAtenderOrdem = async (ordem, idTecnico) => {
+    // TODO ERRO 400
+    /* 
+        "JSON parse error: 
+        Cannot deserialize value of type `java.lang.Long` 
+        from Object value (token `JsonToken.START_OBJECT`)"
+    */
+    console.log('debug put atender ordem')
+    console.warn(ordem.id)
+    console.warn(ordem.servico)
+    console.warn(idTecnico)
+    console.warn(ordem.descricao)
     try {
         const response = await axios.put(`${config.url}/api/ordens`, {
             id: ordem.id,
-            descricao: ordem.descricao,
+            descricao: ordem.descricao || "",
             funcionario: idTecnico,
             situacao: "EM_EXECUCAO",
             servico: ordem.servico || 0
