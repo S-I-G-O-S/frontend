@@ -29,9 +29,9 @@ function OrdensPendentes() {
     const fetchOrdens = async () => {
         try {
             const result = await getOrdensForHome('PENDENTE')
-            setReqstOrdensPendentes(result)
-            setOrdensPendentes(result.data.content)
-            console.warn(result)
+            setReqstOrdensPendentes(result.response)
+            setOrdensPendentes(result.response.data.content)
+            console.warn(result.response)
         } catch (error) {
             console.error(error)
         }

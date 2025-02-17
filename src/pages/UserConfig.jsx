@@ -55,7 +55,7 @@ function UserConfig() {
     }, [])
     return (
         <div id='pagePerfilConfig' className='paginas'>
-        <Header titulo={"Configurações"} usuario={usuario}></Header>
+        {/* <Header titulo={"Configurações"} usuario={usuario}></Header> */}
         <Nav cargo={usuario?.cargo || ''}></Nav>
         <main id="mainPerfilConfig">
             {

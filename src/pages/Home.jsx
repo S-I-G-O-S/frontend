@@ -17,17 +17,6 @@ import { CommentOutlined, CustomerServiceOutlined } from '@ant-design/icons'
 
 
 function Home() {
-    const showNotification = (placement) => {
-        notification.info({
-        message: `Sem internet`,
-        description: 'Reconecte-se a internet',
-        placement,
-        });
-    };
-    // showNotification('bottomLeft')
-    const [isLoading, setIsLoading] = useState({
-        ordensEmAtendimento: true
-    })
     const [showUsuario, setShowUsuario] = useState(null)
     const [showInfosUser, setShowInfosUser] = useState(true)
     const [usuario, setUsuario] = useState(() => {
@@ -40,17 +29,20 @@ function Home() {
     return (
         <>
         <div id='pageHome' className='paginas'>
-        <Header titulo={"Página inicial"} usuario={usuario}></Header>
+        {/* <Header titulo={"Página inicial"} usuario={usuario}></Header> */}
         <Nav cargo={usuario?.cargo || ''}></Nav>
         <main id="mainHome">
             {
                 !usuario ? '' : (
                 <>
-                <Atalhos></Atalhos>
+                <Atalhos cargo={usuario?.cargo}></Atalhos>
                 {/* informações do usuário */}
-                {showInfosUser && usuario.cargo == 'DEV' ? 
+                {/*
+                showInfosUser && usuario.cargo == 'DEV' ? 
                     <InfosUser></InfosUser> : ''
-                }
+                
+                */}
+                {/* TODO mostrar ordens do tecnico relacionadas ao mesmo */}
                 {(usuario.cargo === 'tecnico') && (
                     <section id='secTecnico'>
                     </section>

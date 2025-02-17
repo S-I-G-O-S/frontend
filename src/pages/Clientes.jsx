@@ -132,7 +132,7 @@ function Clientes() {
     }, [])
     return (
         <div id='pageClientes' className='paginas'>
-        <Header titulo={"Clientes"} usuario={usuario}></Header>
+        {/* <Header titulo={"Clientes"} usuario={usuario}></Header> */}
         <Nav cargo={usuario?.cargo || ''}></Nav>
         <main id='mainClientes'>
             {/* Listagem */}

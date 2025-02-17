@@ -1,10 +1,10 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
+// TODO Ainda não utilizado
 // Cria o contexto
-const PreferenciasContext = createContext();
-
+const UsuarioContext = createContext();
 // Provedor do contexto
-export const PreferenciasProvider = ({ children }) => {
+export const UsuarioProvider = ({ children }) => {
     const [usuario, setUsuario] = useState(() => {
         const storedUsuario = sessionStorage.getItem('usuario');
         return storedUsuario
@@ -13,11 +13,11 @@ export const PreferenciasProvider = ({ children }) => {
     });
 
     useEffect(() => {
-        sessionStorage.setItem('usuario', JSON.stringify(sessPreferencias));
+        sessionStorage.setItem('usuario', JSON.stringify(usuario));
     }, [usuario]);
 
     return (
-        <PreferenciasContext.Provider value={{ sessPreferencias, setSessPreferencias }}>
+        <PreferenciasContext.Provider value={{ usuario, setUsuario }}>
             {children}
         </PreferenciasContext.Provider>
     );

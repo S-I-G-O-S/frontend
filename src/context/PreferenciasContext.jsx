@@ -6,14 +6,14 @@ const PreferenciasContext = createContext();
 // Provedor do contexto
 export const PreferenciasProvider = ({ children }) => {
     const [sessPreferencias, setSessPreferencias] = useState(() => {
-        const storedPreferencias = sessionStorage.getItem('preferencias');
+        const storedPreferencias = sessionStorage.getItem('preferencias')
         return storedPreferencias
             ? JSON.parse(storedPreferencias)
             : {
                 tema: 'salmaoLight',
                 abertoNav: true,
-            };
-    });
+            }
+    })
 
     useEffect(() => {
         // console.log('Mudando tema para: '+ sessPreferencias.tema)

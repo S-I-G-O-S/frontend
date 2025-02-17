@@ -213,9 +213,10 @@ body {
 .paginas {
     display: grid;
     grid-template-columns: max-content auto;
-    grid-template-rows: 7vh calc(100vh - 3rem);
+    grid-template-rows: 100vh;
+    /* grid-template-rows: 3rem calc(100vh - 3rem); */
     grid-template-areas: 
-    "nav header"
+    "nav main"
     "nav main";
     padding: 0;
     margin: 0;

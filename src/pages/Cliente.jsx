@@ -337,9 +337,9 @@ function Cliente() {
     const fecthHistOrdens = async (page) => {
         try {
             const result = await getOrdensPorCliente(page, cliente.id)
-            console.warn(result.data.content)
-            setReqstHistorico(result)
-            setHistorico(result.data.content)
+            console.warn(result.response.data.content)
+            setReqstHistorico(result.response)
+            setHistorico(result.response.data.content)
         } catch (error) {
             console.error(error)
         }
@@ -385,7 +385,7 @@ function Cliente() {
     }, [])
     return(
         <div id="pageCliente" className='paginas'>
-        <Header titulo={
+        {/* <Header titulo={
             idCliente !== null
             ? ( !cliente ? 
                 `Editando cliente` :
@@ -394,7 +394,7 @@ function Cliente() {
             : 'Novo cliente'
         }
         usuario={usuario}
-        ></Header>
+        ></Header> */}
         <Nav cargo={usuario?.cargo || ''}></Nav>
         <main id='mainCliente'>        
             <section id='secInfos'>

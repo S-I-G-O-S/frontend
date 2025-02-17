@@ -8,30 +8,9 @@ export const getOrdens = async () => {
                 'Content-Type': 'application/json',
             },
         })
-        return response
-        /*
-        {
-            "id": 1,
-            "cliente": "Empresa 3",
-            "endereco": {
-                "id": 33,
-                "cep": "43033000",
-                "logradouro": "Rua Ceará",
-                "numero": "330",
-                "bairro": "Centro",
-                "cidade": "Londrina",
-                "uf": "PR",
-                "complemento": "Bloco A"
-            },
-            "descricao": "Teste de criar ordem",
-            "funcionario": null,
-            "situacao": "PENDENTE",
-            "servico": "Instalação de Alarmes",
-            "dtAbertura": "16-11-2024 06:02:17"
-        }
-        */
-    } catch (error) {
-        throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
+        return { success: true, response: response }
+    } catch (err) {
+        return { success: false, error: err }
     }
 }
 export const getPageOrdens = async (pagina, filtros) => {
@@ -47,9 +26,9 @@ export const getPageOrdens = async (pagina, filtros) => {
                 'Content-Type': 'application/json',
             },
         })
-        return response
-    } catch (error) {
-        throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
+        return { success: true, response: response }
+    } catch (err) {
+        return { success: false, error: err }
     }
 }
 export const getOrdensPorSituacao = async (situacao) => {
@@ -59,9 +38,9 @@ export const getOrdensPorSituacao = async (situacao) => {
                 'Content-Type': 'application/json',
             },
         })
-        return response
-    } catch (error) {
-        throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
+        return { success: true, response: response }
+    } catch (err) {
+        return { success: false, error: err }
     }
 }
 export const getOrdensForHome = async (situacao) => {
@@ -71,9 +50,9 @@ export const getOrdensForHome = async (situacao) => {
                 'Content-Type': 'application/json',
             },
         })
-        return response
-    } catch (error) {
-        throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
+        return { success: true, response: response }
+    } catch (err) {
+        return { success: false, error: err }
     }
 }
 export const getOrdensPorCliente = async (pagina, idCliente) => {
@@ -83,9 +62,21 @@ export const getOrdensPorCliente = async (pagina, idCliente) => {
                 'Content-Type': 'application/json',
             },
         })
-        return response
-    } catch (error) {
-        throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
+        return { success: true, response: response }
+    } catch (err) {
+        return { success: false, error: err }
+    }
+}
+export const getOrdensPorTecnicoForHome = async (idTecnico) => {
+    try {
+        const response = await axios.get(`${config.url}/api/ordens?size=5&funcionario=${idTecnico}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        return { success: true, response: response }
+    } catch (err) {
+        return { success: false, error: err }
     }
 }
 export const getAtendimentos = async (id) => {
@@ -112,6 +103,7 @@ export const getOrdensPorID = async (id) => {
         return { success: false, error: error }
     }
 }
+
 export const postNovaOrdem = async (ordem) => {
     try {
         const response = await axios.post(`${config.url}/api/ordens`, {
@@ -127,6 +119,36 @@ export const postNovaOrdem = async (ordem) => {
         }
     }
 }
+
+
+export const putEditOrdem = async (novaOrdem) => {
+    try {
+        const response = await axios.put(`${config.url}/api/ordens`, {
+            id: ordem.id,
+            descricao: ordem.descricao,
+            funcionario: idTecnico,
+            situacao: "EM_EXECUCAO",
+            servico: ordem.servico || 0
+        })
+        return { success: true, response: response }
+    } catch (err) {
+        return { success: false, error: err }
+    }
+}
+export const putAtenderOrdem = async (ordem, idTecnico) => {
+    try {
+        const response = await axios.put(`${config.url}/api/ordens`, {
+            id: ordem.id,
+            descricao: ordem.descricao,
+            funcionario: idTecnico,
+            situacao: "EM_EXECUCAO",
+            servico: ordem.servico || 0
+        })
+        return { success: true, response: response }
+    } catch (err) {
+        return { success: false, error: err }
+    }
+}
 export const putCancelOrdem = async (ordem) => {
     console.log('debug cancelando ordem')
     console.warn(ordem)
@@ -134,12 +156,24 @@ export const putCancelOrdem = async (ordem) => {
         const response = await axios.put(`${config.url}/api/ordens`, {
             id: ordem.id,
             descricao: ordem.descricao,
-            funcionario: ordem.funcionario || 0,
             situacao: "CANCELADA",
             servico: ordem.servico || 0
         })
         return { success: true, response: response }
     } catch (err) {
         return { success: false, error: err }
+    }
+}
+export const postAtendimento = async (idOrdem) => {
+    try {
+        const response = await axios.post(`${config.url}/api/ordens/atendimentos`, {
+            ordem: idOrdem
+        })
+        return { success: true, response: response }
+    } catch (error) {
+        return {
+            success: false,
+            error: `Erro: ${error.response?.data?.message || error.message}`,
+        }
     }
 }

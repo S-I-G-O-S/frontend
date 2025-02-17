@@ -50,7 +50,7 @@ function Header({usuario, titulo}) {
                 <h1 className='tituloPag'>{titulo}</h1>
             </div>
             <div id='headerRight'>
-                <Dropdown
+                {/* <Dropdown
                     menu={{
                         items: itensMenu,
                         style: {
@@ -83,10 +83,8 @@ function Header({usuario, titulo}) {
                         </div>
                     )}
                 >
-                    {/* <div id='contIconUser'>
-                    </div> */}
                     <UserOutlined id="iconUser"/>
-                </Dropdown>
+                </Dropdown> */}
                 {/*
                     viewContUser &&
                     (<div id='contConfigUser'>

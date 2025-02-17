@@ -15,7 +15,8 @@ import {
     NovaOrdem,
     Ordem,
     PrimeiroAcesso,
-    Teste
+    Teste,
+    MeusAtendimentos
 } from '@pages'
 
 
@@ -72,6 +73,10 @@ function AppRoutes() {
                 {
                     path: "/ordem",
                     element: <Ordem />,
+                },
+                {
+                    path: "/atendimentos",
+                    element: <MeusAtendimentos/>,
                 },
                 {
                     path: "/nova-ordem",

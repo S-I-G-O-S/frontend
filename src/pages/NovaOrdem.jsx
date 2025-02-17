@@ -154,7 +154,7 @@ function NovaOrdem() {
     }, [])
     return (
         <div id="pageNovaOrdem" className="paginas">
-        <Header titulo={"Nova ordem de serviço"} usuario={usuario}></Header>
+        {/* <Header titulo={"Nova ordem de serviço"} usuario={usuario}></Header> */}
         <Nav cargo={usuario?.cargo || ''}></Nav>
         <main id="mainNovaOrdem">
             <section id="sec1">

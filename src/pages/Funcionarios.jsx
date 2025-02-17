@@ -5,22 +5,20 @@ import { getCookie } from '@services/cookies.js'
 
 // Estilização
 import '@styles/funcionarios.css'
-import Nav from '@components/public/Nav.jsx'
-import Header from '@components/public/Header.jsx'
 
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { isMobile } from 'react-device-detect'
 
-
 import { Pagination, Skeleton, Input, Select, Button, Modal, Dropdown } from 'antd'
 import { EditFilled, OrderedListOutlined, CloseOutlined, FilterFilled, SearchOutlined, DownOutlined, UnorderedListOutlined } from '@ant-design/icons'
 
+import Header from '@components/public/Header.jsx'
+import Nav from '@components/public/Nav.jsx'
 import Edit from '@assets/edit-text.png'
 import Down from '@assets/dark/down.png' 
 import Up from '@assets/dark/up.png'
 import Loading from '@components/public/Loading.jsx'
-
 
 function Funcionarios() {
     const navigate = useNavigate()
@@ -29,7 +27,6 @@ function Funcionarios() {
         return cookieUsuario ? cookieUsuario : ''
     })
     const [reqstFuncionarios, setReqstFuncionarios] = useState()
-    const [reqstEspecialidades, setReqstEspecialidades] = useState()
     const [funcionarios, setFuncionarios] = useState()
     const [especialidades, setEspecialidades] = useState()
     const [showContFiltros, setShowContFiltros] = useState(false)
@@ -221,7 +218,6 @@ function Funcionarios() {
     const fetchEspecialidades = async () => {
         try {
             const response = await getEspecialidades()
-            setReqstEspecialidades(response)
             setEspecialidades(response.data.content)
             console.warn(response)
         } catch (error) {
@@ -253,210 +249,213 @@ function Funcionarios() {
 
     return (
         <div id='pageFuncionarios' className='paginas'>
-        <Header titulo={"Funcionarios"} usuario={usuario}></Header>
+        {/* <Header titulo={"Funcionarios"} usuario={usuario}></Header> */}
         <Nav cargo={usuario?.cargo || ''}></Nav>
         <main id='mainFuncionarios'>
-            <section id='secList'>
-                <div id='contEspecsNovoFunc'>
-                    <button className='btt' onClick={() => goToEspecialidades()}>
-                            Especialidades e Serviços
-                    </button>
-                    {   
-                    usuario.cargo == 'ADM' || usuario.cargo == 'DEV' ?
-                    <button className='btt'
-                        onClick={() => handleCreateClick()}>Novo Funcionário</button>
-                    : ''
-                    } 
-                </div>
-                {/* <ListFuncionarios cargo={usuario.cargo}></ListFuncionarios> */}
-                {
-                !funcionarios ? '' :
-                <div id='contFiltros'>
-                    <div id='contPesqFunc'>
-                        <input type="text" 
-                            value={filtros.nome.value == 'default' ? '' : filtros.nome.value}
-                            onChange={(e) => handleChangeFilters(e.target.value, "nome")}
-                        />
-                        <button onClick={handlePesquisarNome}>
-                            <SearchOutlined style={{color: '#fcd8b9'}}/>
+            {
+                (usuario.cargo=='BASE' || usuario.cargo=="ADM" || usuario.cargo=="DEV") &&
+                <section id='secList'>
+                    <div id='contEspecsNovoFunc'>
+                        <button className='btt' onClick={() => goToEspecialidades()}>
+                                Especialidades e Serviços
+                        </button>
+                        {   
+                        usuario.cargo == 'ADM' || usuario.cargo == 'DEV' ?
+                        <button className='btt'
+                            onClick={() => handleCreateClick()}>Novo Funcionário</button>
+                        : ''
+                        } 
+                    </div>
+                    {/* <ListFuncionarios cargo={usuario.cargo}></ListFuncionarios> */}
+                    {
+                    !funcionarios ? '' :
+                    <div id='contFiltros'>
+                        <div id='contPesqFunc'>
+                            <input type="text" 
+                                value={filtros.nome.value == 'default' ? '' : filtros.nome.value}
+                                onChange={(e) => handleChangeFilters(e.target.value, "nome")}
+                            />
+                            <button onClick={handlePesquisarNome}>
+                                <SearchOutlined style={{color: '#fcd8b9'}}/>
+                            </button>
+                        </div>
+                        {/* <Button 
+                            size='small'
+                            type="text" 
+                            icon={<FilterFilled />}  
+                            iconPosition={'end'}
+                            onClick={handleChangeContFiltros}
+                        >
+                            Filtros
+                        </Button> */}
+                        <button id="bttFiltros" onClick={handleChangeContFiltros}>
+                            <p>
+                                filtros
+                            </p>
+                            <FilterFilled />
                         </button>
                     </div>
-                    {/* <Button 
-                        size='small'
-                        type="text" 
-                        icon={<FilterFilled />}  
-                        iconPosition={'end'}
-                        onClick={handleChangeContFiltros}
-                    >
-                        Filtros
-                    </Button> */}
-                    <button id="bttFiltros" onClick={handleChangeContFiltros}>
-                        <p>
-                            filtros
-                        </p>
-                        <FilterFilled />
-                    </button>
-                </div>
-                }
-                {
-                testeLayout ? 
-                <div id='layoutMobile'>
-                {
-                    !funcionarios ? 
-                    <Skeleton/> :
-                    funcionarios.map(funcionario => (
-                        <div id={`funcionario${funcionario.id}`} className='funcs skillsFechado' key={funcionario.id}>
-                            <div className='infosFunc'>
-                                <div className='nomeFunc'>
-                                    <span>Nome: </span>
-                                    {funcionario.primeiro + ' ' + funcionario.ultimo}
-                                </div>
-                                <div className='cellFunc'>
-                                    <span>Cel: </span>
-                                    {funcionario.celular}
-                                </div>
-                                <div className='ultAtvFunc'>
-                                    <span>Ultima atividade: </span>
-                                    {converterDtHr(funcionario.ultimaAtividade)}
-                                </div>
-                                <div className='cargoFunc'>
-                                    <span>Cargo: </span>
-                                    {funcionario.cargo}
-                                </div>
-                                <div className='statusFunc'>
-                                    <span>Status: </span>
-                                    {
-                                        funcionario.disponivel
-                                            ? 'disponível'
-                                            : 'indisponível'
-                                    }
-                                </div>
-                            </div>
-                            <div className='editFunc' onClick={() => handleEditClick(funcionario.id)}>
-                                <img className='imgEditFunc' src={Edit} alt="editar"/>
-                            </div>
-                        </div>
-                    ))
-                }
-                </div> 
-                :
-                <div id="contListFuncs">
-                <table id='listFuncs'>
-                    <thead>
-                        <tr id='titleList'>
-                            <th className='nomeTitle cl1'>nome</th>
-                            <th className='cellTitle cl2'>celular</th>
-                            <th className='ultAtvTitle cl3'>ultima atividade</th>
-                            <th className='cargoTitle cl4'>cargo</th>
-                            <th className='statusTitle cl5'>status</th>
-                            {   // TODO Só mostrar para ADM e DEV
-                            usuario.cargo=='ADM' || usuario.cargo=='DEV' ?
-                            <th className='cl6'></th> : ''
-                            }
-                        </tr>
-                    </thead>
-                    <tbody className='tbody'>
-                        {
-                            !funcionarios ? 
-                            <tr>
-                                <td colSpan='6'>
-                                <Loading/>
-                                </td>
-                            </tr>
-                            :
-                            funcionarios.map(funcionario => (
-                                <tr id={`funcionario${funcionario.id}`} className='funcs' key={funcionario.id}>
-                                    <td className='nomeFunc cl1'>
+                    }
+                    {
+                    testeLayout ? 
+                    <div id='layoutMobile'>
+                    {
+                        !funcionarios ? 
+                        <Skeleton/> :
+                        funcionarios.map(funcionario => (
+                            <div id={`funcionario${funcionario.id}`} className='funcs skillsFechado' key={funcionario.id}>
+                                <div className='infosFunc'>
+                                    <div className='nomeFunc'>
+                                        <span>Nome: </span>
                                         {funcionario.primeiro + ' ' + funcionario.ultimo}
-                                    </td>
-                                    <td className='cellFunc cl2'>
+                                    </div>
+                                    <div className='cellFunc'>
+                                        <span>Cel: </span>
                                         {funcionario.celular}
-                                    </td>
-                                    <td className='ultAtvFunc cl3'>
+                                    </div>
+                                    <div className='ultAtvFunc'>
+                                        <span>Ultima atividade: </span>
                                         {converterDtHr(funcionario.ultimaAtividade)}
-                                    </td>
-                                    <td className='cargoFunc cl4'>
-                                        {converterCargo(funcionario.cargo)}
-                                    </td>
-                                    <td className='statusFunc cl5'>
+                                    </div>
+                                    <div className='cargoFunc'>
+                                        <span>Cargo: </span>
+                                        {funcionario.cargo}
+                                    </div>
+                                    <div className='statusFunc'>
+                                        <span>Status: </span>
                                         {
                                             funcionario.disponivel
                                                 ? 'disponível'
                                                 : 'indisponível'
                                         }
-                                    </td>
-                                    {/* 
-                                        TODO [FUNC] Deixar só a seta pra baixo, expandido e mostrando as opções de :
-                                            Editar funcionario (base)
-                                            Mostrar Especialidades (base e ADM)
-                                    */}
-                                    {   // TODO Só mostrar para ADM e DEV
-                                    usuario.cargo=='ADM' || usuario.cargo=='DEV' ?
-                                    <td className='setaSkillsFunc cl6'>
-                                    { 
-                                        especialidades &&
-                                        <Dropdown
-                                        placement='bottom'
-                                        menu={{
-                                            items: [
-                                                {
-                                                    key: 1,
-                                                    label: (
-                                                        <div onClick={() => handleEditClick(funcionario.id)}>editar</div>
-                                                    ),
-                                                    icon: <EditFilled style={{color: '#26110D'}}/>
-                                                },
-                                                {
-                                                    key: '2',
-                                                    label: 'especialidades',
-                                                    children: listEspecialidades(funcionario.especialidades),
-                                                    icon: <OrderedListOutlined style={{color: '#26110D'}}/>
-                                                },
-                                            ],
-                                            style: {
-                                                backgroundColor: '#F2E8DF',
-                                                fontWeight: '500'
-                                            }
-                                        }}
-                                        overlayStyle={{
-                                            border: "0.1rem solid #26110D",
-                                            borderRadius: '0.5rem'
-                                        }}
-                                        >
-                                            {/* <img id={`imgSetaSkillsFunc${funcionario.id}`} className='imgSetaSKills' src={Down} alt="ver esp :ecialidades"/> */}
-                                            <DownOutlined style={{color: '#26110D'}}/>
-                                        </Dropdown>
-                                    }
-                                    </td> 
-                                    : ''
-                                    }
-                                    {/* <td className='editFunc cl7' onClick={() => handleEditClick(funcionario.id)}>
-                                        <img className='imgEditFunc' src={Edit} alt="editar"/>
-                                    </td> */}
-                                </tr>
-                            ))
-                        }
-                    </tbody>
-                </table>
-                </div>
-                }
-                <div className='paginacao'>
-                    {
-                        !reqstFuncionarios ? '' :
-                        // renderPaginas()
-                        <Pagination 
-                            defaultCurrent={1} 
-                            total={reqstFuncionarios.data.totalPages}
-                            disabled={reqstFuncionarios.data.totalPages == 1}
-                            pageSize={1}
-                            responsive
-                            showSizeChanger={false}
-                            onChange={changePage}
-                            showTitle={false}
-                            />
+                                    </div>
+                                </div>
+                                <div className='editFunc' onClick={() => handleEditClick(funcionario.id)}>
+                                    <img className='imgEditFunc' src={Edit} alt="editar"/>
+                                </div>
+                            </div>
+                        ))
                     }
-                </div>
-            </section>
+                    </div> 
+                    :
+                    <div id="contListFuncs">
+                    <table id='listFuncs'>
+                        <thead>
+                            <tr id='titleList'>
+                                <th className='nomeTitle cl1'>nome</th>
+                                <th className='cellTitle cl2'>celular</th>
+                                <th className='ultAtvTitle cl3'>ultima atividade</th>
+                                <th className='cargoTitle cl4'>cargo</th>
+                                <th className='statusTitle cl5'>status</th>
+                                {   // TODO Só mostrar para ADM e DEV
+                                usuario.cargo=='ADM' || usuario.cargo=='DEV' ?
+                                <th className='cl6'></th> : ''
+                                }
+                            </tr>
+                        </thead>
+                        <tbody className='tbody'>
+                            {
+                                !funcionarios ? 
+                                <tr>
+                                    <td colSpan='6'>
+                                    <Loading/>
+                                    </td>
+                                </tr>
+                                :
+                                funcionarios.map(funcionario => (
+                                    <tr id={`funcionario${funcionario.id}`} className='funcs' key={funcionario.id}>
+                                        <td className='nomeFunc cl1'>
+                                            {funcionario.primeiro + ' ' + funcionario.ultimo}
+                                        </td>
+                                        <td className='cellFunc cl2'>
+                                            {funcionario.celular}
+                                        </td>
+                                        <td className='ultAtvFunc cl3'>
+                                            {converterDtHr(funcionario.ultimaAtividade)}
+                                        </td>
+                                        <td className='cargoFunc cl4'>
+                                            {converterCargo(funcionario.cargo)}
+                                        </td>
+                                        <td className='statusFunc cl5'>
+                                            {
+                                                funcionario.disponivel
+                                                    ? 'disponível'
+                                                    : 'indisponível'
+                                            }
+                                        </td>
+                                        {/* 
+                                            TODO [FUNC] Deixar só a seta pra baixo, expandido e mostrando as opções de :
+                                                Editar funcionario (base)
+                                                Mostrar Especialidades (base e ADM)
+                                        */}
+                                        {   // TODO Só mostrar para ADM e DEV
+                                        usuario.cargo=='ADM' || usuario.cargo=='DEV' ?
+                                        <td className='setaSkillsFunc cl6'>
+                                        { 
+                                            especialidades &&
+                                            <Dropdown
+                                            placement='bottom'
+                                            menu={{
+                                                items: [
+                                                    {
+                                                        key: 1,
+                                                        label: (
+                                                            <div onClick={() => handleEditClick(funcionario.id)}>editar</div>
+                                                        ),
+                                                        icon: <EditFilled style={{color: '#26110D'}}/>
+                                                    },
+                                                    {
+                                                        key: '2',
+                                                        label: 'especialidades',
+                                                        children: listEspecialidades(funcionario.especialidades),
+                                                        icon: <OrderedListOutlined style={{color: '#26110D'}}/>
+                                                    },
+                                                ],
+                                                style: {
+                                                    backgroundColor: '#F2E8DF',
+                                                    fontWeight: '500'
+                                                }
+                                            }}
+                                            overlayStyle={{
+                                                border: "0.1rem solid #26110D",
+                                                borderRadius: '0.5rem'
+                                            }}
+                                            >
+                                                {/* <img id={`imgSetaSkillsFunc${funcionario.id}`} className='imgSetaSKills' src={Down} alt="ver esp :ecialidades"/> */}
+                                                <DownOutlined style={{color: '#26110D'}}/>
+                                            </Dropdown>
+                                        }
+                                        </td> 
+                                        : ''
+                                        }
+                                        {/* <td className='editFunc cl7' onClick={() => handleEditClick(funcionario.id)}>
+                                            <img className='imgEditFunc' src={Edit} alt="editar"/>
+                                        </td> */}
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
+                    </div>
+                    }
+                    <div className='paginacao'>
+                        {
+                            !reqstFuncionarios ? '' :
+                            // renderPaginas()
+                            <Pagination 
+                                defaultCurrent={1} 
+                                total={reqstFuncionarios.data.totalPages}
+                                disabled={reqstFuncionarios.data.totalPages == 1}
+                                pageSize={1}
+                                responsive
+                                showSizeChanger={false}
+                                onChange={changePage}
+                                showTitle={false}
+                                />
+                        }
+                    </div>
+                </section>
+            }
         </main>
         {
         showContFiltros && (

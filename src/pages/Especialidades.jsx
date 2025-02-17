@@ -389,7 +389,7 @@ function Especialidades() {
     }, [])
     return(
         <div id='pageEspecialidades' className='paginas'>
-        <Header titulo={"Especialidades"} usuario={usuario}></Header>
+        {/* <Header titulo={"Especialidades"} usuario={usuario}></Header> */}
         <Nav cargo={usuario?.cargo || ''}></Nav>
         <main className={
                 !tipoJanela ? "secConfigFechada" : "secConfigAberta"

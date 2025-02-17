@@ -387,7 +387,7 @@ function Funcionario() {
     }, [])
     return (
         <div id="pageFuncionario" className='paginas'>
-            <Header titulo={
+            {/* <Header titulo={
                 idFuncionario !== null? 
                 (!funcionario ?
                         `` :
@@ -396,204 +396,207 @@ function Funcionario() {
                     : 'Novo funcionário'
             }
                 usuario={usuario}>
-            </Header>
+            </Header> */}
             <Nav cargo={usuario?.cargo || ''}></Nav>
-            <main>
-                {
-                    !funcionario ?
-                        <section id='secInfos'>
-                            <Loading></Loading>
-                        </section> :
-                        <section id='secInfos'>
-                            <h2>Informações gerais</h2>
-                            {/* Infos do funcionarios */}
-                            <div id='contGeralFunc'>
-                                <div id='contNomeFunc'>
-                                    <label>Nome:</label>
-                                    <Input
-                                        status={""}
-                                        placeholder=""
-                                        value={funcionario.nome || ""}
-                                        onChange={(e) => handleChangeDados(e.target.value, "nome")}
-                                    />
-                                </div>
-                                <div id='contEmailFunc'>
-                                    <label>Email:</label>
-                                    <input
-                                        type="text"
-                                        value={funcionario.email || ""}
-                                        onChange={(e) => handleChangeDados(e.target.value, "email")}
-                                    />
-                                </div>
-                                <div id='contCellFunc'>
-                                    <label>Celular:</label>
-                                    <input
-                                        type="text"
-                                        value={funcionario.celular || ""}
-                                        onChange={(e) => handleChangeDados(e.target.value, "celular")}
-                                    />
-                                </div>
-                                <div id='contCPFFunc'>
-                                    <label>CPF:</label>
-                                    <input
-                                        type="text"
-                                        value={funcionario.cpf || ""}
-                                        onChange={(e) => handleChangeDados(e.target.value, "cpf")}
-                                    />
-                                </div>
-                                <div id='contCargoFunc'>
-                                    <label>Cargo:</label>
-                                    {/* <Select
-                                        defaultValue={funcionario.cargo || 'técnico'}
-                                        options={[
-                                        { 
-                                            value: "técnico", label: "técnico" 
-                                        },
-                                        {
-                                            value: "base", label: "base"
-                                        },
-                                        {
-                                            value: "adm", label: "adm"
-                                        }
-                                        ]} 
-                                        onChange={(e) => handleChangeDados(e.target.value, "cargo")}
-                                    />   */}
-                                    <select id="selectCargo"
-                                        value={funcionario.cargo}
-                                        onChange={(e) => handleChangeDados(e.target.value, "cargo")}>
-                                        <option value="TECNICO">técnico</option>
-                                        <option value="BASE">base</option>
-                                        <option value="ADM">adm</option>
-                                        <option value="DEV">dev</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div id='contEndFunc'>
-                                <div id='contCepFunc'>
-                                    <label>CEP:</label>
-                                    <input
-                                        type="text"
-                                        value={funcionario.endereco.cep || ""}
-                                        onChange={(e) => handleCEP(e.target.value)}
-                                    />
-                                    <button id='bttPesqCEP'
-                                        onClick={fetchCEP}
-                                    >
-                                        <p>Pesquisar CEP</p>
-                                        <SearchOutlined />
-                                    </button>
-                                    {/* <p>{cepMensagem}</p> */}
-                                </div>
-                                <div id='contRuaFunc'>
-                                    <label>Rua:</label>
-                                    <input
-                                        type="text"
-                                        value={funcionario.endereco?.logradouro || ""}
-                                        onChange={(e) => handleChangeEndereco(e.target.value, "logradouro")}
-                                    />
-                                </div>
-                                <div id='contNumFunc'>
-                                    <label>Nº:</label>
-                                    <input
-                                        type="text"
-                                        value={funcionario.endereco?.numero || ""}
-                                        onChange={(e) => handleChangeEndereco(e.target.value, "numero")}
-                                    />
-                                </div>
-                                <div id='contCompFunc'>
-                                    <label>Complemento:</label>
-                                    <input
-                                        type="text"
-                                        value={funcionario.endereco?.complemento || ""}
-                                        onChange={(e) => handleChangeEndereco(e.target.value, "complemento")}
-                                    />
-                                </div>
-                                <div id='contBairroFunc'>
-                                    <label>Bairro:</label>
-                                    <input
-                                        type="text"
-                                        value={funcionario.endereco?.bairro || ""}
-                                        onChange={(e) => handleChangeEndereco(e.target.value, "bairro")}
-                                    />
-                                </div>
-                                <div id='contCidadeFunc'>
-                                    <label>Cidade:</label>
-                                    <input
-                                        type="text"
-                                        value={funcionario.endereco?.cidade || ""}
-                                        onChange={(e) => handleChangeEndereco(e.target.value, "cidade")}
-                                    />
-                                </div>
-                                <div id='contUFFunc'>
-                                    <label>UF:</label>
-                                    <input
-                                        type="text"
-                                        value={funcionario.endereco?.uf || ""}
-                                        onChange={(e) => handleChangeEndereco(e.target.value, "uf")}
-                                    />
-                                </div>
-                            </div>
-
-                            <div id='contControle'>
-                                <button id='bttCancelar' onClick={goToFuncionarios}>Cancelar</button>
-                                <button id='bttSalvar' onClick={handleSalvar}>Salvar</button>
-                                {/* TODO Adicionar este elemento em todas as confirmações de exclusões */}
-                                <Popconfirm
-                                    title="Apagar funcionário"
-                                    description={`Deseja mesmo excluir '${funcionario.nome}'?`}
-                                    onConfirm={handleDelete}
-                                    onCancel={null}
-                                    okText="SIM"
-                                    cancelText="NÃO">
-                                    <button id='bttExcluir'
-                                        // onClick={handleDelete}
-                                        >
-                                        Excluir
-                                    </button>
-                                </Popconfirm>
-                            </div>
-                        </section>
-                }
-                <section id='secEspecialidades'>
-                    <h2>Especialidades</h2>
-                    <div id='contAddEspecFunc'>
-                        {/* pesquisar */}
-                        <input type="text" list='dtListEspecialidades'
-                            value={pesqAddEspec}
-                            onChange={(e) => changePesqAddEspec(e.target.value)}
-                            autocomplete="off"
-                        />
-                        <datalist id='dtListEspecialidades'>
-                            {
-                                !especialidades ? '' :
-                                    especialidades
-                                        .map(espec => (
-                                            <option key={espec.id} value={espec.nome}>
-                                                {espec.nome}
-                                            </option>
-                                        ))
-                            }
-                        </datalist>
-                        <button onClick={addEspecToFunc}>Adicionar</button>
-                    </div>
-                    <div id="contListEspecFunc">
-                        {/* listagem  */}
-                        {
-                            !funcionario?.especialidades ? (
+            {
+                (usuario.cargo=='BASE' || usuario.cargo=="ADM" || usuario.cargo=="DEV") &&
+                <main>
+                    {
+                        !funcionario ?
+                            <section id='secInfos'>
                                 <Loading></Loading>
-                            ) :(
-                                funcionario.especialidades && funcionario.especialidades.length > 0 ? (
-                                    funcionario.especialidades.map(espec => (
-                                        converterEspecs(espec)
-                                    ))
-                                ) : (
-                                    <p id='semEspecialidades'>Nenhuma especialidade adicionada</p>
+                            </section> :
+                            <section id='secInfos'>
+                                <h2>Informações gerais</h2>
+                                {/* Infos do funcionarios */}
+                                <div id='contGeralFunc'>
+                                    <div id='contNomeFunc'>
+                                        <label>Nome:</label>
+                                        <Input
+                                            status={""}
+                                            placeholder=""
+                                            value={funcionario.nome || ""}
+                                            onChange={(e) => handleChangeDados(e.target.value, "nome")}
+                                        />
+                                    </div>
+                                    <div id='contEmailFunc'>
+                                        <label>Email:</label>
+                                        <input
+                                            type="text"
+                                            value={funcionario.email || ""}
+                                            onChange={(e) => handleChangeDados(e.target.value, "email")}
+                                        />
+                                    </div>
+                                    <div id='contCellFunc'>
+                                        <label>Celular:</label>
+                                        <input
+                                            type="text"
+                                            value={funcionario.celular || ""}
+                                            onChange={(e) => handleChangeDados(e.target.value, "celular")}
+                                        />
+                                    </div>
+                                    <div id='contCPFFunc'>
+                                        <label>CPF:</label>
+                                        <input
+                                            type="text"
+                                            value={funcionario.cpf || ""}
+                                            onChange={(e) => handleChangeDados(e.target.value, "cpf")}
+                                        />
+                                    </div>
+                                    <div id='contCargoFunc'>
+                                        <label>Cargo:</label>
+                                        {/* <Select
+                                            defaultValue={funcionario.cargo || 'técnico'}
+                                            options={[
+                                            { 
+                                                value: "técnico", label: "técnico" 
+                                            },
+                                            {
+                                                value: "base", label: "base"
+                                            },
+                                            {
+                                                value: "adm", label: "adm"
+                                            }
+                                            ]} 
+                                            onChange={(e) => handleChangeDados(e.target.value, "cargo")}
+                                        />   */}
+                                        <select id="selectCargo"
+                                            value={funcionario.cargo}
+                                            onChange={(e) => handleChangeDados(e.target.value, "cargo")}>
+                                            <option value="TECNICO">técnico</option>
+                                            <option value="BASE">base</option>
+                                            <option value="ADM">adm</option>
+                                            <option value="DEV">dev</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div id='contEndFunc'>
+                                    <div id='contCepFunc'>
+                                        <label>CEP:</label>
+                                        <input
+                                            type="text"
+                                            value={funcionario.endereco.cep || ""}
+                                            onChange={(e) => handleCEP(e.target.value)}
+                                        />
+                                        <button id='bttPesqCEP'
+                                            onClick={fetchCEP}
+                                        >
+                                            <p>Pesquisar CEP</p>
+                                            <SearchOutlined />
+                                        </button>
+                                        {/* <p>{cepMensagem}</p> */}
+                                    </div>
+                                    <div id='contRuaFunc'>
+                                        <label>Rua:</label>
+                                        <input
+                                            type="text"
+                                            value={funcionario.endereco?.logradouro || ""}
+                                            onChange={(e) => handleChangeEndereco(e.target.value, "logradouro")}
+                                        />
+                                    </div>
+                                    <div id='contNumFunc'>
+                                        <label>Nº:</label>
+                                        <input
+                                            type="text"
+                                            value={funcionario.endereco?.numero || ""}
+                                            onChange={(e) => handleChangeEndereco(e.target.value, "numero")}
+                                        />
+                                    </div>
+                                    <div id='contCompFunc'>
+                                        <label>Complemento:</label>
+                                        <input
+                                            type="text"
+                                            value={funcionario.endereco?.complemento || ""}
+                                            onChange={(e) => handleChangeEndereco(e.target.value, "complemento")}
+                                        />
+                                    </div>
+                                    <div id='contBairroFunc'>
+                                        <label>Bairro:</label>
+                                        <input
+                                            type="text"
+                                            value={funcionario.endereco?.bairro || ""}
+                                            onChange={(e) => handleChangeEndereco(e.target.value, "bairro")}
+                                        />
+                                    </div>
+                                    <div id='contCidadeFunc'>
+                                        <label>Cidade:</label>
+                                        <input
+                                            type="text"
+                                            value={funcionario.endereco?.cidade || ""}
+                                            onChange={(e) => handleChangeEndereco(e.target.value, "cidade")}
+                                        />
+                                    </div>
+                                    <div id='contUFFunc'>
+                                        <label>UF:</label>
+                                        <input
+                                            type="text"
+                                            value={funcionario.endereco?.uf || ""}
+                                            onChange={(e) => handleChangeEndereco(e.target.value, "uf")}
+                                        />
+                                    </div>
+                                </div>
+
+                                <div id='contControle'>
+                                    <button id='bttCancelar' onClick={goToFuncionarios}>Cancelar</button>
+                                    <button id='bttSalvar' onClick={handleSalvar}>Salvar</button>
+                                    {/* TODO Adicionar este elemento em todas as confirmações de exclusões */}
+                                    <Popconfirm
+                                        title="Apagar funcionário"
+                                        description={`Deseja mesmo excluir '${funcionario.nome}'?`}
+                                        onConfirm={handleDelete}
+                                        onCancel={null}
+                                        okText="SIM"
+                                        cancelText="NÃO">
+                                        <button id='bttExcluir'
+                                            // onClick={handleDelete}
+                                            >
+                                            Excluir
+                                        </button>
+                                    </Popconfirm>
+                                </div>
+                            </section>
+                    }
+                    <section id='secEspecialidades'>
+                        <h2>Especialidades</h2>
+                        <div id='contAddEspecFunc'>
+                            {/* pesquisar */}
+                            <input type="text" list='dtListEspecialidades'
+                                value={pesqAddEspec}
+                                onChange={(e) => changePesqAddEspec(e.target.value)}
+                                autocomplete="off"
+                            />
+                            <datalist id='dtListEspecialidades'>
+                                {
+                                    !especialidades ? '' :
+                                        especialidades
+                                            .map(espec => (
+                                                <option key={espec.id} value={espec.nome}>
+                                                    {espec.nome}
+                                                </option>
+                                            ))
+                                }
+                            </datalist>
+                            <button onClick={addEspecToFunc}>Adicionar</button>
+                        </div>
+                        <div id="contListEspecFunc">
+                            {/* listagem  */}
+                            {
+                                !funcionario?.especialidades ? (
+                                    <Loading></Loading>
+                                ) :(
+                                    funcionario.especialidades && funcionario.especialidades.length > 0 ? (
+                                        funcionario.especialidades.map(espec => (
+                                            converterEspecs(espec)
+                                        ))
+                                    ) : (
+                                        <p id='semEspecialidades'>Nenhuma especialidade adicionada</p>
+                                    )
                                 )
-                            )
-                        }
-                    </div>
-                </section>
-            </main>
+                            }
+                        </div>
+                    </section>
+                </main>
+            }
             {
                 viewSenha ?
                     <div id='shadowBG'>

@@ -58,6 +58,18 @@ function Ordem() {
             console.error(error)
         }
     }
+    const atenderOrdem = () => {
+        /*
+            * editar ordem e mudar 'funcionario' para o id do tecnico
+        */
+        // verificar se não tem um funcionario atendendo
+        if (ordem.situacao!=='PENDENTE' || ordem.situacao!=='RETORNO') {
+            // Não da pra atender ele
+            console.log('impossivel atender esta ordem.')
+            return
+        }
+        
+    }
     useEffect(() => {
         if (!ordem?.id) {
             return
@@ -76,7 +88,6 @@ function Ordem() {
     }
     useEffect(() => {
         console.clear()
-        console.log(idOrdem)
         if (!idOrdem) {
             setOrdem('noCode')
             return
@@ -85,7 +96,7 @@ function Ordem() {
     }, [])
     return(
         <div id="pageOrdem" className="paginas">
-        <Header titulo={"Editando ordem"} usuario={usuario}></Header>
+        {/* <Header titulo={"Editando ordem"} usuario={usuario}></Header> */}
         <Nav cargo={usuario?.cargo || ''}></Nav>
         <main id="mainOrdem">
         {
@@ -96,148 +107,99 @@ function Ordem() {
                 <aside id="asideAcoes">
                     <h2>Opções</h2>
                     <div id="contAcoes">
-                        <button>Designar técnico</button>
-                        <Popconfirm
-                            title=""
-                            description={`Deseja cancelar esta ordem?`}
-                            onConfirm={cancelarOrdem}
-                            onCancel={null}
-                            okText="sim"
-                            cancelText="não">     
-                            <button>Cancelar ordem</button>
-                        </Popconfirm>
-                        <button onClick={changeEditMode}>Alterar ordem</button>
+                        {
+                            usuario.cargo==="BASE" || usuario.cargo==="ADM" &&
+                            <>
+                            <button>Designar técnico</button>
+                            <Popconfirm
+                                title=""
+                                description={`Deseja cancelar esta ordem?`}
+                                onConfirm={cancelarOrdem}
+                                onCancel={null}
+                                okText="sim"
+                                cancelText="não">     
+                                <button>Cancelar ordem</button>
+                            </Popconfirm>
+                            <button onClick={changeEditMode}>Alterar ordem</button>
+                            </>
+                        }
+                        {
+                            usuario.cargo!=="TECNICO" &&
+                            (ordem.situacao==='PENDENTE' ||
+                            ordem.situacao==='RETORNO') &&
+                            <button>atender ordem</button>
+                        }
                     </div>
                 </aside>
-                {
-                    editMode ? 
-                    <section id="secPrincipal">
-                        <h2>Informações</h2>
-                        <div id="contGeral">
-                            <div>
-                                <span>ID ordem:</span>
-                                {ordem.id}
-                                {}
-                            </div>
-                            <div>
-                                <span>Criado por:</span>
-                                {ordem.criadoPor}
-                            </div>
-                            <div>
-                                <span>Situação:</span>
-                                {ordem.situacao}
-                            </div>
-                            <div>
-                                <span>Descrição:</span>
-                                <input type="text" value={ordem.descricao || 'sem descrição'}/>
-                            </div>
+                <section id="secPrincipal">
+                    <h2>Informações</h2>
+                    <div id="contGeral">
+                        <div>
+                            <span>ID ordem:</span>
+                            {ordem.id}
                         </div>
-                        <div id="contServico">
-                            <div>
-                                <span>Serviço:</span>
-                                {ordem.servico.nome}
-                            </div>
-                            <div>
-                                <span>Descrição:</span>
-                                {ordem.servico.descricao}
-                            </div>
+                        <div>
+                            <span>Criado por:</span>
+                            {ordem.criadoPor}
                         </div>
-                        <div id="contCliente">
-                            <div>
-                                <span>Cliente:</span>
-                                {ordem.cliente.nome}
-                            </div>
-                            <div>
-                                
-                                <span>CNPJ:</span>
-                                {formatCNPJ(ordem.cliente.cnpj)}
-                            </div>
-                            <div>
-                                <span>ID cliente:</span>
-                                {ordem.cliente.id}
-                            </div>
+                        <div>
+                            <span>Situação:</span>
+                            {ordem.situacao}
                         </div>
-                        <div id="contEndereco">
-                            <span>
-                                <div>Endereço:</div>
-                            </span>
-                            <div>{ordem.endereco.logradouro}, {ordem.endereco.numero}, {`${ordem.endereco.complemento}  - ` || ''}{ordem.endereco.bairro}, {ordem.endereco.cidade}-{ordem.endereco.uf}/{ordem.endereco.cep}</div>
+                        <div>
+                            <span>Descrição:</span>
+                            {ordem.descricao || 'sem descrição'}
                         </div>
                         {
-                            ordem.funcionario && (
-                                <id id="contFuncionario">
-                                    <div>{ordem.funcionario.primeiro}</div>
-                                    <div>{ordem.funcionario.ultimo}</div>
-                                    <div>{ordem.funcionario.celular}</div>
-                                    <div>{ordem.funcionario.disponivel}</div>
-                                </id>
-                            )
+                            ordem.funcionario &&
+                            <div>
+                                <span>Técnico atendendo:</span>
+                                {ordem.funcionario.primeiro} {ordem.funcionario.ultimo}
+                            </div>
                         }
-                    </section>
-                    :
-                    <section id="secPrincipal">
-                        <h2>Informações</h2>
-                        <div id="contGeral">
-                            <div>
-                                <span>ID ordem:</span>
-                                {ordem.id}
-                            </div>
-                            <div>
-                                <span>Criado por:</span>
-                                {ordem.criadoPor}
-                            </div>
-                            <div>
-                                <span>Situação:</span>
-                                {ordem.situacao}
-                            </div>
-                            <div>
-                                <span>Descrição:</span>
-                                {ordem.descricao || 'sem descrição'}
-                            </div>
+                    </div>
+                    <div id="contServico">
+                        <div>
+                            <span>Serviço:</span>
+                            {ordem.servico.nome}
                         </div>
-                        <div id="contServico">
-                            <div>
-                                <span>Serviço:</span>
-                                {ordem.servico.nome}
-                            </div>
-                            <div>
-                                <span>Descrição:</span>
-                                {ordem.servico.descricao}
-                            </div>
+                        <div>
+                            <span>Descrição:</span>
+                            {ordem.servico.descricao}
                         </div>
-                        <div id="contCliente">
-                            <div>
-                                <span>Cliente:</span>
-                                {ordem.cliente.nome}
-                            </div>
-                            <div>
-                                
-                                <span>CNPJ:</span>
-                                {formatCNPJ(ordem.cliente.cnpj)}
-                            </div>
-                            <div>
-                                <span>ID cliente:</span>
-                                {ordem.cliente.id}
-                            </div>
+                    </div>
+                    <div id="contCliente">
+                        <div>
+                            <span>Cliente:</span>
+                            {ordem.cliente.nome}
                         </div>
-                        <div id="contEndereco">
-                            <span>
-                                <div>Endereço:</div>
-                            </span>
-                            <div>{ordem.endereco.logradouro}, {ordem.endereco.numero}{`${ordem.endereco.complemento}` || ''}  - {ordem.endereco.bairro}, {ordem.endereco.cidade}-{ordem.endereco.uf}/{ordem.endereco.cep}</div>
+                        <div>
+                            
+                            <span>CNPJ:</span>
+                            {formatCNPJ(ordem.cliente.cnpj)}
                         </div>
-                        {
-                            ordem.funcionario && (
-                                <id id="contFuncionario">
-                                    <div>{ordem.funcionario.primeiro}</div>
-                                    <div>{ordem.funcionario.ultimo}</div>
-                                    <div>{ordem.funcionario.celular}</div>
-                                    <div>{ordem.funcionario.disponivel}</div>
-                                </id>
-                            )
-                        }
-                    </section>
-                }
+                        <div>
+                            <span>ID cliente:</span>
+                            {ordem.cliente.id}
+                        </div>
+                    </div>
+                    <div id="contEndereco">
+                        <span>
+                            <div>Endereço:</div>
+                        </span>
+                        <div>{ordem.endereco.logradouro}, {ordem.endereco.numero}{`${ordem.endereco.complemento}` || ''}  - {ordem.endereco.bairro}, {ordem.endereco.cidade}-{ordem.endereco.uf}/{ordem.endereco.cep}</div>
+                    </div>
+                    {
+                        ordem.funcionario && (
+                            <id id="contFuncionario">
+                                <div>{ordem.funcionario.primeiro}</div>
+                                <div>{ordem.funcionario.ultimo}</div>
+                                <div>{ordem.funcionario.celular}</div>
+                                <div>{ordem.funcionario.disponivel}</div>
+                            </id>
+                        )
+                    }
+                </section>           
                 <section id="secAtendimentos">
                     <h2>Atendimentos</h2>
                     {

@@ -4,10 +4,10 @@ import { Card } from "antd"
 import { Link, useNavigate } from "react-router-dom"
 import { getOrdensForHome } from "../../services/backend/ordemAPI"
 
-function OrdensEmAtendimento() {
+function OrdensTecnico({idTecnico}) {
     const navigate = useNavigate()
-    const [ordensEmExecucao, setOrdensEmExecucao] = useState(null)
-    const [reqstOrdensEmExecucao, setReqstOrdensEmExecucao] = useState(null)
+    const [ordens, setOrdens] = useState(null)
+    const [reqstOrdens, setReqstOrdens] = useState(null)
     const converterDtHr = (dataHora) => {
         const [dia, mes, anoHora] = dataHora.split('-')
         const [ano, hora] = anoHora.split(' ')
@@ -28,7 +28,7 @@ function OrdensEmAtendimento() {
     }
     const fetchOrdens = async () => {
         try {
-            const result = await getOrdensForHome('EM_EXECUCAO')
+            const result = await getOrdensPorTecnicoForHome(idTecnico)
             setReqstOrdensEmExecucao(result.response)
             setOrdensEmExecucao(result.response.data.content)
             console.warn(result.response)
@@ -37,34 +37,27 @@ function OrdensEmAtendimento() {
         }
     }
     useEffect(() => {
-        // setOrdensEmAtendimento([
-        //     {
-        //         id: 1,
-        //         dtAbertura: "21/11/2024",
-        //         cliente: "Cliente 1",
-        //         servico: 'Configuração de Redes',
-        //         endereco: "R. XV de novembro, 16 - Santos-SP",
-        //         tecnico: "Jusenir Almeida"
-        //     }
-        // ])
         fetchOrdens()
     }, [])
-    return !ordensEmExecucao ? <Loading />  : (
-        ordensEmExecucao.length==0 ? '' : (
-            <div id="contOrdensEmAtendimento" className="contsOrdens">
+    return !ordens ? <Loading />  : (
+        ordens.length==0 ? 
+        // TODO Mostrar ao tecnico que ele não tem ordens abertas
+        '' 
+        : (
+            <div id="contOrdensTecnico" className="contsOrdens">
                 <div className="headContsOrdens">
                     <div className="titulo">Ordens em execução</div>
                     {
-                        (6 - 5 ) > 0 &&
-                        (<Link className="link" to={'/ordens?situacao=EM_EXECUCAO'}>
-                            mais {6 - 5}
+                        (reqstOrdens.data.totalElements - 5 ) > 0 &&
+                        (<Link className="link" to={'/atendimentos'}>
+                            mais {reqstOrdens.data.totalElements - 5}
                         </Link>)
                     }
                 </div>
                 <div className="bodyContsOrdens">
-                    {ordensEmExecucao.map(ordem => (
+                    {ordens.map(ordem => (
                         <div key={ordem.id} on
-                            className="ordensEmAtendimento ordens"
+                            className="ordens"
                             onClick={() => handleAbrirOrdem(ordem.id)}>
                             <div className="nomeCliente">{ordem.cliente}</div>
                             <div className="serviço">{ordem.servico}</div>
@@ -76,4 +69,4 @@ function OrdensEmAtendimento() {
         )
     )
 }
-export default OrdensEmAtendimento
+export default OrdensTecnico

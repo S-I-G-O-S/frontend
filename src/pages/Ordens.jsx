@@ -164,7 +164,6 @@ function Ordens() {
         //     ...prevState,
         //     situacao: true,
         // }))
-        console.log('DEBBUG: ' + value + ' ' + filtros.situacao.value)
         if (value==filtros.situacao.value) {
             //  Quando o usuario clicar no mesmo botão de situação, ele vai ser anulado
             value='default'
@@ -258,9 +257,9 @@ function Ordens() {
     const fetchOrdens = async (pagina) => {
         try {
             const result = await getPageOrdens(pagina, filtros)
-            setReqstOrdens(result)
-            setOrdens(result.data.content)
-            console.warn(result)
+            setReqstOrdens(result.response)
+            setOrdens(result.response.data.content)
+            console.warn(result.response)
         } catch (error) {
             console.error(error)
         }
@@ -273,11 +272,6 @@ function Ordens() {
     useEffect(() => {
         console.clear()
         const fetchData = async () => {
-            // fetchOrdensSituacao('PENDENTE')
-            // fetchOrdensSituacao('EM_EXECUCAO')
-            // fetchOrdensSituacao('RETORNO')
-            // fetchOrdensSituacao('FINALIZADA')
-            // fetchOrdensSituacao('CANCELADA')
             fetchOrdens(0)
         }
         if (situacaoParam=='') {
@@ -290,7 +284,7 @@ function Ordens() {
     }, [])
     return (
         <div id="pageOrdens" className='paginas'>
-            <Header titulo={"Ordens"} usuario={usuario}></Header>
+            {/* <Header titulo={"Ordens"} usuario={usuario}></Header> */}
             <Nav cargo={usuario?.cargo || ''}></Nav>
             <main id="mainOrdens">
             <section id="sec1">

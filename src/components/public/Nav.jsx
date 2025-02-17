@@ -8,7 +8,7 @@ import clientesIcon from '@assets/clientesIcon.png'
 import ordensIcon from '@assets/ordensIcon.png'
 import especsIcon from '@assets/tag.png'
 import { useEffect, useState } from 'react'
-import { HomeFilled, IdcardFilled, ScheduleFilled, SettingFilled, SettingOutlined, ShoppingFilled, TagFilled }  from '@ant-design/icons'
+import { HomeFilled, IdcardFilled, LogoutOutlined, ReadFilled, ScheduleFilled, SettingFilled, SettingOutlined, ShoppingFilled, TagFilled }  from '@ant-design/icons'
 import { IconFuncionarios } from './IconsSVG'
 import { usePreferencias } from '@context/PreferenciasContext'
 
@@ -19,6 +19,18 @@ function Nav({ cargo }) {
             ...prevState,
             abertoNav: !sessPreferencias.abertoNav
         }))
+    }
+    const handleLogout = async () => {
+        try {
+            const result = await logoutFunc()
+            console.warn(result)
+        } catch (error) {
+            console.error(error)
+        }
+        sessionStorage.clear()
+        setToken(null)
+        deleteCookie('usuario')
+        navigate("/", { replace: true })
     }
     return (
         <nav id='nav' className={sessPreferencias.abertoNav ? "navAberto" : "navFechado"}>
@@ -37,8 +49,6 @@ function Nav({ cargo }) {
                     {/* <img src={homeIcon} alt="home" /> */}
                     <p className='nomeGoTo' id='goToHomeP'>home</p>
                 </NavLink>
-                
-                
                 {/* Paginas exibidas só para usuarios 'base' ou 'adm' */}
                 {cargo === 'BASE' || cargo === 'ADM' || cargo == 'DEV' ?
                 <> 
@@ -89,6 +99,21 @@ function Nav({ cargo }) {
                     </NavLink>
                 </> :  ''
                 }
+                {/* Paginas exibidas só para usuarios 'tecnico' */}
+                {/* TODO pagina Meus Atendimentos mostrando para todos exceto tecnicos */}
+                {!cargo!=='TECNICO' ?
+                <> 
+                    <NavLink
+                        className={({ isActive }) => (isActive ? "links active" : "links ")}
+                        id='goToMeusAtendimentos' 
+                        to="/atendimentos"
+                        title='Meus Atendimentos'
+                        >
+                        <ReadFilled className='iconNav'/>
+                        <p className='nomeGoTo' id='goToMeusAtendimentosP'>Meus Atendimentos</p>
+                    </NavLink>
+                </> : ''
+                }
                 <NavLink
                     className={({ isActive }) => (isActive ? "links active" : "links ")}
                     id='goToHome' 
@@ -100,6 +125,12 @@ function Nav({ cargo }) {
                     {/* <img src={homeIcon} alt="home" /> */}
                     <p className='nomeGoTo' id='goToConfigsP'>Configurações</p>
                 </NavLink>
+            </div>
+            <div id='containerFooter'>
+                <button title='sair' onClick={handleLogout}>
+                    <LogoutOutlined id='iconSair' rotate={180}/>
+                    <div id='txtSair'>sair</div>
+                </button>
             </div>
         </nav>
     )
