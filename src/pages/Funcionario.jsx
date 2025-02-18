@@ -601,7 +601,6 @@ function Funcionario() {
                                 <input type="text" name="" id=""
                                     value={funcionario.senha || ""}
                                     onChange={(e) => handleChangeDados(e.target.value, "senha")} />
-                                {/* TODO Adicionar função de senha automatica */}
                                 <button>Gerar senha automatica</button>
                             </div>
                             <div>

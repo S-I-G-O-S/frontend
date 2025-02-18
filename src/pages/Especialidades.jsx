@@ -475,7 +475,7 @@ function Especialidades() {
                                     value={especAberta.descricao}
                                     onChange={(e) => mudarDescricaoPrevEspec(e.target.value)}
                                     placeholder="Opcional"
-                                    maxLength={250} //  TODO Verificar limite de caract da descrição da especialidade
+                                    maxLength={250}
                                     autoSize={{
                                     minRows: 2,
                                     maxRows: 6,
@@ -556,7 +556,7 @@ function Especialidades() {
                                         value={servicoAberto.descricao}
                                         onChange={(e) => mudarInfoServico(e.target.value, 'descricao')}
                                         placeholder="Opcional"
-                                        maxLength={250} //  TODO Verificar limite de caract da descrição do serviço
+                                        maxLength={250}
                                         autoSize={{
                                         minRows: 2,
                                         maxRows: 6,

@@ -11,7 +11,6 @@ import { useEffect, useState } from "react"
 import { CheckCircleOutlined, CloseCircleOutlined, CloseOutlined, DownOutlined, FieldTimeOutlined, LoadingOutlined, RollbackOutlined, ToolOutlined, UpOutlined } from '@ant-design/icons'
 import { Pagination } from "antd"
 
-// TODO Criação e Edição de Ordens por ordem de redirecionamento
 function Ordens() {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search)

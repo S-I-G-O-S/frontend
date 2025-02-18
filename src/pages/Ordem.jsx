@@ -10,7 +10,6 @@ import { ExceptionOutlined } from '@ant-design/icons'
 import { putAtenderOrdem, putCancelOrdem } from "../services/backend/ordemAPI";
 import { notification, Popconfirm } from "antd";
 
-//  TODO Talvez seja redundante receber o endereço do cliente e da ordem
 function Ordem() {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search)

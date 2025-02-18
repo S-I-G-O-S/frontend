@@ -347,7 +347,7 @@ function Funcionarios() {
                                 <th className='ultAtvTitle cl3'>ultima atividade</th>
                                 <th className='cargoTitle cl4'>cargo</th>
                                 <th className='statusTitle cl5'>status</th>
-                                {   // TODO Só mostrar para ADM e DEV
+                                {   // Só mostrar para ADM e DEV
                                 usuario.cargo=='ADM' || usuario.cargo=='DEV' ?
                                 <th className='cl6'></th> : ''
                                 }
@@ -383,12 +383,7 @@ function Funcionarios() {
                                                     : 'indisponível'
                                             }
                                         </td>
-                                        {/* 
-                                            TODO [FUNC] Deixar só a seta pra baixo, expandido e mostrando as opções de :
-                                                Editar funcionario (base)
-                                                Mostrar Especialidades (base e ADM)
-                                        */}
-                                        {   // TODO Só mostrar para ADM e DEV
+                                        {   // Só mostrar para ADM e DEV
                                         usuario.cargo=='ADM' || usuario.cargo=='DEV' ?
                                         <td className='setaSkillsFunc cl6'>
                                         { 
