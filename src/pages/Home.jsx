@@ -32,61 +32,39 @@ function Home() {
         {/* <Header titulo={"Página inicial"} usuario={usuario}></Header> */}
         <Nav cargo={usuario?.cargo || ''}></Nav>
         <main id="mainHome">
-            {
-                !usuario ? '' : (
-                <>
-                <Atalhos cargo={usuario?.cargo}></Atalhos>
-                {/* informações do usuário */}
-                {/*
-                showInfosUser && usuario.cargo == 'DEV' ? 
-                    <InfosUser></InfosUser> : ''
-                
-                */}
-                {/* TODO mostrar ordens do tecnico relacionadas ao mesmo */}
-                {(usuario.cargo === 'tecnico') && (
-                    <section id='secTecnico'>
-                    </section>
-                )}
-                {/* funcionários disponíveis se o usuário for 'base' ou 'adm' */}
-                {(usuario.cargo === 'base' || usuario.cargo === 'ADM' || usuario.cargo == 'DEV') && (
-                    // <FuncsDisponiveis></FuncsDisponiveis>
-                    ''
-                )}
-
-                {/* Ordens abertas e ordens em atendimento se o usuário for 'base' ou 'adm' */}
-                <section id='secOrdens'>
-                    {/* Ordens Abertas */}
-                    <OrdensPendentes ></OrdensPendentes>
-                         {/* Ordens em Atendimento */}
-                        {(usuario.cargo==='BASE' || usuario.cargo==='ADM' || usuario.cargo==='DEV') && 
-                            <OrdensEmAtendimento></OrdensEmAtendimento>
-                        }
+        {
+            !usuario ? '' : (
+            <>
+            <Atalhos cargo={usuario?.cargo}></Atalhos>
+            {/* informações do usuário */}
+            {/*
+            showInfosUser && usuario.cargo == 'DEV' ? 
+                <InfosUser></InfosUser> : ''
+            */}
+            {/* TODO Não mostrar ordens relacionada a outros tecnicos */}
+            {/* TODO mostrar ordem que pedem serviços que o tecnico possa executar pela sua especialidade */}
+            {/* TODO mostrar ordens do tecnico relacionadas ao mesmo */}
+            {(usuario.cargo === 'tecnico') && (
+                <section id='secTecnico'>
                 </section>
-                </>
-            )
+            )}
+            {/* funcionários disponíveis se o usuário for 'base' ou 'adm' */}
+            {(usuario.cargo === 'base' || usuario.cargo === 'ADM' || usuario.cargo == 'DEV') && (
+                // <FuncsDisponiveis></FuncsDisponiveis>
+                ''
+            )}
+
+            {/* Ordens abertas e ordens em atendimento se o usuário for 'base' ou 'adm' */}
+            <section id='secOrdens'>
+                {/* Ordens Abertas */}
+                <OrdensPendentes ></OrdensPendentes>
+                        {/* Ordens em Atendimento */}
+                    {(usuario.cargo==='BASE' || usuario.cargo==='ADM' || usuario.cargo==='DEV') && 
+                        <OrdensEmAtendimento></OrdensEmAtendimento>
+                    }
+            </section>
+            </>)
         }
-        {/* <FloatButton.Group
-            trigger="click"
-            type="primary"
-            style={{
-                insetInlineEnd: 24,
-            }}
-            icon={<CustomerServiceOutlined />}
-            >
-            <FloatButton />
-            <FloatButton icon={<CommentOutlined />} />
-        </FloatButton.Group>
-        <FloatButton.Group
-            trigger="hover"
-            type="primary"
-            style={{
-                insetInlineEnd: 94,
-            }}
-            icon={<CustomerServiceOutlined />}
-            >
-            <FloatButton />
-            <FloatButton icon={<CommentOutlined />} />
-        </FloatButton.Group> */}
         </main>
         </div>
         </>

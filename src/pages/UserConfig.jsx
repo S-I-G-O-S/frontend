@@ -79,7 +79,44 @@ function UserConfig() {
             </section>
             <section id='secUserConfig'>
                 <h2>Configurações</h2>
+                {/* 
+                    - infos do usuario
+                        mostrar os dados atuais
+                        alterar dados simples
+                            celular
+                            especialidades
+                            endereço
+                    - preferencias de acessibilidade
+                        - tema
+                        - zoom
+                    - segurança 
+                        mudar senha
+                        mudar email
+                    - informações do programa
+                        versão
+                        direitos reservados
+                        mais sobre o projeto
+                */}
                 <div>
+                <h3>Minha informações</h3>
+                {
+                    !usuario ? 
+                    <Loading></Loading> :
+                    <div id='contInfosFunc'>
+                        <div>Nome: {usuario.nome || ''}</div>
+                        <div>Cargo: {usuario.cargo || ''}</div>
+                        <div>Tel./Cel.: {usuario.celular || ''}</div>
+                        <div>Email: {usuario.email || ''}</div>
+                        <div>
+                            Endereço: {usuario.endereco.logradouro || ''}, Nº{usuario.endereco.numero || ''} - {usuario.endereco.cidade || ''}-{usuario.endereco.uf || ''} 
+                        </div>
+                    </div>
+                }
+                    {/* TODO Abrir janela para editar */}
+                    <button>Alterar informações</button>
+                </div>
+                <div>
+                    <h3>Preferências</h3>
                     <label>Tema: </label>
                     <select name="" id="" 
                         onChange={(e) => changeTheme(e.target.value)} 
@@ -88,6 +125,11 @@ function UserConfig() {
                         <option value="salmaoLight">salmão claro</option>
                         <option value="salmaoDark">salmão noturno</option>
                     </select>
+                </div>
+                <div>
+                    <h3>Segurança</h3>
+                    <button>mudar minha senha</button>
+                    <button>mudar meu email</button>
                 </div>
                 <div>
                     <div>Versão 0.1.0</div>
