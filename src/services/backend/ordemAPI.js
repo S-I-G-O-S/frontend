@@ -17,7 +17,7 @@ export const getPageOrdens = async (pagina, filtros) => {
     if (!filtros) {
         return
     }
-    let filtragem=''  
+    let filtragem = ''
     filtragem = `${!filtros.situacao.is ? '' : `&situacao=${filtros.situacao.value}`}${!filtros.funcionario.is ? '' : `&funcionario=${filtros.funcionario.value}`}${!filtros.servico.is ? '' : `&servico=${filtros.servico.value}`}
     `
     try {
@@ -69,7 +69,19 @@ export const getOrdensPorCliente = async (pagina, idCliente) => {
 }
 export const getOrdensPorTecnicoForHome = async (idTecnico) => {
     try {
-        const response = await axios.get(`${config.url}/api/ordens?size=5&funcionario=${idTecnico}`, {
+        const response = await axios.get(`${config.url}/api/ordens?size=5&funcionario=${idTecnico}&situacao="EM_EXECUCAO"`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        return { success: true, response: response }
+    } catch (err) {
+        return { success: false, error: err }
+    }
+}
+export const getOrdensAtivasPorTecnico = async (idTecnico) => {
+    try {
+        const response = await axios.get(`${config.url}/api/ordens?funcionario=${idTecnico}&situacao=EM_EXECUCAO`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -120,20 +132,6 @@ export const postNovaOrdem = async (ordem) => {
     }
 }
 
-export const putEditOrdem = async (novaOrdem) => {
-    try {
-        const response = await axios.put(`${config.url}/api/ordens`, {
-            id: ordem.id,
-            descricao: ordem.descricao,
-            funcionario: idTecnico,
-            situacao: "EM_EXECUCAO",
-            servico: ordem.servico || 0
-        })
-        return { success: true, response: response }
-    } catch (err) {
-        return { success: false, error: err }
-    }
-}
 export const putAtenderOrdem = async (ordem, idTecnico) => {
     // TODO ERRO 400
     /* 
@@ -142,17 +140,17 @@ export const putAtenderOrdem = async (ordem, idTecnico) => {
         from Object value (token `JsonToken.START_OBJECT`)"
     */
     console.log('debug put atender ordem')
-    console.warn(ordem.id)
-    console.warn(ordem.servico)
-    console.warn(idTecnico)
-    console.warn(ordem.descricao)
+    console.log('ordem id: ', ordem.id)
+    console.warn('serviço id: ', ordem.servico.id)
+    console.warn('tecnico id: ', idTecnico)
+    console.warn('descricao: ', ordem.descricao)
     try {
         const response = await axios.put(`${config.url}/api/ordens`, {
             id: ordem.id,
-            descricao: ordem.descricao || "",
+            descricao: ordem.descricao || " ",
             funcionario: idTecnico,
             situacao: "EM_EXECUCAO",
-            servico: ordem.servico || 0
+            servico: ordem.servico.id || 0
         })
         return { success: true, response: response }
     } catch (err) {

@@ -58,63 +58,45 @@ function UserConfig() {
         {/* <Header titulo={"Configurações"} usuario={usuario}></Header> */}
         <Nav cargo={usuario?.cargo || ''}></Nav>
         <main id="mainPerfilConfig">
-            {
+        {
             !usuario ? <Loading></Loading> :
             <>
-                {/*
-                usuario.cargo == 'DEV' &&
-                <section id='secDevConfigs'>
-                    <h2>Configurações de desenvolvimento</h2>
-                    <label>cargo</label>
-                    <select name="" id="" 
-                        value={usuario.cargo}
-                        onChange={(e) => handleChangeUsuario(e.target.value, "cargo")}>
-                        <option value="TECNICO">TECNICO</option>
-                        <option value="BASE">BASE</option>
-                        <option value="ADM">ADM</option>
-                        <option value="DEV">DEV</option>
-                    </select>
-                </section>
-                */}
-                <section id='secInfosFuncionario'>
-                    <h2>Minhas informações</h2>
-                    {
-                        !usuario ? 
-                        <Loading></Loading> :
-                        <div id='contInfosFunc'>
-                            <div>Nome: {usuario.nome || ''}</div>
-                            <div>Cargo: {usuario.cargo || ''}</div>
-                            <div>Tel./Cel.: {usuario.celular || ''}</div>
-                            <div>Email: {usuario.email || ''}</div>
-                            <div>
-                                Endereço: {usuario.endereco.logradouro || ''}, Nº{usuario.endereco.numero || ''} - {usuario.endereco.cidade || ''}-{usuario.endereco.uf || ''} 
-                            </div>
-                        </div>
-                    }
-                </section>
-                <section id='secUserConfig'>
-                    <h2>Preferências</h2>
-                    <div>
+            <section id='secInfosFuncionario'>
+                <h2>Minhas informações</h2>
+                {
+                    !usuario ? 
+                    <Loading></Loading> :
+                    <div id='contInfosFunc'>
+                        <div>Nome: {usuario.nome || ''}</div>
+                        <div>Cargo: {usuario.cargo || ''}</div>
+                        <div>Tel./Cel.: {usuario.celular || ''}</div>
+                        <div>Email: {usuario.email || ''}</div>
                         <div>
-                            <label>Tema: </label>
-                            <select name="" id="" 
-                                onChange={(e) => changeTheme(e.target.value)} 
-                                value={sessPreferencias.tema}>
-                                {/* <option value="" disabled hidden selected>--</option> */}
-                                <option value="salmaoLight">salmão claro</option>
-                                <option value="salmaoDark">salmão noturno</option>
-                            </select>
+                            Endereço: {usuario.endereco.logradouro || ''}, Nº{usuario.endereco.numero || ''} - {usuario.endereco.cidade || ''}-{usuario.endereco.uf || ''} 
                         </div>
                     </div>
-                    <div>
-                        <div>Versão 0.1.0</div>
-                        <div>©{data.getFullYear()} SIGOS inc.</div>
-                        <a href="">Sobre o SIGOS</a>
-
-                    </div>
-                </section>
+                }
+            </section>
+            <section id='secUserConfig'>
+                <h2>Configurações</h2>
+                <div>
+                    <label>Tema: </label>
+                    <select name="" id="" 
+                        onChange={(e) => changeTheme(e.target.value)} 
+                        value={sessPreferencias.tema}>
+                        {/* <option value="" disabled hidden selected>--</option> */}
+                        <option value="salmaoLight">salmão claro</option>
+                        <option value="salmaoDark">salmão noturno</option>
+                    </select>
+                </div>
+                <div>
+                    <div>Versão 0.1.0</div>
+                    <div>©{data.getFullYear()} SIGOS inc.</div>
+                    <a href="">Sobre o SIGOS</a>
+                </div>
+            </section>
             </>
-            }
+        }
         </main>
         </div>
     )
