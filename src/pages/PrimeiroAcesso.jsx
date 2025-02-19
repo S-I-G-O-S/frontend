@@ -39,7 +39,6 @@ function PrimeiroAcesso() {
         }
     }
     const changeRender = (value, field) => {
-        console.log('TESTE RENDER')
         setRenderizar(prevState => ({
             ...prevState,
             [field]: value,

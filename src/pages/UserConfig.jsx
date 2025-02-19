@@ -6,9 +6,16 @@ import Loading from '@components/public/Loading'
 import { getCookie, setCookie } from '@services/cookies'
 import { getDeployStatus } from '@services/renderAPI'
 import { usePreferencias } from '@context/PreferenciasContext'
+import ChangeInfos from '../components/UserConfig/ChangeInfos'
+import ChangeSenha from '../components/UserConfig/ChangeSenha'
+import ChangeEmail from '../components/UserConfig/ChangeEmail'
 
 function UserConfig() {
     const data = new Date()
+    const [modalNovaSenha, setModalNovaSenha] = useState(false)
+    const [modalNovoEmail, setModalNovoEmail] = useState(false)
+    const [modalChangeInfos, setModalChangeInfos] = useState(false)
+
     const [usuario, setUsuario] = useState(() => {
         const cookieUsuario = getCookie('usuario')
         return cookieUsuario ? cookieUsuario : ''
@@ -52,6 +59,7 @@ function UserConfig() {
         console.log(usuario)
         console.log(sessPreferencias)
         // changeTheme(sessPreferencias.tema)
+        console.warn(usuario)
     }, [])
     return (
         <div id='pagePerfilConfig' className='paginas'>
@@ -140,6 +148,24 @@ function UserConfig() {
             </>
         }
         </main>
+        {
+            modalChangeInfos &&
+            <div className='shadowBG'>
+                <ChangeInfos closeModal={setModalChangeInfos}></ChangeInfos>
+            </div>
+        }
+        {
+            modalNovaSenha &&
+            <div className='shadowBG'>
+                <ChangeSenha closeModal={setModalNovaSenha}></ChangeSenha>
+            </div>
+        }
+        {
+            modalNovoEmail &&
+            <div className='shadowBG'>
+                <ChangeEmail closeModal={setModalNovoEmail}></ChangeEmail>
+            </div>
+        }
         </div>
     )
 }
