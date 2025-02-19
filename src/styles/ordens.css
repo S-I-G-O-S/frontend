@@ -13,9 +13,8 @@
         flex-direction: row;
         align-items: flex-start;
         justify-content: center;
+        flex-wrap: wrap;
         gap: 0.5rem;
-        width: 100%;
-        max-height: 98%;
     }
     section {
         padding: 1rem;
@@ -109,7 +108,7 @@
             border-radius: 0.3rem;
             #tableHistOrdens {
                 gap: 0;
-                overflow-x: auto;
+                overflow-x: scroll;
                 border-style: solid;
                 border-width: 0.1rem;
                 border-collapse: collapse;
@@ -121,6 +120,7 @@
                     padding: 0.1rem 0.5rem;
                 }
                 .ordem {
+                    
                     cursor: pointer;
                     border-style: solid;
                     border-width: 0.1rem;

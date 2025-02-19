@@ -1,4 +1,4 @@
-export default function ChangeEmail ({closeModal}) {
+export default function ChangeEmail ({changeModal}) {
     return (
         <></>
     )
