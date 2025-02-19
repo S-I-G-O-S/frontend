@@ -1,60 +1,94 @@
-#mainPerfilConfig {
+#pageUserConfig {
     grid-area: main;
-    display: grid;
-    grid-template-areas: 
-    'mainConfig infosFunc';
-    grid-template-columns: auto minmax(min-content, 30rem);
-    grid-template-rows: min-content;
+    display: flex;
+    /* grid-template-areas: 
+    'mainConfig infosFunc'; */
+    /* grid-template-columns: auto minmax(min-content, 30rem);
+    grid-template-rows: min-content; */
 
     gap: 1rem;
     width: 100%;
     margin: 0 auto;
-}
-#mainPerfilConfig
-> section {
-    padding: 1.5rem 1.5rem;
-    border-style: solid;
-    border-width: 0.1em;
-    border-radius: 10px;
-    width: 100%;
-    h2 {
-        font-size: 1rem;
+
+    h3 {
+        font-size: .95rem;
         margin: 0;
-        margin-bottom: 0.99rem;
+        margin-bottom: 1rem;
+    }
+    #mainUserConfig {
+        section {
+            display: flex;
+            flex-direction: column;
+            padding: 1rem 1rem;
+            border-style: solid;
+            border-width: 0.1em;
+            border-radius: .3rem;
+            width: 100%;
+            gap: .4rem;
+            h2 {
+                font-size: 1rem;
+                margin: 0;
+                margin-bottom: 0.99rem;
+            }
+        }
+        button {
+            font-size: .85rem;
+            background-color: var(--marrom1);
+            color: var(--salmao3);
+            border-radius: .3rem;
+            padding: .2rem 1rem;
+        }
+        button:hover {
+            background-color: var(--marrom2);
+        }
+        #contMinhasInfos {
+            border: .1rem solid var(--salmao1);
+            border-radius: .3rem;
+            padding: .5rem;
+            #contInfosFunc {
+                display: flex;
+                flex-direction: column;
+            
+                font-size: 0.9rem;
+                padding: 0.5rem;
+                /* border-style: solid;
+                border-width: 0.1em;
+                border-radius: 0.3rem; */
+            }
+        }
+        #contPreferencias {
+            border: .1rem solid var(--salmao1);
+            border-radius: .3rem;
+            padding: .5rem;
+        }
+        #contSeguranca {
+            border: .1rem solid var(--salmao1);
+            border-radius: .3rem;
+            padding: .5rem;
+        }
+        #contSigos {
+            border: .1rem solid var(--salmao1);
+            border-radius: .3rem;
+            padding: .5rem;
+        }
     }
 }
-#mainPerfilConfig
-#infosFuncionario {
-    grid-area: infosFunc;
-}
-#mainPerfilConfig
-#contInfosFunc {
-    display: flex;
-    flex-direction: column;
 
-    font-size: 0.9rem;
-    padding: 0.5rem;
-    border-style: solid;
-    border-width: 0.1em;
-    border-radius: 0.3rem;
-}
-#mainPerfilConfig
-#secUserConfig {
-    grid-area: mainConfig;
-}
-
-#pagePerfilConfig {
-    #mainPerfilConfig {
-        background-color: var(--branco);
-    }
-    #mainPerfilConfig
-    > section {
+#pageUserConfig {
+    section {
         border-color: var(--marrom1);
         background-color: var(--salmao2);
     }
-    #contInfosFunc {
-        border-color: var(--salmao1);
-    }
+}
+.shadowBG {
+    display: flex;
+    flex-direction: row;
+    align-items: self-start;
+    justify-content: center;
+    grid-area: main;
+    width: 100%;
+    gap: 0.5rem;
+    overflow-y: scroll;
 }
 @media screen and (width <= 750px) {
 }

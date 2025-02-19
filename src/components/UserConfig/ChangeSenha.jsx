@@ -2,7 +2,7 @@ import { notification } from 'antd'
 import { useEffect } from 'react'
 import zxcvbn from 'zxcvbn'
 
-export default function ChangeSenha({closeModal}) {
+export default function ChangeSenha({changeModal}) {
     const [renderizar, setRenderizar] = useState({
         senhaAntigaVisible: false,
         novaSenhaVisible: false,

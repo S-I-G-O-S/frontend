@@ -62,13 +62,14 @@ function UserConfig() {
         console.warn(usuario)
     }, [])
     return (
-        <div id='pagePerfilConfig' className='paginas'>
+        <div id='pageUserConfig' className='paginas'>
         {/* <Header titulo={"Configurações"} usuario={usuario}></Header> */}
         <Nav cargo={usuario?.cargo || ''}></Nav>
-        <main id="mainPerfilConfig">
+        <main id="mainUserConfig">
         {
             !usuario ? <Loading></Loading> :
             <>
+            {/* 
             <section id='secInfosFuncionario'>
                 <h2>Minhas informações</h2>
                 {
@@ -85,6 +86,7 @@ function UserConfig() {
                     </div>
                 }
             </section>
+            */}
             <section id='secUserConfig'>
                 <h2>Configurações</h2>
                 {/* 
@@ -105,7 +107,7 @@ function UserConfig() {
                         direitos reservados
                         mais sobre o projeto
                 */}
-                <div>
+                <div id='contMinhasInfos'>
                 <h3>Minha informações</h3>
                 {
                     !usuario ? 
@@ -121,9 +123,9 @@ function UserConfig() {
                     </div>
                 }
                     {/* TODO Abrir janela para editar */}
-                    <button>Alterar informações</button>
+                    <button onClick={() => setModalChangeInfos(true)}>Alterar informações</button>
                 </div>
-                <div>
+                <div id='contPreferencias'>
                     <h3>Preferências</h3>
                     <label>Tema: </label>
                     <select name="" id="" 
@@ -134,12 +136,12 @@ function UserConfig() {
                         <option value="salmaoDark">salmão noturno</option>
                     </select>
                 </div>
-                <div>
+                <div id='contSeguranca'>
                     <h3>Segurança</h3>
                     <button>mudar minha senha</button>
                     <button>mudar meu email</button>
                 </div>
-                <div>
+                <div id='contSigos'>
                     <div>Versão 0.1.0</div>
                     <div>©{data.getFullYear()} SIGOS inc.</div>
                     <a href="">Sobre o SIGOS</a>
@@ -151,19 +153,19 @@ function UserConfig() {
         {
             modalChangeInfos &&
             <div className='shadowBG'>
-                <ChangeInfos closeModal={setModalChangeInfos}></ChangeInfos>
+                <ChangeInfos changeModal={setModalChangeInfos}></ChangeInfos>
             </div>
         }
         {
             modalNovaSenha &&
             <div className='shadowBG'>
-                <ChangeSenha closeModal={setModalNovaSenha}></ChangeSenha>
+                <ChangeSenha changeModal={setModalNovaSenha}></ChangeSenha>
             </div>
         }
         {
             modalNovoEmail &&
             <div className='shadowBG'>
-                <ChangeEmail closeModal={setModalNovoEmail}></ChangeEmail>
+                <ChangeEmail changeModal={setModalNovoEmail}></ChangeEmail>
             </div>
         }
         </div>
