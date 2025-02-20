@@ -61,9 +61,9 @@ export const getFuncionarioPorID = async (id) => {
                 'Content-Type': 'application/json',
             },
         })
-        return response
+        return { success: true, response }
     } catch (error) {
-        throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
+        return { success: false, error}
     }
 }
 export const deleteFuncionario = async (id) => {

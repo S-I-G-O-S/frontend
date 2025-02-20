@@ -9,6 +9,7 @@ import { usePreferencias } from '@context/PreferenciasContext'
 import ChangeInfos from '../components/UserConfig/ChangeInfos'
 import ChangeSenha from '../components/UserConfig/ChangeSenha'
 import ChangeEmail from '../components/UserConfig/ChangeEmail'
+import { getUsuarioContext } from '../context/UsuarioContext'
 
 function UserConfig() {
     const data = new Date()
@@ -16,10 +17,7 @@ function UserConfig() {
     const [modalNovoEmail, setModalNovoEmail] = useState(false)
     const [modalChangeInfos, setModalChangeInfos] = useState(false)
 
-    const [usuario, setUsuario] = useState(() => {
-        const cookieUsuario = getCookie('usuario')
-        return cookieUsuario ? cookieUsuario : ''
-    })
+    const {usuario} = getUsuarioContext()
     const { sessPreferencias, setSessPreferencias } = usePreferencias()
     /*
     useEffect(() => {
@@ -57,9 +55,8 @@ function UserConfig() {
     useEffect(() => {
         console.clear()
         console.log(usuario)
-        console.log(sessPreferencias)
+        // console.log(sessPreferencias)
         // changeTheme(sessPreferencias.tema)
-        console.warn(usuario)
     }, [])
     return (
         <div id='pageUserConfig' className='paginas'>
@@ -153,7 +150,7 @@ function UserConfig() {
         {
             modalChangeInfos &&
             <div className='shadowBG'>
-                <ChangeInfos changeModal={setModalChangeInfos}></ChangeInfos>
+                <ChangeInfos changeModal={setModalChangeInfos} usuario={usuario}></ChangeInfos>
             </div>
         }
         {

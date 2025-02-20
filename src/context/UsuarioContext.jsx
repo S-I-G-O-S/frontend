@@ -1,29 +1,32 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { setCookie, getCookie } from "@services/cookies";
 
 // TODO Ainda não utilizado
-// Cria o contexto
 const UsuarioContext = createContext();
-// Provedor do contexto
+
 export const UsuarioProvider = ({ children }) => {
     const [usuario, setUsuario] = useState(() => {
-        const storedUsuario = sessionStorage.getItem('usuario');
-        return storedUsuario
-            ? JSON.parse(storedUsuario)
-            : {};
-    });
-
+        const cookieUsuario = getCookie('usuario')
+        return cookieUsuario ? cookieUsuario : ''
+    })
+    const attUsuario = (novoUsuario) => {
+        if (usuario!=novoUsuario) {
+            console.info("nova versão do usuario recebida.")
+        }
+        setUsuario(novoUsuario)
+        setCookie('usuario', novoUsuario, 12)
+    }
     useEffect(() => {
-        sessionStorage.setItem('usuario', JSON.stringify(usuario));
+        console.info('contexto usuario atualizado')
     }, [usuario]);
 
     return (
-        <PreferenciasContext.Provider value={{ usuario, setUsuario }}>
+        <UsuarioContext.Provider value={{ usuario, attUsuario }}>
             {children}
-        </PreferenciasContext.Provider>
+        </UsuarioContext.Provider>
     );
 };
 
-// Hook para usar o contexto
-export const usePreferencias = () => {
-    return useContext(PreferenciasContext);
+export const getUsuarioContext = () => {
+    return useContext(UsuarioContext);
 };
