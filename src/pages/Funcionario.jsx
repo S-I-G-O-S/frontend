@@ -351,13 +351,13 @@ function Funcionario() {
 
     }
     const fetchFuncionario = async () => {
-        try {
-            const response = await getFuncionarioPorID(idFuncionario)
-            setFuncionario(response.data)
-            console.warn(response)
-        } catch (error) {
-            console.error(error.message)
+        const result = await getFuncionarioPorID(idFuncionario)
+        if (!result.success) {
+            console.error(result.error)
+            return
         }
+        setFuncionario(result.response.data)
+        console.warn(result.response)
     }
     useEffect(() => {
         if (!carregando) {

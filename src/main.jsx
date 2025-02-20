@@ -4,13 +4,16 @@ import AuthProvider from '@context/authContext';
 import AppRoutes from "./router/routes";
 import { PreferenciasProvider } from '@context/PreferenciasContext';
 import './index.css'
+import { UsuarioProvider } from './context/UsuarioContext';
 
 function App() {
     return (
         <AuthProvider>
-            <PreferenciasProvider>
-                <AppRoutes />
-            </PreferenciasProvider>
+            <UsuarioProvider>
+              <PreferenciasProvider>
+                  <AppRoutes />
+              </PreferenciasProvider>
+            </UsuarioProvider>
         </AuthProvider>
     );
 }

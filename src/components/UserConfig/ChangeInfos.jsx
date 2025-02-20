@@ -1,4 +1,11 @@
+import { useEffect, useState } from "react";
+import { SearchOutlined} from '@ant-design/icons'
+import '@styles/userConfig/changeInfos.css'
+import { getUsuarioContext } from "../../context/UsuarioContext";
+import { getFuncionarioPorID } from "../../services/backend/funcionariosAPI";
+
 export default function ChangeInfos({ changeModal }) {
+    const {usuario, attUsuario} = getUsuarioContext()
     const [funcionario, setFuncionario] = useState({
         "nome": "",
         "primeiro": "",
@@ -6,7 +13,7 @@ export default function ChangeInfos({ changeModal }) {
         "cpf": "",
         "email": "",
         "celular": "",
-        "cargo": "TECNICO",
+        "cargo": "",
         "endereco": {
             "cep": "",
             "logradouro": "",
@@ -111,9 +118,6 @@ export default function ChangeInfos({ changeModal }) {
         if(field == 'nome' && value.length > 100) {
             return
         }
-        if(field == 'cpf' && value.length > 11) {
-            return
-        }
         if(field == 'email' && value.length > 100) {
             return
         }
@@ -178,7 +182,20 @@ export default function ChangeInfos({ changeModal }) {
         })
         return true;
     }
-    return (
+    const fetchFuncionario = async () => {
+        const result = await getFuncionarioPorID(usuario.id)
+        if (!result.success) {
+            console.error(result.error)
+            return
+        }
+        setFuncionario(result.response.data)
+        console.warn(result.response)
+        // TODO 
+    }
+    useEffect(() => {
+        fetchFuncionario()
+    }, [usuario])
+    return usuario && (
         <section id='secChangeInfos'>
             {/* 
                 nome,
@@ -191,20 +208,36 @@ export default function ChangeInfos({ changeModal }) {
                 <div id='subContNome'>
                     {/* Atualizar os input Primeiro e Ultimo por este */}
                     <label>Nome completo</label>
-                    <input type="text" />
+                    <input 
+                        type="text" 
+                        value={funcionario.nome}
+                        onChange={(e) => handleChangeDados(e.target.value, 'nome')}
+                        />
                 </div>
                 <div id='subContPrimeiro'>
-                    <label>Primeiro nom</label>
-                    <input type="text" />
+                    <label>Primeiro nome</label>
+                    <input 
+                        type="text" 
+                        value={funcionario.primeiro}
+                        onChange={(e) => handleChangeDados(e.target.value, 'primeiro')}
+                        />
                 </div>
                 <div id='subContUltimo'>
                     <label>Ultimo nome</label>
-                    <i  nput type="text" />
+                    <input 
+                        type="text" 
+                        value={funcionario.ultimo}
+                        onChange={(e) => handleChangeDados(e.target.value, 'ultimo')}
+                        />
                 </div>
             </div>
             <div id="contCelular">
                 <label>celular</label>
-                <input type="text" />
+                <input 
+                    type="text" 
+                    value={funcionario.celular}
+                    onChange={(e) => handleChangeDados(e.target.value, 'celular')}
+                    />
             </div>
             <div id='contEndFunc'>
                 <div id='contCepFunc'>
@@ -269,7 +302,7 @@ export default function ChangeInfos({ changeModal }) {
                 </div>
             </div>
             <div>
-                <button onClick={() => closeModal(false)}>cancelar</button>
+                <button onClick={() => changeModal(false)}>cancelar</button>
             </div>
         </section>
     )
