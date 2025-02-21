@@ -10,12 +10,14 @@ import config from '@services/config.js'
 import { useEffect, useRef, useState } from 'react'
 import { notification } from 'antd'
 import { EyeInvisibleOutlined, EyeOutlined, EyeTwoTone, LoadingOutlined } from '@ant-design/icons'
+import { getUsuarioContext } from '../context/UsuarioContext'
 
 function Login() {
     const navigate = useNavigate()
     const emailRef = useRef(null)
     const senhaRef = useRef(null)
     const buttonRef = useRef(null)
+    const {setUsuario} = getUsuarioContext()
     
     const [render, setRender] = useState({
         senhaVisible: false,
@@ -67,7 +69,11 @@ function Login() {
         }
         console.log('DEBBUG LOGIN 3')
         setToken(result.data.tokenJWT)  // Definir o token no Authorization
-        setCookie('usuario', result.data.funcionario, 12)
+
+        // TODO Testando atualização direta no Context
+        // setCookie('usuario', result.data.funcionario, 12)
+        setUsuario(result.data.funcionario)
+        
         if (result.data.funcionario.tema == null) {
             sessionStorage.setItem('preferencias', JSON.stringify({
                 tema: 'salmaoLight',
