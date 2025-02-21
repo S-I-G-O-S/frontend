@@ -182,18 +182,7 @@ export default function ChangeInfos({ changeModal }) {
         })
         return true;
     }
-    const fetchFuncionario = async () => {
-        const result = await getFuncionarioPorID(usuario.id)
-        if (!result.success) {
-            console.error(result.error)
-            return
-        }
-        setFuncionario(result.response.data)
-        console.warn(result.response)
-        // TODO 
-    }
     useEffect(() => {
-        fetchFuncionario()
     }, [usuario])
     return usuario && (
         <section id='secChangeInfos'>

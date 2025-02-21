@@ -19,31 +19,19 @@ function UserConfig() {
 
     const {usuario} = getUsuarioContext()
     const { sessPreferencias, setSessPreferencias } = usePreferencias()
-    /*
-    useEffect(() => {
-        if (sessPreferencias) {
-            console.log('Mudando tema para: '+ sessPreferencias.tema)
-            sessionStorage.setItem('preferencias', JSON.stringify(sessPreferencias))
-        }
-    }, [sessPreferencias.tema])
-    */
     const changeTheme = (tema) => {
         setSessPreferencias(prevState => ({
             ...prevState,
             tema: tema
         }))
     }
-    const handleChangeUsuario = (value, field) => {
-        setUsuario(prevState => ({
-            ...prevState,
-            [field]: value,
-        }))
-    }
+    /*
     useEffect(() => {
         if (usuario) {
             sessionStorage.setItem('usuario', JSON.stringify(usuario))
         }
     }, [usuario])
+    */
     const fetchRender = async () => {
         try {
             const result = await getDeployStatus()
@@ -66,24 +54,6 @@ function UserConfig() {
         {
             !usuario ? <Loading></Loading> :
             <>
-            {/* 
-            <section id='secInfosFuncionario'>
-                <h2>Minhas informações</h2>
-                {
-                    !usuario ? 
-                    <Loading></Loading> :
-                    <div id='contInfosFunc'>
-                        <div>Nome: {usuario.nome || ''}</div>
-                        <div>Cargo: {usuario.cargo || ''}</div>
-                        <div>Tel./Cel.: {usuario.celular || ''}</div>
-                        <div>Email: {usuario.email || ''}</div>
-                        <div>
-                            Endereço: {usuario.endereco.logradouro || ''}, Nº{usuario.endereco.numero || ''} - {usuario.endereco.cidade || ''}-{usuario.endereco.uf || ''} 
-                        </div>
-                    </div>
-                }
-            </section>
-            */}
             <section id='secUserConfig'>
                 <h2>Configurações</h2>
                 {/* 

@@ -1,6 +1,15 @@
 import axios from 'axios'
 import config from '../config'
 
+export const getUsuario = async () => {
+    try {
+        const response = await axios.put(`${config.url}/appi/usuarios`)
+        console.warn(response)
+        return { success: true, response }
+    } catch (error) {
+        return { success: false, error }
+    }
+}
 export const putRegSenha = async (login, senha, novaSenha) => {
     try {
         const response = await axios.put(`${config.url}/api/usuarios/login`, {
