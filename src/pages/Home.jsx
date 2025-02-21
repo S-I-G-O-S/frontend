@@ -14,15 +14,17 @@ import { useEffect, useState } from 'react'
 
 import {notification, Alert, FloatButton} from 'antd';  
 import { CommentOutlined, CustomerServiceOutlined } from '@ant-design/icons'
+import { getUsuarioContext } from '../context/UsuarioContext'
 
 
 function Home() {
     const [showUsuario, setShowUsuario] = useState(null)
     const [showInfosUser, setShowInfosUser] = useState(true)
-    const [usuario, setUsuario] = useState(() => {
-        const cookieUsuario = getCookie('usuario')
-        return cookieUsuario ? cookieUsuario : ''
-    })
+    const {usuario} = getUsuarioContext()
+    // const [usuario, setUsuario] = useState(() => {
+    //     const cookieUsuario = getCookie('usuario')
+    //     return cookieUsuario ? cookieUsuario : ''
+    // })
     useEffect(() => {
         // console.clear()
     }, [])
