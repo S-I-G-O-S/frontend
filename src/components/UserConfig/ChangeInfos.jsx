@@ -2,15 +2,14 @@ import { useEffect, useState } from "react";
 import { SearchOutlined} from '@ant-design/icons'
 import '@styles/userConfig/changeInfos.css'
 import { getUsuarioContext } from "../../context/UsuarioContext";
-import { getFuncionarioPorID } from "../../services/backend/funcionariosAPI";
+import { putEditUsuario } from "../../services/backend/usuarioAPI";
 
 export default function ChangeInfos({ changeModal }) {
     const {usuario, attUsuario} = getUsuarioContext()
-    const [funcionario, setFuncionario] = useState({
+    const [formUsuario, setFormUsuario] = useState({
         "nome": "",
         "primeiro": "",
         "ultimo": "",
-        "cpf": "",
         "email": "",
         "celular": "",
         "cargo": "",
@@ -22,32 +21,45 @@ export default function ChangeInfos({ changeModal }) {
             "cidade": "",
             "uf": "",
             "complemento": ""
-        },
-        "especialidades": []
+        }
     })
-    const handleSalvar = () => {
-
+    const [loading, setLoading] = useState(false)
+    const handleSalvar = async () => {
+        setLoading(true)
+        const result = await putEditUsuario(formUsuario)
+        if (!result.success) {
+            console.error(result.error)
+            setLoading(false)
+            return
+        }
+        attUsuario()
+        setLoading(false)
+        changeModal(false)
     }
     const handleCEP = (value) => {
-        const cep = value.replace(/\D/g, '');
+        const cep = value.replace(/\D/g, '')
         
         if (cep.length > 8) {return}
 
         if (cep.length === 0) {
-            setFuncionario(prevState => ({
+            setFormUsuario(prevState => ({
                 ...prevState,
                 endereco: {
                     ...prevState.endereco,
                     cep: '',
                 }
             }));
-            return;3
+            return
         }
+
         let formatted = cep;
+        /*
+        TODO Tirei pra evitar erro no primeiro carregamento
         if (cep.length > 5) {
             formatted = `${cep.slice(0, 5)}-${cep.slice(5)}`;
         }
-        setFuncionario(prevState => ({
+        */
+        setFormUsuario(prevState => ({
             ...prevState,
             endereco: {
                 ...prevState.endereco,
@@ -56,13 +68,13 @@ export default function ChangeInfos({ changeModal }) {
         }))
     }
     const fetchCEP = async () => {
-        const cep = funcionario.endereco.cep.replace(/\D/g, '')
+        const cep = formUsuario.endereco.cep.replace(/\D/g, '')
         if (cep.length === 8) {
             try {
                 const response = await cepAPI(cep)
                 console.warn(response)
                 const { street, neighborhood, city, state } = response.data
-                setFuncionario(prevState => ({
+                setFormUsuario(prevState => ({
                     ...prevState,
                     endereco: {
                         ...prevState.endereco,
@@ -106,7 +118,7 @@ export default function ChangeInfos({ changeModal }) {
         if(field == 'complemento' && value.length > 100) {
             return
         }
-        setFuncionario(prevState => ({
+        setFormUsuario(prevState => ({
             ...prevState,
             endereco: {
                 ...prevState.endereco,
@@ -127,7 +139,7 @@ export default function ChangeInfos({ changeModal }) {
             return
         }
         
-        setFuncionario(prevState => ({
+        setFormUsuario(prevState => ({
             ...prevState,
             [field]: value,
         }))
@@ -135,7 +147,7 @@ export default function ChangeInfos({ changeModal }) {
     const formatCelular = (value) => {
         let cleaned = value.replace(/\D/g, '');
         if (cleaned.length === 0) {
-            setFuncionario(prevState => ({
+            setFormUsuario(prevState => ({
                 ...prevState,
                 celular: ''
             }));
@@ -151,20 +163,20 @@ export default function ChangeInfos({ changeModal }) {
         if (cleaned.length > 7) {
             formatted = `(${cleaned.slice(0, 2)}) ${cleaned.slice(2, 7)}-${cleaned.slice(7)}`;
         }
-        setFuncionario(prevState => ({
+        setFormUsuario(prevState => ({
             ...prevState,
             celular: formatted,
         }));
     }
     const formatNome = () => {
-        const nomeSanitizado = funcionario.nome.trim().replace(/[^a-zA-Z\s]/g, '');
+        const nomeSanitizado = formUsuario.nome.trim().replace(/[^a-zA-Z\s]/g, '');
 
         if (!nomeSanitizado) {
-            return false;
+            return
         }
         if (nomeSanitizado.length > 30) {
             console.error("O nome deve ter no máximo 30 caracteres.");
-            return false;
+            return
         }
 
         const partesNome = nomeSanitizado.split(/\s+/).map(
@@ -175,14 +187,19 @@ export default function ChangeInfos({ changeModal }) {
         const ultimo = partesNome.length > 1 ? partesNome[partesNome.length - 1] : '';
         handleChangeDados(primeiro, "primeiro")
         handleChangeDados(ultimo, "ultimo")
-        setFuncionario({
-            ...funcionario,
+        /*
+        setFormUsuario({
+            ...formUsuario,
             primeiro: primeiro ? primeiro : '',
             ultimo: ultimo ? ultimo : ''
         })
-        return true;
+        */
     }
     useEffect(() => {
+        formatNome()
+    }, [formUsuario?.nome])
+    useEffect(() => {
+        setFormUsuario(usuario)
     }, [usuario])
     return usuario && (
         <section id='secChangeInfos'>
@@ -199,7 +216,7 @@ export default function ChangeInfos({ changeModal }) {
                     <label>Nome completo</label>
                     <input 
                         type="text" 
-                        value={funcionario.nome}
+                        value={formUsuario.nome}
                         onChange={(e) => handleChangeDados(e.target.value, 'nome')}
                         />
                 </div>
@@ -207,7 +224,7 @@ export default function ChangeInfos({ changeModal }) {
                     <label>Primeiro nome</label>
                     <input 
                         type="text" 
-                        value={funcionario.primeiro}
+                        value={formUsuario.primeiro}
                         onChange={(e) => handleChangeDados(e.target.value, 'primeiro')}
                         />
                 </div>
@@ -215,7 +232,7 @@ export default function ChangeInfos({ changeModal }) {
                     <label>Ultimo nome</label>
                     <input 
                         type="text" 
-                        value={funcionario.ultimo}
+                        value={formUsuario.ultimo}
                         onChange={(e) => handleChangeDados(e.target.value, 'ultimo')}
                         />
                 </div>
@@ -224,7 +241,7 @@ export default function ChangeInfos({ changeModal }) {
                 <label>celular</label>
                 <input 
                     type="text" 
-                    value={funcionario.celular}
+                    value={formUsuario.celular}
                     onChange={(e) => handleChangeDados(e.target.value, 'celular')}
                     />
             </div>
@@ -233,7 +250,7 @@ export default function ChangeInfos({ changeModal }) {
                     <label>CEP:</label>
                     <input
                         type="text"
-                        value={funcionario.endereco.cep || ""}
+                        value={formUsuario.endereco.cep || ""}
                         onChange={(e) => handleCEP(e.target.value)}
                     />
                     <button id='bttPesqCEP' onClick={fetchCEP}>
@@ -245,7 +262,7 @@ export default function ChangeInfos({ changeModal }) {
                     <label>Rua:</label>
                     <input
                         type="text"
-                        value={funcionario.endereco?.logradouro || ""}
+                        value={formUsuario.endereco?.logradouro || ""}
                         onChange={(e) => handleChangeEndereco(e.target.value, "logradouro")}
                     />
                 </div>
@@ -253,7 +270,7 @@ export default function ChangeInfos({ changeModal }) {
                     <label>Nº:</label>
                     <input
                         type="text"
-                        value={funcionario.endereco?.numero || ""}
+                        value={formUsuario.endereco?.numero || ""}
                         onChange={(e) => handleChangeEndereco(e.target.value, "numero")}
                     />
                 </div>
@@ -261,7 +278,7 @@ export default function ChangeInfos({ changeModal }) {
                     <label>Complemento:</label>
                     <input
                         type="text"
-                        value={funcionario.endereco?.complemento || ""}
+                        value={formUsuario.endereco?.complemento || ""}
                         onChange={(e) => handleChangeEndereco(e.target.value, "complemento")}
                     />
                 </div>
@@ -269,7 +286,7 @@ export default function ChangeInfos({ changeModal }) {
                     <label>Bairro:</label>
                     <input
                         type="text"
-                        value={funcionario.endereco?.bairro || ""}
+                        value={formUsuario.endereco?.bairro || ""}
                         onChange={(e) => handleChangeEndereco(e.target.value, "bairro")}
                     />
                 </div>
@@ -277,7 +294,7 @@ export default function ChangeInfos({ changeModal }) {
                     <label>Cidade:</label>
                     <input
                         type="text"
-                        value={funcionario.endereco?.cidade || ""}
+                        value={formUsuario.endereco?.cidade || ""}
                         onChange={(e) => handleChangeEndereco(e.target.value, "cidade")}
                     />
                 </div>
@@ -285,13 +302,14 @@ export default function ChangeInfos({ changeModal }) {
                     <label>UF:</label>
                     <input
                         type="text"
-                        value={funcionario.endereco?.uf || ""}
+                        value={formUsuario.endereco?.uf || ""}
                         onChange={(e) => handleChangeEndereco(e.target.value, "uf")}
                     />
                 </div>
             </div>
             <div>
                 <button onClick={() => changeModal(false)}>cancelar</button>
+                <button onClick={handleSalvar}>salvar</button>
             </div>
         </section>
     )
