@@ -120,7 +120,7 @@ function UserConfig() {
         {
             modalChangeInfos &&
             <div className='shadowBG'>
-                <ChangeInfos changeModal={setModalChangeInfos} usuario={usuario}></ChangeInfos>
+                <ChangeInfos changeModal={setModalChangeInfos}></ChangeInfos>
             </div>
         }
         {
