@@ -89,7 +89,7 @@
                 height: 100%;
                 border-radius: 0 0.3rem 0.3rem 0;
             }
-            #senha button:hover :focus {
+            #senha button:hover, button:focus {
                 background-color: var(--salmao2);
             }
             #senha button:focus {

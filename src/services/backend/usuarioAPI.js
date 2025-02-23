@@ -13,13 +13,13 @@ export const getUsuario = async () => {
 export const putRegSenha = async (login, senha, novaSenha) => {
     try {
         const response = await axios.put(`${config.url}/api/usuarios/login`, {
-            login,
+            // login,
             senha,
             novaSenha
         })
-        return response
+        return { success: true, response }
     } catch (error) {
-        throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
+        return { success: false, error }
     }
 }
 export const putEditUsuario = async (usuario) => {

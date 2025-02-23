@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { SearchOutlined} from '@ant-design/icons'
-import '@styles/userConfig/changeInfos.css'
 import { getUsuarioContext } from "../../context/UsuarioContext";
 import { putEditUsuario } from "../../services/backend/usuarioAPI";
+import { notification } from "antd";
+import { cepAPI } from '@services/cepAPI.js'
+
+import '@styles/userConfig/changeInfos.css'
 
 export default function ChangeInfos({ changeModal }) {
     const {usuario, attUsuario} = getUsuarioContext()
@@ -88,14 +91,14 @@ export default function ChangeInfos({ changeModal }) {
                 notification.error({
                     message: `Erro ao procurar CEP`,
                     description: 'CEP não encontrado',
-                    placement,
+                    placement: "bottomLeft"
                 })
             }
         } else {
             notification.error({
                 message: `Erro ao procurar CEP`,
                 description: 'CEP fornecido inválido.',
-                placement,
+                placement: "bottomLeft",
             })
         }
     }
@@ -201,7 +204,7 @@ export default function ChangeInfos({ changeModal }) {
     useEffect(() => {
         setFormUsuario(usuario)
     }, [usuario])
-    return usuario && (
+    return formUsuario && (
         <section id='secChangeInfos'>
             {/* 
                 nome,
@@ -213,37 +216,37 @@ export default function ChangeInfos({ changeModal }) {
             <div id='contNomes'>
                 <div id='subContNome'>
                     {/* Atualizar os input Primeiro e Ultimo por este */}
-                    <label>Nome completo</label>
-                    <input 
-                        type="text" 
+                    <label>Nome completo:</label>
+                    <input
+                        type="text"
                         value={formUsuario.nome}
                         onChange={(e) => handleChangeDados(e.target.value, 'nome')}
-                        />
+                    />
                 </div>
                 <div id='subContPrimeiro'>
-                    <label>Primeiro nome</label>
-                    <input 
-                        type="text" 
+                    <label>Primeiro nome:</label>
+                    <input
+                        type="text"
                         value={formUsuario.primeiro}
                         onChange={(e) => handleChangeDados(e.target.value, 'primeiro')}
-                        />
+                    />
                 </div>
                 <div id='subContUltimo'>
-                    <label>Ultimo nome</label>
-                    <input 
-                        type="text" 
+                    <label>Ultimo nome:</label>
+                    <input
+                        type="text"
                         value={formUsuario.ultimo}
                         onChange={(e) => handleChangeDados(e.target.value, 'ultimo')}
-                        />
+                    />
                 </div>
             </div>
             <div id="contCelular">
-                <label>celular</label>
-                <input 
-                    type="text" 
+                <label>Celular:</label>
+                <input
+                    type="text"
                     value={formUsuario.celular}
                     onChange={(e) => handleChangeDados(e.target.value, 'celular')}
-                    />
+                />
             </div>
             <div id='contEndFunc'>
                 <div id='contCepFunc'>
@@ -253,11 +256,11 @@ export default function ChangeInfos({ changeModal }) {
                         value={formUsuario.endereco.cep || ""}
                         onChange={(e) => handleCEP(e.target.value)}
                     />
-                    <button id='bttPesqCEP' onClick={fetchCEP}>
-                        <p>Pesquisar CEP</p>
-                        <SearchOutlined />
-                    </button>
                 </div>
+                <button id='bttPesqCEP' onClick={fetchCEP}>
+                    <p>Pesquisar CEP</p>
+                    <SearchOutlined />
+                </button>
                 <div id='contRuaFunc'>
                     <label>Rua:</label>
                     <input
@@ -303,13 +306,12 @@ export default function ChangeInfos({ changeModal }) {
                     <input
                         type="text"
                         value={formUsuario.endereco?.uf || ""}
-                        onChange={(e) => handleChangeEndereco(e.target.value, "uf")}
                     />
                 </div>
             </div>
-            <div>
-                <button onClick={() => changeModal(false)}>cancelar</button>
-                <button onClick={handleSalvar}>salvar</button>
+            <div id="contAcoesChangeInfos">
+                <button id="bttCancelarChangeInfos" onClick={() => changeModal(false)}>cancelar</button>
+                <button id="bttSalvarChangeInfos" onClick={handleSalvar}>salvar</button>
             </div>
         </section>
     )

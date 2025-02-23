@@ -79,6 +79,7 @@ body {
     button {
         all: unset;
         box-sizing: border-box;
+        cursor: pointer;
     }
     input[type="text"]{
         all: unset;

@@ -56,6 +56,7 @@ section {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
+    justify-content: center;
     padding: 0;
     border: 0;
     .ant-card {
@@ -114,7 +115,7 @@ section {
         }
     }
 }
-#mainHome
+#mainHome   
 #secOrdens .contsOrdens {
     flex-grow: 1;
     flex-basis: 20rem;
