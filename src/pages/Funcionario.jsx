@@ -406,8 +406,9 @@ function Funcionario() {
                                 <div id='contGeralFunc'>
                                     <div id='contNomeFunc'>
                                         <label>Nome:</label>
-                                        <Input
-                                            status={""}
+                                        <input
+                                            type="text"
+                                            // status={""}
                                             placeholder=""
                                             value={funcionario.nome || ""}
                                             onChange={(e) => handleChangeDados(e.target.value, "nome")}

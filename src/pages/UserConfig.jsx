@@ -90,7 +90,7 @@ function UserConfig() {
                     </div>
                 }
                     {/* TODO Abrir janela para editar */}
-                    <button onClick={() => setModalChangeInfos(true)}>Alterar informações</button>
+                    <button onClick={() => setModalChangeInfos(true)} className='bttConfigs'>Alterar informações</button>
                 </div>
                 <div id='contPreferencias'>
                     <h3>Preferências</h3>
@@ -105,8 +105,8 @@ function UserConfig() {
                 </div>
                 <div id='contSeguranca'>
                     <h3>Segurança</h3>
-                    <button>mudar minha senha</button>
-                    <button>mudar meu email</button>
+                    <button className='bttConfigs' onClick={() => setModalNovaSenha(true)}>mudar minha senha</button>
+                    {/* <button>mudar meu email</button> */}
                 </div>
                 <div id='contSigos'>
                     <div>Versão 0.1.0</div>
