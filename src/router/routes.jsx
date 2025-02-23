@@ -1,7 +1,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { useAuth } from '@context/authContext'
 import { ProtectedRoute } from "./ProtectedRoute";
-import { Login, Home, UserConfig, PaginaIncorreta, Clientes, Cliente, Funcionarios, Funcionario, Especialidades, Ordens, NovaOrdem, Ordem, PrimeiroAcesso, Teste, MeusAtendimentos } from '@pages'
+import { Login, Home, UserConfig, PaginaIncorreta, Clientes, Cliente, Funcionarios, Funcionario, Especialidades, Ordens, NovaOrdem, Ordem, PrimeiroAcesso, Teste, MeusAtendimentos, Analise } from '@pages'
 
 function AppRoutes() {
     const { token } = useAuth();
@@ -10,10 +10,6 @@ function AppRoutes() {
         {
             path: "/",
             element: <Login />,
-        },
-        {
-            path: "/teste",
-            element: <Teste />,
         }
     ]
     const rotasProtegidas = [
@@ -76,6 +72,10 @@ function AppRoutes() {
                 {
                     path: "/cliente",
                     element: <Cliente />,
+                },
+                {
+                    path: "/analise",
+                    element: <Analise />,
                 },
                 {
                     path: "*",
