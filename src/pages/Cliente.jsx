@@ -1,15 +1,10 @@
-
 import {getClientePorID, postCliente, putCliente, deleteCliente, putContato, postContato, deleteContato, getContatosPorID} from '@backend/clientesAPI.js'
-
 import Nav from '@components/public/Nav.jsx'
 import '@styles/cliente.css'
-import Header from '@components/public/Header.jsx'
-import Down from '@assets/light/down.png' 
-import Up from '@assets/light/up.png'
 import { cepAPI } from '@services/cepAPI.js'
 import Loading from '@components/public/Loading.jsx'
 import { getCookie } from '@services/cookies.js'
-import { getOrdens, getOrdensPorCliente } from '@services/backend/ordemAPI.js'
+import { getOrdensPorCliente } from '@services/backend/ordemAPI.js'
 import { usePreferencias } from '@context/PreferenciasContext.jsx'
 
 import { useEffect, useState } from 'react'

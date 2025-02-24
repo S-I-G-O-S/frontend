@@ -1,13 +1,12 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import Header from "@components/public/Header";
-import Nav from "@components/public/Nav";
-import Loading from "@components/public/Loading";
-import { getCookie } from "@services/cookies";
+import Nav from "@components/public/Nav.jsx";
+import Loading from "@components/public/Loading.jsx";
+import { getCookie } from "@services/cookies.js";
 import '@styles/ordens/ordem.css'
-import { getAtendimentos, getOrdensPorID } from "@backend/ordemAPI";
+import { getAtendimentos, getOrdensPorID } from "@backend/ordemAPI.js";
 import { useEffect, useState } from "react";
 import { ExceptionOutlined } from '@ant-design/icons'
-import { putAtenderOrdem, putCancelOrdem } from "../services/backend/ordemAPI";
+import { putAtenderOrdem, putCancelOrdem } from "../services/backend/ordemAPI.js";
 import { notification, Popconfirm } from "antd";
 
 function Ordem() {
@@ -121,7 +120,7 @@ function Ordem() {
                     <h2>Opções</h2>
                     <div id="contAcoes">
                         {
-                            usuario.cargo==="BASE" || usuario.cargo==="ADM" &&
+                            usuario.cargo==="BASE" || usuario.cargo==="ADM" || usuario.cargo==='DEV' &&
                             <>
                             <button>Designar técnico</button>
                             <Popconfirm

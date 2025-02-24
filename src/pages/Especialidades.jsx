@@ -1,19 +1,16 @@
 // Funções de requisições
-import { getEspecialidades, postEspecialidade, deleteEspec, putEspecialidade } from '@backend/especialidadesAPI'
-import { getServicos, getServicoPorID, postServico, putServico, deleteServico } from '@backend/servicosAPI'
+import { getEspecialidades, postEspecialidade, deleteEspec, putEspecialidade } from '@backend/especialidadesAPI.js'
+import { getServicos, getServicoPorID, postServico, putServico } from '@backend/servicosAPI.js'
 
 import '@styles/especialidades.css'
-import Nav from '@components/public/Nav'
-import Header from '@components/public/Header'
-import removeIcon from '@assets/remove.png'
-import UnitEspec from '@components/Especialidades/unitEspecialidade'
-import Loading from '@components/public/Loading'
-import { getCookie } from '@services/cookies'
-
+import Nav from '@components/public/Nav.jsx'
+import UnitEspec from '@components/Especialidades/unitEspecialidade.jsx'
+import Loading from '@components/public/Loading.jsx'
+import { getCookie } from '@services/cookies.js'
 import { useEffect, useState } from 'react'
-import { Await } from 'react-router-dom'
+
 import TextArea from 'antd/es/input/TextArea'
-import { MinusCircleFilled, MinusCircleTwoTone } from '@ant-design/icons'
+import { MinusCircleFilled } from '@ant-design/icons'
 import { ColorPicker } from 'antd'
 
 // https://www.delftstack.com/pt/howto/react/for-loop-in-react/

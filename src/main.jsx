@@ -4,7 +4,7 @@ import AuthProvider from '@context/authContext.jsx';
 import AppRoutes from "./router/routes.jsx";
 import { PreferenciasProvider } from '@context/PreferenciasContext.jsx';
 import './index.css'
-import { UsuarioProvider } from './context/UsuarioContext';
+import { UsuarioProvider } from './context/UsuarioContext.jsx';
 
 function App() {
     return (

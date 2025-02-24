@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import Nav from "../components/public/Nav";
-import { getCookie } from '@services/cookies'
-import { getOrdensAtivasPorTecnico } from "../services/backend/ordemAPI";
+import Nav from "../components/public/Nav.jsx";
+import { getCookie } from '@services/cookies.js'
+import { getOrdensAtivasPorTecnico } from "../services/backend/ordemAPI.js";
 
 {/* Carregar atendimentos relacionados ao tecnico */}
 export default function MeusAtendimentos() {

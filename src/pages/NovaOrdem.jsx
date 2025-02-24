@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react"
-import { getCookie } from "@services/cookies"
-import Header from "@components/public/Header"
-import Nav from "@components/public/Nav"
-import { getClientes } from '@backend/clientesAPI'
-import { getFuncionarioPorID, getTecnicos } from "@backend/funcionariosAPI"
+import { getCookie } from "@services/cookies.js"
+import Nav from "@components/public/Nav.jsx"
+import { getClientes } from '@backend/clientesAPI.js'
 import '@styles/ordens/novaOrdem.css'
 import { getServicos } from "@backend/servicosAPI"
 import { postNovaOrdem } from "@backend/ordemAPI"

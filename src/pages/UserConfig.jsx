@@ -1,15 +1,13 @@
-import Nav from '@components/public/Nav'
-import Header from '@components/public/Header'
+import Nav from '@components/public/Nav.jsx'
 import '@styles/userConfig.css'
 import { useEffect, useState } from 'react'
-import Loading from '@components/public/Loading'
-import { getCookie, setCookie } from '@services/cookies'
-import { getDeployStatus } from '@services/renderAPI'
-import { usePreferencias } from '@context/PreferenciasContext'
-import ChangeInfos from '../components/UserConfig/ChangeInfos'
-import ChangeSenha from '../components/UserConfig/ChangeSenha'
-import ChangeEmail from '../components/UserConfig/ChangeEmail'
-import { getUsuarioContext } from '../context/UsuarioContext'
+import Loading from '@components/public/Loading.jsx'
+import { getDeployStatus } from '@services/renderAPI.js'
+import { usePreferencias } from '@context/PreferenciasContext.jsx'
+import ChangeInfos from '../components/UserConfig/ChangeInfos.jsx'
+import ChangeSenha from '../components/UserConfig/ChangeSenha.jsx'
+import ChangeEmail from '../components/UserConfig/ChangeEmail.jsx'
+import { getUsuarioContext } from '../context/UsuarioContext.jsx'
 
 function UserConfig() {
     const data = new Date()

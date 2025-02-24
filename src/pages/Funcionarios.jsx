@@ -10,10 +10,9 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { isMobile } from 'react-device-detect'
 
-import { Pagination, Skeleton, Input, Select, Button, Modal, Dropdown } from 'antd'
-import { EditFilled, OrderedListOutlined, CloseOutlined, FilterFilled, SearchOutlined, DownOutlined, UnorderedListOutlined } from '@ant-design/icons'
+import { Pagination, Skeleton, Dropdown } from 'antd'
+import { EditFilled, OrderedListOutlined, CloseOutlined, FilterFilled, SearchOutlined, DownOutlined } from '@ant-design/icons'
 
-import Header from '@components/public/Header.jsx'
 import Nav from '@components/public/Nav.jsx'
 import Edit from '@assets/edit-text.png'
 import Down from '@assets/dark/down.png' 

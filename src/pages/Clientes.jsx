@@ -143,6 +143,9 @@ function Clientes() {
                         <button onClick={() => handleShowNovoCliente()}>Novo cliente</button>
                     </div> : ''
                 }
+                {
+                    !clientes ? 
+                    <Loading></Loading> :
                 <table id='tabelaClientes'>
                     <thead>
                     <tr id='cabecalho'>
@@ -154,8 +157,6 @@ function Clientes() {
                     </thead>
                     <tbody id='listClientes'>
                     {
-                        !clientes ? 
-                        <Loading></Loading> :
                         clientes.map(cliente => (
                             <tr key={cliente.id} className='clientes'>
                                 <td className='nome'>{cliente.nome}</td>
@@ -202,6 +203,7 @@ function Clientes() {
                     }
                     </tbody>
                 </table>
+                }
                 <div className='paginacao'>
                     {
                         !reqstClientes ? '' :

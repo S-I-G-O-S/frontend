@@ -5,13 +5,12 @@ import { cepAPI } from '@services/cepAPI.js'
 
 import '@styles/funcionario.css'
 import Nav from '@components/public/Nav.jsx'
-import Header from '@components/public/Header.jsx'
 import Loading from '@components/public/Loading.jsx'
 import { getCookie } from '@services/cookies.js'
 
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { notification, Popconfirm, Input, Button, Select } from 'antd';
+import { notification, Popconfirm } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 
 function Funcionario() {
@@ -594,22 +593,22 @@ function Funcionario() {
             }
             {
                 viewSenha ?
-                    <div id='shadowBG'>
-                        <section id='secTempSenha'>
-                            <h2>Definindo senha temporária</h2>
-                            <p>Esta será a senha fornecida ao funcionário para seu primeiro acesso. </p>
-                            <div>
-                                <input type="text" name="" id=""
-                                    value={funcionario.senha || ""}
-                                    onChange={(e) => handleChangeDados(e.target.value, "senha")} />
-                                <button>Gerar senha automatica</button>
-                            </div>
-                            <div>
-                                <button onClick={setViewSenha(false)}>voltar</button>
-                                <button onClick={handleSalvar}>salvar</button>
-                            </div>
-                        </section>
-                    </div> : ''
+                <div id='shadowBG'>
+                    <section id='secTempSenha'>
+                        <h2>Definindo senha temporária</h2>
+                        <p>Esta será a senha fornecida ao funcionário para seu primeiro acesso. </p>
+                        <div>
+                            <input type="text" name="" id=""
+                                value={funcionario.senha || ""}
+                                onChange={(e) => handleChangeDados(e.target.value, "senha")} />
+                            <button>Gerar senha automatica</button>
+                        </div>
+                        <div>
+                            <button onClick={setViewSenha(false)}>voltar</button>
+                            <button onClick={handleSalvar}>salvar</button>
+                        </div>
+                    </section>
+                </div> : ''
             }
         </div>
     )
