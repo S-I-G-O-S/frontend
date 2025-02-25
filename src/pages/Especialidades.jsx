@@ -203,14 +203,14 @@ function Especialidades() {
             } else {
                 result = await putServico(servicoAberto, arrayEspecs)
             }
-            if (result.success) {
-                window.alert('Alterações salvas com sucesso!')
-                fecharEspec()
-                fecharServ()
-            } else {
+            if (!result.success) {
                 window.alert("Não foi possivel salvar este serviço.")
                 console.error(result.error)
+                return
             }
+            window.alert('Alterações salvas com sucesso!')
+            fecharEspec()
+            fecharServ()
             console.warn(servicoAberto)
             return 
         }
@@ -222,11 +222,11 @@ function Especialidades() {
             }
             
             const result = await deleteEspec(especAberta.id);
-            if (result.success) {
-                setEspecialidades((prev) => prev.filter((esp) => esp.id !== especAberta.id))
-            } else {
-                setErro(result.error)
-            }
+            if (!result.success) {
+                console.error(result.error)
+                return
+            } 
+            setEspecialidades((prev) => prev.filter((esp) => esp.id !== especAberta.id))
             fecharEspec()
         }
     }
@@ -314,16 +314,13 @@ function Especialidades() {
             })
         } else {
         //  Serviço existente
-            try {
-                const result = await getServicoPorID(idServ)
-                setServicoAberto(result.data)
-                // if (!servicoAberto) {
-                //     console.error('Erro ao abrir serviço.')
-                //     return;
-                // }
-            } catch (error) {
-                console.error(error.message)
+            const result = await getServicoPorID(idServ)
+                
+            if (!result.success) {
+                console.error(result.error)
+                return
             }
+            setServicoAberto(result.response.data)
         }
         console.log("Serviço do id " + idServ +" foi aberto")
         fecharEspec()
@@ -351,26 +348,23 @@ function Especialidades() {
         fetchData()
     }
     const fetchEspecialidades = async () => {
-        try {
-            const response = await getEspecialidades()
-            setReqstEspecialidades(response)
-            setEspecialidades(response.data.content)
-        } catch (error) {
-            console.error(error.message)
+        const result = await getEspecialidades()
+        if (!result.success) {
+            console.error(result.error)
+            return
         }
+        setReqstEspecialidades(result.response)
+        setEspecialidades(result.response.data.content)
     }
     const fetchServicos = async () => {
-        try {
-            const data = await getServicos()
-            setReqstServicos(data)
-            setServicos(data.content)
+        const result = await getServicos()
         
-        } catch (error) {
-            setErro(error.message)
+        if (!result.success) {
+            console.error(result.error)
+            return
         }
-    }
-    const fetchServico = async (idServ) => {
-        
+        setReqstServicos(result.response.data)
+        setServicos(result.response.data.content)
     }
     useEffect(() => {
         if (erro) {

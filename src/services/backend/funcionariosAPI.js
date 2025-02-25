@@ -8,9 +8,9 @@ export const getFuncionarios = async () => {
                 'Content-Type': 'application/json',
             },
         })
-        return response
+        return { success: true, response }
     } catch (error) {
-        throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
+        return { success: false, error }
     }
 }
 export const getFuncionariosDisponiveis = async () => {
@@ -35,9 +35,9 @@ export const getPageFuncionarios = async (pagina, filtros) => {
                 'Content-Type': 'application/json',
             },
         })
-        return response
+        return { success: true, response }
     } catch (error) {
-        throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
+        return { success: false, error }
     }
 }
 export const getTecnicos = async () => {
@@ -47,9 +47,9 @@ export const getTecnicos = async () => {
                 'Content-Type': 'application/json',
             },
         })
-        return response
+        return { success: true, response }
     } catch (error) {
-        throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
+        return { success: false, error }
     }
 }
 export const getFuncionarioPorID = async (id) => {
@@ -70,12 +70,9 @@ export const deleteFuncionario = async (id) => {
     try {
         const response = await axios.delete(`${config.url}/api/funcionarios/${id}`)
         console.warn(response)
-        return { success: true }
+        return { success: true, response }
     } catch (error) {
-        return {
-            success: false,
-            error: `Erro ao deletar: ${error.response?.data?.message || error.message}`,
-        }
+        return { success: false, error }
     }
 }
 
@@ -95,32 +92,20 @@ export const postFuncionario = async (funcionario, especialidades) => {
             celular: funcionario.celular,
             cargo: funcionario.cargo,
             endereco: {
-                  cep: formatedCEP,
-                  logradouro: funcionario.endereco.logradouro,
-                  numero: funcionario.endereco.numero,
-                  bairro: funcionario.endereco.bairro,
-                  cidade: funcionario.endereco.cidade,
-                  uf: funcionario.endereco.uf,
-                  complemento: funcionario.endereco.complemento,
+                cep: formatedCEP,
+                logradouro: funcionario.endereco.logradouro,
+                numero: funcionario.endereco.numero,
+                bairro: funcionario.endereco.bairro,
+                cidade: funcionario.endereco.cidade,
+                uf: funcionario.endereco.uf,
+                complemento: funcionario.endereco.complemento,
             },
-            // {
-            //     cep: f.endereco.cep,
-            //     logradouro: f.endereco.logradouro,
-            //     numero: f.endereco.numero,
-            //     bairro: f.endereco.bairro,
-            //     cidade: f.endereco.cidade,
-            //     uf: f.endereco.uf,
-            //     complemento: f.endereco.complemento
-            // },
             especialidades
         })
         
-        return { success: true, data: response.data }
+        return { success: true, response }
     } catch (error) {
-        return {
-            success: false,
-            error: `Erro: ${error.response?.data?.message || error.message}`,
-        }
+        return { success: false, error }
     }
 }
 
@@ -147,11 +132,8 @@ export const putFuncionario = async (funcionario, especialidades) => {
             },
             especialidades: especialidades
         })
-        return { success: true, data: response.data }
+        return { success: true, response }
     } catch (error) {
-        return {
-            success: false,
-            error: `Erro ao salvar: ${error.response?.data?.message || error.message}`,
-        }
+        return { success: false, error }
     }
 }

@@ -44,11 +44,12 @@
 #secAtalhos {
     background-color: transparent;
     #contAtalhos {
-        background-color: var(--marrom1);
+        background-color: rgba(0, 0, 0, 0.1);
+        border-color: rgba(0, 0, 0, 0.1);
         .atalhos {
             color: var(--marrom1);
             background-color: var(--salmao1);
-            border-color: var(--salmao1);
+            border-color: var(--laranja);
         }
         .atalhos:hover {
             background-color: var(--salmao2);

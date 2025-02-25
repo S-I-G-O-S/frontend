@@ -8,9 +8,9 @@ export const getServicos = async () => {
                 'Content-Type': 'application/json',
             },
         })
-        return response.data
+        return { success: true, response }
     } catch (error) {
-        throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
+        return { success: false, error }
     }
 }
 export const getServicoPorID = async (id) => {
@@ -20,21 +20,18 @@ export const getServicoPorID = async (id) => {
                 'Content-Type': 'application/json',
             },
         })
-        return response
+        return { success: true, response }
     } catch (error) {
-        throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
+        return { success: false, error }
     }
 }
 
 export const deleteServico = async (id) => {
     try {
-        await axios.delete(`${config.url}/api/servicos/${id}`)
-        return { success: true }
+        const response = await axios.delete(`${config.url}/api/servicos/${id}`)
+        return { success: true, response }
     } catch (error) {
-        return {
-            success: false,
-            error: `Erro ao deletar: ${error.response?.data?.message || error.message}`,
-        }
+        return { success: false, error }
     }
 }
 
@@ -45,12 +42,9 @@ export const postServico = async (servico, especs) => {
             descricao: servico.descricao,
             especialidades: especs
         })
-        return { success: true, data: response.data }
+        return { success: true, response }
     } catch (error) {
-        return {
-            success: false,
-            error: `Erro: ${error.response?.data?.message || error.message}`,
-        }
+        return { success: false, error }
     }
 }
 export const putServico = async (servico, especs) => {
@@ -66,11 +60,8 @@ export const putServico = async (servico, especs) => {
             descricao: servico.descricao,
             especialidades: especs
         })
-        return { success: true, data: response }
+        return { success: true, response }
     } catch (error) {
-        return {
-            success: false,
-            error: `Erro ao salvar: ${error.response?.data?.message || error.message}`,
-        }
+        return { success: false, error }
     }
 }

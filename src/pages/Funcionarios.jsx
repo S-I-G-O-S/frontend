@@ -19,12 +19,14 @@ import Down from '@assets/dark/down.png'
 import Up from '@assets/dark/up.png'
 import Loading from '@components/public/Loading.jsx'
 
+// TODO Substituir Dropdown por abrir uma modal com informações do usuario e link para a pag de edição do funcionario
 function Funcionarios() {
     const navigate = useNavigate()
     const [usuario, setUsuario] = useState(() => {
         const cookieUsuario = getCookie('usuario')
         return cookieUsuario ? cookieUsuario : ''
     })
+    const [loadingRows, setLoadingRows] = useState(false)
     const [reqstFuncionarios, setReqstFuncionarios] = useState()
     const [funcionarios, setFuncionarios] = useState()
     const [especialidades, setEspecialidades] = useState()
@@ -215,24 +217,25 @@ function Funcionarios() {
         fetchFuncionarios(0)
     }
     const fetchEspecialidades = async () => {
-        try {
-            const response = await getEspecialidades()
-            setEspecialidades(response.data.content)
-            console.warn(response)
-        } catch (error) {
+        const result = await getEspecialidades()
+        if (!result.success)  {
             console.error(error.message)
             return
         }
+        setEspecialidades(result.response.data.content)
+        console.warn(result.response)
     }
     const fetchFuncionarios = async (pagina) => {
-        try {
-            const result = await getPageFuncionarios(pagina, filtros)
-            setReqstFuncionarios(result)
-            setFuncionarios(result.data.content)
-            console.warn(result)
-        } catch (error) {
-            console.log(error.message)
+        setLoadingRows(true)
+        const result = await getPageFuncionarios(pagina, filtros)
+        if (!result.success) {
+            console.error(result.error)
+            return
         }
+        setReqstFuncionarios(result.response)
+        setFuncionarios(result.response.data.content)
+        console.warn(result.response )
+        setLoadingRows(false)
     }
     useEffect(() => {
         console.clear()
@@ -278,15 +281,6 @@ function Funcionarios() {
                                 <SearchOutlined style={{color: '#fcd8b9'}}/>
                             </button>
                         </div>
-                        {/* <Button 
-                            size='small'
-                            type="text" 
-                            icon={<FilterFilled />}  
-                            iconPosition={'end'}
-                            onClick={handleChangeContFiltros}
-                        >
-                            Filtros
-                        </Button> */}
                         <button id="bttFiltros" onClick={handleChangeContFiltros}>
                             <p>
                                 filtros
@@ -354,7 +348,7 @@ function Funcionarios() {
                         </thead>
                         <tbody className='tbody'>
                             {
-                                !funcionarios ? 
+                                loadingRows || !funcionarios ? 
                                 <tr>
                                     <td colSpan='6'>
                                     <Loading/>
@@ -388,32 +382,32 @@ function Funcionarios() {
                                         { 
                                             especialidades &&
                                             <Dropdown
-                                            placement='bottom'
-                                            menu={{
-                                                items: [
-                                                    {
-                                                        key: 1,
-                                                        label: (
-                                                            <div onClick={() => handleEditClick(funcionario.id)}>editar</div>
-                                                        ),
-                                                        icon: <EditFilled style={{color: '#26110D'}}/>
-                                                    },
-                                                    {
-                                                        key: '2',
-                                                        label: 'especialidades',
-                                                        children: listEspecialidades(funcionario.especialidades),
-                                                        icon: <OrderedListOutlined style={{color: '#26110D'}}/>
-                                                    },
-                                                ],
-                                                style: {
-                                                    backgroundColor: '#F2E8DF',
-                                                    fontWeight: '500'
-                                                }
-                                            }}
-                                            overlayStyle={{
-                                                border: "0.1rem solid #26110D",
-                                                borderRadius: '0.5rem'
-                                            }}
+                                                placement='bottom'
+                                                menu={{
+                                                    items: [
+                                                        {
+                                                            key: 1,
+                                                            label: (
+                                                                <div onClick={() => handleEditClick(funcionario.id)}>editar</div>
+                                                            ),
+                                                            icon: <EditFilled style={{color: '#26110D'}}/>
+                                                        },
+                                                        {
+                                                            key: '2',
+                                                            label: 'especialidades',
+                                                            children: listEspecialidades(funcionario.especialidades),
+                                                            icon: <OrderedListOutlined style={{color: '#26110D'}}/>
+                                                        },
+                                                    ],
+                                                    style: {
+                                                        backgroundColor: '#F2E8DF',
+                                                        fontWeight: '500'
+                                                    }
+                                                }}
+                                                overlayStyle={{
+                                                    border: "0.1rem solid #26110D",
+                                                    borderRadius: '0.5rem'
+                                                }}
                                             >
                                                 {/* <img id={`imgSetaSkillsFunc${funcionario.id}`} className='imgSetaSKills' src={Down} alt="ver esp :ecialidades"/> */}
                                                 <DownOutlined style={{color: '#26110D'}}/>

@@ -8,21 +8,18 @@ export const getEspecialidades = async () => {
                 'Content-Type': 'application/json',
             },
         })
-        return response
+        return { success: true, response }
     } catch (error) {
-        throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
+        return { success: false, error }
     }
 }
 export const deleteEspec = async (id) => {
     try {
         const response = await axios.delete(`${config.url}/api/especialidades/${id}`)
         console.log(response)
-        return { success: true }
+        return { success: true, response }
     } catch (error) {
-        return {
-            success: false,
-            error: `Erro ao deletar: ${error.response?.data?.message || error.message}`,
-        }
+        return { success: false, error }
     }
 }
 export const postEspecialidade = async (espec) => {
@@ -32,12 +29,9 @@ export const postEspecialidade = async (espec) => {
             descricao: espec.descricao,
             cor: espec.cor,
         })
-        return { success: true, response: response }
+        return { success: true, response }
     } catch (error) {
-        return {
-            success: false,
-            error: `Erro: ${error.response?.data?.message || error.message}`,
-        }
+        return { success: false, error }
     }
 }
 export const putEspecialidade = async (espec) => {
@@ -48,11 +42,8 @@ export const putEspecialidade = async (espec) => {
             descricao: espec.descricao,
             cor: espec.cor
         })
-        return { success: true, response: response }
+        return { success: true, response }
     } catch (error) {
-        return {
-            success: false,
-            error: `Erro ao salvar: ${error.response?.data?.message || error.message}`,
-        }
+        return { success: false, error }
     }
 }
