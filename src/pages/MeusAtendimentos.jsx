@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Nav from "../components/public/Nav.jsx";
+import Loading from '@components/public/Loading.jsx'
 import { getCookie } from '@services/cookies.js'
 import { getOrdensAtivasPorTecnico } from "../services/backend/ordemAPI.js";
 
@@ -9,18 +10,35 @@ export default function MeusAtendimentos() {
         const cookieUsuario = getCookie('usuario')
         return cookieUsuario ? cookieUsuario : ''
     })
-    const [ordensAtivas, setOrdensAtivas] = useState([])
-    const fecthOrdensAtivas = async () => {
+    const [loading, setLoading] = useState({
+        ordensAbertas: false,
+        ordensFechadas: false
+    })
+    const [ordensAbertas, setOrdensAbertas] = useState([])
+    const [ordensFechadas, setOrdensFechadas] = useState([])    
+    
+    const changeLoadings = (field, value) => {
+        setLoading(prevState => ({
+            ...prevState,
+            [field]: value 
+        }))
+    }
+    const fecthOrdensFechadas = async () => {
+
+    }
+    const fecthOrdensAbertas = async () => {
+        changeLoadings('ordensAbertas', true)
         const result = await getOrdensAtivasPorTecnico(usuario.id)
         if (!result.success) {
             console.error(result.error)
             return
         }
         console.warn(result.response)
-        setOrdensAtivas(result.response.data.content)
+        changeLoadings('ordensAbertas', false)
+        setOrdensAbertas(result.response.data.content)
     }
     useEffect(() => {
-        fecthOrdensAtivas()
+        fecthOrdensAbertas()
     }, [])
 
     return (
@@ -28,13 +46,20 @@ export default function MeusAtendimentos() {
         <Nav cargo={usuario?.cargo || ''}></Nav>
         <main id="mainAtendimentos">
             {/* atendimentos abertos */}
-            <section> 
+            <section id="secOrdensAbertas"> 
             {
-
+                loading.ordensAbertas  ? 
+                    <Loading></Loading> : 
+                    (!ordensAbertas || ordensAbertas.length==0) ?
+                        <div>sem ordens ativas</div> : 
+                        // Listagem das ordens
+                        <div>
+                            listagem das ordens
+                        </div>
             }
-            </section>
+            </section >
             {/* atendimentos finalizados ou cancelados */}
-            <section>
+            <section id="secOrdensFechadas">
             {
                 
             }
