@@ -6,6 +6,7 @@ import InfosUser from '@components/Home/InfosUser.jsx'
 import FuncsDisponiveis from '@components/Home/FuncsDisponiveis.jsx'
 import OrdensPendentes from '@components/Home/OrdensPendentes.jsx'
 import OrdensEmAtendimento from '@components/Home/OrdensEmAtendimento.jsx'
+import OrdensEmAtendimentoTecnico from '@components/Home/OrdensEmAtendimentoTecnico.jsx'
 import { getCookie } from '@services/cookies.js'
 import Atalhos from '@components/Home/Atalhos.jsx'
 
@@ -60,10 +61,14 @@ function Home() {
             <section id='secOrdens'>
                 {/* Ordens Abertas */}
                 <OrdensPendentes ></OrdensPendentes>
-                        {/* Ordens em Atendimento */}
-                    {(usuario.cargo==='BASE' || usuario.cargo==='ADM' || usuario.cargo==='DEV') && 
-                        <OrdensEmAtendimento></OrdensEmAtendimento>
-                    }
+                {/* Ordens em Atendimento */}
+                {(usuario.cargo==='BASE' || usuario.cargo==='ADM' || usuario.cargo==='DEV') && 
+                    <OrdensEmAtendimento></OrdensEmAtendimento>
+                }
+                {
+                    (usuario.cargo=="TECNICO") && 
+                    <OrdensEmAtendimentoTecnico></OrdensEmAtendimentoTecnico>
+                }
             </section>
             </>)
         }

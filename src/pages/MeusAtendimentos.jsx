@@ -5,6 +5,14 @@ import { getCookie } from '@services/cookies.js'
 import { getOrdensAtivasPorTecnico } from "../services/backend/ordemAPI.js";
 
 {/* Carregar atendimentos relacionados ao tecnico */}
+
+/*
+    TODO Ajustar endpoint ordem/atendimentos:
+        Atualmente ele insere a dtAtendimento apartir do POST
+        Seria bom atualizar assim que dsAtendimento for fornecido
+        Por enquanto utilizar este endpoint, pois o tecnico não tem permissão de alterar a ordem
+        
+*/
 export default function MeusAtendimentos() {
     const [usuario, setUsuario] = useState(() => {
         const cookieUsuario = getCookie('usuario')

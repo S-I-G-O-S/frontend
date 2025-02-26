@@ -6,7 +6,7 @@ import '@styles/ordens/ordem.css'
 import { getAtendimentos, getOrdensPorID } from "@backend/ordemAPI.js";
 import { useEffect, useState } from "react";
 import { ExceptionOutlined } from '@ant-design/icons'
-import { putAtenderOrdem, putCancelOrdem } from "../services/backend/ordemAPI.js";
+import { postAtendimento, putAtenderOrdem, putCancelOrdem } from "../services/backend/ordemAPI.js";
 import { notification, Popconfirm } from "antd";
 
 function Ordem() {
@@ -48,13 +48,13 @@ function Ordem() {
         console.warn(result)
     }
     const fetchAtendimentos = async (id) => {
-        try {
-            const result = await getAtendimentos(id)
-            setAtendimentos(result.data.content)
-            console.warn(result)
-        } catch (error) {
-            console.error(error)
+        const result = await getAtendimentos(id)
+        if (!result.success) {
+            console.error(result.error)
+            return
         }
+        setAtendimentos(result.response.data.content)
+        console.warn(result.response)
     }
     
     const handleAtenderOrdem = async () => {
@@ -69,9 +69,7 @@ function Ordem() {
         }
         // verificar se o funcionario é um técnico
         if (usuario.cargo!=='TECNICO') {return}
-        console.log('debug idTecnico')
-        console.warn(usuario.id)
-        const result = await putAtenderOrdem(ordem, usuario.id)
+        const result = await postAtendimento(ordem.id)
         if (!result.success) {
             console.error(result.error)
             return
@@ -95,8 +93,9 @@ function Ordem() {
             console.error(result.error)
             return
         }
-        setOrdem(result.data)
-        setEditDados(result.data) // Dados exibidos na edição da ordem
+        setOrdem(result.response.data)
+        setEditDados(result.response.data)
+        console.warn(result.response)
     }
     useEffect(() => {
         console.clear()

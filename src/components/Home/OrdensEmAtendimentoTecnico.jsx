@@ -2,10 +2,12 @@ import { useEffect, useState } from "react"
 import Loading from "../public/Loading"
 import { Card } from "antd"
 import { Link, useNavigate } from "react-router-dom"
-import { getOrdensForHome } from "../../services/backend/ordemAPI"
+import { getOrdensForHome, getOrdensPorTecnicoForHome } from "../../services/backend/ordemAPI"
+import { getUsuarioContext } from "../../context/UsuarioContext"
 
 function OrdensEmAtendimento() {
     const navigate = useNavigate()
+    const {usuario} = getUsuarioContext()
     const [ordensEmExecucao, setOrdensEmExecucao] = useState(null)
     const [reqstOrdensEmExecucao, setReqstOrdensEmExecucao] = useState(null)
     const converterDtHr = (dataHora) => {
@@ -27,9 +29,10 @@ function OrdensEmAtendimento() {
         navigate(`/ordem?id=${idOrdem}`)
     }
     const fetchOrdens = async () => {
-        const result = await getOrdensForHome('EM_EXECUCAO')
+        console.log(usuario.id)
+        const result = await getOrdensPorTecnicoForHome(usuario.id)
         if (!result.success) {
-            console.error(error)
+            console.error(result.error)
             return
         }
         setReqstOrdensEmExecucao(result.response)
@@ -37,16 +40,6 @@ function OrdensEmAtendimento() {
         console.warn(result.response)
     }
     useEffect(() => {
-        // setOrdensEmAtendimento([
-        //     {
-        //         id: 1,
-        //         dtAbertura: "21/11/2024",
-        //         cliente: "Cliente 1",
-        //         servico: 'Configuração de Redes',
-        //         endereco: "R. XV de novembro, 16 - Santos-SP",
-        //         tecnico: "Jusenir Almeida"
-        //     }
-        // ])
         fetchOrdens()
     }, [])
     return !ordensEmExecucao ? <Loading />  : (

@@ -69,14 +69,14 @@ export const getOrdensPorCliente = async (pagina, idCliente) => {
 }
 export const getOrdensPorTecnicoForHome = async (idTecnico) => {
     try {
-        const response = await axios.get(`${config.url}/api/ordens?size=5&funcionario=${idTecnico}&situacao="EM_EXECUCAO"`, {
+        const response = await axios.get(`${config.url}/api/ordens?size=5&funcionario=${idTecnico}&situacao=EM_EXECUCAO`, {
             headers: {
                 'Content-Type': 'application/json',
             },
         })
-        return { success: true, response: response }
-    } catch (err) {
-        return { success: false, error: err }
+        return { success: true, response }
+    } catch (error) {
+        return { success: false, error }
     }
 }
 export const getOrdensAtivasPorTecnico = async (idTecnico) => {
@@ -86,9 +86,9 @@ export const getOrdensAtivasPorTecnico = async (idTecnico) => {
                 'Content-Type': 'application/json',
             },
         })
-        return { success: true, response: response }
-    } catch (err) {
-        return { success: false, error: err }
+        return { success: true, response }
+    } catch (error) {
+        return { success: false, error }
     }
 }
 export const getAtendimentos = async (id) => {
@@ -98,9 +98,9 @@ export const getAtendimentos = async (id) => {
                 'Content-Type': 'application/json',
             },
         })
-        return response
+        return { success: true, response }
     } catch (error) {
-        throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
+        return { success: false, error }
     }
 }
 export const getOrdensPorID = async (id) => {
@@ -110,9 +110,9 @@ export const getOrdensPorID = async (id) => {
                 'Content-Type': 'application/json',
             },
         })
-        return { success: true, data: response.data }
+        return { success: true, response }
     } catch (error) {
-        return { success: false, error: error }
+        return { success: false,  error }
     }
 }
 
@@ -173,15 +173,13 @@ export const putCancelOrdem = async (ordem) => {
     }
 }
 export const postAtendimento = async (idOrdem) => {
+    console.log(idOrdem)
     try {
         const response = await axios.post(`${config.url}/api/ordens/atendimentos`, {
             ordem: idOrdem
         })
         return { success: true, response: response }
     } catch (error) {
-        return {
-            success: false,
-            error: `Erro: ${error.response?.data?.message || error.message}`,
-        }
+        return { success: false, error }
     }
 }
