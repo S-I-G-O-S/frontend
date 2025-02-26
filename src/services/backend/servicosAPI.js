@@ -25,7 +25,6 @@ export const getServicoPorID = async (id) => {
         return { success: false, error }
     }
 }
-
 export const deleteServico = async (id) => {
     try {
         const response = await axios.delete(`${config.url}/api/servicos/${id}`)
@@ -34,7 +33,6 @@ export const deleteServico = async (id) => {
         return { success: false, error }
     }
 }
-
 export const postServico = async (servico, especs) => {
     try {
         const response = await axios.post(`${config.url}/api/servicos`, {

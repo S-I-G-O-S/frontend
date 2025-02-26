@@ -10,19 +10,20 @@ import { postAtendimento, putAtenderOrdem, putCancelOrdem } from "../services/ba
 import { notification, Popconfirm } from "antd";
 
 function Ordem() {
+    const { usuario } = getUsuarioContext()
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search)
     const idOrdem = searchParams?.get('id') ?? null
     const navigate = useNavigate()
-    const [usuario, setUsuario] = useState(() => {
-        const cookieUsuario = getCookie('usuario')
-        return cookieUsuario ? cookieUsuario : ''
-    })
+    // const [usuario, setUsuario] = useState(() => {
+    //     const cookieUsuario = getCookie('usuario')
+    //     return cookieUsuario ? cookieUsuario : ''
+    // })
     const [ordem, setOrdem] = useState(null)
     const [atendimentos, setAtendimentos] = useState(null)
     const [editMode, setEditMode] = useState(false)
     const [editDados, setEditDados] = useState({})
-
+    const [modalTecnicos, setModalTecnicos] = useState(false)
     const changeEditMode = () => {
         if (!editMode) {
             setEditMode(true)
@@ -56,7 +57,6 @@ function Ordem() {
         setAtendimentos(result.response.data.content)
         console.warn(result.response)
     }
-    
     const handleAtenderOrdem = async () => {
         /*
             * editar ordem e mudar 'funcionario' para o id do tecnico
@@ -80,6 +80,9 @@ function Ordem() {
             description: 'Bom trabalho',
             placement: 'bottomLeft',
         })
+    }
+    const handleDesignarTecnico = async () => {
+        
     }
     useEffect(() => {
         if (!ordem?.id) {
@@ -118,28 +121,28 @@ function Ordem() {
                 <aside id="asideAcoes">
                     <h2>Opções</h2>
                     <div id="contAcoes">
-                        {
-                            usuario.cargo==="BASE" || usuario.cargo==="ADM" || usuario.cargo==='DEV' &&
-                            <>
-                            <button>Designar técnico</button>
-                            <Popconfirm
-                                title=""
-                                description={`Deseja cancelar esta ordem?`}
-                                onConfirm={cancelarOrdem}
-                                onCancel={null}
-                                okText="sim"
-                                cancelText="não">     
-                                <button>Cancelar ordem</button>
-                            </Popconfirm>
-                            <button onClick={changeEditMode}>Alterar ordem</button>
-                            </>
-                        }
-                        {
-                            usuario.cargo==="TECNICO" &&
-                            (ordem.situacao==='PENDENTE' ||
-                            ordem.situacao==='RETORNO') &&
-                            <button onClick={handleAtenderOrdem}>atender ordem</button>
-                        }
+                    {
+                        usuario.cargo==="BASE" || usuario.cargo==="ADM" || usuario.cargo==='DEV' &&
+                        <>
+                        <button>Designar técnico</button>
+                        <Popconfirm
+                            title=""
+                            description={`Deseja cancelar esta ordem?`}
+                            onConfirm={cancelarOrdem}
+                            onCancel={null}
+                            okText="sim"
+                            cancelText="não">     
+                            <button>Cancelar ordem</button>
+                        </Popconfirm>
+                        <button onClick={changeEditMode}>Alterar ordem</button>
+                        </>
+                    }
+                    {
+                        usuario.cargo==="TECNICO" &&
+                        (ordem.situacao==='PENDENTE' ||
+                        ordem.situacao==='RETORNO') &&
+                        <button onClick={handleAtenderOrdem}>atender ordem</button>
+                    }
                     </div>
                 </aside>
                 <section id="secPrincipal">

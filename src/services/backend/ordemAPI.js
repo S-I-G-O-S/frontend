@@ -1,6 +1,7 @@
 import axios from 'axios'
 import config from '../config'
 
+//  GET
 export const getOrdens = async () => {
     try {
         const response = await axios.get(`${config.url}/api/ordens`, {
@@ -115,7 +116,18 @@ export const getOrdensPorID = async (id) => {
         return { success: false,  error }
     }
 }
-
+//  POST
+export const postAtendimento = async (idOrdem) => {
+    console.log(idOrdem)
+    try {
+        const response = await axios.post(`${config.url}/api/ordens/atendimentos`, {
+            ordem: idOrdem
+        })
+        return { success: true, response: response }
+    } catch (error) {
+        return { success: false, error }
+    }
+}
 export const postNovaOrdem = async (ordem) => {
     try {
         const response = await axios.post(`${config.url}/api/ordens`, {
@@ -131,6 +143,7 @@ export const postNovaOrdem = async (ordem) => {
         }
     }
 }
+//  PUT
 
 export const putAtenderOrdem = async (ordem, idTecnico) => {
     // TODO ERRO 400
@@ -172,14 +185,4 @@ export const putCancelOrdem = async (ordem) => {
         return { success: false, error: err }
     }
 }
-export const postAtendimento = async (idOrdem) => {
-    console.log(idOrdem)
-    try {
-        const response = await axios.post(`${config.url}/api/ordens/atendimentos`, {
-            ordem: idOrdem
-        })
-        return { success: true, response: response }
-    } catch (error) {
-        return { success: false, error }
-    }
-}
+
