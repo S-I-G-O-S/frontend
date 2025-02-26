@@ -146,12 +146,6 @@ export const postNovaOrdem = async (ordem) => {
 //  PUT
 
 export const putAtenderOrdem = async (ordem, idTecnico) => {
-    // TODO ERRO 400
-    /* 
-        "JSON parse error: 
-        Cannot deserialize value of type `java.lang.Long` 
-        from Object value (token `JsonToken.START_OBJECT`)"
-    */
     console.log('debug put atender ordem')
     console.log('ordem id: ', ordem.id)
     console.warn('serviço id: ', ordem.servico.id)

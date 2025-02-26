@@ -13,6 +13,8 @@ import { useEffect, useState } from 'react'
 import { notification, Popconfirm } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 
+// TODO testar ZOD + Form Hook na validação de formularios
+
 function Funcionario() {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search)

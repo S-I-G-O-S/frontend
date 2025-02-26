@@ -2,7 +2,6 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { setCookie, getCookie } from "@services/cookies";
 import { getUsuario } from '../services/backend/usuarioAPI';
 
-// TODO Ainda não utilizado
 const UsuarioContext = createContext();
 
 export const UsuarioProvider = ({ children }) => {

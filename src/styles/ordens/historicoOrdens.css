@@ -25,7 +25,6 @@
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
-    /* TODO Add temas */
     background-color: var(--branco);
     border-color: var(--marrom1);
 }

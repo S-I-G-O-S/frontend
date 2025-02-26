@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { ExceptionOutlined } from '@ant-design/icons'
 import { postAtendimento, putAtenderOrdem, putCancelOrdem } from "../services/backend/ordemAPI.js";
 import { notification, Popconfirm } from "antd";
+import { getUsuarioContext } from "../context/UsuarioContext.jsx";
 
 function Ordem() {
     const { usuario } = getUsuarioContext()
@@ -226,7 +227,17 @@ function Ordem() {
                             </div>
                             :
                             (
-                                <div></div>
+                                <div id="contListAtendimentos">
+                                {
+                                    atendimentos.map(atendimento => (
+                                        <div className="itemListAtendimento">
+                                            <div>nome: {atendimento.funcionario}</div>
+                                            <div>data do atendimento: {atendimento.dtAtendimento}</div>
+                                            <div>descrição do atendimento: {atendimento.dsAtendimento || "sem descrição"}</div>
+                                        </div>
+                                    ))   
+                                }
+                                </div>
                             )
                         )
                     }

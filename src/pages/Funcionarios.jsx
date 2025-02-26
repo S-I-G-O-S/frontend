@@ -18,14 +18,17 @@ import Edit from '@assets/edit-text.png'
 import Down from '@assets/dark/down.png' 
 import Up from '@assets/dark/up.png'
 import Loading from '@components/public/Loading.jsx'
+import { getUsuarioContext } from '../context/UsuarioContext';
 
 // TODO Substituir Dropdown por abrir uma modal com informações do usuario e link para a pag de edição do funcionario
+//  SÓ O ADM E O PROPRIO TECNICO PODEM EDITAR O FUNCIONARIO
 function Funcionarios() {
     const navigate = useNavigate()
-    const [usuario, setUsuario] = useState(() => {
-        const cookieUsuario = getCookie('usuario')
-        return cookieUsuario ? cookieUsuario : ''
-    })
+    const { usuario } = getUsuarioContext()
+    // const [usuario, setUsuario] = useState(() => {
+    //     const cookieUsuario = getCookie('usuario')
+    //     return cookieUsuario ? cookieUsuario : ''
+    // })
     const [loadingRows, setLoadingRows] = useState(false)
     const [reqstFuncionarios, setReqstFuncionarios] = useState()
     const [funcionarios, setFuncionarios] = useState()

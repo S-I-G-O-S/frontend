@@ -3,12 +3,8 @@ import { NavLink } from 'react-router-dom'
 import navLeft  from '@assets/navLeft.png'
 import navRight  from '@assets/navRight.png'
 // import homeIcon from '@assets/homeIcon.png'
-import funcsIcon from '@assets/funcsIcon.png'
-import clientesIcon from '@assets/clientesIcon.png'
-import ordensIcon from '@assets/ordensIcon.png'
-import especsIcon from '@assets/tag.png'
 import { useEffect, useState } from 'react'
-import { HomeFilled, IdcardFilled, LogoutOutlined, ReadFilled, ScheduleFilled, SettingFilled, SettingOutlined, ShoppingFilled, TagFilled }  from '@ant-design/icons'
+import { HomeFilled, IdcardFilled, LeftCircleFilled, LogoutOutlined, ReadFilled, RightCircleFilled, ScheduleFilled, SettingFilled, SettingOutlined, ShoppingFilled, TagFilled }  from '@ant-design/icons'
 import { IconFuncionarios } from './IconsSVG'
 import { usePreferencias } from '@context/PreferenciasContext'
 import { logoutFunc } from '@backend/authAPI'
@@ -38,9 +34,18 @@ function Nav({ cargo }) {
     }
     return (
         <nav id='nav' className={sessPreferencias.abertoNav ? "navAberto" : "navFechado"}>
-            <img id="bttNav" 
+            {/* 
+                <RightCircleFilled />
+                <LeftCircleFilled /> 
+                */}
+            {
+                true ? 
+                <img id="bttNav" 
                 src={sessPreferencias.abertoNav ? navLeft : navRight}
                 onClick={changeNav} className={sessPreferencias.abertoNav ? "navFechar" : "navAbrir"}/>
+                :
+                <></>
+            }
             <div id='containerLinks'>
                 <NavLink
                     className={({ isActive }) => (isActive ? "links active" : "links ")}

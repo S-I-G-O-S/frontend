@@ -93,13 +93,6 @@ body {
         z-index: 999;
     }
 }
-/* TODO testar futuramente */
-/* .salmaoDark {
-
-}
-.salmaoLight {
-
-} */
 .ant-input-password {
     display: flex;
     align-items: center;

@@ -2,9 +2,11 @@
     #mainOrdem {
         grid-area: main;
         display: grid;
-        grid-template-columns: 1fr 3fr auto;
+        grid-template-columns: 2fr 3fr 2fr;
+        grid-template-areas: 
+            "acoes principal atendimentos";
         align-items: flex-start;
-        justify-content: center;
+        /* justify-content: center; */
         gap: 0.5rem;
         width: 100%;
         max-height: 98%;
@@ -33,6 +35,7 @@
     }
     #asideAcoes {
         display: flex;
+        grid-area: acoes;
         flex-direction: column;
         #contAcoes {
             display: flex;
@@ -53,6 +56,7 @@
     #secPrincipal {
         display: flex;
         flex-direction: column;
+        grid-area: principal;
         gap: 0.3rem;
         h2 {
             margin-bottom: 0.7rem;
@@ -92,6 +96,8 @@
         }
     }
     #secAtendimentos {
+        grid-area: atendimentos;
+
         #msgSemAtendimentos {
             display: flex;
             flex-direction: column;
@@ -160,6 +166,35 @@
         #msgSemAtendimentos {
             background-color: var(--salmao3);
             border-color: var(--salmao1);
+        }
+    }
+}
+@media screen and (width <= 950px) {
+    #pageOrdem >
+    #mainOrdem {
+        grid-template-columns: 3fr 2fr;
+        grid-template-rows: auto 1fr;
+        grid-template-areas: 
+        "acoes acoes"
+        "principal atendimentos";
+        
+        section, aside {
+            h2 {
+                font-size: .85rem;
+                margin-bottom: .4rem;
+            }
+        }
+        #asideAcoes {
+            flex-direction: column;
+            #contAcoes {
+                justify-content: space-evenly;
+                flex-direction: row;
+                padding: .3rem;
+                
+                button {
+                    width: 30%;
+                }
+            }
         }
     }
 }

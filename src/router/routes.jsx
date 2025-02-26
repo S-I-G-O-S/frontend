@@ -85,7 +85,6 @@ function AppRoutes() {
         }
     ]
     const rotasParaNaoAutenticados = [
-        //  TODO criar tela de acesso á pagina invalida ou pagina não encontrada
         {
             path: "/",
             element: <Login />,
