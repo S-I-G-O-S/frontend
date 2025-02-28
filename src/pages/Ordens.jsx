@@ -1,27 +1,21 @@
-import Header from "@components/public/Header.jsx"
 import Nav from "@components/public/Nav.jsx"
 import '@styles/ordens.css'
 import { useNavigate, useLocation } from "react-router-dom"
-import Hide from "@assets/hide.png"
-import { getCookie } from '@services/cookies.js'
-import { getOrdens, getOrdensPorSituacao, getPageOrdens } from "@backend/ordemAPI.js"
+import { getPageOrdens } from "@backend/ordemAPI.js"
 import Loading from "@components/public/Loading.jsx"
 
 import { useEffect, useState } from "react"
-import { CheckCircleOutlined, CloseCircleOutlined, CloseOutlined, DownOutlined, FieldTimeOutlined, LoadingOutlined, RollbackOutlined, ToolOutlined, UpOutlined } from '@ant-design/icons'
+import { CheckCircleOutlined, CloseCircleOutlined, CloseOutlined, FieldTimeOutlined, RollbackOutlined, ToolOutlined } from '@ant-design/icons'
 import { Pagination } from "antd"
+import { getUsuarioContext } from "../context/UsuarioContext.jsx";
 
 function Ordens() {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search)
     let situacaoParam = searchParams?.get('situacao') ?? ''
     const navigate = useNavigate()
+    const { usuario } = getUsuarioContext()
     const [ordemAberta, setOrdemAberta] = useState(null)
-    const [pendente, setPendente] = useState(null)
-    const [emExecucao, setEmExecucao] = useState(null)
-    const [retorno, setRetorno] = useState(null)
-    const [finalizada, setFinalizada] = useState(null)
-    const [cancelada, setCancelada] = useState(null)
     const [ordens, setOrdens] = useState(null)
     const [reqstOrdens, setReqstOrdens] = useState(null)
     const [filtros, setFiltros] = useState({
@@ -44,13 +38,6 @@ function Ordens() {
         funcionario: false,
         servico: false
     })
-    const [expandLists, setExpandLists] = useState({
-        pendente: false,
-        emExecucao: false,
-        retorno: false,
-        finalizada: false,
-        cancelada: false
-    })
     const [loadings, setLoadings] = useState({
         editarOrdem: false,
         situacao: false,
@@ -60,10 +47,10 @@ function Ordens() {
         bttCancelada: false,
         bttFinalizada: false
     })
-    const [usuario, setUsuario] = useState(() => {
+    /*const [usuario, setUsuario] = useState(() => {
         const cookieUsuario = getCookie('usuario')
         return cookieUsuario ? cookieUsuario : ''
-    })
+    })*/
     
     const converterDtHr = (dataHora) => {
         const [dia, mes, anoHora] = dataHora.split('-')
@@ -83,33 +70,9 @@ function Ordens() {
     //  SEC FILTRO GERAL
     const handleFecharFiltro = (tipoFiltro) => {
         setRender(prevState => ({
-            ...prev,
+            ...prevState,
             [tipoFiltro]: false
         }))
-    }
-    //  SEC FILTRO SERVICO
-    const handleAbrirFiltroServico = () => {
-        setRender({
-            cliente: false,
-            funcionario: false,
-            servico: true
-        })
-    }
-    //  SEC FILTRO FUNCIONARIO
-    const handleAbrirFiltroFuncionario = () => {
-        setRender({
-            cliente: false,
-            funcionario: true,
-            servico: false
-        })
-    }
-    //  SEC FILTRO CLIENTE
-    const handleAbrirFiltroCliente = () => {
-        setRender({
-            cliente: true,
-            funcionario: false,
-            servico: false
-        })
     }
     //  SEC ORDEM ABERTA
     const handleEditClick = (idOrdem) => {
@@ -117,26 +80,6 @@ function Ordens() {
     }
     const handleAbrirOrdem = (idOrdem) => {
         const ordemToAbrir = ordens.find(ordem => ordem.id == idOrdem)
-        
-        /*switch (tipo) {
-            case 'PENDENTE':
-                ordemToAbrir = pendente.find(ordem => ordem.id == idOrdem)
-                break;
-            case 'EM_EXECUCAO':
-                ordemToAbrir = emExecucao.find(ordem => ordem.id == idOrdem)
-                break;
-            case 'RETORNO':
-                ordemToAbrir = retorno.find(ordem => ordem.id == idOrdem)
-                break;
-            case 'FINALIZADA':
-                ordemToAbrir = finalizada.find(ordem => ordem.id == idOrdem)
-                break;
-            case 'CANCELADA':
-                ordemToAbrir = cancelada.find(ordem => ordem.id == idOrdem)
-                break;
-            default: console.warn('Erro de tipagem das ordens!')
-                break;
-        }*/
         if (!ordemToAbrir) {
             console.error('Erro ao abrir ordem!')
             return
@@ -152,9 +95,6 @@ function Ordens() {
     }
     useEffect(() => {
         console.clear()
-        console.log(ordemAberta)
-        if(filtros.situacao.is) {
-        }
         console.log('Filtrando por situação: '+ filtros.situacao.value)
         fetchOrdens(0)
     }, [filtros.situacao.value])
@@ -209,50 +149,11 @@ function Ordens() {
         }))
     }
     //  SEC 2
-    const handleChangeQTD = (value) => {
-        setFiltros(prevState => ({
-            ...prevState,
-            qtd: value
-        }))
-        fetchFuncionarios(0)
-    }
     const changePage = (current, pageSize) => {
         fetchOrdens(current - 1)
     }
 
     //  REQUISIÇÕES
-    const fetchOrdensSituacao = async (situacao) => {
-        try {
-            const response = await getOrdensPorSituacao(situacao)
-            const array = response.data.content
-            if (array?.length == 0) {
-                return
-            }
-            switch (situacao) {
-                case 'PENDENTE':
-                    setPendente(array)
-                    break;
-                case 'EM_EXECUCAO':
-                    setEmExecucao(array)
-                    break;
-                case 'RETORNO':
-                    setRetorno(array)
-                    break;
-                case 'FINALIZADA':
-                    setFinalizada(array)
-                    break;
-                case 'CANCELADA':
-                    setCancelada(array)
-                    break;
-                default: console.warn('Erro de tipagem das ordens!')
-                    break;
-            }
-            console.log('LISTANDO ORDENS ' + situacao + ':')
-            console.warn(array)
-        } catch (error) {
-            console.error(error.message)
-        }
-    }
     const fetchOrdens = async (pagina) => {
         try {
             const result = await getPageOrdens(pagina, filtros)
@@ -412,7 +313,7 @@ function Ordens() {
                                             <td className="cl2">{converterDtHr(ordem.dtAbertura)}</td>
                                             <td className="cl3">{ordem.cliente}</td>
                                             <td className="cl4">{ordem.funcionario || 'nenhum'}</td>
-                                            <td className="cl5">{ordem.situacao}</td>
+                                            <td className="cl5">{ordem.situacao=="EM_EXECUCAO" ? "EM EXECUÇÃO": ordem.situacao}</td>
                                         </tr>
                                     ))
                                 )
@@ -468,27 +369,6 @@ function Ordens() {
                         <div id="HeaderFiltroCliente">
                             <h2>Procurar por cliente</h2>
                             <CloseOutlined className="fecharFiltro" onClick={() => handleFecharFiltro('cliente')}/>
-                        </div>
-                    </section>
-                </div>
-            }
-            {
-                render.funcionario && 
-                <div className="shadowBG">
-                    <section id="secFiltroFuncionario" className="secsFiltro">
-                        <div id="HeaderFiltroFuncionario">
-                            <CloseOutlined className="fecharFiltro" onClick={() => handleFecharFiltro('funcionario')}/>
-                        </div>
-                    </section>
-                </div>
-            }
-            {
-                render.servico && 
-                <div className="shadowBG">
-                    <section id="secFiltroServico" className="secsFiltro">
-                        <div id="HeaderFiltroServico">
-                            <h2>Procurar por serviço</h2>
-                            <CloseOutlined className="fecharFiltro" onClick={() => handleFecharFiltro('servico')}/>
                         </div>
                     </section>
                 </div>

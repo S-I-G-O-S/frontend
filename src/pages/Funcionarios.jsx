@@ -34,10 +34,10 @@ function Funcionarios() {
     const [funcionarios, setFuncionarios] = useState()
     const [especialidades, setEspecialidades] = useState()
     const [showContFiltros, setShowContFiltros] = useState(false)
-    const [nomeProcurado, setNomeProcurado] = useState({
+    /*const [nomeProcurado, setNomeProcurado] = useState({
         nome: '',
         is: false
-    })
+    })*/
     const [filtros, setFiltros] = useState({
         nome: {
             value: 'default',
@@ -222,7 +222,7 @@ function Funcionarios() {
     const fetchEspecialidades = async () => {
         const result = await getEspecialidades()
         if (!result.success)  {
-            console.error(error.message)
+            console.error(result.error)
             return
         }
         setEspecialidades(result.response.data.content)
@@ -359,7 +359,7 @@ function Funcionarios() {
                                 </tr>
                                 :
                                 funcionarios.map(funcionario => (
-                                    <tr id={`funcionario${funcionario.id}`} className='funcs' key={funcionario.id}>
+                                    <tr id={`funcionario${funcionario.id}`} className='funcs' key={`func${funcionario.id}`}>
                                         <td className='nomeFunc cl1'>
                                             {funcionario.primeiro + ' ' + funcionario.ultimo}
                                         </td>

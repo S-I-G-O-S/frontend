@@ -160,8 +160,8 @@ export const putAtenderOrdem = async (ordem, idTecnico) => {
             servico: ordem.servico.id || 0
         })
         return { success: true, response: response }
-    } catch (err) {
-        return { success: false, error: err }
+    } catch (error) {
+        return { success: false, error }
     }
 }
 export const putCancelOrdem = async (ordem) => {
@@ -170,13 +170,13 @@ export const putCancelOrdem = async (ordem) => {
     try {
         const response = await axios.put(`${config.url}/api/ordens`, {
             id: ordem.id,
-            descricao: ordem.descricao,
+            descricao: ordem.descricao || "",
             situacao: "CANCELADA",
-            servico: ordem.servico || 0
+            servico: ordem.servico.id
         })
-        return { success: true, response: response }
-    } catch (err) {
-        return { success: false, error: err }
+        return { success: true, response }
+    } catch (error) {
+        return { success: false, error }
     }
 }
 

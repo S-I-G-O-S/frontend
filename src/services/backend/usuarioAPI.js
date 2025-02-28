@@ -10,7 +10,7 @@ export const getUsuario = async () => {
         return { success: false, error }
     }
 }
-export const putRegSenha = async (login, senha, novaSenha) => {
+export const putRegSenha = async ( senha, novaSenha) => {
     try {
         const response = await axios.put(`${config.url}/api/usuarios/login`, {
             // login,

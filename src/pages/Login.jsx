@@ -40,11 +40,10 @@ function Login() {
             description,
             placement,
 
-        });
-    };
+        })
+    }
     const handleLogin = async () => {
         if (loading) {
-            console.log('foi')
             return
         }
         setLoading(true)
@@ -56,36 +55,31 @@ function Login() {
             setLoading(false)
             return
         }
-        let result
-        try {
-            console.log('DEBUG LOGIN 1')
-            result = await loginFunc(login)
-            console.log('DEBUG LOGIN 2')
-        } catch (error) {
-            console.log(error)
+        let result = await loginFunc(login)
+        if (!result.success) {
+            console.log(result.error)
             showNotif('bottomLeft', `Erro ao fazer login!`, 'Tente novamente mais tarde ou entre em contato com o suporte.')
             setLoading(false)
             return
         }
-        console.log('DEBBUG LOGIN 3')
-        setToken(result.data.tokenJWT)  // Definir o token no Authorization
+        setToken(result.response.data.tokenJWT)  // Definir o token no Authorization
 
         // TODO Testando atualização direta no Context
         // setCookie('usuario', result.data.funcionario, 12)
-        setUsuario(result.data.funcionario)
+        setUsuario(result.response.data.funcionario)
         
-        if (result.data.funcionario.tema == null) {
+        if (result.response.data.funcionario.tema == null) {
             sessionStorage.setItem('preferencias', JSON.stringify({
                 tema: 'salmaoLight',
                 abertoNav: true 
             }))
         } else {
             sessionStorage.setItem('preferencias', JSON.stringify({
-                tema: result.data.funcionario.tema,
+                tema: result.response.data.funcionario.tema,
                 abertoNav: true 
             }))
         }
-        if (result.data.funcionario.ultimaAtividade == null) {
+        if (result.response.data.funcionario.ultimaAtividade == null) {
             // setPrimeiroAcesso(true)
             setLoading(false)
             if (config.configNovoUsuario) {

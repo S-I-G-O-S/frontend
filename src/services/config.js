@@ -6,7 +6,7 @@ const configURL = true
 //  false: usando localhost como backend
 /**********************************************/
 //  TELA DE NOVO USUARIO
-const configNovoUsuario = false
+const configNovoUsuario = true
 //  true: o novo usuario será enviado para tela de definir senha ao fazer login
 //  false: o novo usuario será enviado direto para tela inicial ao fazer login
 

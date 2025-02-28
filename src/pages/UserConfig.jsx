@@ -23,13 +23,6 @@ function UserConfig() {
             tema: tema
         }))
     }
-    /*
-    useEffect(() => {
-        if (usuario) {
-            sessionStorage.setItem('usuario', JSON.stringify(usuario))
-        }
-    }, [usuario])
-    */
     const fetchRender = async () => {
         try {
             const result = await getDeployStatus()
@@ -87,8 +80,7 @@ function UserConfig() {
                         </div>
                     </div>
                 }
-                    {/* TODO Abrir janela para editar */}
-                    <button onClick={() => setModalChangeInfos(true)} className='bttConfigs'>Alterar informações</button>
+                    <button onClick={() => setModalChangeInfos(true)} className='bttConfigs'>mudar minhas informações</button>
                 </div>
                 <div id='contPreferencias'>
                     <h3>Preferências</h3>

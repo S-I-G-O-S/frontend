@@ -81,7 +81,6 @@ export default function ChangeSenha({changeModal}) {
             // setMsgNovaSenha('senhas diferentes!')
             return
         }
-        console.log(forcaSenha.nivel)
         if (forcaSenha.nivel < minForca) {
             // setMsgNovaSenha('É necessaria uma senha forte!')
             notification.error({
@@ -91,8 +90,7 @@ export default function ChangeSenha({changeModal}) {
             })
             return
         }
-        console.warn(novaSenha)
-        const result = await putRegSenha(novaSenha.login, novaSenha.senhaAntiga, novaSenha.senha)
+        const result = await putRegSenha(novaSenha.senhaAntiga, novaSenha.senha)
         if (!result.success) {
             console.log(result.error)
             notification.error({

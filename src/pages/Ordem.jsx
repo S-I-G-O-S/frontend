@@ -38,8 +38,6 @@ function Ordem() {
         return cnpjLimpo.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, "$1.$2.$3/$4-$5")
     }
     const cancelarOrdem = async () => {
-        console.log('debug ordem sendo cancelada:')
-        console.warn(ordem)
         const result = await putCancelOrdem(ordem)
         if (!result.success) {
             console.error(result.error)

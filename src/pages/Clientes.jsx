@@ -144,8 +144,6 @@ function Clientes() {
                     </div> : ''
                 }
                 {
-                    !clientes ? 
-                    <Loading></Loading> :
                 <table id='tabelaClientes'>
                     <thead>
                     <tr id='cabecalho'>
@@ -157,6 +155,12 @@ function Clientes() {
                     </thead>
                     <tbody id='listClientes'>
                     {
+                        !clientes ? 
+                        <tr>
+                            <td colSpan='6'>
+                            <Loading/>
+                            </td>
+                        </tr> :
                         clientes.map(cliente => (
                             <tr key={cliente.id} className='clientes'>
                                 <td className='nome'>{cliente.nome}</td>

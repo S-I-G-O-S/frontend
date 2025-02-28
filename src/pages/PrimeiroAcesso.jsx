@@ -1,5 +1,5 @@
 import '@styles/primeiroAcesso.css'
-import { getCookie } from "@services/cookies"
+// import { getCookie } from "@services/cookies"
 import { putRegSenha } from "@backend/usuarioAPI"
 
 import { useEffect, useState } from "react"
@@ -7,14 +7,17 @@ import { EyeInvisibleOutlined, EyeOutlined} from '@ant-design/icons'
 import { notification } from "antd"
 import zxcvbn from 'zxcvbn'
 import { useNavigate } from "react-router-dom"
+import { getUsuarioContext } from '../context/UsuarioContext'
 
+//  TODO Falta estilizar essa pag
 function PrimeiroAcesso() {
     const navigate = useNavigate()
     //  States
-    const [usuario, setUsuario] = useState(() => {
+    /*const [usuario, setUsuario] = useState(() => {
         const cookieUsuario = getCookie('usuario')
         return cookieUsuario ? cookieUsuario : ''
-    })
+    })*/
+    const {usuario} = getUsuarioContext()
     const [renderizar, setRenderizar] = useState({
         senhaAntigaVisible: false,
         novaSenhaVisible: false,
@@ -100,16 +103,13 @@ function PrimeiroAcesso() {
             return
         }
         console.warn(novaSenha)
-        try {
-            const result = await putRegSenha(novaSenha.login, novaSenha.senhaAntiga, novaSenha.senha)
-            console.warn(result)
-        } catch (error) {
-            console.log(error)
+        const result = await putRegSenha(novaSenha.senhaAntiga, novaSenha.senha)
+        if (!result.success) {
+            console.log(result.error)
             notification.error({
                 message: `Erro ao registrar nova senha!`,
-                description: 'Tente novamente mais tarde ou entre em contato com o suporte.',
+                description: 'Tente novamente ou entre em contato com o suporte.',
                 placement: 'bottomLeft',
-
             })
             return
         }

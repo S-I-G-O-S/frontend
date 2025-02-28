@@ -1,5 +1,5 @@
 import './Nav.css'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import navLeft  from '@assets/navLeft.png'
 import navRight  from '@assets/navRight.png'
 // import homeIcon from '@assets/homeIcon.png'
@@ -12,6 +12,7 @@ import { useAuth } from '@context/authContext'
 import { deleteCookie } from '@services/cookies'
 
 function Nav({ cargo }) {
+    const navigate = useNavigate()
     const { setToken } = useAuth()
     const { sessPreferencias, setSessPreferencias } = usePreferencias()
     const changeNav = () => {
@@ -21,11 +22,10 @@ function Nav({ cargo }) {
         }))
     }
     const handleLogout = async () => {
-        try {
-            const result = await logoutFunc()
-            console.warn(result)
-        } catch (error) {
-            console.error(error)
+        const result = await logoutFunc()
+        if (!result.success) {
+            console.log(result.error)
+            return
         }
         sessionStorage.clear()
         setToken(null)
