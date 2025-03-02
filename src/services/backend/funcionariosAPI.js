@@ -52,6 +52,20 @@ export const getTecnicos = async () => {
         return { success: false, error }
     }
 }
+export const getTecnicosPorEspecialidade = async (espec) => {
+    console.log('procurando tecnicos com especialidade: ' + espec)
+    try {
+        // TODO Tirei pois todos funcs estão indisponiveis &disponivel=true
+        const response = await axios.get(`${config.url}/api/funcionarios?size=50&cargo=TECNICO&especialidade=${espec}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        return { success: true, response }
+    } catch (error) {
+        return { success: false, error }
+    }
+}
 export const getFuncionarioPorID = async (id) => {
     // TODO a api não retorna o CPF
     try {

@@ -99,7 +99,7 @@ function Funcionario() {
                     cep: '',
                 }
             }));
-            return;3
+            return;
         }
         let formatted = cep;
         if (cep.length > 5) {
@@ -116,33 +116,36 @@ function Funcionario() {
     const fetchCEP = async () => {
         const cep = funcionario.endereco.cep.replace(/\D/g, '')
         if (cep.length === 8) {
-            try {
-                const response = await cepAPI(cep)
-                console.warn(response)
-                const { street, neighborhood, city, state } = response.data
-                setFuncionario(prevState => ({
-                    ...prevState,
-                    endereco: {
-                        ...prevState.endereco,
-                        logradouro: street,
-                        bairro: neighborhood,
-                        cidade: city,
-                        uf: state
-                    }
-                }))
-            } catch (error) {
-                showNotifCEP('bottomLeft')
+            const result = await cepAPI(cep)
+            if (!result.success) {
+                console.error(result.error)
+                notification.error({
+                    message: `CEP inválido ou não encontrado`,
+                    // description: 'Reconecte-se a internet',
+                    placement: 'bottomLeft',
+                })
+                return
             }
+            console.warn(result.response)
+            const { street, neighborhood, city, state } = result.response.data
+            setFuncionario(prevState => ({
+                ...prevState,
+                endereco: {
+                    ...prevState.endereco,
+                    logradouro: street,
+                    bairro: neighborhood,
+                    cidade: city,
+                    uf: state
+                }
+            }))
         } else {
-            showNotifCEP('bottomLeft')
+            console.error("São necessários 8 digitos.")
+            notification.error({
+                message: `CEP inválido`,
+                description: 'São necessários 8 digitos',
+                placement: 'bottomLeft',
+            })
         }
-    }
-    const showNotifCEP = (placement) => {
-        notification.error({
-            message: `CEP inválido ou não encontrado`,
-            // description: 'Reconecte-se a internet',
-            placement,
-        })
     }
     const handleChangeEndereco = (value, field) => {
         if(field == 'logradouro' && value.length > 100) {

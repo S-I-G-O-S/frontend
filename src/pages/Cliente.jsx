@@ -270,38 +270,33 @@ function Cliente() {
     const fetchCEP = async () => {
         const cep = cliente.endereco.cep.replace(/\D/g, '')
         if (cep.length === 8) {
-            try {
-                const response = await cepAPI(cep)
-                console.warn(response)
-                const { street, neighborhood, city, state } = response.data
-                setCliente(prevState => ({
-                    ...prevState,
-                    endereco: {
-                        ...prevState.endereco,
-                        logradouro: street,
-                        bairro: neighborhood,
-                        cidade: city,
-                        uf: state
-                    }
-                }))
-            } catch (error) {
-                console.error("Erro ao buscar CEP:", error)
-                // setMsgCEP("CEP não encontrado ou inválido.")
-                // setTimeout(() => {
-                //     setMsgCEP('')
-                // }, 5000)
+            const result = await cepAPI(cep)
+            if (!result.success) {
+                console.error(result.error)
                 notification.error({
                     message: `CEP inválido ou não encontrado`,
                     // description: 'Reconecte-se a internet',
                     placement: 'bottomLeft',
                 })
-                // alert("CEP não encontrado ou inválido.");
+                return
             }
+            console.warn(result.response)
+            const { street, neighborhood, city, state } = result.response.data
+            setCliente(prevState => ({
+                ...prevState,
+                endereco: {
+                    ...prevState.endereco,
+                    logradouro: street,
+                    bairro: neighborhood,
+                    cidade: city,
+                    uf: state
+                }
+            }))
         } else {
             console.error("São necessários 8 digitos.")
             notification.error({
-                message: `CEP inválido ou não encontrado`,
-                // description: 'Reconecte-se a internet',
+                message: `CEP inválido`,
+                description: 'São necessários 8 digitos',
                 placement: 'bottomLeft',
             })
         }

@@ -4,11 +4,12 @@ import Loading from "@components/public/Loading.jsx";
 import { getCookie } from "@services/cookies.js";
 import '@styles/ordens/ordem.css'
 import { getAtendimentos, getOrdensPorID } from "@backend/ordemAPI.js";
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";9
 import { ExceptionOutlined } from '@ant-design/icons'
-import { postAtendimento, putAtenderOrdem, putCancelOrdem } from "../services/backend/ordemAPI.js";
+import { putCancelOrdem } from "../services/backend/ordemAPI.js";
 import { notification, Popconfirm } from "antd";
 import { getUsuarioContext } from "../context/UsuarioContext.jsx";
+import ModalTecnicos from "../components/Ordem/ModalTecnicos.jsx";
 
 function Ordem() {
     const { usuario } = getUsuarioContext()
@@ -40,21 +41,17 @@ function Ordem() {
     const cancelarOrdem = async () => {
         const result = await putCancelOrdem(ordem)
         if (!result.success) {
+            notification.error({
+        message: `Erro ${result.error.status}`,
+                description: result.error.response.data,
+                placement: 'bottomLeft',
+            })
             console.error(result.error)
             return
         }
         setOrdem(result.data)
         console.log('Ordem cancelada:')
         console.warn(result)
-    }
-    const fetchAtendimentos = async (id) => {
-        const result = await getAtendimentos(id)
-        if (!result.success) {
-            console.error(result.error)
-            return
-        }
-        setAtendimentos(result.response.data.content)
-        console.warn(result.response)
     }
     const handleAtenderOrdem = async () => {
         /*
@@ -80,8 +77,32 @@ function Ordem() {
             placement: 'bottomLeft',
         })
     }
-    const handleDesignarTecnico = async () => {
-        
+    const handleDesignarTecnico = async (idTecnico) => {
+        // verificar se não tem um funcionario atendendo
+        if (ordem.situacao!=='PENDENTE' && ordem.situacao!=='RETORNO') {
+            // Não da pra atender ele
+            console.log('impossivel atender esta ordem.')
+            notification.error({
+                message: 'Técnico já designado para esta ordem.',
+                // description: 'Bom trabalho',
+                placement: 'bottomLeft',
+            })
+            return
+        }
+        if (!modalTecnicos) {
+            setModalTecnicos(true)
+            console.log("foi")
+            return
+        }
+    }
+    const fetchAtendimentos = async (id) => {
+        const result = await getAtendimentos(id)
+        if (!result.success) {
+            console.error(result.error)
+            return
+        }
+        setAtendimentos(result.response.data.content)
+        console.warn(result.response)
     }
     useEffect(() => {
         if (!ordem?.id) {
@@ -123,7 +144,7 @@ function Ordem() {
                     {
                         usuario.cargo==="BASE" || usuario.cargo==="ADM" || usuario.cargo==='DEV' &&
                         <>
-                        <button>Designar técnico</button>
+                        <button onClick={() => handleDesignarTecnico(0)}>Designar técnico</button>
                         <Popconfirm
                             title=""
                             description={`Deseja cancelar esta ordem?`}
@@ -228,7 +249,10 @@ function Ordem() {
                                 <div id="contListAtendimentos">
                                 {
                                     atendimentos.map(atendimento => (
-                                        <div className="itemListAtendimento">
+                                        <div 
+                                            className="itemListAtendimento"
+                                            key={`atendimento${atendimento.id}`}
+                                            >
                                             <div>nome: {atendimento.funcionario}</div>
                                             <div>data do atendimento: {atendimento.dtAtendimento}</div>
                                             <div>descrição do atendimento: {atendimento.dsAtendimento || "sem descrição"}</div>
@@ -244,6 +268,16 @@ function Ordem() {
             )
         }
         </main>
+        {
+            modalTecnicos && (
+            <div className='shadowBG'>
+                <ModalTecnicos
+                    handleDesignarTecnico={handleDesignarTecnico} 
+                    especialidades={ordem.servico.especialidades} 
+                    changeModal={setModalTecnicos}></ModalTecnicos>
+            </div>
+            )
+        }
         </div>
     )
 }

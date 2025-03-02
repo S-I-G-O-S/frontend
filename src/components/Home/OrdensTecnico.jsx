@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import Loading from "../public/Loading"
 import { Card } from "antd"
 import { Link, useNavigate } from "react-router-dom"
-import { getOrdensForHome } from "../../services/backend/ordemAPI"
+import { getOrdensForHome, getOrdensPorTecnicoForHome } from "../../services/backend/ordemAPI"
 
 function OrdensTecnico({idTecnico}) {
     const navigate = useNavigate()
@@ -27,14 +27,14 @@ function OrdensTecnico({idTecnico}) {
         navigate(`/ordem?id=${idOrdem}`)
     }
     const fetchOrdens = async () => {
-        try {
-            const result = await getOrdensPorTecnicoForHome(idTecnico)
-            setReqstOrdensEmExecucao(result.response)
-            setOrdensEmExecucao(result.response.data.content)
-            console.warn(result.response)
-        } catch (error) {
-            console.error(error)
+        const result = await getOrdensPorTecnicoForHome(idTecnico)
+        if (!result.success) {
+            console.error(result.error)
+            return
         }
+        setReqstOrdensEmExecucao(result.response)
+        setOrdensEmExecucao(result.response.data.content)
+        console.warn(result.response)
     }
     useEffect(() => {
         fetchOrdens()

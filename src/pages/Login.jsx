@@ -114,7 +114,7 @@ function Login() {
         }
     }, [request])
     useEffect(() => {
-        console.clear()
+        // console.clear()
     }, [])
     return (
     <main id='mainLogin'>

@@ -12,19 +12,22 @@ import { useEffect, useState } from 'react'
 import TextArea from 'antd/es/input/TextArea'
 import { MinusCircleFilled } from '@ant-design/icons'
 import { ColorPicker } from 'antd'
+import { getUsuarioContext } from '../context/UsuarioContext'
 
 // https://www.delftstack.com/pt/howto/react/for-loop-in-react/
 
 function Especialidades() {
-    // Geal
+    // Geral
+    const { usuario } = getUsuarioContext()
+    
     const [tipoJanela, setTipoJanela] = useState(null)
     const [layoutEspecServicos, setLayoutEspecServicos] = useState("layoutServicos")
     const [ordemEspecServicos, setOrdemEspecServicos] = useState("asc")
     const [erro, setErro] = useState('')
-    const [usuario, setUsuario] = useState(() => {
+    /*const [usuario, setUsuario] = useState(() => {
         const cookieUsuario = getCookie('usuario')
         return cookieUsuario ? cookieUsuario : ''
-    })
+    })*/
     
     // Especialidades
     const [reqstEspecialidades, setReqstEspecialidades] = useState([])

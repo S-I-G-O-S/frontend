@@ -1,5 +1,6 @@
 import axios from 'axios'
 import config from '../config'
+import { checkAuthError } from '../../router/checkAuthError'
 
 //  GET
 export const getOrdens = async () => {
@@ -10,8 +11,9 @@ export const getOrdens = async () => {
             },
         })
         return { success: true, response: response }
-    } catch (err) {
-        return { success: false, error: err }
+    } catch (error) {
+        checkAuthError(error)
+        return { success: false, error }
     }
 }
 export const getPageOrdens = async (pagina, filtros) => {
@@ -28,8 +30,8 @@ export const getPageOrdens = async (pagina, filtros) => {
             },
         })
         return { success: true, response: response }
-    } catch (err) {
-        return { success: false, error: err }
+    } catch (error) {
+        return { success: false, error }
     }
 }
 export const getOrdensPorSituacao = async (situacao) => {
@@ -40,8 +42,8 @@ export const getOrdensPorSituacao = async (situacao) => {
             },
         })
         return { success: true, response: response }
-    } catch (err) {
-        return { success: false, error: err }
+    } catch (error) {
+        return { success: false, error }
     }
 }
 export const getOrdensForHome = async (situacao) => {
@@ -52,8 +54,8 @@ export const getOrdensForHome = async (situacao) => {
             },
         })
         return { success: true, response: response }
-    } catch (err) {
-        return { success: false, error: err }
+    } catch (error) {
+        return { success: false, error }
     }
 }
 export const getOrdensPorCliente = async (pagina, idCliente) => {
@@ -64,8 +66,8 @@ export const getOrdensPorCliente = async (pagina, idCliente) => {
             },
         })
         return { success: true, response: response }
-    } catch (err) {
-        return { success: false, error: err }
+    } catch (error) {
+        return { success: false, error }
     }
 }
 export const getOrdensPorTecnicoForHome = async (idTecnico) => {
@@ -137,16 +139,13 @@ export const postNovaOrdem = async (ordem) => {
         })
         return { success: true, response: response }
     } catch (error) {
-        return {
-            success: false,
-            error: `Erro: ${error.response?.data?.message || error.message}`,
-        }
+        return { success: false, error }
     }
 }
 //  PUT
 
-export const putAtenderOrdem = async (ordem, idTecnico) => {
-    console.log('debug put atender ordem')
+export const putDesignarTecnico = async (ordem, idTecnico) => {
+    console.log('debug put designar tecnico')
     console.log('ordem id: ', ordem.id)
     console.warn('serviço id: ', ordem.servico.id)
     console.warn('tecnico id: ', idTecnico)
@@ -156,7 +155,6 @@ export const putAtenderOrdem = async (ordem, idTecnico) => {
             id: ordem.id,
             descricao: ordem.descricao || " ",
             funcionario: idTecnico,
-            situacao: "EM_EXECUCAO",
             servico: ordem.servico.id || 0
         })
         return { success: true, response: response }
@@ -166,7 +164,10 @@ export const putAtenderOrdem = async (ordem, idTecnico) => {
 }
 export const putCancelOrdem = async (ordem) => {
     console.log('debug cancelando ordem')
-    console.warn(ordem)
+    console.warn("id: " + ordem.id)
+    console.warn("descricao: " + ordem.descricao)
+    console.warn("servico: " + ordem.servico.id)
+    // TODO Retornando erro 400: "The given id must not be null"
     try {
         const response = await axios.put(`${config.url}/api/ordens`, {
             id: ordem.id,
@@ -179,4 +180,3 @@ export const putCancelOrdem = async (ordem) => {
         return { success: false, error }
     }
 }
-

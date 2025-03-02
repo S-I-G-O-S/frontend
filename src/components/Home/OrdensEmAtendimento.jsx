@@ -29,7 +29,7 @@ function OrdensEmAtendimento() {
     const fetchOrdens = async () => {
         const result = await getOrdensForHome('EM_EXECUCAO')
         if (!result.success) {
-            console.error(error)
+            console.error(result.error)
             return
         }
         setReqstOrdensEmExecucao(result.response)

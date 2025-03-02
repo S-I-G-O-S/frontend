@@ -3,6 +3,7 @@ import Loading from "../public/Loading"
 import { Card } from "antd"
 import { getOrdensForHome } from "../../services/backend/ordemAPI"
 import { Link, useNavigate } from "react-router-dom"
+import { checkAuthError } from "../../router/checkAuthError"
 
 function OrdensPendentes() {
     const navigate = useNavigate()
@@ -27,14 +28,15 @@ function OrdensPendentes() {
         navigate(`/ordem?id=${idOrdem}`)
     }
     const fetchOrdens = async () => {
-        try {
-            const result = await getOrdensForHome('PENDENTE')
-            setReqstOrdensPendentes(result.response)
-            setOrdensPendentes(result.response.data.content)
-            console.warn(result.response)
-        } catch (error) {
-            console.error(error)
+        const result = await getOrdensForHome('PENDENTE')
+        if (!result.success) {
+            checkAuthError(result.error)
+            console.error(result.error)
+            return
         }
+        setReqstOrdensPendentes(result.response)
+        setOrdensPendentes(result.response.data.content)
+        console.warn(result.response)
     }
     useEffect(() => {
         fetchOrdens()
