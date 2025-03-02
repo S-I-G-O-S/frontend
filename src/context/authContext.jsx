@@ -51,7 +51,7 @@ const AuthProvider = ({ children }) => {
 			)
 
 		return () => axios.interceptors.request.eject(requestInterceptor);*/
-		axios.interceptors.response.use(
+		const requestInterceptor = axios.interceptors.response.use(
 			(response) => {
 				return response;
 			},
@@ -62,11 +62,11 @@ const AuthProvider = ({ children }) => {
 					logout();  // Chama seu método assíncrono de logout
 					location.reload();
 				}
-				// Aqui, erros inesperados (como problemas de rede reais) serão tratados
 				console.error("Erro na resposta", error);
 				return Promise.reject(error);
 			}
-		);
+		)
+		return () => axios.interceptors.request.eject(requestInterceptor);
 	}, []);
 	useEffect(() => {
 		if (token) {
