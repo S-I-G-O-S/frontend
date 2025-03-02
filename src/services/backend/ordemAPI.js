@@ -12,7 +12,6 @@ export const getOrdens = async () => {
         })
         return { success: true, response: response }
     } catch (error) {
-        checkAuthError(error)
         return { success: false, error }
     }
 }
@@ -29,7 +28,7 @@ export const getPageOrdens = async (pagina, filtros) => {
                 'Content-Type': 'application/json',
             },
         })
-        return { success: true, response: response }
+        return { success: true, response }
     } catch (error) {
         return { success: false, error }
     }
@@ -41,7 +40,7 @@ export const getOrdensPorSituacao = async (situacao) => {
                 'Content-Type': 'application/json',
             },
         })
-        return { success: true, response: response }
+        return { success: true, response }
     } catch (error) {
         return { success: false, error }
     }
@@ -53,7 +52,7 @@ export const getOrdensForHome = async (situacao) => {
                 'Content-Type': 'application/json',
             },
         })
-        return { success: true, response: response }
+        return { success: true, response }
     } catch (error) {
         return { success: false, error }
     }
@@ -65,7 +64,7 @@ export const getOrdensPorCliente = async (pagina, idCliente) => {
                 'Content-Type': 'application/json',
             },
         })
-        return { success: true, response: response }
+        return { success: true, response }
     } catch (error) {
         return { success: false, error }
     }
@@ -125,7 +124,7 @@ export const postAtendimento = async (idOrdem) => {
         const response = await axios.post(`${config.url}/api/ordens/atendimentos`, {
             ordem: idOrdem
         })
-        return { success: true, response: response }
+        return { success: true, response }
     } catch (error) {
         return { success: false, error }
     }
@@ -137,7 +136,7 @@ export const postNovaOrdem = async (ordem) => {
             descricao: ordem.descricao,
             servico: ordem.servicoID
         })
-        return { success: true, response: response }
+        return { success: true, response }
     } catch (error) {
         return { success: false, error }
     }
@@ -157,7 +156,7 @@ export const putDesignarTecnico = async (ordem, idTecnico) => {
             funcionario: idTecnico,
             servico: ordem.servico.id || 0
         })
-        return { success: true, response: response }
+        return { success: true, response }
     } catch (error) {
         return { success: false, error }
     }

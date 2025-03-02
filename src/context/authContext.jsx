@@ -29,45 +29,32 @@ const AuthProvider = ({ children }) => {
 		// navigate("/", { replace: true })
 	}
 	useEffect(() => {
-		/*
-		const requestInterceptor = axios.interceptors.request.
-			use(
-				(config) => {
-					const jwtToken = getCookie("token")
-					if (jwtToken) {
-						config.headers["Authorization"] = `Bearer ${jwtToken}`
-					}
-					return config
-				},
-				(response) => response,
-				(error) => {
-					if (error.response && error.response.status === 403) {
-						console.warn('apagando token');
-						logout()
-						location.reload();
-					}
-					return Promise.reject(error)
-				}
-			)
-
-		return () => axios.interceptors.request.eject(requestInterceptor);*/
-		const requestInterceptor = axios.interceptors.response.use(
-			(response) => {
-				return response;
-			},
+		const interceptor = axios.interceptors.response.use(
+			(config) => {
+                const jwtToken = getCookie("token")
+                if (jwtToken) {
+                    config.headers["Authorization"] = `Bearer ${jwtToken}`
+                }
+                return config
+            },
+			// (response) => response,
 			(error) => {
-				//	TODO atualmente ele esta deslogando para o erro 403 do tipo "Network Error", o certo (eu acho) seria ajustar o backend para informar que o token tá invalido. 
-				if (error.message === "Network Error") {
-					console.warn("Erro 403 detectado via interceptor. Efetuando logout...");
-					logout();  // Chama seu método assíncrono de logout
-					location.reload();
+				/*
+				if (
+					error.message === "Network Error" ||
+					error.code === "ERR_NETWORK" ||
+					(error.response && error.response.status === 0)
+				) {
+					console.warn("Erro de rede detectado, tratando como token inválido. Efetuando logout...")
+					logout()
+					// location.reload()
 				}
-				console.error("Erro na resposta", error);
-				return Promise.reject(error);
+				*/
+				return Promise.reject(error)
 			}
 		)
-		return () => axios.interceptors.request.eject(requestInterceptor);
-	}, []);
+		return () => axios.interceptors.response.eject(interceptor)
+	}, [])
 	useEffect(() => {
 		if (token) {
 			axios.defaults.headers.common["Authorization"] = "Bearer " + token;

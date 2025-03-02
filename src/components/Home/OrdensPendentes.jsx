@@ -30,7 +30,6 @@ function OrdensPendentes() {
     const fetchOrdens = async () => {
         const result = await getOrdensForHome('PENDENTE')
         if (!result.success) {
-            checkAuthError(result.error)
             console.error(result.error)
             return
         }

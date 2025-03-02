@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Dropdown, notification, Pagination } from 'antd'
 import { CloseOutlined, CommentOutlined, InfoCircleOutlined, PhoneOutlined } from '@ant-design/icons'
+import { getUsuarioContext } from '../context/UsuarioContext'
 
 
 function Cliente() {
@@ -23,11 +24,8 @@ function Cliente() {
     const [reqstHistorico, setReqstHistorico] = useState(null)
     const [viewContContato, setViewContContato] = useState(false)
     const [contato, setContato] = useState(null)
-    const [usuario, setUsuario] = useState(() => {
-        const cookieUsuario = getCookie('usuario')
-        return cookieUsuario ? cookieUsuario : ''
-    })
-    const { sessPreferencias, setSessPreferencias } = usePreferencias()
+    const { usuario } = getUsuarioContext()
+    const { sessPreferencias } = usePreferencias()
     const [themeCores, setThemeCores] = useState(
         {menu: {
             bgColor: '#f7cba4',
@@ -47,21 +45,16 @@ function Cliente() {
             return
         }
         if (window.confirm("Deseja APAGAR este contato de "+ cliente.nome +"?")){
-            let result
-            try {
-                result = await deleteContato(idContato)
-                console.warn(result.response)
-            } catch (err) {
-                console.error(err)
-            }
-            if (result.success) {
-                setCliente(prevCliente => ({
-                    ...prevCliente,
-                    contatos: prevCliente.contatos.filter(c => c.id !== idContato)
-                }))
-            } else {
+            let result = await deleteContato(idContato)
+            if (!result.success) {
                 console.error(result.error)
+                return
             }
+            console.warn(result.response)
+            setCliente(prevCliente => ({
+                ...prevCliente,
+                contatos: prevCliente.contatos.filter(c => c.id !== idContato)
+            }))
         }
     }
     const handleAddContato = async () => {
@@ -71,33 +64,26 @@ function Cliente() {
         let result
         console.log('salvando contato:')
         console.log(contato)
-        try {
-            if ('id' in contato) {
-                result = await putContato(contato)
-            } else {
-                result = await postContato(contato)
-            }
-            console.warn(result.response)
-        } catch (err) {
-            console.error(err)
-        }
-        if (result.success) {
-            console.warn(result.response.data)
-            // if ('id' in contato) {
-            //     fetchContatos()
-            // } else {
-            // }
-            const novoContato = result.response.data
-            setCliente(prevCliente => ({
-                ...prevCliente,
-                contatos: prevCliente.contatos.some(c => c.id === novoContato.id)
-                    ? prevCliente.contatos.map(c => c.id === novoContato.id ? novoContato : c)  // Atualiza o contato se ele já existir
-                    : [...prevCliente.contatos, novoContato]  // Adiciona um novo contato se ele não existir
-            }))
-            handleViewContContato(null)
+        if ('id' in contato) {
+            result = await putContato(contato)
         } else {
-            window.alert("Erro ao salvar este contato")
+            result = await postContato(contato)
         }
+        if (!result.success) {
+            console.error(result.error)
+            window.alert("Erro ao salvar este contato")
+            return
+        }
+        console.warn(result.response)
+        console.warn(result.response.data)
+        const novoContato = result.response.data
+        setCliente(prevCliente => ({
+            ...prevCliente,
+            contatos: prevCliente.contatos.some(c => c.id === novoContato.id)
+                ? prevCliente.contatos.map(c => c.id === novoContato.id ? novoContato : c)  // Atualiza o contato se ele já existir
+                : [...prevCliente.contatos, novoContato]  // Adiciona um novo contato se ele não existir
+        }))
+        handleViewContContato(null)
     }
     const handleViewContContato = (idContato) => {   // Alterna o estado da janela de edição do cliente
         if(viewContContato) {
@@ -184,16 +170,16 @@ function Cliente() {
             return
         }
         const result = await deleteCliente(cliente.id);
-        console.warn(result.response)
-        if (result.success) {
-            notification.success({
-                message: `Cliente excluído com sucesso.`,
-                // description: 'Reconecte-se a internet',
-                placement: 'bottomLeft',
-            })
-        } else {
+        if (!result.success) {
             console.error(result.error)
-        }
+            return
+        } 
+        console.warn(result.response)
+        notification.success({
+            message: `Cliente excluído com sucesso.`,
+            // description: 'Reconecte-se a internet',
+            placement: 'bottomLeft',
+        })
         handleVoltar()
     }
     const handleVoltar = () => {
@@ -219,36 +205,34 @@ function Cliente() {
             return
         }
         if (idCliente != null) {
-            let response
             if (window.confirm("Deseja sobreescrever o cliente "+ cliente.nome +"?" )) {
-                try {
-                    response = await putCliente(cliente)
-                    console.warn(response)
-                    notification.success({
-                        message: `Cliente atualizado com sucesso.`,
-                        // description: 'Reconecte-se a internet',
-                        placement: 'bottomLeft',
-                    })
-                } catch (err) {
-                    console.error(err.message)
+                const result = await putCliente(cliente)
+                if (!result.success) {
+                    console.error(result.error)
                     return
                 }
-            } else {
-                try {
-                    response = await postCliente(cliente)
-                    console.warn(response)
-                    notification.success({
-                        message: `Cliente criado com sucesso.`,
-                        // description: 'Reconecte-se a internet',
-                        placement: 'bottomLeft',
-                    })
-                } catch (err) {
-                    console.error(err.message)
-                    return
-                }
-            }
-            handleVoltar()
+                console.warn(result.response)
+                notification.success({
+                    message: `Cliente atualizado com sucesso.`,
+                    // description: 'Reconecte-se a internet',
+                    placement: 'bottomLeft',
+                })
+            } else { return }
         }
+        else {
+            const result = await postCliente(cliente)
+            if (!result.success) {
+                console.error(result.error)
+                return
+            }
+            console.warn(result.response)
+            notification.success({
+                message: `Cliente criado com sucesso.`,
+                // description: 'Reconecte-se a internet',
+                placement: 'bottomLeft',
+            })
+        }
+        handleVoltar()
     }
     // HISTORICO DE ORDENS
     const converterDtHr = (dataHora) => {
@@ -316,23 +300,24 @@ function Cliente() {
         }))
     }
     const fetchCliente = async (id) => {
-        try {
-            const response = await getClientePorID(id)
-            setCliente(response.data)
-            console.warn(response)
-        } catch (error) {
-            console.error(error.message)
+        const result = await getClientePorID(id)
+        if (!result.success) {
+            console.error(result.error)
+            return
         }
+        setCliente(result.response.data)
+        console.warn(result.response)
+        
     }
     const fecthHistOrdens = async (page) => {
-        try {
-            const result = await getOrdensPorCliente(page, cliente.id)
-            console.warn(result.response.data.content)
-            setReqstHistorico(result.response)
-            setHistorico(result.response.data.content)
-        } catch (error) {
-            console.error(error)
+        const result = await getOrdensPorCliente(page, cliente.id)
+        if (!result.success) {
+            console.error(result.error)
+            return
         }
+        console.warn(result.response.data.content)
+        setReqstHistorico(result.response)
+        setHistorico(result.response.data.content)
     }
     const changePage = (current, pageSize) => {
         fecthHistOrdens(current - 1)
@@ -495,7 +480,7 @@ function Cliente() {
                                 </div>
                             </div>
                         </div> */}
-                        <div className='contato' key={contato.id}>
+                        <div className='contato' key={`contato${contato.id}`}>
                             <div className='contContatoLeft'>
                                 <h4>
                                 {contato.nome}
@@ -583,7 +568,7 @@ function Cliente() {
                         </tr>    
                         ) : (
                         historico.map(ordem => (
-                            <tr key={ordem.id}>
+                            <tr key={`ordem${ordem.id}}` }>
                                 <td className='cl1'>{ordem.id}</td>
                                 <td className='cl2'>{ordem.servico}</td>
                                 <td className='cl3'>{ordem.tecnico || 'nenhum'}</td>

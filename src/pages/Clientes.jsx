@@ -113,15 +113,13 @@ function Clientes() {
         }))
     }
     const fetchClientes = async (pagina) => {
-        try {
-            const response = await getPageClientes(pagina, filtros)
-            ///setReqstFuncionarios(data)
-            setReqstClientes(response)
-            setClientes(response.data.content)
-            console.log(response)
-        } catch (error) {
-            console.error(error.message)
+        const result = await getPageClientes(pagina, filtros)
+        if (result.error) {
+            console.error(result.error)
         }
+        setReqstClientes(result.response)
+        setClientes(result.response.data.content)
+        console.log(result.response)
     }
     const changePage = (current, pageSize) => {
         fetchClientes((current - 1))

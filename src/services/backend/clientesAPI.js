@@ -26,15 +26,9 @@ export const getPageClientes = async (pagina, filtros) => {
                 'Content-Type': 'application/json',
             },
         })
-        return response
-        /*{
-            "id": 0,
-            "nome": "string",
-            "cnpj": "string",
-            "ativo": true
-        }*/
+        return { success: true, response }
     } catch (error) {
-        throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
+        return { success: false, error }
     }
 }
 export const getClientePorID = async (id) => {
@@ -44,21 +38,18 @@ export const getClientePorID = async (id) => {
                 'Content-Type': 'application/json',
             },
         })
-        return response
+        return { success: true, response }
     } catch (error) {
-        throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
+        return { success: false, error }
     }
 }
 export const deleteCliente = async (id) => {
     try {
         const response = await axios.delete(`${config.url}/api/clientes/${id}`)
         console.log(response)
-        return { success: true, response: response}
+        return { success: true, response }
     } catch (error) {
-        return {
-            success: false,
-            error: `Erro ao deletar: ${error.response?.data?.message || error.message}`,
-        }
+        return { success: false, error }
     }
 }
 
@@ -66,12 +57,9 @@ export const postCliente = async (cliente) => {
     try {
         const response = await axios.post(`${config.url}/api/clientes`, cliente)
         
-        return { success: true, response: response }
+        return { success: true, response }
     } catch (error) {
-        return {
-            success: false,
-            error: `Erro: ${error.response?.data?.message || error.message}`,
-        }
+        return { success: false, error }
     }
 }
 
@@ -91,12 +79,9 @@ export const putCliente = async (cliente) => {
                 complemento: cliente.endereco.complemento
             }
         })
-        return { success: true, response: response }
+        return { success: true, response }
     } catch (error) {
-        return {
-            success: false,
-            error: `Erro ao salvar: ${error.response?.data?.message || error.message}`,
-        }
+        return { success: false, error }
     }
 }
 
@@ -107,42 +92,33 @@ export const getContatosPorID = async (id) => {
                 'Content-Type': 'application/json',
             },
         })
-        return response
+        return { success: true, response }
     } catch (error) {
-        throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
+        return { success: false, error }
     }
 }
 export const postContato = async (contato) => {
     try {
         const response = await axios.post(`${config.url}/api/clientes/contatos`, contato)
         
-        return { success: true, response: response }
+        return { success: true, response }
     } catch (error) {
-        return {
-            success: false,
-            error: `Erro: ${error.response?.data?.message || error.message}`,
-        }
+        return { success: false, error }
     }
 }
 export const putContato = async (contato) => {
     try {
         const response = await axios.put(`${config.url}/api/clientes/contatos`, contato)
-        return { success: true, response: response }
+        return { success: true, response }
     } catch (error) {
-        return {
-            success: false,
-            error: `Erro ao salvar: ${error.response?.data?.message || error.message}`,
-        }
+        return { success: false, error }
     }
 }
 export const deleteContato = async (id) => {
     try {
         const response = await axios.delete(`${config.url}/api/clientes/contatos/${id}`)
-        return { success: true, response: response}
+        return { success: true, response }
     } catch (error) {
-        return {
-            success: false,
-            error: `Erro ao deletar: ${error.response?.data?.message || error.message}`,
-        }
+        return { success: false, error }
     }
 }
