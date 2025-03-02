@@ -1,7 +1,6 @@
 // Funções de requisições
 import { getPageFuncionarios } from '@backend/funcionariosAPI.js'
 import { getEspecialidades } from '@backend/especialidadesAPI.js'
-import { getCookie } from '@services/cookies.js'
 
 // Estilização
 import '@styles/funcionarios.css'

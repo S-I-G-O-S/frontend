@@ -15,10 +15,12 @@ function NovaOrdem() {
     const [servicos, setServicos] = useState([])
     const [servico, setServico] = useState({})
     const [formNovaOrdem, setFormNovaOrdem] = useState({
-        clienteID: '',
+        clienteID: null,
         cliente: '',
-        servicoID: '',
+        servicoID: null,
         servico: '',
+        funcionarioID: null,
+        funcionario: '',
         descricao: ''
     })
     const [showComponents, setShowComponents] = useState({
@@ -126,23 +128,26 @@ function NovaOrdem() {
     const goToOrdens = () => {
         navigate(`/ordens`)
     }
+    const fetchFuncionarios = async () => {
+
+    }
     const fetchServicos = async () => {
-        try {
-            const response = await getServicos()
-            console.warn(response)
-            setServicos(response.content)
-        } catch (error) {
-            console.error(error.message)
+        const result = await getServicos()
+        if (!result.success) {
+            console.error(result.error)
+            return
         }
+        console.warn(result.response)
+        setServicos(result.response.content)
     }
     const fetchClientes = async () => {
-        try {
-            const response = await getClientes()
-            setClientes(response.data.content)
-            console.warn(response)
-        } catch (error) {
-            console.error(error.message)
+        const result = await getClientes()
+        if (!result.success) {
+            console.error(result.error)
+            return
         }
+        console.warn(result.response)
+        setClientes(result.response.data.content)
     }
     useEffect(() => {
         console.clear()
@@ -167,7 +172,7 @@ function NovaOrdem() {
                         {
                             clientes && [
                                 clientes.map(cliente => (
-                                    <option key={cliente.id} value={cliente.nome}>{cliente.nome}</option>
+                                    <option key={`cliente${cliente.id}`} value={cliente.nome}>{cliente.nome}</option>
                                 ))
                             ]
                         }
@@ -201,7 +206,7 @@ function NovaOrdem() {
                             {
                                 servicos && 
                                 servicos.map(servico => (
-                                    <option key={servico.id} value={servico.nome}>{servico.nome}</option>
+                                    <option key={`servico${servico.id}`} value={servico.nome}>{servico.nome}</option>
                                 ))
                             }
                         </datalist>

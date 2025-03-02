@@ -1,31 +1,18 @@
 import axios from 'axios'
 import config from '../config'
+import { responsiveArray } from 'antd/es/_util/responsiveObserver'
 
 export const getClientes = async () => {
     try {
-        const response = await axios.get(`${config.url}/api/clientes?ativo=true`, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-        return response
-        /*{
-            "id": 0,
-            "nome": "string",
-            "cnpj": "string",
-            "ativo": true
-        }*/
+        const response = await axios.get(`${config.url}/api/clientes?ativo=true`)
+        return { success: true, response }
     } catch (error) {
-        throw new Error(`Erro de conexão: ${error.response?.data?.message || error.message}`)
+        return { success: false, error }
     }
 }
 export const getPageClientes = async (pagina, filtros) => {
     try {
-        const response = await axios.get(`${config.url}/api/clientes?page=${pagina}&size=15`, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
+        const response = await axios.get(`${config.url}/api/clientes?page=${pagina}&size=15`)
         return { success: true, response }
     } catch (error) {
         return { success: false, error }

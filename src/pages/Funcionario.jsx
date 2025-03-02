@@ -6,12 +6,12 @@ import { cepAPI } from '@services/cepAPI.js'
 import '@styles/funcionario.css'
 import Nav from '@components/public/Nav.jsx'
 import Loading from '@components/public/Loading.jsx'
-import { getCookie } from '@services/cookies.js'
 
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { notification, Popconfirm } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
+import { getUsuarioContext } from '../context/UsuarioContext'
 
 // TODO testar ZOD + Form Hook na validação de formularios
 
@@ -44,10 +44,7 @@ function Funcionario() {
     const [pesqAddEspec, setPesqAddEspec] = useState('')
     const [viewSenha, setViewSenha] = useState(false)
     const [headerNomeFunc, setHeaderNomeFunc] = useState('')
-    const [usuario, setUsuario] = useState(() => {
-        const cookieUsuario = getCookie('usuario')
-        return cookieUsuario ? cookieUsuario : ''
-    })
+    const { usuario } = getUsuarioContext()
     //  Especialidades do Funcionario
     const addEspecToFunc = () => {
         console.info("ADICIONANDO ESPECIALIDADE")
@@ -345,13 +342,13 @@ function Funcionario() {
         )
     }
     const fetchEspecialidades = async () => {
-        try {
-            const response = await getEspecialidades()
-            setEspecialidades(response.data.content)
-            // console.warn(response)
-        } catch (error) {
-            console.error(error.message)
+        const result = await getEspecialidades()
+        if (!result.success) {
+            console.error(result.error)
+            return
         }
+        console.warn(result.response)
+        setEspecialidades(result.response.data.content)
 
     }
     const fetchFuncionario = async () => {

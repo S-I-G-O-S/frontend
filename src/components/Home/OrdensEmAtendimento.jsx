@@ -63,7 +63,7 @@ function OrdensEmAtendimento() {
                 </div>
                 <div className="bodyContsOrdens">
                     {ordensEmExecucao.map(ordem => (
-                        <div key={ordem.id} on
+                        <div key={ordem.id}
                             className="ordensEmAtendimento ordens"
                             onClick={() => handleAbrirOrdem(ordem.id)}>
                             <div className="nomeCliente">{ordem.cliente}</div>

@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import Nav from "../components/public/Nav.jsx";
 import Loading from '@components/public/Loading.jsx'
-import { getCookie } from '@services/cookies.js'
 import { getOrdensAtivasPorTecnico } from "../services/backend/ordemAPI.js";
-
-{/* Carregar atendimentos relacionados ao tecnico */}
-
+import { getUsuarioContext } from "../context/UsuarioContext.jsx";
+import { WarningFilled } from '@ant-design/icons'
 /*
     TODO Ajustar endpoint ordem/atendimentos:
         Atualmente ele insere a dtAtendimento apartir do POST
@@ -14,10 +12,8 @@ import { getOrdensAtivasPorTecnico } from "../services/backend/ordemAPI.js";
         
 */
 export default function MeusAtendimentos() {
-    const [usuario, setUsuario] = useState(() => {
-        const cookieUsuario = getCookie('usuario')
-        return cookieUsuario ? cookieUsuario : ''
-    })
+    const { usuario } = getUsuarioContext()
+
     const [loading, setLoading] = useState({
         ordensAbertas: false,
         ordensFechadas: false
@@ -59,7 +55,11 @@ export default function MeusAtendimentos() {
                 loading.ordensAbertas  ? 
                     <Loading></Loading> : 
                     (!ordensAbertas || ordensAbertas.length==0) ?
-                        <div>sem ordens ativas</div> : 
+                        <div>
+                            <WarningFilled />
+                            <p>sem ordens abertas...</p>
+                        </div> 
+                        :
                         // Listagem das ordens
                         <div>
                             listagem das ordens

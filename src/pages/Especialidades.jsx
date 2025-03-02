@@ -6,7 +6,6 @@ import '@styles/especialidades.css'
 import Nav from '@components/public/Nav.jsx'
 import UnitEspec from '@components/Especialidades/unitEspecialidade.jsx'
 import Loading from '@components/public/Loading.jsx'
-import { getCookie } from '@services/cookies.js'
 import { useEffect, useState } from 'react'
 
 import TextArea from 'antd/es/input/TextArea'
@@ -19,7 +18,6 @@ import { getUsuarioContext } from '../context/UsuarioContext'
 function Especialidades() {
     // Geral
     const { usuario } = getUsuarioContext()
-    
     const [tipoJanela, setTipoJanela] = useState(null)
     const [layoutEspecServicos, setLayoutEspecServicos] = useState("layoutServicos")
     const [ordemEspecServicos, setOrdemEspecServicos] = useState("asc")

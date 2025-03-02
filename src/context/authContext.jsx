@@ -54,7 +54,7 @@ const AuthProvider = ({ children }) => {
 			}
 		)
 		return () => axios.interceptors.response.eject(responseInterceptor)
-	}, [token])
+	}, [])
 	useEffect(() => {
 		if (token) {
 			axios.defaults.headers.common["Authorization"] = "Bearer " + token;

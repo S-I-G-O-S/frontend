@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react"
 import Loading from "../public/Loading"
-import { Card } from "antd"
 import { Link, useNavigate } from "react-router-dom"
-import { getOrdensForHome, getOrdensPorTecnicoForHome } from "../../services/backend/ordemAPI"
+import { getOrdensPorTecnicoForHome } from "../../services/backend/ordemAPI"
 import { getUsuarioContext } from "../../context/UsuarioContext"
 
 function OrdensEmAtendimento() {
@@ -56,7 +55,7 @@ function OrdensEmAtendimento() {
                 </div>
                 <div className="bodyContsOrdens">
                     {ordensEmExecucao.map(ordem => (
-                        <div key={ordem.id} on
+                        <div key={ordem.id}
                             className="ordensEmAtendimento ordens"
                             onClick={() => handleAbrirOrdem(ordem.id)}>
                             <div className="nomeCliente">{ordem.cliente}</div>

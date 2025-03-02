@@ -27,7 +27,7 @@ function Home() {
     //     return cookieUsuario ? cookieUsuario : ''
     // })
     useEffect(() => {
-        // console.clear()
+        console.clear()
     }, [])
     return (
         <>
@@ -37,40 +37,27 @@ function Home() {
         <main id="mainHome">
         {
             !usuario ? '' : (
-            <>
-            <Atalhos cargo={usuario?.cargo}></Atalhos>
-            {/* informações do usuário */}
-            {/*
-            showInfosUser && usuario.cargo == 'DEV' ? 
-                <InfosUser></InfosUser> : ''
-            */}
-            {/* TODO Não mostrar ordens relacionada a outros tecnicos */}
-            {/* TODO mostrar ordem que pedem serviços que o tecnico possa executar pela sua especialidade */}
-            {/* TODO mostrar ordens do tecnico relacionadas ao mesmo */}
-            {(usuario.cargo === 'tecnico') && (
-                <section id='secTecnico'>
-                </section>
-            )}
-            {/* funcionários disponíveis se o usuário for 'base' ou 'adm' */}
-            {(usuario.cargo === 'base' || usuario.cargo === 'ADM' || usuario.cargo == 'DEV') && (
-                // <FuncsDisponiveis></FuncsDisponiveis>
-                ''
-            )}
-
-            {/* Ordens abertas e ordens em atendimento se o usuário for 'base' ou 'adm' */}
-            <section id='secOrdens'>
-                {/* Ordens Abertas */}
-                <OrdensPendentes ></OrdensPendentes>
-                {/* Ordens em Atendimento */}
-                {(usuario.cargo==='BASE' || usuario.cargo==='ADM' || usuario.cargo==='DEV') && 
-                    <OrdensEmAtendimento></OrdensEmAtendimento>
-                }
-                {
-                    (usuario.cargo=="TECNICO") && 
-                    <OrdensEmAtendimentoTecnico></OrdensEmAtendimentoTecnico>
-                }
-            </section>
-            </>)
+                <>
+                <Atalhos cargo={usuario?.cargo}></Atalhos>
+                {/* informações do usuário */}
+                {/*
+                showInfosUser && usuario.cargo == 'DEV' ? 
+                    <InfosUser></InfosUser> : ''
+                */}
+                {(usuario.cargo==='BASE' || usuario.cargo==='ADM' || usuario.cargo==='DEV') && (
+                    // <FuncsDisponiveis></FuncsDisponiveis>
+                    <>
+                    <section id='secOrdens'>
+                        <OrdensPendentes/>
+                        <OrdensEmAtendimento/>
+                    </section>
+                    </>
+                )}
+                {(usuario.cargo=="TECNICO") && (
+                    <OrdensEmAtendimentoTecnico/>
+                )}
+                </>
+            )
         }
         </main>
         </div>
