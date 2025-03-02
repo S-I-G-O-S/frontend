@@ -3,7 +3,6 @@ import Loading from "../public/Loading"
 import { Card } from "antd"
 import { getOrdensForHome } from "../../services/backend/ordemAPI"
 import { Link, useNavigate } from "react-router-dom"
-import { checkAuthError } from "../../router/checkAuthError"
 
 function OrdensPendentes() {
     const navigate = useNavigate()

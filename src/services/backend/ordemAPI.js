@@ -1,6 +1,5 @@
 import axios from 'axios'
 import config from '../config'
-import { checkAuthError } from '../../router/checkAuthError'
 
 //  GET
 export const getOrdens = async () => {
@@ -48,9 +47,6 @@ export const getOrdensPorSituacao = async (situacao) => {
 export const getOrdensForHome = async (situacao) => {
     try {
         const response = await axios.get(`${config.url}/api/ordens?size=5&situacao=${situacao}`, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
         })
         return { success: true, response }
     } catch (error) {
