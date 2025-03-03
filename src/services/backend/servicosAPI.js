@@ -3,11 +3,7 @@ import config from '../config'
 
 export const getServicos = async () => {
     try {
-        const response = await axios.get(`${config.url}/api/servicos?size=30`, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
+        const response = await axios.get(`${config.url}/api/servicos?size=30`)
         return { success: true, response }
     } catch (error) {
         return { success: false, error }

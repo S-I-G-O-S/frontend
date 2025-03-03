@@ -127,11 +127,14 @@ export const postAtendimento = async (idOrdem) => {
 }
 export const postNovaOrdem = async (ordem) => {
     try {
-        const response = await axios.post(`${config.url}/api/ordens`, {
+        const payload = {
             cliente: ordem.clienteID,
             descricao: ordem.descricao,
-            servico: ordem.servicoID
-        })
+            servico: ordem.servicoID,
+            ...(ordem.tecnicoID !== null && { funcionario: ordem.tecnicoID })
+        }
+
+        const response = await axios.post(`${config.url}/api/ordens`, payload)
         return { success: true, response }
     } catch (error) {
         return { success: false, error }

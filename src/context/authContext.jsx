@@ -40,7 +40,7 @@ const AuthProvider = ({ children }) => {
 		const responseInterceptor = axios.interceptors.response.use(
 			(response) => response,
 			(error) => {
-				console.warn("DEBUG AUTH ERROR:", error)
+				// console.warn("DEBUG AUTH ERROR:", error)
 				// Se o erro for de rede (incluindo CORS sem cabeçalhos) ou o código for "ERR_NETWORK"
 				if (error.message === "Network Error" || error.code === "ERR_NETWORK") {
 					console.warn(

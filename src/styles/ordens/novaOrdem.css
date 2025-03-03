@@ -1,25 +1,31 @@
-
 #pageNovaOrdem {
     #mainNovaOrdem {
         display: flex;
         align-items: flex-start;
         justify-content: center;
+
         section {
             min-width: 30rem;
             padding: 1rem 2rem;
             border: 0.1rem solid;
             border-radius: 0.3rem;
         }
+
         #sec1 {
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
-            input {
-                font-size: 0.9rem;
-                padding: 0.1rem 0.3rem;
-                border-width: 0.1rem;
-                border-style: solid;
-                border-radius: 0.3rem;
+
+            .selectNovaOrdem {
+                /* padding: 0.1rem 0.3rem; */
+                .ant-select-selector {
+                    font-size: 0.9rem;
+                    background-color: var(--branco);
+                    border-radius: 0.3rem;
+                    border-width: 0.1rem;
+                    border-style: solid;
+                    border-radius: 0.3rem;
+                }
             }
             button {
                 cursor: pointer;
@@ -34,23 +40,28 @@
                 border-style: solid;
                 border-radius: 0.3rem;
             }
+
             button:focus {
                 outline-width: 0.1rem;
                 outline-style: solid;
             }
+
             button:focus, button:hover {
                 text-decoration: underline;
             }
+
             #contCliente {
                 display: grid;
                 grid-template-columns: min-content auto 5rem;
                 gap: 0.5rem;
-                
+                align-items: center;
+
                 padding: 0.9rem;
                 border-style: solid;
                 border-width: 0.1rem;
                 border-radius: 0.3rem;
             }
+
             #contInfosCliente {
                 display: flex;
                 flex-direction: column;
@@ -60,26 +71,29 @@
                 border-width: 0.1rem;
                 border-style: solid;
                 border-radius: 0.3rem;
-                
+
                 #sub1ContInfosCliente {
                     display: flex;
                     justify-content: space-between;
                 }
+
                 #sub2ContInfosCliente {
                     display: flex;
                     gap: 0.5rem;
                 }
             }
+
             #contServico {
                 display: grid;
                 grid-template-columns: min-content auto 5rem;
                 gap: 0.5rem;
-                
+                align-items: center;
                 padding: 0.9rem;
                 border-width: 0.1rem;
                 border-style: solid;
                 border-radius: 0.3rem;
             }
+
             #contInfosServico {
                 display: flex;
                 flex-direction: column;
@@ -89,28 +103,64 @@
                 border-width: 0.1rem;
                 border-style: solid;
                 border-radius: 0.3rem;
-                
+
                 #descricaoServico {
                     font-size: 0.75rem;
                 }
             }
+
+            #contTecnico {
+                display: flex;
+                flex-direction: column;
+                
+                gap: .5rem;
+                padding: 0.9rem;
+                padding-top: 0;
+                border-style: solid;
+                border-width: 0.1rem;
+                border-radius: 0.3rem;
+
+                h3 {
+                    font-size: 1rem;
+                }
+
+                #subContTecnico {
+                    display: grid;
+                    grid-template-columns: min-content auto 5rem;
+                    gap: 0.5rem;
+                    align-items: center;
+                }
+            }
+
+            #contInfosTecnico {
+                display: flex;
+                flex-direction: column;
+                font-size: 0.9rem;
+
+                padding: 0.5rem 1rem;
+                border-width: 0.1rem;
+                border-style: solid;
+                border-radius: 0.3rem;
+            }
+
             #contDescricao {
                 display: grid;
                 grid-template-columns: min-content auto;
                 gap: 0.5rem;
-                
+
                 padding: 0.9rem;
                 border-width: 0.1rem;
                 border-style: solid;
                 border-radius: 0.3rem;
                 border-color: var(--salmao1);
-                
+
                 textarea {
                     border-radius: 0.3rem;
                     border-width: 0.1rem;
                     border-style: solid;
                     transition: 0s;
                 }
+
                 textarea:focus {
                     outline-width: 0.1rem;
                     outline-style: solid;
@@ -120,10 +170,12 @@
                     border-style: solid;
                 }
             }
+
             #contFinalizar {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
+
                 button {
                     cursor: pointer;
                     display: flex;
@@ -137,10 +189,12 @@
                     border-style: solid;
                     border-radius: 0.3rem;
                 }
+
                 button:focus {
                     outline-width: 0.1rem;
                     outline-style: solid;
                 }
+
                 button:focus, button:hover {
                     text-decoration: underline;
 
@@ -149,13 +203,16 @@
         }
     }
 }
+
 #pageNovaOrdem {
     section {
         border-color: var(--marrom1);
         background-color: var(--salmao2);
     }
+
     #sec1 {
-        input {
+
+        /* input {
             background-color: var(--branco);
             color: var(--marrom1);
             border-color: var(--marrom1);
@@ -164,31 +221,67 @@
             outline-color: var(--marrom1);
             outline-width: 0.1rem;
             outline-style: solid;
+        } */
+        .selectNovaOrdem {
+            .ant-select-selector {
+                background-color: var(--branco);
+                color: var(--marrom1);
+                border-color: var(--marrom1);
+            }
         }
+        .ant-select-focused {
+            .ant-select-selector {
+                border-color: var(--laranja);
+                outline-color: var(--laranja);
+                outline-width: 0.1rem;
+                outline-style: solid;
+            }
+        }
+        
         button {
             background-color: var(--marrom1);
             color: var(--salmao2);
             border-color: var(--marrom1);
         }
+
         button:hover {
             background-color: var(--marrom2);
         }
+
         button:focus {
             outline-color: var(--laranja);
             border-color: var(--laranja);
         }
+
         #contCliente {
             border-color: var(--salmao1);
         }
+
         #contInfosCliente {
             border-color: var(--salmao1);
             color: var(--salmao3);
             background-color: var(--marrom3);
         }
+
         #contServico {
             border-color: var(--salmao1);
         }
+
         #contInfosServico {
+            border-color: var(--salmao1);
+            color: var(--salmao3);
+            background-color: var(--marrom3);
+        }
+
+        #contTecnico {
+            border-color: var(--salmao1);
+            h3 {
+            }
+            #subContTecnico {
+            }
+        }
+
+        #contInfosTecnico {
             border-color: var(--salmao1);
             color: var(--salmao3);
             background-color: var(--marrom3);
@@ -198,29 +291,36 @@
                 background-color: var(--branco);
                 border-color: var(--marrom1);
             }
+
             textarea:focus {
                 border-color: var(--marrom1);
 
             }
         }
+
         #contFinalizar {
             button {
                 border-color: var(--marrom1);
             }
+
             #bttCancelar {
                 background-color: var(--salmao1);
                 color: var(--marrom1);
             }
+
             #bttCancelar:hover {
                 background-color: var(--salmao2);
             }
+
             #bttGerarOrdem {
                 background-color: var(--marrom1);
                 color: var(--salmao2);
             }
+
             #bttGerarOrdem:hover {
                 background-color: var(--marrom2);
             }
+
             button:focus {
                 outline-color: var(--laranja);
                 border-color: var(--laranja);
