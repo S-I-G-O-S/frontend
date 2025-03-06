@@ -1,0 +1,129 @@
+#secChangeInfos {
+    #contNomes, #contCelular, #contEndFunc {
+        padding: .5rem ;
+        border: .1rem solid;
+        border-radius: .3rem;
+        border-color: var(--salmao1);
+        input {
+            border-radius: 0.3rem;
+            border-style: solid;
+            border-width: .1rem;
+            font-size: 0.9rem;
+            padding: 0.1rem 0.25rem;
+            height: auto;
+        }
+        input:focus {
+            font-weight: 400;
+            outline-width: .1rem;
+            outline-style: solid;
+        }
+        label {
+            font-weight: 500;
+        }
+    }
+    #contNomes {
+        display: flex;
+        flex-direction: column;
+        gap: .15rem;
+        #subContNome, #subContPrimeiro, #subContUltimo {
+            display: flex;
+            justify-content: space-between;
+            gap: .5rem;
+            
+        }
+    }
+    #contCelular {
+        display: flex;
+        justify-content: space-between;
+        gap: .5rem;
+    }
+    #contEndFunc {
+        display: flex;
+        flex-direction: column;
+        gap: .15rem;
+        #contCepFunc, #contRuaFunc, #contNumFunc, #contCompFunc, #contBairroFunc, #contCidadeFunc, #contUFFunc {
+            display: flex;
+            justify-content: space-between;
+            gap: .5rem;
+        }
+        #bttPesqCEP {
+            display: flex;
+            gap: .5rem ;
+            padding: .1rem 1rem;
+            border: .1rem solid;
+            border-radius: .3rem;
+            margin: .1rem auto .3rem auto;
+            width: auto;
+            color: var(--salmao3);
+            border-color: var(--marrom1);
+            background-color: var(--marrom1);
+        }
+        #bttPesqCEP:hover {
+            background-color: var(--marrom2);
+        }
+        #bttPesqCEP:focus {
+            text-decoration: underline;
+            border-color: var(--laranja);
+            background-color: var(--marrom2);
+        }
+    }
+    #contAcoesChangeInfos {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        button {
+            text-align: center;
+            font-weight: 500;
+            padding: .1rem 1rem;
+            border: .1rem solid;
+            border-radius: .3rem;
+            width: 40%;
+        }
+        #bttCancelarChangeInfos {
+            color: var(--marrom1);
+            border-color: var(--marrom1);
+            background-color: var(--salmao1);
+        }
+        #bttCancelarChangeInfos:hover {
+            background-color: var(--salmao3);
+        } 
+        #bttCancelarChangeInfos:focus {
+            text-decoration: underline;
+            border-color: var(--laranja);
+        }
+        #bttSalvarChangeInfos {
+            color: var(--salmao3);
+            border-color: var(--marrom1);
+            background-color: var(--marrom1);
+        }
+        #bttSalvarChangeInfos:hover {
+            background-color: var(--marrom2);
+        } 
+        #bttSalvarChangeInfos:focus {
+            text-decoration: underline;
+            border-color: var(--laranja);
+        }
+    }
+}
+
+/* tematização */
+#secChangeInfos {
+    #contNomes, #contCelular, #contEndFunc {
+        input {
+            background-color: var(--branco);
+            border-color: var(--marrom1);
+        }
+        input:focus {
+            border-color: var(--laranja);
+            outline-color: var(--laranja);
+        }
+        select {
+            background-color: var(--branco);
+            border-color: var(--marrom1);
+        }
+        select:focus {
+            border-color: var(--laranja);
+            outline-color: var(--laranja);
+        }
+    }
+}
