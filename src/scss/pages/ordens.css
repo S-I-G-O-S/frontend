@@ -1,0 +1,517 @@
+:root {
+    --pendente: #8fcdff;
+    --emExecucao: #f6ff7b;
+    --retorno: #ffb968;
+    --cancelada: #ff8888;
+    --finalizada: #0cda4a;
+}
+
+#pageOrdens {
+    #mainOrdens {
+        grid-area: main;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    section {
+        padding: 1rem;
+        border-style: solid;
+        border-width: 0.1rem;
+        border-radius: 0.3rem;
+    }
+    #sec1 {
+        max-height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        #contNovo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem;
+            border-style: solid;
+            border-width: 0.1rem;
+            border-radius: 0.3rem;
+            #bttNovaOrdem {
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                font-size: 0.9rem;
+                font-weight: 500;
+                
+                padding: 0.2rem 1rem;
+                border-style: solid;
+                border-width: 0.1rem;
+                border-radius: 0.3rem;
+            }
+        }
+        #contSituacoes {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            padding: 0.5rem;
+            border-style: solid;
+            border-width: 0.1rem;
+            
+            border-radius: 0.3rem;
+
+            
+            .bttsSituacao {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 0.5rem;
+                cursor: pointer;
+                /* min-width: 9rem; */
+
+                padding: 0.2rem 2.1rem;
+                border-style: solid;
+                border-width: 0.1rem;
+                border-radius: 0.3rem;
+                transition: 100ms;
+                p {
+                    font-size: 0.95rem;
+                    font-weight: 500;
+                }
+                div {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.3rem;
+                }
+            }
+            .bttsSituacao:disabled {
+                opacity: 0.85;
+            }
+            .bttsSituacao:hover {
+                padding: 0.3rem 2.1rem;
+                height: 2fr;
+            }
+            .bttSelecionado {
+                border: 0.15rem solid;
+            }
+        }
+    }
+    #secHistOrdens {
+        display: flex;
+        flex-direction: column;
+        max-height: 95%;
+        #contTableHistOrdens {
+            padding: 0.5rem;
+            border-style: solid;
+            border-width: 0.1rem;
+            border-radius: 0.3rem;
+            #tableHistOrdens {
+                gap: 0;
+                overflow-x: scroll;
+                border-style: solid;
+                border-width: 0.1rem;
+                border-collapse: collapse;
+                border-spacing: 0;
+                width: 100%;
+                th {
+                    text-align: center;
+                    font-weight: 400;
+                    padding: 0.1rem 0.5rem;
+                }
+                .ordem {
+                    
+                    cursor: pointer;
+                    border-style: solid;
+                    border-width: 0.1rem;
+                    td {
+                        font-size: 0.93rem;
+                        text-align: center;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        padding: 0.1rem 1rem;
+                    }
+                    .cl1,
+                    .cl2,
+                    .cl3,
+                    .cl4 {
+                        border-right-width: 0.1rem;
+                        border-right-style: solid;
+                    }
+                }
+                #msgSemOrdens {
+                    justify-content: center;
+                    td {
+                        align-content: center;
+                        text-align: center;
+                        font-weight: 500;
+                        padding: 0.2rem 0.5rem;
+                    }
+                }
+
+            }
+        }
+    }
+
+}
+
+#mainOrdens 
+#pageOrdens
+.shadowBG {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    background-color: #000000da;
+    width: 100%;
+    height: 100%;
+}
+#secOrdemAberta
+#headOrdemAberta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    margin: 0;
+    margin-bottom: 0.5rem;
+}
+#secOrdemAberta
+#headOrdemAberta
+h2 {
+    font-size: 1.1rem;
+}
+#secOrdemAberta
+#fecharOrdemAberta {
+    cursor: pointer;
+    padding: 0.1rem;
+    border-radius: 0.3rem;
+    transition: 180ms;
+}
+#secOrdemAberta
+#fecharOrdemAberta>svg {
+    height: 1.2rem;
+    width: 1.2rem;
+}
+#secOrdemAberta
+#infosOrdemAberta {
+    padding: 0.5rem 01rem;
+    border: 0.1rem solid;
+    border-radius: 0.3rem;
+    font-size: 0.93rem;
+}
+#secOrdemAberta
+#infosOrdemAberta
+div {
+    font-weight: 400;
+    padding: 0.15rem 0;
+    border-bottom: 0.1rem solid;
+}
+#secOrdemAberta
+#infosOrdemAberta
+#infoSituacaoOrdemAberta {
+    border: 0;
+}
+#secOrdemAberta
+#infosOrdemAberta
+span {
+    font-weight: 500;
+}
+#secOrdemAberta
+#acoesOrdemAberta {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0.5rem;
+    border: 0.1rem solid;
+    
+    border-radius: 0.3rem;
+}
+#secOrdemAberta
+#acoesOrdemAberta>button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.2rem 2rem;
+    border: 0.1rem solid;
+    border-color: #000;
+    border-radius: 0.3rem;
+}
+#pageOrdens
+.shadowBG {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    background-color: #000000da;
+    width: 100%;
+    height: 100%;
+}
+#secOrdemAberta
+#headOrdemAberta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    color: var(--marrom);
+    margin: 0;
+    margin-bottom: 0.5rem;
+}
+#secOrdemAberta
+#headOrdemAberta
+h2 {
+    font-size: 1.1rem;
+}
+#secOrdemAberta
+#fecharOrdemAberta {
+    cursor: pointer;
+    padding: 0.1rem;
+    border-radius: 0.3rem;
+    transition: 180ms;
+}
+#secOrdemAberta
+#fecharOrdemAberta>svg {
+    height: 1.2rem;
+    width: 1.2rem;
+}
+#secOrdemAberta
+#infosOrdemAberta {
+    padding: 0.5rem 01rem;
+    border: 0.1rem solid;
+    border-radius: 0.3rem;
+    font-size: 0.93rem;
+
+    border-color: var(--salmao1);
+    background-color: var(--branco);
+
+}
+#secOrdemAberta
+#infosOrdemAberta
+div {
+    font-weight: 400;
+    padding: 0.15rem 0;
+    border-bottom: 0.1rem solid;
+    border-color: var(--marrom1);
+}
+#secOrdemAberta
+#infosOrdemAberta
+#infoSituacaoOrdemAberta {
+    border: 0;
+}
+#secOrdemAberta
+#infosOrdemAberta
+span {
+    font-weight: 500;
+}
+#secOrdemAberta
+#acoesOrdemAberta {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0.5rem;
+    border: 0.1rem solid;
+    border-color: var(--salmao1);
+    border-radius: 0.3rem;
+}
+#secOrdemAberta
+#acoesOrdemAberta>button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.2rem 2rem;
+    border: 0.1rem solid;
+    border-color: #000;
+    border-radius: 0.3rem;
+}
+#secOrdemAberta
+#bttFecharOrdemAberta {
+    background-color: #ff8888;
+}
+#secOrdemAberta
+#bttFecharOrdemAberta:hover {
+    background-color: #f37272;
+    text-decoration: underline;
+}
+#secOrdemAberta
+#bttEditarOrdem {
+    background-color: #84aff0;
+}
+#secOrdemAberta
+#bttEditarOrdem:hover {
+    background-color: #6b9ae2;
+    text-decoration: underline;
+}
+#pageOrdens {
+    .secsFiltro {
+        .fecharFiltro {
+            cursor: pointer;
+            padding: 0.1rem;
+            border-radius: 0.3rem;
+            transition: 180ms;
+        }
+        .fecharFiltro>svg {
+            height: 1.2rem;
+            width: 1.2rem;
+        }
+    }
+}
+#pageOrdens {
+    section {
+        background-color: var(--salmao2);
+        border-color: var(--marrom1);
+        color: var(--marrom1);
+    }
+    #sec1 {
+        #contNovo {
+            border-color: var(--salmao1);
+            #bttNovaOrdem {
+                color: var(--salmao2);
+                background-color: var(--marrom1);
+                border-color: var(--marrom1);
+            }
+            #bttNovaOrdem:hover {
+                background-color: var(--marrom2);
+                color: var(--salmao1);
+            }
+        }
+        #contSituacoes {
+            border-color: var(--salmao1);
+            background-color: var(--azul);
+            .bttsSituacao {
+                border-color: var(--marrom1);
+            }
+            .bttsSituacao:hover {
+                border-color: var(--laranja);
+            } 
+            #bttSituacaoPendente {
+                background-color: var(--pendente);
+            }
+            #bttSituacaoEmExecucao {
+                background-color: var(--emExecucao);
+            }
+            #bttSituacaoRetorno {
+                background-color: var(--retorno);
+            }
+            #bttSituacaoCancelada {
+                background-color: var(--cancelada);
+            }
+            #bttSituacaoFinalizada {
+                background-color: var(--finalizada);
+            }
+            .bttSelecionado {
+                border-color: var(--laranja);
+            }
+        }
+    }
+    #secHistOrdens {
+        #contTableHistOrdens {
+            border-color: var(--salmao1);
+        }
+        #tableHistOrdens {
+            background-color: var(--branco);
+            border-color: var(--marrom1);
+            #titleList {
+                color: var(--salmao2);
+                background-color: var(--marrom1);
+            }
+            .ordem {
+                .cl1,
+                .cl2,
+                .cl3,
+                .cl4 {
+                    border-right-color: var(--marrom1);
+                }
+            }
+            .ordem:hover {
+                background-color: var(--salmao3);
+            }
+            #msgSemOrdens td {
+                color: #960101;
+            }
+        }
+    }
+    .ant-pagination {
+        .ant-pagination-item {
+            background-color: var(--salmao1);
+            border-color: var(--marrom1);
+
+            a {
+                color: var(--marrom1);
+            }
+        }
+
+        .ant-pagination-item:hover {
+            background-color: var(--salmao2);
+        }
+
+        .ant-pagination-item-active {
+            border-color: var(--laranja);
+            background-color: var(--marrom1);
+
+            a {
+                color: var(--salmao2);
+            }
+        }
+
+        .ant-pagination-item-active:hover {
+            background-color: var(--marrom2);
+        }
+    }
+    #secOrdemAberta {
+        #fecharOrdemAberta:hover {
+            background-color: var(--salmao1);
+        }
+        #fecharOrdemAberta>svg {
+            color: var(--marrom1);
+        }
+        #infosOrdemAberta  {
+            border-color: var(--salmao1);
+            background-color: var(--branco);
+            div {
+                border-color: var(--marrom1);
+            }
+        }
+        #acoesOrdemAberta {
+            border-color: var(--salmao1);
+            #bttFecharOrdemAberta {
+                background-color: #ff8888;
+            }
+            #bttFecharOrdemAberta:hover {
+                background-color: #f37272;
+                text-decoration: underline;
+            }
+            #bttEditarOrdem {
+                background-color: #84aff0;
+            }
+            #bttEditarOrdem:hover {
+                background-color: #6b9ae2;
+                text-decoration: underline;
+            }
+        }
+    }
+    .secsFiltro {
+        .fecharFiltro:hover {
+            background-color: var(--salmao1);
+        }
+        .fecharFiltro>svg {
+            color: var(--marrom1);
+        }
+    }
+}
+@media screen and (width <=750px) {
+    #mainOrdens {
+        justify-content: center;
+        align-items: start;
+        flex-direction: column;
+    }
+    #mainOrdens 
+    section {
+        width: 100%;
+    }
+}
