@@ -1,0 +1,32 @@
+#modalTecnicos {
+    /* background-color: var(--salmao2); */
+    min-width: 40vw;
+
+    #listTecnicos {
+        display: flex;
+        flex-direction: column;
+        gap: .1rem;
+        list-style: none;
+        padding-inline-start: 0;
+        
+        li {
+            cursor: pointer;
+            padding: .1rem .5rem;
+            border-radius: .3rem;
+            background-color: var(--branco);
+        }
+    }
+    #infosTecnico {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: .5rem;
+        background-color: var(--salmao3);
+        
+        padding: .1rem .5rem;
+        border-style: solid;
+        border-width: .1rem;
+        border-color: var(--marrom1);
+        border-radius: .3rem;
+    }
+}

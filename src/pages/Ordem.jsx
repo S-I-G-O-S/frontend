@@ -1,12 +1,11 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import Nav from "@components/public/Nav.jsx";
 import Loading from "@components/public/Loading.jsx";
-import { getCookie } from "@services/cookies.js";
-import '@styles/ordens/ordem.css'
+import '@styles/ordem.css'
 import { getAtendimentos, getOrdensPorID } from "@backend/ordemAPI.js";
 import { useEffect, useState } from "react";9
 import { ExceptionOutlined } from '@ant-design/icons'
-import { putCancelOrdem } from "../services/backend/ordemAPI.js";
+import { putCancelOrdem, putDesignarTecnico } from "../services/backend/ordemAPI.js";
 import { notification, Popconfirm } from "antd";
 import { getUsuarioContext } from "../context/UsuarioContext.jsx";
 import ModalTecnicos from "../components/Ordem/ModalTecnicos.jsx";
@@ -77,7 +76,7 @@ function Ordem() {
             placement: 'bottomLeft',
         })
     }
-    const handleDesignarTecnico = async (idTecnico) => {
+    const changeModalTecnicos = async (idTecnico) => {
         // verificar se não tem um funcionario atendendo
         if (ordem.situacao!=='PENDENTE' && ordem.situacao!=='RETORNO') {
             // Não da pra atender ele
@@ -91,9 +90,9 @@ function Ordem() {
         }
         if (!modalTecnicos) {
             setModalTecnicos(true)
-            console.log("foi")
             return
         }
+        
     }
     const fetchAtendimentos = async (id) => {
         const result = await getAtendimentos(id)
@@ -122,6 +121,7 @@ function Ordem() {
     }
     useEffect(() => {
         console.clear()
+        console.log(usuario)
         if (!idOrdem) {
             setOrdem('noCode')
             return
@@ -141,10 +141,9 @@ function Ordem() {
                 <aside id="asideAcoes">
                     <h2>Opções</h2>
                     <div id="contAcoes">
-                    {
-                        usuario.cargo==="BASE" || usuario.cargo==="ADM" || usuario.cargo==='DEV' &&
+                    {(usuario.cargo==="BASE" || usuario.cargo==="ADM" || usuario.cargo==='DEV' ) &&(
                         <>
-                        <button onClick={() => handleDesignarTecnico(0)}>Designar técnico</button>
+                        <button onClick={() => changeModalTecnicos(0)}>Designar técnico</button>
                         <Popconfirm
                             title=""
                             description={`Deseja cancelar esta ordem?`}
@@ -156,13 +155,10 @@ function Ordem() {
                         </Popconfirm>
                         <button onClick={changeEditMode}>Alterar ordem</button>
                         </>
-                    }
-                    {
-                        usuario.cargo==="TECNICO" &&
-                        (ordem.situacao==='PENDENTE' ||
-                        ordem.situacao==='RETORNO') &&
+                    )}
+                    {(usuario.cargo==="TECNICO" && (ordem.situacao==='PENDENTE' || ordem.situacao==='RETORNO')) && (
                         <button onClick={handleAtenderOrdem}>atender ordem</button>
-                    }
+                    )}
                     </div>
                 </aside>
                 <section id="secPrincipal">
@@ -270,11 +266,12 @@ function Ordem() {
         </main>
         {
             modalTecnicos && (
+            console.log('abrindo modal tecnicos'),
             <div className='shadowBG'>
                 <ModalTecnicos
-                    handleDesignarTecnico={handleDesignarTecnico} 
+                    ordem={ordem}
                     especialidades={ordem.servico.especialidades} 
-                    changeModal={setModalTecnicos}></ModalTecnicos>
+                    changeModal={setModalTecnicos}/>
             </div>
             )
         }

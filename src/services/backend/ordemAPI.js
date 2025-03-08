@@ -131,7 +131,7 @@ export const postNovaOrdem = async (ordem) => {
             cliente: ordem.clienteID,
             descricao: ordem.descricao,
             servico: ordem.servicoID,
-            ...(ordem.tecnicoID !== null && { funcionario: ordem.tecnicoID })
+            // ...(ordem.tecnicoID !== null && { funcionario: ordem.tecnicoID })
         }
 
         const response = await axios.post(`${config.url}/api/ordens`, payload)

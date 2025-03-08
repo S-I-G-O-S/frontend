@@ -36,6 +36,7 @@ const AuthProvider = ({ children }) => {
 		return () => axios.interceptors.request.eject(requestInterceptor)
 	}, [])
 	// Response interceptor para tratar erros (ex.: CORS -> Network Error)
+	/*
 	useEffect(() => {
 		const responseInterceptor = axios.interceptors.response.use(
 			(response) => response,
@@ -55,6 +56,7 @@ const AuthProvider = ({ children }) => {
 		)
 		return () => axios.interceptors.response.eject(responseInterceptor)
 	}, [])
+	*/
 	useEffect(() => {
 		if (token) {
 			axios.defaults.headers.common["Authorization"] = "Bearer " + token;

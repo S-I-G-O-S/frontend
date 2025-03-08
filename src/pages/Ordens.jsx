@@ -149,7 +149,7 @@ function Ordens() {
         }))
     }
     //  SEC 2
-    const changePage = (current, pageSize) => {
+    const changePage = (current) => {
         fetchOrdens(current - 1)
     }
 
