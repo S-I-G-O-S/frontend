@@ -9,6 +9,7 @@ import { putCancelOrdem, putDesignarTecnico } from "../services/backend/ordemAPI
 import { notification, Popconfirm } from "antd";
 import { getUsuarioContext } from "../context/UsuarioContext.jsx";
 import ModalTecnicos from "../components/Ordem/ModalTecnicos.jsx";
+import ModalAtendimento from "../components/Ordem/ModalAtendimento.jsx";
 
 function Ordem() {
     const { usuario } = getUsuarioContext()
@@ -25,6 +26,7 @@ function Ordem() {
     const [editMode, setEditMode] = useState(false)
     const [editDados, setEditDados] = useState({})
     const [modalTecnicos, setModalTecnicos] = useState(false)
+    const [modalAtendimento, setModalAtendimento] = useState(false)
     const changeEditMode = () => {
         if (!editMode) {
             setEditMode(true)
@@ -52,6 +54,7 @@ function Ordem() {
         console.log('Ordem cancelada:')
         console.warn(result)
     }
+    
     const handleAtenderOrdem = async () => {
         /*
             * editar ordem e mudar 'funcionario' para o id do tecnico
@@ -156,8 +159,10 @@ function Ordem() {
                         <button onClick={changeEditMode}>Alterar ordem</button>
                         </>
                     )}
-                    {(usuario.cargo==="TECNICO" && (ordem.situacao==='PENDENTE' || ordem.situacao==='RETORNO')) && (
-                        <button onClick={handleAtenderOrdem}>atender ordem</button>
+                    {(
+                        usuario.cargo==="TECNICO" && 
+                        (ordem.situacao==='PENDENTE' || ordem.situacao==='RETORNO')) && (
+                        <button onClick={() => setModalAtendimento(true)}>atender ordem</button>
                     )}
                     </div>
                 </aside>
@@ -264,17 +269,19 @@ function Ordem() {
             )
         }
         </main>
-        {
-            modalTecnicos && (
-            console.log('abrindo modal tecnicos'),
+        {modalTecnicos && (
             <div className='shadowBG'>
                 <ModalTecnicos
                     ordem={ordem}
                     especialidades={ordem.servico.especialidades} 
                     changeModal={setModalTecnicos}/>
             </div>
-            )
-        }
+        )}
+        {modalAtendimento && (
+            <div className='shadowBG'>
+                <ModalAtendimento/>
+            </div>
+        )}
         </div>
     )
 }

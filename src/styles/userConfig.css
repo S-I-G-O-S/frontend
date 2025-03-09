@@ -11,9 +11,17 @@
         grid-template-rows: min-content; */
 
         width: 100%;
+        height: max-content;
         gap: 1rem;
         
         section {
+            h2 {
+                font-size: 1rem;
+                margin: 0;
+                margin-bottom: 0.99rem;
+            }
+        }
+        #secUserConfig {
             display: flex;
             flex-direction: column;
             padding: 1rem 1rem;
@@ -23,28 +31,11 @@
             width: max-content;
             min-width: 60%;
             gap: .4rem;
-            h2 {
-                font-size: 1rem;
-                margin: 0;
-                margin-bottom: 0.99rem;
-            }
-        }
-        #secUserConfig {
             h3 {
                 font-size: .93rem;
                 margin: 0;
                 margin-bottom: 1rem;
             }
-            /* button {
-                font-size: .85rem;
-                background-color: var(--marrom1);
-                color: var(--salmao3);
-                border-radius: .3rem;
-                padding: .2rem 1rem;
-            }
-            button:hover {
-                background-color: var(--marrom2);
-            } */
             .bttConfigs {
                 font-weight: 500;
                 color: var(--marrom1);
@@ -100,6 +91,7 @@
     }
 }
 .shadowBG {
+    grid-area: main;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -112,4 +104,17 @@
 @media screen and (width <= 750px) {
 }
 @media screen and (width <= 550px) {
+    #pageUserConfig {
+        #mainUserConfig {
+            overflow-x: hidden;
+            #secUserConfig {
+                /* word-break: break-all; */
+                overflow-x: hidden;
+                width: 96vw;
+            }
+        }
+        .shadowBG {
+            position: absolute;
+        }
+    }
 }

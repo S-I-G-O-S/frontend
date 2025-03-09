@@ -123,6 +123,12 @@
             }
         }
     }
+    .shadowBG {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
 }
 #pageOrdem {
     color: var(--marrom1);
@@ -170,6 +176,9 @@
     }
 }
 @media screen and (width <= 950px) {
+    body {
+        overflow-y: scroll;
+    }
     #pageOrdem >
     #mainOrdem {
         grid-template-columns: 3fr 2fr;
@@ -177,6 +186,7 @@
         grid-template-areas: 
         "acoes acoes"
         "principal atendimentos";
+        max-height: none;
         
         section, aside {
             h2 {
@@ -193,8 +203,34 @@
                 
                 button {
                     width: 30%;
+
                 }
             }
         }
     }
+}
+@media screen and (width <= 500px) {
+    #pageOrdem {
+        #mainOrdem {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto min-content auto;
+            grid-template-areas: 
+            "acoes"
+            "principal" 
+            "atendimentos";
+            
+            
+            #asideAcoes {
+                flex-direction: column;
+                #contAcoes {
+                    flex-direction: column;
+                    padding: .3rem;
+                    
+                    button {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    } 
 }

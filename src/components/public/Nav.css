@@ -196,7 +196,7 @@
         align-items: center;
         justify-content: center;
         gap: 0;
-        padding: 0;
+        padding: .1rem 0 ;
         width: 100%;
         transition: none;
         #bttNav {
@@ -207,7 +207,7 @@
             flex-direction: row;
             align-items: center;
             justify-content: center;
-            width: 100%;
+            /* width: 100%; */
             margin: 0;
             .links {
                 display: flex;
@@ -220,6 +220,37 @@
                     display: none;
                 }
 
+            }
+        }
+        #containerFooter {
+            position: fixed;
+            left: .1rem;
+            top: .1rem;
+            bottom: 0;
+            button {
+                padding: .1rem 2vw;
+            }
+        }
+    }
+}
+@media screen and (width <= 500px) {
+    #nav,
+    .navFechado,
+    .navAbert {
+        #containerLinks {
+            margin: 0 2.5rem;
+            flex-wrap: wrap;
+            .links {
+                flex-grow: 1;
+                flex-basis: auto;
+            }
+        }
+        #containerFooter {
+            button {
+                padding: .1rem 2vw;
+                #txtSair {
+                    display: none;
+                }
             }
         }
     }

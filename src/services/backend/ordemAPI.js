@@ -67,7 +67,7 @@ export const getOrdensPorCliente = async (pagina, idCliente) => {
 }
 export const getOrdensPorTecnicoForHome = async (idTecnico) => {
     try {
-        const response = await axios.get(`${config.url}/api/ordens?size=5&funcionario=${idTecnico}&situacao=EM_EXECUCAO`, {
+        const response = await axios.get(`${config.url}/api/ordens?size=5&funcionario=${idTecnico}&situacao=PENDENTE`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -113,6 +113,7 @@ export const getOrdensPorID = async (id) => {
         return { success: false,  error }
     }
 }
+
 //  POST
 export const postAtendimento = async (idOrdem) => {
     console.log(idOrdem)
@@ -141,7 +142,6 @@ export const postNovaOrdem = async (ordem) => {
     }
 }
 //  PUT
-
 export const putDesignarTecnico = async (ordem, idTecnico) => {
     console.log('debug put designar tecnico')
     console.log('ordem id: ', ordem.id)
@@ -160,6 +160,7 @@ export const putDesignarTecnico = async (ordem, idTecnico) => {
         return { success: false, error }
     }
 }
+
 export const putCancelOrdem = async (ordem) => {
     console.log('debug cancelando ordem')
     console.warn("id: " + ordem.id)
