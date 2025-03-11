@@ -9,8 +9,7 @@ function Atalhos({cargo}) {
                     <div>ordens pendentes</div>
                     <FieldTimeOutlined className='iconAtalhos'/>
                 </Link>
-                {
-                    cargo==='BASE' || cargo==='ADM' || cargo==='DEV' &&
+                {(cargo==='BASE' || cargo==='ADM' || cargo==='DEV') && (
                     <>
                     <Link className='atalhos' to={"/ordens"}>
                         <div>ordens em execução</div>
@@ -25,15 +24,14 @@ function Atalhos({cargo}) {
                         <FileAddOutlined className='iconAtalhos'/>
                     </Link>
                     </>
-                }
-                {
-                    cargo==='TECNICO' &&
+                )}
+                {cargo==='TECNICO' && (
                     <>
                     <Link className='atalhos' to={"/atendimentos"}>
                         <div>meus atendimentos</div>
                     </Link>
                     </>
-                }
+                )}
             </div>
         </section>
     )
