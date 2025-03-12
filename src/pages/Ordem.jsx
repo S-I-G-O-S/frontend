@@ -5,7 +5,7 @@ import '@styles/ordem.css'
 import { getAtendimentos, getOrdensPorID } from "@backend/ordemAPI.js";
 import { useEffect, useState } from "react";9
 import { ExceptionOutlined } from '@ant-design/icons'
-import { putCancelOrdem, putDesignarTecnico } from "../services/backend/ordemAPI.js";
+import { postAtendimento, putCancelOrdem, putDesignarTecnico } from "../services/backend/ordemAPI.js";
 import { notification, Popconfirm } from "antd";
 import { getUsuarioContext } from "../context/UsuarioContext.jsx";
 import ModalTecnicos from "../components/Ordem/ModalTecnicos.jsx";
@@ -22,6 +22,7 @@ function Ordem() {
     //     return cookieUsuario ? cookieUsuario : ''
     // })
     const [ordem, setOrdem] = useState(null)
+    const [atendimentoAtual, setAtendimentoAtual] = useState(null)
     const [atendimentos, setAtendimentos] = useState(null)
     const [editMode, setEditMode] = useState(false)
     const [editDados, setEditDados] = useState({})
@@ -59,14 +60,20 @@ function Ordem() {
         /*
             * editar ordem e mudar 'funcionario' para o id do tecnico
         */
-        // verificar se não tem um funcionario atendendo
-        if (ordem.situacao!=='PENDENTE' && ordem.situacao!=='RETORNO') {
-            // Não da pra atender ele
-            console.log('impossivel atender esta ordem.')
-            return
-        }
         // verificar se o funcionario é um técnico
         if (usuario.cargo!=='TECNICO') {return}
+        // verificar se não tem um funcionario atendendo
+        if (ordem.funcionario.id!==usuario.id) {
+            console.error("ERRO DE SEGURANÇA: O usuário não é o técnico responsável!")
+            return
+        }
+        // verificar se o técnico ja iniciou um atendimento
+        if (atendimentos.length>0) {
+            // abre a janela de finalizar atendimento
+            setModalAtendimento(true)
+            return
+        }
+        // inicia o atendimento
         const result = await postAtendimento(ordem.id)
         if (!result.success) {
             console.error(result.error)
@@ -74,7 +81,7 @@ function Ordem() {
         }
         console.log('ordem relacionada ao técnico ' + usuario.nome)
         notification.success({
-            message: 'Ordem relacionada a você.',
+            message: `Atendimento iniciado, bom serviço ${usuario.nome}.`,
             description: 'Bom trabalho',
             placement: 'bottomLeft',
         })
@@ -161,8 +168,14 @@ function Ordem() {
                     )}
                     {(
                         usuario.cargo==="TECNICO" && 
-                        (ordem.situacao==='PENDENTE' || ordem.situacao==='RETORNO')) && (
-                        <button onClick={() => setModalAtendimento(true)}>atender ordem</button>
+                        (ordem.situacao==='PENDENTE' || ordem.situacao==='RETORNO' || ordem.situacao==="EM_EXECUCAO")) && (
+                        <button onClick={handleAtenderOrdem}>
+                            {
+                                ordem.situacao==="EM_EXECUCAO" ? 
+                                "finalizar ordem" :
+                                "iniciar atendimento"
+                            }
+                        </button>
                     )}
                     </div>
                 </aside>
@@ -250,7 +263,7 @@ function Ordem() {
                                 <div id="contListAtendimentos">
                                 {
                                     atendimentos.map(atendimento => (
-                                        <div 
+                                        <div
                                             className="itemListAtendimento"
                                             key={`atendimento${atendimento.id}`}
                                             >
@@ -279,7 +292,11 @@ function Ordem() {
         )}
         {modalAtendimento && (
             <div className='shadowBG'>
-                <ModalAtendimento/>
+                <ModalAtendimento 
+                    changeModal={setModalAtendimento}
+                    situacao={ordem.situacao}
+                    
+                    />
             </div>
         )}
         </div>

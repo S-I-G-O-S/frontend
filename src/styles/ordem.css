@@ -209,7 +209,7 @@
         }
     }
 }
-@media screen and (width <= 500px) {
+@media screen and (width <= 600px) {
     #pageOrdem {
         #mainOrdem {
             grid-template-columns: 1fr;

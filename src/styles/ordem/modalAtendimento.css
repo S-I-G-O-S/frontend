@@ -1,0 +1,6 @@
+#secRegisAtendimento {
+    #contAcoesAtendimento {
+        display: flex;
+        justify-content: space-around;
+    }
+}
