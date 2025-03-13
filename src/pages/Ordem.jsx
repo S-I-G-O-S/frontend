@@ -104,6 +104,16 @@ function Ordem() {
         }
         
     }
+    useEffect(() => {
+        if (atendimentos && atendimentos.length>0) {
+            if (ordem.situacao=="EM_EXECUCAO") {
+                // TODO atualmente pegando apenas o primeiro atendimento do array
+                setAtendimentoAtual(atendimentos[0].id)
+                console.log("atendimento aberto: " + atendimentos[0].id)
+            }
+            // const atendimentoAberto = clientes.find(cliente => cliente.id === formNovaOrdem.clienteID)
+        }
+    }, [atendimentos])
     const fetchAtendimentos = async (id) => {
         const result = await getAtendimentos(id)
         if (!result.success) {
@@ -295,7 +305,7 @@ function Ordem() {
                 <ModalAtendimento 
                     changeModal={setModalAtendimento}
                     situacao={ordem.situacao}
-                    
+                    atendimento={atendimentoAtual || 0}
                     />
             </div>
         )}

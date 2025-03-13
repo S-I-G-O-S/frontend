@@ -9,7 +9,6 @@ import { notification, Popconfirm, Select } from "antd"
 import TextArea from "antd/es/input/TextArea"
 import { useNavigate } from "react-router-dom"
 import { getUsuarioContext } from "../context/UsuarioContext"
-import { getTecnicosPorEspecialidade } from "../services/backend/funcionariosAPI"
 function NovaOrdem() {
     const navigate = useNavigate()
     const [clientes, setClientes] = useState([])
@@ -87,7 +86,6 @@ function NovaOrdem() {
         setCliente(clienteToAdd)
         handleChangeNovaOrdem(null, 'tecnicoID')
         handleChangeNovaOrdem(null, 'servicoID')
-        fetchServicos()
         changeShowComponents(true, 'contServico')
     }
     const confirmServico = () => {
@@ -159,9 +157,8 @@ function NovaOrdem() {
     }
     useEffect(() => {
         console.clear()
-        setTimeout(() => {
-            fetchClientes()
-        }, 100)
+        fetchClientes()
+        fetchServicos()
     }, [])
     return (
         <div id="pageNovaOrdem" className="paginas">

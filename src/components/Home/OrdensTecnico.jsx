@@ -26,7 +26,7 @@ function OrdensTecnico({idTecnico}) {
         navigate(`/ordem?id=${idOrdem}`)
     }
     const fetchOrdens = async () => {
-        const result = await getOrdensPorTecnicoForHome(idTecnico)
+        const result = await getOrdensPorTecnicoForHome(idTecnico)                                            
         if (!result.success) {
             console.error(result.error)
             return

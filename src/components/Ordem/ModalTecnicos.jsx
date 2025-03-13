@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getTecnicosPorEspecialidade } from "../../services/backend/funcionariosAPI"
+import { getTecnicosPorServico } from "../../services/backend/funcionariosAPI"
 import "@styles/ordem/modalTecnicos.css"
 import { notification } from "antd"
 import { putDesignarTecnico } from "../../services/backend/ordemAPI"
@@ -9,7 +9,7 @@ export default function ModalTecnicos ({ordem, especialidades, changeModal}) {
     const [tecnico, setTecnico] = useState(null)
     const handleSelectTecnico = (id) => {
         const tecnicoToAdd = tecnicos.find(tecnico => tecnico.id === id)
-
+        
         if(!tecnicoToAdd) {
             console.error("Tecnico não encontrado")
             return
@@ -33,6 +33,7 @@ export default function ModalTecnicos ({ordem, especialidades, changeModal}) {
         })
     }
     const fetchTecnicos = async () => {
+        /*
         let tecnicosUnicos = new Map()
 
         for (let espec of especialidades) {
@@ -48,9 +49,16 @@ export default function ModalTecnicos ({ordem, especialidades, changeModal}) {
             })
         }
         setTecnicos(Array.from(tecnicosUnicos.values()))
+        */
+        const result = await  getTecnicosPorServico(ordem.servico)
+        if (!result.success) {
+            console.error(result.error)
+            return
+        }
+        setTecnicos(result.response.data.content)
+        console.warn(result.response)
     }
     useEffect(() => {
-        // if (tecnicos) {return}
         fetchTecnicos()
     }, [])
     return (
