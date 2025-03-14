@@ -1,15 +1,3 @@
-:root {
-    --azul1: #395873;
-    --azul2: #5297d3;
-    --laranja: #D96704;
-    --salmao1: #F2AE72;
-    --salmao2: #f7cba4;
-    --salmao3: #fcd8b9;
-    --branco: #F2E8DF;
-    --marrom: #26110D;
-    --preto: #000000;
-}
-
 #mainLogin {
     display: flex;
     flex-direction: column;
