@@ -320,22 +320,22 @@ function Ordens() {
                             }
                         </tbody>
                     </table>
-                    <div className='paginacao'>
-                        {
-                            !reqstOrdens ? '' :
-                            // renderPaginas()
-                            <Pagination 
-                                defaultCurrent={1} 
-                                total={reqstOrdens.data.totalPages}
-                                disabled={reqstOrdens.data.totalPages == 1}
-                                pageSize={1}
-                                responsive
-                                showSizeChanger={false}
-                                onChange={changePage}
-                                showTitle={false}
-                                />
-                        }
-                    </div>
+                </div>
+                <div className='paginacao'>
+                    {
+                        (!reqstOrdens || reqstOrdens.data.totalPages==1)? '' :
+                        // renderPaginas()
+                        <Pagination 
+                            defaultCurrent={1} 
+                            total={reqstOrdens.data.totalPages}
+                            disabled={reqstOrdens.data.totalPages == 1}
+                            pageSize={1}
+                            responsive
+                            showSizeChanger={false}
+                            onChange={changePage}
+                            showTitle={false}
+                            />
+                    }
                 </div>
             </section>
             </main>

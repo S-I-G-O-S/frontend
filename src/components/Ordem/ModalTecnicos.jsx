@@ -50,7 +50,7 @@ export default function ModalTecnicos ({ordem, especialidades, changeModal}) {
         }
         setTecnicos(Array.from(tecnicosUnicos.values()))
         */
-        const result = await  getTecnicosPorServico(ordem.servico)
+        const result = await  getTecnicosPorServico(ordem.servico.id)
         if (!result.success) {
             console.error(result.error)
             return
