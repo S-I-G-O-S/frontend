@@ -1,5 +1,6 @@
 import axios from 'axios'
 import config from '../config'
+import { A } from 'storybook/internal/components'
 
 //  GET
 export const getOrdens = async () => {
@@ -67,7 +68,7 @@ export const getOrdensPorCliente = async (pagina, idCliente) => {
 }
 export const getOrdensPorTecnicoForHome = async (idTecnico) => {
     try {
-        const response = await axios.get(`${config.url}/api/ordens?size=5&funcionario=${idTecnico}&situacao=EM_EXECUCAO`, {
+        const response = await axios.get(`${config.url}/api/ordens?size=5&funcionario=${idTecnico}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -113,6 +114,7 @@ export const getOrdensPorID = async (id) => {
         return { success: false,  error }
     }
 }
+
 //  POST
 export const postAtendimento = async (idOrdem) => {
     console.log(idOrdem)
@@ -131,7 +133,7 @@ export const postNovaOrdem = async (ordem) => {
             cliente: ordem.clienteID,
             descricao: ordem.descricao,
             servico: ordem.servicoID,
-            ...(ordem.tecnicoID !== null && { funcionario: ordem.tecnicoID })
+            // ...(ordem.tecnicoID !== null && { funcionario: ordem.tecnicoID })
         }
 
         const response = await axios.post(`${config.url}/api/ordens`, payload)
@@ -141,13 +143,7 @@ export const postNovaOrdem = async (ordem) => {
     }
 }
 //  PUT
-
 export const putDesignarTecnico = async (ordem, idTecnico) => {
-    console.log('debug put designar tecnico')
-    console.log('ordem id: ', ordem.id)
-    console.warn('serviço id: ', ordem.servico.id)
-    console.warn('tecnico id: ', idTecnico)
-    console.warn('descricao: ', ordem.descricao)
     try {
         const response = await axios.put(`${config.url}/api/ordens`, {
             id: ordem.id,
@@ -161,10 +157,6 @@ export const putDesignarTecnico = async (ordem, idTecnico) => {
     }
 }
 export const putCancelOrdem = async (ordem) => {
-    console.log('debug cancelando ordem')
-    console.warn("id: " + ordem.id)
-    console.warn("descricao: " + ordem.descricao)
-    console.warn("servico: " + ordem.servico.id)
     // TODO Retornando erro 400: "The given id must not be null"
     try {
         const response = await axios.put(`${config.url}/api/ordens`, {
@@ -172,6 +164,18 @@ export const putCancelOrdem = async (ordem) => {
             descricao: ordem.descricao || "",
             situacao: "CANCELADA",
             servico: ordem.servico.id
+        })
+        return { success: true, response }
+    } catch (error) {
+        return { success: false, error }
+    }
+}
+export const putConcluirAtendimento = async (atendimento, situacao) => {
+    try {
+        const response = await axios.put(`${config.url}/api/ordens/atendimentos`, {
+            atendimento: atendimento.idAtendimento,
+            dsAtendimento: atendimento.descricao || "",
+            situacao: situacao,
         })
         return { success: true, response }
     } catch (error) {

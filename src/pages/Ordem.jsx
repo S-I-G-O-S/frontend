@@ -1,15 +1,15 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import Nav from "@components/public/Nav.jsx";
 import Loading from "@components/public/Loading.jsx";
-import { getCookie } from "@services/cookies.js";
-import '@styles/ordens/ordem.css'
+import '@styles/ordem.css'
 import { getAtendimentos, getOrdensPorID } from "@backend/ordemAPI.js";
 import { useEffect, useState } from "react";9
 import { ExceptionOutlined } from '@ant-design/icons'
-import { putCancelOrdem } from "../services/backend/ordemAPI.js";
+import { postAtendimento, putCancelOrdem, putDesignarTecnico } from "../services/backend/ordemAPI.js";
 import { notification, Popconfirm } from "antd";
 import { getUsuarioContext } from "../context/UsuarioContext.jsx";
 import ModalTecnicos from "../components/Ordem/ModalTecnicos.jsx";
+import ModalAtendimento from "../components/Ordem/ModalAtendimento.jsx";
 
 function Ordem() {
     const { usuario } = getUsuarioContext()
@@ -22,10 +22,12 @@ function Ordem() {
     //     return cookieUsuario ? cookieUsuario : ''
     // })
     const [ordem, setOrdem] = useState(null)
+    const [atendimentoAtual, setAtendimentoAtual] = useState(null)
     const [atendimentos, setAtendimentos] = useState(null)
     const [editMode, setEditMode] = useState(false)
     const [editDados, setEditDados] = useState({})
     const [modalTecnicos, setModalTecnicos] = useState(false)
+    const [modalAtendimento, setModalAtendimento] = useState(false)
     const changeEditMode = () => {
         if (!editMode) {
             setEditMode(true)
@@ -53,18 +55,25 @@ function Ordem() {
         console.log('Ordem cancelada:')
         console.warn(result)
     }
+    
     const handleAtenderOrdem = async () => {
         /*
             * editar ordem e mudar 'funcionario' para o id do tecnico
         */
-        // verificar se não tem um funcionario atendendo
-        if (ordem.situacao!=='PENDENTE' && ordem.situacao!=='RETORNO') {
-            // Não da pra atender ele
-            console.log('impossivel atender esta ordem.')
-            return
-        }
         // verificar se o funcionario é um técnico
         if (usuario.cargo!=='TECNICO') {return}
+        // verificar se não tem um funcionario atendendo
+        if (ordem.funcionario.id!==usuario.id) {
+            console.error("ERRO DE SEGURANÇA: O usuário não é o técnico responsável!")
+            return
+        }
+        // verificar se o técnico ja iniciou um atendimento
+        if (atendimentos.length>0) {
+            // abre a janela de finalizar atendimento
+            setModalAtendimento(true)
+            return
+        }
+        // inicia o atendimento
         const result = await postAtendimento(ordem.id)
         if (!result.success) {
             console.error(result.error)
@@ -72,12 +81,12 @@ function Ordem() {
         }
         console.log('ordem relacionada ao técnico ' + usuario.nome)
         notification.success({
-            message: 'Ordem relacionada a você.',
+            message: `Atendimento iniciado, bom serviço ${usuario.nome}.`,
             description: 'Bom trabalho',
             placement: 'bottomLeft',
         })
     }
-    const handleDesignarTecnico = async (idTecnico) => {
+    const changeModalTecnicos = async (idTecnico) => {
         // verificar se não tem um funcionario atendendo
         if (ordem.situacao!=='PENDENTE' && ordem.situacao!=='RETORNO') {
             // Não da pra atender ele
@@ -91,10 +100,20 @@ function Ordem() {
         }
         if (!modalTecnicos) {
             setModalTecnicos(true)
-            console.log("foi")
             return
         }
+        
     }
+    useEffect(() => {
+        if (atendimentos && atendimentos.length>0) {
+            if (ordem.situacao=="EM_EXECUCAO") {
+                // TODO atualmente pegando apenas o primeiro atendimento do array
+                setAtendimentoAtual(atendimentos[0].id)
+                console.log("atendimento aberto: " + atendimentos[0].id)
+            }
+            // const atendimentoAberto = clientes.find(cliente => cliente.id === formNovaOrdem.clienteID)
+        }
+    }, [atendimentos])
     const fetchAtendimentos = async (id) => {
         const result = await getAtendimentos(id)
         if (!result.success) {
@@ -122,6 +141,7 @@ function Ordem() {
     }
     useEffect(() => {
         console.clear()
+        console.log(usuario)
         if (!idOrdem) {
             setOrdem('noCode')
             return
@@ -141,10 +161,9 @@ function Ordem() {
                 <aside id="asideAcoes">
                     <h2>Opções</h2>
                     <div id="contAcoes">
-                    {
-                        usuario.cargo==="BASE" || usuario.cargo==="ADM" || usuario.cargo==='DEV' &&
+                    {(usuario.cargo==="BASE" || usuario.cargo==="ADM" || usuario.cargo==='DEV' ) &&(
                         <>
-                        <button onClick={() => handleDesignarTecnico(0)}>Designar técnico</button>
+                        <button onClick={() => changeModalTecnicos(0)}>Designar técnico</button>
                         <Popconfirm
                             title=""
                             description={`Deseja cancelar esta ordem?`}
@@ -156,13 +175,18 @@ function Ordem() {
                         </Popconfirm>
                         <button onClick={changeEditMode}>Alterar ordem</button>
                         </>
-                    }
-                    {
-                        usuario.cargo==="TECNICO" &&
-                        (ordem.situacao==='PENDENTE' ||
-                        ordem.situacao==='RETORNO') &&
-                        <button onClick={handleAtenderOrdem}>atender ordem</button>
-                    }
+                    )}
+                    {(
+                        usuario.cargo==="TECNICO" && 
+                        (ordem.situacao==='PENDENTE' || ordem.situacao==='RETORNO' || ordem.situacao==="EM_EXECUCAO")) && (
+                        <button onClick={handleAtenderOrdem}>
+                            {
+                                ordem.situacao==="EM_EXECUCAO" ? 
+                                "finalizar ordem" :
+                                "iniciar atendimento"
+                            }
+                        </button>
+                    )}
                     </div>
                 </aside>
                 <section id="secPrincipal">
@@ -249,7 +273,7 @@ function Ordem() {
                                 <div id="contListAtendimentos">
                                 {
                                     atendimentos.map(atendimento => (
-                                        <div 
+                                        <div
                                             className="itemListAtendimento"
                                             key={`atendimento${atendimento.id}`}
                                             >
@@ -268,16 +292,23 @@ function Ordem() {
             )
         }
         </main>
-        {
-            modalTecnicos && (
+        {modalTecnicos && (
             <div className='shadowBG'>
                 <ModalTecnicos
-                    handleDesignarTecnico={handleDesignarTecnico} 
+                    ordem={ordem}
                     especialidades={ordem.servico.especialidades} 
-                    changeModal={setModalTecnicos}></ModalTecnicos>
+                    changeModal={setModalTecnicos}/>
             </div>
-            )
-        }
+        )}
+        {modalAtendimento && (
+            <div className='shadowBG'>
+                <ModalAtendimento 
+                    changeModal={setModalAtendimento}
+                    situacao={ordem.situacao}
+                    atendimento={atendimentoAtual || 0}
+                    />
+            </div>
+        )}
         </div>
     )
 }

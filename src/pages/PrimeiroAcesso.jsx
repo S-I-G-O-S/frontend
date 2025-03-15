@@ -1,9 +1,7 @@
-import '@styles/primeiroAcesso.css'
-// import { getCookie } from "@services/cookies"
+import "@styles/primeiroAcesso.css"
 import { putRegSenha } from "@backend/usuarioAPI"
-
-import { useEffect, useState } from "react"
-import { EyeInvisibleOutlined, EyeOutlined} from '@ant-design/icons'
+import { useEffect, useRef, useState } from "react"
+import { EyeInvisibleOutlined, EyeOutlined, LoadingOutlined} from '@ant-design/icons'
 import { notification } from "antd"
 import zxcvbn from 'zxcvbn'
 import { useNavigate } from "react-router-dom"
@@ -12,12 +10,12 @@ import { getUsuarioContext } from '../context/UsuarioContext'
 //  TODO Falta estilizar essa pag
 function PrimeiroAcesso() {
     const navigate = useNavigate()
-    //  States
-    /*const [usuario, setUsuario] = useState(() => {
-        const cookieUsuario = getCookie('usuario')
-        return cookieUsuario ? cookieUsuario : ''
-    })*/
     const {usuario} = getUsuarioContext()
+    const senhaAntigaRef = useRef(null)
+    const novaSenhaRef = useRef(null)
+    const repetirNovaSenhaRef = useRef(null)
+    const buttonRef = useRef(null)
+    //  States
     const [renderizar, setRenderizar] = useState({
         senhaAntigaVisible: false,
         novaSenhaVisible: false,
@@ -30,7 +28,7 @@ function PrimeiroAcesso() {
         rSenha: '' 
     })
     const [forcaSenha, setForcaSenha] = useState({ nivel: 1, msg: 'muito fraca' })
-    
+    const [loadingSalvar, setLoadingSalvar] = useState(false)
     //  Functions
     const handleChangeNovaSenha = (value, field) => {
         setNovaSenha(prevState => ({
@@ -83,6 +81,7 @@ function PrimeiroAcesso() {
         }
     }
     const handleRegSenha = async () => {
+        setLoadingSalvar(true)
         const minForca = 1  // nivel obrigatorio da nova senha
         if (novaSenha.senha != novaSenha.rSenha) {
             notification.error({
@@ -102,14 +101,15 @@ function PrimeiroAcesso() {
             })
             return
         }
-        console.warn(novaSenha)
         const result = await putRegSenha(novaSenha.senhaAntiga, novaSenha.senha)
+        setLoadingSalvar(false)
         if (!result.success) {
             console.log(result.error)
             notification.error({
                 message: `Erro ao registrar nova senha!`,
                 description: 'Tente novamente ou entre em contato com o suporte.',
                 placement: 'bottomLeft',
+                duration: 6
             })
             return
         }
@@ -125,18 +125,25 @@ function PrimeiroAcesso() {
     }, [])
     return (
         <>
-        <main id="mainPrimeiroAcesso'">
+        <div id="pagePrimeiroAcesso">
             <section id='secPrimeiroAcesso'>
+                <h1>Seu primeiro acesso na Sigos</h1>
                 <div id='contMsgAviso'>
-                    <h1>Olá {usuario.nome}</h1>
+                    <p>Olá {usuario.nome}</p>
                     <p>Para garantir a segurança de sua conta, precisamos que você defina sua senha de acesso.</p>
                 </div>
                 <div id='contSenhas'>
-                    <div id='contSenhaAntiga'>
+                    <div id='contSenhaAntiga' className="senhas">
                         <input
+                            ref={senhaAntigaRef}
                             type={renderizar.senhaAntigaVisible ? "text" : "password"}
-                            placeholder="senha antiga"
+                            placeholder="senha atual"
                             onChange={(e) => handleChangeNovaSenha(e.target.value, "senhaAntiga")}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                    novaSenhaRef.current.focus()
+                                }
+                            }}
                         />
                         <button
                             onClick={() => changeRender(!renderizar.senhaAntigaVisible, "senhaAntigaVisible")}
@@ -150,11 +157,17 @@ function PrimeiroAcesso() {
                             }
                         </button>
                     </div>
-                    <div id='contSenha'>
+                    <div id='contSenha' className="senhas">
                         <input
+                            ref={novaSenhaRef}
                             type={renderizar.novaSenhaVisible ? "text" : "password"}
                             placeholder="nova senha"
                             onChange={(e) => handleChangeNovaSenha(e.target.value, "senha")}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                    repetirNovaSenhaRef.current.focus()
+                                }
+                            }}
                         />
                         <button
                             onClick={() => changeRender(!renderizar.novaSenhaVisible, "novaSenhaVisible")}
@@ -168,11 +181,17 @@ function PrimeiroAcesso() {
                             }
                         </button>
                     </div>
-                    <div id='contRepetirSenha'>
+                    <div id='contRepetirSenha' className="senhas">
                         <input
+                            ref={repetirNovaSenhaRef}
                             type={renderizar.novaSenhaRepVisible ? "text" : "password"}
                             placeholder="repetir nova senha"
                             onChange={(e) => handleChangeNovaSenha(e.target.value, "rSenha")}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                    buttonRef.current.focus()
+                                }
+                            }}
                         />
                         <button
                             onClick={() => changeRender(!renderizar.novaSenhaRepVisible, "novaSenhaRepVisible")}
@@ -194,10 +213,18 @@ function PrimeiroAcesso() {
                     <p id='msgNovaSenha' style={{ visibility: msgNovaSenha ? 'visible' : 'hidden'}}>{msgNovaSenha}</p>
                 </div> */}
                 <div id='contAcaoPrimeiroAcesso'>
-                    <button onClick={handleRegSenha}>salvar senha</button>
+                    <button
+                        id="buttonSalvarSenha"
+                        className={loadingSalvar ? 'bttCarregando' : 'bttNormal'} 
+                        ref={buttonRef}
+                        onClick={handleRegSenha}
+                        >
+                        <p>salvar senha</p>
+                        <LoadingOutlined id="iconLoading"/>
+                    </button>
                 </div>
             </section>
-        </main>
+        </div>
         </>
     )
 }

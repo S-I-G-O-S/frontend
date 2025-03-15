@@ -2,29 +2,24 @@ import { useEffect, useState } from "react"
 import { getCookie } from "@services/cookies.js"
 import Nav from "@components/public/Nav.jsx"
 import { getClientes } from '@backend/clientesAPI.js'
-import '@styles/ordens/novaOrdem.css'
+import '@styles/novaOrdem.css'
 import { getServicos } from "@backend/servicosAPI"
 import { postNovaOrdem } from "@backend/ordemAPI"
 import { notification, Popconfirm, Select } from "antd"
 import TextArea from "antd/es/input/TextArea"
 import { useNavigate } from "react-router-dom"
 import { getUsuarioContext } from "../context/UsuarioContext"
-import { getTecnicosPorEspecialidade } from "../services/backend/funcionariosAPI"
 function NovaOrdem() {
     const navigate = useNavigate()
     const [clientes, setClientes] = useState([])
     const [cliente, setCliente] = useState(null)
     const [servicos, setServicos] = useState([])
     const [servico, setServico] = useState(null)
-    const [tecnicos, setTecnicos] = useState([])
-    const [tecnico, setTecnico] = useState(null)
     const [formNovaOrdem, setFormNovaOrdem] = useState({
         clienteID: null,
         cliente: '',
         servicoID: null,
         servico: '',
-        tecnicoID: null,
-        tecnico: '',
         descricao: ''
     })
     const [showComponents, setShowComponents] = useState({
@@ -32,8 +27,6 @@ function NovaOrdem() {
         infosCliente: false,
         contServico: false,
         bttConfirmServico: false,
-        bttConfirmTecnico: false,
-        contTecnico: false,
         contFinalizar: false
     }) 
     const {usuario} = getUsuarioContext()
@@ -93,7 +86,6 @@ function NovaOrdem() {
         setCliente(clienteToAdd)
         handleChangeNovaOrdem(null, 'tecnicoID')
         handleChangeNovaOrdem(null, 'servicoID')
-        fetchServicos()
         changeShowComponents(true, 'contServico')
     }
     const confirmServico = () => {
@@ -111,20 +103,7 @@ function NovaOrdem() {
         // handleChangeNovaOrdem(servicoToAdd.id, 'servicoID')
         handleChangeNovaOrdem(null, 'tecnicoID')
         setServico(servicoToAdd)
-        fetchFuncionarios(servicoToAdd.especialidades)
         changeShowComponents(true, 'contFinalizar')
-    }
-    const confirmTecnico = () => {
-        const tecnicoToAdd = tecnicos.find(tecnico => 
-            tecnico.id === formNovaOrdem.tecnicoID
-        )
-        if (!tecnicoToAdd) {
-            console.error('tecnico não encontrado.')
-            handleChangeNovaOrdem('', tecnico)
-        }
-        console.warn(tecnicoToAdd)
-        setTecnico(tecnicoToAdd)
-        changeShowComponents(true, 'contTecnico')
     }
     const handleGerarOrdem = async () => {
         const result = await postNovaOrdem(formNovaOrdem)
@@ -156,27 +135,6 @@ function NovaOrdem() {
     const goToOrdens = () => {
         navigate(`/ordens`)
     }
-    const fetchFuncionarios = async (especialidades) => {
-        if (!especialidades || especialidades.length<1) {
-            console.error('servico inexistente ou sem especialidades')
-            return
-        }
-        let tecnicosUnicos = new Map()
-        for (let espec of especialidades) {
-            const result = await getTecnicosPorEspecialidade(espec)
-            if (!result.success) {
-                console.error(result.error)
-                continue
-            }
-            console.warn(result.response)
-            result.response.data.content.forEach(tecnico => {
-                tecnicosUnicos.set(tecnico.id, tecnico)
-            })
-        }
-        const tecnicosCapacitados = Array.from(tecnicosUnicos.values())
-        console.warn(tecnicosCapacitados)
-        setTecnicos(tecnicosCapacitados)
-    }
     const fetchServicos = async () => {
         const result = await getServicos()
         if (!result.success) {
@@ -199,9 +157,8 @@ function NovaOrdem() {
     }
     useEffect(() => {
         console.clear()
-        setTimeout(() => {
-            fetchClientes()
-        }, 100)
+        fetchClientes()
+        fetchServicos()
     }, [])
     return (
         <div id="pageNovaOrdem" className="paginas">
@@ -309,61 +266,6 @@ function NovaOrdem() {
                             <div id='nomeServico'>{servico.nome}</div>
                             <div id="descricaoServico">{servico.descricao}</div>
                         </div>
-                        <div id="contTecnico">
-                            <h3>opcional</h3>
-                            <div id="subContTecnico">
-                                <label>Tecnico: </label>
-                                <>
-                                {/* <input type="text"  
-                                    list='dtListTecnicos' 
-                                    value={formNovaOrdem.tecnico}
-                                    onChange={(e) => handleChangeNovaOrdem(e.target.value, 'tecnico')}
-                                    />
-                                <datalist id="dtListTecnicos">
-                                    {(tecnicos && tecnicos.length>0) && (
-                                        tecnicos.map(tecnico => (
-                                            <option key={`tecnico${tecnico.id}`} value={tecnico.nome}>{tecnico?.primeiro} {tecnico.ultimo}</option>
-                                        ))
-                                    )}
-                                </datalist> */}
-                                </>
-                                <Select
-                                    className="selectNovaOrdem"
-                                    showSearch
-                                    filterOption={(input, option) =>
-                                        (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
-                                    }
-                                    value={formNovaOrdem.tecnicoID}
-                                    onSelect={(value) => 
-                                        console.log('tecnico selecionado: ' + value)
-                                    }
-                                    onChange={(value) =>( 
-                                        handleChangeNovaOrdem(value, 'tecnicoID'),
-                                        console.log('valor atual do tecnico: ' + value)
-                                    )}
-                                    options={tecnicos.map(tecnico => (
-                                        {
-                                            value: tecnico.id,
-                                            label: `${tecnico.primeiro} ${tecnico.ultimo}`
-                                        }
-                                    ))}
-                                    style={{
-                                        width: '100%',
-                                    }}
-                                />
-                                {showComponents.bttConfirmTecnico && (
-                                    <button onClick={confirmTecnico}>Confirmar</button>
-                                )}
-                            </div>
-                        </div>
-                        {(showComponents.contTecnico && tecnico) && (
-                            <div id="contInfosTecnico">
-                                <div id="sub1ContInfosTecnico">
-                                    <div>Nome: {tecnico.primeiro} {tecnico.ultimo}</div>
-                                    <div>celular: {tecnico.celular}</div>
-                                </div>
-                            </div>
-                        )}
                         <div id="contDescricao">
                             <label>Descrição: </label>
                             <TextArea

@@ -52,11 +52,10 @@ export const getTecnicos = async () => {
         return { success: false, error }
     }
 }
-export const getTecnicosPorEspecialidade = async (espec) => {
-    console.log('procurando tecnicos com especialidade: ' + espec)
+export const getTecnicosPorServico = async (servico) => {
     try {
         // TODO Tirei pois todos funcs estão indisponiveis &disponivel=true
-        const response = await axios.get(`${config.url}/api/funcionarios?size=50&cargo=TECNICO&especialidade=${espec}`, {
+        const response = await axios.get(`${config.url}/api/funcionarios?size=50&cargo=TECNICO&servico=${servico}`, {
             headers: {
                 'Content-Type': 'application/json',
             },

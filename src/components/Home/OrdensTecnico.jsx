@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import Loading from "../public/Loading"
-import { Card } from "antd"
 import { Link, useNavigate } from "react-router-dom"
 import { getOrdensForHome, getOrdensPorTecnicoForHome } from "../../services/backend/ordemAPI"
 
@@ -27,13 +26,13 @@ function OrdensTecnico({idTecnico}) {
         navigate(`/ordem?id=${idOrdem}`)
     }
     const fetchOrdens = async () => {
-        const result = await getOrdensPorTecnicoForHome(idTecnico)
+        const result = await getOrdensPorTecnicoForHome(idTecnico)                                            
         if (!result.success) {
             console.error(result.error)
             return
         }
-        setReqstOrdensEmExecucao(result.response)
-        setOrdensEmExecucao(result.response.data.content)
+        setReqstOrdens(result.response)
+        setOrdens(result.response.data.content)
         console.warn(result.response)
     }
     useEffect(() => {
@@ -46,7 +45,7 @@ function OrdensTecnico({idTecnico}) {
         : (
             <div id="contOrdensTecnico" className="contsOrdens">
                 <div className="headContsOrdens">
-                    <div className="titulo">Ordens em execução</div>
+                    <div className="titulo">Suas ordens abertas</div>
                     {
                         (reqstOrdens.data.totalElements - 5 ) > 0 &&
                         (<Link className="link" to={'/atendimentos'}>

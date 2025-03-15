@@ -337,6 +337,7 @@ function Especialidades() {
         setTipoJanela(null)
     }
     const handleAttLista = () => {
+        console.log("atualizando listas")
         const fetchData = async () => {
             if(layoutEspecServicos == 'layoutEspecs') {
                 await fetchEspecialidades()
@@ -374,8 +375,8 @@ function Especialidades() {
     }, [erro])
     useEffect(() => {
         const fetchData = async () => {
-            fetchEspecialidades()
             fetchServicos()
+            fetchEspecialidades()
         }
         fetchData()
     }, [])
@@ -403,7 +404,7 @@ function Especialidades() {
                         <button id='nomeOrderFiltrosEspec' onClick={mudarOrdemEspecServicos}>
                             Nome {ordemEspecServicos.toUpperCase()}
                         </button>
-                        <button onClick={() => {handleAttLista}}>Atualizar</button>
+                        <button onClick={handleAttLista}>Atualizar</button>
                     </div>
                     <div id='groupFiltrosEspecServ'>
                         <p>Agrupar por:</p>

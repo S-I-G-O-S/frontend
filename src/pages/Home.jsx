@@ -16,6 +16,7 @@ import { useEffect, useState } from 'react'
 import {notification, Alert, FloatButton} from 'antd';  
 import { CommentOutlined, CustomerServiceOutlined } from '@ant-design/icons'
 import { getUsuarioContext } from '../context/UsuarioContext'
+import OrdensTecnico from '../components/Home/OrdensTecnico'
 
 
 function Home() {
@@ -44,18 +45,18 @@ function Home() {
                 showInfosUser && usuario.cargo == 'DEV' ? 
                     <InfosUser></InfosUser> : ''
                 */}
-                {(usuario.cargo==='BASE' || usuario.cargo==='ADM' || usuario.cargo==='DEV') && (
-                    // <FuncsDisponiveis></FuncsDisponiveis>
-                    <>
-                    <section id='secOrdens'>
+                <section id='secOrdens'>
+                    {(usuario.cargo==='BASE' || usuario.cargo==='ADM' || usuario.cargo==='DEV') && (
+                        // <FuncsDisponiveis></FuncsDisponiveis>
+                        <>
                         <OrdensPendentes/>
                         <OrdensEmAtendimento/>
-                    </section>
-                    </>
-                )}
-                {(usuario.cargo=="TECNICO") && (
-                    <OrdensEmAtendimentoTecnico/>
-                )}
+                        </>
+                    )}
+                    {(usuario.cargo=="TECNICO") && (
+                        <OrdensTecnico idTecnico={usuario.id}/>
+                    )}
+                </section>
                 </>
             )
         }

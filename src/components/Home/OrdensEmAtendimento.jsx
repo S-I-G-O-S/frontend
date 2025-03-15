@@ -37,16 +37,6 @@ function OrdensEmAtendimento() {
         console.warn(result.response)
     }
     useEffect(() => {
-        // setOrdensEmAtendimento([
-        //     {
-        //         id: 1,
-        //         dtAbertura: "21/11/2024",
-        //         cliente: "Cliente 1",
-        //         servico: 'Configuração de Redes',
-        //         endereco: "R. XV de novembro, 16 - Santos-SP",
-        //         tecnico: "Jusenir Almeida"
-        //     }
-        // ])
         fetchOrdens()
     }, [])
     return !ordensEmExecucao ? <Loading />  : (

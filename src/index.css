@@ -37,15 +37,12 @@
     box-sizing: border-box;
 }
 /* GERAIS */
-html, body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden; /* Para evitar rolagem na página toda */
-}
 body {
     margin: 0px;
     padding: 0px;
     min-height: 100vh;
+    height: 100%;
+    overflow-x: hidden;
 
     max-width: 100%;
     width: 100%;
@@ -63,9 +60,9 @@ body {
     max-width: 100%;
     box-sizing: border-box;
 
-    background-repeat: no-repeat;
+    /* background-repeat: no-repeat;
     background-size: calc(100% + 200px) 9rem;
-    background-position: 100% 100%;  
+    background-position: 100% 100%;   */
 
     p,
     h1,
@@ -115,66 +112,6 @@ body {
 }
 .ant-modal-content{
     background-color: var(--salmao3);
-}
-:where(.css-dev-only-do-not-override-apn68).ant-color-picker-trigger {
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 100%;
-    height: auto;
-    padding: .2rem;
-    border-radius: .3rem;
-    border-style: solid;
-    border-width: .1rem;
-    border-color: var(--marrom1);
-    
-    background: var(--branco);
-    transition: all 0.1s;
-
-    .ant-color-picker-color-block {
-        border-color: var(--marrom1);
-        border-style: solid;
-        border-width: .1rem;
-    }
-    .ant-color-picker-trigger-text {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        .labelColor {
-            font-weight: 500;
-        }
-        span {
-            font-weight: 400;
-        }
-    }
-}
-:where(.css-dev-only-do-not-override-apn68).ant-color-picker-trigger:hover {
-    border-color: var(--marrom1);
-}
-:where(.css-dev-only-do-not-override-apn68).ant-color-picker-trigger:focus {
-    border-color: var(--laranja);
-    outline-width: .1rem;
-    outline-style: solid;
-    outline-color: var(--laranja);
-
-}
-:where(.css-dev-only-do-not-override-apn68).ant-color-picker-trigger.ant-color-picker-trigger-active {
-    border-color: var(--laranja);
-    outline-width: .1rem;
-    outline-style: solid;
-    outline-color: var(--laranja);
-}
-:where(.css-dev-only-do-not-override-apn68).ant-popover {
-    .ant-popover-inner {
-        background-color: var(--salmao3);
-        background-clip: padding-box;
-        border-radius: .5rem;
-        box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08),0 3px 6px -4px rgba(0, 0, 0, 0.12),0 9px 28px 8px rgba(0, 0, 0, 0.05);
-        border-color: var(--salmao2);
-        border-style: solid;
-        border-width: .1rem;
-        padding: .85rem;
-    }
 }
 .paginacao {
     display: flex;
@@ -245,8 +182,13 @@ section {
 @media screen and (width <= 900px) {
     .paginas {
         width: 100vw;
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: min-content auto;
+        grid-template-areas: 
+        "nav"
+        "main";
+        /* flex-direction: column; */
         /* #header {
             position: static;
             z-index: 80;
@@ -257,6 +199,7 @@ section {
         } */
         main {
             max-width: 100vw;
+            overflow-y: scroll;
         }
     }
     #pageEspecialidades {
@@ -266,9 +209,9 @@ section {
         align-items: center;
         max-width: 100vw;
         height: 100vh;
-        section {
+        /* section {
             width: 99%;
-        }
+        } */
     }}
     .paginacao {
         display: flex;

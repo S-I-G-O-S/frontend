@@ -429,8 +429,7 @@ function Funcionarios() {
                     </div>
                     }
                     <div className='paginacao'>
-                        {
-                            !reqstFuncionarios ? '' :
+                        {(!reqstFuncionarios || reqstFuncionarios.data.totalPages==1) ? '' :
                             // renderPaginas()
                             <Pagination 
                                 defaultCurrent={1} 
