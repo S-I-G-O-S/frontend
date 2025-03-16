@@ -28,8 +28,10 @@ export default defineConfig({
 		  },
 		*/
 		// Configurações gerais de build
-		chunkSizeWarningLimit: 500, // Evita warnings para chunks grandes
-		cssCodeSplit: true, // Divide o CSS em arquivos separados para otimização
+		//   Evita warnings para chunks grandes
+		//chunkSizeWarningLimit: 500, 
+		// Divide o CSS em arquivos separados para otimização
+		cssCodeSplit: true, 
 	},
 	/*
 	css: {

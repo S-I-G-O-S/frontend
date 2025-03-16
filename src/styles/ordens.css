@@ -156,20 +156,22 @@
             }
         }
     }
+    .shadowBG {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        background-color: #000000da;
+        width: 100%;
+        height: 100%;
+        #secOrdemAberta {
+            
+        }
+    }
 
 }
 
-#mainOrdens 
 #pageOrdens
-.shadowBG {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    background-color: #000000da;
-    width: 100%;
-    height: 100%;
-}
 #secOrdemAberta
 #headOrdemAberta {
     display: flex;
