@@ -176,61 +176,60 @@
     }
 }
 @media screen and (width <= 950px) {
-    body {
-        overflow-y: scroll;
-    }
-    #pageOrdem >
-    #mainOrdem {
-        grid-template-columns: 3fr 2fr;
-        grid-template-rows: auto 1fr;
-        grid-template-areas: 
-        "acoes acoes"
-        "principal atendimentos";
-        max-height: none;
-        
-        section, aside {
-            h2 {
-                font-size: .85rem;
-                margin-bottom: .4rem;
+    #pageOrdem {
+        #mainOrdem {
+            grid-template-columns: 3fr 2fr;
+            grid-template-rows: auto 1fr;
+            grid-template-areas: 
+            "acoes acoes"
+            "principal atendimentos";
+            max-height: none;
+            
+            section, aside {
+                h2 {
+                    font-size: .85rem;
+                    margin-bottom: .4rem;
+                }
             }
-        }
-        #asideAcoes {
-            flex-direction: column;
-            #contAcoes {
-                justify-content: space-evenly;
-                flex-direction: row;
-                padding: .3rem;
-                
-                button {
-                    width: 30%;
+            #asideAcoes {
+                flex-direction: column;
+                #contAcoes {
+                    justify-content: space-evenly;
+                    flex-direction: row;
+                    padding: .3rem;
+                    
+                    button {
+                        width: 30%;
 
+                    }
                 }
             }
         }
     }
 }
 @media screen and (width <= 600px) {
-    #pageOrdem {
-        #mainOrdem {
-            grid-template-columns: 1fr;
-            grid-template-rows: auto min-content auto;
-            grid-template-areas: 
-            "acoes"
-            "principal" 
-            "atendimentos";
-            
-            
-            #asideAcoes {
+    #pageOrdem > 
+    #mainOrdem {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        /* grid-template-columns: 1fr;
+        grid-template-rows: min-content min-content auto;
+        grid-template-areas: 
+        "acoes"
+        "principal" 
+        "atendimentos"; */
+        
+        #asideAcoes {
+            flex-direction: column;
+            #contAcoes {
                 flex-direction: column;
-                #contAcoes {
-                    flex-direction: column;
-                    padding: .3rem;
-                    
-                    button {
-                        width: 100%;
-                    }
+                padding: .3rem;
+                
+                button {
+                    width: 100%;
                 }
             }
         }
-    } 
+    }
 }

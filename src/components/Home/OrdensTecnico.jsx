@@ -25,14 +25,35 @@ function OrdensTecnico({idTecnico}) {
     const handleAbrirOrdem = (idOrdem) => {
         navigate(`/ordem?id=${idOrdem}`)
     }
+    /*
     const fetchOrdens = async () => {
-        const result = await getOrdensPorTecnicoForHome(idTecnico)                                            
+        let ordens = new Map()
+        for (let situacao of situacoes) {
+            const result = await getOrdensPorTecnicoForHome(espec)
+            if (!result.success) {
+                console.error(result.error)
+                continue
+            }
+            result.response.data.content.forEach(tecnico => {
+                ordens.set(ordem.id, ordem)
+            })
+        }
+        setOrdens(Array.from(ordens.values()))
+    }
+    */
+    const fetchOrdens = async () => {
+        const result = await getOrdensPorTecnicoForHome(idTecnico)
         if (!result.success) {
             console.error(result.error)
             return
         }
-        setReqstOrdens(result.response)
-        setOrdens(result.response.data.content)
+        const ordensAbertas = result.response.data.content.filter(ordem => (
+            ordem.situacao === 'PENDENTE' || 
+            ordem.situacao === 'EM_EXECUCAO' || 
+            ordem.situacao === 'RETORNO'
+        ))
+        // setReqstOrdens(result.response)
+        setOrdens(ordensAbertas)
         console.warn(result.response)
     }
     useEffect(() => {
@@ -46,16 +67,15 @@ function OrdensTecnico({idTecnico}) {
             <div id="contOrdensTecnico" className="contsOrdens">
                 <div className="headContsOrdens">
                     <div className="titulo">Suas ordens abertas</div>
-                    {
-                        (reqstOrdens.data.totalElements - 5 ) > 0 &&
-                        (<Link className="link" to={'/atendimentos'}>
-                            mais {reqstOrdens.data.totalElements - 5}
-                        </Link>)
-                    }
+                    {(ordens.length > 5)  && (
+                        <Link className="link" to={'/atendimentos'}>
+                            mais {ordens.length - 5}
+                        </Link>
+                    )}
                 </div>
                 <div className="bodyContsOrdens">
                     {ordens.map(ordem => (
-                        <div key={ordem.id} on
+                        <div key={ordem.id}
                             className="ordens"
                             onClick={() => handleAbrirOrdem(ordem.id)}>
                             <div className="nomeCliente">{ordem.cliente}</div>

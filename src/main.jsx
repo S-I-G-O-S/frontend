@@ -14,12 +14,10 @@ function App() {
         <AuthProvider>
             <UsuarioProvider>
               <PreferenciasProvider>
-                <div>
-                  {/* O Suspense exibe um fallback enquanto o componente é carregado */}
-                  <Suspense fallback={<Loading texto={"carregando SIGOS"}/>}>
-                    <AppRoutes />
-                  </Suspense>
-                </div>
+                {/* O Suspense exibe um fallback enquanto o componente é carregado */}
+                <Suspense fallback={<Loading texto={"carregando SIGOS"}/>}>
+                  <AppRoutes />
+                </Suspense>
               </PreferenciasProvider>
             </UsuarioProvider>
         </AuthProvider>

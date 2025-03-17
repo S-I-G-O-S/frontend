@@ -136,6 +136,7 @@ function Nav({ cargo }) {
                 </NavLink>
             </div>
             <div id='containerFooter'>
+                {/* <div>Leonardo Martinez</div> */}
                 <button title='sair' onClick={handleLogout}>
                     <LogoutOutlined id='iconSair' rotate={180}/>
                     <div id='txtSair'>sair</div>

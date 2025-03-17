@@ -6,8 +6,8 @@ import InfosUser from '@components/Home/InfosUser.jsx'
 import FuncsDisponiveis from '@components/Home/FuncsDisponiveis.jsx'
 import OrdensPendentes from '@components/Home/OrdensPendentes.jsx'
 import OrdensEmAtendimento from '@components/Home/OrdensEmAtendimento.jsx'
+import OrdensTecnico from '../components/Home/OrdensTecnico'
 import OrdensEmAtendimentoTecnico from '@components/Home/OrdensEmAtendimentoTecnico.jsx'
-import { getCookie } from '@services/cookies.js'
 import Atalhos from '@components/Home/Atalhos.jsx'
 
 import '@styles/home.css'
@@ -16,7 +16,6 @@ import { useEffect, useState } from 'react'
 import {notification, Alert, FloatButton} from 'antd';  
 import { CommentOutlined, CustomerServiceOutlined } from '@ant-design/icons'
 import { getUsuarioContext } from '../context/UsuarioContext'
-import OrdensTecnico from '../components/Home/OrdensTecnico'
 
 
 function Home() {

@@ -55,7 +55,6 @@ function Ordem() {
         console.log('Ordem cancelada:')
         console.warn(result)
     }
-    
     const handleAtenderOrdem = async () => {
         /*
             * editar ordem e mudar 'funcionario' para o id do tecnico
@@ -161,6 +160,11 @@ function Ordem() {
                 <aside id="asideAcoes">
                     <h2>Opções</h2>
                     <div id="contAcoes">
+                    {(ordem.situacao == "FINALIZADA") && (
+                        <p style={{ textAlign: "center" }}>
+                            ordem finalizada
+                        </p>
+                    )}
                     {(usuario.cargo==="BASE" || usuario.cargo==="ADM" || usuario.cargo==='DEV' ) &&(
                         <>
                         <button onClick={() => changeModalTecnicos(0)}>Designar técnico</button>
@@ -176,9 +180,7 @@ function Ordem() {
                         <button onClick={changeEditMode}>Alterar ordem</button>
                         </>
                     )}
-                    {(
-                        usuario.cargo==="TECNICO" && 
-                        (ordem.situacao==='PENDENTE' || ordem.situacao==='RETORNO' || ordem.situacao==="EM_EXECUCAO")) && (
+                    {(usuario.cargo==="TECNICO" && usuario.id == ordem.funcionario.id) && (ordem.situacao==='PENDENTE' || ordem.situacao==='RETORNO' || ordem.situacao==="EM_EXECUCAO") && (
                         <button onClick={handleAtenderOrdem}>
                             {
                                 ordem.situacao==="EM_EXECUCAO" ? 

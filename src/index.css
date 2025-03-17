@@ -8,6 +8,7 @@
     --salmao2: #f7cba4;
     --salmao3: #fcd8b9;
     --branco: #f2e8df;
+    --brancoHover: #ecded2;
     --cinza1: #dfdcd9;
     --marrom1: #26110D;
     --marrom2: #3b1f17;
@@ -40,26 +41,25 @@
 body {
     margin: 0px;
     padding: 0px;
-    min-height: 100vh;
-    height: 100%;
     overflow-x: hidden;
 
-    max-width: 100%;
-    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+    width: 100vw;
+    max-width: 100vw;
+
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
 
     font-family: var(--font2);
 }
 #root {
     padding: 0;
     margin: 0;
-    min-height: 100vh;
+    height: 100vh;
+    max-height: 100vh;
     width: 100%;
     max-width: 100%;
-    box-sizing: border-box;
-
+    overflow: hidden;
     /* background-repeat: no-repeat;
     background-size: calc(100% + 200px) 9rem;
     background-position: 100% 100%;   */
@@ -158,7 +158,6 @@ body {
     overflow-y: hidden;
     main {
         padding: 0.5rem 2rem;
-        overflow-y: auto;
     }
 }
 .paginas {
@@ -199,7 +198,6 @@ section {
         } */
         main {
             max-width: 100vw;
-            overflow-y: scroll;
         }
     }
     #pageEspecialidades {

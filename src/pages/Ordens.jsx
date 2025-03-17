@@ -155,14 +155,14 @@ function Ordens() {
 
     //  REQUISIÇÕES
     const fetchOrdens = async (pagina) => {
-        try {
-            const result = await getPageOrdens(pagina, filtros)
-            setReqstOrdens(result.response)
-            setOrdens(result.response.data.content)
-            console.warn(result.response)
-        } catch (error) {
+        const result = await getPageOrdens(pagina, filtros)
+        if (!result.success) {
             console.error(error)
+            return
         }
+        setReqstOrdens(result.response)
+        setOrdens(result.response.data.content)
+        console.warn(result.response)
         changeAllSituacaoLoadings()
         // setloadings(prevState => ({
         //     ...prevState,
@@ -362,7 +362,7 @@ function Ordens() {
                     </section>
                 </div>
             }
-            {
+            {/*
                 render.cliente && 
                 <div className="shadowBG">
                     <section id="secFiltroCliente" className="secsFiltro">
@@ -372,7 +372,7 @@ function Ordens() {
                         </div>
                     </section>
                 </div>
-            }
+            */}
         </div>
     )
 }

@@ -168,6 +168,11 @@
     .links:hover {
         background-color: rgba(0, 0, 0, 0.2);
     }
+    .links:focus {
+        outline-style: none;
+        border: .1rem solid var(--laranja);
+        background-color: rgba(0, 0, 0, 0.3);
+    }
     .iconNav,
     .iconNav > svg{
         color: var(--branco);

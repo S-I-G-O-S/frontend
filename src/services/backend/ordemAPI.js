@@ -68,7 +68,7 @@ export const getOrdensPorCliente = async (pagina, idCliente) => {
 }
 export const getOrdensPorTecnicoForHome = async (idTecnico) => {
     try {
-        const response = await axios.get(`${config.url}/api/ordens?size=5&funcionario=${idTecnico}`, {
+        const response = await axios.get(`${config.url}/api/ordens?size=99&funcionario=${idTecnico}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
