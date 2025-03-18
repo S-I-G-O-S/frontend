@@ -30,6 +30,7 @@ function NovaOrdem() {
         contFinalizar: false
     }) 
     const {usuario} = getUsuarioContext()
+    const [ordemId, setOrdemID] = useState(0)
     const handleChangeNovaOrdem = (value, field) => {
         setFormNovaOrdem(prevState => ({
             ...prevState,
@@ -119,7 +120,7 @@ function NovaOrdem() {
             placement: 'bottomLeft',
         })
         setTimeout(() => {
-            // goToOrdens()
+            navigate(`/ordem?id=${result.response.data.id}`)
         }, 1000)
     }
     const handleCancel = () => {
