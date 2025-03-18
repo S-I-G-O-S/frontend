@@ -29,4 +29,40 @@
         border-color: var(--marrom1);
         border-radius: .3rem;
     }
+    #contAcoesSelectTecnico {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: .5rem;
+        gap: 1rem;
+        
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: .2rem .3rem;
+            border-radius: .3rem;
+            border-style: solid;
+            border-width: .1rem;
+        }
+        #bttCancelSelectTecnico {
+            color: var(--marrom1);
+            background-color: var(--salmao1);
+            border-color: var(--marrom1);
+        }
+        #bttCancelSelectTecnico:hover, 
+        #bttCancelSelectTecnico:focus {
+            background-color: var(--salmao3);
+        }
+        
+        #bttConfirmTecnico {
+            color: var(--salmao2);
+            background-color: var(--marrom1);
+            border-color: var(--marrom1);
+        }
+        #bttConfirmTecnico:hover,
+        #bttConfirmTecnico:focus {
+            background-color: var(--marrom2);
+            border-color: var(--laranja);
+        }
+    }
 }

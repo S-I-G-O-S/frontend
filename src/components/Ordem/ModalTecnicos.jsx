@@ -3,10 +3,12 @@ import { getTecnicosPorServico } from "../../services/backend/funcionariosAPI"
 import "@styles/ordem/modalTecnicos.css"
 import { notification } from "antd"
 import { putDesignarTecnico } from "../../services/backend/ordemAPI"
+import Loading from "../public/Loading"
 //  TODO Fazer a validação de props: https://dev.to/vinod3d/props-validation-in-react-4ga0
 export default function ModalTecnicos ({ordem, especialidades, changeModal}) {
     const [tecnicos, setTecnicos] = useState([])
     const [tecnico, setTecnico] = useState(null)
+    const [loading, setLoading] = useState(true)
     const handleSelectTecnico = (id) => {
         const tecnicoToAdd = tecnicos.find(tecnico => tecnico.id === id)
         
@@ -50,11 +52,13 @@ export default function ModalTecnicos ({ordem, especialidades, changeModal}) {
         }
         setTecnicos(Array.from(tecnicosUnicos.values()))
         */
+        setLoading(true)
         const result = await  getTecnicosPorServico(ordem.servico.id)
         if (!result.success) {
             console.error(result.error)
             return
         }
+        setLoading(false)
         setTecnicos(result.response.data.content)
         console.warn(result.response)
     }
@@ -65,15 +69,23 @@ export default function ModalTecnicos ({ordem, especialidades, changeModal}) {
         <section id="modalTecnicos">
             <h2>Técnicos apitos para este serviço</h2>
             <ul id="listTecnicos">
-            {!tecnicos ? 
-                <div>sem tecnicos competentes</div> :
-                tecnicos.map(tecnico => (
-                    <li key={`tecnico${tecnico.id}`} className="itemTecnicoApto" onClick={() => handleSelectTecnico(tecnico.id)}>
-                        {tecnico.primeiro} {tecnico.ultimo}
-                    </li>
-                )
-            )}
+                {loading ? (<Loading />) : (
+                    !tecnicos || tecnicos.length === 0 ? (
+                        <div>Sem técnicos competentes</div>
+                    ) : (
+                        tecnicos.map(tecnico => (
+                            <li 
+                                key={`tecnico${tecnico.id}`} 
+                                className="itemTecnicoApto" 
+                                onClick={() => handleSelectTecnico(tecnico.id)}
+                            >
+                                {tecnico.primeiro} {tecnico.ultimo}
+                            </li>
+                        ))
+                    )
+                )}
             </ul>
+
             {/* 
                 {
                     "id": 5,
@@ -96,10 +108,12 @@ export default function ModalTecnicos ({ordem, especialidades, changeModal}) {
                     <div >{!tecnico.disponivel && 'não '}disponível no momento</div>
                 </div>
             )}
-            <button onClick={() => changeModal(false)}>fechar</button>
-            {tecnico && (
-                <button onClick={handleConfirmTecnico}>confirmar</button>
-            )}
+            <div id="contAcoesSelectTecnico">
+                <button id="bttCancelSelectTecnico" onClick={() => changeModal(false)}>fechar</button>
+                {tecnico && (
+                    <button id="bttConfirmTecnico" onClick={handleConfirmTecnico}>confirmar</button>
+                )}
+            </div>
         </section>
     )
 }

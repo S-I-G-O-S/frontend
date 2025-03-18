@@ -170,8 +170,8 @@
     }
     .links:focus {
         outline-style: none;
-        border: .1rem solid var(--laranja);
-        background-color: rgba(0, 0, 0, 0.3);
+        border: .1rem solid var(--marrom10);
+        /* background-color: rgba(0, 0, 0, 0.3); */
     }
     .iconNav,
     .iconNav > svg{

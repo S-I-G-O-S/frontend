@@ -94,23 +94,16 @@
                         border-style: solid;
                         border-width: .1rem;
                         border-radius: 5px;
+
+                        cursor: pointer;
+                        display: grid;
+                        grid-template-columns: 1fr 2fr min-content;
+                        grid-column: 1fr;
                         div {
                             white-space: nowrap;
                             overflow: hidden;
                             text-overflow: ellipsis;
                         }
-                    }
-                    .ordensPendentes {
-                        cursor: pointer;
-                        display: grid;
-                        grid-template-columns: 1fr 2fr min-content;
-                        grid-column: 1fr;
-                    }
-                    .ordensEmAtendimento {
-                        cursor: pointer;
-                        display: grid;
-                        grid-template-columns: 1fr 2fr min-content;
-                        grid-column: 1fr;
                     }
                 }
             }
