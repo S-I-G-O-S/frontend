@@ -18,10 +18,8 @@ function Clientes() {
     const [clientes, setClientes] = useState()
     const [novoCliente, setNovoCliente] = useState(null)
     const [showNovoCliente, setShowNovoCliente] = useState(null)
-    const [usuario, setUsuario] = useState(() => {
-        const cookieUsuario = getCookie('usuario')
-        return cookieUsuario ? cookieUsuario : ''
-    })
+    const { usuario } = getUsuarioContext()
+
     const [filtros, setFiltros] = useState({
         nome: null,
         cnpj: null,

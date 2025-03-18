@@ -8,6 +8,7 @@ export const getDeployStatus = async () => {
         });
         return response;
     } catch (error) {
+        console.error(error)
         return null;
     }
 };
