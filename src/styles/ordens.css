@@ -310,6 +310,21 @@
                 .cl4 {
                     border-right-color: var(--marrom1);
                 }
+                .tipoOrdemPENDENTE {
+                    background-color: var(--pendente);
+                }
+                .tipoOrdemEM_EXECUCAO {
+                    background-color: var(--emExecucao);
+                }
+                .tipoOrdemRETORNO {
+                    background-color: var(--retorno);
+                }
+                .tipoOrdemCANCELADA {
+                    background-color: var(--cancelada);
+                }
+                .tipoOrdemFINALIZADA {
+                    background-color: var(--finalizada);
+                }
             }
             .ordem:hover {
                 background-color: var(--salmao3);

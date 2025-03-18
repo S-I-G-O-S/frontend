@@ -313,7 +313,7 @@ function Ordens() {
                                             <td className="cl2">{converterDtHr(ordem.dtAbertura)}</td>
                                             <td className="cl3">{ordem.cliente}</td>
                                             <td className="cl4">{ordem.funcionario || 'nenhum'}</td>
-                                            <td className="cl5">{ordem.situacao=="EM_EXECUCAO" ? "EM EXECUÇÃO": ordem.situacao}</td>
+                                            <td className={`cl5 tipoOrdem${ordem.situacao}`}>{ordem.situacao=="EM_EXECUCAO" ? "EM EXECUÇÃO": ordem.situacao}</td>
                                         </tr>
                                     ))
                                 )
