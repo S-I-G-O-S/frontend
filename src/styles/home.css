@@ -64,6 +64,7 @@
                 border: 0.1rem solid;
                 border-radius: 0.4rem;
                 max-width: 50%;
+                height: min-content;
                 .headContsOrdens {
                     display: flex;
                     align-items: center;
@@ -97,13 +98,30 @@
 
                         cursor: pointer;
                         display: grid;
-                        grid-template-columns: 1fr 2fr min-content;
-                        grid-column: 1fr;
+                        grid-template-columns: 1fr 2fr;
+                        grid-column: 1fr 1fr;
+                        grid-template-areas: 
+                            "dataHora nomeCliente"
+                            "tecnico servico";
+
                         div {
                             white-space: nowrap;
                             overflow: hidden;
                             text-overflow: ellipsis;
                         }
+                        .nomeCliente {
+                            grid-area: nomeCliente;
+                        }
+                        .serviço {
+                            grid-area: servico;
+                        }
+                        .dataHora {
+                            grid-area: dataHora;
+                        }
+                        .tecnico {
+                            grid-area: tecnico;
+                        }
+
                     }
                 }
             }

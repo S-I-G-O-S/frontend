@@ -4,8 +4,9 @@ import "@styles/ordem/modalTecnicos.css"
 import { notification } from "antd"
 import { putDesignarTecnico } from "../../services/backend/ordemAPI"
 import Loading from "../public/Loading"
+import { ConsoleView } from "react-device-detect"
 //  TODO Fazer a validação de props: https://dev.to/vinod3d/props-validation-in-react-4ga0
-export default function ModalTecnicos ({ordem, especialidades, changeModal}) {
+export default function ModalTecnicos ({ordem, changeModal, setOrdem}) {
     const [tecnicos, setTecnicos] = useState([])
     const [tecnico, setTecnico] = useState(null)
     const [loading, setLoading] = useState(true)
@@ -28,6 +29,17 @@ export default function ModalTecnicos ({ordem, especialidades, changeModal}) {
             })
             return
         }
+        console.warn(result.response)
+        /*
+        setOrdem(prevState => ({
+            ...prevState,
+            funcionario: [
+                ...especState.especialidades,
+                especToAdd
+            ]
+        }))
+        */
+       setOrdem(result.response.data)
         changeModal(false)
         notification.success({
             message: "Um técnico designado para esta ordem.",

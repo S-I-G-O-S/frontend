@@ -87,7 +87,8 @@ function Ordem() {
     }
     const changeModalTecnicos = async (idTecnico) => {
         // verificar se não tem um funcionario atendendo
-        if (ordem.situacao!=='PENDENTE' && ordem.situacao!=='RETORNO') {
+        console.warn('debug ' + !ordem.funcionario)
+        if (ordem.funcionario) {
             // Não da pra atender ele
             console.log('impossivel atender esta ordem.')
             notification.error({
@@ -299,7 +300,9 @@ function Ordem() {
                 <ModalTecnicos
                     ordem={ordem}
                     especialidades={ordem.servico.especialidades} 
-                    changeModal={setModalTecnicos}/>
+                    changeModal={setModalTecnicos}
+                    setOrdem={setOrdem}
+                    />
             </div>
         )}
         {modalAtendimento && (
