@@ -23,7 +23,9 @@
     "react-router-dom": "^6.26.0",
     "recharts": "^2.15.1",
     "styled-components": "^6.1.13",
-    "zxcvbn": "^4.4.2"
+    "zxcvbn": "^4.4.2",
+    "@googlemaps/markerclusterer": "^2.5.1",
+    "@vis.gl/react-google-maps": "latest"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.2",

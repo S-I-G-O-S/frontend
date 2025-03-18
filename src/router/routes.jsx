@@ -78,6 +78,10 @@ function AppRoutes() {
                     element: <Analise />,
                 },
                 {
+                    path: "/teste",
+                    element: <Teste />,
+                },
+                {
                     path: "*",
                     element: <PaginaIncorreta />,
                 },
