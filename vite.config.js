@@ -14,6 +14,7 @@ export default defineConfig({
 			'@pages': path.resolve(__dirname, './src/pages'),
 			'@provider': path.resolve(__dirname, './src/provider'),
 			'@context': path.resolve(__dirname, './src/context'),
+			'@vis.gl/react-google-maps/examples.js': 'https://visgl.github.io/react-google-maps/scripts/examples.js'
 		},
 	},
 	build: {
@@ -44,7 +45,7 @@ export default defineConfig({
 	*/
 	server: {
 		port: 5173, // Porta do servidor dev
-		open: true, // Abre o navegador automaticamente
+		open: false, // Abre o navegador automaticamente
 		/*proxy: {
 		  '/api': {
 			target: 'http://localhost:5000', // Proxy para o backend (ajuste a URL do backend)
