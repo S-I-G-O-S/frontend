@@ -6,7 +6,8 @@ import { getGoogleMapsToken } from "../services/mapsAPI";
 export default function Teste() {
     const token = getGoogleMapsToken()
     const { usuario } = getUsuarioContext()
-    const position = { lat: -23.942596609219, lng: -46.32638259822 }
+    // const position = { lat: -23.942596609219, lng: -46.32638259822 }
+    const position = { lat: -33.860664, lng: 151.208138 }
 
     return (
         <APIProvider apiKey={token} onLoad={() => console.log('Maps API has loaded.')}>
