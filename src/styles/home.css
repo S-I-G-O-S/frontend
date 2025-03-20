@@ -91,7 +91,7 @@
                         gap: 0.3rem;
                         font-size: 0.9rem;
                         
-                        padding: 0.2rem 0.5rem;
+                        padding: 0.2rem 0.3rem;
                         border-style: solid;
                         border-width: .1rem;
                         border-radius: 5px;
@@ -108,6 +108,8 @@
                             white-space: nowrap;
                             overflow: hidden;
                             text-overflow: ellipsis;
+                            padding: .1rem .3rem;
+                            border-radius: .3rem;
                         }
                         .nomeCliente {
                             grid-area: nomeCliente;
@@ -160,10 +162,17 @@
                     .ordens {
                         background-color: var(--branco);
                         border-color: var(--marrom1);
+                        
+                        div {
+                            background-color: var(--brancoHover);
+                        }
                     }
                     .ordens:hover {
                         background-color: var(--brancoHover);
                         /* border-color: var(--laranja); */
+                        div {
+                            background-color: var(--branco);
+                        }
                     }
                 }
             }

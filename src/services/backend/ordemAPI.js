@@ -1,6 +1,5 @@
 import axios from 'axios'
 import config from '../config'
-import { A } from 'storybook/internal/components'
 
 //  GET
 export const getOrdens = async () => {

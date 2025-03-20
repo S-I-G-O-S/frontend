@@ -55,19 +55,24 @@ function Login() {
             setLoading(false)
             return
         }
+        console.log("fazendo requisição api/login")
         let result = await loginFunc(login)
+        console.log("requisição retornada")
         if (!result.success) {
             console.log(result.error)
             showNotif('bottomLeft', `Erro ao fazer login!`, 'Tente novamente mais tarde ou entre em contato com o suporte.')
             setLoading(false)
             return
         }
+        console.log('DEBUG 1')
         setToken(result.response.data.tokenJWT)  // Definir o token no Authorization
 
+        console.log('DEBUG 1')
         // TODO Testando atualização direta no Context
         // setCookie('usuario', result.data.funcionario, 12)
         setUsuario(result.response.data.funcionario)
         
+        console.log('DEBUG 1')
         if (result.response.data.funcionario.tema == null) {
             sessionStorage.setItem('preferencias', JSON.stringify({
                 tema: 'salmaoLight',

@@ -12,6 +12,7 @@ import TextArea from 'antd/es/input/TextArea'
 import { MinusCircleFilled } from '@ant-design/icons'
 import { ColorPicker } from 'antd'
 import { getUsuarioContext } from '../context/UsuarioContext'
+import { deleteServico } from '../services/backend/servicosAPI'
 
 // https://www.delftstack.com/pt/howto/react/for-loop-in-react/
 
@@ -21,18 +22,11 @@ function Especialidades() {
     const [tipoJanela, setTipoJanela] = useState(null)
     const [layoutEspecServicos, setLayoutEspecServicos] = useState("layoutServicos")
     const [ordemEspecServicos, setOrdemEspecServicos] = useState("asc")
-    const [erro, setErro] = useState('')
-    /*const [usuario, setUsuario] = useState(() => {
-        const cookieUsuario = getCookie('usuario')
-        return cookieUsuario ? cookieUsuario : ''
-    })*/
-    
     // Especialidades
     const [reqstEspecialidades, setReqstEspecialidades] = useState([])
     const [especialidades, setEspecialidades] = useState(reqstEspecialidades)
     const [prevEspec, setPrevEspec] = useState(null)
     const [especAberta, setEspecAberta] = useState(null)
-
     // Serviços
     const [reqstServicos, setReqstServicos] = useState([])
     const [servicos, setServicos] = useState(reqstServicos)
@@ -65,7 +59,6 @@ function Especialidades() {
             )   
         }
     }
-
     //  EDIÇÃO ESPECIALIDADE
     const mudarTemaPrevEspecConfig = () => {
         if (prevEspec.prevTema === "preVisuLight") {
@@ -179,6 +172,9 @@ function Especialidades() {
             }
             console.warn(result.response)
             if (result.success) {
+                setEspecialidades(prevState => (
+                    [...prevState, especAberta]
+                ))
                 window.alert('Alterações salvas com sucesso!')
                 fecharEspec()
                 fecharEspec()
@@ -209,6 +205,9 @@ function Especialidades() {
                 console.error(result.error)
                 return
             }
+            setServicos(prevState => (
+                [...prevState, servicoAberto]
+            ))
             window.alert('Alterações salvas com sucesso!')
             fecharEspec()
             fecharServ()
@@ -218,10 +217,9 @@ function Especialidades() {
     }
     const handleDeletar = async () => {
         if (tipoJanela == 'espec') {
-            if(!window.confirm("Deseja APAGAR a especialidade " + especAberta.nome + "?")) {
+            if(!window.confirm("Deseja APAGAR a especialidade: " + especAberta.nome + "?")) {
                 return
             }
-            
             const result = await deleteEspec(especAberta.id);
             if (!result.success) {
                 console.error(result.error)
@@ -229,6 +227,17 @@ function Especialidades() {
             } 
             setEspecialidades((prev) => prev.filter((esp) => esp.id !== especAberta.id))
             fecharEspec()
+        } else {
+            if(!window.confirm("Deseja APAGAR o serviço: " + servicoAberto.nome + "?")) {
+                return
+            }
+            const result = await deleteServico(servicoAberto.id);
+            if (!result.success) {
+                console.error(result.error)
+                return
+            }
+            setServicos((prev) => prev.filter((servico) => servico.id !== servicoAberto.id))
+            fecharServ()
         }
     }
     const handleCancel = () => {
@@ -369,11 +378,6 @@ function Especialidades() {
         setServicos(result.response.data.content)
     }
     useEffect(() => {
-        if (erro) {
-            console.error(erro)
-        }
-    }, [erro])
-    useEffect(() => {
         const fetchData = async () => {
             fetchServicos()
             fetchEspecialidades()
@@ -446,10 +450,9 @@ function Especialidades() {
             !tipoJanela  ?
                 '': 
                 (tipoJanela == 'espec' ?
-                    (<section id='secConfigEspec'>
+                    (<section id='secConfigEspec' className='secConfig'>
                         <h2>Editando especialidade</h2>
                         <div id='contInfosEspecEdit'>
-
                             <div id='campoNomeConfigEspec'>
                                 <label>Nome:</label>
                                 <input 
@@ -516,12 +519,12 @@ function Especialidades() {
                             </div>
                         </div>
                         <div id='contFimAcao'>
-                        <button id='bttCancelar' onClick={handleCancel}>cancelar</button>
-                        <button id='bttSalvar' onClick={handleSalvar}>salvar</button>
-                        {
-                            especAberta.id == "nova" ? '' :
-                            <button id='bttExcluir' onClick={handleDeletar}>deletar</button>
-                        }
+                            <button id='bttCancelar' onClick={handleCancel}>cancelar</button>
+                            <button id='bttSalvar' onClick={handleSalvar}>salvar</button>
+                            {
+                                especAberta.id == "nova" ? '' :
+                                <button id='bttExcluir' onClick={handleDeletar}>deletar</button>
+                            }
                         </div>
                     </section>) :
                     (!servicoAberto ? 
@@ -593,14 +596,14 @@ function Especialidades() {
                                         (<p id='msgSemEspecs'>Nenhuma especialidade adicionada</p>)
                                 }
                                 </div>
-                                        </div>
-                                        <div id='contAcaoConfigServ'>
-                                            <button id='bttCancelar' onClick={handleCancel}>cancelar</button>
-                                            <button id='bttSalvar' onClick={handleSalvar}>salvar</button>
-                                            {
-                                                servicoAberto.id == "novo" ? '' :
-                                                <button id='bttExcluir' onClick={handleDeletar}>deletar</button>
-                                            }
+                                </div>
+                                <div id='contAcaoConfigServ'>
+                                    <button id='bttCancelar' onClick={handleCancel}>cancelar</button>
+                                    <button id='bttSalvar' onClick={handleSalvar}>salvar</button>
+                                    {
+                                        servicoAberto.id == "novo" ? '' :
+                                        <button id='bttExcluir' onClick={handleDeletar}>deletar</button>
+                                    }
                             </div>
                         </section>
                     )
