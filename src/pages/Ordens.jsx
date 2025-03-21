@@ -81,7 +81,6 @@ function Ordens() {
         navigate('/nova-ordem')
     }
     useEffect(() => {
-        console.clear()
         console.log('Filtrando por situação: '+ filtros.situacao.value)
         fetchOrdens(0)
     }, [filtros.situacao.value])

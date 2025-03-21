@@ -12,10 +12,12 @@
         grid-template-columns: max-content auto;
         grid-template-rows: auto;
         align-items: flex-start;
+        justify-content: center;
         gap: 0.5rem;
         /* height: 100%; */
-        overflow: hidden;
+        box-sizing: border-box;
         section {
+            box-sizing: border-box;
             padding: 1rem;
             border-style: solid;
             border-width: 0.1rem;
@@ -24,6 +26,7 @@
         #sec1 {
             max-height: 100%;
             display: flex;
+
             flex-direction: column;
             gap: 0.3rem;
             #contNovo {
@@ -56,10 +59,8 @@
                 padding: 0.5rem;
                 border-style: solid;
                 border-width: 0.1rem;
-                
                 border-radius: 0.3rem;
 
-                
                 .bttsSituacao {
                     display: flex;
                     justify-content: space-between;
@@ -108,7 +109,6 @@
                 border-width: 0.1rem;
                 border-radius: 0.3rem;
                 width: 100%;
-                overflow-x: hidden;
                 overflow-y: hidden;
                 #tableHistOrdens {
                     gap: 0;
@@ -117,6 +117,7 @@
                     border-width: 0.1rem;
                     border-collapse: collapse;
                     border-spacing: 0;
+                    overflow-x: scroll;
                     width: 100%;
                     th {
                         text-align: center;
@@ -406,9 +407,8 @@
 @media screen and (width <= 1115px) {
     #pageOrdens {
         #mainOrdens {
-            grid-template-columns: auto;
+            grid-template-columns: min-content;
             grid-template-rows: min-content auto;
-            
             #sec1 >
             #contSituacoes {
                 display: flex;
@@ -420,5 +420,11 @@
     }
 }
 @media screen and (width <=750px) {
-    
+    #pageOrdens {
+        #mainOrdens {
+            #contTableHistOrdens {
+
+            }
+        }
+    }
 } 

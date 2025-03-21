@@ -118,7 +118,7 @@ function Clientes() {
         }
         setReqstClientes(result.response)
         setClientes(result.response.data.content)
-        console.log(result.response)
+        console.warn(result.response)
     }
     const changePage = (current, pageSize) => {
         fetchClientes((current - 1))

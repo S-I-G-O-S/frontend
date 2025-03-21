@@ -179,6 +179,9 @@ section {
     background-color: var(--salmao2);
 }
 @media screen and (width <= 900px) {
+    body {
+        overflow-y: auto;
+    }
     .paginas {
         width: 100vw;
         display: grid;
