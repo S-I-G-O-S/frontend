@@ -1,5 +1,6 @@
 import {getPageClientes, postCliente} from '@backend/clientesAPI.js'
 import { getCookie } from '@services/cookies.js'
+import { getUsuarioContext } from "../context/UsuarioContext.jsx";
 import Nav from '@components/public/Nav.jsx'
 import Loading from '@components/public/Loading.jsx'
 import '@styles/clientes.css'
