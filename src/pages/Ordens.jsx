@@ -38,20 +38,7 @@ function Ordens() {
         funcionario: false,
         servico: false
     })
-    const [loadings, setLoadings] = useState({
-        editarOrdem: false,
-        situacao: false,
-        bttPendente: false,
-        bttEmExecucao: false,
-        bttRetorno: false,
-        bttCancelada: false,
-        bttFinalizada: false
-    })
-    /*const [usuario, setUsuario] = useState(() => {
-        const cookieUsuario = getCookie('usuario')
-        return cookieUsuario ? cookieUsuario : ''
-    })*/
-    
+    const [loading, setLoading] = useState(true)
     const converterDtHr = (dataHora) => {
         const [dia, mes, anoHora] = dataHora.split('-')
         const [ano, hora] = anoHora.split(' ')
@@ -107,45 +94,12 @@ function Ordens() {
             //  Quando o usuario clicar no mesmo botão de situação, ele vai ser anulado
             value='default'
         }
-        switch (value) {
-            case 'PENDENTE':
-                changeLoadings(!loadings.bttPendente, 'bttPendente')
-                break;
-            case 'EM_EXECUCAO':
-                changeLoadings(!loadings.bttEmExecucao, 'bttEmExecucao')
-                break;
-            case 'RETORNO':
-                changeLoadings(!loadings.bttRetorno, 'bttRetorno')
-                break;
-            case 'FINALIZADA':
-                changeLoadings(!loadings.bttFinalizada, 'bttFinalizada')
-                break;
-            case 'CANCELADA':
-                changeLoadings(!loadings.bttCancelada, 'bttCancelada')
-                break;
-            default: console.warn('Erro de tipagem das ordens!')
-                break;
-        }
-        
         setFiltros(prevState => ({
             ...prevState,
             [field]: {
                 value,
                 is: (value=='' || value=='default'? false : true)
             },
-        }))
-    }
-    const changeAllSituacaoLoadings = () => {
-        changeLoadings(false, 'bttPendente')
-        changeLoadings(false, 'bttEmExecucao')
-        changeLoadings(false, 'bttRetorno')
-        changeLoadings(false, 'bttFinalizada')
-        changeLoadings(false, 'bttCancelada')
-    }
-    const changeLoadings = (value, field) => {
-        setLoadings(prevState => ({
-            ...prevState,
-            [field]: value
         }))
     }
     //  SEC 2
@@ -155,15 +109,16 @@ function Ordens() {
 
     //  REQUISIÇÕES
     const fetchOrdens = async (pagina) => {
+        setLoading(true)
         const result = await getPageOrdens(pagina, filtros)
         if (!result.success) {
             console.error(error)
             return
         }
+        setLoading(false)
         setReqstOrdens(result.response)
         setOrdens(result.response.data.content)
         console.warn(result.response)
-        changeAllSituacaoLoadings()
         // setloadings(prevState => ({
         //     ...prevState,
         //     situacao: false,
@@ -199,7 +154,7 @@ function Ordens() {
                         id="bttSituacaoPendente"
                         className={ `bttsSituacao ${filtros.situacao.value=='PENDENTE' ? 'bttSelecionado' : ''}`}
                         onClick={() => handleChangeFilters('PENDENTE', 'situacao')}
-                        disabled={loadings.bttPendente}
+                        disabled={loading}
                         >
                         <div>
                             <FieldTimeOutlined />
@@ -214,7 +169,7 @@ function Ordens() {
                         id="bttSituacaoEmExecucao"
                         className={ `bttsSituacao ${filtros.situacao.value=='EM_EXECUCAO' ? 'bttSelecionado' : ''}`}
                         onClick={() => handleChangeFilters('EM_EXECUCAO', 'situacao')}
-                        disabled={loadings.bttEmExecucao}
+                        disabled={loading}
                         >
                         <div>
                             <ToolOutlined />
@@ -229,7 +184,7 @@ function Ordens() {
                         id="bttSituacaoRetorno"
                         className={ `bttsSituacao ${filtros.situacao.value=='RETORNO' ? 'bttSelecionado' : ''}`}
                         onClick={() => handleChangeFilters('RETORNO', 'situacao')}
-                        disabled={loadings.bttRetorno}
+                        disabled={loading}
                         >
                         <div>
                             <RollbackOutlined/>
@@ -244,7 +199,7 @@ function Ordens() {
                         id="bttSituacaoCancelada"
                         className={ `bttsSituacao ${filtros.situacao.value=='CANCELADA' ? 'bttSelecionado' : ''}`}
                         onClick={() => handleChangeFilters('CANCELADA', 'situacao')}
-                        disabled={loadings.bttCancelada}
+                        disabled={loading}
                         >
                         <div>
                             <CloseCircleOutlined />
@@ -259,7 +214,7 @@ function Ordens() {
                         id="bttSituacaoFinalizada"
                         className={ `bttsSituacao ${filtros.situacao.value=='FINALIZADA' ? 'bttSelecionado' : ''}`}
                         onClick={() => handleChangeFilters('FINALIZADA', 'situacao')}
-                        disabled={loadings.bttFinalizada}
+                        disabled={loading}
                         >
                         <div>
                             <CheckCircleOutlined />
@@ -285,22 +240,18 @@ function Ordens() {
                         </tr>
                         </thead>
                         <tbody id="listOrdens">
-                            {
-                                !ordens ?
+                            {(!ordens || loading)? (
                                 <tr>
                                     <td colSpan='6'>
                                     <Loading/>
                                     </td>
-                                </tr>
-                                :
-                                (
-                                    ordens.length==0 ? 
+                                </tr>) : (
+                                ordens.length==0 ? (
                                     <tr id="msgSemOrdens">
                                         <td colSpan='6'>
                                             sem ordens
                                         </td>
-                                    </tr>
-                                    :
+                                    </tr> ) :
                                     ordens?.map(ordem => (
                                         <tr id={`ordem${ordem.id}`}
                                             className="ordem"

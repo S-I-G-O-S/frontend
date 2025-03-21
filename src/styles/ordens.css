@@ -92,7 +92,8 @@
                     height: 2fr;
                 }
                 .bttSelecionado {
-                    border: 0.15rem solid;
+                    border-style: solid;
+                    border-width: .2rem;
                 }
             }
         }
@@ -270,7 +271,7 @@
                 border-color: var(--marrom1);
             }
             .bttsSituacao:hover {
-                border-color: var(--laranja);
+                border-color: var(--marrom1);
             } 
             #bttSituacaoPendente {
                 background-color: var(--pendente);
@@ -402,7 +403,7 @@
         }
     }
 }
-@media screen and (width <=900px) {
+@media screen and (width <= 1115px) {
     #pageOrdens {
         #mainOrdens {
             grid-template-columns: auto;
