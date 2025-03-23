@@ -69,6 +69,7 @@ function Funcionarios() {
         navigate(`/funcionario`)
     }
     const handleEditClick = (idFuncionario) => {
+        if (usuario.cargo=='BASE' || usuario.cargo=='TECNICO') {return}
         navigate(`/funcionario?id=${idFuncionario}`)
     }
     const converterDtHr = (dataHora) => {
@@ -342,23 +343,18 @@ function Funcionarios() {
                                 <th className='ultAtvTitle cl3'>ultima atividade</th>
                                 <th className='cargoTitle cl4'>cargo</th>
                                 <th className='statusTitle cl5'>status</th>
-                                {   // Só mostrar para ADM e DEV
-                                usuario.cargo=='ADM' || usuario.cargo=='DEV' ?
-                                <th className='cl6'></th> : ''
-                                }
+                                <th className='cl6'>especialidades</th>
                             </tr>
                         </thead>
                         <tbody className='tbody'>
-                            {
-                                loadingRows || !funcionarios ? 
+                            {(loadingRows || !funcionarios) ? (
                                 <tr>
                                     <td colSpan='6'>
                                     <Loading/>
                                     </td>
-                                </tr>
-                                :
+                                </tr>) : (
                                 funcionarios.map(funcionario => (
-                                    <tr id={`funcionario${funcionario.id}`} className='funcs' key={`func${funcionario.id}`}>
+                                    <tr id={`funcionario${funcionario.id}`} className='funcs' key={`func${funcionario.id}`} onClick={() => handleEditClick(funcionario.id)}>
                                         <td className='nomeFunc cl1'>
                                             {funcionario.primeiro + ' ' + funcionario.ultimo}
                                         </td>
@@ -372,35 +368,16 @@ function Funcionarios() {
                                             {converterCargo(funcionario.cargo)}
                                         </td>
                                         <td className='statusFunc cl5'>
-                                            {
-                                                funcionario.disponivel
-                                                    ? 'disponível'
-                                                    : 'indisponível'
-                                            }
+                                            {funcionario.disponivel ? 'disponível' : 'indisponível'}
                                         </td>
-                                        {   // Só mostrar para ADM e DEV
-                                        usuario.cargo=='ADM' || usuario.cargo=='DEV' ?
                                         <td className='setaSkillsFunc cl6'>
-                                        { 
-                                            especialidades &&
+                                        {especialidades && (
                                             <Dropdown
                                                 placement='bottom'
                                                 menu={{
-                                                    items: [
-                                                        {
-                                                            key: 1,
-                                                            label: (
-                                                                <div onClick={() => handleEditClick(funcionario.id)}>editar</div>
-                                                            ),
-                                                            icon: <EditFilled style={{color: '#26110D'}}/>
-                                                        },
-                                                        {
-                                                            key: '2',
-                                                            label: 'especialidades',
-                                                            children: listEspecialidades(funcionario.especialidades),
-                                                            icon: <OrderedListOutlined style={{color: '#26110D'}}/>
-                                                        },
-                                                    ],
+                                                    
+                                                    items: funcionario.especialidades.length==0 ? 
+                                                        [{ key: 'semEspecialidade', label: "sem especialidades"}] : listEspecialidades(funcionario.especialidades),
                                                     style: {
                                                         backgroundColor: '#F2E8DF',
                                                         fontWeight: '500'
@@ -410,39 +387,35 @@ function Funcionarios() {
                                                     border: "0.1rem solid #26110D",
                                                     borderRadius: '0.5rem'
                                                 }}
-                                            >
-                                                {/* <img id={`imgSetaSkillsFunc${funcionario.id}`} className='imgSetaSKills' src={Down} alt="ver esp :ecialidades"/> */}
-                                                <DownOutlined style={{color: '#26110D'}}/>
+                                                
+                                                >
+                                                {/* <DownOutlined style={{color: '#26110D'}}/> */}
+                                                <div>expandir</div>
                                             </Dropdown>
-                                        }
-                                        </td> 
-                                        : ''
-                                        }
-                                        {/* <td className='editFunc cl7' onClick={() => handleEditClick(funcionario.id)}>
-                                            <img className='imgEditFunc' src={Edit} alt="editar"/>
-                                        </td> */}
+                                        )}
+                                        </td>
                                     </tr>
                                 ))
-                            }
+                            )}
                         </tbody>
                     </table>
                     </div>
                     }
-                    <div className='paginacao'>
-                        {(!reqstFuncionarios || reqstFuncionarios.data.totalPages==1) ? '' :
-                            // renderPaginas()
-                            <Pagination 
-                                defaultCurrent={1} 
-                                total={reqstFuncionarios.data.totalPages}
-                                disabled={reqstFuncionarios.data.totalPages == 1}
-                                pageSize={1}
-                                responsive
-                                showSizeChanger={false}
-                                onChange={changePage}
-                                showTitle={false}
-                                />
-                        }
-                    </div>
+                    {(funcionarios && reqstFuncionarios.data.totalPages>1) && (
+                        // renderPaginas()
+                        <div className='paginacao'>
+                        <Pagination 
+                            defaultCurrent={1} 
+                            total={reqstFuncionarios.data.totalPages}
+                            disabled={reqstFuncionarios.data.totalPages == 1}
+                            pageSize={1}
+                            responsive
+                            showSizeChanger={false}
+                            onChange={changePage}
+                            showTitle={false}
+                            />
+                        </div>
+                    )}
                 </section>
             }
         </main>

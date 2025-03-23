@@ -69,7 +69,7 @@
                     padding: 0 0rem;
                     input {
                         font-size: 0.9rem;
-                        padding: 0rem 0.3rem;
+                        padding: .1rem .3rem;
                         border-style: solid;
                         border-radius: 0.3rem 0 0 0.3rem;
                         border-width: 0.1rem;
@@ -77,7 +77,7 @@
                         line-height: 1.1rem;
                     }
                     input:focus {
-                        outline-width: 0.1rem;
+                        outline-width: .1rem;
                         outline-style: solid;
                     }
                     button {
@@ -89,9 +89,9 @@
                         border-radius: 0 0.3rem 0.3rem 0;
                         height: 1.2rem;
                     }
-                    button:focus, 
-                    button:hover {
-                        outline: none;
+                    button:focus {
+                        outline-width: .15rem;
+                        outline-style: solid;
                     }
                 }
                 .ant-input-group-wrapper {
@@ -126,6 +126,10 @@
                         height: 0.95rem;
                         width: 0.95rem;
                     }
+                }
+                #bttFiltros:focus {
+                    outline-width: .15rem;
+                    outline-style: solid;
                 }
             }
             #layoutMobile {
@@ -184,6 +188,7 @@
                             font-size: 1rem;
                             text-align: center;
                             font-weight: 400;
+                            padding: 0 .5rem;
                         }
                     }
                     tbody {
@@ -195,6 +200,7 @@
                             box-sizing: border-box;
                             border-top-width: 0.1rem;
                             border-top-style: solid;
+                            cursor: pointer;
                             td {
                                 text-align: center;
                                 white-space: nowrap;
@@ -211,11 +217,10 @@
                                 border-right-width: 0.1rem;
                             }
                             .cl6 {
-                                cursor: pointer;
-                                display: flex;
+                                /* display: flex; */
                                 align-items: center;
                                 justify-content: center;
-                                padding: 0;
+                                height: 100%;
                                 .anticon {
                                     display: flex;
                                     align-items: center;
@@ -225,6 +230,10 @@
                                 .anticon > svg {
                                     width: 1.2rem;
                                     height: 1.2rem;
+                                }
+                                div {
+                                    width: 100%;
+                                    height: 100%;
                                 }
                             }
                             
@@ -351,37 +360,39 @@
     .btt:hover {
         background-color: var(--marrom2);
     }
+    #contEspecsNovoFunc
+    .btt:focus {
+        border-color: var(--laranja);
+    }
     #contFiltros {
         color: var(--salmao2);
         background-color: var(--marrom1);
         border-color: var(--marrom1);   
         #contPesqFunc {
             border-color: var(--salmao1);
-        }
-        #contPesqFunc
-        input {
-            background-color: var(--branco);
-            color: var(--marrom1);
-            border-color: var(--marrom1);
-        }
-        #contPesqFunc
-        input:focus {
-            outline-color: var(--laranja);
-            border-color: var(--laranja);
-        }
-        #contPesqFunc
-        button {
-            border-color: var(--marrom1);
-            background-color: var(--marrom1);
-        }
-        #contPesqFunc
-        button:hover {
-            background-color: var(--marrom2);
-        }
-        button:focus{
-            background-color: var(--marrom2);
-            svg {
-                color: var(--salmao3);
+            input {
+                background-color: var(--branco);
+                color: var(--marrom1);
+                border-color: var(--marrom1);
+            }
+            input:focus {
+                outline-color: var(--laranja);
+                border-color: var(--laranja);
+            }
+            button {
+                border-color: var(--marrom1);
+                background-color: var(--marrom1);
+            }
+            button:hover {
+                background-color: var(--marrom2);
+            }
+            button:focus{
+                background-color: var(--marrom2);
+                outline-color: var(--laranja);
+                /* border-color: var(--laranja); */
+                svg {
+                    color: var(--salmao3);
+                }
             }
         }
         #bttFiltros {
@@ -390,6 +401,9 @@
         }
         #bttFiltros:hover {
             background-color: var(--salmao2);
+        }
+        #bttFiltros:focus {
+            outline-color: var(--laranja);
         }
     }
     #layoutMobile {

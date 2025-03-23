@@ -10,6 +10,7 @@
         position: fixed;
         transition: 0.25s;
         cursor: pointer;
+        margin-left: 11.5rem;
     }
     #containerLinks {
         position: sticky;
@@ -187,13 +188,6 @@
         }
     }
 }
-@media screen and (width <= 1230px) {
-    .navAberto {
-        #bttNav {
-            margin-left: 11.5rem;
-        }
-    }
-}
 @media screen and (width <= 900px) {
     #nav,
     .navFechado,
@@ -233,6 +227,8 @@
             position: absolute;
             left: .1rem;
             top: .1rem;
+            width: min-content;
+            height: min-content;
             bottom: 0;
             button {
                 padding: .1rem 2vw;
