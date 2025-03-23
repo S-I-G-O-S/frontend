@@ -8,7 +8,7 @@
     #bttNav {
         width: 3rem;
         position: fixed;
-        /* transition: 0.25s; */
+        transition: 0.25s;
         cursor: pointer;
     }
     #containerLinks {
@@ -54,10 +54,10 @@
         }
     }
     #containerFooter {
-        position: fixed;
+        position:  fixed;
         bottom: .5rem;
         left: .5rem;
-
+        width: 100%;
         color: var(--branco);
 
         #iconSair > svg {
@@ -88,10 +88,11 @@
     }
 }
 .navAberto {
-    width: 13vw;
+    width: 13rem;
     min-width: 10.5rem;
+    transition: 0.25s;
     #bttNav {
-        margin-left: 11.5vw;
+        margin-left: 13.5rem;
     }
     #containerLinks {
         transition: 0.6s;
@@ -125,7 +126,7 @@
     }
     #containerFooter {
         button {
-            width: 11.5vw;
+            width: 11.5rem;
         }
         #txtSair {
             display: block;
@@ -134,6 +135,7 @@
 }
 .navFechado {
     width: 4rem;
+    transition: 0.25s;
     #bttNav {
         margin-left: 2.4rem;
     }
@@ -188,7 +190,7 @@
 @media screen and (width <= 1230px) {
     .navAberto {
         #bttNav {
-            margin-left: 9rem;
+            margin-left: 11.5rem;
         }
     }
 }

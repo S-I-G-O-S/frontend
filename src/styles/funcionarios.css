@@ -5,7 +5,7 @@
         align-items: center;
         width: 100%;
         grid-area: main;
-
+        padding: .5rem;
         #secList {
             display: flex;
             flex-direction: column;
@@ -496,7 +496,6 @@
 @media screen and (width <= 1024px) {
     #pageFuncionarios >
     #mainFuncionarios {
-        padding: 0.5rem;
         /* #secList {
             #listFuncs {
                 overflow: scroll;
@@ -507,7 +506,7 @@
 @media screen and (width <= 500px) {
     #pageFuncionarios >
     #mainFuncionarios {
-        padding: 0.1rem;
+        padding: 0.2rem;
         #secList {
             #contEspecsNovoFunc {
                 flex-direction: column;
