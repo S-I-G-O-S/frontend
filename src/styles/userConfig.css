@@ -28,7 +28,7 @@
             border-style: solid;
             border-width: 0.1em;
             border-radius: .3rem;
-            width: max-content;
+            width: 100% ;
             min-width: 60%;
             gap: .4rem;
             h3 {

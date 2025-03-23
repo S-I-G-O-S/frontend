@@ -348,7 +348,7 @@
     #pageFuncionario {
         main {
             flex-direction: column;
-            
+            justify-content: flex-start;
             section {
                 width: 100%;
                 max-width: 100%;

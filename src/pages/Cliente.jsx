@@ -581,10 +581,9 @@ function Cliente() {
                 }
                 </tbody>
                 </table>
-                <div className='paginacao'>
-                {
-                    historico &&
+                {(historico && reqstHistorico.data.totalPages>1) && (
                     // renderPaginas()
+                    <div className='paginacao'>
                     <Pagination 
                         defaultCurrent={1} 
                         total={reqstHistorico.data.totalPages}
@@ -595,8 +594,8 @@ function Cliente() {
                         onChange={changePage}
                         showTitle={false}
                         />
-                }
-                </div>
+                    </div>
+                )}
             </section>
         </main>
         {
