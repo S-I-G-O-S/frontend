@@ -56,10 +56,13 @@ function OrdensEmAtendimento() {
                         <div key={ordem.id}
                             className="ordensEmAtendimento ordens"
                             onClick={() => handleAbrirOrdem(ordem.id)}>
-                            <div className="nomeCliente">{ordem.cliente}</div>
-                            <div className="serviço">{ordem.servico}</div>
-                            <div className="tecnico">{!ordem.funcionario ? 'sem técnico' : `${ordem.funcionario.primerio} ${ordem.funcionario.ultimo}`}</div> 
-                            <div className="dtAbertura">16/11/2024, 06:02</div>
+                            <div className="nomeCliente" title={ordem.cliente}>{ordem.cliente}</div>
+                            <div className="serviço" title={ordem.servico}>{ordem.servico}</div>
+                            <div className="tecnico" 
+                                title={!ordem.funcionario ? '' : `${ordem.funcionario}`}>
+                                {!ordem.funcionario ? 'sem técnico' : `${ordem.funcionario}`}
+                            </div> 
+                            <div className="dtAbertura" title={ordem.dtAbertura}>{converterDtHr(ordem.dtAbertura)}</div>
                         </div>
                     ))}
                 </div>

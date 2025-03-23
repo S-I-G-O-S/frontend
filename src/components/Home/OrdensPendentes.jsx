@@ -56,10 +56,13 @@ function OrdensPendentes() {
                         <div key={ordem.id}
                             className="ordensPendentes ordens" 
                             onClick={() => handleAbrirOrdem(ordem.id)}>
-                            <div className="nomeCliente">{ordem.cliente}</div>
-                            <div className="servico">{ordem.servico}</div> 
-                            <div className="tecnico">{ordem?.funcionario?.primeiro || 'sem técnico'}</div> 
-                            <div className="dataHora">{converterDtHr(ordem.dtAbertura)}</div>
+                            <div className="nomeCliente" title={ordem.cliente}>{ordem.cliente}</div>
+                            <div className="serviço" title={ordem.servico}>{ordem.servico}</div>
+                            <div className="tecnico" 
+                                title={!ordem.funcionario ? '' : `${ordem.funcionario}`}>
+                                {!ordem.funcionario ? 'sem técnico' : `${ordem.funcionario}`}
+                            </div> 
+                            <div className="dataHora" title={ordem.dtAbertura}>{converterDtHr(ordem.dtAbertura)}</div>
                         </div>
                     ))}
                 </div>
