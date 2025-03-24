@@ -10,7 +10,7 @@ import { notification, Popconfirm } from "antd";
 import { getUsuarioContext } from "../context/UsuarioContext.jsx";
 import ModalTecnicos from "../components/Ordem/ModalTecnicos.jsx";
 import ModalAtendimento from "../components/Ordem/ModalAtendimento.jsx";
-import Mapa from "../components/public/mapa.jsx";
+import Mapa from "@components/ordem/mapa.jsx";
 
 function Ordem() {
     const { usuario } = getUsuarioContext()
@@ -29,6 +29,7 @@ function Ordem() {
     const [editDados, setEditDados] = useState({})
     const [modalTecnicos, setModalTecnicos] = useState(false)
     const [modalAtendimento, setModalAtendimento] = useState(false)
+    const [modalMapa, setModalMapa] = useState(false)
     const changeEditMode = () => {
         if (!editMode) {
             setEditMode(true)
@@ -103,7 +104,9 @@ function Ordem() {
             setModalTecnicos(true)
             return
         }
-        
+    }
+    const changeModalMapa = () => {
+        setModalMapa(!modalMapa)
     }
     useEffect(() => {
         if (atendimentos && atendimentos.length>0) {
@@ -162,6 +165,7 @@ function Ordem() {
                 <aside id="asideAcoes">
                     <h2>Opções</h2>
                     <div id="contAcoes">
+                    {/* TODO Ajustar esta parte */}
                     {(ordem.situacao == "FINALIZADA") && (
                         <p style={{ textAlign: "center" }}>
                             ordem finalizada
@@ -191,8 +195,8 @@ function Ordem() {
                             }
                         </button>
                     )}
+                    <button onClick={() => setModalMapa(true)}>Ver mapa</button>
                     </div>
-                    <Mapa endereco={ordem.endereco}/>
                 </aside>
                 <section id="secPrincipal">
                     <h2>Informações</h2>
@@ -314,6 +318,13 @@ function Ordem() {
                     situacao={ordem.situacao}
                     atendimento={atendimentoAtual || 0}
                     />
+            </div>
+        )}
+        {modalMapa && (
+            <div className='shadowBG'>
+                <Mapa 
+                    endereco={ordem.endereco}
+                    changeModal={changeModalMapa}/>
             </div>
         )}
         </div>

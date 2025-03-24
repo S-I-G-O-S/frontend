@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { AdvancedMarker, APIProvider, Map } from '@vis.gl/react-google-maps';
 import { getGoogleMapsToken } from "@services/mapsAPI";
 
-export default function Mapa({ endereco }) {
+export default function Mapa({ endereco, changeModal }) {
     const token = getGoogleMapsToken();
     const formatEndereco = `${endereco.logradouro}, ${endereco.numero}, CEP ${endereco.cep}, ${endereco.cidade}, ${endereco.uf}, Brasil`;
 
@@ -27,23 +27,27 @@ export default function Mapa({ endereco }) {
     }, [mapsLoaded, formatEndereco])
 
     return (
-        <APIProvider apiKey={token} onLoad={() => (
-            console.log('Maps API has loaded.'),
-            setMapsLoaded(true)
-        )}>
-            <div id="contMapa" style={{ height: "20rem", width: "20rem" }}>
-                {position ? (
-                    <Map
-                        defaultZoom={15}
-                        defaultCenter={position}
-                        mapId="Local do serviço"
-                    >
-                        <AdvancedMarker position={position} />
-                    </Map>
-                ) : (
-                    <p>Carregando mapa...</p>
-                )}
-            </div>
-        </APIProvider>
-    );
+        <section id="secMapaOrdem">
+            <h2>Endereço</h2>
+            <APIProvider apiKey={token} onLoad={() => (
+                console.log('Maps API has loaded.'),
+                setMapsLoaded(true)
+            )}>
+                <div id="contMapa" style={{ height: "20rem", width: "20rem" }}>
+                    {position ? (
+                        <Map
+                            defaultZoom={15}
+                            defaultCenter={position}
+                            mapId="Local do serviço"
+                        >
+                            <AdvancedMarker position={position} />
+                        </Map>
+                    ) : (
+                        <p>Carregando mapa...</p>
+                    )}
+                </div>
+            </APIProvider>
+            <button onClick={() => changeModal(false)}>sair</button>
+        </section>
+    )
 }
