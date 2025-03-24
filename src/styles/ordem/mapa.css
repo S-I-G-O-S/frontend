@@ -1,0 +1,36 @@
+#secMapaOrdem {
+    #contMapa {
+        border: .1rem solid var(--marrom1);
+        height: 30rem;
+        width: 30rem;
+    }
+    #contAcoesMapaOrdem {
+        display: flex;
+        justify-content: space-around;
+
+        padding: .2rem .3rem;
+        border: .1rem solid var(--salmao1);
+        border-radius: .3rem;
+        background-color: var(--salmao3);
+        button {
+            text-align: center;
+            min-width: 45%;
+            border-radius: .3rem;
+            padding: .1rem 1rem;
+            font-weight: 400;
+        }
+        #bttSair {
+            color: var(--salmao1);
+            background-color: var(--marrom1);
+        }
+    }
+}
+@media (width<=550px) {
+    #secMapaOrdem {
+        #contMapa {
+            border: .1rem solid var(--marrom1);
+            height: 95vw;
+            width: 80vw;
+        }
+    }
+}

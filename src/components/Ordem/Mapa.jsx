@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { AdvancedMarker, APIProvider, Map } from '@vis.gl/react-google-maps';
 import { getGoogleMapsToken } from "@services/mapsAPI";
+import "@styles/ordem/mapa.css"
 
 export default function Mapa({ endereco, changeModal }) {
     const token = getGoogleMapsToken();
@@ -33,7 +34,7 @@ export default function Mapa({ endereco, changeModal }) {
                 console.log('Maps API has loaded.'),
                 setMapsLoaded(true)
             )}>
-                <div id="contMapa" style={{ height: "20rem", width: "20rem" }}>
+                <div id="contMapa" >
                     {position ? (
                         <Map
                             defaultZoom={15}
@@ -47,7 +48,9 @@ export default function Mapa({ endereco, changeModal }) {
                     )}
                 </div>
             </APIProvider>
-            <button onClick={() => changeModal(false)}>sair</button>
+            <div id="contAcoesMapaOrdem">
+                <button id="bttSair" onClick={() => changeModal(false)}>sair</button>
+            </div>
         </section>
     )
 }
