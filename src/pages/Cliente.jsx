@@ -108,11 +108,13 @@ function Cliente() {
         }
     }
     // INFOS
+    /*
     const formatarCNPJ = (cnpj) => {
         if(cnpj == '') {return}
         const cnpjLimpo = cnpj.replace(/\D/g, '')
         handleEditDado(cnpjLimpo.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, "$1.$2.$3/$4-$5"), 'cnpj')
     }
+    */
     const handleCEP = (value) => {
         const cep = value.replace(/\D/g, '');
         if (cep.length <= 8) {
@@ -126,10 +128,46 @@ function Cliente() {
         }
     }
     const handleEditDado = (valor, field) => {
+        if (field=='cnpj') {
+            if (valor.length==14) {
+                return
+            }
+        }
         setCliente(prevState => ({
             ...prevState,
             [field]: valor,
         }))
+    }
+    const formatarCNPJ = (cnpj) => {
+        const cnpjLimpo = cnpj.replace(/\D/g, '');
+        
+        if (cnpjLimpo.length > 14) {return}
+
+        if (cnpjLimpo.length === 0) {
+            setFuncionario(prevState => ({
+                ...prevState,
+                endereco: {
+                    ...prevState.endereco,
+                    cep: '',
+                }
+            }));
+            return;
+        }
+        let formatted = cnpjLimpo;
+        //  00.623.904 /  0001-73
+        //  0123456789 0  1234567
+        if (cnpjLimpo.length>2) {
+            formatted = `${cnpjLimpo.slice(0, 2)}.${cnpjLimpo.slice(2)}`;
+        }
+        if (cnpjLimpo.length>6) {
+            formatted = `${cnpjLimpo.slice(0, 2)}.${cnpjLimpo.slice(2, 5)}`;
+        }
+        if (cnpjLimpo.length>2) {
+            formatted = `${cnpjLimpo.slice(0, 2)}.${cnpjLimpo.slice()}`;
+        }
+        if (cnpjLimpo.length>2) {
+            formatted = `${cnpjLimpo.slice(0, 2)}.${cnpjLimpo.slice(3)}`;
+        }
     }
     const handleEditEndereco = (valor, field) => {
         setCliente(prevState => ({

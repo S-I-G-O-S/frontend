@@ -507,7 +507,7 @@
         }
     }
 }
-@media screen and (width <= 1024px) {
+@media (width <= 1024px) {
     #pageFuncionarios >
     #mainFuncionarios {
         /* #secList {
@@ -517,7 +517,7 @@
         } */
     }
 }
-@media screen and (width <= 500px) {
+@media (width <= 500px) {
     #pageFuncionarios >
     #mainFuncionarios {
         padding: 0.2rem;

@@ -10,6 +10,7 @@ import { notification, Popconfirm } from "antd";
 import { getUsuarioContext } from "../context/UsuarioContext.jsx";
 import ModalTecnicos from "../components/Ordem/ModalTecnicos.jsx";
 import ModalAtendimento from "../components/Ordem/ModalAtendimento.jsx";
+import Mapa from "../components/public/mapa.jsx";
 
 function Ordem() {
     const { usuario } = getUsuarioContext()
@@ -191,6 +192,7 @@ function Ordem() {
                         </button>
                     )}
                     </div>
+                    <Mapa endereco={ordem.endereco}/>
                 </aside>
                 <section id="secPrincipal">
                     <h2>Informações</h2>

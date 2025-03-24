@@ -134,7 +134,7 @@ function Clientes() {
         <main id='mainClientes'>
             {/* Listagem */}
             <section id='secListClientes'>
-                {usuario.cargo == 'ADM' || usuario.cargo == 'DEV' && (
+                {(usuario.cargo=='ADM' || usuario.cargo=='DEV') && (
                     <div id='containerH2Novo'>
                         <button onClick={() => handleShowNovoCliente()}>Novo cliente</button>
                     </div>

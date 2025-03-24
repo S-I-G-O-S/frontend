@@ -10,7 +10,6 @@
         position: fixed;
         transition: 0.25s;
         cursor: pointer;
-        margin-left: 11.5rem;
     }
     #containerLinks {
         position: sticky;
@@ -93,7 +92,7 @@
     min-width: 10.5rem;
     transition: 0.25s;
     #bttNav {
-        margin-left: 13.5rem;
+        margin-left: 11.5rem;
     }
     #containerLinks {
         transition: 0.6s;
@@ -253,7 +252,7 @@
         #containerFooter {
             button {
                 padding: .1rem .5rem;
-                width: 2.5rem;
+                width: 2.rem;
                 #txtSair {
                     display: none;
                 }
