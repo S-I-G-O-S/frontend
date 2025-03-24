@@ -563,6 +563,20 @@
                 border-color: var(--laranja);
                 outline-color: var(--laranja);
             }
+            #contCamposCoresEspecEdit {
+                #inpCorFundo, #inpCorLetra {
+                    background-color: var(--branco);
+                    border-color: var(--marrom1);
+                    .ant-color-picker-color-block {
+                        border: .1rem solid;
+                        border-color: var(--marrom1);
+                    }
+                }
+                #inpCorFundo:focus, #inpCorLetra:focus {
+                    border-color: var(--laranja);
+                    outline: .1rem solid var(--laranja);
+                } 
+            }
             #headPreVisu {
                 button {
                     background-color: var(--marrom1);
@@ -668,6 +682,17 @@
         }
     }
 }
+    .ant-color-picker {
+        .ant-popover-inner {
+            border: .1rem solid;
+            border-color: var(--marrom1);
+            background-color: var(--branco);
+            .ant-color-picker-select {
+                border: .1rem solid var(--marrom1);
+                border-radius: .35rem;
+            }
+        }
+    }
 @media screen and (width <= 950px) {
     #pageEspecialidades{
         .secConfigAberta {

@@ -463,9 +463,6 @@ function Especialidades() {
                             </div>
                             <div id='campoDescricaoConfigEspec'>
                                 <label>Descrição:</label>
-                                {/* <input type="text" id='descricaoConfigEspec' 
-                                    value={especAberta.descricao}
-                                    onChange={(e) => mudarDescricaoPrevEspec(e.target.value)}/> */}
                                 <TextArea
                                     id="txtDescricao"
                                     value={especAberta.descricao}
@@ -483,9 +480,10 @@ function Especialidades() {
                             </div>
                             <div id='contCamposCoresEspecEdit'>
                                 <ColorPicker 
-                                    id="inpCorLetra"
+                                    id="inpCorFundo"
                                     value={prevEspec.cor1}
                                     disabledAlpha
+                                    arrow={false}
                                     showText={(color) => 
                                         <span>
                                             <strong className='labelColor'>Cor de fundo</strong> {color.toHexString()}
@@ -494,6 +492,7 @@ function Especialidades() {
                                 <ColorPicker
                                     id="inpCorLetra"
                                     value={prevEspec.cor2}
+                                    arrow={false}
                                     disabledAlpha
                                     showText={(color) => 
                                         <span>

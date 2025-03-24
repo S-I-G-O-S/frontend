@@ -227,11 +227,13 @@
             position: absolute;
             left: .1rem;
             top: .1rem;
-            width: min-content;
+            width: 13vw;
             height: min-content;
             bottom: 0;
             button {
                 padding: .1rem 2vw;
+                width: 15vw;
+                
             }
         }
     }
@@ -250,7 +252,8 @@
         }
         #containerFooter {
             button {
-                padding: .1rem 2vw;
+                padding: .1rem .5rem;
+                width: 2.5rem;
                 #txtSair {
                     display: none;
                 }
