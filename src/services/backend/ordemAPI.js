@@ -22,7 +22,7 @@ export const getPageOrdens = async (pagina, filtros) => {
     filtragem = `${!filtros.situacao.is ? '' : `&situacao=${filtros.situacao.value}`}${!filtros.funcionario.is ? '' : `&funcionario=${filtros.funcionario.value}`}${!filtros.servico.is ? '' : `&servico=${filtros.servico.value}`}
     `
     try {
-        const response = await axios.get(`${config.url}/api/ordens?page=${pagina}&size=${filtros.qtd}${filtragem}`, {
+        const response = await axios.get(`${config.url}/api/ordens?page=${pagina}&sort=dtAbertura,desc&size=${filtros.qtd}${filtragem}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
