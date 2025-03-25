@@ -3,14 +3,14 @@ import Nav from "@components/public/Nav.jsx";
 import Loading from "@components/public/Loading.jsx";
 import '@styles/ordem.css'
 import { getAtendimentos, getOrdensPorID } from "@backend/ordemAPI.js";
-import { useEffect, useState } from "react";9
+import { useEffect, useState } from "react";
 import { ExceptionOutlined } from '@ant-design/icons'
-import { postAtendimento, putCancelOrdem, putDesignarTecnico } from "../services/backend/ordemAPI.js";
+import { postAtendimento, putCancelOrdem, putDesignarTecnico } from "@services/backend/ordemAPI.js";
 import { notification, Popconfirm } from "antd";
-import { getUsuarioContext } from "../context/UsuarioContext.jsx";
-import ModalTecnicos from "../components/Ordem/ModalTecnicos.jsx";
-import ModalAtendimento from "../components/Ordem/ModalAtendimento.jsx";
-import Mapa from "@components/ordem/mapa.jsx";
+import { getUsuarioContext } from "@context/UsuarioContext.jsx";
+import ModalTecnicos from "@components/Ordem/ModalTecnicos.jsx";
+import ModalAtendimento from "@components/Ordem/ModalAtendimento.jsx";
+import Mapa from "@components/ordem/Mapa.jsx";
 
 function Ordem() {
     const { usuario } = getUsuarioContext()
@@ -18,10 +18,6 @@ function Ordem() {
     const searchParams = new URLSearchParams(location.search)
     const idOrdem = searchParams?.get('id') ?? null
     const navigate = useNavigate()
-    // const [usuario, setUsuario] = useState(() => {
-    //     const cookieUsuario = getCookie('usuario')
-    //     return cookieUsuario ? cookieUsuario : ''
-    // })
     const [ordem, setOrdem] = useState(null)
     const [atendimentoAtual, setAtendimentoAtual] = useState(null)
     const [atendimentos, setAtendimentos] = useState(null)
