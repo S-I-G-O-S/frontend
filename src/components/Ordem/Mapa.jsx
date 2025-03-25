@@ -3,7 +3,7 @@ import { AdvancedMarker, APIProvider, Map } from '@vis.gl/react-google-maps';
 import { getGoogleMapsToken } from "@services/mapsAPI";
 import "@styles/ordem/mapa.css"
 
-export default function Mapa({ endereco, changeModal }) {
+function Mapa ({ endereco, changeModal }) {
     const token = getGoogleMapsToken();
     const formatEndereco = `${endereco.logradouro}, ${endereco.numero}, CEP ${endereco.cep}, ${endereco.cidade}, ${endereco.uf}, Brasil`;
 
@@ -54,3 +54,4 @@ export default function Mapa({ endereco, changeModal }) {
         </section>
     )
 }
+export default Mapa

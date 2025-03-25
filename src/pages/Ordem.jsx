@@ -10,7 +10,7 @@ import { notification, Popconfirm } from "antd";
 import { getUsuarioContext } from "@context/UsuarioContext.jsx";
 import ModalTecnicos from "@components/Ordem/ModalTecnicos.jsx";
 import ModalAtendimento from "@components/Ordem/ModalAtendimento.jsx";
-import Mapa from "@components/ordem/Mapa.jsx";
+import Mapa from "@components/Ordem/Mapa.jsx";
 
 function Ordem() {
     const { usuario } = getUsuarioContext()
