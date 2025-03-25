@@ -254,12 +254,10 @@ function Ordem() {
                     </div>
                     {
                         ordem.funcionario && (
-                            <id id="contFuncionario">
-                                <div>{ordem.funcionario.primeiro}</div>
-                                <div>{ordem.funcionario.ultimo}</div>
-                                <div>{ordem.funcionario.celular}</div>
-                                <div>{ordem.funcionario.disponivel}</div>
-                            </id>
+                            <div id="contFuncionario">
+                                <p><strong>Funcionário: </strong>{ordem.funcionario.primeiro} {ordem.funcionario.ultimo}</p>
+                                <p><strong>contato: </strong>{ordem.funcionario.celular}</p> 
+                            </div>
                         )
                     }
                 </section>           
