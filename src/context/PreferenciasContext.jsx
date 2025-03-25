@@ -19,6 +19,7 @@ export const PreferenciasProvider = ({ children }) => {
         // console.log('Mudando tema para: '+ sessPreferencias.tema)
         sessionStorage.setItem('preferencias', JSON.stringify(sessPreferencias));
     }, [sessPreferencias]);
+    /*
     useEffect(() => {
         let linkElement = document.getElementById('themeCSS')
 
@@ -31,6 +32,7 @@ export const PreferenciasProvider = ({ children }) => {
 
         linkElement.href = `./src/themes/${sessPreferencias.tema}.css`
     }, [sessPreferencias.tema])
+    */
     return (
         <PreferenciasContext.Provider value={{ sessPreferencias, setSessPreferencias }}>
             {children}
