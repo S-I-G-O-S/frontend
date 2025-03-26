@@ -1650,8 +1650,6 @@
         }
 
         .ant-pagination {
-
-            /* TODO Estilizar paginação */
             .ant-pagination-item {
                 background-color: var(--salmao1);
                 border-color: var(--marrom1);

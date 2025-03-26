@@ -62,7 +62,9 @@ function OrdensTecnico({idTecnico}) {
     return !ordens ? <Loading />  : (
         ordens.length==0 ? 
         // TODO Mostrar ao tecnico que ele não tem ordens abertas
-        '' 
+        <div className="constOrdens">
+            <p>sem ordens abertas</p>
+        </div> 
         : (
             <div id="contOrdensTecnico" className="contsOrdens">
                 <div className="headContsOrdens">

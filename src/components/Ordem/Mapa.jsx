@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { AdvancedMarker, APIProvider, Map } from '@vis.gl/react-google-maps';
 import { getGoogleMapsToken } from "@services/mapsAPI";
 import "@styles/ordem/mapa.css"
+import Loading from '@components/public/Loading.jsx'
 
 function Mapa ({ endereco, changeModal }) {
     const token = getGoogleMapsToken();
@@ -44,7 +45,7 @@ function Mapa ({ endereco, changeModal }) {
                             <AdvancedMarker position={position} />
                         </Map>
                     ) : (
-                        <p>Carregando mapa...</p>
+                        <Loading texto={'carregando mapa'}></Loading>
                     )}
                 </div>
             </APIProvider>

@@ -331,11 +331,6 @@ function ListFuncionarios({cargo}) {
                                     : 'indisponível'
                             }
                         </td>
-                        {/* 
-                            TODO [FUNC] Deixar só a seta pra baixo, expandido e mostrando as opções de :
-                                Editar funcionario (base)
-                                Mostrar Especialidades (base e ADM)
-                        */}
                         <td className='setaSkillsFunc cl6'
                         onClick={() => verEspecialidades(funcionario.id)}>
                             <img id={`imgSetaSkillsFunc${funcionario.id}`} className='imgSetaSKills' src={Down} alt="ver especialidades"/>

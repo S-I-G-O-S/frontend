@@ -7,7 +7,6 @@ import zxcvbn from 'zxcvbn'
 import { useNavigate } from "react-router-dom"
 import { getUsuarioContext } from '../context/UsuarioContext'
 
-//  TODO Falta estilizar essa pag
 function PrimeiroAcesso() {
     const navigate = useNavigate()
     const {usuario} = getUsuarioContext()

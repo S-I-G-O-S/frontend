@@ -19,6 +19,7 @@ function Ordem() {
     const idOrdem = searchParams?.get('id') ?? null
     const navigate = useNavigate()
     const [ordem, setOrdem] = useState(null)
+
     const [atendimentoAtual, setAtendimentoAtual] = useState(null)
     const [atendimentos, setAtendimentos] = useState(null)
     const [editMode, setEditMode] = useState(false)
@@ -42,7 +43,7 @@ function Ordem() {
         const result = await putCancelOrdem(ordem)
         if (!result.success) {
             notification.error({
-        message: `Erro ${result.error.status}`,
+                message: `Erro ${result.error.status}`,
                 description: result.error.response.data,
                 placement: 'bottomLeft',
             })
@@ -58,14 +59,14 @@ function Ordem() {
             * editar ordem e mudar 'funcionario' para o id do tecnico
         */
         // verificar se o funcionario é um técnico
-        if (usuario.cargo!=='TECNICO') {return}
+        if (usuario.cargo !== 'TECNICO') { return }
         // verificar se não tem um funcionario atendendo
-        if (ordem.funcionario.id!==usuario.id) {
+        if (ordem.funcionario.id !== usuario.id) {
             console.error("ERRO DE SEGURANÇA: O usuário não é o técnico responsável!")
             return
         }
         // verificar se o técnico ja iniciou um atendimento
-        if (atendimentos.length>0) {
+        if (atendimentos.length > 0) {
             // abre a janela de finalizar atendimento
             setModalAtendimento(true)
             return
@@ -105,8 +106,8 @@ function Ordem() {
         setModalMapa(!modalMapa)
     }
     useEffect(() => {
-        if (atendimentos && atendimentos.length>0) {
-            if (ordem.situacao=="EM_EXECUCAO") {
+        if (atendimentos && atendimentos.length > 0) {
+            if (ordem.situacao == "EM_EXECUCAO") {
                 // TODO atualmente pegando apenas o primeiro atendimento do array
                 setAtendimentoAtual(atendimentos[0].id)
                 console.log("atendimento aberto: " + atendimentos[0].id)
@@ -126,7 +127,7 @@ function Ordem() {
     useEffect(() => {
         if (!ordem?.id) {
             return
-        }   
+        }
         fetchAtendimentos(ordem.id)
     }, [ordem])
     const fetchOrdem = async (id) => {
@@ -148,179 +149,181 @@ function Ordem() {
         }
         fetchOrdem(idOrdem)
     }, [])
-    return(
+    return (
         <div id="pageOrdem" className="paginas">
-        {/* <Header titulo={"Editando ordem"} usuario={usuario}></Header> */}
-        <Nav cargo={usuario?.cargo || ''}></Nav>
-        <main id="mainOrdem">
-        {
-            !ordem ? <Loading></Loading> :
-            (
-                ordem=='noCode' ? <div>Erro ao obter código da</div> :
-                <>
-                <aside id="asideAcoes">
-                    <h2>Opções</h2>
-                    <div id="contAcoes">
-                    {/* TODO Ajustar esta parte */}
-                    {(ordem.situacao == "FINALIZADA") && (
-                        <p style={{ textAlign: "center" }}>
-                            ordem finalizada
-                        </p>
-                    )}
-                    {(usuario.cargo==="BASE" || usuario.cargo==="ADM" || usuario.cargo==='DEV' ) &&(
-                        <>
-                        <button onClick={() => changeModalTecnicos(0)}>Designar técnico</button>
-                        <Popconfirm
-                            title=""
-                            description={`Deseja cancelar esta ordem?`}
-                            onConfirm={cancelarOrdem}
-                            onCancel={null}
-                            okText="sim"
-                            cancelText="não">     
-                            <button>Cancelar ordem</button>
-                        </Popconfirm>
-                        <button onClick={changeEditMode}>Alterar ordem</button>
-                        </>
-                    )}
-                    {(usuario.cargo==="TECNICO" && usuario.id == ordem.funcionario.id) && (ordem.situacao==='PENDENTE' || ordem.situacao==='RETORNO' || ordem.situacao==="EM_EXECUCAO") && (
-                        <button onClick={handleAtenderOrdem}>
-                            {
-                                ordem.situacao==="EM_EXECUCAO" ? 
-                                "finalizar ordem" :
-                                "iniciar atendimento"
-                            }
-                        </button>
-                    )}
-                    <button onClick={() => setModalMapa(true)}>Ver mapa</button>
-                    </div>
-                </aside>
-                <section id="secPrincipal">
-                    <h2>Informações</h2>
-                    <div id="contGeral">
-                        <div>
-                            <span>ID ordem:</span>
-                            {ordem.id}
-                        </div>
-                        <div>
-                            <span>Criado por:</span>
-                            {ordem.criadoPor}
-                        </div>
-                        <div>
-                            <span>Situação:</span>
-                            {ordem.situacao}
-                        </div>
-                        <div>
-                            <span>Descrição:</span>
-                            {ordem.descricao || 'sem descrição'}
-                        </div>
-                        {
-                            ordem.funcionario &&
-                            <div>
-                                <span>Técnico atendendo:</span>
-                                {ordem.funcionario.primeiro} {ordem.funcionario.ultimo}
-                            </div>
-                        }
-                    </div>
-                    <div id="contServico">
-                        <div>
-                            <span>Serviço:</span>
-                            {ordem.servico.nome}
-                        </div>
-                        <div>
-                            <span>Descrição:</span>
-                            {ordem.servico.descricao}
-                        </div>
-                    </div>
-                    <div id="contCliente">
-                        <div>
-                            <span>Cliente:</span>
-                            {ordem.cliente.nome}
-                        </div>
-                        <div>
-                            
-                            <span>CNPJ:</span>
-                            {formatCNPJ(ordem.cliente.cnpj)}
-                        </div>
-                        <div>
-                            <span>ID cliente:</span>
-                            {ordem.cliente.id}
-                        </div>
-                    </div>
-                    <div id="contEndereco">
-                        <span>
-                            <div>Endereço:</div>
-                        </span>
-                        <div>{ordem.endereco.logradouro}, {ordem.endereco.numero}{`${ordem.endereco.complemento}` || ''}  - {ordem.endereco.bairro}, {ordem.endereco.cidade}-{ordem.endereco.uf}/{ordem.endereco.cep}</div>
-                    </div>
-                    {
-                        ordem.funcionario && (
-                            <div id="contFuncionario">
-                                <p><strong>Funcionário: </strong>{ordem.funcionario.primeiro} {ordem.funcionario.ultimo}</p>
-                                <p><strong>contato: </strong>{ordem.funcionario.celular}</p> 
-                            </div>
-                        )
-                    }
-                </section>           
-                <section id="secAtendimentos">
-                    <h2>Atendimentos</h2>
-                    {
-                        atendimentos &&
+            {/* <Header titulo={"Editando ordem"} usuario={usuario}></Header> */}
+            <Nav cargo={usuario?.cargo || ''}></Nav>
+            <main id="mainOrdem">
+                {
+                    !ordem ? <Loading></Loading> :
                         (
-                            atendimentos.length==0 ?
-                            <div id="msgSemAtendimentos">
-                                <p>sem atendimentos</p>
-                                <ExceptionOutlined id="iconSemAtendimentos"/> 
-                            </div>
-                            :
-                            (
-                                <div id="contListAtendimentos">
-                                {
-                                    atendimentos.map(atendimento => (
-                                        <div
-                                            className="itemListAtendimento"
-                                            key={`atendimento${atendimento.id}`}
-                                            >
-                                            <div>nome: {atendimento.funcionario}</div>
-                                            <div>data do atendimento: {atendimento.dtAtendimento}</div>
-                                            <div>descrição do atendimento: {atendimento.dsAtendimento || "sem descrição"}</div>
+                            ordem == 'noCode' ? <div>Erro ao obter código da</div> :
+                                <>
+                                    <aside id="asideAcoes">
+                                        <h2>Opções</h2>
+                                        <div id="contAcoes">
+                                            {/* NOTE Considerando q a ordem não possa ser mudada após finalizada */}
+                                            {(ordem.situacao == "FINALIZADA") ? (
+                                                <p style={{ textAlign: "center" }}>
+                                                    ordem finalizada
+                                                </p>
+                                            ) : ((usuario.cargo === "BASE" || usuario.cargo === "ADM" || usuario.cargo === 'DEV') ? (
+                                                <>
+                                                    <button onClick={() => changeModalTecnicos(0)}>Designar técnico</button>
+                                                    <Popconfirm
+                                                        title=""
+                                                        description={`Deseja cancelar esta ordem?`}
+                                                        onConfirm={cancelarOrdem}
+                                                        onCancel={null}
+                                                        okText="sim"
+                                                        cancelText="não">
+                                                        <button>Cancelar ordem</button>
+                                                    </Popconfirm>
+                                                    <button onClick={changeEditMode}>Alterar ordem</button>
+                                                </>
+                                                ) : ((usuario.cargo === "TECNICO" && usuario.id == ordem.funcionario.id) && 
+                                                    (ordem.situacao === 'PENDENTE' || ordem.situacao === 'RETORNO' || ordem.situacao === "EM_EXECUCAO") && (
+                                                        <button onClick={handleAtenderOrdem}>
+                                                            {
+                                                                ordem.situacao === "EM_EXECUCAO" ?
+                                                                    "finalizar ordem" :
+                                                                    "iniciar atendimento"
+                                                            }
+                                                        </button>
+                                                    )
+                                                ))
+                                            }
+                                            {/* TODO adicionar miniatura do mapa */}
+                                            <button onClick={() => setModalMapa(true)}>Ver mapa</button>
                                         </div>
-                                    ))   
-                                }
-                                </div>
-                            )
+                                    </aside>
+                                    <section id="secPrincipal">
+                                        <h2>Informações</h2>
+                                        <div id="contGeral">
+                                            <div>
+                                                <span>ID ordem:</span>
+                                                {ordem.id}
+                                            </div>
+                                            <div>
+                                                <span>Criado por:</span>
+                                                {ordem.criadoPor}
+                                            </div>
+                                            <div>
+                                                <span>Situação:</span>
+                                                {ordem.situacao}
+                                            </div>
+                                            <div>
+                                                <span>Descrição:</span>
+                                                {ordem.descricao || 'sem descrição'}
+                                            </div>
+                                            {
+                                                ordem.funcionario &&
+                                                <div>
+                                                    <span>Técnico atendendo:</span>
+                                                    {ordem.funcionario.primeiro} {ordem.funcionario.ultimo}
+                                                </div>
+                                            }
+                                        </div>
+                                        <div id="contServico">
+                                            <div>
+                                                <span>Serviço:</span>
+                                                {ordem.servico.nome}
+                                            </div>
+                                            <div>
+                                                <span>Descrição:</span>
+                                                {ordem.servico.descricao}
+                                            </div>
+                                        </div>
+                                        <div id="contCliente">
+                                            <div>
+                                                <span>Cliente:</span>
+                                                {ordem.cliente.nome}
+                                            </div>
+                                            <div>
+
+                                                <span>CNPJ:</span>
+                                                {formatCNPJ(ordem.cliente.cnpj)}
+                                            </div>
+                                            <div>
+                                                <span>ID cliente:</span>
+                                                {ordem.cliente.id}
+                                            </div>
+                                        </div>
+                                        <div id="contEndereco">
+                                            <span>
+                                                <div>Endereço:</div>
+                                            </span>
+                                            <div>{ordem.endereco.logradouro}, {ordem.endereco.numero}{`${ordem.endereco.complemento}` || ''}  - {ordem.endereco.bairro}, {ordem.endereco.cidade}-{ordem.endereco.uf}/{ordem.endereco.cep}</div>
+                                        </div>
+                                        {
+                                            ordem.funcionario && (
+                                                <div id="contFuncionario">
+                                                    <p><strong>Funcionário: </strong>{ordem.funcionario.primeiro} {ordem.funcionario.ultimo}</p>
+                                                    <p><strong>contato: </strong>{ordem.funcionario.celular}</p>
+                                                </div>
+                                            )
+                                        }
+                                    </section>
+                                    <section id="secAtendimentos">
+                                        <h2>Atendimentos</h2>
+                                        {
+                                            atendimentos &&
+                                            (
+                                                atendimentos.length == 0 ?
+                                                    <div id="msgSemAtendimentos">
+                                                        <p>sem atendimentos</p>
+                                                        <ExceptionOutlined id="iconSemAtendimentos" />
+                                                    </div>
+                                                    :
+                                                    (
+                                                        <div id="contListAtendimentos">
+                                                            {
+                                                                atendimentos.map(atendimento => (
+                                                                    <div
+                                                                        className="itemListAtendimento"
+                                                                        key={`atendimento${atendimento.id}`}
+                                                                    >
+                                                                        <div>nome: {atendimento.funcionario}</div>
+                                                                        <div>data do atendimento: {atendimento.dtAtendimento}</div>
+                                                                        <div>descrição do atendimento: {atendimento.dsAtendimento || "sem descrição"}</div>
+                                                                    </div>
+                                                                ))
+                                                            }
+                                                        </div>
+                                                    )
+                                            )
+                                        }
+                                    </section>
+                                </>
                         )
-                    }
-                </section>
-                </>
-            )
-        }
-        </main>
-        {modalTecnicos && (
-            <div className='shadowBG'>
-                <ModalTecnicos
-                    ordem={ordem}
-                    especialidades={ordem.servico.especialidades} 
-                    changeModal={setModalTecnicos}
-                    setOrdem={setOrdem}
+                }
+            </main>
+            {modalTecnicos && (
+                <div className='shadowBG'>
+                    <ModalTecnicos
+                        ordem={ordem}
+                        especialidades={ordem.servico.especialidades}
+                        changeModal={setModalTecnicos}
+                        setOrdem={setOrdem}
                     />
-            </div>
-        )}
-        {modalAtendimento && (
-            <div className='shadowBG'>
-                <ModalAtendimento 
-                    changeModal={setModalAtendimento}
-                    situacao={ordem.situacao}
-                    atendimento={atendimentoAtual || 0}
+                </div>
+            )}
+            {modalAtendimento && (
+                <div className='shadowBG'>
+                    <ModalAtendimento
+                        changeModal={setModalAtendimento}
+                        situacao={ordem.situacao}
+                        atendimento={atendimentoAtual || 0}
                     />
-            </div>
-        )}
-        {modalMapa && (
-            <div className='shadowBG'>
-                <Mapa 
-                    endereco={ordem.endereco}
-                    changeModal={changeModalMapa}/>
-            </div>
-        )}
+                </div>
+            )}
+            {modalMapa && (
+                <div className='shadowBG'>
+                    <Mapa
+                        endereco={ordem.endereco}
+                        changeModal={changeModalMapa} />
+                </div>
+            )}
         </div>
     )
 }

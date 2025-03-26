@@ -76,7 +76,14 @@ export default function Analise() {
                     </Pie>
                 </PieChart> */}
                 <section>
-                    
+                    <h1>Análise do administrador</h1>
+                    <div>
+                        {/* 
+                            - Funcionarios
+                            - Ordens
+                            - Serviços 
+                        */}
+                    </div>
                 </section>
             </main>
         </div>

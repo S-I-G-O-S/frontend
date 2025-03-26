@@ -75,7 +75,6 @@ function Clientes() {
             nome: "novo cliente",
             cnpj: "",
             contatos: [
-                // TODO ver se consegue mudar para permitir enviar novos clientes sem contato
                 {
                     nome: "contato obrigatório",
                     descricao: "todo cliente deve ter ao menos 1 contato",

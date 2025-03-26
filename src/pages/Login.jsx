@@ -68,7 +68,6 @@ function Login() {
         setToken(result.response.data.tokenJWT)  // Definir o token no Authorization
 
         console.log('DEBUG 1')
-        // TODO Testando atualização direta no Context
         // setCookie('usuario', result.data.funcionario, 12)
         setUsuario(result.response.data.funcionario)
         

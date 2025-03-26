@@ -151,7 +151,6 @@ function Especialidades() {
                 /> 
             </div>
         )
-        //  TODO Trocar este img por svg
     }
     const mudarInfoServico = (valor, campo) => {
         setServicoAberto(serv => ({
@@ -167,7 +166,6 @@ function Especialidades() {
             if (especAberta.id === "nova") {
                 result = await postEspecialidade(especAberta)
             } else {
-            //  TODO As cores não estão sendo atualizadas
                 result = await putEspecialidade(especAberta)
             }
             console.warn(result.response)
