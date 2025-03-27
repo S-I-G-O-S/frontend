@@ -10,12 +10,9 @@ import { useEffect, useState } from 'react'
 import { isMobile } from 'react-device-detect'
 
 import { Pagination, Skeleton, Dropdown } from 'antd'
-import { EditFilled, OrderedListOutlined, CloseOutlined, FilterFilled, SearchOutlined, DownOutlined } from '@ant-design/icons'
+import { CloseOutlined, FilterFilled, SearchOutlined } from '@ant-design/icons'
 
 import Nav from '@components/public/Nav.jsx'
-import Edit from '@assets/edit-text.png'
-import Down from '@assets/dark/down.png' 
-import Up from '@assets/dark/up.png'
 import Loading from '@components/public/Loading.jsx'
 import { getUsuarioContext } from '../context/UsuarioContext';
 
@@ -28,10 +25,6 @@ function Funcionarios() {
     const [funcionarios, setFuncionarios] = useState()
     const [especialidades, setEspecialidades] = useState()
     const [showContFiltros, setShowContFiltros] = useState(false)
-    /*const [nomeProcurado, setNomeProcurado] = useState({
-        nome: '',
-        is: false
-    })*/
     const [filtros, setFiltros] = useState({
         nome: {
             value: 'default',
@@ -55,18 +48,11 @@ function Funcionarios() {
         },
         qtd: 15
     })
-    //  Testando outro layout da listagem de funcionarios
-    const testeLayout = false
-    const goToEspecialidades = () => {
-        navigate(`/especialidades`)
-    }
-    const handleCreateClick = () => {
-        navigate(`/funcionario`)
-    }
     const handleEditClick = (idFuncionario) => {
         if (usuario.cargo=='BASE' || usuario.cargo=='TECNICO') {return}
         navigate(`/funcionario?id=${idFuncionario}`)
     }
+    // FIXME Utilizar do "utils"
     const converterDtHr = (dataHora) => {
         if (!dataHora) {
             return '--/--/----, --:--'
@@ -85,6 +71,7 @@ function Funcionarios() {
             minute: '2-digit',
         })
     }
+    // FIXME Utilizar do "utils"
     const converterCargo = (cargo) => {
         var cargoConvertido
         switch(cargo) {
@@ -106,21 +93,6 @@ function Funcionarios() {
         }
         return cargoConvertido
     }
-    const converterEspecs = (idEspec) => {
-        let especialidade = especialidades.find(espec => espec.id == idEspec)
-        const [cor1, cor2] = especialidade.cor.split('/')
-        return (
-            <div className='skillsFunc' key={especialidade.id}
-                style={{
-                        borderColor: cor2,
-                        backgroundColor: cor1,
-                        color: cor2
-                }}
-            >
-                {especialidade.nome}
-            </div>
-        )
-    }
     const listEspecialidades = (ids) => {
         return ids.map((id) => {
             const especialidade = especialidades.find((esp) => esp.id === id)
@@ -132,17 +104,6 @@ function Funcionarios() {
             }
             return null;
         }).filter(Boolean)
-    }
-    const verEspecialidades = (idFuncionario) => {
-        const contato = document.getElementById(`contSkillsFunc${idFuncionario}`)
-        const img = document.getElementById(`imgSetaSkillsFunc${idFuncionario}`)
-            if (contato.classList == 'containerSkillsFunc skillsFechado') {
-            contato.classList = "containerSkillsFunc skillsAberto"
-            img.src = Up
-        } else {
-            contato.classList = "containerSkillsFunc skillsFechado"
-            img.src = Down
-        }
     }
     const handleChangeFilters = (value, field) => {
         field=='nome' ? null : console.log("Debbug filtro " + value + ' ' + field)
@@ -242,9 +203,6 @@ function Funcionarios() {
             fetchEspecialidades()
         }
         fetchData()
-        // setTimeout(() => {
-        //     fetchData()
-        // }, 1000)
     }, [])
 
     return (
@@ -256,13 +214,13 @@ function Funcionarios() {
                 (usuario.cargo=='BASE' || usuario.cargo=="ADM" || usuario.cargo=="DEV") &&
                 <section id='secList'>
                     <div id='contEspecsNovoFunc'>
-                        <button className='btt' onClick={() => goToEspecialidades()}>
+                        <button className='btt' onClick={() => navigate(`/especialidades`)}>
                                 Especialidades e Serviços
                         </button>
                         {   
                         usuario.cargo == 'ADM' || usuario.cargo == 'DEV' ?
                         <button className='btt'
-                            onClick={() => handleCreateClick()}>Novo Funcionário</button>
+                            onClick={() => navigate(`/funcionario`)}>Novo Funcionário</button>
                         : ''
                         } 
                     </div>
@@ -287,48 +245,6 @@ function Funcionarios() {
                         </button>
                     </div>
                     }
-                    {
-                    testeLayout ? 
-                    <div id='layoutMobile'>
-                    {
-                        !funcionarios ? 
-                        <Skeleton/> :
-                        funcionarios.map(funcionario => (
-                            <div id={`funcionario${funcionario.id}`} className='funcs skillsFechado' key={funcionario.id}>
-                                <div className='infosFunc'>
-                                    <div className='nomeFunc'>
-                                        <span>Nome: </span>
-                                        {funcionario.primeiro + ' ' + funcionario.ultimo}
-                                    </div>
-                                    <div className='cellFunc'>
-                                        <span>Cel: </span>
-                                        {funcionario.celular}
-                                    </div>
-                                    <div className='ultAtvFunc'>
-                                        <span>Ultima atividade: </span>
-                                        {converterDtHr(funcionario.ultimaAtividade)}
-                                    </div>
-                                    <div className='cargoFunc'>
-                                        <span>Cargo: </span>
-                                        {funcionario.cargo}
-                                    </div>
-                                    <div className='statusFunc'>
-                                        <span>Status: </span>
-                                        {
-                                            funcionario.disponivel
-                                                ? 'disponível'
-                                                : 'indisponível'
-                                        }
-                                    </div>
-                                </div>
-                                <div className='editFunc' onClick={() => handleEditClick(funcionario.id)}>
-                                    <img className='imgEditFunc' src={Edit} alt="editar"/>
-                                </div>
-                            </div>
-                        ))
-                    }
-                    </div> 
-                    :
                     <div id="contListFuncs">
                     <table id='listFuncs'>
                         <thead>
@@ -395,7 +311,6 @@ function Funcionarios() {
                         </tbody>
                     </table>
                     </div>
-                    }
                     {(funcionarios && reqstFuncionarios.data.totalPages>1) && (
                         // renderPaginas()
                         <div className='paginacao'>

@@ -30,7 +30,6 @@ function NovaOrdem() {
         contFinalizar: false
     }) 
     const {usuario} = getUsuarioContext()
-    const [ordemId, setOrdemID] = useState(0)
     const handleChangeNovaOrdem = (value, field) => {
         setFormNovaOrdem(prevState => ({
             ...prevState,
