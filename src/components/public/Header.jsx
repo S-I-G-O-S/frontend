@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
-import './Header.css'
+import '@styles/public/header.css'
 import { useEffect, useState } from 'react'
 import { useAuth } from '@context/authContext'
 import { deleteCookie } from '@services/cookies'

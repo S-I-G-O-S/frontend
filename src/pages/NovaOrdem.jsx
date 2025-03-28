@@ -8,7 +8,7 @@ import { postNovaOrdem } from "@backend/ordemAPI"
 import { notification, Popconfirm, Select } from "antd"
 import TextArea from "antd/es/input/TextArea"
 import { useNavigate } from "react-router-dom"
-import { getUsuarioContext } from "../context/UsuarioContext"
+import { getUsuarioContext } from "@context/UsuarioContext"
 function NovaOrdem() {
     const navigate = useNavigate()
     const [clientes, setClientes] = useState([])

@@ -1,4 +1,4 @@
-import './Nav.css'
+import '@styles/public/nav.css'
 import { NavLink, useNavigate } from 'react-router-dom'
 import navLeft  from '@assets/navLeft.png'
 import navRight  from '@assets/navRight.png'

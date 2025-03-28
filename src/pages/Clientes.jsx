@@ -11,6 +11,8 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { notification, Pagination } from 'antd'
 import { HomeFilled, EditFilled, CloseOutlined }  from '@ant-design/icons'
+import Paginacao from '../components/public/Paginacao.jsx';
+import ListClientes from '../components/Clientes/ListClientes.jsx';
 
 
 function Clientes() {
@@ -96,14 +98,8 @@ function Clientes() {
         
         //navigate(`/cliente`)
     }
-    const handleEditCliente = (idCliente) => {
-        navigate(`/cliente?id=${idCliente}`)
-    }
-    const formatCNPJ = (cnpj) => {
-        if (!cnpj) return ""
-        const cnpjLimpo = cnpj.replace(/\D/g, '')
-        return cnpjLimpo.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, "$1.$2.$3/$4-$5")
-    }
+    
+    
     const handleEditDado = (valor, field) => {
         setNovoCliente(prevState => ({
             ...prevState,
@@ -150,80 +146,27 @@ function Clientes() {
                     </tr>
                     </thead>
                     <tbody id='listClientes'>
-                    {
-                        !clientes ? 
+                    {!clientes ? (
                         <tr>
-                            <td colSpan='6'>
+                            < td colSpan='6'>
                             <Loading/>
                             </td>
-                        </tr> :
-                        clientes.map(cliente => (
-                            <tr key={cliente.id} className='clientes'>
-                                <td className='nome'>{cliente.nome}</td>
-                                <td className='cnpj'>
-                                    { 
-                                        cliente.cnpj ? 
-                                        formatCNPJ(cliente.cnpj) :
-                                        'CNPJ não registrado'
-                                    }
-                                </td>
-                                <td className='endereco'>
-                                {
-                                    cliente.endereco.logradouro!='' ?
-                                    (
-                                        <>
-                                        {cliente.endereco.logradouro}
-                                        {   
-                                            cliente.endereco.numero!='' &&
-                                            (
-                                                <>
-                                                , {cliente.endereco.numero}
-                                                </>
-                                            )
-                                        }
-                                        {   
-                                            cliente.endereco.complemento!='' &&
-                                            (
-                                                <>
-                                                , {cliente.endereco.complemento}
-                                                </>
-                                            )
-                                        }
-                                        </>
-                                    ) :
-                                    'Endereço não registrado'
-                                }
-                                </td>
-                                <td className='options' onClick={() => handleEditCliente(cliente.id)}>
-                                    {/* <img src={Edit} alt="" /> */}
-                                    <EditFilled />
-                                </td>
-                            </tr>
-                        ))
-                    }
+                        </tr> 
+                        ) : (
+                        <ListClientes
+                            clientes={clientes}
+                        />
+                    )}
                     </tbody>
                 </table>
                 </div>
                 }
-                <div className='paginacao'>
-                    {(!reqstClientes || reqstClientes.data.totalPages==1) ? '' :
-                        // renderPaginas()
-                        <Pagination 
-                            defaultCurrent={1} 
-                            total={reqstClientes.data.totalPages}
-                            disabled={reqstClientes.data.totalPages == 1}
-                            pageSize={1}
-                            responsive
-                            showSizeChanger={false}
-                            onChange={changePage}
-                            theme={{
-                                token: {
-
-                                }
-                            }}
-                            />
-                    }
-                </div>
+                {clientes &&
+                    <Paginacao
+                        totalPages={reqstClientes.data.totalPages}
+                        changePage={changePage}
+                    />
+                }
             </section>
         </main>
         {

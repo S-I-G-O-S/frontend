@@ -406,16 +406,6 @@
             outline-color: var(--laranja);
         }
     }
-    #layoutMobile {
-        border-color: var(--marrom1);
-        .funcs {
-            border-color: var(--marrom1);
-            background-color: var(--branco);
-            .editFunc {
-                background-color: var(--branco);
-            }
-        }
-    }
     #contListFuncs {
         #listFuncs {
             border-color: var(--marrom1);
@@ -446,29 +436,7 @@
             }
         }
     }
-    .ant-pagination {
-        .ant-pagination-item {
-            background-color: var(--salmao1);
-            border-color: var(--marrom1);
-            a {
-                color: var(--marrom1);
-            }
-        }
-        .ant-pagination-item:hover {
-            background-color: var(--salmao2);
-        }
-        .ant-pagination-item-active {
-            border-color: var(--laranja);
-            background-color: var(--marrom1);
-            a {
-            color: var(--salmao2);
-
-            }
-        }
-        .ant-pagination-item-active:hover {
-            background-color: var(--marrom2);
-        }
-    }
+    
     #secFiltros {
         background-color: var(--salmao2);
         border-color: var(--marrom1);

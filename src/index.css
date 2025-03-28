@@ -114,34 +114,8 @@ body {
 .ant-modal-content{
     background-color: var(--salmao3);
 }
-.paginacao {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 0rem solid;
-    padding: 0.2rem 0.1rem;
-    gap: 0.4rem;
-    .paginaItem {
-        all: unset;
-        cursor: pointer;
-        font-size: 1rem;
-        padding: 0.1rem 0.5rem;
-        border: 0;
-        border-radius: 0.3rem;
-    }
-}
-.paginacao {
-    border-color: var(--marrom1);
-}
-.paginaItem {
-    color: var(--salmao2);
-    background-color: var(--marrom1);
-}
-.paginacao 
-.paginaItem:hover,
-.paginaItem:focus {
-    background-color: var(--marrom3);
-}
+
+
 .paginas {
     display: grid;
     grid-template-columns: max-content auto;
@@ -215,6 +189,7 @@ section {
             width: 99%;
         } */
     }}
+    /* FIXME Retirar isso pois já tem no css do componente */
     .paginacao {
         display: flex;
         align-items: center;
@@ -233,38 +208,3 @@ section {
         }
     }
 }
-/* Customizando a largura da barra de rolagem */
-/* ::-webkit-scrollbar {
-    width: 0.9rem;
-    height: 0.9rem;
-    box-sizing: border-box;
-} */
-/* Estilizando a trilha da barra */
-/* ::-webkit-scrollbar-track {
-    background-color: var(--salmao3);
-    border-radius: 0 0 0.4rem 0;
-    border-left: 0.1rem solid var(--marrom);
-    box-sizing: border-box;
-} */
-/* Estilizando o "thumb", a parte que o usuário move */
-/* ::-webkit-scrollbar-thumb {
-    background-color: var(--marrom);
-    border-radius: 0.9rem;
-    border: 0rem solid var(--salmao2);
-    cursor: pointer;
-    box-sizing: border-box;
-} */
-/* ::-webkit-scrollbar-button {
-	background-color: #D96704;
-	width: 0.5rem;
-	height: 0.5rem;
-} */
-/* Estilizando o "thumb" ao passar o mouse */
-/* ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--marrom);
-    box-sizing: border-box;
-} */
-/* Estilizando o canto da barra de rolagem */
-/* ::-webkit-scrollbar-corner {
-    background-color: var(--laranja);
-} */

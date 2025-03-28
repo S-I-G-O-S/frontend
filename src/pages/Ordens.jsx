@@ -7,7 +7,7 @@ import Loading from "@components/public/Loading.jsx"
 import { useEffect, useState } from "react"
 import { CheckCircleOutlined, CloseCircleOutlined, CloseOutlined, FieldTimeOutlined, RollbackOutlined, ToolOutlined } from '@ant-design/icons'
 import { Pagination } from "antd"
-import { getUsuarioContext } from "../context/UsuarioContext.jsx";
+import { getUsuarioContext } from "@context/UsuarioContext.jsx";
 
 function Ordens() {
     const location = useLocation();

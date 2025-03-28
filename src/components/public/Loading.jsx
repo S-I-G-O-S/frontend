@@ -1,4 +1,4 @@
-import './Loading.css'
+import '@styles/public/loading.css'
 import {LoadingOutlined} from '@ant-design/icons'
 function Loading({texto}) {
     const tagP = texto || "carregando"

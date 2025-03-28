@@ -9,12 +9,14 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { isMobile } from 'react-device-detect'
 
-import { Pagination, Skeleton, Dropdown } from 'antd'
 import { CloseOutlined, FilterFilled, SearchOutlined } from '@ant-design/icons'
 
 import Nav from '@components/public/Nav.jsx'
+import { getUsuarioContext } from '@context/UsuarioContext';
+import Paginacao from '../components/public/Paginacao';
+import ListFuncionarios from '@components/Funcionarios/ListFuncionarios';
 import Loading from '@components/public/Loading.jsx'
-import { getUsuarioContext } from '../context/UsuarioContext';
+import Filtros from '../components/Funcionarios/Filtros';
 
 //  SÓ O ADM E O PROPRIO TECNICO PODEM EDITAR O FUNCIONARIO
 function Funcionarios() {
@@ -24,7 +26,7 @@ function Funcionarios() {
     const [reqstFuncionarios, setReqstFuncionarios] = useState()
     const [funcionarios, setFuncionarios] = useState()
     const [especialidades, setEspecialidades] = useState()
-    const [showContFiltros, setShowContFiltros] = useState(false)
+    const [modalFiltros, setModalFiltros] = useState(false)
     const [filtros, setFiltros] = useState({
         nome: {
             value: 'default',
@@ -48,65 +50,7 @@ function Funcionarios() {
         },
         qtd: 15
     })
-    const handleEditClick = (idFuncionario) => {
-        if (usuario.cargo=='BASE' || usuario.cargo=='TECNICO') {return}
-        navigate(`/funcionario?id=${idFuncionario}`)
-    }
-    // FIXME Utilizar do "utils"
-    const converterDtHr = (dataHora) => {
-        if (!dataHora) {
-            return '--/--/----, --:--'
-        }
-        const [dia, mes, anoHora] = dataHora.split('-')
-        const [ano, hora] = anoHora.split(' ')
-        const dataISO = `${ano}-${mes}-${dia}T${hora}`
-
-        const data = new Date(dataISO);
-        if (isNaN(data.getTime())) return "Data Inválida"
-            return data.toLocaleDateString('pt-BR', {
-            day: 'numeric',
-            month: '2-digit',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-        })
-    }
-    // FIXME Utilizar do "utils"
-    const converterCargo = (cargo) => {
-        var cargoConvertido
-        switch(cargo) {
-            case 'TECNICO': 
-                cargoConvertido = 'Técnico'
-                break;
-            case 'BASE': 
-                cargoConvertido = 'Base'
-                break;
-            case 'DEV': 
-                cargoConvertido = 'Dev'
-                break;
-            case 'ADM': 
-                cargoConvertido = 'ADM'
-                break;
-            default: 
-                cargoConvertido = 'erro'
-                break;
-        }
-        return cargoConvertido
-    }
-    const listEspecialidades = (ids) => {
-        return ids.map((id) => {
-            const especialidade = especialidades.find((esp) => esp.id === id)
-            if (especialidade) {
-            return {
-                key: especialidade.id,
-                label: especialidade.nome
-            }
-            }
-            return null;
-        }).filter(Boolean)
-    }
-    const handleChangeFilters = (value, field) => {
-        field=='nome' ? null : console.log("Debbug filtro " + value + ' ' + field)
+    const handleChangeFiltros = (value, field) => {
         setFiltros(prevState => ({
             ...prevState,
             [field]: {
@@ -136,13 +80,13 @@ function Funcionarios() {
         }))
     }
     const handleChangeContFiltros = () => {
-        setShowContFiltros(!showContFiltros)
+        setModalFiltros(!modalFiltros)
     }
     const handleAplicarFiltros = () => {
         console.log('Aplicando filtros:')
         console.warn(filtros)
         fetchFuncionarios(0)
-        setShowContFiltros(false)
+        setModalFiltros(false)
     }
     const handleLimparFiltros = () => {
         setFiltros({
@@ -210,225 +154,92 @@ function Funcionarios() {
         {/* <Header titulo={"Funcionarios"} usuario={usuario}></Header> */}
         <Nav cargo={usuario?.cargo || ''}></Nav>
         <main id='mainFuncionarios'>
-            {
-                (usuario.cargo=='BASE' || usuario.cargo=="ADM" || usuario.cargo=="DEV") &&
-                <section id='secList'>
-                    <div id='contEspecsNovoFunc'>
-                        <button className='btt' onClick={() => navigate(`/especialidades`)}>
-                                Especialidades e Serviços
-                        </button>
-                        {   
-                        usuario.cargo == 'ADM' || usuario.cargo == 'DEV' ?
-                        <button className='btt'
-                            onClick={() => navigate(`/funcionario`)}>Novo Funcionário</button>
-                        : ''
-                        } 
-                    </div>
-                    {/* <ListFuncionarios cargo={usuario.cargo}></ListFuncionarios> */}
-                    {
-                    !funcionarios ? '' :
-                    <div id='contFiltros'>
-                        <div id='contPesqFunc'>
-                            <input type="text" 
-                                value={filtros.nome.value == 'default' ? '' : filtros.nome.value}
-                                onChange={(e) => handleChangeFilters(e.target.value, "nome")}
-                            />
-                            <button onClick={handlePesquisarNome}>
-                                <SearchOutlined style={{color: '#fcd8b9'}}/>
-                            </button>
-                        </div>
-                        <button id="bttFiltros" onClick={handleChangeContFiltros}>
-                            <p>
-                                filtros
-                            </p>
-                            <FilterFilled />
+        {(usuario.cargo=='BASE' || usuario.cargo=="ADM" || usuario.cargo=="DEV") &&
+            <section id='secList'>
+                <div id='contEspecsNovoFunc'>
+                    <button className='btt' onClick={() => navigate(`/especialidades`)}>
+                            Especialidades e Serviços
+                    </button>
+                    {   
+                    usuario.cargo == 'ADM' || usuario.cargo == 'DEV' ?
+                    <button className='btt'
+                        onClick={() => navigate(`/funcionario`)}>Novo Funcionário</button>
+                    : ''
+                    } 
+                </div>
+                {
+                !funcionarios ? '' :
+                <div id='contFiltros'>
+                    <div id='contPesqFunc'>
+                        {/* FIXME Mudar para o compomente externo */}
+                        <input type="text" 
+                            value={filtros.nome.value == 'default' ? '' : filtros.nome.value}
+                            onChange={(e) => handleChangeFiltros(e.target.value, "nome")}
+                        />
+                        <button onClick={handlePesquisarNome}>
+                            <SearchOutlined style={{color: '#fcd8b9'}}/>
                         </button>
                     </div>
-                    }
-                    <div id="contListFuncs">
-                    <table id='listFuncs'>
-                        <thead>
-                            <tr id='titleList'>
-                                <th className='nomeTitle cl1'>nome</th>
-                                <th className='cellTitle cl2'>celular</th>
-                                <th className='ultAtvTitle cl3'>ultima atividade</th>
-                                <th className='cargoTitle cl4'>cargo</th>
-                                <th className='statusTitle cl5'>status</th>
-                                <th className='cl6'>especialidades</th>
-                            </tr>
-                        </thead>
-                        <tbody className='tbody'>
-                            {(loadingRows || !funcionarios) ? (
-                                <tr>
-                                    <td colSpan='6'>
-                                    <Loading/>
-                                    </td>
-                                </tr>) : (
-                                funcionarios.map(funcionario => (
-                                    <tr id={`funcionario${funcionario.id}`} className='funcs' key={`func${funcionario.id}`} onClick={() => handleEditClick(funcionario.id)}>
-                                        <td className='nomeFunc cl1'>
-                                            {funcionario.primeiro + ' ' + funcionario.ultimo}
-                                        </td>
-                                        <td className='cellFunc cl2'>
-                                            {funcionario.celular}
-                                        </td>
-                                        <td className='ultAtvFunc cl3'>
-                                            {converterDtHr(funcionario.ultimaAtividade)}
-                                        </td>
-                                        <td className='cargoFunc cl4'>
-                                            {converterCargo(funcionario.cargo)}
-                                        </td>
-                                        <td className='statusFunc cl5'>
-                                            {funcionario.disponivel ? 'disponível' : 'indisponível'}
-                                        </td>
-                                        <td className='setaSkillsFunc cl6'>
-                                        {especialidades && (
-                                            <Dropdown
-                                                placement='bottom'
-                                                menu={{
-                                                    
-                                                    items: funcionario.especialidades.length==0 ? 
-                                                        [{ key: 'semEspecialidade', label: "sem especialidades"}] : listEspecialidades(funcionario.especialidades),
-                                                    style: {
-                                                        backgroundColor: '#F2E8DF',
-                                                        fontWeight: '500'
-                                                    }
-                                                }}
-                                                overlayStyle={{
-                                                    border: "0.1rem solid #26110D",
-                                                    borderRadius: '0.5rem'
-                                                }}
-                                                
-                                                >
-                                                {/* <DownOutlined style={{color: '#26110D'}}/> */}
-                                                <div>expandir</div>
-                                            </Dropdown>
-                                        )}
-                                        </td>
-                                    </tr>
-                                ))
-                            )}
-                        </tbody>
-                    </table>
-                    </div>
-                    {(funcionarios && reqstFuncionarios.data.totalPages>1) && (
-                        // renderPaginas()
-                        <div className='paginacao'>
-                        <Pagination 
-                            defaultCurrent={1} 
-                            total={reqstFuncionarios.data.totalPages}
-                            disabled={reqstFuncionarios.data.totalPages == 1}
-                            pageSize={1}
-                            responsive
-                            showSizeChanger={false}
-                            onChange={changePage}
-                            showTitle={false}
-                            />
-                        </div>
+                    <button id="bttFiltros" onClick={handleChangeContFiltros}>
+                        <p>
+                            filtros
+                        </p>
+                        <FilterFilled />
+                    </button>
+                </div>
+                }
+                <div id="contListFuncs">
+                <table id='listFuncs'>
+                    <thead>
+                        <tr id='titleList'>
+                            <th className='nomeTitle cl1'>nome</th>
+                            <th className='cellTitle cl2'>celular</th>
+                            <th className='ultAtvTitle cl3'>ultima atividade</th>
+                            <th className='cargoTitle cl4'>cargo</th>
+                            <th className='statusTitle cl5'>status</th>
+                            <th className='cl6'>especialidades</th>
+                        </tr>
+                    </thead>
+                    <tbody className='tbody'>
+                    {loadingRows ? (    
+                        <tr>
+                            <td colSpan='6'>
+                                <Loading/>
+                            </td>
+                        </tr>
+                        ) : (
+                        <ListFuncionarios
+                            funcionarios={funcionarios}
+                            especialidades={especialidades}
+                            cargo={usuario.cargo}
+                        />
+
                     )}
-                </section>
-            }
-        </main>
-        {
-        showContFiltros && (
-        <div id='shadowBG'>
-            <section id='secFiltros'>
-                <div id='headerFiltros'>
-                    <h2>Filtros</h2>
-                    <div 
-                        id='closeModel'
-                        onClick={handleChangeContFiltros}>
-                    <CloseOutlined />
-                    </div>
+                    </tbody>
+                </table>
                 </div>
-                <div id='subContFiltros'>
-                    <div id='contCargoFiltro'>
-                        <label>Cargo: </label>
-                        <select 
-                            value={filtros?.cargo.value}
-                            onChange={(e)=> handleChangeFilters(e.target.value, 'cargo')}
-                            >
-                            <option value="default">Todos</option>
-                            <option value="TECNICO">Técnicos</option>
-                            <option value="BASE">Base</option>
-                            <option value="ADM">ADM</option>
-                            <option value="DEV">Dev</option>
-                        </select>
-                    </div>
-                    <div id='contEspecFiltro'>
-                        <label>Especialidade: </label>
-                        <select
-                            value={filtros?.especialidade.value}
-                            onChange={(e)=> handleChangeFilters(e.target.value, 'especialidade')} 
-                            >
-                        {
-                            especialidades && [
-                                <option key="default" value="default">Todos</option>,
-                                ...especialidades.map(espec => (
-                                    <option key={espec.id} value={espec.id}>{espec.nome}</option>
-                                ))
-                            ]
-                        }
-                        </select>
-                    </div>
-                    <div id='contDispFiltro'>
-                        <label>Disponibilidade: </label>
-                        <select
-                            value={filtros?.disponivel.value}
-                            onChange={(e)=> handleChangeFilters(e.target.value, 'disponivel')}
-                            >
-                            <option value="default">Todos</option>
-                            <option value="true">Disponíveis</option>
-                            <option value="false">Indisponíveis</option>
-                        </select>
-                    </div>
-                    {
-                        usuario.cargo=='ADM'|| usuario.cargo=='DEV' ? 
-                        <div id='contAtivoFiltro'>
-                            <label>Funcionarios ativos: </label>
-                            <select
-                                value={filtros?.ativo.value}
-                                onChange={(e)=> handleChangeFilters(e.target.value, 'ativo')}
-                                >
-                                <option value="default">Todos</option>
-                                <option value="true">Ativos</option>
-                                <option value="false">Inativos</option>
-                            </select>
-                        </div> : ''
-                    }
-                    <div id='contQTDFiltro'>
-                        <label>Quantidade: </label>
-                        <select 
-                            id="selectQTD"
-                            value={filtros?.qtd}
-                            onChange={(e) => handleChangeQTD(e.target.value)}
-                            >
-                            <option value="15">15</option>
-                            <option value="30">30</option>
-                            <option value="40">40</option>
-                        </select>
-                    </div>
-                </div>
-                <div id='footerFiltros'>
-                    <button 
-                        id='bttCancelar'
-                        key='cancelar'
-                        onClick={handleChangeContFiltros}
-                        >
-                        Cancelar
-                    </button>
-                    <button
-                        id='bttAplicar'
-                        key='filtar'
-                        onClick={handleAplicarFiltros}
-                        >
-                        Aplicar filtros
-                    </button>
-                </div>
+                {funcionarios && 
+                    <Paginacao
+                        totalPages={reqstFuncionarios.data.totalPages}
+                        changePage={changePage}
+                    />
+                }
             </section>
-        </div>
-        )
         }
+        </main>
+        {modalFiltros && (
+            <div id='shadowBG'>
+                <Filtros
+                    filtros={filtros}
+                    onChangeQTD={handleChangeQTD}
+                    onChange={handleChangeFiltros}
+                    onAplicar={handleAplicarFiltros}
+                    onCancelar={() => setModalFiltros(false)}
+                    especialidades={especialidades}
+                    cargo={usuario.cargo}
+                />
+            </div>
+        )}
         </div>
     )
 }

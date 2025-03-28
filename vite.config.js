@@ -14,6 +14,7 @@ export default defineConfig({
 			'@pages': path.resolve(__dirname, './src/pages'),
 			'@provider': path.resolve(__dirname, './src/provider'),
 			'@context': path.resolve(__dirname, './src/context'),
+			'@hooks': path.resolve(__dirname, './src/hooks'),
 			'@vis.gl/react-google-maps/examples.js': 'https://visgl.github.io/react-google-maps/scripts/examples.js'
 		},
 	},
