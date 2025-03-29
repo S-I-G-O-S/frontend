@@ -160,7 +160,7 @@ function Ordem() {
                             <aside id="asideAcoes">
                                 <h2>Opções</h2>
                                 <div id="contAcoes">
-                                    {/* NOTE Considerando q a ordem não possa ser mudada após finalizada */}
+                                    {/* NOTA Considerando q a ordem não possa ser mudada após finalizada */}
                                     {(ordem.situacao == "FINALIZADA") ? (
                                         <p style={{ textAlign: "center" }}>
                                             ordem finalizada
