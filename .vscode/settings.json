@@ -1,0 +1,49 @@
+{
+    "todo-tree.general.showActivityBarBadge": false,
+    "todo-tree.general.tags": [
+        "NOTA",
+        "TODO",
+        "FIXME",
+        "MARK",
+        "[ ]",
+        "[x]"
+    ],
+    "todo-tree.highlights.defaultHighlight": {
+        "type": "tag",
+        "fontWeight": "bold",
+        "foreground": "#000000",
+        "opacity": 90
+    },
+    "todo-tree.highlights.customHighlight": {
+        "NOTA": {
+            "background": "#FFA500",
+            "iconColour": "#FFA500",
+            "icon": "file"
+        },
+        "TODO": {
+            "background": "#FFD703",
+            "iconColour": "#FFD703",
+            "icon": "tasklist"
+        },
+        "FIXME": {
+            "background": "#FF01FF",
+            "iconColour": "#FF01FF",
+            "icon": "bug"
+        },
+        "MARK": {
+            "background": "#157EFB",
+            "iconColour": "#157EFB",
+            "icon": "tag"
+        },
+        "[ ]": {
+            "background": "#ff0f0f",
+            "iconColour": "#ff0f0f",
+            "icon": "square"
+        },
+        "[x]": {
+            "background": "#00ff0080",
+            "iconColour": "#00ff0080",
+            "icon": "square-fill"
+        }
+    },
+}
