@@ -2,9 +2,9 @@
 import { getEspecialidades, postEspecialidade, deleteEspec, putEspecialidade } from '@backend/especialidadesAPI.js'
 import { getServicos, getServicoPorID, postServico, putServico } from '@backend/servicosAPI.js'
 
-import '@styles/especialidades.css'
+import '@styles/servicosEspecialidades.css'
 import Nav from '@components/public/Nav.jsx'
-import UnitEspec from '@components/Especialidades/unitEspecialidade.jsx'
+import UnitEspec from '@components/ServicosEspecialidades/unitEspecialidade.jsx'
 import Loading from '@components/public/Loading.jsx'
 import { useEffect, useState } from 'react'
 
@@ -16,7 +16,7 @@ import { deleteServico } from '../services/backend/servicosAPI'
 
 // https://www.delftstack.com/pt/howto/react/for-loop-in-react/
 
-function Especialidades() {
+function ServicosEspecialidades() {
     // Geral
     const { usuario } = getUsuarioContext()
     const [tipoJanela, setTipoJanela] = useState(null)
@@ -610,4 +610,4 @@ function Especialidades() {
         </div>
     )
 }
-export default Especialidades
+export default ServicosEspecialidades

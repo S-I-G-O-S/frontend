@@ -4,7 +4,7 @@ import navLeft  from '@assets/navLeft.png'
 import navRight  from '@assets/navRight.png'
 // import homeIcon from '@assets/homeIcon.png'
 import { useEffect, useState } from 'react'
-import { HomeFilled, IdcardFilled, LeftCircleFilled, LogoutOutlined, ReadFilled, RightCircleFilled, ScheduleFilled, SettingFilled, SettingOutlined, ShoppingFilled, TagFilled }  from '@ant-design/icons'
+import { FundFilled, HomeFilled, IdcardFilled, LeftCircleFilled, LogoutOutlined, ReadFilled, RightCircleFilled, ScheduleFilled, SettingFilled, SettingOutlined, ShoppingFilled, TagFilled }  from '@ant-design/icons'
 import { IconFuncionarios } from './IconsSVG'
 import { usePreferencias } from '@context/PreferenciasContext'
 import { logoutFunc } from '@backend/authAPI'
@@ -98,7 +98,7 @@ function Nav({ cargo }) {
                     <NavLink 
                         className={({ isActive }) => (isActive ? "links active" : "links ")}
                         id='goToEspecs' 
-                        to="/especialidades"
+                        to="/servicos"
                         title='Especialidades e serviços'
                         // activeClassName="active" 
                         >
@@ -133,6 +133,18 @@ function Nav({ cargo }) {
                     {/* <img src={homeIcon} alt="home" /> */}
                     <p className='nomeGoTo' id='goToConfigsP'>Configurações</p>
                 </NavLink>
+                {(cargo==="DEV" || cargo==="ADM") && (
+                    <NavLink
+                        className={"links"}
+                        id='goToGrafana'
+                        to={"https://sigostcc.grafana.net/"}
+                        title='Análise'
+                        target='_blank'
+                        >
+                        <FundFilled className="iconNav"/>
+                        <p className='nomeGoTo'>análise</p>
+                    </NavLink>
+                )}
             </div>
             <div id='containerFooter'>
                 {/* <div>Leonardo Martinez</div> */}

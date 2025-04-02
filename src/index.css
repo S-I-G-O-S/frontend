@@ -61,6 +61,7 @@ body {
     width: 100%;
     max-width: 100%;
     overflow: hidden;
+    overflow-y: scroll;
     /* background-repeat: no-repeat;
     background-size: calc(100% + 200px) 9rem;
     background-position: 100% 100%;   */

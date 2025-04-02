@@ -1,7 +1,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { useAuth } from '@context/authContext'
 import { ProtectedRoute } from "./ProtectedRoute";
-import { Login, Home, UserConfig, PaginaIncorreta, Clientes, Cliente, Funcionarios, Funcionario, Especialidades, Ordens, NovaOrdem, Ordem, PrimeiroAcesso, Teste, MeusAtendimentos, Analise } from '@pages'
+import { Login, Home, UserConfig, PaginaIncorreta, Clientes, Cliente, Funcionarios, Funcionario, ServicosEspecialidades, Ordens, NovaOrdem, Ordem, PrimeiroAcesso, Teste, MeusAtendimentos, Analise } from '@pages'
 
 function AppRoutes() {
     const { token } = useAuth();
@@ -42,8 +42,8 @@ function AppRoutes() {
                     element: <Funcionario />,
                 },
                 {
-                    path: "/especialidades",
-                    element: <Especialidades />,
+                    path: "/servicos",
+                    element: <ServicosEspecialidades />,
                 },
                 {
                     path: "/ordens",

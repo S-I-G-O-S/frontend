@@ -1,5 +1,12 @@
 {
     "recommendations": [
-        "Gruntfuggly.todo-tree"
+        "Gruntfuggly.todo-tree",
+        "formulahendry.auto-close-tag",
+        "naumovs.color-highlight",
+        "aeschli.vscode-css-formatter",
+        "oderwat.indent-rainbow",
+        "chamboug.js-auto-backticks",
+        "zhang-renyang.vscode-react",
+        "tonybaloney.vscode-pets"
     ]
 }
