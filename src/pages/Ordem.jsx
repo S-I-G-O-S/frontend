@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Nav from "@components/public/Nav.jsx";
 import Loading from "@components/public/Loading.jsx";
 import '@styles/ordem.css'
@@ -11,13 +11,13 @@ import { getUsuarioContext } from "@context/UsuarioContext.jsx";
 import ModalTecnicos from "@components/Ordem/ModalTecnicos.jsx";
 import ModalAtendimento from "@components/Ordem/ModalAtendimento.jsx";
 import Mapa from "@components/Ordem/Mapa.jsx";
+import { formatCNPJ } from "@services/utils";
 
 function Ordem() {
     const { usuario } = getUsuarioContext()
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search)
     const idOrdem = searchParams?.get('id') ?? null
-    const navigate = useNavigate()
     const [ordem, setOrdem] = useState(null)
 
     const [atendimentoAtual, setAtendimentoAtual] = useState(null)
@@ -33,11 +33,6 @@ function Ordem() {
             return
         }
         setEditMode(false)
-    }
-    const formatCNPJ = (cnpj) => {
-        if (!cnpj) return ""
-        const cnpjLimpo = cnpj.replace(/\D/g, '')
-        return cnpjLimpo.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, "$1.$2.$3/$4-$5")
     }
     const cancelarOrdem = async () => {
         const result = await putCancelOrdem(ordem)
@@ -108,7 +103,7 @@ function Ordem() {
     useEffect(() => {
         if (atendimentos && atendimentos.length > 0) {
             if (ordem.situacao == "EM_EXECUCAO") {
-                // TODO atualmente pegando apenas o primeiro atendimento do array
+                // FIXME atualmente pegando apenas o primeiro atendimento do array
                 setAtendimentoAtual(atendimentos[0].id)
                 console.log("atendimento aberto: " + atendimentos[0].id)
             }

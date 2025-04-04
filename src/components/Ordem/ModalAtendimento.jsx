@@ -1,6 +1,7 @@
 import "@styles/ordem/modalAtendimento.css"
 import { useState } from "react"
 import { putConcluirAtendimento } from "../../services/backend/ordemAPI"
+import UploadFiles from "./UploadFiles"
 import TextArea from "antd/es/input/TextArea"
 
 export default function ModalAtendimento({ changeModal, atendimento }) {
@@ -46,6 +47,7 @@ export default function ModalAtendimento({ changeModal, atendimento }) {
                     }}
                 />,
             </div>
+                {/* <UploadFiles/> */}
             <div id="contAcoesAtendimento">
                 <button onClick={() => changeModal(false)}>cancelar</button>
                 <button
