@@ -6,7 +6,8 @@
         "FIXME",
         "MARK",
         "[ ]",
-        "[x]"
+        "[x]",
+        "DUVIDA"
     ],
     "todo-tree.highlights.defaultHighlight": {
         "type": "tag",
@@ -44,6 +45,11 @@
             "background": "#00ff0080",
             "iconColour": "#00ff0080",
             "icon": "square-fill"
-        }
+        },
+        "DUVIDA": {
+            "background": "#00ffb3",
+            "iconColour": "#00ffb3",
+            "icon": "file"
+        },
     },
 }

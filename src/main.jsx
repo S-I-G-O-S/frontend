@@ -10,21 +10,21 @@ import Loading from '@components/public/Loading.jsx'
 const AppRoutes = lazy(() => import('./router/routes.jsx'))
 
 function App() {
-    return (
-        <AuthProvider>
-            <UsuarioProvider>
-              <PreferenciasProvider>
-                {/* O Suspense exibe um fallback enquanto o componente é carregado */}
-                <Suspense fallback={<Loading texto={"carregando SIGOS"}/>}>
-                  <AppRoutes />
-                </Suspense>
-              </PreferenciasProvider>
-            </UsuarioProvider>
-        </AuthProvider>
-    );
+	return (
+		<AuthProvider>
+			<UsuarioProvider>
+				<PreferenciasProvider>
+					{/* O Suspense exibe um fallback enquanto o componente é carregado */}
+					<Suspense fallback={<Loading texto={"carregando SIGOS"} />}>
+						<AppRoutes />
+					</Suspense>
+				</PreferenciasProvider>
+			</UsuarioProvider>
+		</AuthProvider>
+	);
 }
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
+	<StrictMode>
+		<App />
+	</StrictMode>,
 )

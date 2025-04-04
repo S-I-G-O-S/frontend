@@ -2,6 +2,7 @@ import axios from 'axios'
 import config from '../config'
 
 export const getEspecialidades = async () => {
+    // DUVIDA está vindo todas as especialidades, até as inativas.
     try {
         const response = await axios.get(`${config.url}/api/especialidades`, {
             headers: {
