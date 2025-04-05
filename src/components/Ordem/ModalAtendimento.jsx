@@ -42,24 +42,25 @@ export default function ModalAtendimento({ changeModal, atendimento }) {
                         minRows: 2,
                         maxRows: 6,
                     }}
-                    style={{
-                        resize: 'none'
-                    }}
-                />,
+                />
             </div>
-                {/* <UploadFiles/> */}
+            <UploadFiles/>
             <div id="contAcoesAtendimento">
-                <button onClick={() => changeModal(false)}>cancelar</button>
+                <button id="bttCancelar" onClick={() => changeModal(false)}>cancelar</button>
                 <button
+                    id="bttFinalizar"
                     disabled={renderFimAtendimento}
                     onClick={() => setRenderFimAtendimento(true)}
                 >finalizar</button>
             </div>
             {renderFimAtendimento && (
+                <>
+                <p id="perguntaAtendimento">O atendimento foi concluído?</p>
                 <div id="contFinalizarAtendimento">
-                    <button onClick={() => finalizarAtendimento("RETORNO")}>não concluída</button>
-                    <button onClick={() => finalizarAtendimento("FINALIZADA")}>concluída com sucesso</button>
+                    <button id="bttNaoConcluido" onClick={() => finalizarAtendimento("RETORNO")}>não concluído</button>
+                    <button id="bttConcluido" onClick={() => finalizarAtendimento("FINALIZADA")}>concluído com sucesso</button>
                 </div>
+                </>
             )}
         </section>
     )

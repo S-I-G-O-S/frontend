@@ -1,6 +1,98 @@
 #secRegisAtendimento {
-    #contAcoesAtendimento {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    padding: 1.5rem 2rem;
+    width: 100%;
+    margin: 0 auto;
+    button {
         display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        font-weight: 500;
+        text-align: center;
+        line-height: 100%;
+        font-size: 1rem;
+
+        padding: .3rem 1rem;
+        border-radius: .3rem;
+        border-width: .1rem;
+        border-style: solid;
+        cursor: pointer;
+    }
+    button:focus {
+        outline: .1rem solid var(--laranja);
+    }
+    #contDscrAtendimento {
+        display: flex;
+        flex-direction: column;
+        gap: .3rem;
+        #txtDescricao {
+            border-radius: 0.3rem;
+            border-width: 0.1rem;
+            border-style: solid;
+            transition: 0s;
+            background-color: var(--branco);
+            border-color: var(--marrom1);
+        }
+        #txtDescricao:focus {
+            outline-width: 0.1rem;
+            outline-style: solid;
+            outline-color: var(--laranja);
+            border-radius: 0.3rem;
+            border-width: 0.1rem;
+            border-style: solid;
+            border-color: var(--laranja);
+        }
+    }
+    #contAcoesAtendimento, 
+    #contFinalizarAtendimento {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 0.5rem;
         justify-content: space-around;
+        align-items: safe;
+        word-wrap: break-word;
+    }
+    #contAcoesAtendimento {
+        #bttCancelar {
+            background-color: var(--salmao1);
+            border-color: var(--marrom1);
+        }
+        #bttFinalizar {
+            color: var(--salmao2);
+            border-color: var(--marrom1);
+        
+            background-color: var(--marrom1);
+        }
+    }
+    #perguntaAtendimento {
+        text-align: center;
+        font-size: 1rem;
+    }
+    #contFinalizarAtendimento {
+        #bttNaoConcluido {
+            background-color: #ff8888;
+        }
+        #bttConcluido {
+            background-color: #0cda4a;
+        }
+    }
+}
+@media screen and (width >= 500px) {
+    #secRegisAtendimento {
+        max-width: 90vw;
+        #contAcoesAtendimento, 
+        #contFinalizarAtendimento {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr;
+            gap: 0.5rem;
+            justify-content: space-around;
+            align-items: safe;
+            word-wrap: break-word;
+        }
     }
 }

@@ -1,10 +1,3 @@
-:root {
-    --pendente: #8fcdff;
-    --emExecucao: #f6ff7b;
-    --retorno: #ffb968;
-    --cancelada: #ff8888;
-    --finalizada: #0cda4a;
-}
 #pageOrdens {
     #mainOrdens {
         grid-area: main;

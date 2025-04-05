@@ -19,6 +19,30 @@ export const converterCargo = (cargo) => {
     }
     return cargoConvertido
 }
+export const converterSituacao = (situacao) => {
+    let situacaoConvertida
+    switch(situacao) {
+        case 'PENDENTE': 
+            situacaoConvertida = 'pendente'
+            break;
+        case 'EM_EXECUCAO': 
+            situacaoConvertida = 'em execução'
+            break;
+        case 'RETORNO': 
+            situacaoConvertida = 'retorno'
+            break;
+        case 'CANCELEDA': 
+            situacaoConvertida = 'cancelada'
+            break;
+        case 'FINALIZADA': 
+            situacaoConvertida = 'finalizada'
+            break;
+        default: 
+            situacaoConvertida = 'erro'
+            break;
+    }
+    return situacaoConvertida
+}
 export const converterEspecs = (idEspec) => {
     let especialidade = especialidades.find(espec => espec.id == idEspec)
     const [cor1, cor2] = especialidade.cor.split('/')

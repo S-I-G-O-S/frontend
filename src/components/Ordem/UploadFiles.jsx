@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
+import "@styles/ordem/UploadFiles.css"
 
 function UploadFiles() {
     // estado para armazenar os arquivos selecionados e mensagens de erro
@@ -63,22 +64,26 @@ function UploadFiles() {
         marginTop: '20px'
     }
     return (
-        <div id="secUploadFiles" style={style}>
+        <div id="contUploadFiles" >
             {/* Input de arquivo com múltipla seleção e aceitação de tipos específicos */}
-            <input
-                type="file"
-                multiple
-                accept="image/jpeg, image/png, video/mp4"
-                onChange={handleFileChange}
-            />
+            <div id="contInputFiles">
+                <input
+                    type="file"
+                    multiple
+                    accept="image/jpeg, image/png, video/mp4"
+                    onChange={handleFileChange}
+                    id="inputFiles"
+                    
+                />
+            </div>
             {/* Lista os arquivos selecionados com nome e tamanho (em KB) */}
             {files.length > 0 && (
-                <div>
+                <div id="contListFiles">
                     <p>Arquivos selecionados:</p>
-                    <ul>
+                    <ul id="listFiles">
                         {files.map((file, index) => (
                             <li key={'arquivo${index}'}>
-                                {file.name} - {(file.size / 1048576).toFixed(2)} MB
+                                {file.name} ({(file.size / 1048576).toFixed(2)}MB)
                             </li>
                         ))}
                     </ul>
@@ -86,7 +91,7 @@ function UploadFiles() {
             )}
             {/* Exibe mensagem de erro, se houver */}
             {error && <p style={{ color: 'red' }}>{error}</p>}
-            <button onClick={handleUpload}>Enviar arquivos</button>
+            {/* <button onClick={handleUpload}>Enviar arquivos</button> */}
         </div>
     )
 }

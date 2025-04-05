@@ -12,6 +12,7 @@ import ModalTecnicos from "@components/Ordem/ModalTecnicos.jsx";
 import ModalAtendimento from "@components/Ordem/ModalAtendimento.jsx";
 import Mapa from "@components/Ordem/Mapa.jsx";
 import { formatCNPJ } from "@services/utils";
+import { converterSituacao } from "@services/utils";
 
 function Ordem() {
     const { usuario } = getUsuarioContext()
@@ -203,7 +204,7 @@ function Ordem() {
                                     </div>
                                     <div>
                                         <span>Situação:</span>
-                                        {ordem.situacao}
+                                        {converterSituacao(ordem.situacao)}
                                     </div>
                                     <div>
                                         <span>Descrição:</span>
@@ -248,8 +249,7 @@ function Ordem() {
                                     </span>
                                     <div>{ordem.endereco.logradouro}, {ordem.endereco.numero}{`${ordem.endereco.complemento}` || ''}  - {ordem.endereco.bairro}, {ordem.endereco.cidade}-{ordem.endereco.uf}/{ordem.endereco.cep}</div>
                                 </div>
-                                {
-                                    ordem.funcionario && (
+                                {(ordem.funcionario && usuario.cargo!=="TECNICO") && (
                                         <div id="contFuncionario">
                                             <p><strong>Funcionário: </strong>{ordem.funcionario.primeiro} {ordem.funcionario.ultimo}</p>
                                             <p><strong>contato: </strong>{ordem.funcionario.celular}</p>
