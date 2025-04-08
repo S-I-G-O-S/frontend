@@ -118,12 +118,21 @@
                             grid-area: servico;
                         }
                         .dataHora {
+                            text-align: center;
                             grid-area: dataHora;
                         }
                         .tecnico {
                             grid-area: tecnico;
                         }
 
+                    }
+                    .ordensTecnico {
+                        grid-template-areas: 
+                            "dataHora nomeCliente"
+                            "servico servico";
+                            .serviço {
+                                text-align: center;
+                            }
                     }
                 }
             }

@@ -78,11 +78,11 @@ function OrdensTecnico({idTecnico}) {
                 <div className="bodyContsOrdens">
                     {ordens.map(ordem => (
                         <div key={ordem.id}
-                            className="ordens"
+                            className="ordens ordensTecnico"
                             onClick={() => handleAbrirOrdem(ordem.id)}>
                             <div className="nomeCliente">{ordem.cliente}</div>
                             <div className="serviço">{ordem.servico}</div>
-                            <div className="dtAbertura">16/11/2024, 06:02</div>
+                            <div className="dataHora">16/11/2024, 06:02</div>
                         </div>
                     ))}
                 </div>
