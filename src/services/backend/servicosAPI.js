@@ -2,9 +2,12 @@ import axios from 'axios'
 import config from '../config'
 
 export const getPageServicos = async (pagina, filtros) => {
+    let filtragem=''  
+    filtragem = `${!filtros.nome.is ? '' : `&nome=${filtros.nome.value}`}${!filtros.cargo.is ? '' : `&cargo=${filtros.cargo.value}`}${!filtros.especialidade.is ? '' : `&especialidade=${filtros.especialidade.value}`}${!filtros.disponivel.is ? '' : `&disponivel=${filtros.disponivel.value}`}${!filtros.ativo.is ? '' : `&ativo=${filtros.ativo.value}`}
+    `
     try {
         const response = await axios.get(`${config.url}/api/servicos?page=${pagina}`)
-        
+
         return { success: true, response }
     } catch (error) {
         return { success: false, error }
