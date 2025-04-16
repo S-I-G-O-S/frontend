@@ -3,6 +3,7 @@ import TextArea from 'antd/es/input/TextArea'
 import { notification } from 'antd';
 import { useState } from "react";
 import { MinusCircleFilled } from '@ant-design/icons'
+import Loading from "@components/public/Loading";
 
 const ModalServico = ({ fecharModal, especialidades, servicoAberto, setServicoAberto, setServicos }) => {
     const [pesqAddEspec, setPesqAddEspec] = useState('')
@@ -86,7 +87,7 @@ const ModalServico = ({ fecharModal, especialidades, servicoAberto, setServicoAb
             placement: 'bottomLeft',
         })
         console.warn(servicoAberto)
-        fecharModal()
+        sair()
     }
     const handleDeletar = async () => {
         if(!window.confirm("Deseja APAGAR o serviço: " + servicoAberto.nome + "?")) {
@@ -98,13 +99,17 @@ const ModalServico = ({ fecharModal, especialidades, servicoAberto, setServicoAb
             return
         }
         setServicos((prev) => prev.filter((servico) => servico.id !== servicoAberto.id))
-        fecharServ()
+        sair()
     }
     const deleteEspecServ = (idEspec) => {
         setServicoAberto(especState => ({
             ...especState,
             especialidades: especState.especialidades.filter(espec => espec.id !== idEspec)
         }))
+    }
+    const sair = () => {
+        setServicoAberto(null)
+        fecharModal()
     }
     return !servicoAberto ? <Loading></Loading> : (
         <section id='secConfigServico'>
@@ -171,7 +176,7 @@ const ModalServico = ({ fecharModal, especialidades, servicoAberto, setServicoAb
                 </div>
             </div>
             <div id='contAcaoConfigServ'>
-                <button id='bttCancelar' onClick={fecharModal}>cancelar</button>
+                <button id='bttCancelar' onClick={sair}>cancelar</button>
                 <button id='bttSalvar' onClick={handleSalvar}>salvar</button>
                 {
                     servicoAberto.id == "novo" ? '' :

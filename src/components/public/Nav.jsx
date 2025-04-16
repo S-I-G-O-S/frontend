@@ -37,7 +37,14 @@ function Nav({ cargo }) {
             {/* 
                 <RightCircleFilled />
                 <LeftCircleFilled /> 
-                */}
+            */}
+            <div id='containerFooter'>
+                {/* <div>Leonardo Martinez</div> */}
+                <button title='sair' onClick={handleLogout}>
+                    <LogoutOutlined id='iconSair' rotate={180}/>
+                    <div id='txtSair'>sair</div>
+                </button>
+            </div>
             {
                 true ? 
                 <img id="bttNav" 
@@ -146,13 +153,7 @@ function Nav({ cargo }) {
                     </NavLink>
                 )}
             </div>
-            <div id='containerFooter'>
-                {/* <div>Leonardo Martinez</div> */}
-                <button title='sair' onClick={handleLogout}>
-                    <LogoutOutlined id='iconSair' rotate={180}/>
-                    <div id='txtSair'>sair</div>
-                </button>
-            </div>
+            
         </nav>
     )
 }

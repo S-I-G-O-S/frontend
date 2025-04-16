@@ -3,8 +3,19 @@ import { useEffect, useState } from 'react'
 import { getServicos } from '@services/backend/servicosAPI'
 import { getServicoPorID } from '@backend/servicosAPI.js'
 
-const Servicos = ({ abrirModal, setServicoAberto, servicos, setServicos }) => {
+const Servicos = ({ abrirModal, setServicoAberto, servicos, setServicos, especialidades }) => {
 	const [reqstServicos, setReqstServicos] = useState([])
+	const [filtros, setFiltros] = useState({
+		ordem: "ASC",
+		especialidade: {
+			value: null,
+			is: false
+		},
+		nome: {
+			value: "",
+			is: false
+		}
+	})
 	const fetchServicos = async () => {
 		const result = await getServicos()
 
@@ -12,10 +23,12 @@ const Servicos = ({ abrirModal, setServicoAberto, servicos, setServicos }) => {
 			console.error(result.error)
 			return
 		}
+		console.warn(result.response)
 		setReqstServicos(result.response.data)
 		setServicos(result.response.data.content)
 	}
 	const abrirServico = async (idServ) => {
+		abrirModal()
 		const result = await getServicoPorID(idServ)
 
 		if (!result.success) {
@@ -23,7 +36,6 @@ const Servicos = ({ abrirModal, setServicoAberto, servicos, setServicos }) => {
 			return
 		}
 		setServicoAberto(result.response.data)
-		abrirModal()
 		console.log("Serviço do id " + idServ + " foi aberto")
 	}
 	useEffect(() => {
@@ -32,7 +44,9 @@ const Servicos = ({ abrirModal, setServicoAberto, servicos, setServicos }) => {
 	return (
 		<div id="contServicos">
 			<div id="headContServicos">
-				<div>asc</div>
+				<div>asc
+
+				</div>
 			</div>
 			<div id="listServicos">
 				{!servicos ? (<Loading></Loading>) : (

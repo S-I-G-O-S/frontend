@@ -29,125 +29,6 @@
                 margin: 0;
             }
         }
-        #sec1 {
-            grid-area: sec1;
-            #contNovo {
-                display: flex;
-                align-items: center;
-                justify-content: left;
-                gap: 1rem;
-                margin-bottom: 1rem;
-                button {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    cursor: pointer;
-                    
-                    font-size: 0.9rem;
-                    font-weight: 600;
-
-                    width: auto;
-                    height: auto;
-                    padding: 0.1rem 1.5rem;
-                    border-style: solid;
-                    border-width: 0.1rem;
-                    border-radius: 0.3rem;
-
-                    transition: 150ms;
-
-                    #goToEspecialidades {
-                        all: unset;
-                    }
-                }
-                
-            }
-            #contFiltrosEspecServ {
-                display: flex;
-                justify-content: space-between;
-                padding: 0.3rem 0.5rem;
-                border-radius: 0.3rem 0.3rem 0 0;
-                border-style: solid;
-                border-width: 0.1rem;
-                
-                #orderFiltrosEspecServ {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 0.3rem;
-                    p {
-                        font-size: 0.9rem;
-                        font-weight: 500;
-                        margin: 0;
-                    }
-                    button {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        cursor: pointer;
-
-                        font-size: 0.9rem;
-                        font-weight: 600;
-                        
-                        padding: 0.1rem 1rem;
-                        border-style: solid;
-                        border-width: 0.1rem;
-                        border-radius: 0.3rem;
-                    }
-                    
-                }
-                #groupFiltrosEspecServ {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 0.3rem;
-                    p {
-                        font-size: 0.9rem;
-                        font-weight: 500;
-                        margin: 0;
-                    }
-                    button {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        cursor: pointer;
-
-                        font-size: 0.9rem;
-                        font-weight: 600;
-                        
-                        padding: 0.1rem 1rem;
-                        border-style: solid;
-                        border-width: 0.1rem;
-                        border-radius: 0.3rem;
-                        
-                        
-                    }
-                    
-                }
-            }
-            #contListEspecServ {
-                display: flex;
-                column-gap: 0.3rem;
-                row-gap: 0.3rem;
-                padding: 0.3rem 0.5rem;
-                border-style: solid;
-                border-width: 0.1rem;
-                border-radius: 0 0 0.3rem 0.3rem;
-                overflow-y: auto;
-            }
-            .layoutEspecs {
-                display: flex;
-                
-                justify-content: center;
-                flex-wrap: wrap;
-
-                .especs {
-                    font-size: 0.9rem;
-                    font-weight: 500;
-                    flex-grow: 1;
-                    flex-basis: 15rem;
-                }
-            }
-        }
         
         #secServicos, #secEspecialidades  {
             .contHead {
@@ -224,6 +105,9 @@
                             font-size: 0.8rem;
                             margin: 0;
                         }
+                    }
+                    .servicos:hover, .servicos:focus {
+                        background-color: var(--salmao1);
                     }
                 }
             }

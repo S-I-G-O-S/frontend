@@ -56,96 +56,6 @@ function ServicosEspecialidades() {
             )   
         }
     }
-    
-    
-    // EDIÇÃO SERVIÇO
-    
-    // Geral
-    
-    // TODO Tirar isso
-    /*
-    const handleSalvar = async () => {
-        let result
-        if (tipoJanela == 'espec') {
-            if (especAberta.id === "nova") {
-                result = await postEspecialidade(especAberta)
-            } else {
-                result = await putEspecialidade(especAberta)
-            }
-            console.warn(result.response)
-            if (result.success) {
-                setEspecialidades(prevState => (
-                    [...prevState, especAberta]
-                ))
-                window.alert('Alterações salvas com sucesso!')
-                fecharEspec()
-                fecharEspec()
-            } else {
-                window.alert("Não foi possivel salvar esta especialidade.")
-                console.error(result.error)
-            }
-            console.warn(especAberta)
-            return
-        }
-        if (tipoJanela == 'servico') {
-            let arrayEspecs = []
-            servicoAberto.especialidades.map(espec => (
-                arrayEspecs.push(espec.id)
-            ))
-            console.warn("DEBBUG editando serviço")
-            console.warn(servicoAberto.id)
-            console.warn(servicoAberto.id)
-            console.warn(servicoAberto.id)
-            console.warn(arrayEspecs)
-            if (servicoAberto.id == "novo") {
-                result = await postServico(servicoAberto, arrayEspecs)
-            } else {
-                result = await putServico(servicoAberto, arrayEspecs)
-            }
-            if (!result.success) {
-                window.alert("Não foi possivel salvar este serviço.")
-                console.error(result.error)
-                return
-            }
-            setServicos(prevState => (
-                [...prevState, servicoAberto]
-            ))
-            window.alert('Alterações salvas com sucesso!')
-            fecharEspec()
-            fecharServ()
-            console.warn(servicoAberto)
-            return 
-        }
-    }
-    */
-    // TODO TIrar isso
-    /*
-    const handleDeletar = async () => {
-        if (tipoJanela == 'espec') {
-            if(!window.confirm("Deseja APAGAR a especialidade: " + especAberta.nome + "?")) {
-                return
-            }
-            const result = await deleteEspec(especAberta.id);
-            if (!result.success) {
-                console.error(result.error)
-                return
-            } 
-            setEspecialidades((prev) => prev.filter((esp) => esp.id !== especAberta.id))
-            fecharEspec()
-        } else {
-            if(!window.confirm("Deseja APAGAR o serviço: " + servicoAberto.nome + "?")) {
-                return
-            }
-            const result = await deleteServico(servicoAberto.id);
-            if (!result.success) {
-                console.error(result.error)
-                return
-            }
-            setServicos((prev) => prev.filter((servico) => servico.id !== servicoAberto.id))
-            fecharServ()
-        }
-    }
-    */
     const handleCancel = () => {
         fecharEspec()
     }
@@ -166,48 +76,10 @@ function ServicosEspecialidades() {
             descricao: '',
             especialidades: []
         })
-    }
-    const abrirServico = async (idServ) => {
-        if (tipoJanela == 'servico') {   // Se alguma janela lateral estiver aberta
-            // TODO Excluir caso ocorra erro de uso ao abrir o mesmo serviço
-            if(servicoAberto?.id == idServ) {   // Se a nova janela for igual 
-                return
-            }
-            if(!window.confirm("Deseja excluir todas alterações do serviço " + servicoAberto.nome + "?")) {
-                return
-            }
-        }
-        if(tipoJanela == 'espec') {
-            if(!window.confirm("Deseja excluir todas alterações da especialidade " + especialidadeAberta.nome + "?")) {
-                
-                return
-            }
-        }
-        if (idServ == "novo") {
-        //  Novo serviço
-            setServicoAberto({
-                id: "novo",
-                nome: 'Novo serviço', 
-                descricao: '',
-                especialidades: []
-            })
-        } else {
-        //  Serviço existente
-            const result = await getServicoPorID(idServ)
-                
-            if (!result.success) {
-                console.error(result.error)
-                return
-            }
-            setServicoAberto(result.response.data)
-        }
-        console.log("Serviço do id " + idServ +" foi aberto")
-        fecharEspec()
-        setTipoJanela("servico")
+        setModalServico(true)
     }
     const fecharEspec = () => {
         setEspecialidadeAberta()
-        setPrevEspec()
         setTipoJanela(null)
     }
     const fecharServ = () => {
@@ -224,7 +96,7 @@ function ServicosEspecialidades() {
                 <div className='contHead'>
                     <h1>Serviços</h1>
                     {(usuario.cargo == 'ADM' || usuario.cargo == 'DEV') && (
-                        <button onClick={() => {abrirServico("novo")}}>Novo Serviço</button>
+                        <button onClick={novoServico}>Novo Serviço</button>
                     )}
                 </div>
                 <Servicos
@@ -267,6 +139,7 @@ function ServicosEspecialidades() {
                     servicoAberto={servicoAberto}
                     setServicoAberto={setServicoAberto}
                     setServicos={setServicos}
+                    especialidades={especialidades}
                 />
             </div>
         }
