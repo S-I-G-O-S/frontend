@@ -1,6 +1,15 @@
 import axios from 'axios'
 import config from '../config'
 
+export const getPageServicos = async (pagina, filtros) => {
+    try {
+        const response = await axios.get(`${config.url}/api/servicos?page=${pagina}`)
+        
+        return { success: true, response }
+    } catch (error) {
+        return { success: false, error }
+    }
+}
 export const getServicos = async () => {
     try {
         const response = await axios.get(`${config.url}/api/servicos?size=30`)
