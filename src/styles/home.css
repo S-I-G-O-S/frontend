@@ -129,8 +129,12 @@
                     .ordensTecnico {
                         grid-template-areas: 
                             "dataHora nomeCliente"
-                            "servico servico";
+                            "situacao servico";
                             .serviço {
+                                text-align: center;
+                            }
+                            .situacao {
+                                grid-area: situacao;
                                 text-align: center;
                             }
                     }

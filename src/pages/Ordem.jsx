@@ -10,6 +10,7 @@ import { notification, Popconfirm } from "antd";
 import { getUsuarioContext } from "@context/UsuarioContext.jsx";
 import ModalTecnicos from "@components/Ordem/ModalTecnicos.jsx";
 import ModalAtendimento from "@components/Ordem/ModalAtendimento.jsx";
+import Atendimentos from "@components/Ordem/Atendimentos.jsx";
 import Mapa from "@components/Ordem/Mapa.jsx";
 import { formatCNPJ } from "@services/utils";
 import { converterSituacao } from "@services/utils";
@@ -101,31 +102,9 @@ function Ordem() {
     const changeModalMapa = () => {
         setModalMapa(!modalMapa)
     }
-    useEffect(() => {
-        if (atendimentos && atendimentos.length > 0) {
-            if (ordem.situacao == "EM_EXECUCAO") {
-                // FIXME atualmente pegando apenas o primeiro atendimento do array
-                setAtendimentoAtual(atendimentos[0].id)
-                console.log("atendimento aberto: " + atendimentos[0].id)
-            }
-            // const atendimentoAberto = clientes.find(cliente => cliente.id === formNovaOrdem.clienteID)
-        }
-    }, [atendimentos])
-    const fetchAtendimentos = async (id) => {
-        const result = await getAtendimentos(id)
-        if (!result.success) {
-            console.error(result.error)
-            return
-        }
-        setAtendimentos(result.response.data.content)
-        console.warn(result.response)
-    }
-    useEffect(() => {
-        if (!ordem?.id) {
-            return
-        }
-        fetchAtendimentos(ordem.id)
-    }, [ordem])
+    
+    
+    
     const fetchOrdem = async (id) => {
         const result = await getOrdensPorID(id)
         if (!result.success) {
@@ -251,42 +230,18 @@ function Ordem() {
                                 </div>
                                 {(ordem.funcionario && usuario.cargo!=="TECNICO") && (
                                         <div id="contFuncionario">
-                                            <p><strong>Funcionário: </strong>{ordem.funcionario.primeiro} {ordem.funcionario.ultimo}</p>
-                                            <p><strong>contato: </strong>{ordem.funcionario.celular}</p>
+                                            <p><span>Funcionário: </span>{ordem.funcionario.primeiro} {ordem.funcionario.ultimo}</p>
+                                            <p><span>contato: </span>{ordem.funcionario.celular}</p>
                                         </div>
                                     )
                                 }
                             </section>
-                            <section id="secAtendimentos">
-                                <h2>Atendimentos</h2>
-                                {
-                                    atendimentos &&
-                                    (
-                                        atendimentos.length == 0 ?
-                                            <div id="msgSemAtendimentos">
-                                                <p>sem atendimentos</p>
-                                                <ExceptionOutlined id="iconSemAtendimentos" />
-                                            </div>
-                                            :
-                                            (
-                                                <div id="contListAtendimentos">
-                                                    {
-                                                        atendimentos.map(atendimento => (
-                                                            <div
-                                                                className="itemListAtendimento"
-                                                                key={`atendimento${atendimento.id}`}
-                                                            >
-                                                                <div>nome: {atendimento.funcionario}</div>
-                                                                <div>data do atendimento: {atendimento.dtAtendimento}</div>
-                                                                <div>descrição do atendimento: {atendimento.dsAtendimento || "sem descrição"}</div>
-                                                            </div>
-                                                        ))
-                                                    }
-                                                </div>
-                                            )
-                                    )
-                                }
-                            </section>
+                            <Atendimentos
+                                idOrdem={ordem.id || null}
+                                setAtendimentos={setAtendimentos}
+                                atendimentos={atendimentos}
+                                setAtendimentoAtual={setAtendimentoAtual}
+                            />
                         </>
                 )}
             </main>

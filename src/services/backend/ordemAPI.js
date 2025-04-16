@@ -91,7 +91,7 @@ export const getOrdensAtivasPorTecnico = async (idTecnico) => {
 }
 export const getAtendimentos = async (id) => {
     try {
-        const response = await axios.get(`${config.url}/api/ordens/${id}/atendimentos`, {
+        const response = await axios.get(`${config.url}/api/ordens/${id}/atendimentos?sort=desc`, {
             headers: {
                 'Content-Type': 'application/json',
             },

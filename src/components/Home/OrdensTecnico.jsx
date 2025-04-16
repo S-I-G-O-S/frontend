@@ -2,11 +2,13 @@ import { useEffect, useState } from "react"
 import Loading from "../public/Loading"
 import { Link, useNavigate } from "react-router-dom"
 import { getOrdensForHome, getOrdensPorTecnicoForHome } from "../../services/backend/ordemAPI"
-
+import {converterDtHr} from "@services/utils.jsx"
+import { converterSituacao } from "@services/utils"
 function OrdensTecnico({idTecnico}) {
     const navigate = useNavigate()
     const [ordens, setOrdens] = useState(null)
     const [reqstOrdens, setReqstOrdens] = useState(null)
+    /*
     const converterDtHr = (dataHora) => {
         const [dia, mes, anoHora] = dataHora.split('-')
         const [ano, hora] = anoHora.split(' ')
@@ -22,6 +24,7 @@ function OrdensTecnico({idTecnico}) {
             minute: '2-digit',
         })
     }
+    */
     const handleAbrirOrdem = (idOrdem) => {
         navigate(`/ordem?id=${idOrdem}`)
     }
@@ -49,7 +52,7 @@ function OrdensTecnico({idTecnico}) {
         }
         const ordensAbertas = result.response.data.content.filter(ordem => (
             ordem.situacao === 'PENDENTE' || 
-            ordem.situacao === 'EM_EXECUCAO' || 
+            ordem.situacao === 'EM_EXECUCAO' ||  
             ordem.situacao === 'RETORNO'
         ))
         // setReqstOrdens(result.response)
@@ -59,7 +62,7 @@ function OrdensTecnico({idTecnico}) {
     useEffect(() => {
         fetchOrdens()
     }, [])
-    return !ordens ? <Loading />  : (
+    return !ordens ? <Loading/>  : (
         ordens.length==0 ? 
         // TODO Mostrar ao tecnico que ele não tem ordens abertas
         <div className="constOrdens">
@@ -80,9 +83,10 @@ function OrdensTecnico({idTecnico}) {
                         <div key={ordem.id}
                             className="ordens ordensTecnico"
                             onClick={() => handleAbrirOrdem(ordem.id)}>
+                            <div className="dataHora">{converterDtHr(ordem.dtAbertura)}</div>
                             <div className="nomeCliente">{ordem.cliente}</div>
+                            <div className={`situacao situacao${ordem.situacao}`}>{converterSituacao(ordem.situacao)}</div>
                             <div className="serviço">{ordem.servico}</div>
-                            <div className="dataHora">16/11/2024, 06:02</div>
                         </div>
                     ))}
                 </div>
