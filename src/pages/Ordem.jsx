@@ -181,9 +181,10 @@ function Ordem() {
                                         <span>Criado por:</span>
                                         {ordem.criadoPor}
                                     </div>
-                                    <div>
-                                        <span>Situação:</span>
-                                        {converterSituacao(ordem.situacao)}
+                                    <div id="contSituacao">
+                                        <span>Situação:</span><div id="situacao" className={`situacao${ordem.situacao}`}>
+                                        {converterSituacao(ordem.situacao, 'maiusculo')}
+                                        </div>
                                     </div>
                                     <div>
                                         <span>Descrição:</span>

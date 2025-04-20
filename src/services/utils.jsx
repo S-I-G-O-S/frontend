@@ -19,23 +19,58 @@ export const converterCargo = (cargo) => {
     }
     return cargoConvertido
 }
-export const converterSituacao = (situacao) => {
+export const converterSituacao = (situacao, propEstilo) => {
+    const estilo = propEstilo || "padrao"
+    console.log('debug estilo situacao ' + estilo)
+    // padrao
+    // minusculo
+    // maiusculo
     let situacaoConvertida
     switch(situacao) {
-        case 'PENDENTE': 
-            situacaoConvertida = 'pendente'
+        case 'PENDENTE':
+            if (estilo=="maiusculo") {
+                situacaoConvertida = 'PENDENTE'
+            } else if (estilo=="minusculo") {
+                situacaoConvertida = 'pendente'
+            } else {
+                situacaoConvertida = 'Pendente'
+            }
             break;
-        case 'EM_EXECUCAO': 
-            situacaoConvertida = 'em execução'
+        case 'EM_EXECUCAO':
+            if (estilo=="maiusculo") {
+                situacaoConvertida = 'EM_EXECUCAO'
+            } else if (estilo=="minusculo") {
+                situacaoConvertida = 'em_execucao'
+            } else {
+                situacaoConvertida = 'Em execução'
+            }
             break;
-        case 'RETORNO': 
-            situacaoConvertida = 'retorno'
+        case 'RETORNO':
+            if (estilo=="maiusculo") {
+                situacaoConvertida = 'RETORNO'
+            } else if (estilo=="minusculo") {
+                situacaoConvertida = 'retorno'
+            } else {
+                situacaoConvertida = 'Retorno'
+            }
             break;
         case 'CANCELEDA': 
-            situacaoConvertida = 'cancelada'
+            if (estilo=="maiusculo") {
+                situacaoConvertida = 'CANCELEDA'
+            } else if (estilo=="minusculo") {
+                situacaoConvertida = 'cancelada'
+            } else {
+                situacaoConvertida = 'Cancelada'
+            }
             break;
-        case 'FINALIZADA': 
-            situacaoConvertida = 'finalizada'
+        case 'FINALIZADA':
+            if (estilo=="maiusculo") {
+                situacaoConvertida = 'FINALIZADA'
+            } else if (estilo=="minusculo") {
+                situacaoConvertida = 'finalizada'
+            } else {
+                situacaoConvertida = 'Finalizada'
+            }
             break;
         default: 
             situacaoConvertida = 'erro'

@@ -77,6 +77,19 @@
                 display: flex;
                 gap: 0.2rem;
             }
+            #contSituacao {
+                #situacao {
+                    padding: 0 .3rem;
+                    border-radius: .3rem;
+                    font-weight: 500;
+                }
+                .situacaoPENDENTE {
+                    background-color: var(--pendente);
+                }
+                .situacaoRETORNO {
+                    background-color: var(--retorno);
+                }
+            }
         }
         #contServico {
             div {
