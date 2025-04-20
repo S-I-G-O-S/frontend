@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import "@styles/ordem/UploadFiles.css"
+import "@styles/ordem/uploadFiles.css"
 
 function UploadFiles() {
     // estado para armazenar os arquivos selecionados e mensagens de erro
