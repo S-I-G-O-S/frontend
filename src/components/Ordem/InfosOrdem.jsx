@@ -9,6 +9,7 @@ const InfosOrdem = ({ordem, cargo}) => {
 			<div id="contGeral">
 				<div>
 					<span>ID ordem:</span>
+					{ordem.id}
 				</div>
 				<div>
 					<span>Criado por:</span>
