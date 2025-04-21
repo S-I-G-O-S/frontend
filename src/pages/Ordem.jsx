@@ -12,8 +12,8 @@ import ModalTecnicos from "@components/Ordem/ModalTecnicos.jsx";
 import ModalAtendimento from "@components/Ordem/ModalAtendimento.jsx";
 import Atendimentos from "@components/Ordem/Atendimentos.jsx";
 import Mapa from "@components/Ordem/Mapa.jsx";
-import { formatCNPJ } from "@services/utils";
-import { converterSituacao } from "@services/utils";
+import InfosOrdem from "@components/Ordem/InfosOrdem";
+import AcoesOrdem from "@components/Ordem/AcoesOrdem";
 
 function Ordem() {
     const { usuario } = getUsuarioContext()
@@ -104,7 +104,6 @@ function Ordem() {
     }
     
     
-    
     const fetchOrdem = async (id) => {
         const result = await getOrdensPorID(id)
         if (!result.success) {
@@ -132,117 +131,26 @@ function Ordem() {
                 {!ordem ? <Loading></Loading> :(
                     ordem == 'noCode' ? <div>Erro ao obter código da ordem</div> :
                         <>
-                            <aside id="asideAcoes">
-                                <h2>Opções</h2>
-                                <div id="contAcoes">
-                                    {/* NOTA Considerando q a ordem não possa ser mudada após finalizada */}
-                                    {(ordem.situacao == "FINALIZADA") ? (
-                                        <p style={{ textAlign: "center" }}>
-                                            ordem finalizada
-                                        </p>
-                                    ) : ((usuario.cargo === "BASE" || usuario.cargo === "ADM" || usuario.cargo === 'DEV') ? (
-                                        <>
-                                            <button onClick={() => changeModalTecnicos(0)}>Designar técnico</button>
-                                            <Popconfirm
-                                                title=""
-                                                description={`Deseja cancelar esta ordem?`}
-                                                onConfirm={cancelarOrdem}
-                                                onCancel={null}
-                                                okText="sim"
-                                                cancelText="não">
-                                                <button>Cancelar ordem</button>
-                                            </Popconfirm>
-                                            <button onClick={changeEditMode}>Alterar ordem</button>
-                                        </>
-                                        ) : ((usuario.cargo === "TECNICO" && usuario.id == ordem.funcionario.id) && 
-                                            (ordem.situacao === 'PENDENTE' || ordem.situacao === 'RETORNO' || ordem.situacao === "EM_EXECUCAO") && (
-                                                <button onClick={handleAtenderOrdem}>
-                                                    {
-                                                        ordem.situacao === "EM_EXECUCAO" ?
-                                                            "finalizar ordem" :
-                                                            "iniciar atendimento"
-                                                    }
-                                                </button>
-                                            )
-                                        ))
-                                    }
-                                    {/* TODO adicionar miniatura do mapa */}
-                                    <button onClick={() => setModalMapa(true)}>Ver mapa</button>
-                                </div>
-                            </aside>
-                            <section id="secPrincipal">
-                                <h2>Informações</h2>
-                                <div id="contGeral">
-                                    <div>
-                                        <span>ID ordem:</span>
-                                        {ordem.id}
-                                    </div>
-                                    <div>
-                                        <span>Criado por:</span>
-                                        {ordem.criadoPor}
-                                    </div>
-                                    <div id="contSituacao">
-                                        <span>Situação:</span><div id="situacao" className={`situacao${ordem.situacao}`}>
-                                        {converterSituacao(ordem.situacao, 'maiusculo')}
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <span>Descrição:</span>
-                                        {ordem.descricao || 'sem descrição'}
-                                    </div>
-                                    {
-                                        ordem.funcionario &&
-                                        <div>
-                                            <span>Técnico atendendo:</span>
-                                            {ordem.funcionario.primeiro} {ordem.funcionario.ultimo}
-                                        </div>
-                                    }
-                                </div>
-                                <div id="contServico">
-                                    <div>
-                                        <span>Serviço:</span>
-                                        {ordem.servico.nome}
-                                    </div>
-                                    <div>
-                                        <span>Descrição:</span>
-                                        {ordem.servico.descricao}
-                                    </div>
-                                </div>
-                                <div id="contCliente">
-                                    <div>
-                                        <span>Cliente:</span>
-                                        {ordem.cliente.nome}
-                                    </div>
-                                    <div>
-
-                                        <span>CNPJ:</span>
-                                        {formatCNPJ(ordem.cliente.cnpj)}
-                                    </div>
-                                    <div>
-                                        <span>ID cliente:</span>
-                                        {ordem.cliente.id}
-                                    </div>
-                                </div>
-                                <div id="contEndereco">
-                                    <span>
-                                        <div>Endereço:</div>
-                                    </span>
-                                    <div>{ordem.endereco.logradouro}, {ordem.endereco.numero}{`${ordem.endereco.complemento}` || ''}  - {ordem.endereco.bairro}, {ordem.endereco.cidade}-{ordem.endereco.uf}/{ordem.endereco.cep}</div>
-                                </div>
-                                {(ordem.funcionario && usuario.cargo!=="TECNICO") && (
-                                        <div id="contFuncionario">
-                                            <p><span>Funcionário: </span>{ordem.funcionario.primeiro} {ordem.funcionario.ultimo}</p>
-                                            <p><span>contato: </span>{ordem.funcionario.celular}</p>
-                                        </div>
-                                    )
-                                }
-                            </section>
-                            <Atendimentos
-                                idOrdem={ordem.id || null}
-                                setAtendimentos={setAtendimentos}
-                                atendimentos={atendimentos}
-                                setAtendimentoAtual={setAtendimentoAtual}
-                            />
+                        <AcoesOrdem
+                            ordem={ordem}
+                            usuario={usuario}
+                            changeModalTecnicos={changeModalTecnicos}
+                            cancelarOrdem={cancelarOrdem}
+                            changeEditMode={changeEditMode}
+                            handleAtenderOrdem={handleAtenderOrdem}
+                            abrirMapa={() => setModalMapa(true)}
+                        />
+                        
+                        <InfosOrdem
+                            ordem={ordem}
+                            cargo={usuario.cargo}
+                        ></InfosOrdem>
+                        <Atendimentos
+                            idOrdem={ordem.id || null}
+                            setAtendimentos={setAtendimentos}
+                            atendimentos={atendimentos}
+                            setAtendimentoAtual={setAtendimentoAtual}
+                        />
                         </>
                 )}
             </main>

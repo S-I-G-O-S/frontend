@@ -19,9 +19,12 @@ export const getArquivoUnico = async (idArquivo) => {
         return { success: false, error }
     }
 }
-export const postArquivo = async (arquivo) => {
+export const postArquivo = async (arquivo, atendimento) => {
     try {
-        const response = await axios.post(`${config.url}/api/fotos`)
+        const response = await axios.post(`${config.url}/api/fotos`, {
+            file: arquivo,
+            atendimentoId: atendimento
+        })
         return { success: true, response }
     } catch (error) {
         return { success: false, error }

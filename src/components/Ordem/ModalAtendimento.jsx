@@ -3,6 +3,7 @@ import { useState } from "react"
 import { putConcluirAtendimento } from "../../services/backend/ordemAPI"
 import UploadFiles from "./UploadFiles"
 import TextArea from "antd/es/input/TextArea"
+import { postArquivo } from "@services/backend/arquivosAPI"
 
 export default function ModalAtendimento({ changeModal, atendimento }) {
     const [renderFimAtendimento, setRenderFimAtendimento] = useState(false)
@@ -10,13 +11,38 @@ export default function ModalAtendimento({ changeModal, atendimento }) {
         idAtendimento: atendimento || 0,
         descricao: ""
     })
+    const [files, setFiles] = useState([])
     const handleDescricao = (value) => {
         setFormAtendimento(prevState => ({
             ...prevState,
             descricao: value
         }))
     }
+    const upload = () => {
+        const uploadFiles = files
+        if (uploadFiles.length === 0) {
+            console.warn('Nenhum arquivo selecionado')
+            return true
+        }
+        const formData = new FormData()
+        uploadFiles.forEach(file => {
+            formData.append('files', file)
+        })
+        let resultUploadFile
+        uploadFiles.map((file, index) => {
+            resultUploadFile = postArquivo(file, atendimento.id)
+            if (!resultUploadFile.success) {
+                console.error(`Erro ao enviar arquivo ${index}: ` + resultUploadFile.error)
+                console.error(file)
+                return false
+            }
+        })
+        console.log(`${uploadFiles.length} arquivos enviados com sucesso.`)
+        return true
+    }
     const finalizarAtendimento = async (situacao) => {
+        if (!upload()) return
+
         const result = await putConcluirAtendimento(formAtendimento, situacao)
 
         if (!result.success) {
@@ -44,7 +70,10 @@ export default function ModalAtendimento({ changeModal, atendimento }) {
                     }}
                 />
             </div>
-            <UploadFiles/>
+            <UploadFiles
+                files={files}
+                setFiles={setFiles}
+            />
             <div id="contAcoesAtendimento">
                 <button id="bttCancelar" onClick={() => changeModal(false)}>cancelar</button>
                 <button
