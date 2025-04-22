@@ -8,42 +8,11 @@ function OrdensTecnico({idTecnico}) {
     const navigate = useNavigate()
     const [ordens, setOrdens] = useState(null)
     const [reqstOrdens, setReqstOrdens] = useState(null)
-    /*
-    const converterDtHr = (dataHora) => {
-        const [dia, mes, anoHora] = dataHora.split('-')
-        const [ano, hora] = anoHora.split(' ')
-        const dataISO = `${ano}-${mes}-${dia}T${hora}`
 
-        const data = new Date(dataISO);
-        if (isNaN(data.getTime())) return "Data Inválida"
-            return data.toLocaleDateString('pt-BR', {
-            day: 'numeric',
-            month: '2-digit',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-        })
-    }
-    */
     const handleAbrirOrdem = (idOrdem) => {
         navigate(`/ordem?id=${idOrdem}`)
     }
-    /*
-    const fetchOrdens = async () => {
-        let ordens = new Map()
-        for (let situacao of situacoes) {
-            const result = await getOrdensPorTecnicoForHome(espec)
-            if (!result.success) {
-                console.error(result.error)
-                continue
-            }
-            result.response.data.content.forEach(tecnico => {
-                ordens.set(ordem.id, ordem)
-            })
-        }
-        setOrdens(Array.from(ordens.values()))
-    }
-    */
+
     const fetchOrdens = async () => {
         const result = await getOrdensPorTecnicoForHome(idTecnico)
         if (!result.success) {
