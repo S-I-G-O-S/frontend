@@ -1,0 +1,37 @@
+#pageMeusAtendimentos {
+    h2 {
+        font-size: 1rem;
+        margin-bottom: .5rem;
+    }
+    main {
+        padding: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+    }
+    #secOrdensAbertas, #secOrdensFechadas {
+        display: flex;
+        flex-direction: column;
+        gap: .3rem;
+        padding: .5rem;
+        border-radius: .3rem;
+        border-width: .1rem;
+        border-style: solid;
+        border-color: var(--marrom1);
+        background-color: var(--salmao2);
+    }
+    #secOrdensAbertas {
+
+    }
+    #secOrdensFechadas {
+
+    }
+    .cardOrdens {
+        padding: .2rem .5rem;
+        border-radius: .3rem;
+        border-width: .1rem;
+        border-style: solid;
+        border-color: var(--marrom1);
+        background-color: var(--branco);
+    }
+}

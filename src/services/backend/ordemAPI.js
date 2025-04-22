@@ -77,9 +77,9 @@ export const getOrdensPorTecnicoForHome = async (idTecnico) => {
         return { success: false, error }
     }
 }
-export const getOrdensAtivasPorTecnico = async (idTecnico) => {
+export const getOrdensTecnico = async (idTecnico) => {
     try {
-        const response = await axios.get(`${config.url}/api/ordens?funcionario=${idTecnico}&situacao=EM_EXECUCAO`, {
+        const response = await axios.get(`${config.url}/api/ordens?funcionario=${idTecnico}`, {
             headers: {
                 'Content-Type': 'application/json',
             },

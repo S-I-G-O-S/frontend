@@ -21,7 +21,6 @@ export const converterCargo = (cargo) => {
 }
 export const converterSituacao = (situacao, propEstilo) => {
     const estilo = propEstilo || "padrao"
-    console.log('debug estilo situacao ' + estilo)
     // padrao
     // minusculo
     // maiusculo

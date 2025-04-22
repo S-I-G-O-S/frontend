@@ -3,7 +3,7 @@ import { converterSituacao } from "@services/utils";
 
 const InfosOrdem = ({ordem, cargo}) => {
     
-    return (
+    return ( 
         <section id="secPrincipal">
 			<h2>Informações</h2>
 			<div id="contGeral">
