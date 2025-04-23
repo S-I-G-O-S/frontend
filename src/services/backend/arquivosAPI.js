@@ -1,4 +1,5 @@
 import config from "@services/config"
+import axios from "axios"
 
 
 export const getArquivos = async (idAtendimento) => {
@@ -13,7 +14,6 @@ export const getArquivos = async (idAtendimento) => {
 export const getArquivoUnico = async (idArquivo) => {
     try {
         const response = await axios.get(`${config.url}/api/fotos/${idArquivo}`)
-
         return { success: true, response: response }
     } catch (error) {
         return { success: false, error }
