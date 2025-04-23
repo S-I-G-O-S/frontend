@@ -4,7 +4,7 @@ import { getGoogleMapsToken } from "@services/mapsAPI";
 import "@styles/ordem/mapa.css"
 import Loading from '@components/public/Loading.jsx'
 
-function Mapa ({ endereco, changeModal }) {
+function Mapa ({ endereco, closeMap }) {
     const token = getGoogleMapsToken();
     const formatEndereco = `${endereco.logradouro}, ${endereco.numero}, CEP ${endereco.cep}, ${endereco.cidade}, ${endereco.uf}, Brasil`;
 
@@ -50,7 +50,7 @@ function Mapa ({ endereco, changeModal }) {
                 </div>
             </APIProvider>
             <div id="contAcoesMapaOrdem">
-                <button id="bttSair" onClick={() => changeModal(false)}>sair</button>
+                <button id="bttSair" onClick={closeMap}>sair</button>
             </div>
         </section>
     )

@@ -9,11 +9,12 @@ import { postAtendimento, putCancelOrdem } from "@services/backend/ordemAPI.js";
 import { notification, Popconfirm } from "antd";
 import { getUsuarioContext } from "@context/UsuarioContext.jsx";
 import ModalTecnicos from "@components/Ordem/ModalTecnicos.jsx";
-import ModalAtendimento from "@components/Ordem/ModalAtendimento.jsx";
+import ModalNovoAtendimento from "@components/Ordem/ModalNovoAtendimento.jsx";
 import Atendimentos from "@components/Ordem/Atendimentos.jsx";
 import Mapa from "@components/Ordem/Mapa.jsx";
 import InfosOrdem from "@components/Ordem/InfosOrdem";
 import AcoesOrdem from "@components/Ordem/AcoesOrdem";
+import ModalViewAtendimento from "@components/Ordem/ModalViewAtendimento";
 
 function Ordem() {
     const { usuario } = getUsuarioContext()
@@ -21,21 +22,28 @@ function Ordem() {
     const searchParams = new URLSearchParams(location.search)
     const idOrdem = searchParams?.get('id') ?? null
     const [ordem, setOrdem] = useState(null)
-
+    const [atendimento, setAtendimento] = useState(null)
     const [atendimentoAtual, setAtendimentoAtual] = useState(null)
     const [atendimentos, setAtendimentos] = useState(null)
-    const [editMode, setEditMode] = useState(false)
-    const [editDados, setEditDados] = useState({})
-    const [modalTecnicos, setModalTecnicos] = useState(false)
-    const [modalAtendimento, setModalAtendimento] = useState(false)
-    const [modalMapa, setModalMapa] = useState(false)
-    const changeEditMode = () => {
-        if (!editMode) {
-            setEditMode(true)
-            return
-        }
-        setEditMode(false)
+    const [modais, setModais] = useState({
+        modalNovoAtendimento: false,
+        modalViewAtendimento: false,
+        modalMapa: false,
+        modalTecnicos: false,
+    })
+    const changeModal = (field, value) => {
+        setModais(prevState => ({
+            ...prevState,
+            [field]: value
+        }))
     }
+    // const changeEditMode = () => {
+    //     if (!editMode) {
+    //         setEditMode(true)
+    //         return
+    //     }
+    //     setEditMode(false)
+    // }
     const cancelarOrdem = async () => {
         const result = await putCancelOrdem(ordem)
         if (!result.success) {
@@ -52,9 +60,6 @@ function Ordem() {
         console.warn(result)
     }
     const handleAtenderOrdem = async () => {
-        /*
-            * editar ordem e mudar 'funcionario' para o id do tecnico
-        */
         // verificar se o funcionario é um técnico
         if (usuario.cargo !== 'TECNICO') { return }
         // verificar se não tem um funcionario atendendo
@@ -65,7 +70,9 @@ function Ordem() {
         // verificar se o técnico ja iniciou um atendimento
         if (atendimentos.length > 0) {
             // abre a janela de finalizar atendimento
-            setModalAtendimento(true)
+            // FIXME TROCAR AQUI
+            // setModalAtendimento(true)
+            changeModal("modalNovoAtendimento", true)
             return
         }
         // inicia o atendimento
@@ -95,15 +102,16 @@ function Ordem() {
             return
         }
         if (!modalTecnicos) {
-            setModalTecnicos(true)
+            // FIXME TROCAR AQUI
+            // setModalTecnicos(true)
+            changeModal("modalTecnicos", true)
             return
         }
     }
-    const changeModalMapa = () => {
-        setModalMapa(!modalMapa)
+    const abrirAtendimento = (atendimento) => {
+        setAtendimento(atendimento)
+        changeModal("modalViewAtendimento", true)
     }
-    
-    
     const fetchOrdem = async (id) => {
         const result = await getOrdensPorID(id)
         if (!result.success) {
@@ -111,7 +119,7 @@ function Ordem() {
             return
         }
         setOrdem(result.response.data)
-        setEditDados(result.response.data)
+        // setEditDados(result.response.data)
         console.warn(result.response)
     }
     useEffect(() => {
@@ -130,54 +138,62 @@ function Ordem() {
             <main id="mainOrdem">
                 {!ordem ? <Loading></Loading> :(
                     ordem == 'noCode' ? <div>Erro ao obter código da ordem</div> :
-                        <>
-                        <AcoesOrdem
-                            ordem={ordem}
-                            usuario={usuario}
-                            changeModalTecnicos={changeModalTecnicos}
-                            cancelarOrdem={cancelarOrdem}
-                            changeEditMode={changeEditMode}
-                            handleAtenderOrdem={handleAtenderOrdem}
-                            abrirMapa={() => setModalMapa(true)}
-                        />
-                        
-                        <InfosOrdem
-                            ordem={ordem}
-                            cargo={usuario.cargo}
-                        ></InfosOrdem>
-                        <Atendimentos
-                            idOrdem={ordem.id || null}
-                            setAtendimentos={setAtendimentos}
-                            atendimentos={atendimentos}
-                            setAtendimentoAtual={setAtendimentoAtual}
-                        />
-                        </>
+                    <>
+                    <AcoesOrdem
+                        ordem={ordem}
+                        usuario={usuario}
+                        changeModalTecnicos={changeModalTecnicos}
+                        cancelarOrdem={cancelarOrdem}
+                        // changeEditMode={changeEditMode}
+                        handleAtenderOrdem={handleAtenderOrdem}
+                        abrirMapa={() => changeModal( "modalMapa", true)}
+                    />
+                    
+                    <InfosOrdem
+                        ordem={ordem}
+                        cargo={usuario.cargo}
+                    ></InfosOrdem>
+                    <Atendimentos
+                        idOrdem={ordem.id || null}
+                        setAtendimentos={setAtendimentos}
+                        atendimentos={atendimentos}
+                        setAtendimentoAtual={setAtendimentoAtual}
+                        abrirAtendimento={abrirAtendimento}
+                    />
+                    </>
                 )}
             </main>
-            {modalTecnicos && (
+            {modais.modalTecnicos && (
                 <div className='shadowBG'>
                     <ModalTecnicos
                         ordem={ordem}
                         especialidades={ordem.servico.especialidades}
-                        changeModal={setModalTecnicos}
+                        changeModal={changeModal}
                         setOrdem={setOrdem}
                     />
                 </div>
             )}
-            {modalAtendimento && (
+            {modais.modalNovoAtendimento && (
                 <div className='shadowBG'>
-                    <ModalAtendimento
-                        changeModal={setModalAtendimento}
+                    <ModalNovoAtendimento
+                        changeModal={changeModal}
                         situacao={ordem.situacao}
                         atendimento={atendimentoAtual || 0}
                     />
                 </div>
             )}
-            {modalMapa && (
+            {modais.modalMapa && (
                 <div className='shadowBG'>
                     <Mapa
                         endereco={ordem.endereco}
-                        changeModal={changeModalMapa} />
+                        closeMap={() => changeModal("modalMapa", false)} />
+                </div>
+            )}
+            {modais.modalViewAtendimento && (
+                <div className='shadowBG'>
+                    <ModalViewAtendimento
+                        closeModal={() => changeModal("modalViewAtendimento", false)}
+                        atendimento={atendimento || null}/>
                 </div>
             )}
         </div>

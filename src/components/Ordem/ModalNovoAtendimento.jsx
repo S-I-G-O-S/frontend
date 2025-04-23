@@ -5,7 +5,7 @@ import UploadFiles from "./UploadFiles"
 import TextArea from "antd/es/input/TextArea"
 import { postArquivo } from "@services/backend/arquivosAPI"
 
-export default function ModalAtendimento({ changeModal, atendimento }) {
+export default function ModalNovoAtendimento({ changeModal, atendimento }) {
     const [renderFimAtendimento, setRenderFimAtendimento] = useState(false)
     const [formAtendimento, setFormAtendimento] = useState({
         idAtendimento: atendimento || 0,
@@ -51,7 +51,7 @@ export default function ModalAtendimento({ changeModal, atendimento }) {
         }
         console.warn(result.response)
         console.log("Atendimento finalizado")
-        changeModal(false)
+        changeModal("modalNovoAtendimento", false)
     }
     return (
         <section id="secRegisAtendimento">
@@ -75,7 +75,7 @@ export default function ModalAtendimento({ changeModal, atendimento }) {
                 setFiles={setFiles}
             />
             <div id="contAcoesAtendimento">
-                <button id="bttCancelar" onClick={() => changeModal(false)}>cancelar</button>
+                <button id="bttCancelar" onClick={() => changeModal("modalNovoAtendimento", false)}>cancelar</button>
                 <button
                     id="bttFinalizar"
                     disabled={renderFimAtendimento}

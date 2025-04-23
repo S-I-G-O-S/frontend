@@ -6,7 +6,7 @@ const AcoesOrdem = (
         usuario,
         changeModalTecnicos,
         cancelarOrdem,
-        changeEditMode, 
+        // changeEditMode, 
         handleAtenderOrdem, 
         abrirMapa
     }) => {
@@ -17,7 +17,6 @@ const AcoesOrdem = (
     */
     const renderButtons = () => {
         if (ordem.situacao === "FINALIZADA") {   // Ordem finalizada
-            console.log('debug rend buttons 1')
             return (
                 <p style={{ textAlign: "center" }}>
                     ordem finalizada
@@ -25,7 +24,6 @@ const AcoesOrdem = (
             )
         }
         if (ordem.situacao === "CANCELADA") {    // Ordem cancelada
-            console.log('debug rend buttons 2')
             return (
                 <p style={{ textAlign: "center" }}>
                     ordem finalizada
@@ -33,10 +31,11 @@ const AcoesOrdem = (
             )
         }
         if (usuario.cargo !== "TECNICO") {  //  Usuário não é técnico
-            console.log('debug rend buttons 3')
             return (
                 <>
-                <button onClick={() => changeModalTecnicos(0)}>Designar técnico</button>
+                {(!ordem.funcionario) &&
+                    <button onClick={() => changeModalTecnicos(0)}>Designar técnico</button>
+                }
                 <Popconfirm
                     title=""
                     description={`Deseja cancelar esta ordem?`}
@@ -46,13 +45,12 @@ const AcoesOrdem = (
                     cancelText="não">
                     <button>Cancelar ordem</button>
                 </Popconfirm>
-                <button onClick={changeEditMode}>Alterar ordem</button>
+                {/* <button onClick={changeEditMode}>Alterar ordem</button> */}
                 </>
             )
         }
         if (usuario.cargo === "TECNICO" && usuario.id == ordem.funcionario.id) {    //  Usuário é o técnico designado
             if (ordem.situacao !== 'CANCELADA' && ordem.situacao !== 'FINALIZADA') {    //  Ordem ativa ainda (não cancelada ou finalizada)
-                console.log('debug rend buttons 4')
                 return (
                     <button onClick={handleAtenderOrdem}>
                         {

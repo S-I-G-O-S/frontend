@@ -4,7 +4,13 @@ import { ExceptionOutlined } from '@ant-design/icons'
 import "@styles/ordem/atendimentos.css"
 import { converterDtHr } from "@services/utils"
 import Loading from "@components/public/Loading"
-const Atendimentos = ({idOrdem, atendimentos, setAtendimentos, setAtendimentoAtual}) => {
+const Atendimentos = ({
+        idOrdem, 
+        atendimentos, 
+        setAtendimentos, 
+        setAtendimentoAtual, 
+        abrirAtendimento
+    }) => {
     const [loading, setLoading] = useState(true)
     useEffect(() => {
         if (atendimentos && atendimentos.length > 0) {
@@ -48,6 +54,7 @@ const Atendimentos = ({idOrdem, atendimentos, setAtendimentos, setAtendimentoAtu
                                 <div
                                     className="itemListAtendimento"
                                     key={`atendimento${atendimento.id}`}
+                                    onClick={() => abrirAtendimento(atendimento)}
                                 >
                                     <div className="itemListAtendimentoNome"><span>Nome:</span> {atendimento.funcionario}</div>
                                     <div className="itemListAtendimentoData"><span>Data do atendimento:</span> {converterDtHr(atendimento.dtAtendimento)}</div>

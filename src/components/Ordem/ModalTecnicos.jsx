@@ -30,40 +30,14 @@ export default function ModalTecnicos ({ordem, changeModal, setOrdem}) {
             return
         }
         console.warn(result.response)
-        /*
-        setOrdem(prevState => ({
-            ...prevState,
-            funcionario: [
-                ...especState.especialidades,
-                especToAdd
-            ]
-        }))
-        */
        setOrdem(result.response.data)
-        changeModal(false)
+        changeModal("modalTecnicos", false)
         notification.success({
             message: "Um técnico designado para esta ordem.",
             placement: "bottomLeft"
         })
     }
     const fetchTecnicos = async () => {
-        /*
-        let tecnicosUnicos = new Map()
-
-        for (let espec of especialidades) {
-            const result = await getTecnicosPorEspecialidade(espec)
-            if (!result.success) {
-                console.error(result.error)
-                continue
-            }
-            console.warn(result.response)
-
-            result.response.data.content.forEach(tecnico => {
-                tecnicosUnicos.set(tecnico.id, tecnico)
-            })
-        }
-        setTecnicos(Array.from(tecnicosUnicos.values()))
-        */
         setLoading(true)
         const result = await  getTecnicosPorServico(ordem.servico.id)
         if (!result.success) {
@@ -97,22 +71,6 @@ export default function ModalTecnicos ({ordem, changeModal, setOrdem}) {
                     )
                 )}
             </ul>
-
-            {/* 
-                {
-                    "id": 5,
-                    "primeiro": "Julio",
-                    "ultimo": "Gomes",
-                    "celular": "(12) 34567-8912",
-                    "cargo": "TECNICO",
-                    "ativo": true,
-                    "disponivel": false,
-                    "ultimaAtividade": "02-03-2025 16:39:52",
-                    "especialidades": [
-                        1
-                    ]
-                }
-             */}
             {tecnico && (
                 <div id="infosTecnico">
                     <div> <strong>id:</strong> {tecnico.id}</div>
@@ -121,7 +79,7 @@ export default function ModalTecnicos ({ordem, changeModal, setOrdem}) {
                 </div>
             )}
             <div id="contAcoesSelectTecnico">
-                <button id="bttCancelSelectTecnico" onClick={() => changeModal(false)}>fechar</button>
+                <button id="bttCancelSelectTecnico" onClick={() => changeModal("modalTecnicos", false)}>fechar</button>
                 {tecnico && (
                     <button id="bttConfirmTecnico" onClick={handleConfirmTecnico}>confirmar</button>
                 )}
