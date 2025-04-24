@@ -20,12 +20,6 @@
         border-color: var(--marrom1);
         background-color: var(--salmao2);
     }
-    #secOrdensAbertas {
-
-    }
-    #secOrdensFechadas {
-
-    }
     .cardOrdens {
         padding: .2rem .5rem;
         border-radius: .3rem;
