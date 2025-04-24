@@ -1,3 +1,4 @@
+import "@styles/ordem/ModalViewAtendimento.css"
 import { converterDtHr, converterSituacao } from "@services/utils"
 import Loading from "../public/Loading"
 import { getArquivos, getArquivoUnico } from "@services/backend/arquivosAPI"
@@ -54,26 +55,32 @@ const ModalViewAtendimento = ({ closeModal, atendimento }) => {
 
     return (
         <section id="secViewAtendimento">
-            <div><strong>id:</strong> {atendimento.id}</div>
-            <div><strong>técnico:</strong> {atendimento.funcionario}</div>
-            <div><strong>data início:</strong> {converterDtHr(atendimento.dtAtendimento)}</div>
-            <div><strong>data finalização:</strong> {converterDtHr(atendimento.dtFinal)}</div>
-            <div><strong>descrição:</strong> {atendimento.dsAtendimento}</div>
-            <div><strong>situação final:</strong> {converterSituacao(atendimento.dsSituacao)}</div>
-
+            <h2>Atendimento</h2>
+            <div id="infosAtendimento">
+                <div><strong>id:</strong> {atendimento.id}</div>
+                <div><strong>técnico:</strong> {atendimento.funcionario}</div>
+                <div><strong>data início:</strong> {converterDtHr(atendimento.dtAtendimento)}</div>
+                <div><strong>data finalização:</strong> {converterDtHr(atendimento.dtFinal)}</div>
+                <div><strong>descrição:</strong> {atendimento.dsAtendimento}</div>
+                <div><strong>situação final:</strong> {converterSituacao(atendimento.dsSituacao)}</div>
+            </div>
+            <div><strong>arquivos do atendimento:</strong></div>
             <div id="listArquivos">
-                {arquivos.map((src, idx) => (
-                    <img
-                        key={`imagem${idx}`}
-                        src={src}
-                        alt={`atendimento ${idx}`}
-                        style={{ maxWidth: '100%', height: 'auto' }}
-                    />
-                ))}
+                {(arquivos.length>0 && arquivos) &&
+                    arquivos.map((src, idx) => (
+                        console.log(arquivos.length),
+                        <img
+                            className="imgAtendimento"
+                            key={`imagem${idx}`}
+                            src={src}
+                            alt={`atendimento ${idx}`}
+                        />
+                    ))
+                }
             </div>
 
             <div id="acoesViewAtendimento">
-                <button id="sair" onClick={closeModal}>sair</button>
+                <button id="sair" className="button bttPrimary" onClick={closeModal}>sair</button>
             </div>
         </section>
     )

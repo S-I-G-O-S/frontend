@@ -1,4 +1,4 @@
-import "@styles/ordem/modalAtendimento.css"
+import "@styles/ordem/modalNovoAtendimento.css"
 import { useState } from "react"
 import { putConcluirAtendimento } from "../../services/backend/ordemAPI"
 import UploadFiles from "./UploadFiles"

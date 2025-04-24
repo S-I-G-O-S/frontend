@@ -4,6 +4,7 @@ import AuthProvider from '@context/authContext.jsx';
 // import AppRoutes from "./router/routes.jsx"; 
 import { PreferenciasProvider } from '@context/PreferenciasContext.jsx';
 import './index.css'
+import "@styles/globals.css"
 import { UsuarioProvider } from './context/UsuarioContext.jsx';
 import Loading from '@components/public/Loading.jsx'
 

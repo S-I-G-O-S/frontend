@@ -53,52 +53,54 @@ body {
     overflow-y: auto;
     width: 100vw;
     max-width: 100vw;
-
-    box-sizing: border-box;
+    box-sizing: content-box;
 
     font-family: var(--font2);
 }
 #root {
     padding: 0;
     margin: 0;
-    height: 100%;
-    max-height: 100%;
-    width: 100%;
-    max-width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+    width: 100vw;
+    max-width: 100vw;
     overflow: hidden;
     overflow-y: scroll;
+    box-sizing: content-box;
+    /* background-repeat: no-repeat;
     /* background-repeat: no-repeat;
     background-size: calc(100% + 200px) 9rem;
     background-position: 100% 100%;   */
 
-    p,
-    h1,
-    h2,
-    h3 {
-        margin: 0;
-    }
-    h4 {
-        all: unset;
-    }
-    button {
-        all: unset;
-        box-sizing: border-box;
-        cursor: pointer;
-    }
-    input[type="text"]{
-        all: unset;
-        box-sizing: border-box;
-    }
-    input[type="password"]{
-        all: unset;
-        box-sizing: border-box;
-    }
-    .popup {
-        z-index: 999;
-    }
-    span {
-        font-weight: 500;
-    }
+}
+p,
+h1,
+h2,
+h3 {
+    margin: 0;
+}
+h4 {
+    all: unset;
+}
+
+input[type="text"]{
+    all: unset;
+    box-sizing: border-box;
+}
+input[type="password"]{
+    all: unset;
+    box-sizing: border-box;
+}
+.popup {
+    z-index: 999;
+}
+span {
+    font-weight: 500;
+}
+button {
+    all: unset;
+    box-sizing: border-box;
+    cursor: pointer;
 }
 .ant-input-password {
     display: flex;
@@ -124,7 +126,6 @@ body {
     background-color: var(--salmao3);
 }
 
-
 .paginas {
     display: grid;
     grid-template-columns: max-content auto;
@@ -134,14 +135,30 @@ body {
     "nav main"
     "nav main";
     padding: 0;
-    margin: 0;
+    /* margin: 0; */
     min-height: 100vh;
-    min-width: 100vw;
-    max-width: 100vw;
-    box-sizing: border-box;
+    /* min-width: 100vw; */
+    /* max-width: 100vw; */
     overflow-y: hidden;
     main {
         padding: 0.5rem 2rem;
+    }
+}
+.button {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .3rem;
+    padding: .1rem .5rem;
+    
+    font-weight: 500;
+}
+.bttPrimary {
+    color: var(--salmao2);
+    background-color: var(--marrom1);
+    &:hover {
+        background-color: var(--marrom2);
     }
 }
 .paginas {
@@ -163,9 +180,6 @@ section {
     background-color: var(--salmao2);
 }
 @media screen and (width <= 900px) {
-    body {
-        /* overflow-y: auto; */
-    }
     .paginas {
         /* width: 100vw; */
         display: grid;

@@ -101,9 +101,7 @@ function Ordem() {
             })
             return
         }
-        if (!modalTecnicos) {
-            // FIXME TROCAR AQUI
-            // setModalTecnicos(true)
+        if (!modais.modalTecnicos) {
             changeModal("modalTecnicos", true)
             return
         }
