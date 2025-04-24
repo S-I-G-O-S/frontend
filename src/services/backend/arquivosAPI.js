@@ -13,8 +13,8 @@ export const getArquivos = async (idAtendimento) => {
 }
 export const getArquivoUnico = async (idArquivo) => {
     try {
-        const response = await axios.get(`${config.url}/api/fotos/${idArquivo}`)
-        return { success: true, response: response }
+        const response = await axios.get(`${config.url}/api/fotos/${idArquivo}`, { responseType: 'arraybuffer' })
+        return { success: true, response }
     } catch (error) {
         return { success: false, error }
     }
