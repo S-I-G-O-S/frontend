@@ -51,6 +51,7 @@
                 border-style: solid;
                 border-width: 0.1rem;
                 border-radius: 0.3rem;
+                width: 15rem;
 
                 .bttsSituacao {
                     display: flex;
@@ -65,7 +66,7 @@
                     border-width: 0.1rem;
                     border-radius: 0.3rem;
                     transition: 100ms;
-                    width: 12rem;
+                    width: auto;
                     p {
                         font-size: 0.95rem;
                         font-weight: 500;
@@ -81,8 +82,9 @@
                     opacity: 0.85;
                 }
                 .bttsSituacao:hover {
-                    width: 12.5rem;
-                    height: 2fr;
+                    /* width: 12.5rem;
+                    height: 2fr; */
+                    letter-spacing: .1rem;
                 }
                 .bttSelecionado {
                     border-style: solid;
@@ -418,6 +420,11 @@
 @media screen and (width <=750px) {
     #pageOrdens {
         #mainOrdens {
+            #sec1 {
+                #contSituacoes {
+                    width: 100%;
+                }
+            }
             #contTableHistOrdens {
 
             }
