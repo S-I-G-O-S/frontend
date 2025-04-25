@@ -107,14 +107,7 @@ function Cliente() {
             setViewContContato(true)
         }
     }
-    // INFOS
-    /*
-    const formatarCNPJ = (cnpj) => {
-        if(cnpj == '') {return}
-        const cnpjLimpo = cnpj.replace(/\D/g, '')
-        handleEditDado(cnpjLimpo.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, "$1.$2.$3/$4-$5"), 'cnpj')
-    }
-    */
+
     const handleCEP = (value) => {
         const cep = value.replace(/\D/g, '');
         if (cep.length <= 8) {

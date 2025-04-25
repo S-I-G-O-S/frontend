@@ -3,6 +3,7 @@ import { converterDtHr, converterSituacao } from "@services/utils"
 import Loading from "../public/Loading"
 import { getArquivos, getArquivoUnico } from "@services/backend/arquivosAPI"
 import { useEffect, useState } from "react"
+import HeaderModal from "../public/HeaderModal"
 
 const ModalViewAtendimento = ({ closeModal, atendimento }) => {
     const [arquivos, setArquivos] = useState([])
@@ -54,8 +55,11 @@ const ModalViewAtendimento = ({ closeModal, atendimento }) => {
     if (!atendimento) return <Loading />
 
     return (
-        <section id="secViewAtendimento">
-            <h2>Atendimento</h2>
+        <div id="modalViewAtendimento" className="modal">
+            <HeaderModal 
+                title={"Atendimento"}
+                hasCloseBtt={true}
+                closeModal={closeModal}/>
             <div id="infosAtendimento">
                 <div><strong>id:</strong> {atendimento.id}</div>
                 <div><strong>técnico:</strong> {atendimento.funcionario}</div>
@@ -82,7 +86,7 @@ const ModalViewAtendimento = ({ closeModal, atendimento }) => {
             <div id="acoesViewAtendimento">
                 <button id="sair" className="button bttPrimary" onClick={closeModal}>sair</button>
             </div>
-        </section>
+        </div>
     )
 }
 

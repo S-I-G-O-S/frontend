@@ -152,15 +152,6 @@
             }
         }
     }
-    .shadowBG {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: fixed;
-        background-color: #000000da;
-        width: 100%;
-        height: 100%;
-    }
     #secOrdemAberta {
         #headOrdemAberta {
             display: flex;
@@ -412,6 +403,7 @@
                     flex-direction: row;
                     flex-wrap: wrap;
                     justify-content: center;
+                    width: 100%;
                 }
             }
         }
@@ -421,9 +413,6 @@
     #pageOrdens {
         #mainOrdens {
             #sec1 {
-                #contSituacoes {
-                    width: 100%;
-                }
             }
             #contTableHistOrdens {
 

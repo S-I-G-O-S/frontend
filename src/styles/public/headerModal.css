@@ -1,0 +1,24 @@
+.headerModal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    margin: 0;
+    margin-bottom: 0.5rem;
+    h2 {
+        font-size: 1.1rem;
+    }
+    .bttCloseModal {
+        cursor: pointer;
+        padding: 0.1rem;
+        border-radius: 0.3rem;
+        transition: 180ms;
+        
+        .iconCloseModal {
+            svg {
+                height: 1.2rem;
+                width: 1.2rem;
+            }
+        }
+    }
+}

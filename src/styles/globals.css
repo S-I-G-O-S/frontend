@@ -1,1 +1,23 @@
 /* atualmente utilizando o index.css até padronizar o projeto todo. */
+.modal {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.5rem 2rem;
+    border-radius: .3rem;
+    border-width: .1rem;
+    border-style: solid;
+    border-color: var(--marrom1);
+    background-color: var(--salmao2);
+    max-width: 80vw;
+}
+@media screen and (width <= 550px) {
+    .modal {
+        max-width: 90vw;
+    }
+}
+@media screen and (width <= 400px) {
+    .modal {
+        padding: 1rem;
+    }
+}

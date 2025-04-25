@@ -9,8 +9,8 @@ import Edit from '@assets/edit-text.png'
 
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { notification, Pagination } from 'antd'
-import { HomeFilled, EditFilled, CloseOutlined } from '@ant-design/icons'
+import { notification } from 'antd'
+import { CloseOutlined } from '@ant-design/icons'
 import Paginacao from '../components/public/Paginacao.jsx';
 import ListClientes from '../components/Clientes/ListClientes.jsx';
 
