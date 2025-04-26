@@ -409,6 +409,7 @@ function Funcionario() {
                                         <label>Nome:</label>
                                         <input
                                             type="text"
+                                            className={"textInput"}
                                             // status={""}
                                             placeholder=""
                                             value={funcionario.nome || ""}
@@ -419,6 +420,7 @@ function Funcionario() {
                                         <label>Email:</label>
                                         <input
                                             type="text"
+                                            className={"textInput"}
                                             value={funcionario.email || ""}
                                             onChange={(e) => handleChangeDados(e.target.value, "email")}
                                         />
@@ -427,6 +429,7 @@ function Funcionario() {
                                         <label>Celular:</label>
                                         <input
                                             type="text"
+                                            className={"textInput"}
                                             value={funcionario.celular || ""}
                                             onChange={(e) => handleChangeDados(e.target.value, "celular")}
                                         />
@@ -435,29 +438,16 @@ function Funcionario() {
                                         <label>CPF:</label>
                                         <input
                                             type="text"
+                                            className={"textInput"}
                                             value={funcionario.cpf || ""}
                                             onChange={(e) => handleChangeDados(e.target.value, "cpf")}
                                         />
                                     </div>
                                     <div id='contCargoFunc'>
                                         <label>Cargo:</label>
-                                        {/* <Select
-                                            defaultValue={funcionario.cargo || 'técnico'}
-                                            options={[
-                                            { 
-                                                value: "técnico", label: "técnico" 
-                                            },
-                                            {
-                                                value: "base", label: "base"
-                                            },
-                                            {
-                                                value: "adm", label: "adm"
-                                            }
-                                            ]} 
-                                            onChange={(e) => handleChangeDados(e.target.value, "cargo")}
-                                        />   */}
                                         <select id="selectCargo"
                                             value={funcionario.cargo}
+                                            className={"select"}
                                             onChange={(e) => handleChangeDados(e.target.value, "cargo")}>
                                             <option value="TECNICO">técnico</option>
                                             <option value="BASE">base</option>
@@ -471,6 +461,7 @@ function Funcionario() {
                                         <label>CEP:</label>
                                         <input
                                             type="text"
+                                            className={"textInput"}
                                             value={funcionario.endereco.cep || ""}
                                             onChange={(e) => handleCEP(e.target.value)}
                                         />
@@ -486,6 +477,7 @@ function Funcionario() {
                                         <label>Rua:</label>
                                         <input
                                             type="text"
+                                            className={"textInput"}
                                             value={funcionario.endereco?.logradouro || ""}
                                             onChange={(e) => handleChangeEndereco(e.target.value, "logradouro")}
                                         />
@@ -494,6 +486,7 @@ function Funcionario() {
                                         <label>Nº:</label>
                                         <input
                                             type="text"
+                                            className={"textInput"}
                                             value={funcionario.endereco?.numero || ""}
                                             onChange={(e) => handleChangeEndereco(e.target.value, "numero")}
                                         />
@@ -502,6 +495,7 @@ function Funcionario() {
                                         <label>Complemento:</label>
                                         <input
                                             type="text"
+                                            className={"textInput"}
                                             value={funcionario.endereco?.complemento || ""}
                                             onChange={(e) => handleChangeEndereco(e.target.value, "complemento")}
                                         />
@@ -510,6 +504,7 @@ function Funcionario() {
                                         <label>Bairro:</label>
                                         <input
                                             type="text"
+                                            className={"textInput"}
                                             value={funcionario.endereco?.bairro || ""}
                                             onChange={(e) => handleChangeEndereco(e.target.value, "bairro")}
                                         />
@@ -518,6 +513,7 @@ function Funcionario() {
                                         <label>Cidade:</label>
                                         <input
                                             type="text"
+                                            className={"textInput"}
                                             value={funcionario.endereco?.cidade || ""}
                                             onChange={(e) => handleChangeEndereco(e.target.value, "cidade")}
                                         />
@@ -527,6 +523,7 @@ function Funcionario() {
                                         <input
                                             type="text"
                                             value={funcionario.endereco?.uf || ""}
+                                            className={"textInput"}
                                             onChange={(e) => handleChangeEndereco(e.target.value, "uf")}
                                         />
                                     </div>
@@ -557,6 +554,7 @@ function Funcionario() {
                         <div id='contAddEspecFunc'>
                             {/* pesquisar */}
                             <input type="text" list='dtListEspecialidades'
+                                className={"textInput"}
                                 value={pesqAddEspec}
                                 onChange={(e) => changePesqAddEspec(e.target.value)}
                                 autocomplete="off"

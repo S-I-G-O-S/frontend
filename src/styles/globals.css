@@ -1,15 +1,62 @@
 /* atualmente utilizando o index.css até padronizar o projeto todo. */
-.modal {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 1.5rem 2rem;
-    border-radius: .3rem;
-    border-width: .1rem;
-    border-style: solid;
-    border-color: var(--marrom1);
-    background-color: var(--salmao2);
-    max-width: 80vw;
+#root {
+    .modal {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 1.5rem 2rem;
+        border-radius: .3rem;
+        border-width: .1rem;
+        border-style: solid;
+        border-color: var(--marrom1);
+        background-color: var(--salmao2);
+        max-width: 80vw;
+    }
+    .textInput {
+        all: unset;
+        box-sizing: border-box;
+        border-radius: 0.3rem;
+        border-style: solid;
+        border-width: .1rem;
+        font-size: 0.9rem;
+        padding: 0.1rem 0.25rem;
+        height: auto;
+        background-color: var(--branco);
+        border-color: var(--marrom1);
+        &:focus {
+            font-weight: 400;
+            outline-width: .1rem;
+            outline-style: solid;
+            border-color: var(--laranja);
+            outline-color: var(--laranja);
+        }
+    }
+    .select {
+        display: flex;
+        align-items: center;
+        align-self: center;
+        align-content: center;
+        justify-content: center;
+        text-align: center;
+        border-radius: 0.3rem;
+        font-size: 0.8rem;
+        padding: 0.1rem 0.25rem;
+        /* padding-top: .2rem; */
+        height: auto;
+        border-style: solid;
+        border-width: .1rem;
+        background-color: var(--branco);
+        border-color: var(--marrom1);
+        &:focus {
+            outline-style: solid;
+            outline-width: .1rem;
+            border-color: var(--laranja);
+            outline-color: var(--laranja);
+        }
+        option {
+            text-align: left;
+        }
+    }
 }
 @media screen and (width <= 550px) {
     .modal {
