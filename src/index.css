@@ -142,8 +142,10 @@ button {
     overflow-y: hidden;
     main {
         padding: 0.5rem 2rem;
+        overflow: hidden;
     }
 }
+/* GLOBAL CLASS */
 .button {
     cursor: pointer;
     display: flex;
@@ -161,18 +163,8 @@ button {
         background-color: var(--marrom2);
     }
 }
-.modal {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 1.5rem 2rem;
-    border-radius: .3rem;
-    border-width: .1rem;
-    border-style: solid;
-    border-color: var(--marrom1);
-    background-color: var(--salmao2);
-    max-width: 80vw;
-}
+
+
 .paginas {
     background-color: #F2E8DF;
 }
