@@ -10,15 +10,24 @@
     }
     .bttCloseModal {
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         padding: 0.1rem;
+        padding-bottom: 0;
         border-radius: 0.3rem;
         transition: 180ms;
-        
         .iconCloseModal {
             svg {
-                height: 1.2rem;
-                width: 1.2rem;
+                height: 1.3rem;
+                width: 1.3rem;
             }
         }
     }
+}
+.bttCloseModal svg {
+    color: var(--marrom1);
+}
+.bttCloseModal:hover {
+    background-color: var(--salmao1);
 }

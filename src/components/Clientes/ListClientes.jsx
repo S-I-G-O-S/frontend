@@ -3,6 +3,7 @@ import { formatCNPJ } from "../../services/utils"
 import { EditFilled }  from '@ant-design/icons'
 
 function ListClientes({ clientes }) {
+    const navigate = useNavigate();
     if (!clientes) {
         return (
             <tr>
@@ -12,7 +13,6 @@ function ListClientes({ clientes }) {
             </tr>
         )
     }
-    const navigate = useNavigate()
     const handleEditCliente = (idCliente) => {
         navigate(`/cliente?id=${idCliente}`)
     }

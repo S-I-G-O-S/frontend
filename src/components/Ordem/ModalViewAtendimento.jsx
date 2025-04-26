@@ -3,7 +3,7 @@ import { converterDtHr, converterSituacao } from "@services/utils"
 import Loading from "../public/Loading"
 import { getArquivos, getArquivoUnico } from "@services/backend/arquivosAPI"
 import { useEffect, useState } from "react"
-import HeaderModal from "../public/HeaderModal"
+import HeaderModal from "@components/public/HeaderModal"
 
 const ModalViewAtendimento = ({ closeModal, atendimento }) => {
     const [arquivos, setArquivos] = useState([])
