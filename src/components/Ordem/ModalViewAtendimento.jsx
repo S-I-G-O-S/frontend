@@ -1,9 +1,9 @@
-import "@styles/ordem/ModalViewAtendimento.css"
-import { converterDtHr, converterSituacao } from "@services/utils"
-import Loading from "../public/Loading"
-import { getArquivos, getArquivoUnico } from "@services/backend/arquivosAPI"
+import "@styles/ordem/modalViewAtendimento.css"
+import { converterDtHr, converterSituacao } from "@services/utils.jsx"
+import Loading from "@components/public/Loading.jsx"
+import { getArquivos, getArquivoUnico } from "@services/backend/arquivosAPI.js"
 import { useEffect, useState } from "react"
-import HeaderModal from "@components/public/HeaderModal"
+import HeaderModal from "@components/public/HeaderModal.jsx"
 
 const ModalViewAtendimento = ({ closeModal, atendimento }) => {
     const [arquivos, setArquivos] = useState([])
