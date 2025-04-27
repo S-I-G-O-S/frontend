@@ -438,7 +438,7 @@ function Funcionario() {
                                         <label>CPF:</label>
                                         <input
                                             type="text"
-                                            className={"textInput"}
+                                            className="textInput"
                                             value={funcionario.cpf || ""}
                                             onChange={(e) => handleChangeDados(e.target.value, "cpf")}
                                         />
@@ -447,7 +447,7 @@ function Funcionario() {
                                         <label>Cargo:</label>
                                         <select id="selectCargo"
                                             value={funcionario.cargo}
-                                            className={"select"}
+                                            className="select"
                                             onChange={(e) => handleChangeDados(e.target.value, "cargo")}>
                                             <option value="TECNICO">técnico</option>
                                             <option value="BASE">base</option>
@@ -466,6 +466,7 @@ function Funcionario() {
                                             onChange={(e) => handleCEP(e.target.value)}
                                         />
                                         <button id='bttPesqCEP'
+                                            className='button bttPrimary'
                                             onClick={fetchCEP}
                                         >
                                             <p>Pesquisar CEP</p>
@@ -530,8 +531,8 @@ function Funcionario() {
                                 </div>
 
                                 <div id='contControle'>
-                                    <button id='bttCancelar' onClick={goToFuncionarios}>Cancelar</button>
-                                    <button id='bttSalvar' onClick={handleSalvar}>Salvar</button>
+                                    <button id='bttCancelar' className="bttYellow" onClick={goToFuncionarios}>Cancelar</button>
+                                    <button id='bttSalvar' className="bttGreen" onClick={handleSalvar}>Salvar</button>
                                     {/* TODO Adicionar este elemento em todas as confirmações de exclusões */}
                                     <Popconfirm
                                         title="Apagar funcionário"
@@ -540,7 +541,7 @@ function Funcionario() {
                                         onCancel={null}
                                         okText="SIM"
                                         cancelText="NÃO">
-                                        <button id='bttExcluir'
+                                        <button id='bttExcluir' className='bttRed'
                                             // onClick={handleDelete}
                                             >
                                             Excluir
@@ -570,7 +571,7 @@ function Funcionario() {
                                             ))
                                 }
                             </datalist>
-                            <button onClick={addEspecToFunc}>Adicionar</button>
+                            <button className='button bttPrimary' onClick={addEspecToFunc}>Adicionar</button>
                         </div>
                         <div id="contListEspecFunc">
                             {/* listagem  */}
@@ -593,7 +594,7 @@ function Funcionario() {
             }
             {
                 viewSenha ?
-                <div id='shadowBG'>
+                <div className='shadowBG'>
                     <section id='secTempSenha'>
                         <h2>Definindo senha temporária</h2>
                         <p>Esta será a senha fornecida ao funcionário para seu primeiro acesso. </p>
