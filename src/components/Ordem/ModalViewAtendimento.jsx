@@ -1,4 +1,4 @@
-import "@styles/ordem/ModalViewAtendimento.css"
+import "@styles/ordem/modalViewAtendimento.css"
 import { converterDtHr, converterSituacao } from "@services/utils"
 import Loading from "../public/Loading"
 import { getArquivos, getArquivoUnico } from "@services/backend/arquivosAPI"
@@ -8,10 +8,6 @@ import HeaderModal from "@components/public/HeaderModal"
 const ModalViewAtendimento = ({ closeModal, atendimento }) => {
     const [arquivos, setArquivos] = useState([])
 
-    const addArquivo = (arquivoUrl) => {
-        setArquivos((prev) => [...prev, arquivoUrl])
-    }
-
     const arrayBufferToDataURL = (buffer, mime = 'image/jpeg') => {
         const binary = Array.from(new Uint8Array(buffer))
             .map((b) => String.fromCharCode(b))
@@ -19,33 +15,30 @@ const ModalViewAtendimento = ({ closeModal, atendimento }) => {
         const base64 = window.btoa(binary)
         return `data:${mime};base64,${base64}`
     }
-
-    const getFile = async (id) => {
-        try {
-            const result = await getArquivoUnico(id)
-            if (!result.success) throw result.error
-
-            const mime = result.response.headers['content-type'] || 'image/jpeg'
-            const dataUrl = arrayBufferToDataURL(result.response.data, mime)
-            addArquivo(dataUrl)
-        } catch (error) {
-            console.error('Erro ao puxar imagem', id, error)
-        }
-    }
-
     const getArrayFiles = async () => {
         const result = await getArquivos(atendimento.id)
-        if (!result.success) {
-            console.error(result.error)
-            return
-        }
-        setArquivos([])
+        if (!result.success) throw result.error
+
         const lista = result.response.data
-        if (!lista.length) {
-            console.log('Sem fotos neste atendimento')
-            return
-        }
-        lista.forEach(({ id }) => getFile(id))
+        // dispara todas as buscas em paralelo
+        const promessas = lista.map(async arquivo => {
+            const r = await getArquivoUnico(arquivo.id)
+            if (!r.success) return null
+
+            
+            console.log("tipo do arquivo: ", r.response.headers['content-type'])
+            const mime = r.response.headers['content-type'] || 'image/jpeg'
+            const dataUrl = arrayBufferToDataURL(r.response.data, mime)
+            return { 
+                nome: arquivo.nomeArquivo,
+                tipo: mime, 
+                content: dataUrl
+            }
+        })
+
+        const arquivosConvertidos = (await Promise.all(promessas)).filter(Boolean)
+        console.table(arquivosConvertidos)
+        setArquivos(arquivosConvertidos)
     }
 
     useEffect(() => {
@@ -68,17 +61,19 @@ const ModalViewAtendimento = ({ closeModal, atendimento }) => {
                 <div><strong>descrição:</strong> {atendimento.dsAtendimento}</div>
                 <div><strong>situação final:</strong> {converterSituacao(atendimento.dsSituacao)}</div>
             </div>
-            <div><strong>arquivos do atendimento:</strong></div>
+            {/* <div><strong>arquivos do atendimento:</strong></div> */}
             <div id="listArquivos">
                 {(arquivos.length>0 && arquivos) &&
-                    arquivos.map((src, idx) => (
-                        console.log(arquivos.length),
-                        <img
-                            className="imgAtendimento"
-                            key={`imagem${idx}`}
-                            src={src}
-                            alt={`atendimento ${idx}`}
-                        />
+                    arquivos.map((arquivo, index) => (
+                        <div className="arquivoAtendimento" key={`arquivo${index}`}>
+                        {(arquivo.tipo=="image/jpeg") &&
+                            <img
+                                className="imgAtendimento"
+                                src={arquivo.content}
+                                alt={arquivo.nome}
+                            />
+                        }
+                        </div>
                     ))
                 }
             </div>
@@ -91,13 +86,3 @@ const ModalViewAtendimento = ({ closeModal, atendimento }) => {
 }
 
 export default ModalViewAtendimento
-
-// Ajuste em arquivosAPI:
-// export const getArquivoUnico = async (idArquivo) => {
-//   try {
-//     const response = await axios.get(`${config.url}/api/fotos/${idArquivo}`, { responseType: 'arraybuffer' })
-//     return { success: true, response }
-//   } catch (error) {
-//     return { success: false, error }
-//   }
-// }

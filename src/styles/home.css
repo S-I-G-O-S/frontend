@@ -1,5 +1,5 @@
 #pageHome {
-    #mainHome {
+    main {
         grid-area: main;
         display: flex;
         align-items: start;
@@ -202,12 +202,10 @@
 }
 @media screen and (width <= 750px) {
     #pageHome{
-        #mainHome {
-            grid-template-columns: 1fr;
-            grid-template-rows: max-content max-content;
-            grid-template-areas: 
-                "ordensSendoAtendidas"
-                "tecDisponiveis" ;
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
             gap: 1rem;
             #secOrdens {
                 display: flex;
@@ -229,5 +227,9 @@
     }
 }
 @media screen and (width <= 550px) {
-    
+    #pageHome {
+        main {
+            padding: .5rem;
+        }
+    }
 }

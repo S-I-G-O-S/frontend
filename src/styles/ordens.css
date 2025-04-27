@@ -409,13 +409,17 @@
         }
     }
 }
-@media screen and (width <=750px) {
+@media screen and (width <=550px) {
     #pageOrdens {
         #mainOrdens {
             #sec1 {
-            }
-            #contTableHistOrdens {
-
+                #contSituacoes {
+                    display: flex;
+                    flex-direction: row;
+                    .bttsSituacao {
+                        width: 100%;
+                    }
+                }
             }
         }
     }

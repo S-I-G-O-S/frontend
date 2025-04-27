@@ -17,7 +17,7 @@
         border-style: solid;
         border-color: var(--marrom1);
         background-color: var(--salmao2);
-        max-width: 80vw;
+        max-width: 90vw;
     }
     .textInput {
         all: unset;
@@ -111,13 +111,14 @@
         }
     }
 }
-@media screen and (width <= 550px) {
+@media screen and (width <= 550px) { #root {
     .modal {
         max-width: 90vw;
     }
-}
-@media screen and (width <= 400px) {
+}}
+@media screen and (width <= 400px) { #root {
     .modal {
-        padding: 1rem;
+        padding: .7rem 1rem;
+        max-width: 95vw;
     }
-}
+}}
