@@ -287,7 +287,6 @@
 @media screen and (width <= 550px) {
     #pageFuncionario {
         main {
-            padding: .5rem;
             section {
                 width: 100%;
                 #contControle {

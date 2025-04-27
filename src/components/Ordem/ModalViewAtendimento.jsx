@@ -1,5 +1,5 @@
 import "@styles/ordem/modalViewAtendimento.css"
-import { converterDtHr, converterSituacao } from "@services/utils"
+import { converterDtHr, converterSituacao } from "@services/utils.jsx"
 import Loading from "@components/public/Loading.jsx"
 import { getArquivos, getArquivoUnico } from "@services/backend/arquivosAPI.js"
 import { useEffect, useState } from "react"
