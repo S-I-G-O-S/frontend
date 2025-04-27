@@ -1,4 +1,11 @@
 /* atualmente utilizando o index.css até padronizar o projeto todo. */
+:root {
+    --blue: #8fcdff;
+    --yellow: #f6ff7b;
+    --orange: #ffb968;
+    --red: #ff8888;
+    --green: #0cda4a;
+}
 #root {
     .modal {
         display: flex;
@@ -39,7 +46,7 @@
         justify-content: center;
         text-align: center;
         border-radius: 0.3rem;
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         padding: 0.1rem 0.25rem;
         /* padding-top: .2rem; */
         height: auto;
@@ -55,6 +62,52 @@
         }
         option {
             text-align: left;
+        }
+    }
+    .button {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        column-gap: .3rem;
+        row-gap: .1rem;
+        border-radius: .3rem;
+        padding: .1rem .5rem;
+        
+        font-weight: 500;
+    }
+    .bttPrimary {
+        color: var(--salmao2);
+        background-color: var(--marrom1);
+        border-style: solid;
+        border-width: .1rem;
+        border-color: var(--marrom1);
+        &:hover {
+            background-color: var(--marrom2);
+        }
+        &:focus {
+            outline-width: .1rem;
+            outline-style: solid;
+            outline-color: var(--laranja);  
+            border-color: var(--laranja);
+        }
+    }
+    .bttGreen {
+        background-color: var(--green);
+        &:hover {
+            background-color: #30fa52;
+        }
+    }
+    .bttRed {
+        background-color: var(--red);
+        &:hover {
+            background-color: #ff6e6e;
+        }
+    }
+    .bttYellow {
+        background-color: var(--yellow);
+        &:hover {
+            background-color: #faf736;
         }
     }
 }

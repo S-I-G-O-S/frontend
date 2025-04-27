@@ -146,23 +146,8 @@ button {
     }
 }
 /* GLOBAL CLASS */
-.button {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: .3rem;
-    padding: .1rem .5rem;
-    
-    font-weight: 500;
-}
-.bttPrimary {
-    color: var(--salmao2);
-    background-color: var(--marrom1);
-    &:hover {
-        background-color: var(--marrom2);
-    }
-}
+
+
 
 
 .paginas {

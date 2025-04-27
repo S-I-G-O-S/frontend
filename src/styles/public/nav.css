@@ -191,10 +191,15 @@
     #nav,
     .navFechado,
     .navAberto  {
-        display: flex;
+        display: grid;
+        grid-template-columns: 13vw auto 13vw;
+        grid-template-rows: min-content;
+        grid-template-areas: "exit links null";
+        /* display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: center;
+        justify-content: center; 
+        */
         gap: 0;
         padding: .1rem 0 ;
         width: 100%;
@@ -203,6 +208,7 @@
             display: none;
         }
         #containerLinks {
+            grid-area: links;
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -223,6 +229,7 @@
             }
         }
         #containerFooter {
+            grid-area: exit;
             position: relative;
             left: .1rem;
             top: .1rem;
