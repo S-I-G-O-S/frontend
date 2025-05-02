@@ -7,6 +7,7 @@ import { WarningFilled } from '@ant-design/icons'
 import OrdensFechadas from "@components/MeusAtendimentos/OrdensFechadas.jsx";
 import OrdensAbertas from "../components/MeusAtendimentos/OrdensAbertas.jsx";
 import "@styles/meusAtendimentos.css"
+import { useAuth } from "../context/authContext.jsx";
 
 export default function MeusAtendimentos() {
     const { usuario } = getUsuarioContext()
@@ -63,7 +64,9 @@ export default function MeusAtendimentos() {
         changeLoadings('ordensFechadas', false)
         changeLoadings('ordensAbertas', false)
     }
+    const {checkAuth} = useAuth()
     useEffect(() => {
+        checkAuth()
         fecthOrdens()
     }, [])
 

@@ -9,6 +9,7 @@ import { notification, Popconfirm, Select } from "antd"
 import TextArea from "antd/es/input/TextArea"
 import { useNavigate } from "react-router-dom"
 import { getUsuarioContext } from "@context/UsuarioContext"
+import { useAuth } from "../context/authContext"
 function NovaOrdem() {
     const navigate = useNavigate()
     const [clientes, setClientes] = useState([])
@@ -155,8 +156,10 @@ function NovaOrdem() {
         console.warn(result.response)
         setClientes(result.response.data.content)
     }
+    const {checkAuth} = useAuth()
     useEffect(() => {
         console.clear()
+        checkAuth()
         fetchClientes()
         fetchServicos()
     }, [])

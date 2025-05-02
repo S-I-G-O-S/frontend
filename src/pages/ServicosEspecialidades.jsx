@@ -11,6 +11,7 @@ import ModalEspecialidade from '@components/ServicosEspecialidades/ModalEspecial
 import ModalServico from '@components/ServicosEspecialidades/ModalServico'
 import Servicos from '@components/ServicosEspecialidades/Servicos'
 import Especialidades from '@components/ServicosEspecialidades/Especialidades'
+import { useAuth } from '../context/authContext'
 
 function ServicosEspecialidades() {
     // Geral
@@ -86,7 +87,10 @@ function ServicosEspecialidades() {
         setServicoAberto(null)
         setTipoJanela(null)
     }
-
+    const {checkAuth} = useAuth()
+    useEffect(() => {
+        checkAuth()
+    }, [])
     return(
         <div id='pageEspecialidades' className='paginas'>
         {/* <Header titulo={"Especialidades"} usuario={usuario}></Header> */}

@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { notification } from 'antd'
 import TableClientes from '../components/Clientes/TableClientes.jsx';
 import ModelNovoCliente from '../components/Clientes/ModelNovoCliente.jsx';
+import { useAuth } from '../context/authContext.jsx';
 
 function Clientes() {
 	const [viewModalNovoCliente, setViewModalNovoCliente] = useState(false)
@@ -14,8 +15,9 @@ function Clientes() {
 		cnpj: null,
 		ativo: null
 	})
-	
+	const {checkAuth} = useAuth()
 	useEffect(() => {
+		checkAuth()
 		console.clear()
 	}, [])
 	return (

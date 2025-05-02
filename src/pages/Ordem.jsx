@@ -15,6 +15,7 @@ import Mapa from "@components/Ordem/Mapa.jsx";
 import InfosOrdem from "@components/Ordem/InfosOrdem";
 import AcoesOrdem from "@components/Ordem/AcoesOrdem";
 import ModalViewAtendimento from "@components/Ordem/ModalViewAtendimento";
+import { useAuth } from "../context/authContext";
 
 function Ordem() {
     const { usuario } = getUsuarioContext()
@@ -120,8 +121,10 @@ function Ordem() {
         // setEditDados(result.response.data)
         console.warn(result.response)
     }
+    const {checkAuth} = useAuth()
     useEffect(() => {
         console.clear()
+        checkAuth()
         console.log(usuario)
         if (!idOrdem) {
             setOrdem('noCode')

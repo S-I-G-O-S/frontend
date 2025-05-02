@@ -13,13 +13,15 @@ import { CloseOutlined, FilterFilled, SearchOutlined } from '@ant-design/icons'
 
 import Nav from '@components/public/Nav.jsx'
 import { getUsuarioContext } from '@context/UsuarioContext';
-import Paginacao from '../components/public/Paginacao';
+import Paginacao from '@components/public/Paginacao';
 import ListFuncionarios from '@components/Funcionarios/ListFuncionarios';
 import Loading from '@components/public/Loading.jsx'
-import Filtros from '../components/Funcionarios/Filtros';
+import Filtros from '@components/Funcionarios/Filtros';
+import { useAuth } from '@context/authContext';
 
 //  SÓ O ADM E O PROPRIO TECNICO PODEM EDITAR O FUNCIONARIO
 function Funcionarios() {
+    const {checkAuth} = useAuth()
     const navigate = useNavigate()
     const { usuario } = getUsuarioContext()
     const [loadingRows, setLoadingRows] = useState(false)
@@ -142,6 +144,7 @@ function Funcionarios() {
     }
     useEffect(() => {
         console.clear()
+        checkAuth()
         const fetchData = async () => {
             filtros ? fetchFuncionarios(0) : ''
             fetchEspecialidades()

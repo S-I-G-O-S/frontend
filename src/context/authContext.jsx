@@ -15,13 +15,10 @@ const AuthProvider = ({ children }) => {
 			deleteCookie("token")
 		}
 	}
-	const verifAuth = async () => {
-		const tokenCookie = getCookie('token')
-		if ((!token )!=(!tokenCookie)) {
+	const checkAuth = async () => {
+		if ((!token )!=(!getCookie('token'))) {
 			await logout()
-			console.error('%c DEBUG SESSÃO EXPIRADA!', 
-			'color: red;')
-			console.log(token + " | " + tokenCookie)
+			// console.log(token + " | " + tokenCookie)
 		}
 	}
 	const logout = async () => {
@@ -80,17 +77,17 @@ const AuthProvider = ({ children }) => {
 		}
 	}, [token]);
 
-	const contextValue = useMemo(
-		() => ({
-			token,
-			setToken,
-			logout,
-			verifAuth
-		}),
-		[token]
-	);
+	// const contextValue = useMemo(
+	// 	() => ({
+	// 		token,
+	// 		setToken,
+	// 		logout,
+	// 		checkAuth
+	// 	}),
+	// 	[token]
+	// );
 	return (
-		<AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
+		<AuthContext.Provider value={{token, setToken, logout, checkAuth}}>{children}</AuthContext.Provider>
 	);
 };
 

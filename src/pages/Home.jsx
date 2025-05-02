@@ -10,7 +10,11 @@ import { getUsuarioContext } from '../context/UsuarioContext'
 import { useAuth } from '@context/authContext'
 
 function Home() {
-    
+    const {checkAuth} = useAuth()
+    useEffect(() => {
+        console.clear()
+        checkAuth()
+    }, [])
     const {usuario} = getUsuarioContext()
     // const [usuario, setUsuario] = useState(() => {
     //     const cookieUsuario = getCookie('usuario')

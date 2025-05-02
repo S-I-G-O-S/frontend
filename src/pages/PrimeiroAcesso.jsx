@@ -6,6 +6,7 @@ import { notification } from "antd"
 import zxcvbn from 'zxcvbn'
 import { useNavigate } from "react-router-dom"
 import { getUsuarioContext } from '../context/UsuarioContext'
+import { useAuth } from "../context/authContext"
 
 function PrimeiroAcesso() {
     const navigate = useNavigate()
@@ -115,8 +116,10 @@ function PrimeiroAcesso() {
         console.log('Validação completa.')
         navigate("/home", { replace: true })
     }
+    const {checkAuth} = useAuth()
     useEffect(() => {
         console.clear()
+        checkAuth()
         console.warn(usuario)
         if (usuario) {
             handleChangeNovaSenha(usuario.login, 'login')
