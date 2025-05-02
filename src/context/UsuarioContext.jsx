@@ -22,7 +22,6 @@ export const UsuarioProvider = ({ children }) => {
         console.info('%c contexto usuario atualizado', 'color: red;')
         setCookie('usuario', usuario, 12)
     }, [usuario]);
-
     return (
         <UsuarioContext.Provider value={{ usuario, attUsuario, setUsuario }}>
             {children}

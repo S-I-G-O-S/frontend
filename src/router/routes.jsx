@@ -2,10 +2,15 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { useAuth } from '@context/authContext'
 import { ProtectedRoute } from "./ProtectedRoute";
 import { Login, Home, UserConfig, PaginaIncorreta, Clientes, Cliente, Funcionarios, Funcionario, ServicosEspecialidades, Ordens, NovaOrdem, Ordem, PrimeiroAcesso, Teste, MeusAtendimentos, Analise } from '@pages'
+import { useEffect } from "react";
 
-function AppRoutes() {
-    const { token } = useAuth();
-
+const AppRoutes = () => {
+    const { token, verifAuth } = useAuth();
+    useEffect(() => {
+        // console.log("Routes 1")
+        verifAuth()
+    }, [])
+    // console.log("Routes 2")
     const rotasPublicas = [
         {
             path: "/",

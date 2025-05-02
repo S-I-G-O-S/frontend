@@ -12,8 +12,7 @@ import { useAuth } from '@context/authContext'
 import { deleteCookie } from '@services/cookies'
 
 function Nav({ cargo }) {
-    const navigate = useNavigate()
-    const { setToken } = useAuth()
+    const { setToken, logout } = useAuth()
     const { sessPreferencias, setSessPreferencias } = usePreferencias()
     const changeNav = () => {
         setSessPreferencias(prevState => ({
@@ -22,15 +21,7 @@ function Nav({ cargo }) {
         }))
     }
     const handleLogout = async () => {
-        const result = await logoutFunc()
-        if (!result.success) {
-            console.log(result.error)
-            return
-        }
-        sessionStorage.clear()
-        setToken(null)
-        deleteCookie('usuario')
-        navigate("/", { replace: true })
+        logout()
     }
     return (
         <nav id='nav' className={sessPreferencias.abertoNav ? "navAberto" : "navFechado"}>

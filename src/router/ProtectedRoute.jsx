@@ -1,16 +1,14 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from '@context/authContext'
-import { useEffect, useState } from "react"
 import { getCookie } from "@services/cookies";
+import { useEffect } from "react";
 
 export const ProtectedRoute = () => {
     const { token } = useAuth()
-    
-    if (!token || !getCookie('token')) {
-        return <Navigate to="/"/>;
+    const tokenCookie = getCookie('token')
+    // console.log("Debug token: " + token + " | " + tokenCookie)
+    if (!token || !tokenCookie) {
+        return <Navigate to="/"/>
     }
-    // useEffect(() => {
-    // },[token])
-
-    return <Outlet />;
-};
+    return <Outlet />
+}

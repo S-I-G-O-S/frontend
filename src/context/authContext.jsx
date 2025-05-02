@@ -15,11 +15,26 @@ const AuthProvider = ({ children }) => {
 			deleteCookie("token")
 		}
 	}
-	const logout = () => {
-		sessionStorage.clear()
+	const verifAuth = async () => {
+		const tokenCookie = getCookie('token')
+		if ((!token )!=(!tokenCookie)) {
+			await logout()
+			console.error('%c DEBUG SESSÃO EXPIRADA!', 
+			'color: red;')
+			console.log(token + " | " + tokenCookie)
+		}
+	}
+	const logout = async () => {
 		// localStorage.setItem("logout", Date.now());
-		setToken(null)
-		deleteCookie('usuario')
+		console.log("Encerrando sessão...")
+		const result = await logoutFunc()
+        sessionStorage.clear()
+        setToken(null)
+        deleteCookie('usuario')
+        // navigate("/", { replace: true })
+		console.clear()
+        console.log("Sessão encerrada")
+		if (!result.success) {throw result.error}
 	}
 	// Request interceptor para adicionar o token ao header
 	useEffect(() => {
@@ -69,6 +84,8 @@ const AuthProvider = ({ children }) => {
 		() => ({
 			token,
 			setToken,
+			logout,
+			verifAuth
 		}),
 		[token]
 	);
@@ -79,6 +96,6 @@ const AuthProvider = ({ children }) => {
 
 export const useAuth = () => {
 	return useContext(AuthContext);
-};
+}
 
 export default AuthProvider;
