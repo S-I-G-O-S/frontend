@@ -12,6 +12,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { Dropdown, notification, Pagination } from 'antd'
 import { CloseOutlined, CommentOutlined, InfoCircleOutlined, PhoneOutlined } from '@ant-design/icons'
 import { getUsuarioContext } from '../context/UsuarioContext'
+import { useAuth } from '../context/authContext'
 
 
 function Cliente() {
@@ -333,12 +334,10 @@ function Cliente() {
     const fetchCliente = async (id) => {
         const result = await getClientePorID(id)
         if (!result.success) {
-            console.error(result.error)
-            return
+            throw result.error
         }
         setCliente(result.response.data)
         console.warn(result.response)
-        
     }
     const fecthHistOrdens = async (page) => {
         const result = await getOrdensPorCliente(page, cliente.id)
@@ -377,30 +376,18 @@ function Cliente() {
                 break;
         }
     }, [sessPreferencias])
+    const {checkAuth} = useAuth()
     useEffect(() => {
         console.clear()
+        checkAuth()
         if (idCliente) {
-            try {
-                fetchCliente(idCliente)
-            } catch (error) {
-                console.error(error.message)
-            }
+            fetchCliente(idCliente)
         } else {
             novoCliente()
         }
     }, [])
     return(
         <div id="pageCliente" className='paginas'>
-        {/* <Header titulo={
-            idCliente !== null
-            ? ( !cliente ? 
-                `Editando cliente` :
-                `Editando cliente "${cliente.nome}"`
-            )
-            : 'Novo cliente'
-        }
-        usuario={usuario}
-        ></Header> */}
         <Nav cargo={usuario?.cargo || ''}></Nav>
         <main id='mainCliente'>        
             <section id='secInfos'>

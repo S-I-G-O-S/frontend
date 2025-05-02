@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react'
 import { notification, Popconfirm } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { getUsuarioContext } from '../context/UsuarioContext'
+import { useAuth } from '../context/authContext'
 
 // TODO testar ZOD + Form Hook na validação de formularios
 
@@ -373,8 +374,10 @@ function Funcionario() {
             setHeaderNomeFunc(funcionario.nome)
         }
     }, [funcionario])
+    const {checkAuth} = useAuth()
     useEffect(() => {
         console.clear()
+        checkAuth()
         if (idFuncionario) {
             fetchFuncionario()
         }

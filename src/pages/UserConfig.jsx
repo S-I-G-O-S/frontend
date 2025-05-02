@@ -8,13 +8,14 @@ import ChangeInfos from '../components/UserConfig/ChangeInfos.jsx'
 import ChangeSenha from '../components/UserConfig/ChangeSenha.jsx'
 import ChangeEmail from '../components/UserConfig/ChangeEmail.jsx'
 import { getUsuarioContext } from '../context/UsuarioContext.jsx'
+import { useAuth } from '../context/authContext.jsx'
 
 function UserConfig() {
     const data = new Date()
     const [modalNovaSenha, setModalNovaSenha] = useState(false)
     const [modalNovoEmail, setModalNovoEmail] = useState(false)
     const [modalChangeInfos, setModalChangeInfos] = useState(false)
-
+    const {checkAuth} = useAuth()
     const {usuario} = getUsuarioContext()
     const { sessPreferencias, setSessPreferencias } = usePreferencias()
     const changeTheme = (tema) => {
@@ -33,7 +34,7 @@ function UserConfig() {
     }
     useEffect(() => {
         console.clear()
-        console.log(usuario)
+        checkAuth()
         // console.log(sessPreferencias)
         // changeTheme(sessPreferencias.tema)
     }, [])
