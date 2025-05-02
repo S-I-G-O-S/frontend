@@ -53,15 +53,15 @@ const InfosOrdem = ({ordem, cargo}) => {
 					{formatCNPJ(ordem.cliente.cnpj)}
 				</div>
 				<div>
-					<span>ID cliente:</span>
+					<span>ID cliente: </span>
 					{ordem.cliente.id}
 				</div>
 			</div>
 			<div id="contEndereco">
-				<span>
-					<div>Endereço:</div>
-				</span>
-				<div>{ordem.endereco.logradouro}, {ordem.endereco.numero}{`${ordem.endereco.complemento}` || ''}  - {ordem.endereco.bairro}, {ordem.endereco.cidade}-{ordem.endereco.uf}/{ordem.endereco.cep}</div>
+				<div>
+					<span>Endereço: </span>
+					{ordem.endereco.logradouro}, {ordem.endereco.numero}{`${ordem.endereco.complemento}` || ''}  - {ordem.endereco.bairro}, {ordem.endereco.cidade}-{ordem.endereco.uf}/{ordem.endereco.cep}
+				</div>
 			</div>
 			{(ordem.funcionario && cargo!=="TECNICO") && (
 					<div id="contFuncionario">

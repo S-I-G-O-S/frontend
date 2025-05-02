@@ -7,16 +7,15 @@ import Atalhos from '@components/Home/Atalhos.jsx'
 import '@styles/home.css'
 import { useEffect, useState } from 'react'
 import { getUsuarioContext } from '../context/UsuarioContext'
+import { useAuth } from '@context/authContext'
 
 function Home() {
+    
     const {usuario} = getUsuarioContext()
     // const [usuario, setUsuario] = useState(() => {
     //     const cookieUsuario = getCookie('usuario')
     //     return cookieUsuario ? cookieUsuario : ''
     // })
-    useEffect(() => {
-        console.clear()
-    }, [])
     return (
         <>
         <div id='pageHome' className='paginas'>

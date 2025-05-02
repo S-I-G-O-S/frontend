@@ -4,7 +4,6 @@ import Negocio from '@assets/negocio.png'
 import Analise from '@assets/analise.png'
 import { loginFunc } from '@services/backend/authAPI'
 import { useAuth } from '@context/authContext'
-import { setCookie } from '@services/cookies'
 import config from '@services/config.js'
 
 import { useEffect, useRef, useState } from 'react'
@@ -117,9 +116,6 @@ function Login() {
             console.warn(request)
         }
     }, [request])
-    useEffect(() => {
-        // console.clear()
-    }, [])
     return (
     <main id='mainLogin'>
         <section id="secLogin">
