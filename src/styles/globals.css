@@ -7,6 +7,14 @@
     --green: #0cda4a;
 }
 #root {
+    .section {
+        padding: 1rem 1rem;
+        border-radius: .3rem;
+        border-width: 1px;
+        border-style: solid;
+        border-color: var(--marrom1);
+        background-color: var(--salmao2);
+    }
     .modal {
         display: flex;
         flex-direction: column;
@@ -24,7 +32,7 @@
         box-sizing: border-box;
         border-radius: 0.3rem;
         border-style: solid;
-        border-width: .1rem;
+        border-width: 1px;
         font-size: 0.9rem;
         padding: 0.1rem 0.25rem;
         height: auto;
@@ -51,7 +59,7 @@
         /* padding-top: .2rem; */
         height: auto;
         border-style: solid;
-        border-width: .1rem;
+        border-width: 1px;
         background-color: var(--branco);
         border-color: var(--marrom1);
         &:focus {
@@ -80,7 +88,7 @@
         color: var(--salmao2);
         background-color: var(--marrom1);
         border-style: solid;
-        border-width: .1rem;
+        border-width: 1px;
         border-color: var(--marrom1);
         &:hover {
             background-color: var(--marrom2);

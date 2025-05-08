@@ -158,7 +158,7 @@ function Funcionarios() {
         <Nav cargo={usuario?.cargo || ''}></Nav>
         <main id='mainFuncionarios'>
         {(usuario.cargo=='BASE' || usuario.cargo=="ADM" || usuario.cargo=="DEV") &&
-            <section id='secList'>
+            <section id='secList' className='section'>
                 <div id='contEspecsNovoFunc'>
                     <button className='btt' onClick={() => navigate(`/especialidades`)}>
                             Especialidades e Serviços

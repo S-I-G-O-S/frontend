@@ -2,14 +2,14 @@
     input[type="text"] {
         border-radius: 0.3rem;
         border-style: solid;
-        border-width: .1rem;
+        border-width: 1px;
         font-size: 0.9rem;
         padding: 0.2rem 0.25rem;
         height: auto;
     }
     input[type="text"]:focus {
         font-weight: 400;
-        outline-width: .1rem;
+        outline-width: 1px;
         outline-style: solid;
     }
     main {
@@ -20,7 +20,7 @@
         grid-area: main;
         section {
             padding: 1rem;
-            border-width: 0.1rem;
+            border-width: 1px;
             border-style: solid;
             border-radius: .4rem;
             width: 100%;
@@ -50,9 +50,9 @@
 
                     width: auto;
                     height: auto;
-                    padding: 0.1rem 1.5rem;
+                    padding: 1px 1.5rem;
                     border-style: solid;
-                    border-width: 0.1rem;
+                    border-width: 1px;
                     border-radius: 0.3rem;
 
                     transition: 150ms;
@@ -73,12 +73,12 @@
             gap: 1rem;
             #contServicos {
                 border-radius: .3rem;
-                border: .1rem solid var(--marrom1);
+                border: 1px solid var(--marrom1);
                 #headContServicos {
                     color: var(--salmao3);
                     border-radius: .3rem .3rem 0 0;
                     background-color: var(--marrom1);
-                    padding: .1rem .5rem;
+                    padding: 1px .5rem;
                 }
                 #listServicos {
                     padding: .5rem;
@@ -92,7 +92,7 @@
                         cursor: pointer;
                         padding: 0.3rem;
                         border-style: solid;
-                        border-width: 0.1rem;
+                        border-width: 1px;
                         border-radius: 0.3rem;
                         background-color: var(--salmao2);
                         h4 {
@@ -118,12 +118,12 @@
             gap: 1rem;
             border-radius: .3rem;
             #contEspecialidades {
-                border: .1rem solid var(--marrom1);
+                border: 1px solid var(--marrom1);
                 border-radius: .3rem;
                 #headContEspecialidades {
                     color: var(--salmao3);
                     background-color: var(--marrom1);
-                    padding: .1rem .5rem;
+                    padding: 1px .5rem;
                     border-radius: .3rem .3rem 0 0;
                 }
                 #listEspecialidades {
@@ -158,7 +158,7 @@
             gap: 0.3rem;
             font-size: 0.92rem;
             border-style: solid;
-            border-width: 0.1rem;
+            border-width: 1px;
             border-radius: 0.2rem;
             padding: 0.5rem;
 
@@ -184,13 +184,13 @@
                 textarea {
                     line-height: 1.1rem;
                     border-radius: 0.3rem;
-                    border-width: 0.1rem;
+                    border-width: 1px;
                     border-style: solid;
                     box-shadow: none;
                     transition: 0s;
                 }
                 textarea:focus {
-                    outline-width: 0.1rem;
+                    outline-width: 1px;
                     outline-style: solid;
                 }
             }
@@ -215,10 +215,10 @@
                         font-size: 0.9rem;
                         font-weight: 600;
                         
-                        padding: 0.1rem 1rem;
+                        padding: 1px 1rem;
                         border-radius: 0.3rem;
                         border-style: solid;
-                        border-width: 0.1rem;
+                        border-width: 1px;
                     }
                     
                 }
@@ -230,7 +230,7 @@
                     width: 100%;
                     height: auto;
                     border-style: solid;
-                    border-width: 0.1rem;
+                    border-width: 1px;
                     border-radius: 0.3rem;
                     padding: 0.5rem;
                     box-sizing: border-box;
@@ -241,7 +241,7 @@
                         justify-content: center;
                         font-weight: 500;
                         font-size: 0.89rem;
-                        padding: 0.1rem 0.5rem;
+                        padding: 1px 0.5rem;
                         border: 0.15rem solid;
                         border-radius: 0.4rem;
                         overflow: hidden;
@@ -255,7 +255,7 @@
             justify-content: center;
             gap: 1rem;
             border-style: solid;
-            border-width: 0.1rem;
+            border-width: 1px;
             
             border-radius: 0.2rem;
             padding: 0.5rem;
@@ -271,9 +271,9 @@
                 height: auto;
                 width: auto;
                 border-style: solid;
-                border-width: 0.1rem;
+                border-width: 1px;
                 border-radius: 0.3rem;
-                padding: 0.1rem 1rem;
+                padding: 1px 1rem;
 
                 transition: 100ms;
             }
@@ -296,7 +296,7 @@
             justify-content: center;
             flex-direction: column;
             gap: 0.5rem;
-            border-width: 0.1rem;
+            border-width: 1px;
             border-style: solid;
             border-radius: 0.2rem;
             padding: 0.5rem;
@@ -310,13 +310,13 @@
                 textarea {
                     line-height: 1.1rem;
                     border-radius: 0.3rem;
-                    border-width: 0.1rem;
+                    border-width: 1px;
                     border-style: solid;
                     box-shadow: none;
                     transition: 0s;
                 }
                 textarea:focus {
-                    outline-width: 0.1rem;
+                    outline-width: 1px;
                     outline-style: solid;
                 }
                 
@@ -325,7 +325,7 @@
         #contEspecsConfigServ {
             display: flex;
             flex-direction: column;
-            border-width: 0.1rem;
+            border-width: 1px;
             border-style: solid;
             
             border-radius: 0.2rem;
@@ -345,7 +345,7 @@
 
                     padding: 0.2rem 0.5rem;
                     border-style: solid;
-                    border-width: 0.1rem;
+                    border-width: 1px;
                     border-radius: 0.3rem;
                 }
             }
@@ -361,7 +361,7 @@
                     align-items: center;
                     padding: 0.2rem 0.5rem;
                     border-radius: 0.4rem;
-                    border-width: .1rem;
+                    border-width: 1px;
                     border-style: solid;
                     width: 100%;
                     p {
@@ -410,7 +410,7 @@
             display: flex;
             justify-content: center;
             gap: 1rem;
-            border-width: 0.1rem;
+            border-width: 1px;
             border-style: solid;
             
             border-radius: 0.2rem;
@@ -427,9 +427,9 @@
                 height: auto;
                 width: auto;
                 border-style: solid;
-                border-width: 0.1rem;
+                border-width: 1px;
                 border-radius: 0.3rem;
-                padding: 0.1rem 1rem;
+                padding: 1px 1rem;
 
                 transition: 100ms;
             }
@@ -524,13 +524,13 @@
                     background-color: var(--branco);
                     border-color: var(--marrom1);
                     .ant-color-picker-color-block {
-                        border: .1rem solid;
+                        border: 1px solid;
                         border-color: var(--marrom1);
                     }
                 }
                 #inpCorFundo:focus, #inpCorLetra:focus {
                     border-color: var(--laranja);
-                    outline: .1rem solid var(--laranja);
+                    outline: 1px solid var(--laranja);
                 } 
             }
             #headPreVisu {
@@ -640,11 +640,11 @@
 }
 .ant-color-picker {
     .ant-popover-inner {
-        border: .1rem solid;
+        border: 1px solid;
         border-color: var(--marrom1);
         background-color: var(--branco);
         .ant-color-picker-select {
-            border: .1rem solid var(--marrom1);
+            border: 1px solid var(--marrom1);
             border-radius: .35rem;
         }
     }

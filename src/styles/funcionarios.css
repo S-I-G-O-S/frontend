@@ -12,12 +12,12 @@
             grid-area: sec1;
             max-width: 95%;
             max-height: 95%;
-            
-            padding: 1rem;
+            /* FIXME ADOT GLOBAL SECTION */
+            /* padding: 1rem; */
             padding-bottom: 0.5rem;
-            border-width: 0.1rem;
-            border-style: solid;
-            border-radius: 0.4rem;
+            /* border-width: 1px; */
+            /* border-style: solid; */
+            /* border-radius: 0.4rem; */
             #contEspecsNovoFunc {
                 display: flex;
                 align-items: center;
@@ -41,12 +41,10 @@
                     border-width: 0.1rem;
                     border-radius: 0.3rem;
                     
-
                     #goToEspecialidades {
                         all: unset;
                     }
                 }
-                
             }
             #contFiltros {
                 display: flex;
@@ -72,7 +70,7 @@
                         padding: .1rem .3rem;
                         border-style: solid;
                         border-radius: 0.3rem 0 0 0.3rem;
-                        border-width: 0.1rem;
+                        border-width: 1px;
                         height: auto;
                         line-height: 1.1rem;
                     }
@@ -85,7 +83,7 @@
                         cursor: pointer;
                         padding: 0.1rem 0.3rem;
                         border-style: solid;
-                        border-width: 0.1rem;
+                        border-width: 1px;
                         border-radius: 0 0.3rem 0.3rem 0;
                         height: 1.2rem;
                     }
@@ -177,7 +175,7 @@
                     gap: 0;
                     overflow-x: auto;
                     border-style: solid;
-                    border-width: 0.1rem;
+                    border-width: 1px;
                     border-collapse: collapse;
                     border-spacing: 0;
                     width: 100%;
@@ -198,7 +196,7 @@
                         .funcs {
                             font-size: 0.9rem;
                             box-sizing: border-box;
-                            border-top-width: 0.1rem;
+                            border-top-width: 1px;
                             border-top-style: solid;
                             cursor: pointer;
                             td {
@@ -214,7 +212,7 @@
                             .cl4,
                             .cl5 {
                                 border-right-style: solid;
-                                border-right-width: 0.1rem;
+                                border-right-width: 1px;
                             }
                             .cl6 {
                                 /* display: flex; */

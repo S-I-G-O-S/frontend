@@ -16,7 +16,7 @@
             
             padding: 1rem;
             padding-bottom: 0.5rem;
-            border-width: 0.1rem;
+            border-width: 1px;
             border-style: solid;
             border-radius: 0.4rem;
 
@@ -37,7 +37,7 @@
                     width: auto;
                     padding: 0.2rem 2rem;
                     border-style: solid;
-                    border-width: 0.1rem;
+                    border-width: 1px;
                     border-radius: 0.3rem;
 
                     transition: 150ms;
@@ -55,7 +55,7 @@
 
                     border-spacing: 0;
                     border-style: solid;
-                    border-width: 0.1rem;
+                    border-width: 1px;
                     border-collapse: collapse;
                     #cabecalho {
                         height: auto;
@@ -72,7 +72,7 @@
                         .clientes {
                             height: auto;
                             border-style: solid;
-                            border-width: 0.1rem;
+                            border-width: 1px;
 
                             .nome,
                             .cnpj,
@@ -85,7 +85,7 @@
 
                                 padding: 0.15rem 0.5rem;
                                 border-right-style: solid;
-                                border-right-width: 0.1rem;
+                                border-right-width: 1px;
 
                             }
 
@@ -127,7 +127,7 @@
             gap: 0.5rem;
             padding: 1rem;
             border-style: solid;
-            border-width: 0.1rem;
+            border-width: 1px;
             border-radius: 0.5rem;
             
             height: min-content;
@@ -141,7 +141,7 @@
                 gap: 0.2rem;
                 padding: 1rem;
                 border-style: solid;
-                border-width: 0.1rem;
+                border-width: 1px;
                 border-radius: 0.3rem;
                 
                 div {
@@ -174,7 +174,7 @@
                 gap: 1rem;
                 padding: 1rem;
                 border-style: solid;
-                border-width: 0.1rem;
+                border-width: 1px;
                 border-radius: 0.3rem;
                 button {
                     display: flex;
@@ -186,9 +186,8 @@
                     height: 1.5rem;
                     width: 8rem;
                     border-style: solid;
-                    border-width: 0.1rem;
+                    border-width: 1px;
                     border-radius: 0.3rem;
-
                     transition: 150ms;
                 }
                 button:hover {
