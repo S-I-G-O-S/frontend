@@ -13,7 +13,7 @@
         gap: 0.5rem;
         section {
             padding: 1rem;
-            border-width: 0.1rem;
+            border-width: 1px;
             border-style: solid;
             border-radius: 10px;
             h2 {
@@ -21,13 +21,6 @@
                 margin: 0;
                 margin-bottom: 1.5rem;
             }
-            /* #contGeralFunc,
-            #contEndFunc,
-            #contControle,
-            #contAddEspecFunc
-            {
-                
-            } */
         }
         #secInfos {
             display: flex;
@@ -38,7 +31,7 @@
             #contGeralFunc,
             #contEndFunc,
             #contControle {
-                border-width: 0.1rem;
+                border-width: 1px;
                 border-style: solid;
                 border-radius: 0.3rem;
                 padding: 0.5rem;
@@ -124,7 +117,7 @@
                     
                     height: 1.5rem;
                     width: 8rem;
-                    border-width: 0.1rem;
+                    border-width: 1px;
                     border-style: solid;
                     border-radius: 0.3rem;
 
@@ -142,7 +135,7 @@
             box-sizing: border-box;
             div {
                 padding: 0.3rem;
-                border-width: 0.1rem;
+                border-width: 1px;
                 border-style: solid;
                 border-radius: 0.25rem;
             }

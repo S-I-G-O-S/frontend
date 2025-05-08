@@ -401,10 +401,10 @@ function Funcionario() {
                 <main>
                     {
                         !funcionario ?
-                            <section id='secInfos'>
+                            <section id='secInfos' className='section'>
                                 <Loading></Loading>
                             </section> :
-                            <section id='secInfos'>
+                            <section id='secInfos' className='section'>
                                 <h2>Informações gerais</h2>
                                 {/* Infos do funcionarios */}
                                 <div id='contGeralFunc'>
@@ -553,7 +553,7 @@ function Funcionario() {
                                 </div>
                             </section>
                     }
-                    <section id='secEspecialidades'>
+                    <section id='secEspecialidades' className='section'>
                         <h2>Especialidades</h2>
                         <div id='contAddEspecFunc'>
                             {/* pesquisar */}

@@ -10,7 +10,7 @@
         gap: 0.5rem;
         section {
             padding: 1rem;
-            border-width: 0.1rem;
+            border-width: 1px;
             border-style: solid;
             border-radius: 0.3rem;
             h2 {
@@ -30,15 +30,15 @@
             }
             input {
                 font-size: 0.9rem;
-                padding: 0.1rem 0.3rem;
-                border-width: 0.1rem;
+                padding: 1px 0.3rem;
+                border-width: 1px;
                 border-style: solid;
                 border-radius: 0.3rem;
             }
             #geral,
             #endereco,
             #fimAcao {
-                border-width: 0.1rem;
+                border-width: 1px;
                 border-style: solid;
                 border-radius: 0.3rem;
                 padding: 0.5rem;
@@ -68,7 +68,6 @@
                 flex-wrap: wrap;
                 column-gap: 0.5rem;
                 row-gap: 0.3rem;
-
                 padding: 0.5rem;
                 div {
                     display: flex;
@@ -89,13 +88,13 @@
                         align-content: center;
                         justify-items: center;
                         font-size: 0.9rem;
-                        padding: 0.1rem 0.5rem;
-                        border-width: 0.1rem;
+                        padding: 1px 0.5rem;
+                        border-width: 1px;
                         border-style: solid;
                         border-radius: 0.3rem;
                     }
                     button:focus {
-                        outline-width: 0.1rem;
+                        outline-width: 1px;
                         outline-style: solid;
                     }
                 }
@@ -138,8 +137,8 @@
                     
                     height: auto;
                     width: auto;
-                    padding: 0.1rem 1.5rem;
-                    border-width: 0.1rem;
+                    padding: 1px 1.5rem;
+                    border-width: 1px;
                     border-style: solid;
                     border-radius: 0.3rem;
 
@@ -147,10 +146,9 @@
                 }
                 button:focus {
                     text-decoration: underline;
-                    outline-width: 0.1rem;
+                    outline-width: 1px;
                     outline-style: solid;
                 }
-                
             }
         }
         #secContatos {
@@ -195,7 +193,7 @@
                     font-weight: 500;
                     padding: 0.25rem 0.99rem;
                     border-style: solid;
-                    border-width: 0.1rem;
+                    border-width: 1px;
                     border-radius: 0.5rem;
                     
                     .contContatoLeft {
@@ -207,7 +205,7 @@
                         }
                         p {
                             font-size: 0.75rem;
-                            letter-spacing: 0.1rem;
+                            letter-spacing: 1px;
                         }
                     }
                     .contContatoRight {
@@ -225,11 +223,11 @@
                             font-size: 0.9rem;
                             padding: 0.2rem 0.5rem;
                             border-style: solid;
-                            border-width: 0.1rem;
+                            border-width: 1px;
                             border-radius: 0.3rem;
                         }
                         button:focus {
-                            outline-width: 0.1rem;
+                            outline-width: 1px;
                             outline-style: solid;
                         }
                         #iconMaisContato {
@@ -237,7 +235,7 @@
                             align-items: center;
                             justify-content: center;
                             box-sizing: border-box;
-                            padding: 0 0.1rem;
+                            padding: 0 1px;
                         }
                         #iconMaisContato svg {
                             height: 1.1rem;
@@ -331,33 +329,25 @@
         }
         #secHistorico {
             grid-area: sec3;
-        }
-        #secHistorico > h2 {
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-        }
-        #contListHistoricos {
-            border-style: solid;
-            border-width: 0.1rem;
-            border-collapse: collapse;
-            border-spacing: 0;
-            width: 100%;
-
-        }
-        /* #contListHistoricos 
-        th, td {
-            font-weight: 400;
-            padding: 0.1rem 0.2rem;
-            text-align: center;
-            border: 0.1rem solid;
-        } */
-        thead th{
-            font-weight: 400;
-        }
-        tbody td {
-            font-size: 0.95rem;
-            text-align: center;
-        }
+                h2 {
+                    font-size: 1.1rem;
+                    margin-bottom: 1.5rem;
+                }
+                #contListHistoricos {
+                    border-style: solid;
+                    border-width: 1px;
+                    border-collapse: collapse;
+                    border-spacing: 0;
+                    width: 100%;
+                }
+                thead th{
+                    font-weight: 400;
+                }
+                tbody td {
+                    font-size: 0.95rem;
+                    text-align: center;
+                }
+        } 
     }
     #shadowBG {
         display: flex;
@@ -387,7 +377,7 @@
                     display: block;
                     align-content: center;
                     justify-items: center;
-                    padding: 0.1rem 0.3rem;
+                    padding: 1px 0.3rem;
                     border-radius: 0.3rem;
                     transition: 200ms;
                     svg {
@@ -403,7 +393,7 @@
                 padding: 0.5rem 1rem;
                 border-radius: 0.3rem;
                 border-style: solid;
-                border-width: 0.1rem;
+                border-width: 1px;
                 div {
                     display: grid;
                     grid-template-columns: min-content auto;
@@ -413,8 +403,8 @@
                     }
                     input {
                         font-size: 0.9rem;
-                        padding: 0.1rem 0.3rem;
-                        border-width: 0.1rem;
+                        padding: 1px 0.3rem;
+                        border-width: 1px;
                         border-style: solid;
                         border-radius: 0.3rem;
                     }
@@ -426,7 +416,7 @@
                 padding: 0.5rem 1rem;
                 border-radius: 0.3rem;
                 border-style: solid;
-                border-width: 0.1rem;
+                border-width: 1px;
                 button {
                     display: flex;
                     align-items: center;
@@ -439,7 +429,7 @@
                     width: 7rem;
                     padding: 0.3rem 0.5rem;
                     border-style: solid;
-                    border-width: 0.1rem;
+                    border-width: 1px;
                     border-radius: 0.3rem;
                     
                     transition: 150ms;
@@ -468,7 +458,7 @@
         }
         input:focus {
             outline-color: var(--marrom1);
-            outline-width: 0.1rem;
+            outline-width: 1px;
             outline-style: solid;
         }
         #geral,
@@ -619,7 +609,7 @@
                 }
                 input:focus {
                     outline-color: var(--marrom1);
-                    outline-width: 0.1rem;
+                    outline-width: 1px;
                     outline-style: solid;
                 }
             }
@@ -675,7 +665,6 @@
             cursor: pointer;
             font-size: 0.95rem;
             font-weight: 500;
-            
 
             height: 1.5rem;
             width: 80%;
@@ -684,7 +673,6 @@
 
             transition: 150ms;
         }
-        
         button:hover {
             width: 90%;
         }

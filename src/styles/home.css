@@ -39,7 +39,7 @@
             .funcsDisp {
                 display: flex;
                 padding: 0.1rem  0.5rem;
-                border: 0.1rem solid var(--marrom1);
+                border: 1px solid var(--marrom1);
                 border-radius: 0.3rem;
                 background-color: var(--salmao3);
                 .nomeFunc {
@@ -61,7 +61,7 @@
                 flex-basis: 20rem;
                 
                 padding: 0 0.2rem;
-                border: 0.1rem solid;
+                border: 1px solid;
                 border-radius: 0.4rem;
                 max-width: 50%;
                 height: min-content;
@@ -71,7 +71,7 @@
                     justify-content: space-between;
                     
                     padding: 0.5rem 0.7rem;
-                    border-bottom: 0.1rem solid;
+                    border-bottom: 1px solid;
                     .titulo {
                         font-size: 0.95rem;
                         font-weight: 500;
@@ -93,7 +93,7 @@
                         
                         padding: 0.2rem 0.3rem;
                         border-style: solid;
-                        border-width: .1rem;
+                        border-width: 1px;
                         border-radius: 5px;
 
                         cursor: pointer;

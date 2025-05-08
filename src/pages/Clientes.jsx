@@ -26,7 +26,7 @@ function Clientes() {
 			<Nav cargo={usuario?.cargo || ''}></Nav>
 			<main id='mainClientes'>
 				{/* Listagem */}
-				<section id='secListClientes'>
+				<section id='secListClientes' className='section'>
 					{(usuario.cargo == 'ADM' || usuario.cargo == 'DEV') && (
 						<div id='containerH2Novo'>
 							<button onClick={() => setViewModalNovoCliente(true)}>Novo cliente</button>
