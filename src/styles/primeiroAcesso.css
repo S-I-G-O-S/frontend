@@ -50,17 +50,17 @@
             .senhas {
                 font-size: 0.97rem;
                 border-style: solid;
-                border-width: 0.1rem;
+                border-width: 1px;
                 border-radius: 0.3rem;
                 background-color: var(--branco);
                 border-color: var(--laranja);
                 input {
-                    padding: 0.15rem 0.1rem 0.15rem 0.4rem;
+                    padding: 0.15rem 1px 0.15rem 0.4rem;
                     border-radius: 0.3rem;
                 }
                 button {
                     cursor: pointer;
-                    padding: 0.1rem 0.3rem;
+                    padding: .1rem 0.3rem;
                     height: 100%;
                     border-radius: 0 0.3rem 0.3rem 0;
                 }
@@ -68,7 +68,7 @@
                     background-color: var(--salmao2);
                 }
                 button:focus {
-                    outline-width: 0.1rem;
+                    outline-width: 1px;
                     outline-style: solid;
                     outline-color: var(--laranja);
 
@@ -92,7 +92,7 @@
                 width: auto;
                 height: auto;
                 border-radius: 5px;
-                border-width: 0.1rem;
+                border-width: 1px;
                 border-style: solid;
                 margin: 0.5rem 0;
                 

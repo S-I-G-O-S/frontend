@@ -218,7 +218,7 @@
                     flex-basis: 0;
                     
                     padding: 0 0.2rem;
-                    border: 0.1rem solid;
+                    border: 1px solid;
                     border-radius: 0.4rem;
                     max-width: 100%;
                 }

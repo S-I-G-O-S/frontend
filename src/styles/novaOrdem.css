@@ -7,7 +7,7 @@
         section {
             min-width: 30rem;
             padding: 1rem 2rem;
-            border: 0.1rem solid;
+            border: 1px solid;
             border-radius: 0.3rem;
         }
 
@@ -22,7 +22,7 @@
                     font-size: 0.9rem;
                     background-color: var(--branco);
                     border-radius: 0.3rem;
-                    border-width: 0.1rem;
+                    border-width: 1px;
                     border-style: solid;
                     border-radius: 0.3rem;
                 }
@@ -35,14 +35,14 @@
                 gap: 0.3rem;
                 font-size: 0.9rem;
 
-                padding: 0.1rem 0.5rem;
-                border-width: 0.1rem;
+                padding: 1px 0.5rem;
+                border-width: 1px;
                 border-style: solid;
                 border-radius: 0.3rem;
             }
 
             button:focus {
-                outline-width: 0.1rem;
+                outline-width: 1px;
                 outline-style: solid;
             }
 
@@ -58,7 +58,7 @@
 
                 padding: 0.9rem;
                 border-style: solid;
-                border-width: 0.1rem;
+                border-width: 1px;
                 border-radius: 0.3rem;
             }
 
@@ -68,7 +68,7 @@
                 font-size: 0.9rem;
 
                 padding: 0.5rem 1rem;
-                border-width: 0.1rem;
+                border-width: 1px;
                 border-style: solid;
                 border-radius: 0.3rem;
 
@@ -89,7 +89,7 @@
                 gap: 0.5rem;
                 align-items: center;
                 padding: 0.9rem;
-                border-width: 0.1rem;
+                border-width: 1px;
                 border-style: solid;
                 border-radius: 0.3rem;
             }
@@ -100,7 +100,7 @@
                 font-size: 0.9rem;
 
                 padding: 0.5rem 1rem;
-                border-width: 0.1rem;
+                border-width: 1px;
                 border-style: solid;
                 border-radius: 0.3rem;
 
@@ -117,7 +117,7 @@
                 padding: 0.9rem;
                 padding-top: 0;
                 border-style: solid;
-                border-width: 0.1rem;
+                border-width: 1px;
                 border-radius: 0.3rem;
 
                 h3 {
@@ -138,7 +138,7 @@
                 font-size: 0.9rem;
 
                 padding: 0.5rem 1rem;
-                border-width: 0.1rem;
+                border-width: 1px;
                 border-style: solid;
                 border-radius: 0.3rem;
             }
@@ -149,24 +149,24 @@
                 gap: 0.5rem;
 
                 padding: 0.9rem;
-                border-width: 0.1rem;
+                border-width: 1px;
                 border-style: solid;
                 border-radius: 0.3rem;
                 border-color: var(--salmao1);
 
                 textarea {
                     border-radius: 0.3rem;
-                    border-width: 0.1rem;
+                    border-width: 1px;
                     border-style: solid;
                     transition: 0s;
                 }
 
                 textarea:focus {
-                    outline-width: 0.1rem;
+                    outline-width: 1px;
                     outline-style: solid;
 
                     border-radius: 0.3rem;
-                    border-width: 0.1rem;
+                    border-width: 1px;
                     border-style: solid;
                 }
             }
@@ -185,13 +185,13 @@
                     font-size: 0.9rem;
 
                     padding: 0.2rem 1.5rem;
-                    border-width: 0.1rem;
+                    border-width: 1px;
                     border-style: solid;
                     border-radius: 0.3rem;
                 }
 
                 button:focus {
-                    outline-width: 0.1rem;
+                    outline-width: 1px;
                     outline-style: solid;
                 }
 
@@ -233,7 +233,7 @@
             .ant-select-selector {
                 border-color: var(--laranja);
                 outline-color: var(--laranja);
-                outline-width: 0.1rem;
+                outline-width: 1px;
                 outline-style: solid;
             }
         }
