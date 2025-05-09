@@ -1,11 +1,11 @@
 import { CloseOutlined } from '@ant-design/icons'
-import { Children } from 'react'
 
 const Modal = (props) => {
     const title = props?.title || ""
     const hasCloseBtt = props?.closeButton || false
     const closeModal = props?.closeModal || console.error("Sem função para fechar a janela")
     return (
+        
         <div className="shadowBG">
             <div className='publicModal'>
                 <div className="headerModal">
@@ -17,7 +17,7 @@ const Modal = (props) => {
                         </button>
                     }
                 </div>
-                {Children}
+                {props.children}
             </div>
         </div>
     )
