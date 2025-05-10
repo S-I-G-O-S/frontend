@@ -4,7 +4,6 @@ import Negocio from '@assets/negocio.png'
 import Analise from '@assets/analise.png'
 import { loginFunc } from '@services/backend/authAPI'
 import { useAuth } from '@context/authContext'
-import config from '@services/config.js'
 
 import { useEffect, useRef, useState } from 'react'
 import { notification } from 'antd'
@@ -85,11 +84,7 @@ function Login() {
         if (result.response.data.funcionario.ultimaAtividade == null) {
             // setPrimeiroAcesso(true)
             setLoading(false)
-            if (config.configNovoUsuario) {
-                navigate("/novo-usuario")
-            } else {
-                navigate("/home", { replace: true })
-            }
+            navigate("/novo-usuario")
             return
         }
         navigate("/home", { replace: true })

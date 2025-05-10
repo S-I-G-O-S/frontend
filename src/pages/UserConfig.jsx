@@ -2,7 +2,6 @@ import Nav from '@components/public/Nav.jsx'
 import '@styles/userConfig.css'
 import { useEffect, useState } from 'react'
 import Loading from '@components/public/Loading.jsx'
-import { getDeployStatus } from '@services/renderAPI.js'
 import { usePreferencias } from '@context/PreferenciasContext.jsx'
 import ChangeInfos from '../components/UserConfig/ChangeInfos.jsx'
 import ChangeSenha from '../components/UserConfig/ChangeSenha.jsx'
@@ -23,14 +22,6 @@ function UserConfig() {
             ...prevState,
             tema: tema
         }))
-    }
-    const fetchRender = async () => {
-        try {
-            const result = await getDeployStatus()
-            console.warn(result)
-        } catch (err) {
-            console.error(err)
-        }
     }
     useEffect(() => {
         console.clear()
