@@ -1,24 +1,33 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-// Cria o contexto
 const PreferenciasContext = createContext();
 
-// Provedor do contexto
 export const PreferenciasProvider = ({ children }) => {
-    const [sessPreferencias, setSessPreferencias] = useState(() => {
+    const [preferencias, setPreferencias] = useState(() => {
         const storedPreferencias = sessionStorage.getItem('preferencias')
         return storedPreferencias
             ? JSON.parse(storedPreferencias)
             : {
                 tema: 'salmaoLight',
-                abertoNav: true,
+                viewNav: true,
             }
     })
-
+    const changeNav = () => {
+        setPreferencias(prevState => ({
+            ...prevState,
+            viewNav: !preferencias.viewNav
+        }))
+    }
+    const changeTema = (tema) => {
+        setPreferencias(prevState => ({
+            ...prevState,
+            tema: tema
+        }))
+    }
     useEffect(() => {
         // console.log('Mudando tema para: '+ sessPreferencias.tema)
-        sessionStorage.setItem('preferencias', JSON.stringify(sessPreferencias));
-    }, [sessPreferencias]);
+        sessionStorage.setItem('preferencias', JSON.stringify(preferencias))
+    }, [preferencias])
     /*
     useEffect(() => {
         let linkElement = document.getElementById('themeCSS')
@@ -34,13 +43,12 @@ export const PreferenciasProvider = ({ children }) => {
     }, [sessPreferencias.tema])
     */
     return (
-        <PreferenciasContext.Provider value={{ sessPreferencias, setSessPreferencias }}>
+        <PreferenciasContext.Provider value={{ preferencias, changeNav, changeTema, tema: preferencias.tema, viewNav: preferencias.viewNav }}>
             {children}
         </PreferenciasContext.Provider>
-    );
-};
+    )
+}
 
-// Hook para usar o contexto
 export const usePreferencias = () => {
     return useContext(PreferenciasContext);
 };

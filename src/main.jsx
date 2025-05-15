@@ -15,7 +15,6 @@ function App() {
 		<AuthProvider>
 			<UsuarioProvider>
 				<PreferenciasProvider>
-					{/* O Suspense exibe um fallback enquanto o componente é carregado */}
 					<Suspense fallback={<Loading texto={"carregando SIGOS"} />}>
 						<AppRoutes />
 					</Suspense>

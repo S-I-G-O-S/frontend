@@ -1,30 +1,20 @@
 import '@styles/public/nav.css'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import navLeft  from '@assets/navLeft.png'
 import navRight  from '@assets/navRight.png'
 // import homeIcon from '@assets/homeIcon.png'
-import { useEffect, useState } from 'react'
 import { FundFilled, HomeFilled, IdcardFilled, LeftCircleFilled, LogoutOutlined, ReadFilled, RightCircleFilled, ScheduleFilled, SettingFilled, SettingOutlined, ShoppingFilled, TagFilled }  from '@ant-design/icons'
-import { IconFuncionarios } from './IconsSVG'
 import { usePreferencias } from '@context/PreferenciasContext'
-import { logoutFunc } from '@backend/authAPI'
 import { useAuth } from '@context/authContext'
-import { deleteCookie } from '@services/cookies'
 
 function Nav({ cargo }) {
-    const { setToken, logout } = useAuth()
-    const { sessPreferencias, setSessPreferencias } = usePreferencias()
-    const changeNav = () => {
-        setSessPreferencias(prevState => ({
-            ...prevState,
-            abertoNav: !sessPreferencias.abertoNav
-        }))
-    }
+    const { logout } = useAuth()
+    const { changeNav, viewNav } = usePreferencias()
     const handleLogout = async () => {
         logout()
     }
     return (
-        <nav id='nav' className={sessPreferencias.abertoNav ? "navAberto" : "navFechado"}>
+        <nav id='nav' className={viewNav ? "navAberto" : "navFechado"}>
             {/* 
                 <RightCircleFilled />
                 <LeftCircleFilled /> 
@@ -39,8 +29,9 @@ function Nav({ cargo }) {
             {
                 true ? 
                 <img id="bttNav" 
-                src={sessPreferencias.abertoNav ? navLeft : navRight}
-                onClick={changeNav} className={sessPreferencias.abertoNav ? "navFechar" : "navAbrir"}/>
+                src={viewNav ? navLeft : navRight}
+                onClick={changeNav} 
+                className={viewNav ? "navFechar" : "navAbrir"}/>
                 :
                 <></>
             }

@@ -16,13 +16,7 @@ function UserConfig() {
     const [modalChangeInfos, setModalChangeInfos] = useState(false)
     const {checkAuth} = useAuth()
     const {usuario} = getUsuarioContext()
-    const { sessPreferencias, setSessPreferencias } = usePreferencias()
-    const changeTheme = (tema) => {
-        setSessPreferencias(prevState => ({
-            ...prevState,
-            tema: tema
-        }))
-    }
+    const { preferencias, changeTema } = usePreferencias()
     useEffect(() => {
         console.clear()
         checkAuth()
@@ -31,7 +25,6 @@ function UserConfig() {
     }, [])
     return (
         <div id='pageUserConfig' className='paginas'>
-        {/* <Header titulo={"Configurações"} usuario={usuario}></Header> */}
         <Nav cargo={usuario?.cargo || ''}></Nav>
         <main id="mainUserConfig">
         {
@@ -78,8 +71,8 @@ function UserConfig() {
                     <h3>Preferências</h3>
                     <label>Tema: </label>
                     <select name="" id="" 
-                        onChange={(e) => changeTheme(e.target.value)} 
-                        value={sessPreferencias.tema}>
+                        onChange={(e) => changeTema(e.target.value)} 
+                        value={preferencias.tema}>
                         {/* <option value="" disabled hidden selected>--</option> */}
                         <option value="salmaoLight">salmão claro</option>
                         <option value="salmaoDark">salmão noturno</option>
@@ -102,7 +95,9 @@ function UserConfig() {
         {
             modalChangeInfos &&
             <div className='shadowBG'>
-                <ChangeInfos changeModal={setModalChangeInfos}></ChangeInfos>
+                <ChangeInfos
+                    view={modalChangeInfos}
+                    changeModal={setModalChangeInfos}/>
             </div>
         }
         {
