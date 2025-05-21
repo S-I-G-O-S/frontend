@@ -126,7 +126,7 @@ function Nav({ cargo }) {
                     <NavLink
                         className={"links"}
                         id='goToGrafana'
-                        to={"https://sigostcc.grafana.net/"}
+                        to={"https://sigostcc.grafana.net/public-dashboards/4d3c8e50238d4189af97a88cfe14f968"}
                         title='Análise'
                         target='_blank'
                         >
