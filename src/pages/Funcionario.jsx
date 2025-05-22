@@ -219,7 +219,7 @@ function Funcionario() {
         }));
     }
     const formatNome = () => {
-        const nomeSanitizado = funcionario.nome.trim().replace(/[^a-zA-Z\s]/g, '');
+        const nomeSanitizado = funcionario.nome.trim().replace(/[^\p{L}\s]/gu, '')   
 
         if (!nomeSanitizado) {
             return false;
