@@ -2,7 +2,6 @@ import Nav from '@components/public/Nav.jsx'
 import '@styles/userConfig.css'
 import { useEffect, useState } from 'react'
 import Loading from '@components/public/Loading.jsx'
-import { getDeployStatus } from '@services/renderAPI.js'
 import { usePreferencias } from '@context/PreferenciasContext.jsx'
 import ChangeInfos from '../components/UserConfig/ChangeInfos.jsx'
 import ChangeSenha from '../components/UserConfig/ChangeSenha.jsx'
@@ -17,21 +16,7 @@ function UserConfig() {
     const [modalChangeInfos, setModalChangeInfos] = useState(false)
     const {checkAuth} = useAuth()
     const {usuario} = getUsuarioContext()
-    const { sessPreferencias, setSessPreferencias } = usePreferencias()
-    const changeTheme = (tema) => {
-        setSessPreferencias(prevState => ({
-            ...prevState,
-            tema: tema
-        }))
-    }
-    const fetchRender = async () => {
-        try {
-            const result = await getDeployStatus()
-            console.warn(result)
-        } catch (err) {
-            console.error(err)
-        }
-    }
+    const { preferencias, changeTema } = usePreferencias()
     useEffect(() => {
         console.clear()
         checkAuth()
@@ -40,7 +25,6 @@ function UserConfig() {
     }, [])
     return (
         <div id='pageUserConfig' className='paginas'>
-        {/* <Header titulo={"Configurações"} usuario={usuario}></Header> */}
         <Nav cargo={usuario?.cargo || ''}></Nav>
         <main id="mainUserConfig">
         {
@@ -87,8 +71,8 @@ function UserConfig() {
                     <h3>Preferências</h3>
                     <label>Tema: </label>
                     <select name="" id="" 
-                        onChange={(e) => changeTheme(e.target.value)} 
-                        value={sessPreferencias.tema}>
+                        onChange={(e) => changeTema(e.target.value)} 
+                        value={preferencias.tema}>
                         {/* <option value="" disabled hidden selected>--</option> */}
                         <option value="salmaoLight">salmão claro</option>
                         <option value="salmaoDark">salmão noturno</option>
@@ -111,7 +95,9 @@ function UserConfig() {
         {
             modalChangeInfos &&
             <div className='shadowBG'>
-                <ChangeInfos changeModal={setModalChangeInfos}></ChangeInfos>
+                <ChangeInfos
+                    view={modalChangeInfos}
+                    changeModal={setModalChangeInfos}/>
             </div>
         }
         {

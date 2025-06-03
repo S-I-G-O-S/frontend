@@ -7,7 +7,8 @@ import { cepAPI } from '@services/cepAPI.js'
 
 import '@styles/userConfig/changeInfos.css'
 
-export default function ChangeInfos({ changeModal }) {
+export default function ChangeInfos({ view, changeModal }) {
+    if (!view) return null
     const {usuario, attUsuario} = getUsuarioContext()
     const [formUsuario, setFormUsuario] = useState({
         "nome": "",
