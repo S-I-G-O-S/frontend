@@ -50,6 +50,9 @@ function Mapa ({ endereco, closeMap }) {
                 </div>
             </APIProvider>
             <div id="contAcoesMapaOrdem">
+             {/*<button onclick="window.open('https://www.google.com/maps', '_blank')">
+                  Abrir Google Maps
+                </button> */}
                 <button id="bttSair" onClick={closeMap}>sair</button>
             </div>
         </section>
