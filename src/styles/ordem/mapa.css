@@ -1,18 +1,21 @@
 #secMapaOrdem {
     #contMapa {
-        border: .1rem solid var(--marrom1);
+        border: 1px solid var(--marrom1);
         height: 30rem;
         width: 30rem;
     }
     #contAcoesMapaOrdem {
-        display: flex;
-        justify-content: space-around;
-
+        display: grid;
+        /* justify-content: space-around; */
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        column-gap: .5rem;
+        
         padding: .2rem .3rem;
         border: .1rem solid var(--salmao1);
         border-radius: .3rem;
         background-color: var(--salmao3);
-        button {
+        /* button {
             text-align: center;
             min-width: 45%;
             border-radius: .3rem;
@@ -20,9 +23,9 @@
             font-weight: 400;
         }
         #bttSair {
-            color: var(--salmao1);
+            /* color: var(--salmao1); */
             background-color: var(--marrom1);
-        }
+        } */
     }
 }
 @media (width<=550px) {

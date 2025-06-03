@@ -17,6 +17,8 @@ function Mapa ({ endereco, closeMap }) {
             window.google.maps &&
             typeof window.google.maps.Geocoder === "function"
         ) {
+            console.log(formatEndereco)
+            console.log()
             const geocoder = new window.google.maps.Geocoder();
             geocoder.geocode({ address: formatEndereco }, (results, status) => {
                 if (status === "OK" && results[0]) {
@@ -27,6 +29,10 @@ function Mapa ({ endereco, closeMap }) {
             });
         }
     }, [mapsLoaded, formatEndereco])
+    useEffect(() => {
+        if (!position) return
+        console.log("position: " + position)
+    }, [position])
 
     return (
         <section id="secMapaOrdem">
@@ -50,10 +56,10 @@ function Mapa ({ endereco, closeMap }) {
                 </div>
             </APIProvider>
             <div id="contAcoesMapaOrdem">
-             {/*<button onclick="window.open('https://www.google.com/maps', '_blank')">
+                <button className="bttPrimary" onclick="window.open('https://www.google.com/maps', 'blank')">
                   Abrir Google Maps
-                </button> */}
-                <button id="bttSair" onClick={closeMap}>sair</button>
+                </button>
+                <button className="bttPrimary" id="bttSair" onClick={closeMap}>sair</button>
             </div>
         </section>
     )
