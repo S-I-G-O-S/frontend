@@ -112,7 +112,7 @@ function Ordens() {
         setLoading(true)
         const result = await getPageOrdens(pagina, filtros)
         if (!result.success) {
-            console.error(error)
+            console.error(result.error)
             return
         }
         setLoading(false)

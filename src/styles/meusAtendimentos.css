@@ -1,6 +1,6 @@
 #pageMeusAtendimentos {
     h2 {
-        font-size: 1rem;
+        font-size: 14.5px;
         margin-bottom: .5rem;
     }
     main {
@@ -8,24 +8,34 @@
         display: flex;
         flex-direction: column;
         gap: .5rem;
+        #secOrdensAbertas, #secOrdensFechadas {
+            display: flex;
+            flex-direction: column;
+            gap: .3rem;
+            padding: .5rem;
+            border-radius: .3rem;
+            border-width: 1px;
+            border-style: solid;
+            border-color: var(--marrom1);
+            background-color: var(--salmao2);
+        }
+        .cardOrdens {
+            cursor: pointer;
+            font-size: 14px;
+            padding: .2rem .5rem;
+            border-radius: .3rem;
+            border-width: 1px;
+            border-style: solid;
+            border-color: var(--marrom1);
+            background-color: var(--branco);
+        }
     }
-    #secOrdensAbertas, #secOrdensFechadas {
-        display: flex;
-        flex-direction: column;
-        gap: .3rem;
-        padding: .5rem;
-        border-radius: .3rem;
-        border-width: 1px;
-        border-style: solid;
-        border-color: var(--marrom1);
-        background-color: var(--salmao2);
-    }
-    .cardOrdens {
-        padding: .2rem .5rem;
-        border-radius: .3rem;
-        border-width: 1px;
-        border-style: solid;
-        border-color: var(--marrom1);
-        background-color: var(--branco);
+}
+@media screen and (width >= 600px) {
+    #pageMeusAtendimentos >
+    main {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: min-content;
     }
 }

@@ -45,7 +45,7 @@
                 transition: 0.6s;
                 margin: 0;
                 transition: 0.2s;
-                font-size: 1rem;
+                font-size: 14px;
             }
         }
         .links:hover {
@@ -77,7 +77,7 @@
 
             
             #txtSair {
-                font-size: 1.2rem; 
+                font-size: 16px; 
                 font-weight: 500;
                 line-height: 1.1rem;
             }
@@ -120,7 +120,7 @@
                 justify-content: left;
             }
             span {
-                font-size: 0.8rem;
+                font-size: 14px;
             }
         }
     }

@@ -84,7 +84,7 @@ export default function MeusAtendimentos() {
             </section >
             {/* atendimentos finalizados ou cancelados */}
             <section id="secOrdensFechadas">
-                <h2>Ordens arquivadas</h2>
+                <h2>Ordens concluídas</h2>
                 {loading.ordensFechadas ?
                     <Loading/> :
                     <OrdensFechadas ordens={ordensFechadas}/>
