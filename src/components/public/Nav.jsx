@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import navLeft  from '@assets/navLeft.png'
 import navRight  from '@assets/navRight.png'
 // import homeIcon from '@assets/homeIcon.png'
-import { FundFilled, HomeFilled, IdcardFilled, LeftCircleFilled, LogoutOutlined, ReadFilled, RightCircleFilled, ScheduleFilled, SettingFilled, SettingOutlined, ShoppingFilled, TagFilled }  from '@ant-design/icons'
+import { FundFilled, HomeFilled, IdcardFilled, LeftCircleFilled, LeftOutlined, LogoutOutlined, ReadFilled, RightCircleFilled, RightOutlined, ScheduleFilled, SettingFilled, SettingOutlined, ShoppingFilled, TagFilled }  from '@ant-design/icons'
 import { usePreferencias } from '@context/PreferenciasContext'
 import { useAuth } from '@context/authContext'
 
@@ -27,7 +27,7 @@ function Nav({ cargo }) {
                 </button>
             </div>
             {
-                true ? 
+                false ? 
                 <img id="bttNav" 
                 src={viewNav ? navLeft : navRight}
                 onClick={changeNav} 
@@ -35,6 +35,14 @@ function Nav({ cargo }) {
                 :
                 <></>
             }
+            <div id='bttChangeNav' onClick={changeNav}>
+                {viewNav ? 
+                    <LeftOutlined className='iconBttChangeNav'/> :
+                    <RightOutlined className='iconBttChangeNav'/> 
+                }
+
+            </div>
+            
             <div id='containerLinks'>
                 <NavLink
                     className={({ isActive }) => (isActive ? "links active" : "links ")}
