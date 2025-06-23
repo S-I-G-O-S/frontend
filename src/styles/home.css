@@ -56,6 +56,22 @@
             justify-content: center;
             padding: 0;
             border: 0;
+            .contSemOrdens {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 5px;
+                img {
+                    height: auto;
+                    width: 80%;
+                    max-width: 400px;
+                }
+                p {
+                    font-weight: 500;
+                    font-size: 18px;
+                    text-wrap: nowrap;
+                }
+            }
             .contsOrdens {
                 flex-grow: 1;
                 flex-basis: 20rem;

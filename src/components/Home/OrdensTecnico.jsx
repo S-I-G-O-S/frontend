@@ -34,13 +34,14 @@ function OrdensTecnico({idTecnico}) {
     return !ordens ? <Loading/>  : (
         ordens.length==0 ? 
         // TODO Mostrar ao tecnico que ele não tem ordens abertas
-        <div className="constOrdens">
+        <div className="contSemOrdens">
+            <img src="./assets/interrogacao.svg" alt="" />
             <p>sem ordens abertas</p>
         </div> 
         : (
             <div id="contOrdensTecnico" className="contsOrdens">
                 <div className="headContsOrdens">
-                    <div className="titulo">Suas ordens abertas</div>
+                    <div className="titulo">Suas ordens abertas no momento</div>
                     {(ordens.length > 5)  && (
                         <Link className="link" to={'/atendimentos'}>
                             mais {ordens.length - 5}

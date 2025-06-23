@@ -8,24 +8,22 @@ const OrdensAbertas = ({ordens}) => {
         navigate(`/ordem?id=${idOrdem}`)
     }
     if (!ordens || ordens.length==0)  {
-        return (
-            <div>
-                <WarningFilled />
-                <p>sem ordens abertas...</p>
-            </div> 
-        )
+        return null
     } else {
         return (
-            ordens.map((ordem, index) => {
-                return (
-                    <div key={`ordemAberta${index}`} className='ordemAberta cardOrdens' 
-                        onClick={() => handleAbrirOrdem(ordem.id)}>
-                        <div className="dataHora">{converterDtHr(ordem.dtAbertura)}</div>
-                        <div className="nomeCliente">{ordem.cliente}</div>
-                        <div className={`situacao situacao${ordem.situacao}`}>{converterSituacao(ordem.situacao)}</div>
-                        <div className="serviço">{ordem.servico}</div>
-                    </div>
-            )})
+            <section id="secOrdensAbertas">
+                <h2>Ordens abertas</h2>
+                {ordens.map((ordem, index) => {
+                    return (
+                        <div key={`ordemAberta${index}`} className='ordemAberta cardOrdens' 
+                            onClick={() => handleAbrirOrdem(ordem.id)}>
+                            <div className="dataHora">{converterDtHr(ordem.dtAbertura)}</div>
+                            <div className="nomeCliente">{ordem.cliente}</div>
+                            <div className={`situacao situacao${ordem.situacao}`}>{converterSituacao(ordem.situacao)}</div>
+                            <div className="serviço">{ordem.servico}</div>
+                        </div>
+                )})}
+            </section >
         )
     }
 }

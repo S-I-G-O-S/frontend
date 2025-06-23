@@ -75,21 +75,16 @@ export default function MeusAtendimentos() {
         <Nav cargo={usuario?.cargo || ''}></Nav>
         <main id="mainAtendimentos">
             {/* atendimentos abertos */}
-            <section id="secOrdensAbertas">
-                <h2>Ordens abertas</h2>
-                {loading.ordensAbertas  ? 
-                    <Loading></Loading> : 
-                    <OrdensAbertas ordens={ordensAbertas}/>
-                }
-            </section >
+            
+            {loading.ordensAbertas  ? 
+                <Loading></Loading> : 
+                <OrdensAbertas ordens={ordensAbertas}/>
+            }
             {/* atendimentos finalizados ou cancelados */}
-            <section id="secOrdensFechadas">
-                <h2>Ordens concluídas</h2>
-                {loading.ordensFechadas ?
-                    <Loading/> :
-                    <OrdensFechadas ordens={ordensFechadas}/>
-                }
-            </section>
+            {loading.ordensFechadas ?
+                <Loading/> :
+                <OrdensFechadas ordens={ordensFechadas}/>
+            }
         </main>
         </div>
     )

@@ -16,16 +16,19 @@ const OrdensFechadas = ({ordens}) => {
         )
     } else {
         return (
-            ordens.map((ordem, index) => {
-                return (
-                    <div key={`ordemFechada${index}`} className='ordemFechada cardOrdens'
-                        onClick={() => handleAbrirOrdem(ordem.id)}>
-                        <div className="dataHora">{converterDtHr(ordem.dtAbertura)}</div>
-                        <div className="nomeCliente">{ordem.cliente}</div>
-                        <div className={`situacao situacao${ordem.situacao}`}>{converterSituacao(ordem.situacao)}</div>
-                        <div className="serviço">{ordem.servico}</div>
-                    </div>
-            )})
+            <section id="secOrdensFechadas">
+                <h2>Ordens concluídas</h2>
+                {ordens.map((ordem, index) => {
+                    return (
+                        <div key={`ordemFechada${index}`} className='ordemFechada cardOrdens'
+                            onClick={() => handleAbrirOrdem(ordem.id)}>
+                            <div className="dataHora">{converterDtHr(ordem.dtAbertura)}</div>
+                            <div className="nomeCliente">{ordem.cliente}</div>
+                            <div className={`situacao situacao${ordem.situacao}`}>{converterSituacao(ordem.situacao)}</div>
+                            <div className="serviço">{ordem.servico}</div>
+                        </div>
+                )})}
+            </section>
         )
     }
 }
