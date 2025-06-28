@@ -5,15 +5,21 @@
     #listTecnicos {
         display: flex;
         flex-direction: column;
-        gap: .1rem;
+        gap: 1.5px;
         list-style: none;
         padding-inline-start: 0;
+        border: 1px solid var(--salmao1);
+        border-radius: 5px;
         
         li {
             cursor: pointer;
             padding: .1rem .5rem;
             border-radius: .3rem;
             background-color: var(--branco);
+        }
+        li:hover {
+            background-color: var(--marrom1);
+            color: var(--salmao3);
         }
     }
     #infosTecnico {

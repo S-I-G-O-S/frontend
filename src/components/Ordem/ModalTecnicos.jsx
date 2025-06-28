@@ -30,7 +30,7 @@ export default function ModalTecnicos ({ordem, changeModal, setOrdem}) {
             return
         }
         console.warn(result.response)
-       setOrdem(result.response.data)
+        setOrdem(result.response.data)
         changeModal("modalTecnicos", false)
         notification.success({
             message: "Um técnico designado para esta ordem.",

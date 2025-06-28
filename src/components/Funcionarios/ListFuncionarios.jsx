@@ -1,8 +1,9 @@
 // ListaFuncionarios.jsx
-import { Dropdown, Skeleton } from 'antd'
+// import { Dropdown, Skeleton } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { converterCargo, converterDtHr } from '@services/utils.jsx'
-
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
 function ListFuncionarios({ funcionarios, especialidades, cargo }) {
     if ( !funcionarios) {
         return (
@@ -35,30 +36,31 @@ function ListFuncionarios({ funcionarios, especialidades, cargo }) {
             <td className='statusFunc cl5'>
                 {funcionario.disponivel ? 'disponível' : 'indisponível'}
             </td>
-            <td className='setaSkillsFunc cl6'>
+            {/* <td className='setaSkillsFunc cl6'>
                 {especialidades && (
                     <Dropdown
-                        placement='bottom'
-                        menu={{
-                            items: funcionario.especialidades.length === 0 ?
-                                [{ key: 'semEspecialidade', label: "sem especialidades" }] : funcionario.especialidades.map(id => {
-                                    const espec = especialidades.find(e => e.id === id)
-                                    return espec ? { key: espec.id, label: espec.nome } : null
-                                }).filter(Boolean),
-                            style: {
-                                backgroundColor: '#F2E8DF',
-                                fontWeight: '500'
-                            }
-                        }}
-                        overlayStyle={{
-                            border: "0.1rem solid #26110D",
-                            borderRadius: '0.5rem'
-                        }}
+                        // placement='bottom'
+                        // menu={{
+                        //     items: funcionario.especialidades.length === 0 ?
+                        //         [{ key: 'semEspecialidade', label: "sem especialidades" }] : funcionario.especialidades.map(id => {
+                        //             const espec = especialidades.find(e => e.id === id)
+                        //             return espec ? { key: espec.id, label: espec.nome } : null
+                        //         }).filter(Boolean),
+                        //     style: {
+                        //         backgroundColor: '#F2E8DF',
+                        //         fontWeight: '500'
+                        //     }
+                        // }}
+                        // overlayStyle={{
+                        //     border: "0.1rem solid #26110D",
+                        //     borderRadius: '0.5rem'
+                        // }}
+                        options={[1, 2, 3]}
                     >
                         <div>expandir</div>
                     </Dropdown>
                 )}
-            </td>
+            </td> */}
         </tr>
     ))
 }

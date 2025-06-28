@@ -3,6 +3,8 @@ import { AdvancedMarker, APIProvider, Map } from '@vis.gl/react-google-maps';
 import { getGoogleMapsToken } from "@services/mapsAPI";
 import "@styles/ordem/mapa.css"
 import Loading from '@components/public/Loading.jsx'
+import { CloseOutlined } from '@ant-design/icons'
+import HeaderModal from "../public/HeaderModal";
 
 function Mapa ({ endereco, closeMap }) {
     const token = getGoogleMapsToken();
@@ -29,29 +31,33 @@ function Mapa ({ endereco, closeMap }) {
     }, [mapsLoaded, formatEndereco])
 
     return (
-        <section id="secMapaOrdem">
-            <h2>Endereço</h2>
+        <section id="secMapaOrdem" className="modal">
+            <HeaderModal
+                title={"Endereço da ordem de serviço"}
+                hasCloseBtt={true}
+                closeModal={closeMap}
+            />
             <APIProvider apiKey={token} onLoad={() => (
                 console.log('Maps API has loaded.'),
                 setMapsLoaded(true)
             )}>
-                <div id="contMapa" >
                     {position ? (
-                        <Map
-                            defaultZoom={15}
-                            defaultCenter={position}
-                            mapId="Local do serviço"
-                        >
-                            <AdvancedMarker position={position} />
-                        </Map>
+                        <div id="contMapa" >    
+                            <Map
+                                defaultZoom={15}
+                                defaultCenter={position}
+                                mapId="Local do serviço"
+                            >
+                                <AdvancedMarker position={position} />
+                            </Map>
+                        </div>
                     ) : (
                         <Loading texto={'carregando mapa'}></Loading>
                     )}
-                </div>
             </APIProvider>
-            <div id="contAcoesMapaOrdem">
+            {/* <div id="contAcoesMapaOrdem">
                 <button id="bttSair" onClick={closeMap}>sair</button>
-            </div>
+            </div> */}
         </section>
     )
 }

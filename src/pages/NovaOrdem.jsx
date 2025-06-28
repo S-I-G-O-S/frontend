@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { getCookie } from "@services/cookies.js"
 import Nav from "@components/public/Nav.jsx"
 import { getClientes } from '@backend/clientesAPI.js'
 import '@styles/novaOrdem.css'
@@ -74,7 +73,7 @@ function NovaOrdem() {
         }        
     }, [formNovaOrdem.tecnicoID])
     const confirmCliente = () => {
-        const clienteToAdd = clientes.find(cliente => cliente.id === formNovaOrdem.clienteID)
+        const clienteToAdd = clientes.find(cliente => cliente.nome === formNovaOrdem.cliente)
         //  Se o cliente inserido não existir
         if(!clienteToAdd) {
             console.error("Cliente não encontrado")
@@ -85,13 +84,15 @@ function NovaOrdem() {
         console.warn(clienteToAdd)
         // handleChangeNovaOrdem(clienteToAdd.id, 'clienteID')
         setCliente(clienteToAdd)
-        handleChangeNovaOrdem(null, 'tecnicoID')
-        handleChangeNovaOrdem(null, 'servicoID')
+        handleChangeNovaOrdem(clienteToAdd.nome, 'cliente')
+        handleChangeNovaOrdem(clienteToAdd.id, 'clienteID')
+        // handleChangeNovaOrdem(null, 'tecnicoID')
+        // handleChangeNovaOrdem(null, 'servicoID')
         changeShowComponents(true, 'contServico')
     }
     const confirmServico = () => {
         const servicoToAdd = servicos.find(servico => 
-            servico.id === formNovaOrdem.servicoID
+            servico.nome === formNovaOrdem.servico
         )
         //  Se o serviço inserido não existir
         if (!servicoToAdd) {
@@ -100,13 +101,17 @@ function NovaOrdem() {
             showNotif('Serviço não encontrado.')
             return
         }
+        handleChangeNovaOrdem(servicoToAdd.nome, 'servico')
+        handleChangeNovaOrdem(servicoToAdd.id, 'servicoID')
         console.warn(servicoToAdd)
         // handleChangeNovaOrdem(servicoToAdd.id, 'servicoID')
-        handleChangeNovaOrdem(null, 'tecnicoID')
+        // handleChangeNovaOrdem(null, 'tecnicoID')
         setServico(servicoToAdd)
         changeShowComponents(true, 'contFinalizar')
     }
     const handleGerarOrdem = async () => {
+        console.log("debug gerando ordem")
+        console.table(formNovaOrdem)
         const result = await postNovaOrdem(formNovaOrdem)
         if (!result.success) {
             console.error(result.error)
@@ -163,52 +168,56 @@ function NovaOrdem() {
         fetchClientes()
         fetchServicos()
     }, [])
+    useEffect(() => {
+        if(clientes) {
+            console.log(clientes)
+        }
+    }, [clientes])
     return (
         <div id="pageNovaOrdem" className="paginas">
         {/* <Header titulo={"Nova ordem de serviço"} usuario={usuario}></Header> */}
         <Nav cargo={usuario?.cargo || ''}></Nav>
         <main id="mainNovaOrdem">
             <section id="sec1">
-                <div id="contCliente">
-                    <label>Cliente: </label>
-                    {/* <input type="text"  
-                        list='dtListClientes' 
-                        value={formNovaOrdem.cliente}
-                        onChange={(e) => handleChangeNovaOrdem(e.target.value, 'cliente')}
-                        />
-                    <datalist id="dtListClientes">
-                        {(clientes && clientes.length>0) && (
-                            clientes.map(cliente => (
-                                <option key={`cliente${cliente.id}`} value={cliente.nome}>{cliente.nome}</option>
-                            ))
-                        )}
-                    </datalist> */}
-                    <Select
-                        className="selectNovaOrdem"
-                        showSearch
-                        filterOption={(input, option) =>
-                            (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
-                        }
-                        value={formNovaOrdem.clienteID}
-                        // onSelect={(value) => console.log('cliente selecionado: ' + value)}
-                        onSelect={(value) =>( 
-                            handleChangeNovaOrdem(value, 'clienteID'),
-                            console.log('valor atual do cliente: ' + value)
-                        )}
-                        options={clientes.map(cliente => (
-                            {
-                                value: cliente.id,
-                                label: `${cliente.nome}`
-                            }
-                        ))}
-                        style={{
-                            width: '100%',
-                        }}
-                    />
-                    {showComponents.bttConfirmCliente && (
+                {clientes && clientes.length > 0 && (
+                    <div id="contCliente">
+                        <label>Cliente: </label>
+                        <input type="text"
+                        className="textInput"
+                            list='dtListClientes' 
+                            value={formNovaOrdem.cliente}
+                            onChange={(e) => handleChangeNovaOrdem(e.target.value, 'cliente')}
+                            />
+                        <datalist id="dtListClientes">
+                            {(clientes && clientes.length>0) && (
+                                clientes.map(cliente => (
+                                    <option key={`cliente${cliente.id}`} value={cliente.nome}>{cliente.nome}</option>
+                                ))
+                            )}
+                        </datalist>
+                        {/* <Select
+                            className="selectNovaOrdem"
+                            showSearch
+                            optionFilterProp="label"
+                            value={formNovaOrdem.id}
+                            onSearch={(value) => {console.log(value)}}
+                            onSelect={(value) =>( 
+                                handleChangeNovaOrdem(value, 'clienteID'),
+                                console.log('valor atual do cliente: ' + value)
+                            )}
+                            options={clientes.map(cliente => (
+                                {
+                                    value: cliente.id,
+                                    label: `${cliente.nome}`
+                                }
+                            ))}
+                        /> */}
+                        {/* {showComponents.bttConfirmCliente && (
+                            <button onClick={confirmCliente}>Confirmar</button>
+                        )} */}
                         <button onClick={confirmCliente}>Confirmar</button>
-                    )}
-                </div>
+                    </div>
+                )}
                 {(showComponents.contServico &&
                     cliente) && (
                     <>
@@ -223,7 +232,8 @@ function NovaOrdem() {
                     </div>
                     <div id="contServico">
                         <label>Serviço: </label>
-                        {/* <input type="text"  
+                        <input type="text"
+                            className="textInput"
                             list='dtListServicos' 
                             value={formNovaOrdem.servico}
                             onChange={(e) => handleChangeNovaOrdem(e.target.value, 'servico')}
@@ -234,8 +244,8 @@ function NovaOrdem() {
                                     <option key={`servico${servico.id}`} value={servico.nome}>{servico.nome}</option>
                                 ))
                             )}
-                        </datalist> */}
-                        <Select
+                        </datalist>
+                        {/* <Select
                         className="selectNovaOrdem"
                             showSearch
                             filterOption={(input, option) =>
@@ -258,10 +268,11 @@ function NovaOrdem() {
                             style={{
                                 width: '100%',
                             }}
-                        />
+                        /> */}
                         {showComponents.bttConfirmServico && (
                             <button onClick={confirmServico}>Confirmar</button>
                         )}
+                        <button onClick={confirmServico}>Confirmar</button>
                     </div>
                     {(showComponents.contFinalizar && servico) && (
                         <>
@@ -288,15 +299,15 @@ function NovaOrdem() {
                         </div>
                         <div id="contFinalizar">
                             <button id="bttCancelar" onClick={handleCancel}>cancelar</button>
-                            <Popconfirm
+                            {/* <Popconfirm
                                 title=""
                                 description={`Confirma os dados inseridos?`}
                                 onConfirm={handleGerarOrdem}
                                 onCancel={null}
                                 okText="sim"
                                 cancelText="não">     
-                                <button id='bttGerarOrdem'>Gerar Ordem</button>
-                            </Popconfirm>
+                            </Popconfirm> */}
+                            <button id='bttGerarOrdem' onClick={handleGerarOrdem}>Gerar Ordem</button>
                         </div>
                         </>
                     )}

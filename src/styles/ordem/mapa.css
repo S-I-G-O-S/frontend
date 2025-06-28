@@ -1,4 +1,8 @@
 #secMapaOrdem {
+    #headerMapaOrdem {
+        display: flex;
+        justify-content: space-between;
+    }
     #contMapa {
         border: .1rem solid var(--marrom1);
         height: 30rem;

@@ -1,3 +1,8 @@
+@charset "UTF-8";
+:root {
+    --bttNav: #1e3a52;
+    --bttNavHover: #0f2436;
+}
 #nav {
     display: flex;
     grid-area: nav;
@@ -13,7 +18,7 @@
     }
     #bttChangeNav {
         padding: .5rem;
-        background-color: var(--salmao1);
+        background-color: var(--bttNav);
         display: flex;
         align-items: center;
         justify-content: right;
@@ -23,12 +28,12 @@
             svg {
                 height: 1.5rem;
                 width: 1.5rem;
-                color: var(--marrom1);
+                color: var(--branco);
             }
         }
     }
     #bttChangeNav:hover {
-        background-color: var(--salmao2);
+        background-color: var(--bttNavHover);
     }
     #containerLinks {
         position: sticky;

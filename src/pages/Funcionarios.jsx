@@ -160,7 +160,7 @@ function Funcionarios() {
         {(usuario.cargo=='BASE' || usuario.cargo=="ADM" || usuario.cargo=="DEV") &&
             <section id='secList' className='section'>
                 <div id='contEspecsNovoFunc'>
-                    <button className='btt' onClick={() => navigate(`/especialidades`)}>
+                    <button className='btt' onClick={() => navigate(`/servicos`)}>
                             Especialidades e Serviços
                     </button>
                     {   
@@ -200,13 +200,13 @@ function Funcionarios() {
                             <th className='ultAtvTitle cl3'>ultima atividade</th>
                             <th className='cargoTitle cl4'>cargo</th>
                             <th className='statusTitle cl5'>status</th>
-                            <th className='cl6'>especialidades</th>
+                            {/* <th className='cl6'>especialidades</th> */}
                         </tr>
                     </thead>
                     <tbody className='tbody'>
                     {loadingRows ? (    
                         <tr>
-                            <td colSpan='6'>
+                            <td colSpan='5'>
                                 <Loading/>
                             </td>
                         </tr>
