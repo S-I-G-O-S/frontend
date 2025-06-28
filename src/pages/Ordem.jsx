@@ -69,7 +69,8 @@ function Ordem() {
             return
         }
         // verificar se o técnico ja iniciou um atendimento
-        if (atendimentos.length > 0) {
+        if (atendimentos.length > 0) { // atendimentos[-1].sutuação == 'EM_EXECUCAO' -> Não se deve alterar um atendimento finalizado, independente da situação.
+            // qnd a ordem ta como 'RETORNO' o iniciar atendimento abre direto a janela de finalizar.
             // abre a janela de finalizar atendimento
             // FIXME TROCAR AQUI
             // setModalAtendimento(true)

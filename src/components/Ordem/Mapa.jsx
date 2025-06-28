@@ -55,9 +55,6 @@ function Mapa ({ endereco, closeMap }) {
                         <Loading texto={'carregando mapa'}></Loading>
                     )}
             </APIProvider>
-            {/* <div id="contAcoesMapaOrdem">
-                <button id="bttSair" onClick={closeMap}>sair</button>
-            </div> */}
         </section>
     )
 }
