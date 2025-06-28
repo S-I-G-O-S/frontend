@@ -88,6 +88,7 @@ function Ordem() {
             description: 'Bom trabalho',
             placement: 'bottomLeft',
         })
+        window.location.reload()
     }
     const changeModalTecnicos = async (idTecnico) => {
         // verificar se não tem um funcionario atendendo

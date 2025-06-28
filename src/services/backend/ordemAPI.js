@@ -170,9 +170,12 @@ export const putCancelOrdem = async (ordem) => {
     }
 }
 export const putConcluirAtendimento = async (atendimento, situacao) => {
+    console.log('debug concluindo atendimento')
+    console.log(atendimento)
+    console.log(situacao)
     try {
         const response = await axios.put(`${config.url}/api/ordens/atendimentos`, {
-            atendimento: atendimento.idAtendimento,
+            atendimento: atendimento.idAtendimento.id,
             dsAtendimento: atendimento.descricao || "",
             situacao: situacao,
         })

@@ -20,6 +20,9 @@ export const getArquivoUnico = async (idArquivo) => {
     }
 }
 export const postArquivo = async (arquivo, atendimento) => {
+    console.log(`Debug enviando arquivo para o atendimento:`)
+    console.log(atendimento)
+    console.log(arquivo)
     try {
         const response = await axios.post(`${config.url}/api/fotos`, {
             file: arquivo,

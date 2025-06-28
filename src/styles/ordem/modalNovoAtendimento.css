@@ -83,7 +83,7 @@
 }
 @media screen and (width >= 500px) {
     #secRegisAtendimento {
-        max-width: 90vw;
+        width: fit-content;
         #contAcoesAtendimento, 
         #contFinalizarAtendimento {
             display: grid;

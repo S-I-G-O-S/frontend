@@ -14,10 +14,13 @@ const Atendimentos = ({
     const [loading, setLoading] = useState(true)
     useEffect(() => {
         if (atendimentos && atendimentos.length > 0) {
-            setAtendimentoAtual(atendimentos[0].id)
             console.log("atendimento aberto: " + atendimentos[0].id)
-            
-            // const atendimentoAberto = clientes.find(cliente => cliente.id === formNovaOrdem.clienteID)
+            const atendimentoComMaiorId = atendimentos.reduce((maior, atual) => {
+            return atual.id > maior.id ? atual : maior
+        })
+
+        setAtendimentoAtual(atendimentoComMaiorId)
+        console.log("atendimento com maior ID: " + atendimentoComMaiorId.id)
         }
     }, [atendimentos])
     const fetchAtendimentos = async () => {

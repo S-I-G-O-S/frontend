@@ -29,8 +29,8 @@ export default function ModalNovoAtendimento({ changeModal, atendimento }) {
             formData.append('files', file)
         })
         let resultUploadFile
-        uploadFiles.map((file, index) => {
-            resultUploadFile = postArquivo(file, atendimento.id)
+        uploadFiles.map(async (file, index) => {
+            resultUploadFile = await postArquivo(file, atendimento.id)
             if (!resultUploadFile.success) {
                 console.error(`Erro ao enviar arquivo ${index}: ` + resultUploadFile.error)
                 console.error(file)
@@ -52,6 +52,7 @@ export default function ModalNovoAtendimento({ changeModal, atendimento }) {
         console.warn(result.response)
         console.log("Atendimento finalizado")
         changeModal("modalNovoAtendimento", false)
+        window.location.reload()
     }
     return (
         <section id="secRegisAtendimento">

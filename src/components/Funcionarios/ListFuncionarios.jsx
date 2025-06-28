@@ -2,8 +2,6 @@
 // import { Dropdown, Skeleton } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { converterCargo, converterDtHr } from '@services/utils.jsx'
-import Dropdown from 'react-dropdown';
-import 'react-dropdown/style.css';
 function ListFuncionarios({ funcionarios, especialidades, cargo }) {
     if ( !funcionarios) {
         return (
